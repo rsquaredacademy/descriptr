@@ -31,8 +31,7 @@ gmean <- function(x) {
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
-    result <- (prod(x)) ^ (1 / length(x))
-    return(result)
+    prod(x) ^ (1 / length(x))
 }
 
 hmean <- function(x) {
@@ -40,8 +39,7 @@ hmean <- function(x) {
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
-    result <- length(x) / sum(sapply(x, divide_by))
-    return(result)
+    length(x) / sum(sapply(x, div_by))
 }
 
 stat_mode <- function(x) {
@@ -62,8 +60,7 @@ stat_range <- function(data) {
     if(!is.numeric(data)) {
       stop('data must be numeric')
     }
-    result <- diff(range(data))
-    return(result)
+    diff(range(data))
 }
 
 kurtosis <- function(x) {
@@ -105,8 +102,8 @@ stat_cvar <- function(x) {
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
-    result <- (sd(x) / mean(x)) * 100
-    return(result)
+    (sd(x) / mean(x)) * 100
+
 }
 
 stat_css <- function(x) {
@@ -114,8 +111,7 @@ stat_css <- function(x) {
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
-    result <- sum(sapply(x, uss, mean(x)))
-    return(round(result))
+    sum(sapply(x, uss, mean(x)))
 }
 
 
