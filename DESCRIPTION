@@ -1,11 +1,24 @@
 Package: descriptr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Descriptive Statistics & Distributions Exploration
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person("Aravind", "Hebbali", email = "hebbali.aravind@gmail.com", role = c("aut", "cre"))
+Description: A set of functions for exploring statistical distributions and
+    generate descriptive statistics before performing statistical tests and 
+    building models.
+Depends:
+    R(>= 3.3.2)
+Imports:
+    graphics
+Suggests:
+    covr,
+    testthat,
+    knitr,
+    rmarkdown
+License: MIT + file LICENSE
+URL: https://github.com/rsquaredacademy/descriptr
+BugReports: https://github.com/rsquaredacademy/descriptr/issues
 Encoding: UTF-8
 LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1
