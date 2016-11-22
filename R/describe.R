@@ -173,7 +173,7 @@ skewness <- function(x) {
 
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
-#' @param a numeric vector
+#' @param x a numeric vector
 #' @details The \code{stat_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
@@ -198,7 +198,7 @@ stat_mdev <- function(x) {
 
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
-#' @param a numeric vector containing the values whose mode is to be computed
+#' @param x a numeric vector containing the values whose mode is to be computed
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @examples
@@ -219,7 +219,7 @@ stat_cvar <- function(x) {
 
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
-#' @param a numeric vector containing the values whose mode is to be computed
+#' @param x a numeric vector containing the values whose mode is to be computed
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Corrected sum of squares of \code{x}
@@ -243,6 +243,19 @@ stat_css <- function(x) {
 }
 
 
+#' @title Index Values
+#' @description Returns index of values.
+#' @param data a numeric vector
+#' @param values a numeric vector containing the values whose index is returned
+#' @details Any NA values are stripped from \code{data} and \code{values} before
+#' computation takes place.
+#' @return Index of the \code{values} in \code{data}. In case, \code{data} does
+#' not contain \code{index}, \code{NULL} is returned.
+#' @examples
+#' rindex(mtcars$mpg, 21)
+#' rindex(mtcars$mpg, 22)
+#' @export
+#'
 rindex <- function(data, values) {
 
     if(!is.numeric(data)) {
@@ -253,6 +266,8 @@ rindex <- function(data, values) {
       stop('values must be numeric')
     }
 
+    data <- na.omit(data)
+    values <- na.omit(values)
     out <- c()
     for (i in seq_along(values)) {
         k <- return_pos(data, values[i])
