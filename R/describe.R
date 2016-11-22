@@ -31,7 +31,7 @@ tailobs <- function(data, n, type = c('low', 'high')) {
 #' @param x a numeric vector containing the values whose geometric mean is to be
 #' computed
 #' @param ... further arguments passed to or from other methods
-#' @return Returns the geometric mean of x
+#' @return Returns the geometric mean of \code{x}
 #' @examples
 #' gmean(mtcars$mpg)
 #' @export
@@ -52,7 +52,7 @@ gmean <- function(x, ...) {
 #' @param x a numeric vector containing the values whose harmonic mean is to be
 #' computed
 #' @param ... further arguments passed to or from other methods
-#' @return Returns the harmonic mean of x
+#' @return Returns the harmonic mean of \code{x}
 #' @examples
 #' hmean(mtcars$mpg)
 #' @export
@@ -72,6 +72,7 @@ hmean <- function(x, ...) {
 #' @param x a numeric vector containing the values whose mode is to be computed
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
+#' @return Mode of \code{x}
 #' @examples
 #' stat_mode(mtcars$mpg)
 #' stat_mode(mtcars$cyl)
@@ -152,6 +153,7 @@ skewness <- function(x) {
 #' the statistic used to compute the deviations is not \code{median} but
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
+#' @return Mean absolute deviation of \code{x}
 #' @examples
 #' stat_mdev(mtcars$mpg)
 #' @seealso \code{\link[stats]{mad}}
@@ -188,12 +190,30 @@ stat_cvar <- function(x) {
 
 }
 
+
+#' @title Corrected Sum of Squares
+#' @description Compute the corrected sum of squares
+#' @param a numeric vector containing the values whose mode is to be computed
+#' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
+#' @return Corrected sum of squares of \code{x}
+#' @examples
+#' stat_css(mtcars$mpg)
+#' @references \href{http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm}{NIST/SEMATECH e-Handbook of Statistical Methods}
+#' @export
+#'
 stat_css <- function(x) {
 
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
-    sum(sapply(x, uss, mean(x)))
+
+    y <- mean(x, na.rm = TRUE)
+    x %>%
+      na.omit() %>%
+      `-`(y) %>%
+      `^`(2) %>%
+      sum()
 }
 
 
