@@ -168,6 +168,17 @@ stat_mdev <- function(x) {
     return(result)
 }
 
+#' @title Coefficient of Variation
+#' @description Compute the coefficient of variation
+#' @param a numeric vector containing the values whose mode is to be computed
+#' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
+#' @examples
+#' stat_cvar(mtcars$mpg)
+#' @seealso \code{\link[stats]{var}} \code{\link[stats]{sd}}
+#' @references \href{http://www.ats.ucla.edu/stat/mult_pkg/faq/general/coefficient_of_variation.htm}{FAQ: What is the coefficient of variation?  UCLA: Statistical Consulting Group.}
+#' @export
+#'
 stat_cvar <- function(x) {
 
     if(!is.numeric(x)) {
