@@ -81,12 +81,27 @@ stat_mode <- function(x) {
     return(mode)
 }
 
-stat_range <- function(data) {
+#' @title Range
+#' @description Compute the range of a numeric vector
+#' @param x a numeric vector
+#' @return Range of \code{x}
+#' @examples
+#' stat_range(mtcars$mpg)
+#' @seealso \code{\link[stats]{range}}
+#' @export
+#'
+stat_range <- function(x) {
 
-    if(!is.numeric(data)) {
+    if(!is.numeric(x)) {
       stop('data must be numeric')
     }
-    diff(range(data))
+
+    out <- x %>%
+      na.omit() %>%
+      range() %>%
+      diff()
+
+    return(out)
 }
 
 kurtosis <- function(x) {
