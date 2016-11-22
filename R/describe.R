@@ -147,6 +147,19 @@ kurtosis <- function(x) {
     return(result)
 }
 
+
+#' @title Skewness
+#' @description Compute the skewness of a probability distribution.
+#' @param x a numeric vector containing the values whose skewness is to be computed
+#' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
+#' @return Skewness of \code{x}
+#' @examples
+#' skewness(mtcars$mpg)
+#' @seealso \code{kurtosis}
+#' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
+#' @export
+#'
 skewness <- function(x) {
 
     if(!is.numeric(x)) {
