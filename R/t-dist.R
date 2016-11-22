@@ -6,7 +6,7 @@
 #' t_plot()
 #' t_plot(6)
 #' t_plot(df = 8)
-#' @seealso \code{link{t_per}} \code{link{t_prob}} \code{\link[stats]{TDist}}
+#' @seealso \code{\link{t_per}} \code{\link{t_prob}} \code{\link[stats]{TDist}}
 #' @export
 t_plot <- function(df = 3) {
 
@@ -49,7 +49,7 @@ t_plot <- function(df = 3) {
 #' t_per(probs = 0.95, df = 4, type = 'lower')
 #' t_per(probs = 0.35, df = 4, type = 'upper')
 #' t_per(probs = 0.69, df = 7, type = 'both')
-#' @seealso \code{link{t_plot}} \code{link{t_prob}} \code{\link[stats]{TDist}}
+#' @seealso \code{\link{t_plot}} \code{\link{t_prob}} \code{\link[stats]{TDist}}
 #' @export
 t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 
@@ -173,7 +173,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 #' t_prob(0.945, 7, 'upper')
 #' t_prob(1.445, 7, 'interval')
 #' t_prob(1.6, 7, 'both')
-#' @seealso \code{link{t_plot}} \code{link{t_per}} \code{\link[stats]{TDist}}
+#' @seealso \code{\link{t_plot}} \code{\link{t_per}} \code{\link[stats]{TDist}}
 #' @export
 t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
 
