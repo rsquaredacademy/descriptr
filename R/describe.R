@@ -34,11 +34,27 @@ gmean <- function(x) {
     prod(x) ^ (1 / length(x))
 }
 
+
+#' @title Harmonic Mean
+#' @description Compute the harmonic mean
+#' @param x a numeric vector containing the values whose harmonic mean is to be
+#' computed
+#' @return Returns the harmonic mean of x
+#' @examples
+#' hmean(mtcars$mpg)
+#' @export
+#' @seealso \code{\link{gmean}}
+#'
 hmean <- function(x) {
 
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
+
+    if (is.na(x)) {
+        x <- na.omit(x)
+    }
+
     length(x) / sum(sapply(x, div_by))
 }
 
