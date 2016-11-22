@@ -175,9 +175,25 @@ test_that('stat_mdev returns the appropriate error', {
 
 
 test_that('output from hmean matches the expected output', {
-
     expect_equal(round(hmean(mtcars$mpg), 2), 18.44)
     expect_equal(round(hmean(mtcars$disp), 2), 166.8)
     expect_equal(round(hmean(mtcars$hp), 2), 118.23)
+})
 
+test_that('hmean throws the appropriate error', {
+    expect_error(hmean('mtcars$mpg'), 'x must be numeric')
+    expect_error(hmean(as.factor(mtcars$mpg)), 'x must be numeric')
+})
+
+
+test_that('output from gmean matches the expected output', {
+    expect_equal(round(gmean(mtcars$mpg), 2), 19.25)
+    expect_equal(round(gmean(mtcars$disp), 2), 197.32)
+    expect_equal(round(gmean(mtcars$hp), 2), 131.88)
+})
+
+
+test_that('gmean throws the appropriate error', {
+    expect_error(gmean('mtcars$mpg'), 'x must be numeric')
+    expect_error(gmean(as.factor(mtcars$mpg)), 'x must be numeric')
 })

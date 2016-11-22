@@ -26,11 +26,23 @@ tailobs <- function(data, n, type = c('low', 'high')) {
 
 }
 
-gmean <- function(x) {
+#' @title Geometric Mean
+#' @description Compute the geometric mean
+#' @param x a numeric vector containing the values whose geometric mean is to be
+#' computed
+#' @param ... further arguments passed to or from other methods
+#' @return Returns the geometric mean of x
+#' @examples
+#' gmean(mtcars$mpg)
+#' @export
+#' @seealso \code{\link{hmean}}
+#'
+gmean <- function(x, ...) {
 
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
+
     prod(x) ^ (1 / length(x))
 }
 
@@ -39,24 +51,22 @@ gmean <- function(x) {
 #' @description Compute the harmonic mean
 #' @param x a numeric vector containing the values whose harmonic mean is to be
 #' computed
+#' @param ... further arguments passed to or from other methods
 #' @return Returns the harmonic mean of x
 #' @examples
 #' hmean(mtcars$mpg)
 #' @export
 #' @seealso \code{\link{gmean}}
 #'
-hmean <- function(x) {
+hmean <- function(x, ...) {
 
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
 
-    if (is.na(x)) {
-        x <- na.omit(x)
-    }
-
     length(x) / sum(sapply(x, div_by))
 }
+
 
 stat_mode <- function(x) {
 
