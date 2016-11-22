@@ -67,17 +67,33 @@ hmean <- function(x, ...) {
     length(x) / sum(sapply(x, div_by))
 }
 
-
+#' @title Mode
+#' @description Compute the sample mode
+#' @param x a numeric vector containing the values whose mode is to be computed
+#' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
+#' @examples
+#' stat_mode(mtcars$mpg)
+#' stat_mode(mtcars$cyl)
+#' @seealso \code{\link[stats]{mean}} \code{\link[stats]{median}}
+#' @export
+#'
 stat_mode <- function(x) {
 
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
-    y <- as.data.frame(table(x))
-    y <- y[order(-y$Freq), ]
-    mode <- y$x[which(y$Freq == max(y$Freq))]
-    mode <- as.numeric(as.vector(mode))
-    mode <- min(mode)
+
+    mode <- x %>%
+            table() %>%
+            as.data.frame(stringsAsFactors = FALSE) %>%
+            arrange(desc(Freq)) %>%
+            filter(Freq == max(Freq)) %>%
+            select(contains(".")) %>%
+            unlist() %>%
+            as.numeric() %>%
+            min()
+
     return(mode)
 }
 
