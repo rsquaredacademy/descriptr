@@ -113,11 +113,25 @@ skewness <- function(x) {
     return(result)
 }
 
+#' @title Mean Absolute Deviation
+#' @description Compute the mean absolute deviation about the mean
+#' @param a numeric vector
+#' @details The \code{stat_mdev} function computes the mean absolute deviation
+#' about the mean. It is different from \code{mad} in \code{stats} package as
+#' the statistic used to compute the deviations is not \code{median} but
+#' \code{mean}. Any NA values are stripped from \code{x} before computation
+#' takes place
+#' @examples
+#' stat_mdev(mtcars$mpg)
+#' @seealso \code{\link[stats]{mad}}
+#' @export
+#'
 stat_mdev <- function(x) {
 
     if(!is.numeric(x)) {
       stop('x must be numeric')
     }
+    x <- na.omit(x)
     m <- mean(x)
     result <- sum(sapply(x, md_helper, m)) / length(x)
     return(result)

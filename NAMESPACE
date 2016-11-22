@@ -2,3 +2,4 @@
 
 export(gmean)
 export(hmean)
+export(stat_mdev)

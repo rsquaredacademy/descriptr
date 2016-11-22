@@ -166,11 +166,14 @@ test_that('output from stat_mdev matches the expected result', {
 })
 
 
-test_that('stat_mdev returns the appropriate error', {
+test_that('output from stat_mdev matches the expected result', {
+    expect_equal(stat_mdev(c(92, 83, 88, 94, 91, 85, 89, 90)), 2.75)
+    expect_equal(stat_mdev(c(3, 6, 6, 7, 8, 11, 15, 16)), 3.75)
+})
 
+test_that('stat_mdev returns the appropriate error', {
   expect_error(stat_mdev('mtcars$mpg'), 'x must be numeric')
   expect_error(stat_mdev(as.factor(mtcars$mpg)), 'x must be numeric')
-
 })
 
 
