@@ -27,6 +27,6 @@ t_prob(1.445, 7, 'interval')
 t_prob(1.6, 7, 'both')
 }
 \seealso{
-\code{link{t_plot}} \code{link{t_per}} \code{\link[stats]{TDist}}
+\code{\link{t_plot}} \code{\link{t_per}} \code{\link[stats]{TDist}}
 }
 

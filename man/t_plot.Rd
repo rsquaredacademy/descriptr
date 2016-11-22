@@ -19,6 +19,6 @@ t_plot(6)
 t_plot(df = 8)
 }
 \seealso{
-\code{link{t_per}} \code{link{t_prob}} \code{\link[stats]{TDist}}
+\code{\link{t_per}} \code{\link{t_prob}} \code{\link[stats]{TDist}}
 }
 

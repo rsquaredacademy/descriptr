@@ -27,6 +27,6 @@ t_per(probs = 0.35, df = 4, type = 'upper')
 t_per(probs = 0.69, df = 7, type = 'both')
 }
 \seealso{
-\code{link{t_plot}} \code{link{t_prob}} \code{\link[stats]{TDist}}
+\code{\link{t_plot}} \code{\link{t_prob}} \code{\link[stats]{TDist}}
 }
 

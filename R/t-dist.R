@@ -175,6 +175,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 #' t_prob(1.6, 7, 'both')
 #' @seealso \code{\link{t_plot}} \code{\link{t_per}} \code{\link[stats]{TDist}}
 #' @export
+#'
 t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
 
   if (!is.numeric(perc)) {
