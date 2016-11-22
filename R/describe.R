@@ -1,3 +1,18 @@
+#' @title Tail Observations
+#' @description Returns the n highest/lowest observations from a numeric vector.
+#' @param data a numeric vector
+#' @param n number of observations to be returned
+#' @param type if \code{low}, the \code{n} lowest observations are returned, else the
+#' highest \code{n} obervations are returned
+#' @details Any NA values are stripped from \code{data} before computation
+#' takes place.
+#' @return \code{n} highest/lowest observations from \code{data}
+#' @examples
+#' tailobs(mtcars$mpg, 5)
+#' tailobs(mtcars$mpg, 5, type = "high)
+#' @export
+#' @seealso \code{\link[dplyr]{top_n}}
+#'
 tailobs <- function(data, n, type = c('low', 'high')) {
 
   if(!is.numeric(data)) {
@@ -15,11 +30,15 @@ tailobs <- function(data, n, type = c('low', 'high')) {
   method <- match.arg(type)
 
   if (method == 'low') {
-    data <- sort(data)
-    result <- data[1:n]
+    result <- data %>%
+      na.omit() %>%
+      sort() %>%
+      `[`(1:n)
   } else {
-    data <- sort(data, decreasing = TRUE)
-    result <- data[1:n]
+    result <- data %>%
+      na.omit() %>%
+      sort(decreasing = TRUE) %>%
+      `[`(1:n)
   }
 
   return(result)
@@ -31,11 +50,13 @@ tailobs <- function(data, n, type = c('low', 'high')) {
 #' @param x a numeric vector containing the values whose geometric mean is to be
 #' computed
 #' @param ... further arguments passed to or from other methods
+#' #' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
 #' @return Returns the geometric mean of \code{x}
 #' @examples
 #' gmean(mtcars$mpg)
 #' @export
-#' @seealso \code{\link{hmean}}
+#' @seealso \code{\link{hmean}} \code{\link[stats]{mean}}
 #'
 gmean <- function(x, ...) {
 
@@ -52,11 +73,13 @@ gmean <- function(x, ...) {
 #' @param x a numeric vector containing the values whose harmonic mean is to be
 #' computed
 #' @param ... further arguments passed to or from other methods
+#' #' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
 #' @return Returns the harmonic mean of \code{x}
 #' @examples
 #' hmean(mtcars$mpg)
 #' @export
-#' @seealso \code{\link{gmean}}
+#' @seealso \code{\link{gmean}} \code{\link[stats]{mean}}
 #'
 hmean <- function(x, ...) {
 
