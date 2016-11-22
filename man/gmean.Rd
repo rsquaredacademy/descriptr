@@ -10,10 +10,12 @@ gmean(x, ...)
 \item{x}{a numeric vector containing the values whose geometric mean is to be
 computed}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods
+#' @details Any NA values are stripped from \code{x} before computation
+takes place.}
 }
 \value{
-Returns the geometric mean of x
+Returns the geometric mean of \code{x}
 }
 \description{
 Compute the geometric mean
@@ -22,6 +24,6 @@ Compute the geometric mean
 gmean(mtcars$mpg)
 }
 \seealso{
-\code{\link{hmean}}
+\code{\link{hmean}} \code{\link[stats]{mean}}
 }
 

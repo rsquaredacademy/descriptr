@@ -10,10 +10,12 @@ hmean(x, ...)
 \item{x}{a numeric vector containing the values whose harmonic mean is to be
 computed}
 
-\item{...}{further arguments passed to or from other methods}
+\item{...}{further arguments passed to or from other methods
+#' @details Any NA values are stripped from \code{x} before computation
+takes place.}
 }
 \value{
-Returns the harmonic mean of x
+Returns the harmonic mean of \code{x}
 }
 \description{
 Compute the harmonic mean
@@ -22,6 +24,6 @@ Compute the harmonic mean
 hmean(mtcars$mpg)
 }
 \seealso{
-\code{\link{gmean}}
+\code{\link{gmean}} \code{\link[stats]{mean}}
 }
 

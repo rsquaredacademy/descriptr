@@ -7,7 +7,10 @@
 stat_mdev(x)
 }
 \arguments{
-\item{a}{numeric vector}
+\item{x}{a numeric vector}
+}
+\value{
+Mean absolute deviation of \code{x}
 }
 \description{
 Compute the mean absolute deviation about the mean

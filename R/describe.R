@@ -9,7 +9,7 @@
 #' @return \code{n} highest/lowest observations from \code{data}
 #' @examples
 #' tailobs(mtcars$mpg, 5)
-#' tailobs(mtcars$mpg, 5, type = "high)
+#' tailobs(mtcars$mpg, 5, type = "high")
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
