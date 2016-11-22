@@ -4,11 +4,13 @@
 \alias{hmean}
 \title{Harmonic Mean}
 \usage{
-hmean(x)
+hmean(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector containing the values whose harmonic mean is to be
 computed}
+
+\item{...}{further arguments passed to or from other methods}
 }
 \value{
 Returns the harmonic mean of x
