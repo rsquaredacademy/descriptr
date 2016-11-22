@@ -121,6 +121,19 @@ stat_range <- function(x) {
     return(out)
 }
 
+
+#' @title Kurtosis
+#' @description Compute the kurtosis of a probability distribution.
+#' @param x a numeric vector containing the values whose kurtosis is to be computed
+#' @details Any NA values are stripped from \code{x} before computation
+#' takes place.
+#' @return Kurtosis of \code{x}
+#' @examples
+#' kurtosis(mtcars$mpg)
+#' @seealso \code{skewness}
+#' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
+#' @export
+#'
 kurtosis <- function(x) {
 
     if(!is.numeric(x)) {
