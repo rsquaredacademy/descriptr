@@ -146,3 +146,35 @@ print_ftable <- function(data) {
   cat('\n\n')
 
 }
+
+
+print_group <- function(data) {
+
+    line <- 23
+    n <- 21
+    n_names <- max(nchar(data$stats[2, c(-1)]))
+    n_uss <- max(nchar(data$stats[12, c(-1)]))
+    w <- max(n_names, n_uss) + 2
+    cola <- ncol(data$stats)
+    col <- cola - 1
+    ow <- 23 * cola - col
+    row <- nrow(data$stats)
+
+    cat(format(paste(data$yvar, 'by', data$xvar), width = ow, justify = 'centre'), '\n')
+    cat(rep('-', ow), sep = '', '\n')
+    cat('|')
+    for (i in seq_len(cola)) {
+        cat(format(data$stats[1, i], width = n, justify = 'right'), '|', sep = '')
+    }
+    cat('\n')
+    cat(rep('-', ow), sep = '', '\n')
+    for (i in 2:row) {
+        cat('|')
+        for (j in seq_len(cola)) {
+            cat(format(data$stats[i, j], width = n, justify = 'right'), '|', sep = '')
+        }
+        cat('\n')
+    }
+    cat(rep('-', ow), sep = '', '\n')
+
+}
