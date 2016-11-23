@@ -90,3 +90,22 @@ test_that("output from print_fcont matches the expected result", {
 
     expect_output(print_fcont(k), pim)
 })
+
+
+test_that("output from freq_table matches the expected result", {
+
+    k <- freq_table(mtcars$cyl)
+    pim <- "                               Variable: cyl
+|--------------------------------------------------------------------------|
+    |                                Cumulative                    Cumulative  |
+    |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
+    |--------------------------------------------------------------------------|
+    |       4      |       7      |       7      |      35      |      35      |
+    |--------------------------------------------------------------------------|
+    |       6      |       4      |      11      |      20      |      55      |
+    |--------------------------------------------------------------------------|
+    |       8      |       9      |      20      |      45      |      100     |
+    |--------------------------------------------------------------------------|
+    "
+    expect_output(print_ftable(k), pim)
+})
