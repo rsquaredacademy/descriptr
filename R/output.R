@@ -67,3 +67,43 @@ print_cross <- function(data) {
     cat("\n")
 
 }
+
+
+print_screen <- function(x) {
+
+    columns <- c('  Column Name  ', '  Data Type  ', '  Levels  ', '  Missing  ', '  Missing (%)  ')
+    len_col <- as.vector(sapply(columns, nchar))
+    xlev <- lapply(k$levels, paste, collapse = " ") %>%
+        lapply(nchar) %>%
+        unlist %>%
+        max
+    lengths <- list(x$Variables, x$Types, xlev, x$Missing, x$MissingPer)
+    n <- length(columns)
+    nlist <- list()
+    for (i in seq_len(n)) {
+        nlist[[i]] <- max(len_col[i], max(sapply(lengths[[i]], nchar)))
+    }
+    clengths <- unlist(nlist)
+    clengths[3] <- max(10, xlev)
+    dash <- sum(clengths) + 6
+    cat(rep("-",dash), sep = "")
+    cat("\n|")
+    for(i in seq_len(n)) {
+        cat(columns[i], "|", sep = "")
+    }
+    cat("\n", rep("-",dash), sep = "")
+    cat("\n")
+    for (i in seq_len(x$Columns)) {
+        cat("|", format(x$Variables[i], width = clengths[1], justify = 'centre'), "|",
+            format(x$Types[i], width = clengths[2], justify = 'centre'), "|",
+            format(paste(x$levels[[i]], collapse = " "), width = clengths[3], justify = 'centre'), "|",
+            format(as.character(x$Missing[i]), width = clengths[4], justify = 'centre'), "|",
+            format(as.character(x$MissingPer[i]), width = clengths[5], justify = 'centre'), "|\n", sep = ""
+        )
+    }
+    cat(rep("-",dash), sep = "")
+    cat("\n\n")
+    cat(' Overall Missing Values          ', x$MissingTotal, "\n", 'Percentage of Missing Values    ', x$MissingTotPer, "%\n",
+        'Rows with Missing Values        ', x$MissingRows, "\n", "Columns With Missing Values     ", x$MissingCols, "\n")
+
+}

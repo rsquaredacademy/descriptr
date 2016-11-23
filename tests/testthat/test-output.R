@@ -1,0 +1,69 @@
+context('print')
+
+# test_that('output from print_cross matches expected output', {
+#
+#     k <- cross_table(mtcars$cyl, mtcars$vs)
+#     pim <- "    Cell Contents
+# |---------------|
+# |     Frequency |
+# |       Percent |
+# |       Row Pct |
+# |       Col Pct |
+# |---------------|
+# Total Observations:  32
+# -------------------------------------------------------------
+# |              |                     vs                     |
+# -------------------------------------------------------------
+# |          cyl |            0 |            1 |    Row Total |
+# -------------------------------------------------------------
+# |            4 |            1 |           10 |           11 |
+# |              |        0.031 |        0.312 |              |
+# |              |         0.09 |         0.91 |         0.34 |
+# |              |         0.06 |         0.71 |              |
+# -------------------------------------------------------------
+# |            6 |            3 |            4 |            7 |
+# |              |        0.094 |        0.125 |              |
+# |              |         0.43 |         0.57 |         0.22 |
+# |              |         0.17 |         0.29 |              |
+# -------------------------------------------------------------
+# |            8 |           14 |            0 |           14 |
+# |              |        0.438 |            0 |              |
+# |              |            1 |            0 |         0.44 |
+# |              |         0.78 |            0 |              |
+# -------------------------------------------------------------
+# | Column Total |           18 |           14 |           32 |
+# |              |        0.563 |        0.437 |              |
+# -------------------------------------------------------------"
+#
+#     expect_output(print_cross(k), pim)
+# })
+
+test_that('output from print_screener matches expected output', {
+
+    mt <- mtcars
+    mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
+    mt[sample(1:n, 12), sample(1:cl, 6)] <- NA
+    k <- screener(mt)
+    pim <- "-----------------------------------------------------------------------
+|  Column Name  |  Data Type  |  Levels  |  Missing  |  Missing (%)  |
+    -----------------------------------------------------------------------
+    |      mpg      |   numeric   |    NA     |     0     |       0       |
+    |      cyl      |   factor    |   4 6 8   |    12     |     37.5      |
+    |     disp      |   numeric   |    NA     |     0     |       0       |
+    |      hp       |   numeric   |    NA     |    12     |     37.5      |
+    |     drat      |   numeric   |    NA     |     0     |       0       |
+    |      wt       |   numeric   |    NA     |     0     |       0       |
+    |     qsec      |   numeric   |    NA     |    12     |     37.5      |
+    |      vs       |   factor    |    0 1    |    12     |     37.5      |
+    |      am       |   factor    |    0 1    |    12     |     37.5      |
+    |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
+    |     carb      |   factor    |1 2 3 4 6 8|     0     |       0       |
+    -----------------------------------------------------------------------
+
+    Overall Missing Values           72
+    Percentage of Missing Values     20.45 %
+    Rows with Missing Values         12
+    Columns With Missing Values      6 "
+
+    expect_output(print_screen(k), pim)
+})
