@@ -107,3 +107,21 @@ print_screen <- function(x) {
         'Rows with Missing Values        ', x$MissingRows, "\n", "Columns With Missing Values     ", x$MissingCols, "\n")
 
 }
+
+
+print_fcont <- function(data) {
+
+    cat(format(paste('Variable:', data$varname), width = 77, justify = 'centre'), '\n')
+    cat("|---------------------------------------------------------------------------|
+|                                 Cumulative                    Cumulative  |
+|     Bins      |  Frequency   |   Frequency  |   Percent    |    Percent   |
+|---------------------------------------------------------------------------|")
+    for (i in seq_len(data$bins)) {
+        k <- i + 1
+        cat("\n|", formata(data$breaks[i], 1, 5), "-", formata(data$breaks[k], 1, 5), "|",
+            formata(data$frequency[i], 2, 12), "|", formata(data$cumulative[i], 2, 12), "|",
+            formatas(data$percent[i], 2, 12), "|", formatas(data$cum_percent[i], 2, 12), "|")
+        cat("\n|---------------------------------------------------------------------------|")
+    }
+
+}
