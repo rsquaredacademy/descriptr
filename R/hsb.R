@@ -18,5 +18,6 @@
 #'   \item{socst}{scores from test of social studies}
 #' }
 #'
-#' @source \url{http://www.ats.ucla.edu/stat/spss/whatstat/whatstat.htm}
+#' @source \url{http://www.ats.ucla.edu/stat/spss/whatstat/whatstat.htm} 
+#' \url{https://nces.ed.gov/surveys/hsb/}
 "hsb"
