@@ -7,7 +7,7 @@ Description: A set of functions for exploring statistical distributions and
     generate descriptive statistics before performing statistical tests and 
     building models.
 Depends:
-    R(>= 3.3.2)
+    R(>= 3.2.4)
 Imports:
     graphics,
     dplyr,
