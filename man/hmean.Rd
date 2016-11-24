@@ -24,6 +24,6 @@ Compute the harmonic mean
 hmean(mtcars$mpg)
 }
 \seealso{
-\code{\link{gmean}} \code{\link[stats]{mean}}
+\code{\link{gmean}} \code{\link[base]{mean}}
 }
 

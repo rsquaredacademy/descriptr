@@ -44,6 +44,7 @@
 summary_stats <- function(data) UseMethod('summary_stats')
 
 #' @rdname summary_stats
+#' @importFrom stats quantile
 #' @export
 summary_stats.default <- function(data) {
 
@@ -94,6 +95,6 @@ summary_stats.default <- function(data) {
 }
 
 #' @export
-print.summary_stats <- function(x) {
+print.summary_stats <- function(x, ...) {
   print_stats(x)
 }

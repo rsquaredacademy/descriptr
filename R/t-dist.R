@@ -1,3 +1,4 @@
+#' @importFrom stats dt
 #' @title T Distribution Plot
 #' @description Visualize how degrees of freedom affect the shape of t
 #' distribution
@@ -37,6 +38,7 @@ t_plot <- function(df = 3) {
 }
 
 
+#' @importFrom stats qt
 #' @title T Distribution Percentile
 #' @description Visualize the percentile from the value of the lower/upper
 #' cumulative distribution function of the student's t-distribution
@@ -161,6 +163,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 }
 
 
+#' @importFrom stats pt
 #' @title T Distribution Probability
 #' @description Visualize cumulative probabilities based on t statistics
 #' @param perc t statistic

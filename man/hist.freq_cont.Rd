@@ -19,6 +19,6 @@ for the frequency table created using \code{freq_cont}
 }
 \examples{
 k <- freq_cont(mtcars$mpg, 4)
-plot(k)
+hist(k)
 }
 

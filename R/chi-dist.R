@@ -1,3 +1,5 @@
+#' @importFrom stats dchisq dnorm
+#' @importFrom graphics plot lines polygon points
 #' @title Visualize Chi Square Distribution
 #' @description Visualize how changes in degrees of freedom affect the shape of
 #' the chi square distribution.
@@ -68,6 +70,8 @@ chi_plot <- function(df = 3, normal = FALSE) {
 }
 
 
+#' @importFrom stats qchisq
+#' @importFrom graphics text abline
 #' @title Chi Square Distribution Percentile
 #' @description Visualize the percentile from the value of the lower/upper
 #' cumulative distribution function of the chi square distribution
@@ -178,6 +182,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 }
 
 
+#' @importFrom stats pchisq
 #' @title Area Under Chi Square Distribution
 #' @description Visualize area under chi square distribution
 #' @param perc percentile

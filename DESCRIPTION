@@ -9,7 +9,9 @@ Description: A set of functions for exploring statistical distributions and
 Depends:
     R(>= 3.3.2)
 Imports:
-    graphics
+    graphics,
+    dplyr,
+    magrittr
 Suggests:
     covr,
     testthat,

@@ -24,6 +24,6 @@ Compute the geometric mean
 gmean(mtcars$mpg)
 }
 \seealso{
-\code{\link{hmean}} \code{\link[stats]{mean}}
+\code{\link{hmean}} \code{\link[base]{mean}}
 }
 

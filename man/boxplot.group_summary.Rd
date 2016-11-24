@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{an object of the class \code{group_summary}}
+
+\item{...}{further arguments to be passed to or from methods}
 }
 \description{
 \code{boxplot.group_summary} creates boxplots of the continuous

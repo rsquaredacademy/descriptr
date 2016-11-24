@@ -1,3 +1,5 @@
+#' @importFrom magrittr %>%
+#' @importFrom stats na.omit
 #' @title Tail Observations
 #' @description Returns the n highest/lowest observations from a numeric vector.
 #' @param data a numeric vector
@@ -56,7 +58,7 @@ tailobs <- function(data, n, type = c('low', 'high')) {
 #' @examples
 #' gmean(mtcars$mpg)
 #' @export
-#' @seealso \code{\link{hmean}} \code{\link[stats]{mean}}
+#' @seealso \code{\link{hmean}} \code{\link[base]{mean}}
 #'
 gmean <- function(x, ...) {
 
@@ -79,7 +81,7 @@ gmean <- function(x, ...) {
 #' @examples
 #' hmean(mtcars$mpg)
 #' @export
-#' @seealso \code{\link{gmean}} \code{\link[stats]{mean}}
+#' @seealso \code{\link{gmean}} \code{\link[base]{mean}}
 #'
 hmean <- function(x, ...) {
 
@@ -90,6 +92,9 @@ hmean <- function(x, ...) {
     length(x) / sum(sapply(x, div_by))
 }
 
+
+
+#' @importFrom dplyr arrange desc filter select contains
 #' @title Mode
 #' @description Compute the sample mode
 #' @param x a numeric vector containing the values whose mode is to be computed
@@ -99,7 +104,7 @@ hmean <- function(x, ...) {
 #' @examples
 #' stat_mode(mtcars$mpg)
 #' stat_mode(mtcars$cyl)
-#' @seealso \code{\link[stats]{mean}} \code{\link[stats]{median}}
+#' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
 #'
 stat_mode <- function(x) {
@@ -108,6 +113,7 @@ stat_mode <- function(x) {
       stop('x must be numeric')
     }
 
+    Freq <- NULL
     mode <- x %>%
             table() %>%
             as.data.frame(stringsAsFactors = FALSE) %>%
@@ -121,13 +127,14 @@ stat_mode <- function(x) {
     return(mode)
 }
 
+
 #' @title Range
 #' @description Compute the range of a numeric vector
 #' @param x a numeric vector
 #' @return Range of \code{x}
 #' @examples
 #' stat_range(mtcars$mpg)
-#' @seealso \code{\link[stats]{range}}
+#' @seealso \code{\link[base]{range}}
 #' @export
 #'
 stat_range <- function(x) {

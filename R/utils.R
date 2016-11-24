@@ -4,6 +4,7 @@ formatter_freq <- function(x) {
       format(width = 13, justify = "centre")
 }
 
+
 formatter <- function(x) {
     x %>%
       as.character() %>%
@@ -13,6 +14,7 @@ formatter <- function(x) {
 percent <- function(x, y) {
     out <- round((x / y) * 100, 2)
 }
+
 
 formata <- function(x, round, width, justify = "centre") {
     x %>%
@@ -60,6 +62,7 @@ standardize <- function(x, avg, stdev, p) {
     ((x - avg) / stdev) ^ p
 }
 
+
 sums <- function(x, q) {
     avg <- mean(x)
     stdev <- sd(x)
@@ -70,6 +73,7 @@ sums <- function(x, q) {
 md_helper <- function(x, y) {
     abs(x - y)
 }
+
 
 std_error <- function(x) {
     sd(x) / (length(x) ^ 0.5)
@@ -237,7 +241,6 @@ xmm <- function(mean, sd) {
     out  <- c(xmin, xmax)
     return(out)
 }
-
 
 pol_t <- function(l1, l2, df, col) {
 

@@ -23,6 +23,7 @@ group_summary <- function(x, y) UseMethod('group_summary')
 
 
 #' @rdname group_summary
+#' @importFrom stats median sd var IQR
 #' @export
 #'
 group_summary.default <- function(x, y) {
@@ -81,11 +82,11 @@ print.group_summary <- function(x, ...) {
 
 
 #' @importFrom graphics boxplot
-#' @importFrom grDevices rainbow
 #' @title Group Summary Box Plot
 #' @description \code{boxplot.group_summary} creates boxplots of the continuous
 #' variable for the different levels of the categorical variable.
 #' @param x an object of the class \code{group_summary}
+#' @param ... further arguments to be passed to or from methods
 #' @examples
 #' mt <- mtcars
 #' mt$cyl <- as.factor(mt$cyl)

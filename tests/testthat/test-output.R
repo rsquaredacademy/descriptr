@@ -145,7 +145,7 @@ test_that("output from print_ftable2 matches the expected result", {
 
     mt <- mtcars
     mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-    pim <- "                               Variable: cyl                                 
+    pim <- "                               Variable: cyl
 |--------------------------------------------------------------------------|
 |                                Cumulative                    Cumulative  |
 |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -158,7 +158,7 @@ test_that("output from print_ftable2 matches the expected result", {
 |--------------------------------------------------------------------------|
 
 
-                                Variable: vs                                 
+                                Variable: vs
 |--------------------------------------------------------------------------|
 |                                Cumulative                    Cumulative  |
 |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -169,7 +169,7 @@ test_that("output from print_ftable2 matches the expected result", {
 |--------------------------------------------------------------------------|
 
 
-                                Variable: am                                 
+                                Variable: am
 |--------------------------------------------------------------------------|
 |                                Cumulative                    Cumulative  |
 |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -180,7 +180,7 @@ test_that("output from print_ftable2 matches the expected result", {
 |--------------------------------------------------------------------------|
 
 
-                               Variable: gear                                
+                               Variable: gear
 |--------------------------------------------------------------------------|
 |                                Cumulative                    Cumulative  |
 |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -193,7 +193,7 @@ test_that("output from print_ftable2 matches the expected result", {
 |--------------------------------------------------------------------------|
 
 
-                               Variable: carb                                
+                               Variable: carb
 |--------------------------------------------------------------------------|
 |                                Cumulative                    Cumulative  |
 |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -227,9 +227,9 @@ test_that("output from print_cross2 matches the expected result", {
  |       Col Pct |
  |---------------|
 
- Total Observations:  32 
+ Total Observations:  32
 
-                         cyl vs vs                           
+                         cyl vs vs
 -------------------------------------------------------------
 |              |                     vs                     |
 -------------------------------------------------------------
@@ -255,7 +255,7 @@ test_that("output from print_cross2 matches the expected result", {
 -------------------------------------------------------------
 
 
-                         cyl vs am                           
+                         cyl vs am
 -------------------------------------------------------------
 |              |                     am                     |
 -------------------------------------------------------------
@@ -281,7 +281,7 @@ test_that("output from print_cross2 matches the expected result", {
 -------------------------------------------------------------
 
 
-                          vs vs am                           
+                          vs vs am
 -------------------------------------------------------------
 |              |                     am                     |
 -------------------------------------------------------------
@@ -306,47 +306,3 @@ test_that("output from print_cross2 matches the expected result", {
 })
 
 
-test_that("output from summary_stats matches the expected result", {
-
-    k <- summary_stats(mtcars$mpg)
-    pim <- "                        Univariate Analysis                          
-
- N                       32.00      Variance                36.32 
- Missing                  0.00      Std Deviation            6.03 
- Mean                    20.09      Range                   23.50 
- Median                  19.20      Interquartile Range      7.38 
- Mode                    10.40      Uncorrected SS       14042.31 
- Trimmed Mean            19.95      Corrected SS          1126.05 
- Skewness                 0.67      Coeff Variation         30.00 
- Kurtosis                -0.02      Std Error Mean           1.07 
-
-                              Quantiles                               
-
-              Quantile                           Estimate              
-
-             100% Max                             33.90                
-             99%                                  33.435               
-             95%                                  30.09                
-             90%                                  31.30                
-             75% Q3                               22.80                
-             50% Median                            NULL                
-             25% Q1                               15.425               
-             10%                                  14.34                
-             5%                                   11.995               
-             1%                                   10.40                
-             0% Min                                NULL                
-
-                         Extreme Observations                         
-
-               Lowest                            Highest               
-
- Value                        Obs       Value                        Obs  
- 10.4                         15        33.9                         20   
- 10.4                         16        32.4                         18   
- 13.3                         24        30.4                         19   
- 14.3                          7        30.4                         28   
- 14.7                         17        27.3                         26 "
-
-    expect_output(print_stats(k), pim)
-
-})

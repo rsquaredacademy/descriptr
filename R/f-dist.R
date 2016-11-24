@@ -1,3 +1,4 @@
+#' @importFrom stats df
 #' @title Visualize F Distribution
 #' @description Visualize how changes in degrees of freedom affect the
 #' shape of the F distribution.
@@ -74,6 +75,7 @@ f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
 }
 
 
+#' @importFrom stats qf
 #' @title F Distribution Percentile
 #' @description Visualize the percentile from the value of the lower/upper
 #' cumulative distribution function of the F distribution
@@ -191,6 +193,7 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
 }
 
 
+#' @importFrom stats pf
 #' @title Area Under F Distribution
 #' @description Visualize area under F distribution
 #' @param perc percentile

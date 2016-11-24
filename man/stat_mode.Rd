@@ -24,6 +24,6 @@ stat_mode(mtcars$mpg)
 stat_mode(mtcars$cyl)
 }
 \seealso{
-\code{\link[stats]{mean}} \code{\link[stats]{median}}
+\code{\link[base]{mean}} \code{\link[stats]{median}}
 }
 

@@ -19,6 +19,6 @@ Compute the range of a numeric vector
 stat_range(mtcars$mpg)
 }
 \seealso{
-\code{\link[stats]{range}}
+\code{\link[base]{range}}
 }
 

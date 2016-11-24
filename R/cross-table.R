@@ -141,7 +141,6 @@ plot.cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
 }
 
 #' @importFrom graphics mosaicplot
-#' @importFrom grDevices rainbow
 #' @export
 #' @title Mosaic Plot Cross Table
 #' @description \code{mosaicplot.cross_table} creates mosaic plot

@@ -1,3 +1,4 @@
+#' @importFrom graphics curve
 #' @title Visualize Normal Distribution
 #' @description Visualize how changes in mean and standard deviation affect the
 #' shape of the normal distribution.
@@ -66,6 +67,7 @@ norm_plot <- function(mean = 0, sd = 1) {
 }
 
 
+#' @importFrom stats qnorm
 #' @title Nomral Distribution Percentile
 #' @description Visualize the percentile from the value of the lower/upper
 #' cumulative distribution function of the student's t-distribution
@@ -201,6 +203,7 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
 }
 
 
+#' @importFrom stats pnorm
 #' @title Area Under Normal Distribution
 #' @description Visualize area under normal distribution
 #' @param perc percentile

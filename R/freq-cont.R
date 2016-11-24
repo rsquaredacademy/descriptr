@@ -63,8 +63,8 @@ freq_cont.default <- function(data, bins = 5) {
 
 
 #' @export
-print.freq_cont <- function(data) {
-  print_fcont(data)
+print.freq_cont <- function(x, ...) {
+  print_fcont(x)
 }
 
 
@@ -77,7 +77,7 @@ print.freq_cont <- function(data) {
 #' @param ... further arguments to be passed to or from methods
 #' @examples
 #' k <- freq_cont(mtcars$mpg, 4)
-#' plot(k)
+#' hist(k)
 #' @export
 #'
 hist.freq_cont <- function(x, col = 'blue', ...) {

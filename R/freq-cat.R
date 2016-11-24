@@ -67,7 +67,6 @@ print.freq_table <- function(data) {
 }
 
 
-#' @importFrom graphics barplot
 #' @importFrom grDevices topo.colors
 #' @title Frequency Table Bar Plot
 #' @description \code{barplot.freq_table} creates bar plot
@@ -91,5 +90,5 @@ barplot.freq_table <- function(height, ...) {
                  ylab = 'Frequency',
                  ylim = c(0, ymax[1]),
                  names.arg = x_names)
-    text(k, h, labels = j, adj = 0.5, pos = 1)
+    graphics::text(k, h, labels = j, adj = 0.5, pos = 1)
 }

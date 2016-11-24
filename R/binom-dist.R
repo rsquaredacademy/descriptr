@@ -1,3 +1,5 @@
+#' @importFrom stats dbinom
+#' @importFrom graphics axis mtext
 #' @title Visualize Binomial Distribution
 #' @description Visualize how changes in number of trials and the probability of
 #' success affect the shape of the binomial distribution.
@@ -47,6 +49,7 @@ binom_plot <- function(n, p) {
 
 }
 
+#' @importFrom stats pbinom
 #' @title Visualize Binomial Distribution Success Probability
 #' @description Probability of having a value lesser/higher than s in a binomial
 #' distribution with n trials with success probability of p (P[X > x]).
@@ -168,7 +171,7 @@ binom_prob <- function(n, p, s,
 
 }
 
-
+#' @importFrom stats qbinom
 #' @title Binomial Distribution Percentile
 #' @description Visualize quantile value below/above which the summation of
 #' probabilities is lesser/greater than or equal to tp.
