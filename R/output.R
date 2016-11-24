@@ -69,6 +69,71 @@ print_cross <- function(data) {
 }
 
 
+print_cross2 <- function(data) {
+    
+    # output formatting
+    p <- length(data$variable_levels)
+    q <- p + 2
+    h <- p + 1
+    r <- (h * 15) - 3
+    f <- length(data$row_name)
+    g <- f + 2
+    h <- p + 1
+    tu <- q * 15
+
+    cat(format(paste(data$variable_names[1], 'vs', data$variable_names[2]), width = tu, justify = 'centre'), '\n')
+    cat("-", rep("---------------", q), sep = "")
+    cat("\n")
+    cat("|              |", format(data$variable_names[2], width = r, justify = "centre"), "|")
+    cat("\n")
+    cat("-", rep("---------------", q), sep = "")
+    cat("\n|")
+    for (i in seq_along(data$column_names)) {
+        cat(formatter(data$column_names[i]), "|")
+    }
+    cat("\n-", rep("---------------", q), sep = "")
+    cat("\n")
+
+    for (i in seq_len(f)) {
+        cat("|")
+        for (j in seq_len(q)) {
+            cat(formatter(data$twowaytable[i, j]), "|")
+        }
+        cat("\n")
+        cat("|              |")
+        for (j in seq_len(p)) {
+            cat(formatter(data$percent_table[i, j]), "|")
+        }
+        cat("              |")
+        cat("\n")
+        cat("|              |")
+        for (j in seq_len(h)) {
+            cat(formatter(data$row_percent[i, j]), "|")
+        }
+        cat("\n")
+        cat("|              |")
+        for (j in seq_len(p)) {
+            cat(formatter(data$column_percent[i, j]), "|")
+        }
+        cat("              |")
+        cat("\n-", rep("---------------", q), sep = "")
+        cat("\n")
+    }   
+    cat("|")
+    for (i in seq_along(data$column_totals)) {
+        cat(formatter(data$column_totals[i]), "|")
+    }
+    cat("\n")
+    cat("|              |")
+    for (i in seq_along(data$percent_column)) {
+        cat(formatter(data$percent_column[i]), "|")
+    }
+    cat("              |")
+    cat("\n-", rep("---------------", q), sep = "")
+    cat("\n\n\n")
+}
+
+
 print_screen <- function(x) {
 
     columns <- c('  Column Name  ', '  Data Type  ', '  Levels  ', '  Missing  ', '  Missing (%)  ')
@@ -145,6 +210,25 @@ print_ftable <- function(data) {
   }
   cat('\n\n')
 
+}
+
+
+print_ftable2 <- function(data) {
+  nr <- nrow(data$ftable)
+  nc <- ncol(data$ftable)
+  cat(format(paste('Variable:', data$varname), width = 76, justify = 'centre'), '\n')
+  cat("|--------------------------------------------------------------------------|
+|                                Cumulative                    Cumulative  |
+|    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
+|--------------------------------------------------------------------------|\n")
+  for (i in seq_len(nr)) {
+    for (j in seq_len(nc)) {
+      cat("|", formatter_freq(data$ftable[i, j]))
+    }
+    cat("|")
+    cat("\n|--------------------------------------------------------------------------|\n")
+  }
+  cat('\n\n')
 }
 
 
