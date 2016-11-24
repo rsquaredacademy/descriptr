@@ -1,3 +1,60 @@
+print_stats <- function(data) {
+
+  n <- nchar(format(data$uss, nsmall = 2))
+  width1 <- 52 + (2 * n)
+  width2 <- as.integer(width1 / 2)
+  width3 <- width2 - 5
+  width4 <- width2 - 2
+
+  col1 <- max(nchar(as.character(data$lowobs)))
+  col2 <- max(nchar(as.character(data$highobs)))
+  col3 <- max(nchar(as.character(data$lowobsi)))
+  col4 <- max(nchar(as.character(data$highobsi)))
+  v <- nchar("Value")
+  ol <- max(col1, col2, col3, col4, v)
+  gap <- width4 - (2 * ol)
+
+  cat(formatc("Univariate Analysis", width1), "\n\n",
+      formatl("N"), formatr(data$obs, n), formats(),
+      formatl("Variance"), formatr(data$variance, n), "\n",
+      formatl("Missing"), formatr(data$missing, n), formats(),
+      formatl("Std Deviation"), formatr(data$stdev, n), "\n",
+      formatl("Mean"), formatr(data$avg, n), formats(),
+      formatl("Range"), formatr(data$range, n), "\n",
+      formatl("Median"), formatr(data$median, n), formats(),
+      formatl("Interquartile Range"), formatr(data$iqrange, n), "\n",
+      formatl("Mode"), formatr(data$mode, n), formats(),
+      formatl("Uncorrected SS"), formatr(data$uss, n), "\n",
+      formatl("Trimmed Mean"), formatr(data$tavg, n), formats(),
+      formatl("Corrected SS"), formatr(data$css, n), "\n",
+      formatl("Skewness"), formatr(data$skew, n), formats(),
+      formatl("Coeff Variation"), formatr(data$cvar, n), "\n",
+      formatl("Kurtosis"), formatr(data$kurtosis, n), formats(),
+      formatl("Std Error Mean"), formatr(data$sem, n), "\n\n",
+      formatc("Quantiles", width1), "\n\n",
+      formatc("Quantile", width2), formatc("Estimate", width2), "\n\n",
+      formatc("100% Max  ", width2), formatnc(data$Max, width2), "\n",
+      formatc("99%       ", width2), formatnc(data$per99, width2), "\n",
+      formatc("95%       ", width2), formatnc(data$per95, width2), "\n",
+      formatc("90%       ", width2), formatnc(data$per90, width2), "\n",
+      formatc("75% Q3    ", width2), formatnc(data$per75, width2), "\n",
+      formatc("50% Median", width2), formatnc(data$Median, width2), "\n",
+      formatc("25% Q1    ", width2), formatnc(data$per25, width2), "\n",
+      formatc("10%       ", width2), formatnc(data$per10, width2), "\n",
+      formatc("5%        ", width2), formatnc(data$per5, width2), "\n",
+      formatc("1%        ", width2), formatnc(data$per1, width2), "\n",
+      formatc("0% Min    ", width2), formatnc(data$Min, width2), "\n\n",
+      formatc("Extreme Observations", width1), "\n\n",
+      formatc("Lowest", width2), formatc("Highest", width2), "\n\n",
+      formatol("Value", ol), format_gap(gap), formatol("Obs", ol), formats(),
+      formatol("Value", ol), format_gap(gap), formatol("Obs", ol), "\n")
+  for (i in seq_len(5)) {
+      cat("",formatol(data$lowobs[i], ol), format_gap(gap), formatol(data$lowobsi[i], ol), formats(),
+          formatol(data$highobs[i], ol), format_gap(gap), formatol(data$highobsi[i], ol), "\n")
+  }
+
+}
+
 print_cross <- function(data) {
 
     p <- length(data$var2_levels)
