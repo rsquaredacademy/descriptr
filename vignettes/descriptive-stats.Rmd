@@ -1,0 +1,74 @@
+---
+title: "Introduction to descriptr"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to descriptr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(descriptr)
+library(dplyr)
+```
+
+Descriptive statistics are used to summarize data. It enables us to present the
+data in a more meaningful way and to discern any patterns existing in the data. 
+They can be useful for two purposes:
+
+- provide basic information about variables in a data set
+- highlight potential relationships between variables
+
+This document introduces you to a basic set of functions which describe the data 
+in a comprehensive manner. There is a second vignette which provides details 
+about function which help visualize statistical distributions.
+
+## Overview
+
+In this section, we will look at functions available in the `descriptr` package
+to get an overview of a data set. Below are the functions available:
+
+- `screener`
+- `group_summary`
+
+```{r screener}
+mt <- mtcars
+mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
+mt[sample(1:nrow(mt), 12), c(2, 4, 7:10)] <- NA
+screener(mt)
+```
+
+```{r screener_plot, fig.width=5, fig.height=5, fig.align='center'}
+mt <- mtcars
+mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
+mt[sample(1:nrow(mt), 12), c(2, 4, 7:10)] <- NA
+plot(screener(mt))
+```
+
+## Univariate Analysis
+
+In this section, we will look at functions available in the `descriptr` package
+to describe a single variable. Below are the functions available:
+
+- `summary_stats`
+- `freq_cont`
+- `freq_table`
+- `oway_tables`
+- `skewness`
+- `kurtosis`
+- `stat_cvar`
+- `stat_mode`
+- `stat_range`
+- `stat_mdev`
+- `stat_css`
+- `gmean`
+- `hmean`
+
+## Bivariate Analysis
+
+In this section, we will look at functions available in the `descriptr` package
+to describe the relationship between variables. Below are the functions available:
+
+- `cross_table`
+- `tway_tables`

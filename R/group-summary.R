@@ -74,6 +74,7 @@ group_summary.default <- function(x, y) {
 }
 
 
+#' @export
 print.group_summary <- function(x, ...) {
     print_group(x)
 }

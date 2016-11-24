@@ -72,10 +72,9 @@ screener.default <- function(x) {
 }
 
 
+#' @export
 print.screener <- function(x, ...) {
-
     print_screen(x)
-
 }
 
 #' @importFrom graphics barplot

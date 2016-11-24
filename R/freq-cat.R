@@ -61,11 +61,11 @@ freq_table.default <- function(data) {
 
 }
 
+#" @export
 print.freq_table <- function(data) {
-
   print_ftable(data)
-
 }
+
 
 #' @importFrom graphics barplot
 #' @importFrom grDevices topo.colors

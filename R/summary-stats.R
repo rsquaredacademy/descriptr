@@ -37,7 +37,7 @@
 #' \item{highobsi}{index of five highest observations}
 #' @examples
 #' summary_stats(mtcars$mpg)
-#' @seealso \code{\link[stats](summary)} \code{\link{freq_cont}}
+#' @seealso \code{\link[base]{summary}} \code{\link{freq_cont}}
 #' \code{\link{freq_table}} \code{\link{cross_table}}
 #' @export
 #'
@@ -93,7 +93,7 @@ summary_stats.default <- function(data) {
     return(result)
 }
 
-
+#' @export
 print.summary_stats <- function(x) {
   print_stats(x)
 }

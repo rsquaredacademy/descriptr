@@ -195,7 +195,7 @@ print_screen <- function(x) {
 
     columns <- c('  Column Name  ', '  Data Type  ', '  Levels  ', '  Missing  ', '  Missing (%)  ')
     len_col <- as.vector(sapply(columns, nchar))
-    xlev <- lapply(k$levels, paste, collapse = " ") %>%
+    xlev <- lapply(x$levels, paste, collapse = " ") %>%
         lapply(nchar) %>%
         unlist %>%
         max

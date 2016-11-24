@@ -62,10 +62,9 @@ freq_cont.default <- function(data, bins = 5) {
 }
 
 
+#' @export
 print.freq_cont <- function(data) {
-
   print_fcont(data)
-
 }
 
 

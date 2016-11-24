@@ -42,7 +42,7 @@ test_that('output from print_screener matches expected output', {
 
     mt <- mtcars
     mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-    mt[sample(1:n, 12), sample(1:cl, 6)] <- NA
+    mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
     k <- screener(mt)
     pim <- "-----------------------------------------------------------------------
 |  Column Name  |  Data Type  |  Levels  |  Missing  |  Missing (%)  |

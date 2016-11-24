@@ -80,11 +80,9 @@ cross_table.default <- function(var1, var2) {
     return(result)
 }
 
-
+#' @export
 print.cross_table <- function(x, ...) {
-
     print_cross(x)
-
 }
 
 #' @importFrom graphics barplot

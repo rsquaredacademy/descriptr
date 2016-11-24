@@ -4,7 +4,7 @@ test_that("output from screener matches the expected result", {
 
     mt <- mtcars
     mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-    mt[sample(1:n, 12), c(2, 4, 7:10)] <- NA
+    mt[sample(1:nrow(mt), 12), c(2, 4, 7:10)] <- NA
     k <- screener(mt)
 
     expect_equal(k$Rows, nrow(mt))
