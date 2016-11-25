@@ -2,10 +2,10 @@
 #' @description \code{summary_stats} returns a whole range of descriptive
 #' statistics for continuous data.
 #' @param data a numeric vector
-#' @return \code{summary_stats} returns an object of class 
-#' \code{"summary_stats"}. An object of class \code{"summary_stats"} 
+#' @return \code{summary_stats} returns an object of class
+#' \code{"summary_stats"}. An object of class \code{"summary_stats"}
 #' is a list containing the following components
-#' 
+#'
 #' \item{obs}{number of observations}
 #' \item{missing}{number of missing observations}
 #' \item{avg}{mean}

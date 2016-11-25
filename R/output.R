@@ -32,25 +32,25 @@ print_stats <- function(data) {
       formatl("Kurtosis"), formatr(data$kurtosis, n), formats(),
       formatl("Std Error Mean"), formatr(data$sem, n), "\n\n",
       formatc("Quantiles", width1), "\n\n",
-      formatc("Quantile", width2), formatc("Estimate", width2), "\n\n",
-      formatc("100% Max  ", width2), formatnc(data$Max, width2), "\n",
+      formatc("Quantile", width2), formatc("Value", width2), "\n\n",
+      formatc("Max       ", width2), formatnc(data$Max, width2), "\n",
       formatc("99%       ", width2), formatnc(data$per99, width2), "\n",
       formatc("95%       ", width2), formatnc(data$per95, width2), "\n",
       formatc("90%       ", width2), formatnc(data$per90, width2), "\n",
-      formatc("75% Q3    ", width2), formatnc(data$per75, width2), "\n",
-      formatc("50% Median", width2), formatnc(data$median, width2), "\n",
-      formatc("25% Q1    ", width2), formatnc(data$per25, width2), "\n",
+      formatc("Q3        ", width2), formatnc(data$per75, width2), "\n",
+      formatc("Median    ", width2), formatnc(data$median, width2), "\n",
+      formatc("Q1        ", width2), formatnc(data$per25, width2), "\n",
       formatc("10%       ", width2), formatnc(data$per10, width2), "\n",
       formatc("5%        ", width2), formatnc(data$per5, width2), "\n",
       formatc("1%        ", width2), formatnc(data$per1, width2), "\n",
-      formatc("0% Min    ", width2), formatnc(data$min, width2), "\n\n",
-      formatc("Extreme Observations", width1), "\n\n",
-      formatc("Lowest", width2), formatc("Highest", width2), "\n\n",
-      formatol("Value", ol), format_gap(gap), formatol("Obs", ol), formats(),
-      formatol("Value", ol), format_gap(gap), formatol("Obs", ol), "\n")
+      formatc("Min       ", width2), formatnc(data$min, width2), "\n\n",
+      formatc("Extreme Values", width1), "\n\n",
+      formatc("Low", width2), formatc("High", width2), "\n\n",
+      formatol("Obs", ol), format_gap(gap), formatol("Value", ol), formats(),
+      formatol("Obs", ol), format_gap(gap), formatol("Value", ol), "\n")
   for (i in seq_len(5)) {
-      cat("",formatol(data$lowobs[i], ol), format_gap(gap), formatol(data$lowobsi[i], ol), formats(),
-          formatol(data$highobs[i], ol), format_gap(gap), formatol(data$highobsi[i], ol), "\n")
+      cat("",formatol(data$lowobsi[i], ol), format_gap(gap), formatol(data$lowobs[i], ol), formats(),
+          formatol(data$highobsi[i], ol), format_gap(gap), formatol(data$highobs[i], ol), "\n")
   }
 
 }

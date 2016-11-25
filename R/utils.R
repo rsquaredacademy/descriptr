@@ -123,6 +123,7 @@ formatc <- function(x, w) {
 
 formatnc <- function(x, w) {
     x %>%
+      round(2) %>%
       format(nsmall = 2) %>%
       format(width = w, justify = "centre")
 }
