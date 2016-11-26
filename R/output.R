@@ -211,7 +211,7 @@ print_screen <- function(x) {
     cat(rep("-",dash), sep = "")
     cat("\n|")
     for(i in seq_len(n)) {
-        cat(columns[i], "|", sep = "")
+        cat(format(columns[i], width = clengths[i], justify = 'centre'), "|", sep = "")
     }
     cat("\n", rep("-",dash), sep = "")
     cat("\n")
