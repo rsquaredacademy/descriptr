@@ -19,9 +19,6 @@ takes place.
 \examples{
 stat_cvar(mtcars$mpg)
 }
-\references{
-\href{http://www.ats.ucla.edu/stat/mult_pkg/faq/general/coefficient_of_variation.htm}{FAQ: What is the coefficient of variation?  UCLA: Statistical Consulting Group.}
-}
 \seealso{
 \code{\link[stats]{var}} \code{\link[stats]{sd}}
 }

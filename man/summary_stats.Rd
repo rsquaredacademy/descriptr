@@ -13,8 +13,8 @@ summary_stats(data)
 \item{data}{a numeric vector}
 }
 \value{
-\code{summary_stats} returns an object of class 
-\code{"summary_stats"}. An object of class \code{"summary_stats"} 
+\code{summary_stats} returns an object of class
+\code{"summary_stats"}. An object of class \code{"summary_stats"}
 is a list containing the following components
 
 \item{obs}{number of observations}
