@@ -136,8 +136,7 @@ plot.cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
         result <- list(data = bardata)
     }
 
-    class(result) <- "cross_table"
-    return(result)
+    invisible(result)
 }
 
 #' @importFrom graphics mosaicplot
@@ -158,10 +157,32 @@ mosaicplot.cross_table <- function(x, ...) {
     mdata <- i_data[, c(-1, -nb)]
     ln <- length(x$var2_levels)
     modata <- matrix(as.numeric(mdata), ncol = ln)
+    colnames(modata) <- x$var2_levels
+    rownames(modata) <- x$var1_levels
     cols <- nrow(modata)
-    mosaicplot(modata, col = rainbow(cols), xlab = x$varnames[1], ylab = x$varnames[2],
-        main = paste(x$varnames[1], "by", x$varnames[2]))
+    mosaicplot(modata, col = rainbow(cols), off = 5,
+               xlab = x$varnames[1], ylab = x$varnames[2],
+               main = paste(x$varnames[1], "by", x$varnames[2]))
+
+    # x axis position
+    cpr <- ncol(x$row_percent)
+    rp <- x$row_percent[, cpr]
+    crp <- cumsum(rp)
+    lcrp <- length(crp)
+    f1 <- (crp[-lcrp] + diff(cumsum(rp)) / 2)
+    xpos <- c(rp[1] / 2, f1)
+
+    # y axis position
+    nr <- nrow(x$row_percent)
+    for (i in seq_len(nr)) {
+        rpy <- rev(x$row_percent[i, -cpr])
+        crpy <- cumsum(rpy)
+        lcrpy <- length(crpy)
+        f1 <- (crpy[-lcrpy] + diff(cumsum(rpy)) / 2)
+        ypos <- c(rpy[1] / 2, f1)
+        text(x = xpos[i], y = ypos, labels = paste(rpy * 100, '%'), cex = 0.6)
+    }
+
     result <- list(data = modata)
-    class(result) <- "cross_table"
-    return(result)
+    invisible(result)
 }
