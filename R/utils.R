@@ -243,6 +243,24 @@ xmm <- function(mean, sd) {
     return(out)
 }
 
+seqln <- function(mean, sd) {
+
+    lmin <- mean - 3 * sd
+    lmax <- mean + 3 * sd
+    l    <- seq(lmin, lmax, sd)
+    return(l)
+
+}
+
+
+xmn <- function(mean, sd) {
+    xmin <- mean - 3 * sd
+    xmax <- mean + 3 * sd
+    out  <- c(xmin, xmax)
+    return(out)
+}
+
+
 pol_t <- function(l1, l2, df, col) {
 
     x <- c(l1, seq(l1, l2, 0.01), l2)

@@ -134,6 +134,19 @@ test_that('output from seql matches the expected result', {
 
 })
 
+test_that('output form xmn matches the expected result', {
+
+    expect_equivalent(xmn(3, 2), c(-3, 9))
+
+})
+
+test_that('output from seqln matches the expected result', {
+
+    expect_equivalent(seqln(3, 2), c(-3, -1, 1, 3, 5, 7, 9))
+
+})
+
+
 
 test_that('output from intervals matches expected result', {
 

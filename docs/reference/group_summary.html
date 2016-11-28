@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -112,7 +112,26 @@ following components:</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
 <span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
-<span class='fu'>group_summary</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>, <span class='no'>mt</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in function_list[[i]](value): could not find function &quot;arrange&quot;</span></div></pre>
+<span class='fu'>group_summary</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>, <span class='no'>mt</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt;                                        mpg by cyl                                         
+#&gt; -----------------------------------------------------------------------------------------
+#&gt; |                  Obs|                   11|                    7|                   14|
+#&gt; -----------------------------------------------------------------------------------------
+#&gt; |              Maximum|                 21.4|                 17.8|                 10.4|
+#&gt; |              Minimum|                 33.9|                 21.4|                 19.2|
+#&gt; |                 Mean|                26.66|                19.74|                 15.1|
+#&gt; |               Median|                   26|                 19.7|                 15.2|
+#&gt; |                 Mode|                 22.8|                   21|                 10.4|
+#&gt; |       Std. Deviation|                 4.51|                 1.45|                 2.56|
+#&gt; |             Variance|                20.34|                 2.11|                 6.55|
+#&gt; |             Skewness|                 0.35|                -0.26|                -0.46|
+#&gt; |             Kurtosis|                -1.43|                -1.83|                 0.33|
+#&gt; |       Uncorrected SS|              8023.83|              2741.14|              3277.34|
+#&gt; |         Corrected SS|               203.39|                12.68|                 85.2|
+#&gt; |      Coeff Variation|                16.91|                 7.36|                16.95|
+#&gt; |      Std. Error Mean|                 1.36|                 0.55|                 0.68|
+#&gt; |                Range|                 12.5|                  3.6|                  8.8|
+#&gt; |  Interquartile Range|                  7.6|                 2.35|                 1.85|
+#&gt; -----------------------------------------------------------------------------------------</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

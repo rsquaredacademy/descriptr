@@ -28,13 +28,13 @@ norm_plot <- function(mean = 0, sd = 1) {
     x <- xax(mean)
 
 
-    l    <- seql(mean, sd)
+    l    <- seqln(mean, sd)
     col  <- c("#0000CD", "#4682B4", "#6495ED", "#4682B4", "#6495ED")
     l1   <- c(3, 2, 1, 5, 6)
     l2   <- c(5, 3, 2, 6, 7)
 
 
-    xm <- xmm(mean, sd)
+    xm <- xmn(mean, sd)
     curve(dnorm(x, mean, sd),
           xlab = '',
           ylab = '',

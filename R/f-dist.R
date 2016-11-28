@@ -285,7 +285,7 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   }
 
 
-  axis(1, at = (0:5), labels = (0:5))
+  axis(1, at = (0:max(l)), labels = (0:max(l)))
 
   for (i in seq_len(length(l1))) {
       pol_f(lc[l1[i]], lc[l2[i]], num_df, den_df, col = col[i])

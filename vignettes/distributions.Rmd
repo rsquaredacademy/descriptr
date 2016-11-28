@@ -88,23 +88,23 @@ norm_per(0.5, 60, 8, 'both')
 - type: lower/upper/both tail
 
 Let X be the IQ of a randomly selected student of a school. Assume X ~ N(90, 12). 
-What is the probability that a randomly selected student has an IQ below 70?
+What is the probability that a randomly selected student has an IQ below 80?
 
 ```{r norm_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-norm_prob(70, mean = 90, sd = 12)
+norm_prob(80, mean = 90, sd = 12)
 ```
 
-What is the probability that a randomly selected student has an IQ above 140?
+What is the probability that a randomly selected student has an IQ above 100?
 
 ```{r norm_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-norm_prob(140, mean = 90, sd = 12, type = 'upper')
+norm_prob(100, mean = 90, sd = 12, type = 'upper')
 ```
 
 What is the probability that a randomly selected student has an IQ 
-between 96 and 124?
+between 96 and 106?
 
 ```{r norm_prob3, fig.width=7, fig.height=7, fig.align='centre'}
-norm_prob(c(96, 124), mean = 90, sd = 12, type = 'both')
+norm_prob(c(96, 106), mean = 90, sd = 12, type = 'both')
 ```
 
 ## Binomial Distribution
@@ -222,10 +222,10 @@ chi_per(0.10, 8, 'lower')
 
 
 What is the probability that a chi-square random variable with 12 degrees of 
-freedom is greater than 12.79?
+freedom is greater than 8.79?
 
 ```{r chi_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-chi_prob(12.79, 12, 'upper')
+chi_prob(8.79, 12, 'upper')
 ```
 
 What is the probability that a chi-square random variable with 12 degrees of 
@@ -265,10 +265,10 @@ denominator degrees of freedom. What is the upper twenth percentile?
 f_per(0.20, 4, 5, 'upper')
 ```
 
-What is the fifteenth percentile?
+What is the 35th percentile?
 
 ```{r f_per2, fig.width=7, fig.height=7, fig.align='centre'}
-f_per(0.15, 4, 5, 'lower')
+f_per(0.35, 4, 5, 'lower')
 ```
 
 ### Probabilities
@@ -332,7 +332,7 @@ t_per(0.11, 8, 'lower')
 What is the area of the curve that has 95% of the t values? 
 
 ```{r t_per3, fig.width=7, fig.height=7, fig.align='centre'}
-t_per(0.95, 8, 'both')
+t_per(0.8, 8, 'both')
 ```
 
 
@@ -348,26 +348,26 @@ t_per(0.95, 8, 'both')
 
 Let T follow a t-distribution with r = 6 df.  
 
-What is the probability that the value of T is less than 2.306?
+What is the probability that the value of T is less than 2?
  
 ```{r t_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2.306, 6, 'lower')
+t_prob(2, 6, 'lower')
 ```
 
-What is the probability that the value of T is greater than 2.306?
+What is the probability that the value of T is greater than 2?
  
 ```{r t_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2.306, 6, 'upper')
+t_prob(2, 6, 'upper')
 ```
 
-What is the probability that the value of T is between -2.306 and 2.306?
+What is the probability that the value of T is between -2 and 2?
  
 ```{r t_prob3, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2.306, 6, 'both')
+t_prob(2, 6, 'both')
 ```
 
-What is the probability that the absolute value of T is greater than 2.306?
+What is the probability that the absolute value of T is greater than 2?
 
 ```{r t_prob4, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2.306, 6, 'interval')
+t_prob(2, 6, 'interval')
 ```

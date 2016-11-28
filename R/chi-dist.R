@@ -256,8 +256,8 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
   } else {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
-    text(x = perc + (perc * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc - (perc * 0.1), y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + (perc * 0.1), y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 

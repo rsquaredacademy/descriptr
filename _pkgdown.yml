@@ -1,0 +1,102 @@
+templates:
+  params:
+    bootswatch: cerulean
+
+home:
+  links:
+  - text: Learn more
+    href: http://www.rsquaredacademy.com
+
+
+reference:
+- title: Data Screening
+  desc: >
+    The `screener()` function will screen data frames and return details such 
+    as variable names, class, levels and missing values. The `plot.screener()` 
+    creates bar plots to visualize % of missing observations for each variable 
+    in a data frame.
+  contents:
+  - screener
+  - screener.default
+  - plot.screener
+
+- title: Descriptive Statistics
+  desc: >
+    The following functions ease the process of generating and visualizing 
+    descriptive statistics for categorical and continuous data.
+  contents:
+  - summary_stats
+  - cross_table
+  - plot.cross_table
+  - mosaicplot.cross_table
+  - freq_table
+  - barplot.freq_table
+  - freq_cont
+  - hist.freq_cont
+  - group_summary
+  - boxplot.group_summary
+  - oway_tables
+  - tway_tables
+
+- title: Normal Distribution
+  desc: >
+    Use the following functions to visualize normal distribution.
+  contents:
+  - norm_plot
+  - norm_per
+  - norm_prob
+
+- title: Binomial Distribution
+  desc: >
+    Use the following functions to visualize binomial distribution.
+  contents:
+  - binom_plot
+  - binom_perc
+  - binom_prob
+
+- title: Chi Square Distribution
+  desc: >
+    Use the following functions to visualize chisquare distribution.
+  contents:
+  - chi_plot
+  - chi_per
+  - chi_prob
+
+- title: F Distribution
+  desc: >
+    Use the following functions to visualize normal distribution.
+  contents:
+  - f_plot
+  - f_per
+  - f_prob
+
+- title: t Distribution
+  desc: >
+    Use the following functions to visualize t distribution.
+  contents:
+  - t_plot
+  - t_per
+  - t_prob
+
+- title: Other Functions
+  desc: >
+    A set of functions used to generate `summary_stats`.
+  contents:
+  - kurtosis
+  - skewness
+  - stat_mode
+  - stat_range
+  - stat_mdev
+  - stat_cvar
+  - stat_css
+  - gmean
+  - hmean
+  - tailobs
+  - rindex
+
+- title: Data
+  desc: >
+    descriptr comes with a built-in dataset `hsb` which is used to
+    illustrate the functions as well as for running tests.
+  contents:
+  - hsb

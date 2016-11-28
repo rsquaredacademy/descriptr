@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -109,7 +109,43 @@ is a list containing the following components</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>summary_stats</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in function_list[[i]](value): could not find function &quot;arrange&quot;</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>summary_stats</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt;                         Univariate Analysis                          
+#&gt; 
+#&gt;  N                       32.00      Variance                36.32 
+#&gt;  Missing                  0.00      Std Deviation            6.03 
+#&gt;  Mean                    20.09      Range                   23.50 
+#&gt;  Median                  19.20      Interquartile Range      7.38 
+#&gt;  Mode                    10.40      Uncorrected SS       14042.31 
+#&gt;  Trimmed Mean            19.95      Corrected SS          1126.05 
+#&gt;  Skewness                 0.67      Coeff Variation         30.00 
+#&gt;  Kurtosis                -0.02      Std Error Mean           1.07 
+#&gt; 
+#&gt;                               Quantiles                               
+#&gt; 
+#&gt;               Quantile                            Value                
+#&gt; 
+#&gt;              Max                                  33.90                
+#&gt;              99%                                  33.44                
+#&gt;              95%                                  30.09                
+#&gt;              90%                                  31.30                
+#&gt;              Q3                                   22.80                
+#&gt;              Median                               19.20                
+#&gt;              Q1                                   15.43                
+#&gt;              10%                                  14.34                
+#&gt;              5%                                   12.00                
+#&gt;              1%                                   10.40                
+#&gt;              Min                                  10.40                
+#&gt; 
+#&gt;                             Extreme Values                            
+#&gt; 
+#&gt;                 Low                                High                
+#&gt; 
+#&gt;   Obs                        Value       Obs                        Value 
+#&gt;   15                         10.4        20                         33.9  
+#&gt;   16                         10.4        18                         32.4  
+#&gt;   24                         13.3        19                         30.4  
+#&gt;    7                         14.3        28                         30.4  
+#&gt;   17                         14.7        26                         27.3  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
