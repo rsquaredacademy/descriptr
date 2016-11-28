@@ -7,6 +7,8 @@
 t_prob(perc, df, type = c("lower", "upper", "interval", "both"))
 }
 \arguments{
+\item{perc}{a quantile value}
+
 \item{df}{degrees of freedom}
 
 \item{type}{lower tail, upper tail, interval or both}

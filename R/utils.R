@@ -228,8 +228,8 @@ xax <- function(mean) {
 
 seql <- function(mean, sd) {
 
-    lmin <- mean - 3 * sd
-    lmax <- mean + 3 * sd
+    lmin <- mean - 5 * sd
+    lmax <- mean + 5 * sd
     l    <- seq(lmin, lmax, sd)
     return(l)
 
@@ -237,8 +237,8 @@ seql <- function(mean, sd) {
 
 
 xmm <- function(mean, sd) {
-    xmin <- mean - 4 * sd
-    xmax <- mean + 4 * sd
+    xmin <- mean - 5 * sd
+    xmax <- mean + 5 * sd
     out  <- c(xmin, xmax)
     return(out)
 }

@@ -124,13 +124,13 @@ test_that('output from fround matches the expected result', {
 
 test_that('output form xmm matches the expected result', {
 
-    expect_equivalent(xmm(3, 2), c(-5, 11))
+    expect_equivalent(xmm(3, 2), c(-7, 13))
 
 })
 
 test_that('output from seql matches the expected result', {
 
-    expect_equivalent(seql(3, 2), c(-3, -1, 1, 3, 5, 7, 9))
+    expect_equivalent(seql(3, 2), c(-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13))
 
 })
 

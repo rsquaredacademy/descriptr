@@ -7,6 +7,8 @@
 f_prob(perc, num_df, den_df, type = c("lower", "upper"))
 }
 \arguments{
+\item{perc}{a quantile value}
+
 \item{num_df}{degrees of freedom associated with the numerator of f statistic}
 
 \item{den_df}{degrees of freedom associated with the denominator of f statistic}

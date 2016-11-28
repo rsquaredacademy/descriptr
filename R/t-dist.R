@@ -165,6 +165,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 #' @importFrom stats pt
 #' @title Visualize T Distribution Probability
 #' @description Calculate and visualize probability from a given quantile
+#' @param perc a quantile value
 #' @param df degrees of freedom
 #' @param type lower tail, upper tail, interval or both
 #' @return probability value for the \code{perc} based on \code{df} and

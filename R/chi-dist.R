@@ -184,7 +184,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 #' @importFrom stats pchisq
 #' @title Visualize Chi Square Distribution Probabilities
 #' @description Calculate and visualize probability from a given quantile.
-#' @param perc percentile
+#' @param perc a quantile value
 #' @param df degrees of freedom
 #' @param type lower tail or upper tail
 #' @return probability value for \code{perc} based on \code{df} and \code{type}

@@ -7,7 +7,7 @@
 chi_prob(perc, df, type = c("lower", "upper"))
 }
 \arguments{
-\item{perc}{percentile}
+\item{perc}{a quantile value}
 
 \item{df}{degrees of freedom}
 

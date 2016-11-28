@@ -79,7 +79,7 @@ print.screener <- function(x, ...) {
 }
 
 
-
+#' @importFrom graphics legend
 #' @title Visualize Missing Values
 #' @description \code{plot.screener} creates bar plots to visualize % of missing
 #' observations for each variable in a data frame

@@ -195,6 +195,7 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
 #' @importFrom stats pf
 #' @title Visualize F Distribution Probabilities
 #' @description Calculate and visualize probability from a given quantile
+#' @param perc a quantile value
 #' @param num_df degrees of freedom associated with the numerator of f statistic
 #' @param den_df degrees of freedom associated with the denominator of f statistic
 #' @param type lower tail or upper tail
@@ -234,7 +235,6 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   } else {
     seq(0, (perc * 1.25), 0.01)
   }
-  # l   <- seq(0, 4, 0.01)
   ln  <- length(l)
 
   if (method == 'lower') {

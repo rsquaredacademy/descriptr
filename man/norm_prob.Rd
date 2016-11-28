@@ -7,6 +7,8 @@
 norm_prob(perc, mean = 0, sd = 1, type = c("lower", "upper", "both"))
 }
 \arguments{
+\item{perc}{a quantile value}
+
 \item{mean}{mean of the normal distribution}
 
 \item{sd}{standard deviation of the normal distribution}

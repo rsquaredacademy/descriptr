@@ -205,6 +205,7 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
 #' @importFrom stats pnorm
 #' @title Visualize Normal Distribution Probabilities
 #' @description Calculate and visualize probability from a given quantile
+#' @param perc a quantile value
 #' @param mean mean of the normal distribution
 #' @param sd standard deviation of the normal distribution
 #' @param type lower tail, upper tail, or both
