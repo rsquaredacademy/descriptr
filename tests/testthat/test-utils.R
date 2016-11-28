@@ -134,6 +134,19 @@ test_that('output from seql matches the expected result', {
 
 })
 
+test_that('output form xmmp matches the expected result', {
+
+    expect_equivalent(xmmp(3, 2, 3.5), c(-4, 10))
+
+})
+
+test_that('output from seqlp matches the expected result', {
+
+    expect_equivalent(seqlp(3, 2, 2.5), c(-2, 0, 2, 4, 6, 8))
+
+})
+
+
 test_that('output form xmn matches the expected result', {
 
     expect_equivalent(xmn(3, 2), c(-3, 9))

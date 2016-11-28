@@ -83,14 +83,14 @@
 <li>mean: mean of the normal distribution</li>
 <li>sd: standard deviation of the normal distribution</li>
 <li>type: lower/upper tail</li>
-</ul><p>Suppose X, the grade on a exam, is normally distributed with mean 60 and standard deviation 8. The teacher wants to give 10% of the class an A. What should be the cutoff to determine who gets an A?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.10</span>, <span class="dv">60</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+</ul><p>Suppose X, the grade on a exam, is normally distributed with mean 60 and standard deviation 3. The teacher wants to give 10% of the class an A. What should be the cutoff to determine who gets an A?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.10</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per1-1.png" width="672"></p>
 <p>The teacher wants to give lower 15% of the class a D. What cutoff should the teacher use to determine who gets an D?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.85</span>, <span class="dv">60</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.85</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per2-1.png" width="672"></p>
 <p>The teacher wants to give middle 50% of the class a B. What cutoff should the teacher use to determine who gets an B?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.5</span>, <span class="dv">60</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.5</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per3-1.png" width="672"></p>
 </div>
 </div>
@@ -105,14 +105,14 @@
 <li>mean: mean of the normal distribution</li>
 <li>sd: standard deviation of the normal distribution</li>
 <li>type: lower/upper/both tail</li>
-</ul><p>Let X be the IQ of a randomly selected student of a school. Assume X ~ N(90, 12). What is the probability that a randomly selected student has an IQ below 80?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="dv">80</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">12</span>)</code></pre></div>
+</ul><p>Let X be the IQ of a randomly selected student of a school. Assume X ~ N(90, 4). What is the probability that a randomly selected student has an IQ below 80?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="dv">80</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob1-1.png" width="672"></p>
 <p>What is the probability that a randomly selected student has an IQ above 100?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">12</span>, <span class="dt">type =</span> <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob2-1.png" width="672"></p>
-<p>What is the probability that a randomly selected student has an IQ between 96 and 106?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="kw">c</span>(<span class="dv">96</span>, <span class="dv">106</span>), <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">12</span>, <span class="dt">type =</span> <span class="st">'both'</span>)</code></pre></div>
+<p>What is the probability that a randomly selected student has an IQ between 85 and 100?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">100</span>), <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob3-1.png" width="672"></p>
 </div>
 </div>

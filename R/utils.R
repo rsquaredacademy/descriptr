@@ -217,6 +217,33 @@ pol_cord <- function(l1, l2, mean, sd, col) {
 }
 
 
+xaxp <- function(mean, el) {
+
+    xl <- mean - el
+    xu <- mean + el
+    x <- seq(xl, xu, 0.01)
+    return(x)
+}
+
+
+seqlp <- function(mean, sd, el) {
+
+    lmin <- mean - (el * sd)
+    lmax <- mean + (el * sd)
+    l    <- seq(lmin, lmax, sd)
+    return(l)
+
+}
+
+
+xmmp <- function(mean, sd, el) {
+    xmin <- mean - (el * sd)
+    xmax <- mean + (el * sd)
+    out  <- c(xmin, xmax)
+    return(out)
+}
+
+
 xax <- function(mean) {
 
     xl <- mean - 3
@@ -228,8 +255,8 @@ xax <- function(mean) {
 
 seql <- function(mean, sd) {
 
-    lmin <- mean - 5 * sd
-    lmax <- mean + 5 * sd
+    lmin <- mean - (5 * sd)
+    lmax <- mean + (5 * sd)
     l    <- seq(lmin, lmax, sd)
     return(l)
 
@@ -237,11 +264,12 @@ seql <- function(mean, sd) {
 
 
 xmm <- function(mean, sd) {
-    xmin <- mean - 5 * sd
-    xmax <- mean + 5 * sd
+    xmin <- mean - (5 * sd)
+    xmax <- mean + (5 * sd)
     out  <- c(xmin, xmax)
     return(out)
 }
+
 
 seqln <- function(mean, sd) {
 

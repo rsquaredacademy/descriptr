@@ -250,8 +250,9 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
     stop('Specify two percentile values')
   }
 
-  x    <- xax(mean)
-  l    <- seql(mean, sd)
+  el   <- max(abs(perc - mean)) / sd + 1
+  x    <- xaxp(mean, el)
+  l    <- seqlp(mean, sd, el)
   ln   <- length(l)
 
   if (method == 'lower') {
@@ -282,7 +283,7 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
 
   }
 
-  xm <- xmm(mean, sd)
+  xm <- xmmp(mean, sd, el)
   curve(dnorm(x, mean, sd),
         xlab = '',
         ylab = '',
