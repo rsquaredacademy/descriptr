@@ -2,13 +2,11 @@
 % Please edit documentation in R/f-dist.R
 \name{f_prob}
 \alias{f_prob}
-\title{Area Under F Distribution}
+\title{Visualize F Distribution Probabilities}
 \usage{
 f_prob(perc, num_df, den_df, type = c("lower", "upper"))
 }
 \arguments{
-\item{perc}{percentile}
-
 \item{num_df}{degrees of freedom associated with the numerator of f statistic}
 
 \item{den_df}{degrees of freedom associated with the denominator of f statistic}
@@ -20,7 +18,7 @@ probability value for \code{perc} based on \code{num_df}, \code{den_df}
 and \code{type}
 }
 \description{
-Visualize area under F distribution
+Calculate and visualize probability from a given quantile
 }
 \examples{
 f_prob(2.35, 5, 32)

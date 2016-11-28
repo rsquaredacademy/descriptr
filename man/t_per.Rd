@@ -2,7 +2,7 @@
 % Please edit documentation in R/t-dist.R
 \name{t_per}
 \alias{t_per}
-\title{T Distribution Percentile}
+\title{Visualize T Distribution Percentile}
 \usage{
 t_per(probs = 0.95, df = 4, type = c("lower", "upper", "both"))
 }
@@ -18,8 +18,7 @@ percentile for the \code{probs} based on \code{df} and
 \code{type}
 }
 \description{
-Visualize the percentile from the value of the lower/upper
-cumulative distribution function of the student's t-distribution
+Calculate and visualize quantiles out of given probability
 }
 \examples{
 t_per(probs = 0.95, df = 4, type = 'lower')

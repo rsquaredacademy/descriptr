@@ -2,7 +2,7 @@
 % Please edit documentation in R/normal-dist.R
 \name{norm_per}
 \alias{norm_per}
-\title{Nomral Distribution Percentile}
+\title{Visualize Nomral Distribution Percentile}
 \usage{
 norm_per(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper",
   "both"))
@@ -21,8 +21,7 @@ percentile for the \code{probs} based on \code{mean}, \code{sd} and
 \code{type}
 }
 \description{
-Visualize the percentile from the value of the lower/upper
-cumulative distribution function of the student's t-distribution
+Calculate and visualize quantiles out of given probability
 }
 \examples{
 norm_per(0.95, mean = 2, sd = 1.36)

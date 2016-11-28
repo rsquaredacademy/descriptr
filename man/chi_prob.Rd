@@ -2,7 +2,7 @@
 % Please edit documentation in R/chi-dist.R
 \name{chi_prob}
 \alias{chi_prob}
-\title{Area Under Chi Square Distribution}
+\title{Visualize Chi Square Distribution Probabilities}
 \usage{
 chi_prob(perc, df, type = c("lower", "upper"))
 }
@@ -17,10 +17,10 @@ chi_prob(perc, df, type = c("lower", "upper"))
 probability value for \code{perc} based on \code{df} and \code{type}
 }
 \description{
-Visualize area under chi square distribution
+Calculate and visualize probability from a given quantile.
 }
 \examples{
-chi_prob(13.58, 11, 'upper')
+chi_prob(13.58, 11, 'lower')
 chi_prob(15.72, 13, 'upper')
 }
 \seealso{

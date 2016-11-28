@@ -2,7 +2,7 @@
 % Please edit documentation in R/binom-dist.R
 \name{binom_prob}
 \alias{binom_prob}
-\title{Visualize Binomial Distribution Success Probability}
+\title{Visualize Cumulative Binomial Probabilities}
 \usage{
 binom_prob(n, p, s, type = c("lower", "upper", "exact", "interval"))
 }
@@ -23,8 +23,7 @@ a list containing the following components:
 \item{stdev}{standard deviation of the binomial distribution}
 }
 \description{
-Probability of having a value lesser/higher than s in a binomial
-distribution with n trials with success probability of p (P[X > x]).
+Calculate and visualize probability from a given quantile
 }
 \examples{
 binom_prob(10, 0.3, 4, type = 'exact')

@@ -45,14 +45,13 @@ binom_plot <- function(n, p) {
 	mtext(text = paste('Mean =', bm, ', Std. Dev. =', bsd), side = 3)
 
   result <- list(avg = bm, stdev = bsd)
-  return(result)
+  invisible(result)
 
 }
 
 #' @importFrom stats pbinom
-#' @title Visualize Binomial Distribution Success Probability
-#' @description Probability of having a value lesser/higher than s in a binomial
-#' distribution with n trials with success probability of p (P[X > x]).
+#' @title Visualize Cumulative Binomial Probabilities
+#' @description Calculate and visualize probability from a given quantile
 #' @param n number of bernoulli trials
 #' @param p success probability
 #' @param s number of success
@@ -167,17 +166,16 @@ binom_prob <- function(n, p, s,
     }
 
     result <- list(prob = k, avg = bm, stdev = bsd)
-    return(result)
+    invisible(result)
 
 }
 
 #' @importFrom stats qbinom
 #' @title Binomial Distribution Percentile
-#' @description Visualize quantile value below/above which the summation of
-#' probabilities is lesser/greater than or equal to tp.
+#' @description Calculate and visualize quantiles out of given probability
 #' @param n number of bernoulli trials
-#' @param p probability of success on each trialprobability of success on each trial
-#' @param tp tail probability
+#' @param p a single aggregated probability of multiple trials
+#' @param tp the probability of success in a trial
 #' @param type lower tail or upper tail
 #' @examples
 #' binom_perc(10, 0.5, 0.05)

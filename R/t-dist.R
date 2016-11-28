@@ -39,9 +39,8 @@ t_plot <- function(df = 3) {
 
 
 #' @importFrom stats qt
-#' @title T Distribution Percentile
-#' @description Visualize the percentile from the value of the lower/upper
-#' cumulative distribution function of the student's t-distribution
+#' @title Visualize T Distribution Percentile
+#' @description Calculate and visualize quantiles out of given probability
 #' @param probs a probability value
 #' @param df degrees of freedom
 #' @param type lower tail, upper tail or both
@@ -120,21 +119,21 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.15, y = max(dt(l, df)), labels = paste0(probs * 100, '%'), col = "#0000CD")
-    text(x = pp + 0.15, y = max(dt(l, df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
+    text(x = pp - 0.15, y = max(dt(l, df)), labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + 0.15, y = max(dt(l, df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.15, y = max(dt(l, df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
-    text(x = pp + 0.15, y = max(dt(l, df)), labels = paste0(probs * 100, '%'), col = "#0000CD")
+    text(x = pp - 0.15, y = max(dt(l, df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + 0.15, y = max(dt(l, df)), labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(', pp[1], ' < X < ', pp[2], ') = ', probs * 100, '%'), side = 3)
-    text(x = mean(l), y = max(dt(l, df)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD")
-    text(x = pp[1] - 0.15, y = max(dt(l, df)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED")
-    text(x = pp[2] + 0.15, y = max(dt(l, df)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED")
+    text(x = mean(l), y = max(dt(l, df)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp[1] - 0.15, y = max(dt(l, df)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp[2] + 0.15, y = max(dt(l, df)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
 
   }
 
@@ -158,15 +157,14 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
   }
 
   result <- list(x = pp)
-  return(result)
+  invisible(result)
 
 }
 
 
 #' @importFrom stats pt
-#' @title T Distribution Probability
-#' @description Visualize cumulative probabilities based on t statistics
-#' @param perc t statistic
+#' @title Visualize T Distribution Probability
+#' @description Calculate and visualize probability from a given quantile
 #' @param df degrees of freedom
 #' @param type lower tail, upper tail, interval or both
 #' @return probability value for the \code{perc} based on \code{df} and
@@ -266,8 +264,8 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD")
-    text(x = perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED")
+    text(x = perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = perc, y = min(dt(l, df)),
           type = 'p', pch = 4, cex = 2)
@@ -277,8 +275,8 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED")
-    text(x = perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD")
+    text(x = perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = perc, y = min(dt(l, df)),
           type = 'p', pch = 4, cex = 2)
@@ -288,9 +286,9 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   } else if (method == "interval") {
 
     mtext(text = paste0('P(', -perc, ' < X < ', perc, ') = ', (1 - (pp1 + pp2)) * 100, '%'), side = 3)
-    text(x = 0, y = max(dt(l, df)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD")
-    text(x = perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED")
-    text(x = -perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED")
+    text(x = 0, y = max(dt(l, df)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = -perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
     abline(v = -perc, lty = 3, lwd = 2)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = -perc, y = min(dt(l, df)),
@@ -305,9 +303,9 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   } else {
 
   	mtext(text = paste0('P(|X| > ', perc, ') = ', (pp1 + pp2) * 100, '%'), side = 3)
-    text(x = 0, y = max(dt(l, df)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD")
-    text(x = perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED")
-    text(x = -perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED")
+    text(x = 0, y = max(dt(l, df)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = -perc - 0.25, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
     abline(v = -perc, lty = 3, lwd = 2)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = -perc, y = min(dt(l, df)),
@@ -322,6 +320,6 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   }
 
   result <- list(probs = pp)
-  return(result)
+  invisible(result)
 
 }

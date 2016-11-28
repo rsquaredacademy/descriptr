@@ -70,15 +70,14 @@ f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
         line = 0.5, col = "#4B0082")
 
     result <- list(mean = fm, stdev = fsd)
-    return(result)
+    invisible(result)
 
 }
 
 
 #' @importFrom stats qf
-#' @title F Distribution Percentile
-#' @description Visualize the percentile from the value of the lower/upper
-#' cumulative distribution function of the F distribution
+#' @title Visualize F Distribution Percentile
+#' @description Calculate and visualize quantiles out of given probability
 #' @param probs a probability value
 #' @param num_df degrees of freedom associated with the numerator of f statistic
 #' @param den_df degrees of freedom associated with the denominator of f statistic
@@ -157,14 +156,14 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.15, y = max(df(l, num_df, den_df)), labels = paste0(probs * 100, '%'), col = "#0000CD")
-    text(x = pp + 0.15, y = max(df(l, num_df, den_df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
+    text(x = pp - (pp * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + (pp * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.15, y = max(df(l, num_df, den_df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
-    text(x = pp + 0.15, y = max(df(l, num_df, den_df)), labels = paste0(probs * 100, '%'), col = "#0000CD")
+    text(x = pp - (pp * 0.05), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + (pp * 0.05), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
@@ -188,15 +187,14 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
   }
 
   result <- list(x = pp, mean = fm, stdev = fsd)
-  return(result)
+  invisible(result)
 
 }
 
 
 #' @importFrom stats pf
-#' @title Area Under F Distribution
-#' @description Visualize area under F distribution
-#' @param perc percentile
+#' @title Visualize F Distribution Probabilities
+#' @description Calculate and visualize probability from a given quantile
 #' @param num_df degrees of freedom associated with the numerator of f statistic
 #' @param den_df degrees of freedom associated with the denominator of f statistic
 #' @param type lower tail or upper tail
@@ -231,7 +229,12 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   fm  <- round(den_df / (den_df - 2), 3)
   fsd <- round(sqrt((2 * (fm ^ 2) * (num_df + den_df - 2)) / (num_df * (den_df - 4))), 3)
 
-  l   <- seq(0, 4, 0.01)
+  l <- if (perc < 4) {
+    seq(0, 4, 0.01)  
+  } else {
+    seq(0, (perc * 1.25), 0.01)
+  }
+  # l   <- seq(0, 4, 0.01)
   ln  <- length(l)
 
   if (method == 'lower') {
@@ -260,7 +263,7 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
          ylab = '',
          xaxt = 'n',
          yaxt = 'n',
-         xlim = c(0, 5),
+         xlim = c(0, (perc * 1.3)),
          ylim = c(0, max(df(l, num_df, den_df)) + 0.03),
          main = 'f distribution',
          sub  = paste('Mean =', fm, ' Std Dev. =', fsd),
@@ -270,14 +273,14 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.15, y = max(df(l, num_df, den_df)), labels = paste0(pp * 100, '%'), col = "#0000CD")
-    text(x = perc + 0.15, y = max(df(l, num_df, den_df)), labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED")
+    text(x = perc - (perc * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + (perc * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.15, y = max(df(l, num_df, den_df)), labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED")
-    text(x = perc + 0.15, y = max(df(l, num_df, den_df)), labels = paste0(pp * 100, '%'), col = "#0000CD")
+    text(x = perc - (perc * 0.15), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + (perc * 0.15), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
@@ -301,6 +304,6 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   }
 
   result <- list(probs = pp, mean = fm, stdev = fsd)
-  return(result)
+  invisible(result)
 
 }

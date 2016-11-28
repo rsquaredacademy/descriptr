@@ -68,9 +68,8 @@ norm_plot <- function(mean = 0, sd = 1) {
 
 
 #' @importFrom stats qnorm
-#' @title Nomral Distribution Percentile
-#' @description Visualize the percentile from the value of the lower/upper
-#' cumulative distribution function of the student's t-distribution
+#' @title Visualize Nomral Distribution Percentile
+#' @description Calculate and visualize quantiles out of given probability
 #' @param probs a probability value
 #' @param mean mean of the normal distribution
 #' @param sd standard deviation of the normal distribution
@@ -157,21 +156,21 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.15, y = max(dnorm(x, mean, sd)), labels = paste0(probs * 100, '%'), col = "#0000CD")
-    text(x = pp + 0.15, y = max(dnorm(x, mean, sd)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
+    text(x = pp - (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.15, y = max(dnorm(x, mean, sd)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
-    text(x = pp + 0.15, y = max(dnorm(x, mean, sd)), labels = paste0(probs * 100, '%'), col = "#0000CD")
+    text(x = pp - (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(', pp[1], ' < X < ', pp[2], ') = ', probs * 100, '%'), side = 3)
-    text(x = mean, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD")
-    text(x = pp[1] - 0.15, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED")
-    text(x = pp[2] + 0.15, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED")
+    text(x = mean, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp[1] - (pp[1] * 0.025), y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp[2] + (pp[2] * 0.025), y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
 
   }
 
@@ -190,7 +189,7 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
   for (i in seq_len(pln)) {
 
     abline(v = pp[i], lty = 3, lwd = 2)
-    points(x = pp[i], y = min(dnorm(x, mean, sd)),
+    points(x = pp[i], y = 0,
            type = 'p', pch = 4, cex = 2)
     mtext(side = 1, text = pp[i], outer = FALSE, at = pp[i],
           line = 0.3, col = "#4B0082", cex = 0.8)
@@ -198,15 +197,14 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
   }
 
   result <- list(x = pp)
-  return(result)
+  invisible(result)
 
 }
 
 
 #' @importFrom stats pnorm
-#' @title Area Under Normal Distribution
-#' @description Visualize area under normal distribution
-#' @param perc percentile
+#' @title Visualize Normal Distribution Probabilities
+#' @description Calculate and visualize probability from a given quantile
 #' @param mean mean of the normal distribution
 #' @param sd standard deviation of the normal distribution
 #' @param type lower tail, upper tail, or both
@@ -298,21 +296,21 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.25, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD")
-    text(x = perc + 0.25, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED")
+    text(x = perc - (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.25, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED")
-    text(x = perc + 0.25, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD")
+    text(x = perc - (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   } else {
 
-    mtext(text = paste0('P(', perc[1], ' < X < ', perc[2], ') = ', pp * 100, '%'), side = 3)
-    text(x = mean, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD")
-    text(x = perc[1] - 0.25, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED")
-    text(x = perc[2] + 0.25, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED")
+    mtext(text = paste0('P(', perc[1], ' < X < ', perc[2], ') = ', (1 - (pp1 + pp2)) * 100, '%'), side = 3)
+    text(x = mean(perc), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc[1] - (perc[1] * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc[2] + (perc[2] * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
 
   }
 
@@ -331,7 +329,7 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
   for (i in seq_len(pln)) {
 
     abline(v = perc[i], lty = 3, lwd = 2)
-    points(x = perc[i], y = min(dnorm(x, mean, sd)),
+    points(x = perc[i], y = 0,
            type = 'p', pch = 4, cex = 2)
     mtext(side = 1, text = perc[i], outer = FALSE, at = perc[i],
           line = 0.3, col = "#4B0082", cex = 0.8)
@@ -339,6 +337,6 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
   }
 
   result <- list(prob = pp)
-  return(result)
+  invisible(result)
 
 }

@@ -2,13 +2,11 @@
 % Please edit documentation in R/normal-dist.R
 \name{norm_prob}
 \alias{norm_prob}
-\title{Area Under Normal Distribution}
+\title{Visualize Normal Distribution Probabilities}
 \usage{
 norm_prob(perc, mean = 0, sd = 1, type = c("lower", "upper", "both"))
 }
 \arguments{
-\item{perc}{percentile}
-
 \item{mean}{mean of the normal distribution}
 
 \item{sd}{standard deviation of the normal distribution}
@@ -20,7 +18,7 @@ probability value for \code{perc} based on \code{mean}, \code{sd} and
 \code{type}
 }
 \description{
-Visualize area under normal distribution
+Calculate and visualize probability from a given quantile
 }
 \examples{
 norm_prob(3.78, mean = 2, sd = 1.36)

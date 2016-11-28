@@ -79,7 +79,7 @@ print.screener <- function(x, ...) {
 }
 
 
-#' @importFrom grDevices heat.colors
+
 #' @title Visualize Missing Values
 #' @description \code{plot.screener} creates bar plots to visualize % of missing
 #' observations for each variable in a data frame
@@ -96,10 +96,13 @@ print.screener <- function(x, ...) {
 plot.screener <- function(x, ...) {
 
     dat <- x$MissingPer
-    ymax <- max(dat) + 3
+    ymax <- max(dat) * 1.5
+    cols <- c("green", "red")[(dat > 10) + 1]
     h <- barplot(dat, main = "Missing Values (%)",
                  xlab = 'Column Names', ylab = 'Percentage',
-                 col = heat.colors(length(dat)), ylim = c(0, ymax))
+                 col = cols, ylim = c(0, ymax))
+    legend('top', legend = c('> 10%', '<= 10%'), fill = c('red', 'green'),
+        horiz = TRUE, title = '% Missing', cex = 0.5, text.width = 0.7)
     line_data <- cbind(h, as.vector(dat))
     text(line_data[, 1], line_data[, 2] + 2, as.vector(dat))
 }

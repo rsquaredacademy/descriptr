@@ -2,13 +2,11 @@
 % Please edit documentation in R/t-dist.R
 \name{t_prob}
 \alias{t_prob}
-\title{T Distribution Probability}
+\title{Visualize T Distribution Probability}
 \usage{
 t_prob(perc, df, type = c("lower", "upper", "interval", "both"))
 }
 \arguments{
-\item{perc}{t statistic}
-
 \item{df}{degrees of freedom}
 
 \item{type}{lower tail, upper tail, interval or both}
@@ -18,7 +16,7 @@ probability value for the \code{perc} based on \code{df} and
 \code{type}
 }
 \description{
-Visualize cumulative probabilities based on t statistics
+Calculate and visualize probability from a given quantile
 }
 \examples{
 t_prob(2.045, 7, 'lower')

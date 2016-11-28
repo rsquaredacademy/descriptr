@@ -9,15 +9,14 @@ binom_perc(n, p, tp, type = c("lower", "upper"))
 \arguments{
 \item{n}{number of bernoulli trials}
 
-\item{p}{probability of success on each trialprobability of success on each trial}
+\item{p}{a single aggregated probability of multiple trials}
 
-\item{tp}{tail probability}
+\item{tp}{the probability of success in a trial}
 
 \item{type}{lower tail or upper tail}
 }
 \description{
-Visualize quantile value below/above which the summation of
-probabilities is lesser/greater than or equal to tp.
+Calculate and visualize quantiles out of given probability
 }
 \examples{
 binom_perc(10, 0.5, 0.05)

@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# descriptr
+descriptr
+=========
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
@@ -23,14 +24,42 @@ knitr::opts_chunk$set(
 ## Overview
 
 The goal of descriptr is to ease the process of generating descriptive
-statistics and exploring statistical distributions.
+statistics and exploring statistical distributions. 
 
 ## Installation
 
-You can install descriptr from github with:
+```{r cran-installation, eval = FALSE}
+# install descriptr from CRAN
+install.packages("descriptr")
 
-```{r gh-installation, eval = FALSE}
+# the development version from github
 # install.packages("devtools")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
+
+## Usage
+
+### Descriptive Statistics
+
+The following functions are available for generating descriptive statistics:
+
+- `summary_stats`
+- `cross_table`
+- `freq_table`
+- `freq_cont`
+- `group_summary`
+- `oway_tables`
+- `tway_tables`
+
+
+### Explore Distributions
+
+Functions have been defined to visualize and compute percentiles/probabilities
+for the following distributions:
+
+- Normal
+- Binomial
+- Chi Square 
+- F
+- t
 

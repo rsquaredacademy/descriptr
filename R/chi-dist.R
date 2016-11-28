@@ -65,16 +65,15 @@ chi_plot <- function(df = 3, normal = FALSE) {
         line = 0.5, col = "#4B0082")
 
     result <- list(mean = chim, stdev = chisd)
-    return(result)
+    invisible(result)
 
 }
 
 
 #' @importFrom stats qchisq
 #' @importFrom graphics text abline
-#' @title Chi Square Distribution Percentile
-#' @description Visualize the percentile from the value of the lower/upper
-#' cumulative distribution function of the chi square distribution
+#' @title Visualize Chi Square Distribution Percentile
+#' @description Visualize and calculate quantiles out of given probability
 #' @param probs a probability value
 #' @param df degrees of freedom
 #' @param type lower tail or upper tail
@@ -146,14 +145,14 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.75, y = max(dchisq(l, df)), labels = paste0(probs * 100, '%'), col = "#0000CD")
-    text(x = pp + 0.75, y = max(dchisq(l, df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
+    text(x = pp - (pp * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + (pp * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - 0.75, y = max(dchisq(l, df)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED")
-    text(x = pp + 0.75, y = max(dchisq(l, df)), labels = paste0(probs * 100, '%'), col = "#0000CD")
+    text(x = pp - (pp * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + (pp * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
@@ -177,20 +176,20 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
   }
 
   result <- list(x = pp, mean = chim, stdev = chisd)
-  return(result)
+  invisible(result)
 
 }
 
 
 #' @importFrom stats pchisq
-#' @title Area Under Chi Square Distribution
-#' @description Visualize area under chi square distribution
+#' @title Visualize Chi Square Distribution Probabilities
+#' @description Calculate and visualize probability from a given quantile.
 #' @param perc percentile
 #' @param df degrees of freedom
 #' @param type lower tail or upper tail
 #' @return probability value for \code{perc} based on \code{df} and \code{type}
 #' @examples
-#' chi_prob(13.58, 11, 'upper')
+#' chi_prob(13.58, 11, 'lower')
 #' chi_prob(15.72, 13, 'upper')
 #' @seealso \code{\link{chi_plot}} \code{\link{chi_per}}
 #' \code{\link[stats]{Chisquare}}
@@ -211,7 +210,8 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
   chim  <- round(df, 3)
   chisd <- round(sqrt(2 * df), 3)
 
-  l   <- seq(0, 25, 0.01)
+  af <- max(perc, df)
+  l   <- seq((af * 0.2), (af * 1.7), 0.01)
   ln  <- length(l)
 
   if (method == 'lower') {
@@ -240,7 +240,7 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
          ylab = '',
          xaxt = 'n',
          yaxt = 'n',
-         xlim = c(0, 30),
+         xlim = c(0, (af * 1.8)),
          ylim = c(0, max(dchisq(l, df)) + 0.03),
          main = paste('Chi Square Distribution: df =', df),
          sub  = paste('Mean =', chim, ' Std Dev. =', chisd),
@@ -250,14 +250,14 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.75, y = max(dchisq(l, df)), labels = paste0(pp * 100, '%'), col = "#0000CD")
-    text(x = perc + 0.75, y = max(dchisq(l, df)), labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED")
+    text(x = perc - (perc * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + (perc * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.75, y = max(dchisq(l, df)), labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED")
-    text(x = perc + 0.75, y = max(dchisq(l, df)), labels = paste0(pp * 100, '%'), col = "#0000CD")
+    text(x = perc - (perc * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + (perc * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
@@ -281,6 +281,6 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
   }
 
   result <- list(prob = pp, mean = chim, stdev = chisd)
-  return(result)
+  invisible(result)
 
 }

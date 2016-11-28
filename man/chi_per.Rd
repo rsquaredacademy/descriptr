@@ -2,7 +2,7 @@
 % Please edit documentation in R/chi-dist.R
 \name{chi_per}
 \alias{chi_per}
-\title{Chi Square Distribution Percentile}
+\title{Visualize Chi Square Distribution Percentile}
 \usage{
 chi_per(probs = 0.95, df = 3, type = c("lower", "upper"))
 }
@@ -17,8 +17,7 @@ chi_per(probs = 0.95, df = 3, type = c("lower", "upper"))
 percentile for the \code{probs} based on \code{df} and \code{type}
 }
 \description{
-Visualize the percentile from the value of the lower/upper
-cumulative distribution function of the chi square distribution
+Visualize and calculate quantiles out of given probability
 }
 \examples{
 chi_per(0.165, 8, 'upper')

@@ -2,7 +2,7 @@
 % Please edit documentation in R/f-dist.R
 \name{f_per}
 \alias{f_per}
-\title{F Distribution Percentile}
+\title{Visualize F Distribution Percentile}
 \usage{
 f_per(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper"))
 }
@@ -20,8 +20,7 @@ percentile for the \code{probs} based on \code{num_df}, \code{den_df}
 and \code{type}
 }
 \description{
-Visualize the percentile from the value of the lower/upper
-cumulative distribution function of the F distribution
+Calculate and visualize quantiles out of given probability
 }
 \examples{
 f_per(0.95, 3, 30, 'lower')
