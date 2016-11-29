@@ -15,7 +15,7 @@ cross_table2.default <- function(var1, var2, name_1, name_2) {
     n <- length(var1)
 
     # row names
-    row_name <- unique(sort(var1))
+    row_name <- levels(var1)
 
 
     # percentage matrix
@@ -48,7 +48,7 @@ cross_table2.default <- function(var1, var2, name_1, name_2) {
     x <- cbind(row_name, x)
     
     # column names
-    col_name <- unique(sort(var2))
+    col_name <- levels(var2)
     col_names <- c(var_names[1], col_name, "Row Total")
 
     # part 6

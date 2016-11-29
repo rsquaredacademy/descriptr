@@ -26,6 +26,7 @@ This document introduces you to a basic set of functions that describe data.
 There is a second vignette which provides details about functions which help 
 visualize statistical distributions.
 
+
 ## Data Screening
 
 The `screener` function will screen a data set and return the following:
@@ -43,6 +44,7 @@ mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
 screener(mt)
 ```
 
+
 ## Summary Statistics
 
 The `summary_stats` function returns a comprehensive set of statistics for 
@@ -51,6 +53,7 @@ The `summary_stats` function returns a comprehensive set of statistics for
 ```{r summary}
 summary_stats(mtcars$mpg)
 ```
+
 
 ## Cross Tabulation
 
@@ -63,12 +66,14 @@ cross_table(mtcars$cyl, mtcars$gear)
 
 A plot method has been defined which will generate:
 
+
 ### Grouped Bar Plots
 
 ```{r cross_group, fig.width=7, fig.height=7, fig.align='centre'}
 k <- cross_table(mtcars$cyl, mtcars$gear)
 plot(k, beside = TRUE)
 ```
+
 
 ### Stacked Bar Plots
 
@@ -77,12 +82,14 @@ k <- cross_table(mtcars$cyl, mtcars$gear)
 plot(k)
 ```
 
+
 ### Proportional Bar Plots
 
 ```{r cross_prop, fig.width=7, fig.height=7, fig.align='centre'}
 k <- cross_table(mtcars$cyl, mtcars$gear)
 plot(k, proportional = TRUE)
 ```
+
 
 ### Mosaic Plots
 
@@ -93,14 +100,15 @@ k <- cross_table(mtcars$cyl, mtcars$gear)
 mosaicplot(k)
 ```
 
+
 ## Frequency Table (Categorical Data)
 
-The `freq_table` function creates frequency tables for categorical variables. It
-is **not necessary** to coerce a variable to type `factor`.
+The `freq_table` function creates frequency tables for categorical variables. 
 
 ```{r ftable}
 freq_table(mtcars$cyl)
 ```
+
 
 ### Bar Plot
 
@@ -111,6 +119,7 @@ k <- freq_table(mtcars$cyl)
 barplot(k)
 ```
 
+
 ## Frequency Table (Continuous Data)
 
 The `freq_cont` function creates frequency tables for continuous variables. The
@@ -120,6 +129,7 @@ default number of intervals is 5.
 freq_cont(mtcars$mpg, 4)
 ```
 
+
 ### Histogram
 
 A `hist` method has been defined.
@@ -128,6 +138,7 @@ A `hist` method has been defined.
 k <- freq_cont(mtcars$mpg, 4)
 hist(k)
 ```
+
 
 ## Group Summary
 
@@ -140,6 +151,7 @@ mt$cyl <- as.factor(mt$cyl)
 group_summary(mt$cyl, mt$mpg)
 ```
 
+
 ### Box Plot
 
 A `boxplot` method has been defined.
@@ -151,6 +163,7 @@ k <- group_summary(mt$cyl, mt$mpg)
 boxplot(k)
 ```
 
+
 ## Multiple One Way Tables
 
 The `oway_tables` function creates multiple one way tables by creating a 
@@ -161,6 +174,7 @@ mt <- mtcars
 mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
 oway_tables(mt)
 ```
+
 
 ## Multiple Two Way Tables
 
