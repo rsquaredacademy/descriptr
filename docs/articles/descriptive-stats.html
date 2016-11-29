@@ -166,33 +166,18 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
 <span class="kw">plot</span>(k, <span class="dt">beside =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/cross_group-1.png" width="672"></p>
-<pre><code>## $data
-##      [,1] [,2] [,3]
-## [1,]    1    8    2
-## [2,]    2    4    1
-## [3,]   12    0    2</code></pre>
 </div>
 <div id="stacked-bar-plots" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#stacked-bar-plots" class="anchor"> </a></body></html>Stacked Bar Plots</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
 <span class="kw">plot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/cross_stack-1.png" width="672"></p>
-<pre><code>## $data
-##      [,1] [,2] [,3]
-## [1,]    1    8    2
-## [2,]    2    4    1
-## [3,]   12    0    2</code></pre>
 </div>
 <div id="proportional-bar-plots" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#proportional-bar-plots" class="anchor"> </a></body></html>Proportional Bar Plots</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
 <span class="kw">plot</span>(k, <span class="dt">proportional =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/cross_prop-1.png" width="672"></p>
-<pre><code>## $data
-##       [,1]  [,2] [,3]
-## [1,]  6.67 66.67   40
-## [2,] 13.33 33.33   20
-## [3,] 80.00  0.00   40</code></pre>
 </div>
 <div id="mosaic-plots" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#mosaic-plots" class="anchor"> </a></body></html>Mosaic Plots</h3>
@@ -204,7 +189,7 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 </div>
 <div id="frequency-table-categorical-data" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#frequency-table-categorical-data" class="anchor"> </a></body></html>Frequency Table (Categorical Data)</h2>
-<p>The <code>freq_table</code> function creates frequency tables for categorical variables. It is <strong>not necessary</strong> to coerce a variable to type <code>factor</code>.</p>
+<p>The <code>freq_table</code> function creates frequency tables for categorical variables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mtcars$cyl)</code></pre></div>
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
@@ -258,8 +243,9 @@ mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
 <span class="kw"><a href="../reference/group_summary.html">group_summary</a></span>(mt$cyl, mt$mpg)</code></pre></div>
 <pre><code>##                                        mpg by cyl                                         
 ## -----------------------------------------------------------------------------------------
-## |                  Obs|                   11|                    7|                   14|
+## |     Statistic/Levels|                    4|                    6|                    8|
 ## -----------------------------------------------------------------------------------------
+## |                  Obs|                   11|                    7|                   14|
 ## |              Maximum|                 21.4|                 17.8|                 10.4|
 ## |              Minimum|                 33.9|                 21.4|                 19.2|
 ## |                 Mean|                26.66|                19.74|                 15.1|

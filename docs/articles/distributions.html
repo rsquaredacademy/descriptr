@@ -125,11 +125,6 @@
 <p>Visualize how changes in number of trials and the probability of success affect the shape of the binomial distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_plot</a></span>(<span class="dv">10</span>, <span class="fl">0.3</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_plot-1.png" width="672"></p>
-<pre><code>## $avg
-## [1] 3
-## 
-## $stdev
-## [1] 1.45</code></pre>
 </div>
 <div id="percentiles-1" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#percentiles-1" class="anchor"> </a></body></html>Percentiles</h3>
@@ -161,47 +156,15 @@
 </ul><p>Assume twenty-percent (20%) of Magemill have no health insurance. Randomly sample n = 12 Magemillians. Let X denote the number in the sample with no health insurance. What is the probability that exactly 4 of the 15 sampled have no health insurance?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'exact'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob1-1.png" width="672"></p>
-<pre><code>## $prob
-## [1] 0.1328756
-## 
-## $avg
-## [1] 2.4
-## 
-## $stdev
-## [1] 1.39</code></pre>
 <p>What is the probability that at most one of those sampled has no health insurance?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob2-1.png" width="672"></p>
-<pre><code>## $prob
-## [1] 0.275
-## 
-## $avg
-## [1] 2.4
-## 
-## $stdev
-## [1] 1.39</code></pre>
 <p>What is the probability that more than seven have no health insurance?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob3-1.png" width="672"></p>
-<pre><code>## $prob
-## [1] 0.001
-## 
-## $avg
-## [1] 2.4
-## 
-## $stdev
-## [1] 1.39</code></pre>
 <p>What is the probability that fewer than 5 have no health insurance?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="st">'interval'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob4-1.png" width="672"></p>
-<pre><code>## $prob
-## [1] 0.9274445
-## 
-## $avg
-## [1] 2.4
-## 
-## $stdev
-## [1] 1.39</code></pre>
 </div>
 </div>
 </div>
