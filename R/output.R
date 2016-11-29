@@ -305,7 +305,7 @@ print_group <- function(data) {
     cat(rep('-', ow), sep = '', '\n')
     cat('|')
     for (i in seq_len(cola)) {
-        cat(format(colnames(k$stats)[i], width = n, justify = 'right'), '|', sep = '')
+        cat(format(colnames(data$stats)[i], width = n, justify = 'right'), '|', sep = '')
     }
     cat('\n')
     cat(rep('-', ow), sep = '', '\n')
