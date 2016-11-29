@@ -305,11 +305,11 @@ print_group <- function(data) {
     cat(rep('-', ow), sep = '', '\n')
     cat('|')
     for (i in seq_len(cola)) {
-        cat(format(data$stats[1, i], width = n, justify = 'right'), '|', sep = '')
+        cat(format(colnames(k$stats)[i], width = n, justify = 'right'), '|', sep = '')
     }
     cat('\n')
     cat(rep('-', ow), sep = '', '\n')
-    for (i in 2:row) {
+    for (i in seq_len(row)) {
         cat('|')
         for (j in seq_len(cola)) {
             cat(format(data$stats[i, j], width = n, justify = 'right'), '|', sep = '')
