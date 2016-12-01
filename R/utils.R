@@ -227,9 +227,14 @@ xaxp <- function(mean, el) {
 
 
 seqlp <- function(mean, sd, el) {
+    if (el > 4) {
+      lmin <- mean - (el * sd)
+      lmax <- mean + (el * sd)
+    } else {
+      lmin <- mean - (4 * sd)
+      lmax <- mean + (4 * sd)  
+    }
 
-    lmin <- mean - (el * sd)
-    lmax <- mean + (el * sd)
     l    <- seq(lmin, lmax, sd)
     return(l)
 
@@ -237,8 +242,14 @@ seqlp <- function(mean, sd, el) {
 
 
 xmmp <- function(mean, sd, el) {
-    xmin <- mean - (el * sd)
-    xmax <- mean + (el * sd)
+    if (el > 4) {
+      xmin <- mean - (el * sd)
+      xmax <- mean + (el * sd)
+    } else {
+      xmin <- mean - (4 * sd)
+      xmax <- mean + (4 * sd)
+    }
+
     out  <- c(xmin, xmax)
     return(out)
 }
@@ -318,5 +329,3 @@ pol_t <- function(l1, l2, df, col) {
 #     ret <- format(x, width = w, justify = "right")
 #     return(ret)
 # }
-
-
