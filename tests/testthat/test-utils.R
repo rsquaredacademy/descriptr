@@ -136,13 +136,15 @@ test_that('output from seql matches the expected result', {
 
 test_that('output form xmmp matches the expected result', {
 
-    expect_equivalent(xmmp(3, 2, 3.5), c(-4, 10))
+    expect_equivalent(xmmp(3, 2, 3.5), c(-5, 11))
+    expect_equivalent(xmmp(3, 2, 4.5), c(-6, 12))
 
 })
 
 test_that('output from seqlp matches the expected result', {
 
-    expect_equivalent(seqlp(3, 2, 2.5), c(-2, 0, 2, 4, 6, 8))
+  expect_equivalent(seqlp(3, 2, 2.5), c(-5, -3, -1,  1,  3,  5,  7,  9, 11))
+  expect_equivalent(seqlp(3, 2, 4.5), c(-6, -4, -2,  0,  2,  4,  6,  8, 10, 12))
 
 })
 
@@ -187,5 +189,3 @@ test_that('output from div_by matches the expected result', {
     expect_equal(div_by(2), 0.5)
 
 })
-
-
