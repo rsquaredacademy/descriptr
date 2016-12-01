@@ -156,21 +156,21 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = pp + (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp - sd, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + sd, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = pp + (pp * 0.025), y = max(dnorm(x, mean, sd)), labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp - sd, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + sd, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(', pp[1], ' < X < ', pp[2], ') = ', probs * 100, '%'), side = 3)
     text(x = mean, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = pp[1] - (pp[1] * 0.025), y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = pp[2] + (pp[2] * 0.025), y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp[1] - sd, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp[2] + sd, y = max(dnorm(x, mean, sd)) + 0.025, labels = paste0(alpha * 100, '%'), col = "#6495ED", cex = 0.6)
 
   }
 
@@ -298,21 +298,21 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc + (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc - sd, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + sd, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = perc + (perc * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc - sd, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + sd, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(', perc[1], ' < X < ', perc[2], ') = ', (1 - (pp1 + pp2)) * 100, '%'), side = 3)
     text(x = mean(perc), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc[1] - (perc[1] * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = perc[2] + (perc[2] * 0.05), y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc[1] - sd, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc[2] + sd, y = max(dnorm(x, mean, sd)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
 
   }
 
