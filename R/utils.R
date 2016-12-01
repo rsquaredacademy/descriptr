@@ -232,7 +232,7 @@ seqlp <- function(mean, sd, el) {
       lmax <- mean + (el * sd)
     } else {
       lmin <- mean - (4 * sd)
-      lmax <- mean + (4 * sd)  
+      lmax <- mean + (4 * sd)
     }
 
     l    <- seq(lmin, lmax, sd)
@@ -269,6 +269,15 @@ seql <- function(mean, sd) {
     lmin <- mean - (5 * sd)
     lmax <- mean + (5 * sd)
     l    <- seq(lmin, lmax, sd)
+    return(l)
+
+}
+
+chiseql <- function(mean, sd) {
+
+    lmin <- mean - (5 * sd)
+    lmax <- mean + (5 * sd)
+    l    <- seq(lmin, lmax, 0.01)
     return(l)
 
 }

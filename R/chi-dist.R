@@ -106,7 +106,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
   chim  <- round(df, 3)
   chisd <- round(sqrt(2 * df), 3)
 
-  l   <- seq(0, 25, 0.01)
+  l    <- chiseql(chim, chisd)
   ln  <- length(l)
 
   if (method == 'lower') {
@@ -126,7 +126,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
     l2   <- c(2, 3)
 
   }
-
+  xm <- xmm(chim, chisd)
   plot(l, dchisq(l, df),
          type = 'l',
          lwd  = 2,
@@ -135,7 +135,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
          ylab = '',
          xaxt = 'n',
          yaxt = 'n',
-         xlim = c(0, 30),
+         xlim = c(xm[1], xm[2]),
          ylim = c(0, max(dchisq(l, df)) + 0.03),
          main = paste('Chi Square Distribution: df =', df),
          sub  = paste('Mean =', chim, ' Std Dev. =', chisd),
@@ -145,19 +145,19 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - (pp * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = pp + (pp * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp - chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - (pp * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = pp + (pp * 0.05), y = max(dchisq(l, df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp - chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
 
-  axis(1, at = seq(0, 30, 5), labels = seq(0, 30, 5))
+  axis(1, at = seq(0, xm[2], 5), labels = seq(0, xm[2], 5))
 
   for (i in seq_len(length(l1))) {
       pol_chi(lc[l1[i]], lc[l2[i]], df, col = col[i])
@@ -210,8 +210,11 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
   chim  <- round(df, 3)
   chisd <- round(sqrt(2 * df), 3)
 
-  af <- max(perc, df)
-  l   <- seq((af * 0.2), (af * 1.7), 0.01)
+  l <- if (perc < 25) {
+    seq(0, 25, 0.01)
+  } else {
+    seq(0, (perc + (3 * chisd)), 0.01)
+  }
   ln  <- length(l)
 
   if (method == 'lower') {
@@ -240,7 +243,7 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
          ylab = '',
          xaxt = 'n',
          yaxt = 'n',
-         xlim = c(0, (af * 1.8)),
+         xlim = c((-chisd - 1), l[ln]),
          ylim = c(0, max(dchisq(l, df)) + 0.03),
          main = paste('Chi Square Distribution: df =', df),
          sub  = paste('Mean =', chim, ' Std Dev. =', chisd),
@@ -250,19 +253,19 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc + (perc * 0.2), y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc - chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.1), y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
-    text(x = perc + (perc * 0.1), y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc - chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + chisd, y = max(dchisq(l, df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
 
-  axis(1, at = seq(0, 30, 5), labels = seq(0, 30, 5))
+  axis(1, at = seq(0, l[ln], 5), labels = seq(0, l[ln], 5))
 
   for (i in seq_len(length(l1))) {
       pol_chi(lc[l1[i]], lc[l2[i]], df, col = col[i])
