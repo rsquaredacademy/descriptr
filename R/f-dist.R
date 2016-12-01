@@ -156,14 +156,14 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - (pp * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = pp + (pp * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp - 0.2, y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp + 0.2, y = max(df(l, num_df, den_df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', pp, ') = ', probs * 100, '%'), side = 3)
-    text(x = pp - (pp * 0.05), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = pp + (pp * 0.05), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = pp - 0.2, y = max(df(l, num_df, den_df)) + 0.02, labels = paste0((1 - probs) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = pp + 0.2, y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(probs * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
@@ -231,7 +231,7 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   fsd <- round(sqrt((2 * (fm ^ 2) * (num_df + den_df - 2)) / (num_df * (den_df - 4))), 3)
 
   l <- if (perc < 4) {
-    seq(0, 4, 0.01)  
+    seq(0, 4, 0.01)
   } else {
     seq(0, (perc * 1.25), 0.01)
   }
@@ -263,8 +263,8 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
          ylab = '',
          xaxt = 'n',
          yaxt = 'n',
-         xlim = c(0, (perc * 1.3)),
-         ylim = c(0, max(df(l, num_df, den_df)) + 0.03),
+         xlim = c(0, l[ln]),
+         ylim = c(0, max(df(l, num_df, den_df)) + 0.05),
          main = 'f distribution',
          sub  = paste('Mean =', fm, ' Std Dev. =', fsd),
          bty  = 'n')
@@ -273,14 +273,14 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc + (perc * 0.3), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc - 0.5, y = max(df(l, num_df, den_df)) + 0.04, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + 0.5, y = max(df(l, num_df, den_df)) + 0.04, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
 
   } else {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - (perc * 0.15), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
-    text(x = perc + (perc * 0.15), y = max(df(l, num_df, den_df)) + 0.02, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc - 0.5, y = max(df(l, num_df, den_df)) + 0.04, labels = paste0(round((1 - pp) * 100, 2), '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + 0.5, y = max(df(l, num_df, den_df)) + 0.04, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
 
   }
 
