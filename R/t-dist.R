@@ -193,9 +193,9 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   method <- match.arg(type)
 
   l <- if (abs(perc) < 5) {
-    seq(-5, 5, 0.01)   
+    seq(-5, 5, 0.01)
   } else {
-    seq(-(perc + 1), (perc + 1), 0.01)   
+    seq(-(perc + 1), (perc + 1), 0.01)
   }
 
   ln   <- length(l)
@@ -270,8 +270,8 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   if (method == "lower") {
 
     mtext(text = paste0('P(X < ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.4, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc + 0.4, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc - 1, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc + 1, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = perc, y = min(dt(l, df)),
           type = 'p', pch = 4, cex = 2)
@@ -281,8 +281,8 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   } else if (method == "upper") {
 
     mtext(text = paste0('P(X > ', perc, ') = ', pp * 100, '%'), side = 3)
-    text(x = perc - 0.3, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = perc + 0.3, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
+    text(x = perc - 1, y = max(dt(l, df)) + 0.07, labels = paste0((1 - pp) * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + 1, y = max(dt(l, df)) + 0.07, labels = paste0(pp * 100, '%'), col = "#0000CD", cex = 0.6)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = perc, y = min(dt(l, df)),
           type = 'p', pch = 4, cex = 2)
@@ -293,8 +293,8 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
 
     mtext(text = paste0('P(', -perc, ' < X < ', perc, ') = ', (1 - (pp1 + pp2)) * 100, '%'), side = 3)
     text(x = 0, y = max(dt(l, df)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc + 0.3, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = -perc - 0.3, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + 1, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = -perc - 1, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
     abline(v = -perc, lty = 3, lwd = 2)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = -perc, y = min(dt(l, df)),
@@ -310,8 +310,8 @@ t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
 
   	mtext(text = paste0('P(|X| > ', perc, ') = ', (pp1 + pp2) * 100, '%'), side = 3)
     text(x = 0, y = max(dt(l, df)) + 0.07, labels = paste0((1 - (pp1 + pp2)) * 100, '%'), col = "#0000CD", cex = 0.6)
-    text(x = perc + 0.3, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
-    text(x = -perc - 0.3, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = perc + 1, y = max(dt(l, df)) + 0.07, labels = paste0(pp[1] * 100, '%'), col = "#6495ED", cex = 0.6)
+    text(x = -perc - 1, y = max(dt(l, df)) + 0.07, labels = paste0(pp[2] * 100, '%'), col = "#6495ED", cex = 0.6)
     abline(v = -perc, lty = 3, lwd = 2)
     abline(v = perc, lty = 3, lwd = 2)
     points(x = -perc, y = min(dt(l, df)),
