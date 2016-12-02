@@ -1,14 +1,34 @@
-#' @importFrom stats dt
-#' @title T Distribution Plot
+#' @importFrom stats dt qt pt
+#' @title Visualize t Distribution
 #' @description Visualize how degrees of freedom affect the shape of t
-#' distribution
+#' distribution. Compute/visualize quantiles out of given probability and
+#' probability from a given quantile.
+#' @param probs a probability value
+#' @param perc a quantile value
 #' @param df degrees of freedom
+#' @param type lower tail, upper tail, interval or both
+#' @return percentile for the \code{probs} based on \code{df} and
+#' \code{type} or probability value for the \code{perc} based on \code{df} and
+#' \code{type}
 #' @examples
+#' # visualize t distribution
 #' t_plot()
 #' t_plot(6)
 #' t_plot(df = 8)
-#' @seealso \code{\link{t_per}} \code{\link{t_prob}} \code{\link[stats]{TDist}}
+#'
+#' # compute/visualize quantiles out of given probability
+#' t_per(probs = 0.95, df = 4, type = 'lower')
+#' t_per(probs = 0.35, df = 4, type = 'upper')
+#' t_per(probs = 0.69, df = 7, type = 'both')
+#'
+#' # compute/visualize probability from a given quantile
+#' t_prob(2.045, 7, 'lower')
+#' t_prob(0.945, 7, 'upper')
+#' t_prob(1.445, 7, 'interval')
+#' t_prob(1.6, 7, 'both')
+#' @seealso \code{\link[stats]{TDist}}
 #' @export
+#'
 t_plot <- function(df = 3) {
 
   if (!is.numeric(df)) {
@@ -38,20 +58,9 @@ t_plot <- function(df = 3) {
 }
 
 
-#' @importFrom stats qt
-#' @title Visualize T Distribution Percentile
-#' @description Calculate and visualize quantiles out of given probability
-#' @param probs a probability value
-#' @param df degrees of freedom
-#' @param type lower tail, upper tail or both
-#' @return percentile for the \code{probs} based on \code{df} and
-#' \code{type}
-#' @examples
-#' t_per(probs = 0.95, df = 4, type = 'lower')
-#' t_per(probs = 0.35, df = 4, type = 'upper')
-#' t_per(probs = 0.69, df = 7, type = 'both')
-#' @seealso \code{\link{t_plot}} \code{\link{t_prob}} \code{\link[stats]{TDist}}
+#' @rdname t_plot
 #' @export
+#'
 t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 
   if(!is.numeric(probs)) {
@@ -162,20 +171,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 }
 
 
-#' @importFrom stats pt
-#' @title Visualize T Distribution Probability
-#' @description Calculate and visualize probability from a given quantile
-#' @param perc a quantile value
-#' @param df degrees of freedom
-#' @param type lower tail, upper tail, interval or both
-#' @return probability value for the \code{perc} based on \code{df} and
-#' \code{type}
-#' @examples
-#' t_prob(2.045, 7, 'lower')
-#' t_prob(0.945, 7, 'upper')
-#' t_prob(1.445, 7, 'interval')
-#' t_prob(1.6, 7, 'both')
-#' @seealso \code{\link{t_plot}} \code{\link{t_per}} \code{\link[stats]{TDist}}
+#' @rdname t_plot
 #' @export
 #'
 t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {

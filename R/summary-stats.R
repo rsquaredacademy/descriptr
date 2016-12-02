@@ -1,3 +1,4 @@
+#' @importFrom stats quantile
 #' @title Descriptive Statistics
 #' @description \code{summary_stats} returns a whole range of descriptive
 #' statistics for continuous data.
@@ -43,9 +44,8 @@
 #'
 summary_stats <- function(data) UseMethod('summary_stats')
 
-#' @rdname summary_stats
-#' @importFrom stats quantile
 #' @export
+#'
 summary_stats.default <- function(data) {
 
     if(!is.numeric(data)) {
