@@ -1,16 +1,31 @@
-#' @importFrom stats df
+#' @importFrom stats df qf pf
 #' @title Visualize F Distribution
 #' @description Visualize how changes in degrees of freedom affect the
-#' shape of the F distribution.
+#' shape of the F distribution. Compute/visualize quantiles out of given
+#' probability and probability from a given quantile.
+#' @param probs a probability value
+#' @param perc a quantile value
 #' @param num_df degrees of freedom associated with the numerator of f statistic
 #' @param den_df degrees of freedom associated with the denominator of f statistic
 #' @param normal logical; if \code{TRUE}, normal curve with same \code{mean} and
-#' \code{sd} as the F distribution is drawn.
+#' \code{sd} as the F distribution is drawn
+#' @param type lower tail or upper tail
+#' @return percentile for the \code{probs} based on \code{num_df}, \code{den_df}
+#' and \code{type} or probability value for \code{perc} based on \code{num_df},
+#' \code{den_df} and \code{type}
 #' @examples
+#' # visualize F distribution
 #' f_plot()
 #' f_plot(6, 10, normal = TRUE)
-#' @seealso \code{\link{f_per}} \code{\link{f_prob}}
-#' \code{\link[stats]{FDist}}
+#'
+#' compute/visualize probability from a given quantile
+#' f_per(0.95, 3, 30, 'lower')
+#' f_per(0.125, 9, 35, 'upper')
+#'
+#' compute/visualize quantiles out of given probability
+#' f_prob(2.35, 5, 32)
+#' f_prob(1.5222, 9, 35, type = "upper")
+#' @seealso \code{\link[stats]{FDist}}
 #' @export
 #'
 f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
@@ -75,19 +90,10 @@ f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
 }
 
 
-#' @importFrom stats qf
-#' @title Visualize F Distribution Percentile
-#' @description Calculate and visualize quantiles out of given probability
-#' @param probs a probability value
-#' @param num_df degrees of freedom associated with the numerator of f statistic
-#' @param den_df degrees of freedom associated with the denominator of f statistic
-#' @param type lower tail or upper tail
-#' @return percentile for the \code{probs} based on \code{num_df}, \code{den_df}
-#' and \code{type}
-#' @examples
-#' f_per(0.95, 3, 30, 'lower')
-#' f_per(0.125, 9, 35, 'upper')
-#' @seealso \code{\link{f_plot}} \code{\link{f_prob}} \code{\link[stats]{FDist}}
+
+
+
+#' @rdname f_plot
 #' @export
 #'
 f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper")) {
@@ -192,19 +198,8 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
 }
 
 
-#' @importFrom stats pf
-#' @title Visualize F Distribution Probabilities
-#' @description Calculate and visualize probability from a given quantile
-#' @param perc a quantile value
-#' @param num_df degrees of freedom associated with the numerator of f statistic
-#' @param den_df degrees of freedom associated with the denominator of f statistic
-#' @param type lower tail or upper tail
-#' @return probability value for \code{perc} based on \code{num_df}, \code{den_df}
-#' and \code{type}
-#' @examples
-#' f_prob(2.35, 5, 32)
-#' f_prob(1.5222, 9, 35, type = "upper")
-#' @seealso \code{\link{f_plot}} \code{\link{f_per}} \code{\link[stats]{FDist}}
+
+#' @rdname f_plot
 #' @export
 #'
 f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {

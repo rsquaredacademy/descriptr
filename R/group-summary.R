@@ -1,8 +1,14 @@
+#' @importFrom stats median sd var IQR
+#' @importFrom graphics boxplot
 #' @title Descriptive Statistics By Group
 #' @description \code{group_summary} returns descriptive statistics of a
 #' continuous variable for the different levels of a categorical variable.
-#' @param x a factor variable
-#' @param y a continuous variable
+#' \code{boxplot.group_summary} creates boxplots of the continuous variable
+#' for the different levels of the categorical variable.
+#' @param fvar a factor variable
+#' @param cvar a continuous variable
+#' @param x an object of the class \code{group_summary}
+#' @param ... further arguments to be passed to or from methods
 #' @return \code{group_summary} returns an object of class \code{"group_summary"}.
 #' An object of class \code{"group_summary"} is a list containing the
 #' following components:
@@ -13,43 +19,48 @@
 #' \item{xvar}{name of the categorical variable}
 #' \item{yvar}{name of the continuous variable}
 #' @examples
+#' # group summary
 #' mt <- mtcars
 #' mt$cyl <- as.factor(mt$cyl)
 #' group_summary(mt$cyl, mt$mpg)
+#'
+#' # boxplot
+#' k <- group_summary(mt$cyl, mt$mpg)
+#' boxplot(k)
 #' @seealso \code{link{summary_stats}}
 #' @export
 #'
-group_summary <- function(x, y) UseMethod('group_summary')
+group_summary <- function(fvar, cvar) UseMethod('group_summary')
 
 
-#' @rdname group_summary
-#' @importFrom stats median sd var IQR
+
+
 #' @export
 #'
 group_summary.default <- function(x, y) {
 
-    if (!is.factor(x)) {
-        stop('x must be an object of type factor')
+    if (!is.factor(fvar)) {
+        stop('fvar must be an object of type factor')
     }
 
-    if (!is.numeric(y)) {
-        stop('y must be numeric')
+    if (!is.numeric(cvar)) {
+        stop('cvar must be numeric')
     }
 
-    if (length(x) != length(y)) {
-        stop('x and y must be of the same length')
+    if (length(fvar) != length(cvar)) {
+        stop('fvar and cvar must be of the same length')
     }
 
-    xname <- l(deparse(substitute(x)))
-    yname <- l(deparse(substitute(y)))
+    xname <- l(deparse(substitute(fvar)))
+    yname <- l(deparse(substitute(cvar)))
 
 
-    split_dat <- tapply(y, list(x), function(x) {
-                      c(length(x), min(x), max(x), mean(x), median(x),
-                      stat_mode(x), sd(x), var(x), skewness(x),
-                      kurtosis(x), stat_uss(x),
-                      stat_css(x), stat_cvar(x),
-                      std_error(x), stat_range(x), IQR(x))
+    split_dat <- tapply(cvar, list(fvar), function(fvar) {
+                      c(length(fvar), min(x), max(fvar), mean(fvar),
+                      median(fvar), stat_mode(fvar), sd(fvar), var(fvar),
+                      skewness(fvar), kurtosis(fvar), stat_uss(fvar),
+                      stat_css(fvar), stat_cvar(fvar), std_error(fvar),
+                      stat_range(fvar), IQR(fvar))
                  })
 
     splito <- sapply(split_dat, round, 2)
@@ -60,9 +71,9 @@ group_summary.default <- function(x, y) {
                 'Std. Error Mean', 'Range', 'Interquartile Range')
 
     out <- data.frame(rnames, splito)
-    names(out) <- c('Statistic/Levels', levels(x))
+    names(out) <- c('Statistic/Levels', levels(fvar))
 
-    plot_data <- data.frame(x, y)
+    plot_data <- data.frame(fvar, cvar)
     names(plot_data) <- c(xname, yname)
 
     result <- list(stats  = out,
@@ -81,17 +92,7 @@ print.group_summary <- function(x, ...) {
 }
 
 
-#' @importFrom graphics boxplot
-#' @title Group Summary Box Plot
-#' @description \code{boxplot.group_summary} creates boxplots of the continuous
-#' variable for the different levels of the categorical variable.
-#' @param x an object of the class \code{group_summary}
-#' @param ... further arguments to be passed to or from methods
-#' @examples
-#' mt <- mtcars
-#' mt$cyl <- as.factor(mt$cyl)
-#' k <- group_summary(mt$cyl, mt$mpg)
-#' boxplot(k)
+#' @rdname group_summary
 #' @export
 #'
 boxplot.group_summary <- function(x, ...) {

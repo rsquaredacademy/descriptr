@@ -28,10 +28,10 @@ test_that("output from group_summary matches the expected result", {
 test_that("group_summary throws the appropriate error", {
 
     expect_error(group_summary(mtcars$cyl, mtcars$mpg),
-                 "x must be an object of type factor")
+                 "fvar must be an object of type factor")
     expect_error(group_summary(as.factor(mtcars$cyl), "mtcars$mpg"),
-                 "y must be numeric")
+                 "cvar must be numeric")
     expect_error(group_summary(as.factor(mtcars$cyl), mtcars$mpg[-1]),
-                 "x and y must be of the same length")
+                 "fvar and cvar must be of the same length")
 
 })

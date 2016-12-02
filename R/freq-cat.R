@@ -1,8 +1,12 @@
+#' @importFrom grDevices topo.colors
 #' @title Frequency Table: Categorical Data
 #' @description \code{freq_table} creates frequency table for factor data and
 #' returns the frequency, cumulative frequency, frequency percent and cumulative
-#' frequency percent.
+#' frequency percent. \code{barplot.freq_table} creates bar plot for the
+#' frequency table created using \code{freq_table}
 #' @param data numeric or factor vector
+#' @param height an object of class \code{freq_table}
+#' @param ... further arguments to be passed to or from methods
 #' @return \code{freq_table} returns an object of class \code{"freq_table"}.
 #' An object of class \code{"freq_table"} is a list containing the
 #' following components
@@ -10,14 +14,18 @@
 #' \item{ftable}{frequency table}
 #' \item{varname}{name of the data}
 #' @examples
+#' # frequency table
 #' freq_table(mtcars$cyl)
 #' freq_table(as.factor(mtcars$cyl))
+#'
+#' # barplot
+#' k <- freq_table(mtcars$cyl)
+#' barplot(k)
 #' @seealso \code{link{freq_cont}} \code{link{cross_table}}
 #' @export
 #'
 freq_table <- function(data) UseMethod("freq_table")
 
-#' @rdname freq_table
 #' @export
 freq_table.default <- function(data) {
 
@@ -67,15 +75,8 @@ print.freq_table <- function(data) {
 }
 
 
-#' @importFrom grDevices topo.colors
-#' @title Frequency Table Bar Plot
-#' @description \code{barplot.freq_table} creates bar plot
-#' for the frequency table created using \code{freq_table}
-#' @param height an object of class \code{freq_table}
-#' @param ... further arguments to be passed to or from methods
-#' @examples
-#' k <- freq_table(mtcars$cyl)
-#' barplot(k)
+
+#' @rdname freq_table
 #' @export
 #'
 barplot.freq_table <- function(height, ...) {

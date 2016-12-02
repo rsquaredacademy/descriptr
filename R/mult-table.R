@@ -1,16 +1,23 @@
-#' @title Multiple One Way Tables
+#' @title Multiple One & Two Way Tables
 #' @description \code{oway_tables} creates multiple one way tables by creating
 #' a frequency table for each categorical variable in a data frame.
+#' \code{tway_tables} creates multiple two way tables by creating a cross
+#' table for each unique pair of categorical variables in a data frame.
 #' @param data a data frame
-#' @details \code{oway_tables} is a extension of the \code{freq_table} 
-#' function. It creates a frequency table for each categorical variable in the 
-#' dataframe. 
+#' @details \code{oway_tables} is a extension of the \code{freq_table}
+#' function. It creates a frequency table for each categorical variable in the
+#' dataframe. \code{tway_tables} is a extension of the \code{cross_table}
+#' function. It creates a two way table for each unique pair of categorical
+#' variables in the dataframe.
 #' @examples
 #' mt <- mtcars
 #' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
+#' # multiple one way tables
 #' oway_tables(mt)
-#' @seealso \code{link{tway_tables}} \code{link{freq_table}} 
-#' \code{link{cross_table}}
+#'
+#' # multiple two way tables
+#' tway_tables(mt)
+#' @seealso \code{link{freq_table}} \code{link{cross_table}}
 #' @export
 #'
 oway_tables <- function(data) {
@@ -18,7 +25,7 @@ oway_tables <- function(data) {
     if (!is.data.frame(data)) {
         stop('data must be a data frame')
     }
-    
+
     is.fact <- sapply(data, is.factor)
 
     if (!any(is.fact == TRUE)) {
@@ -32,23 +39,11 @@ oway_tables <- function(data) {
         k <- freq_table2(factors.df[, i], nam[i])
         print(k)
     }
-    
+
 }
 
 
-#' @title Multiple Two Way Tables
-#' @description \code{tway_tables} creates multiple two way tables by creating
-#' a cross table for each unique pair of categorical variables in a data frame.
-#' @param data a data frame
-#' @details \code{tway_tables} is a extension of the \code{cross_table} 
-#' function. It creates a two way table for each unique pair of categorical 
-#' variables in the dataframe. 
-#' @examples
-#' mt <- mtcars
-#' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-#' tway_tables(mt)
-#' @seealso \code{link{oway_tables}} \code{link{freq_table}} 
-#' \code{link{cross_table}}
+#' @rdname oway_tables
 #' @export
 #'
 tway_tables <- function(data) {
@@ -56,7 +51,7 @@ tway_tables <- function(data) {
     if (!is.data.frame(data)) {
         stop('data must be a data frame')
     }
-    
+
     is.fact <- sapply(data, is.factor)
 
     if (sum(is.fact) < 2) {
@@ -84,7 +79,5 @@ tway_tables <- function(data) {
             print(k)
         }
     }
-    
+
 }
-
-

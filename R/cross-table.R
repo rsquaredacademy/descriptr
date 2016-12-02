@@ -42,7 +42,6 @@
 cross_table <- function(var1, var2) UseMethod("cross_table")
 
 #' @export
-#' @rdname cross_table
 cross_table.default <- function(var1, var2) {
 
     var_1 <- l(deparse(substitute(var1)))

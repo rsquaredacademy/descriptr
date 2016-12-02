@@ -1,10 +1,15 @@
+#' @importFrom graphics hist
 #' @title Frequency Distribution of Continuous Data
 #' @description \code{freq_cont} returns the frequency distribution of
 #' continuous by splitting the data into equidistant intervals created based on
-#' the number of bins specified.
+#' the number of bins specified. \code{hist.freq_cont} creates histogram
+#' for the frequency table created using \code{freq_cont}
 #' @param data numeric vector
 #' @param bins number of intervals into which the data must be split
-#' @return \code{freq_cont} returns an object of class \code{"freq_cont"}.
+#' @param x an object of class \code{freq_cont}
+#' @param col color of the bars
+#' @param ... further arguments to be passed to or from methods
+#' @return \code{freq_cont} returns an object of class \code{"freq_cont"}
 #' An object of class \code{"freq_cont"} is a list containing the
 #' following components
 #'
@@ -17,13 +22,18 @@
 #' \item{data}{data}
 #' \item{varname}{name of the data}
 #' @examples
+#' # frequency table
 #' freq_cont(mtcars$mpg, 4)
+#'
+#' # histogram
+#' k <- freq_cont(mtcars$mpg, 4)
+#' hist(k)
 #' @seealso \code{link{freq_table}} \code{link{cross_table}}
 #' @export
 #'
 freq_cont <- function(data, bins = 5) UseMethod("freq_cont")
 
-#' @rdname freq_cont
+
 #' @export
 freq_cont.default <- function(data, bins = 5) {
 
@@ -67,17 +77,7 @@ print.freq_cont <- function(x, ...) {
   print_fcont(x)
 }
 
-
-#' @importFrom graphics hist
-#' @title Frequency Table Histogram
-#' @description \code{hist.freq_cont} creates histogram
-#' for the frequency table created using \code{freq_cont}
-#' @param x an object of class \code{freq_cont}
-#' @param col color of the bars
-#' @param ... further arguments to be passed to or from methods
-#' @examples
-#' k <- freq_cont(mtcars$mpg, 4)
-#' hist(k)
+#' @rdname freq_cont
 #' @export
 #'
 hist.freq_cont <- function(x, col = 'blue', ...) {
@@ -89,5 +89,3 @@ hist.freq_cont <- function(x, col = 'blue', ...) {
   text(h$mids, h$counts + 1, labels = h$counts, adj = 0.5, pos = 1)
 
 }
-
-
