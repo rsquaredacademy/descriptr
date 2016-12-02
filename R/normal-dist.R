@@ -1,14 +1,32 @@
 #' @importFrom graphics curve
+#' @importFrom stats qnorm pnorm
 #' @title Visualize Normal Distribution
 #' @description Visualize how changes in mean and standard deviation affect the
-#' shape of the normal distribution.
+#' shape of the normal distribution. Compute/visualize quantiles out of given
+#' probability  and probability from a given quantile.
+#' @param perc a quantile value
+#' @param probs a probability value
 #' @param mean mean of the normal distribution
 #' @param sd standard deviation of the normal distribution
+#' @param type lower tail, upper tail or both
+#' @return percentile for the \code{probs} based on \code{mean}, \code{sd} and
+#' \code{type} or probability value for \code{perc} based on \code{mean},
+#' \code{sd} and \code{type}
 #' @examples
+#' # visualize normal distribution
 #' norm_plot()
 #' norm_plot(mean = 2, sd = 0.6)
-#' @seealso \code{\link{norm_per}} \code{\link{norm_prob}}
-#' \code{\link[stats]{Normal}}
+#'
+#' # compute/visualize probability from a given quantile
+#' norm_prob(3.78, mean = 2, sd = 1.36)
+#' norm_prob(3.43, mean = 2, sd = 1.36, type = 'upper')
+#' norm_prob(c(-1.74, 1.83), type = 'both')
+#'
+#' # compute/visualize quantiles out of given probability
+#' norm_per(0.95, mean = 2, sd = 1.36)
+#' norm_per(0.3, mean = 2, sd = 1.36, type = 'upper')
+#' norm_per(0.95, mean = 2, sd = 1.36, type = 'both')
+#' @seealso \code{\link[stats]{Normal}}
 #' @export
 #'
 norm_plot <- function(mean = 0, sd = 1) {
@@ -67,20 +85,8 @@ norm_plot <- function(mean = 0, sd = 1) {
 }
 
 
-#' @importFrom stats qnorm
-#' @title Visualize Nomral Distribution Percentile
-#' @description Calculate and visualize quantiles out of given probability
-#' @param probs a probability value
-#' @param mean mean of the normal distribution
-#' @param sd standard deviation of the normal distribution
-#' @param type lower tail, upper tail or both
-#' @return percentile for the \code{probs} based on \code{mean}, \code{sd} and
-#' \code{type}
-#' @examples
-#' norm_per(0.95, mean = 2, sd = 1.36)
-#' norm_per(0.3, mean = 2, sd = 1.36, type = 'upper')
-#' norm_per(0.95, mean = 2, sd = 1.36, type = 'both')
-#' @seealso \code{\link{norm_plot}} \code{\link{norm_prob}} \code{\link[stats]{Normal}}
+
+#' @rdname norm_plot
 #' @export
 #'
 norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
@@ -202,20 +208,7 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
 }
 
 
-#' @importFrom stats pnorm
-#' @title Visualize Normal Distribution Probabilities
-#' @description Calculate and visualize probability from a given quantile
-#' @param perc a quantile value
-#' @param mean mean of the normal distribution
-#' @param sd standard deviation of the normal distribution
-#' @param type lower tail, upper tail, or both
-#' @return probability value for \code{perc} based on \code{mean}, \code{sd} and
-#' \code{type}
-#' @examples
-#' norm_prob(3.78, mean = 2, sd = 1.36)
-#' norm_prob(3.43, mean = 2, sd = 1.36, type = 'upper')
-#' norm_prob(c(-1.74, 1.83), type = 'both')
-#' @seealso \code{\link{norm_plot}} \code{\link{norm_per}} \code{\link[stats]{Normal}}
+#' @rdname norm_plot
 #' @export
 #'
 norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
