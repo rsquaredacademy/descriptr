@@ -2,9 +2,12 @@
 % Please edit documentation in R/mult-table.R
 \name{oway_tables}
 \alias{oway_tables}
-\title{Multiple One Way Tables}
+\alias{tway_tables}
+\title{Multiple One & Two Way Tables}
 \usage{
 oway_tables(data)
+
+tway_tables(data)
 }
 \arguments{
 \item{data}{a data frame}
@@ -12,19 +15,26 @@ oway_tables(data)
 \description{
 \code{oway_tables} creates multiple one way tables by creating
 a frequency table for each categorical variable in a data frame.
+\code{tway_tables} creates multiple two way tables by creating a cross
+table for each unique pair of categorical variables in a data frame.
 }
 \details{
-\code{oway_tables} is a extension of the \code{freq_table} 
-function. It creates a frequency table for each categorical variable in the 
-dataframe.
+\code{oway_tables} is a extension of the \code{freq_table}
+function. It creates a frequency table for each categorical variable in the
+dataframe. \code{tway_tables} is a extension of the \code{cross_table}
+function. It creates a two way table for each unique pair of categorical
+variables in the dataframe.
 }
 \examples{
 mt <- mtcars
 mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
+# multiple one way tables
 oway_tables(mt)
+
+# multiple two way tables
+tway_tables(mt)
 }
 \seealso{
-\code{link{tway_tables}} \code{link{freq_table}} 
-\code{link{cross_table}}
+\code{link{freq_table}} \code{link{cross_table}}
 }
 

@@ -2,37 +2,11 @@
 % Please edit documentation in R/binom-dist.R
 \name{binom_prob}
 \alias{binom_prob}
-\title{Visualize Cumulative Binomial Probabilities}
+\title{rdname binom_plot}
 \usage{
 binom_prob(n, p, s, type = c("lower", "upper", "exact", "interval"))
 }
-\arguments{
-\item{n}{number of bernoulli trials}
-
-\item{p}{success probability}
-
-\item{s}{number of success}
-
-\item{type}{lower/upper/exact/interval}
-}
-\value{
-a list containing the following components:
-
-\item{prob}{probability of s success}
-\item{avg}{mean of the binomial distribution}
-\item{stdev}{standard deviation of the binomial distribution}
-}
 \description{
-Calculate and visualize probability from a given quantile
-}
-\examples{
-binom_prob(10, 0.3, 4, type = 'exact')
-binom_prob(10, 0.3, 4, type = 'lower')
-binom_prob(10, 0.3, 4, type = 'upper')
-binom_prob(10, 0.3, c(4, 6), type = 'interval')
-}
-\seealso{
-\code{\link{binom_perc}} \code{\link{binom_plot}}
-\code{\link[stats]{Binomial}}
+rdname binom_plot
 }
 

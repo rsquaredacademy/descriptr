@@ -2,20 +2,26 @@
 % Please edit documentation in R/freq-cont.R
 \name{freq_cont}
 \alias{freq_cont}
-\alias{freq_cont.default}
+\alias{hist.freq_cont}
 \title{Frequency Distribution of Continuous Data}
 \usage{
 freq_cont(data, bins = 5)
 
-\method{freq_cont}{default}(data, bins = 5)
+\method{hist}{freq_cont}(x, col = "blue", ...)
 }
 \arguments{
 \item{data}{numeric vector}
 
 \item{bins}{number of intervals into which the data must be split}
+
+\item{x}{an object of class \code{freq_cont}}
+
+\item{col}{color of the bars}
+
+\item{...}{further arguments to be passed to or from methods}
 }
 \value{
-\code{freq_cont} returns an object of class \code{"freq_cont"}.
+\code{freq_cont} returns an object of class \code{"freq_cont"}
 An object of class \code{"freq_cont"} is a list containing the
 following components
 
@@ -31,10 +37,16 @@ following components
 \description{
 \code{freq_cont} returns the frequency distribution of
 continuous by splitting the data into equidistant intervals created based on
-the number of bins specified.
+the number of bins specified. \code{hist.freq_cont} creates histogram
+for the frequency table created using \code{freq_cont}
 }
 \examples{
+# frequency table
 freq_cont(mtcars$mpg, 4)
+
+# histogram
+k <- freq_cont(mtcars$mpg, 4)
+hist(k)
 }
 \seealso{
 \code{link{freq_table}} \code{link{cross_table}}

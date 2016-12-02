@@ -2,17 +2,30 @@
 % Please edit documentation in R/cross-table.R
 \name{cross_table}
 \alias{cross_table}
-\alias{cross_table.default}
+\alias{mosaicplot.cross_table}
+\alias{plot.cross_table}
 \title{Two Way Tables}
 \usage{
 cross_table(var1, var2)
 
-\method{cross_table}{default}(var1, var2)
+\method{plot}{cross_table}(x, beside = FALSE, proportional = FALSE, ...)
+
+\method{mosaicplot}{cross_table}(x, ...)
 }
 \arguments{
 \item{var1}{First categorical variable}
 
 \item{var2}{Second categorical variable}
+
+\item{x}{An object of class cross_table}
+
+\item{beside}{a logical value. If FALSE, the columns of height are portrayed
+as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.}
+
+\item{proportional}{a logical value. If TRUE, the height of the bars is
+proportional}
+
+\item{...}{further arguments to be passed to or from methods.}
 }
 \value{
 \code{cross_table} returns an object of class \code{"cross_table"}.
@@ -34,9 +47,6 @@ following components:
 \code{cross_table} creates two way tables of categorical
 variables. The tables created can be visualized as barplots and mosaicplots.
 }
-\details{
-cross_table is a generic function
-}
 \examples{
 k <- cross_table(mtcars$cyl, mtcars$am)
 
@@ -47,5 +57,8 @@ plot(k, proportional = TRUE)
 
 # mosaic plots
 mosaicplot(k)
+}
+\seealso{
+\code{\link[gmodels]{CrossTable}}
 }
 

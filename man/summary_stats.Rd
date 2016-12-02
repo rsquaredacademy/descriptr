@@ -2,12 +2,9 @@
 % Please edit documentation in R/summary-stats.R
 \name{summary_stats}
 \alias{summary_stats}
-\alias{summary_stats.default}
 \title{Descriptive Statistics}
 \usage{
 summary_stats(data)
-
-\method{summary_stats}{default}(data)
 }
 \arguments{
 \item{data}{a numeric vector}
