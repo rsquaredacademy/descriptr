@@ -1,10 +1,16 @@
+#' @importFrom graphics barplot mosaicplot
+#' @importFrom grDevices rainbow
 #' @title Two Way Tables
 #' @description \code{cross_table} creates two way tables of categorical
 #' variables. The tables created can be visualized as barplots and mosaicplots.
-#'
 #' @param var1 First categorical variable
 #' @param var2 Second categorical variable
-#' @details cross_table is a generic function
+#' @param x An object of class cross_table
+#' @param beside a logical value. If FALSE, the columns of height are portrayed
+#' as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.
+#' @param proportional a logical value. If TRUE, the height of the bars is
+#' proportional
+#' @param ... further arguments to be passed to or from methods.
 #' @return \code{cross_table} returns an object of class \code{"cross_table"}.
 #' An object of class \code{"cross_table"} is a list containing at least the
 #' following components:
@@ -30,8 +36,9 @@
 #'
 #' # mosaic plots
 #' mosaicplot(k)
+#' @seealso \code{\link[gmodels]{CrossTable}}
 #' @export
-
+#'
 cross_table <- function(var1, var2) UseMethod("cross_table")
 
 #' @export
@@ -85,25 +92,10 @@ print.cross_table <- function(x, ...) {
     print_cross(x)
 }
 
-#' @importFrom graphics barplot
-#' @importFrom grDevices rainbow
+
+
 #' @export
-#' @title Cross Table Bar Plot
-#' @description \code{barplot.cross_table} creates stacked and grouped bar plots
-#' for the two way tables created using \code{cross_table}
-#' @details Bar plot method added to cross_table
-#' @param x An object of class cross_table
-#' @param beside a logical value. If FALSE, the columns of height are portrayed
-#' as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.
-#' @param proportional a logical value. If TRUE, the height of the bars is
-#' proportional
-#' @param ... further arguments to be passed to or from methods.
-#'
-#' @examples
-#' k <- cross_table(mtcars$cyl, mtcars$am)
-#' plot(k)
-#' plot(k, beside = TRUE)
-#' plot(k, proportional = TRUE)
+#' @rdname cross_table
 #'
 plot.cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
     i_data <- x$twowaytable
@@ -139,17 +131,9 @@ plot.cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
     invisible(result)
 }
 
-#' @importFrom graphics mosaicplot
+
 #' @export
-#' @title Mosaic Plot Cross Table
-#' @description \code{mosaicplot.cross_table} creates mosaic plot
-#' for the two way tables created using \code{cross_table}
-#' @details Mosaic plot method added to cross_table
-#' @param x An object of class cross_table
-#' @param ... further arguments to be passed to or from methods.
-#' @examples
-#' k <- cross_table(mtcars$cyl, mtcars$am)
-#' mosaicplot(k)
+#' @rdname cross_table
 #'
 mosaicplot.cross_table <- function(x, ...) {
     i_data <- x$twowaytable
