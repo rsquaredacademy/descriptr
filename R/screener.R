@@ -1,8 +1,13 @@
+#' @importFrom graphics legend
+#' @importFrom stats complete.cases
 #' @title Screen Data Frames
 #' @description screener will screen data frames and return details such
-#' as variable names, class, levels and missing values.
-#' @param x a data frame
-#' @details screener is a s3 generic function
+#' as variable names, class, levels and missing values. \code{plot.screener}
+#' creates bar plots to visualize % of missing observations for each variable
+#' in a data frame.
+#' @param y a data frame
+#' @param x an object of class \code{screener}
+#' @param ... further arguments to be passed to or from methods
 #' @return \code{screeneer} returns an object of class \code{"screener"}.
 #' An object of class \code{"screener"} is a list containing the
 #' following components
@@ -23,41 +28,45 @@
 #' \item{MissingCols}{total number of columns with missing observations in the
 #' data frame}
 #' @examples
+#' # screen data
 #' mt <- mtcars
 #' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
 #' mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
 #' screener(mt)
+#'
+#' # visualize missing data
+#' k <- screener(mt)
+#' plot(k)
 #' @export
 #'
-screener <- function(x) UseMethod('screener')
+screener <- function(y) UseMethod('screener')
 
 #' @export
-#' @importFrom stats complete.cases
-#' @rdname screener
-screener.default <- function(x) {
+#'
+screener.default <- function(y) {
 
-    if (!is.data.frame(x)) {
-        stop('x must be a data frame')
+    if (!is.data.frame(y)) {
+        stop('y must be a data frame')
     }
 
-    rows <- nrow(x)
-    cols <- ncol(x)
-    varnames <- names(sapply(x, colnames))
-    datatype <- sapply(x, class)
-    counts <- sapply(x, length)
-    nlev <- lapply(x, nlevels)
-    lev <- lapply(x, levels)
+    rows <- nrow(y)
+    cols <- ncol(y)
+    varnames <- names(sapply(y, colnames))
+    datatype <- sapply(y, class)
+    counts <- sapply(y, length)
+    nlev <- lapply(y, nlevels)
+    lev <- lapply(y, levels)
     for (i in seq_len(length(lev))) {
         if (is.null(lev[[i]])) {
             lev[[i]] <- NA
         }
     }
-    mvalues <- sapply(x, function(y) sum(is.na(y)))
+    mvalues <- sapply(y, function(z) sum(is.na(z)))
     mvaluesper <- round((mvalues / counts) * 100, 2)
 
-    mtotal <- sum(is.na(x))
+    mtotal <- sum(is.na(y))
     mtotalper <- round((mtotal / sum(counts)) * 100, 2)
-    mrows <- sum(!complete.cases(x))
+    mrows <- sum(!complete.cases(y))
     mcols <- sum(mvalues != 0)
 
     result <- list(Rows = rows, Columns = cols, Variables = varnames,
@@ -79,18 +88,8 @@ print.screener <- function(x, ...) {
 }
 
 
-#' @importFrom graphics legend
-#' @title Visualize Missing Values
-#' @description \code{plot.screener} creates bar plots to visualize % of missing
-#' observations for each variable in a data frame
-#' @param x an object of class \code{screener}
-#' @param ... further arguments to be passed to or from methods
-#' @examples
-#' mt <- mtcars
-#' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-#' mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
-#' k <- screener(mt)
-#' plot(k)
+
+#' @rdname screener
 #' @export
 #'
 plot.screener <- function(x, ...) {
