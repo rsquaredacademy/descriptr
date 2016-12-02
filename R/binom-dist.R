@@ -1,18 +1,35 @@
 #' @importFrom stats dbinom
+#' @importFrom stats pbinom
+#' @importFrom stats qbinom
 #' @importFrom graphics axis mtext
 #' @title Visualize Binomial Distribution
 #' @description Visualize how changes in number of trials and the probability of
-#' success affect the shape of the binomial distribution.
+#' success affect the shape of the binomial distribution. Compute/visualize
+#' probability from a given quantile and quantiles out of given probability.
 #' @param n number of trials
 #' @param p probability of success on each trial
+#' @param s number of success
+#' @param tp the probability of success in a trial
+#' @param type lower/upper/exact/interval
 #' @return a list containing the following components:
 #'
 #' \item{avg}{mean of the binomial distribution}
 #' \item{stdev}{standard deviation of the binomial distribution}
+#' \item{prob}{probability of s success}
 #' @examples
+#' # visualize binomial distribution
 #' binom_plot(10, 0.3)
-#' @seealso \code{\link{binom_perc}} \code{\link{binom_prob}}
-#' \code{\link[stats]{Binomial}}
+#'
+#' # Compute/visualize probability from a given quantile
+#' binom_prob(10, 0.3, 4, type = 'exact')
+#' binom_prob(10, 0.3, 4, type = 'lower')
+#' binom_prob(10, 0.3, 4, type = 'upper')
+#' binom_prob(10, 0.3, c(4, 6), type = 'interval')
+#'
+#' # Compute/visualize quantiles out of given probability
+#' binom_perc(10, 0.5, 0.05)
+#' binom_perc(10, 0.5, 0.05, "upper")
+#' @seealso \code{\link[stats]{Binomial}}
 #' @export
 #'
 binom_plot <- function(n, p) {
@@ -49,25 +66,8 @@ binom_plot <- function(n, p) {
 
 }
 
-#' @importFrom stats pbinom
-#' @title Visualize Cumulative Binomial Probabilities
-#' @description Calculate and visualize probability from a given quantile
-#' @param n number of bernoulli trials
-#' @param p success probability
-#' @param s number of success
-#' @param type lower/upper/exact/interval
-#' @return a list containing the following components:
-#'
-#' \item{prob}{probability of s success}
-#' \item{avg}{mean of the binomial distribution}
-#' \item{stdev}{standard deviation of the binomial distribution}
-#' @examples
-#' binom_prob(10, 0.3, 4, type = 'exact')
-#' binom_prob(10, 0.3, 4, type = 'lower')
-#' binom_prob(10, 0.3, 4, type = 'upper')
-#' binom_prob(10, 0.3, c(4, 6), type = 'interval')
-#' @seealso \code{\link{binom_perc}} \code{\link{binom_plot}}
-#' \code{\link[stats]{Binomial}}
+
+#' rdname binom_plot
 #' @export
 #'
 binom_prob <- function(n, p, s,
@@ -170,18 +170,8 @@ binom_prob <- function(n, p, s,
 
 }
 
-#' @importFrom stats qbinom
-#' @title Binomial Distribution Percentile
-#' @description Calculate and visualize quantiles out of given probability
-#' @param n number of bernoulli trials
-#' @param p a single aggregated probability of multiple trials
-#' @param tp the probability of success in a trial
-#' @param type lower tail or upper tail
-#' @examples
-#' binom_perc(10, 0.5, 0.05)
-#' binom_perc(10, 0.5, 0.05, "upper")
-#' @seealso \code{\link{binom_plot}} \code{\link{binom_prob}}
-#' \code{\link[stats]{Binomial}}
+
+#' @rdname binom_plot
 #' @export
 #'
 binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
