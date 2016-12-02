@@ -24,7 +24,7 @@ descriptr
 ## Overview
 
 The goal of descriptr is to ease the process of generating descriptive
-statistics and exploring statistical distributions. 
+statistics and exploring statistical distributions.
 
 ## Installation
 
@@ -59,7 +59,9 @@ for the following distributions:
 
 - Normal
 - Binomial
-- Chi Square 
+- Chi Square
 - F
 - t
 
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
+By participating in this project you agree to abide by its terms.
