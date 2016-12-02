@@ -1,13 +1,11 @@
-#' @importFrom stats dbinom
-#' @importFrom stats pbinom
-#' @importFrom stats qbinom
+#' @importFrom stats dbinom pbinom qbinom
 #' @importFrom graphics axis mtext
 #' @title Visualize Binomial Distribution
 #' @description Visualize how changes in number of trials and the probability of
 #' success affect the shape of the binomial distribution. Compute/visualize
 #' probability from a given quantile and quantiles out of given probability.
 #' @param n number of trials
-#' @param p probability of success on each trial
+#' @param p aggregate probability
 #' @param s number of success
 #' @param tp the probability of success in a trial
 #' @param type lower/upper/exact/interval

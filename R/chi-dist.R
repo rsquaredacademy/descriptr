@@ -1,17 +1,31 @@
-#' @importFrom stats dchisq dnorm
-#' @importFrom graphics plot lines polygon points
+#' @importFrom stats dchisq qchisq pchisq dnorm
+#' @importFrom graphics plot lines polygon points text abline
 #' @title Visualize Chi Square Distribution
 #' @description Visualize how changes in degrees of freedom affect the shape of
-#' the chi square distribution.
+#' the chi square distribution. Compute/visualize quantiles out of given
+#' probability and probability from a given quantile.
 #' @param df degrees of freedom
+#' @param probs a probability value
+#' @param perc a quantile value
+#' @param type lower tail or upper tail
 #' @param normal logical; if \code{TRUE}, normal curve with same \code{mean} and
 #' \code{sd} as the chi square distribution is drawn
+#' @return percentile for the \code{probs} based on \code{df} and \code{type} or
+#' probability value for \code{perc} based on \code{df} and \code{type}
 #' @examples
+#' # visualize chi square distribution
 #' chi_plot()
 #' chi_plot(df = 5)
 #' chi_plot(df = 5, normal = TRUE)
-#' @seealso \code{\link{chi_per}} \code{\link{chi_prob}}
-#' \code{\link[stats]{Chisquare}}
+#'
+#' # Compute/visualize quantiles out of given probability
+#' chi_per(0.165, 8, 'upper')
+#' chi_per(0.22, 13, 'upper')
+#'
+#' # Compute/visualize probability from a given quantile.
+#' chi_prob(13.58, 11, 'lower')
+#' chi_prob(15.72, 13, 'upper')
+#' @seealso \code{\link[stats]{Chisquare}}
 #' @export
 #'
 chi_plot <- function(df = 3, normal = FALSE) {
@@ -70,19 +84,7 @@ chi_plot <- function(df = 3, normal = FALSE) {
 }
 
 
-#' @importFrom stats qchisq
-#' @importFrom graphics text abline
-#' @title Visualize Chi Square Distribution Percentile
-#' @description Visualize and calculate quantiles out of given probability
-#' @param probs a probability value
-#' @param df degrees of freedom
-#' @param type lower tail or upper tail
-#' @return percentile for the \code{probs} based on \code{df} and \code{type}
-#' @examples
-#' chi_per(0.165, 8, 'upper')
-#' chi_per(0.22, 13, 'upper')
-#' @seealso \code{\link{chi_plot}} \code{\link{chi_prob}}
-#' \code{\link[stats]{Chisquare}}
+#' @rdname chi_plot
 #' @export
 #'
 chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
@@ -181,18 +183,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 }
 
 
-#' @importFrom stats pchisq
-#' @title Visualize Chi Square Distribution Probabilities
-#' @description Calculate and visualize probability from a given quantile.
-#' @param perc a quantile value
-#' @param df degrees of freedom
-#' @param type lower tail or upper tail
-#' @return probability value for \code{perc} based on \code{df} and \code{type}
-#' @examples
-#' chi_prob(13.58, 11, 'lower')
-#' chi_prob(15.72, 13, 'upper')
-#' @seealso \code{\link{chi_plot}} \code{\link{chi_per}}
-#' \code{\link[stats]{Chisquare}}
+#' @rdname chi_plot
 #' @export
 #'
 chi_prob <- function(perc, df, type = c("lower", "upper")) {
