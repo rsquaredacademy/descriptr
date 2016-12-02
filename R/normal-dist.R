@@ -2,7 +2,7 @@
 #' @importFrom stats qnorm pnorm
 #' @title Visualize Normal Distribution
 #' @description Visualize how changes in mean and standard deviation affect the
-#' shape of the normal distribution. Compute/visualize quantiles out of given
+#' shape of the normal distribution. compute\/visualize quantiles out of given
 #' probability  and probability from a given quantile.
 #' @param perc a quantile value
 #' @param probs a probability value
@@ -17,12 +17,12 @@
 #' norm_plot()
 #' norm_plot(mean = 2, sd = 0.6)
 #'
-#' # compute/visualize probability from a given quantile
+#' # compute\/visualize probability from a given quantile
 #' norm_prob(3.78, mean = 2, sd = 1.36)
 #' norm_prob(3.43, mean = 2, sd = 1.36, type = 'upper')
 #' norm_prob(c(-1.74, 1.83), type = 'both')
 #'
-#' # compute/visualize quantiles out of given probability
+#' # compute\/visualize quantiles out of given probability
 #' norm_per(0.95, mean = 2, sd = 1.36)
 #' norm_per(0.3, mean = 2, sd = 1.36, type = 'upper')
 #' norm_per(0.95, mean = 2, sd = 1.36, type = 'both')

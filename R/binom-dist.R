@@ -2,7 +2,7 @@
 #' @importFrom graphics axis mtext
 #' @title Visualize Binomial Distribution
 #' @description Visualize how changes in number of trials and the probability of
-#' success affect the shape of the binomial distribution. Compute/visualize
+#' success affect the shape of the binomial distribution. compute\/visualize
 #' probability from a given quantile and quantiles out of given probability.
 #' @param n number of trials
 #' @param p aggregate probability
@@ -18,13 +18,13 @@
 #' # visualize binomial distribution
 #' binom_plot(10, 0.3)
 #'
-#' # Compute/visualize probability from a given quantile
+#' # compute\/visualize probability from a given quantile
 #' binom_prob(10, 0.3, 4, type = 'exact')
 #' binom_prob(10, 0.3, 4, type = 'lower')
 #' binom_prob(10, 0.3, 4, type = 'upper')
 #' binom_prob(10, 0.3, c(4, 6), type = 'interval')
 #'
-#' # Compute/visualize quantiles out of given probability
+#' # compute\/visualize quantiles out of given probability
 #' binom_perc(10, 0.5, 0.05)
 #' binom_perc(10, 0.5, 0.05, "upper")
 #' @seealso \code{\link[stats]{Binomial}}

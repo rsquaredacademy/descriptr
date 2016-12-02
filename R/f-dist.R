@@ -1,7 +1,7 @@
 #' @importFrom stats df qf pf
 #' @title Visualize F Distribution
 #' @description Visualize how changes in degrees of freedom affect the
-#' shape of the F distribution. Compute/visualize quantiles out of given
+#' shape of the F distribution. Compute\/visualize quantiles out of given
 #' probability and probability from a given quantile.
 #' @param probs a probability value
 #' @param perc a quantile value
@@ -18,11 +18,11 @@
 #' f_plot()
 #' f_plot(6, 10, normal = TRUE)
 #'
-#' compute/visualize probability from a given quantile
+#' # compute\/visualize probability from a given quantile
 #' f_per(0.95, 3, 30, 'lower')
 #' f_per(0.125, 9, 35, 'upper')
 #'
-#' compute/visualize quantiles out of given probability
+#' # compute\/visualize quantiles out of given probability
 #' f_prob(2.35, 5, 32)
 #' f_prob(1.5222, 9, 35, type = "upper")
 #' @seealso \code{\link[stats]{FDist}}

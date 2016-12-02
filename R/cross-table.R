@@ -36,7 +36,6 @@
 #'
 #' # mosaic plots
 #' mosaicplot(k)
-#' @seealso \code{\link[gmodels]{CrossTable}}
 #' @export
 #'
 cross_table <- function(var1, var2) UseMethod("cross_table")

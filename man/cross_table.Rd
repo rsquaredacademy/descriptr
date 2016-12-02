@@ -58,7 +58,4 @@ plot(k, proportional = TRUE)
 # mosaic plots
 mosaicplot(k)
 }
-\seealso{
-\code{\link[gmodels]{CrossTable}}
-}
 

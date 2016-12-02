@@ -1,7 +1,7 @@
 #' @importFrom stats dt qt pt
 #' @title Visualize t Distribution
 #' @description Visualize how degrees of freedom affect the shape of t
-#' distribution. Compute/visualize quantiles out of given probability and
+#' distribution. compute\/visualize quantiles out of given probability and
 #' probability from a given quantile.
 #' @param probs a probability value
 #' @param perc a quantile value
@@ -16,12 +16,12 @@
 #' t_plot(6)
 #' t_plot(df = 8)
 #'
-#' # compute/visualize quantiles out of given probability
+#' # compute\/visualize quantiles out of given probability
 #' t_per(probs = 0.95, df = 4, type = 'lower')
 #' t_per(probs = 0.35, df = 4, type = 'upper')
 #' t_per(probs = 0.69, df = 7, type = 'both')
 #'
-#' # compute/visualize probability from a given quantile
+#' # compute\/visualize probability from a given quantile
 #' t_prob(2.045, 7, 'lower')
 #' t_prob(0.945, 7, 'upper')
 #' t_prob(1.445, 7, 'interval')

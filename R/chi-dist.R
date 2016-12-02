@@ -2,7 +2,7 @@
 #' @importFrom graphics plot lines polygon points text abline
 #' @title Visualize Chi Square Distribution
 #' @description Visualize how changes in degrees of freedom affect the shape of
-#' the chi square distribution. Compute/visualize quantiles out of given
+#' the chi square distribution. compute\/visualize quantiles out of given
 #' probability and probability from a given quantile.
 #' @param df degrees of freedom
 #' @param probs a probability value
@@ -18,11 +18,11 @@
 #' chi_plot(df = 5)
 #' chi_plot(df = 5, normal = TRUE)
 #'
-#' # Compute/visualize quantiles out of given probability
+#' # compute\/visualize quantiles out of given probability
 #' chi_per(0.165, 8, 'upper')
 #' chi_per(0.22, 13, 'upper')
 #'
-#' # Compute/visualize probability from a given quantile.
+#' # compute\/visualize probability from a given quantile.
 #' chi_prob(13.58, 11, 'lower')
 #' chi_prob(15.72, 13, 'upper')
 #' @seealso \code{\link[stats]{Chisquare}}
