@@ -83,13 +83,14 @@
     
     <p><code>freq_cont</code> returns the frequency distribution of
 continuous by splitting the data into equidistant intervals created based on
-the number of bins specified.</p>
+the number of bins specified. <code>hist.freq_cont</code> creates histogram
+for the frequency table created using <code>freq_cont</code></p>
     
 
     <pre><span class='fu'>freq_cont</span>(<span class='no'>data</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>freq_cont</span>(<span class='no'>data</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+<span class='co'># S3 method for freq_cont</span>
+<span class='fu'>hist</span>(<span class='no'>x</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -97,11 +98,17 @@ the number of bins specified.</p>
       <dd>numeric vector</dd>
       <dt>bins</dt>
       <dd>number of intervals into which the data must be split</dd>
+      <dt>x</dt>
+      <dd>an object of class <code>freq_cont</code></dd>
+      <dt>col</dt>
+      <dd>color of the bars</dd>
+      <dt>...</dt>
+      <dd>further arguments to be passed to or from methods</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>freq_cont</code> returns an object of class <code>&quot;freq_cont&quot;</code>.
+    <p><code>freq_cont</code> returns an object of class <code>&quot;freq_cont&quot;</code>
 An object of class <code>&quot;freq_cont&quot;</code> is a list containing the
 following components</p>
     
@@ -111,7 +118,8 @@ following components</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>freq_cont</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt;                                 Variable: mpg                                 
+    <pre class="examples"><div class='input'><span class='co'># frequency table</span>
+<span class='fu'>freq_cont</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt;                                 Variable: mpg                                 
 #&gt; |---------------------------------------------------------------------------|
 #&gt; |                                 Cumulative                    Cumulative  |
 #&gt; |     Bins      |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -123,7 +131,10 @@ following components</p>
 #&gt; | 22.1  -  28   |      5       |      28      |        15.62 |         87.5 |
 #&gt; |---------------------------------------------------------------------------|
 #&gt; |  28   - 33.9  |      4       |      32      |         12.5 |          100 |
-#&gt; |---------------------------------------------------------------------------|</div></pre>
+#&gt; |---------------------------------------------------------------------------|</div><div class='input'>
+<span class='co'># histogram</span>
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>freq_cont</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='fl'>4</span>)
+<span class='fu'>hist</span>(<span class='no'>k</span>)</div><img src='freq_cont-4.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

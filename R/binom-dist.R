@@ -65,7 +65,7 @@ binom_plot <- function(n, p) {
 }
 
 
-#' rdname binom_plot
+#' @rdname binom_plot
 #' @export
 #'
 binom_prob <- function(n, p, s,

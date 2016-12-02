@@ -82,20 +82,26 @@
 
     
     <p><code>group_summary</code> returns descriptive statistics of a
-continuous variable for the different levels of a categorical variable.</p>
+continuous variable for the different levels of a categorical variable.
+<code>boxplot.group_summary</code> creates boxplots of the continuous variable
+for the different levels of the categorical variable.</p>
     
 
-    <pre><span class='fu'>group_summary</span>(<span class='no'>x</span>, <span class='no'>y</span>)
+    <pre><span class='fu'>group_summary</span>(<span class='no'>fvar</span>, <span class='no'>cvar</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>group_summary</span>(<span class='no'>x</span>, <span class='no'>y</span>)</pre>
+<span class='co'># S3 method for group_summary</span>
+<span class='fu'>boxplot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>x</dt>
+      <dt>fvar</dt>
       <dd>a factor variable</dd>
-      <dt>y</dt>
+      <dt>cvar</dt>
       <dd>a continuous variable</dd>
+      <dt>x</dt>
+      <dd>an object of the class <code>group_summary</code></dd>
+      <dt>...</dt>
+      <dd>further arguments to be passed to or from methods</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -110,7 +116,8 @@ following components:</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
+    <pre class="examples"><div class='input'><span class='co'># group summary</span>
+<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
 <span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
 <span class='fu'>group_summary</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>, <span class='no'>mt</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt;                                        mpg by cyl                                         
 #&gt; -----------------------------------------------------------------------------------------
@@ -132,7 +139,10 @@ following components:</p>
 #&gt; |      Std. Error Mean|                 1.36|                 0.55|                 0.68|
 #&gt; |                Range|                 12.5|                  3.6|                  8.8|
 #&gt; |  Interquartile Range|                  7.6|                 2.35|                 1.85|
-#&gt; -----------------------------------------------------------------------------------------</div></pre>
+#&gt; -----------------------------------------------------------------------------------------</div><div class='input'>
+<span class='co'># boxplot</span>
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>group_summary</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>, <span class='no'>mt</span>$<span class='no'>mpg</span>)
+<span class='fu'>boxplot</span>(<span class='no'>k</span>)</div><img src='group_summary-4.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

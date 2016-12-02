@@ -83,18 +83,23 @@
     
     <p><code>freq_table</code> creates frequency table for factor data and
 returns the frequency, cumulative frequency, frequency percent and cumulative
-frequency percent.</p>
+frequency percent. <code>barplot.freq_table</code> creates bar plot for the
+frequency table created using <code>freq_table</code></p>
     
 
     <pre><span class='fu'>freq_table</span>(<span class='no'>data</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>freq_table</span>(<span class='no'>data</span>)</pre>
+<span class='co'># S3 method for freq_table</span>
+<span class='fu'>barplot</span>(<span class='no'>height</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>data</dt>
       <dd>numeric or factor vector</dd>
+      <dt>height</dt>
+      <dd>an object of class <code>freq_table</code></dd>
+      <dt>...</dt>
+      <dd>further arguments to be passed to or from methods</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -109,7 +114,8 @@ following components</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>freq_table</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
+    <pre class="examples"><div class='input'><span class='co'># frequency table</span>
+<span class='fu'>freq_table</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
 #&gt; |--------------------------------------------------------------------------|
 #&gt; |                                Cumulative                    Cumulative  |
 #&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -133,7 +139,10 @@ following components</p>
 #&gt; |       8      |      14      |      32      |     43.75    |      100     |
 #&gt; |--------------------------------------------------------------------------|
 #&gt; 
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+<span class='co'># barplot</span>
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>freq_table</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)
+<span class='fu'>barplot</span>(<span class='no'>k</span>)</div><img src='freq_table-6.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

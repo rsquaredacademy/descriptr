@@ -40,7 +40,7 @@
     <div class="page-header toc-ignore">
       <h1>Exploring Distributions</h1>
             
-            <h4 class="date">2016-11-29</h4>
+            <h4 class="date">2016-12-02</h4>
           </div>
 
     
@@ -84,13 +84,13 @@
 <li>sd: standard deviation of the normal distribution</li>
 <li>type: lower/upper tail</li>
 </ul><p>Suppose X, the grade on a exam, is normally distributed with mean 60 and standard deviation 3. The teacher wants to give 10% of the class an A. What should be the cutoff to determine who gets an A?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.10</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_plot.html">norm_per</a></span>(<span class="fl">0.10</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per1-1.png" width="672"></p>
 <p>The teacher wants to give lower 15% of the class a D. What cutoff should the teacher use to determine who gets an D?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.85</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_plot.html">norm_per</a></span>(<span class="fl">0.85</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per2-1.png" width="672"></p>
 <p>The teacher wants to give middle 50% of the class a B. What cutoff should the teacher use to determine who gets an B?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_per.html">norm_per</a></span>(<span class="fl">0.5</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_plot.html">norm_per</a></span>(<span class="fl">0.5</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per3-1.png" width="672"></p>
 </div>
 </div>
@@ -106,13 +106,13 @@
 <li>sd: standard deviation of the normal distribution</li>
 <li>type: lower/upper/both tail</li>
 </ul><p>Let X be the IQ of a randomly selected student of a school. Assume X ~ N(90, 4). What is the probability that a randomly selected student has an IQ below 80?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="dv">80</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_plot.html">norm_prob</a></span>(<span class="dv">80</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob1-1.png" width="672"></p>
 <p>What is the probability that a randomly selected student has an IQ above 100?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_plot.html">norm_prob</a></span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob2-1.png" width="672"></p>
 <p>What is the probability that a randomly selected student has an IQ between 85 and 100?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_prob.html">norm_prob</a></span>(<span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">100</span>), <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/norm_plot.html">norm_prob</a></span>(<span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">100</span>), <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob3-1.png" width="672"></p>
 </div>
 </div>
@@ -136,9 +136,9 @@
 <li>n: the number of trials</li>
 <li>tp: the probability of success in a trial</li>
 <li>type: lower/upper tail</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_perc.html">binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</code></pre></div>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_per1-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_perc.html">binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_per2-1.png" width="672"></p>
 </div>
 </div>
@@ -154,16 +154,16 @@
 <li>s: number of success in a trial</li>
 <li>type: lower/upper/interval/exact tail</li>
 </ul><p>Assume twenty-percent (20%) of Magemill have no health insurance. Randomly sample n = 12 Magemillians. Let X denote the number in the sample with no health insurance. What is the probability that exactly 4 of the 15 sampled have no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'exact'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'exact'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob1-1.png" width="672"></p>
 <p>What is the probability that at most one of those sampled has no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob2-1.png" width="672"></p>
 <p>What is the probability that more than seven have no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob3-1.png" width="672"></p>
 <p>What is the probability that fewer than 5 have no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_prob.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="st">'interval'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/binom_plot.html">binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="st">'interval'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob4-1.png" width="672"></p>
 </div>
 </div>
@@ -189,10 +189,10 @@
 <li>df: degrees of freedom</li>
 <li>type: lower/upper tail</li>
 </ul><p>Let X be a chi-square random variable with 8 degrees of freedom. What is the upper fifth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_per.html">chi_per</a></span>(<span class="fl">0.05</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_plot.html">chi_per</a></span>(<span class="fl">0.05</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/chi_per1-1.png" width="672"></p>
 <p>What is the tenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_per.html">chi_per</a></span>(<span class="fl">0.10</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_plot.html">chi_per</a></span>(<span class="fl">0.10</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/chi_per2-1.png" width="672"></p>
 </div>
 </div>
@@ -207,10 +207,10 @@
 <li>df: degrees of freedom</li>
 <li>type: lower/upper tail</li>
 </ul><p>What is the probability that a chi-square random variable with 12 degrees of freedom is greater than 8.79?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_prob.html">chi_prob</a></span>(<span class="fl">8.79</span>, <span class="dv">12</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_plot.html">chi_prob</a></span>(<span class="fl">8.79</span>, <span class="dv">12</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/chi_prob1-1.png" width="672"></p>
 <p>What is the probability that a chi-square random variable with 12 degrees of freedom is greater than 8.62?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_prob.html">chi_prob</a></span>(<span class="fl">8.62</span>, <span class="dv">12</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/chi_plot.html">chi_prob</a></span>(<span class="fl">8.62</span>, <span class="dv">12</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/chi_prob2-1.png" width="672"></p>
 </div>
 </div>
@@ -237,10 +237,10 @@
 <li>den_df: denominator degrees of freedom</li>
 <li>type: lower/upper tail</li>
 </ul><p>Let X be an F random variable with 4 numerator degrees of freedom and 5 denominator degrees of freedom. What is the upper twenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_per.html">f_per</a></span>(<span class="fl">0.20</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_plot.html">f_per</a></span>(<span class="fl">0.20</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/f_per1-1.png" width="672"></p>
 <p>What is the 35th percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_per.html">f_per</a></span>(<span class="fl">0.35</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_plot.html">f_per</a></span>(<span class="fl">0.35</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/f_per2-1.png" width="672"></p>
 </div>
 </div>
@@ -256,10 +256,10 @@
 <li>den_df: denominator degrees of freedom</li>
 <li>type: lower/upper tail</li>
 </ul><p>What is the probability that an F random variable with 4 numerator degrees of freedom and 5 denominator degrees of freedom is greater than 3.89?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_prob.html">f_prob</a></span>(<span class="fl">3.89</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_plot.html">f_prob</a></span>(<span class="fl">3.89</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/f_prob1-1.png" width="672"></p>
 <p>What is the probability that an F random variable with 4 numerator degrees of freedom and 5 denominator degrees of freedom is less than 2.63?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_prob.html">f_prob</a></span>(<span class="fl">2.63</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/f_plot.html">f_prob</a></span>(<span class="fl">2.63</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/f_prob2-1.png" width="672"></p>
 </div>
 </div>
@@ -283,13 +283,13 @@
 <li>df: degrees of freedom</li>
 <li>type: lower/upper/both tail</li>
 </ul><p>What is the upper fifteenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_per.html">t_per</a></span>(<span class="fl">0.15</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_per</a></span>(<span class="fl">0.15</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_per1-1.png" width="672"></p>
 <p>What is the eleventh percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_per.html">t_per</a></span>(<span class="fl">0.11</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_per</a></span>(<span class="fl">0.11</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_per2-1.png" width="672"></p>
 <p>What is the area of the curve that has 95% of the t values?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_per.html">t_per</a></span>(<span class="fl">0.8</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_per</a></span>(<span class="fl">0.8</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_per3-1.png" width="672"></p>
 </div>
 </div>
@@ -305,16 +305,16 @@
 <li>type: lower/upper/interval/both tail</li>
 </ul><p>Let T follow a t-distribution with r = 6 df.</p>
 <p>What is the probability that the value of T is less than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_prob.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob1-1.png" width="672"></p>
 <p>What is the probability that the value of T is greater than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_prob.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob2-1.png" width="672"></p>
 <p>What is the probability that the value of T is between -2 and 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_prob.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob3-1.png" width="672"></p>
 <p>What is the probability that the absolute value of T is greater than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_prob.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'interval'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/t_plot.html">t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'interval'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob4-1.png" width="672"></p>
 </div>
 </div>

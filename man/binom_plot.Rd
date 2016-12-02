@@ -3,9 +3,12 @@
 \name{binom_plot}
 \alias{binom_perc}
 \alias{binom_plot}
+\alias{binom_prob}
 \title{Visualize Binomial Distribution}
 \usage{
 binom_plot(n, p)
+
+binom_prob(n, p, s, type = c("lower", "upper", "exact", "interval"))
 
 binom_perc(n, p, tp, type = c("lower", "upper"))
 }
@@ -14,11 +17,11 @@ binom_perc(n, p, tp, type = c("lower", "upper"))
 
 \item{p}{aggregate probability}
 
-\item{tp}{the probability of success in a trial}
+\item{s}{number of success}
 
 \item{type}{lower/upper/exact/interval}
 
-\item{s}{number of success}
+\item{tp}{the probability of success in a trial}
 }
 \value{
 a list containing the following components:

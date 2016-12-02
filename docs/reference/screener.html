@@ -82,18 +82,24 @@
 
     
     <p>screener will screen data frames and return details such
-as variable names, class, levels and missing values.</p>
+as variable names, class, levels and missing values. <code>plot.screener</code>
+creates bar plots to visualize <!-- % of missing observations for each variable -->
+in a data frame.</p>
     
 
-    <pre><span class='fu'>screener</span>(<span class='no'>x</span>)
+    <pre><span class='fu'>screener</span>(<span class='no'>y</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>screener</span>(<span class='no'>x</span>)</pre>
+<span class='co'># S3 method for screener</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>x</dt>
+      <dt>y</dt>
       <dd>a data frame</dd>
+      <dt>x</dt>
+      <dd>an object of class <code>screener</code></dd>
+      <dt>...</dt>
+      <dd>further arguments to be passed to or from methods</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -102,35 +108,35 @@ as variable names, class, levels and missing values.</p>
 An object of class <code>&quot;screener&quot;</code> is a list containing the
 following components</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>screener is a s3 generic function</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
+    <pre class="examples"><div class='input'><span class='co'># screen data</span>
+<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
 <span class='no'>mt</span>[, <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>8</span>:<span class='fl'>11</span>)] <span class='kw'>&lt;-</span> <span class='fu'>lapply</span>(<span class='no'>mt</span>[, <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>8</span>:<span class='fl'>11</span>)], <span class='no'>factor</span>)
 <span class='no'>mt</span>[<span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fu'>nrow</span>(<span class='no'>mt</span>), <span class='fl'>12</span>), <span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fu'>ncol</span>(<span class='no'>mt</span>), <span class='fl'>6</span>)] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
 <span class='fu'>screener</span>(<span class='no'>mt</span>)</div><div class='output co'>#&gt; -----------------------------------------------------------------------
 #&gt; |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 #&gt; -----------------------------------------------------------------------
-#&gt; |      mpg      |   numeric   |    NA     |     0     |       0       |
+#&gt; |      mpg      |   numeric   |    NA     |    12     |     37.5      |
 #&gt; |      cyl      |   factor    |   4 6 8   |    12     |     37.5      |
 #&gt; |     disp      |   numeric   |    NA     |    12     |     37.5      |
 #&gt; |      hp       |   numeric   |    NA     |     0     |       0       |
-#&gt; |     drat      |   numeric   |    NA     |    12     |     37.5      |
+#&gt; |     drat      |   numeric   |    NA     |     0     |       0       |
 #&gt; |      wt       |   numeric   |    NA     |    12     |     37.5      |
 #&gt; |     qsec      |   numeric   |    NA     |     0     |       0       |
-#&gt; |      vs       |   factor    |    0 1    |    12     |     37.5      |
-#&gt; |      am       |   factor    |    0 1    |     0     |       0       |
-#&gt; |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
-#&gt; |     carb      |   factor    |1 2 3 4 6 8|     0     |       0       |
+#&gt; |      vs       |   factor    |    0 1    |     0     |       0       |
+#&gt; |      am       |   factor    |    0 1    |    12     |     37.5      |
+#&gt; |     gear      |   factor    |   3 4 5   |     0     |       0       |
+#&gt; |     carb      |   factor    |1 2 3 4 6 8|    12     |     37.5      |
 #&gt; -----------------------------------------------------------------------
 #&gt; 
 #&gt;  Overall Missing Values           72 
 #&gt;  Percentage of Missing Values     20.45 %
 #&gt;  Rows with Missing Values         12 
-#&gt;  Columns With Missing Values      6 </div></pre>
+#&gt;  Columns With Missing Values      6 </div><div class='input'>
+<span class='co'># visualize missing data</span>
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>screener</span>(<span class='no'>mt</span>)
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><img src='screener-4.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -138,8 +144,6 @@ following components</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
