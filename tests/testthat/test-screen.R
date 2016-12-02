@@ -38,5 +38,5 @@ test_that("output from screener matches the expected result", {
 
 
 test_that("screener throws the appropriate error", {
-    expect_error(screener(mtcars$mpg), "x must be a data frame")
+    expect_error(screener(mtcars$mpg), "y must be a data frame")
 })

@@ -37,7 +37,7 @@ group_summary <- function(fvar, cvar) UseMethod('group_summary')
 
 #' @export
 #'
-group_summary.default <- function(x, y) {
+group_summary.default <- function(fvar, cvar) {
 
     if (!is.factor(fvar)) {
         stop('fvar must be an object of type factor')
@@ -56,7 +56,7 @@ group_summary.default <- function(x, y) {
 
 
     split_dat <- tapply(cvar, list(fvar), function(fvar) {
-                      c(length(fvar), min(x), max(fvar), mean(fvar),
+                      c(length(fvar), min(fvar), max(fvar), mean(fvar),
                       median(fvar), stat_mode(fvar), sd(fvar), var(fvar),
                       skewness(fvar), kurtosis(fvar), stat_uss(fvar),
                       stat_css(fvar), stat_cvar(fvar), std_error(fvar),
