@@ -3,9 +3,10 @@ Type: Package
 Title: Descriptive Statistics & Distributions Exploration
 Version: 0.1.0
 Authors@R: person("Aravind", "Hebbali", email = "hebbali.aravind@gmail.com", role = c("aut", "cre"))
-Description: A set of functions for exploring statistical distributions and
-    generate descriptive statistics before performing statistical tests and 
-    building models.
+Description: Generate descriptive statistics such as measures of location,
+    dispersion, frequency tables, cross tables, group summaries and multiple
+    one/two way tables. Visualize and compute percentiles/probabilities of 
+    normal, t, f, chi square and binomial distributions.
 Depends:
     R(>= 3.2.4)
 Imports:
