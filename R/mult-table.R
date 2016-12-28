@@ -11,7 +11,7 @@
 #' variables in the dataframe.
 #' @examples
 #' mt <- mtcars
-#' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
+#' mt[, c(2, 8, 9)] <- lapply(mt[, c(2, 8, 9)], factor)
 #' # multiple one way tables
 #' oway_tables(mt)
 #'
