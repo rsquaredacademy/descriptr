@@ -4,6 +4,8 @@ templates:
 
 home:
   links:
+  - text: Download from CRAN at
+    href: https://CRAN.R-project.org/package=descriptr
   - text: Learn more
     href: http://www.rsquaredacademy.com
 

@@ -127,7 +127,7 @@ print_cross <- function(data) {
 
 
 print_cross2 <- function(data) {
-    
+
     # output formatting
     p <- length(data$variable_levels)
     q <- p + 2
@@ -175,7 +175,7 @@ print_cross2 <- function(data) {
         cat("              |")
         cat("\n-", rep("---------------", q), sep = "")
         cat("\n")
-    }   
+    }
     cat("|")
     for (i in seq_along(data$column_totals)) {
         cat(formatter(data$column_totals[i]), "|")

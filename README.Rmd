@@ -12,8 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-descriptr
-=========
+# descriptr <img src="descriptr.jpg" align="right" />
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
@@ -63,5 +62,39 @@ for the following distributions:
 - F
 - t
 
+## Links
+
+- [Shiny App][shinyapp]
+- [Website][website]
+- [Tutorials][tutorials]
+- [YouTube][youtube]
+
+## Similar Packages
+
+- [tigerstats][tiger]
+- [describer][describe]
+
+## Credits
+
+We have extensively referred to [R Packages][packages] by Hadley Wickham and
+[Writing R Extensions][extension] while creating this package. The [devtools][dev]
+and [testthat][test] package were of immense help. Before submitting the package
+to [CRAN][cran], we submitted it to [rhub][rub] several times to ensure there were
+no errors. We also went through the repositories of several R packages and learnt
+a lot. Thanks to R commmunity, R Core team, R Consortium and Hadley Wickham.
+
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
 By participating in this project you agree to abide by its terms.
+
+[shinyapp]: http://rsquaredlabs.com:3838/explorer/
+[website]: https://rsquaredacademy.github.io/descriptr/
+[tutorials]: http://rsquaredacademy.com/
+[youtube]: https://www.youtube.com/user/rsquaredin
+[tiger]: https://cran.r-project.org/web/packages/tigerstats/
+[describe]: https://cran.r-project.org/web/packages/describer/
+[packages]: http://r-pkgs.had.co.nz/
+[extension]: https://cran.r-project.org/doc/manuals/r-release/R-exts.html
+[dev]: https://cran.r-project.org/web/packages/devtools/
+[test]: https://cran.r-project.org/web/packages/testthat/
+[cran]: https://cran.r-project.org/
+[rub]: https://builder.r-hub.io/
