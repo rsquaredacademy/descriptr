@@ -1,8 +1,6 @@
-# descriptr 0.1.0.9000
+# descriptr 0.1.1
 
-* use ggplot2 for all plots
-* options for selecting variables in multiple one way and two way plots
-* multiple frequency tables for continuous data
+* typo in group summary; maximum and minimum were reversed
 
 # descriptr 0.1.0
 

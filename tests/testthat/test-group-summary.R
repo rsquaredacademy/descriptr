@@ -5,7 +5,7 @@ test_that("output from group_summary matches the expected result", {
     mt <- mtcars
     mt$cyl <- as.factor(mt$cyl)
     k <- group_summary(mt$cyl, mt$mpg)
-    metrics <- c("Obs", "Maximum", "Minimum", "Mean", "Median", "Mode",
+    metrics <- c("Obs", "Minimum", "Maximum", "Mean", "Median", "Mode",
                  "Std. Deviation", "Variance", "Skewness", "Kurtosis",
                  "Uncorrected SS", "Corrected SS", "Coeff Variation",
                  "Std. Error Mean", "Range", "Interquartile Range")
