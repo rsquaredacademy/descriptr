@@ -65,7 +65,7 @@ group_summary.default <- function(fvar, cvar) {
 
     splito <- sapply(split_dat, round, 2)
 
-    rnames <- c('Obs', 'Maximum', 'Minimum', 'Mean', 'Median', 'Mode',
+    rnames <- c('Obs', 'Minimum', 'Maximum', 'Mean', 'Median', 'Mode',
                 'Std. Deviation', 'Variance', 'Skewness', 'Kurtosis',
                 'Uncorrected SS', 'Corrected SS', 'Coeff Variation',
                 'Std. Error Mean', 'Range', 'Interquartile Range')
