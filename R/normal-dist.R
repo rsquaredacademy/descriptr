@@ -43,28 +43,27 @@ norm_plot <- function(mean = 0, sd = 1) {
       stop('sd must be positive')
     }
 
-    x <- xax(mean)
+  x    <- xax(mean)
+  l    <- seql(mean, sd)
+  col  <- c("#0000CD", "#4682B4", "#6495ED", "#4682B4", "#6495ED")
+  l1   <- c(3, 2, 1, 5, 6)
+  l2   <- c(5, 3, 2, 6, 7)
 
 
-    l    <- seqln(mean, sd)
-    col  <- c("#0000CD", "#4682B4", "#6495ED", "#4682B4", "#6495ED")
-    l1   <- c(3, 2, 1, 5, 6)
-    l2   <- c(5, 3, 2, 6, 7)
+  xm <- xmm(mean, sd)
+  curve(dnorm(x, mean, sd),
+        xlab = '',
+        ylab = '',
+        yaxt = 'n',
+        xaxt = 'n',
+        xlim = c(xm[1], xm[2]),
+        ylim = c(0, max(dnorm(x, mean, sd)) + 0.03),
+        main = 'Normal Distribution')
 
+  mtext(text = paste('Mean:', mean, '     Standard Deviation:', sd), side = 3)
+  axis(1, at = l, labels = l)
 
-    xm <- xmn(mean, sd)
-    curve(dnorm(x, mean, sd),
-          xlab = '',
-          ylab = '',
-          yaxt = 'n',
-          xaxt = 'n',
-          xlim = c(xm[1], xm[2]),
-          main = 'Normal Distribution')
-
-    mtext(text = paste('Mean:', mean, '     Standard Deviation:', sd), side = 3)
-    axis(1, at = l, labels = l)
-
-    texts <- c(expression(paste(mu, '-3', sigma)),
+  texts <- c(expression(paste(mu, '-3', sigma)),
              expression(paste(mu, '-2', sigma)),
              expression(paste(mu, '-', sigma)),
              expression(paste(mu)),
@@ -72,15 +71,18 @@ norm_plot <- function(mean = 0, sd = 1) {
              expression(paste(mu, '+2', sigma)),
              expression(paste(mu, '+3', sigma)))
 
-    for (i in seq_len(length(texts))) {
-        mtext(side = 1, text = texts[i], outer = FALSE, at = l[i],
-              line = 2.5, col = "#4B0082")
-    }
+  ll <- l[3:9]
+  
+  for (i in seq_len(length(texts))) {
+      mtext(side = 1, text = texts[i], outer = FALSE, at = ll[i],
+            line = 2.5, col = "#4B0082")
+  }
 
 
-    for (i in seq_len(length(l1))) {
-        pol_cord(l[l1[i]], l[l2[i]], mean, sd, col = col[i])
-    }
+  for (i in seq_len(length(l1))) {
+    pol_cord(ll[l1[i]], ll[l2[i]], mean, sd, col = col[i])
+  }
+
 
 }
 
