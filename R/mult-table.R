@@ -36,7 +36,7 @@ oway_tables <- function(data) {
     nam <- names(factors.df)
     nc <- ncol(factors.df)
     for (i in seq_len(nc)) {
-        k <- freq_table2(factors.df[, i], nam[i])
+        k <- freq_table2(factors.df[i], nam[i])
         print(k)
     }
 
@@ -75,7 +75,7 @@ tway_tables <- function(data) {
     for (i in seq_len(n)) {
         p <- i + 1
         for (j in p:nc) {
-            k <- cross_table2(factors.df[, i], factors.df[, j], nam[i], nam[j])
+            k <- cross_table2(factors.df[[i]], factors.df[[j]], nam[i], nam[j])
             print(k)
         }
     }
