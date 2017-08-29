@@ -94,8 +94,8 @@ test_that("output from print_fcont matches the expected result", {
 
 test_that("output from freq_table matches the expected result", {
 
-    k <- freq_table(mtcars$cyl)
-    pim <- "                               Variable: cyl
+    k <- freq_table(as.factor(mtcars$cyl))
+    pim <- "                               Variable: cyl)
 |--------------------------------------------------------------------------|
     |                                Cumulative                    Cumulative  |
     |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
