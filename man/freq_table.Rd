@@ -32,11 +32,14 @@ frequency table created using \code{freq_table}
 }
 \examples{
 # frequency table
-freq_table(mtcars$cyl)
-freq_table(as.factor(mtcars$cyl))
+mt <- mtcars
+mt$cyl <- as.factor(mt$cyl)
+freq_table(mt$cyl)
 
 # barplot
-k <- freq_table(mtcars$cyl)
+mt <- mtcars
+mt$cyl <- as.factor(mt$cyl)
+k <- freq_table(mt$cyl)
 barplot(k)
 }
 \seealso{

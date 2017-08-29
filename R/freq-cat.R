@@ -1,5 +1,6 @@
 #' @importFrom grDevices topo.colors
 #' @importFrom tibble tibble
+#' @importFrom dplyr pull
 #' @title Frequency Table: Categorical Data
 #' @description \code{freq_table} creates frequency table for factor data and
 #' returns the frequency, cumulative frequency, frequency percent and cumulative
@@ -16,11 +17,14 @@
 #' \item{varname}{name of the data}
 #' @examples
 #' # frequency table
-#' freq_table(mtcars$cyl)
-#' freq_table(as.factor(mtcars$cyl))
+#' mt <- mtcars
+#' mt$cyl <- as.factor(mt$cyl)
+#' freq_table(mt$cyl)
 #'
 #' # barplot
-#' k <- freq_table(mtcars$cyl)
+#' mt <- mtcars
+#' mt$cyl <- as.factor(mt$cyl)
+#' k <- freq_table(mt$cyl)
 #' barplot(k)
 #' @seealso \code{link{freq_cont}} \code{link{cross_table}}
 #' @export
@@ -78,8 +82,8 @@ freq_table.default <- function(data) {
 }
 
 #' @export
-print.freq_table <- function(data) {
-  print_ftable(data)
+print.freq_table <- function(x, ...) {
+  print_ftable(x)
 }
 
 
@@ -88,11 +92,11 @@ print.freq_table <- function(data) {
 #' @export
 #'
 barplot.freq_table <- function(height, ...) {
-    j <- as.numeric(height$ftable[, 2])
+    j <- as.numeric(height$ftable[[2]])
     h <- j
     ymax <- max(h)
     cols <- length(j)
-    x_names <- height$ftable[, 1]
+    x_names <- height$ftable[[1]]
     k <- barplot(j, col = topo.colors(cols),
                  main = paste('Bar Plot of', height$varname),
                  xlab = height$varname,
