@@ -12,7 +12,9 @@ Depends:
 Imports:
     graphics,
     dplyr,
-    magrittr
+    magrittr,
+    tibble,
+    forcats
 Suggests:
     covr,
     testthat,
@@ -24,4 +26,4 @@ BugReports: https://github.com/rsquaredacademy/descriptr/issues
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
