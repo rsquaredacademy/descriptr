@@ -249,18 +249,18 @@ print_fcont <- function(data) {
 }
 
 
-print_ftable <- function(data) {
+print_ftable <- function(x) {
 
-  nr <- nrow(data$ftable)
-  nc <- ncol(data$ftable)
-  cat(format(paste('Variable:', data$varname), width = 76, justify = 'centre'), '\n')
+  nr <- nrow(x$ftable)
+  nc <- ncol(x$ftable)
+  cat(format(paste('Variable:', x$varname), width = 76, justify = 'centre'), '\n')
   cat("|--------------------------------------------------------------------------|
 |                                Cumulative                    Cumulative  |
 |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
 |--------------------------------------------------------------------------|\n")
   for (i in seq_len(nr)) {
     for (j in seq_len(nc)) {
-      cat("|", formatter_freq(data$ftable[i, j]))
+      cat("|", formatter_freq(x$ftable[i, j]))
     }
     cat("|")
     cat("\n|--------------------------------------------------------------------------|\n")
