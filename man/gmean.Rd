@@ -26,4 +26,3 @@ gmean(mtcars$mpg)
 \seealso{
 \code{\link{hmean}} \code{\link[base]{mean}}
 }
-

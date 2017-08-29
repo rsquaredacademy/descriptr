@@ -28,4 +28,3 @@ stat_mdev(mtcars$mpg)
 \seealso{
 \code{\link[stats]{mad}}
 }
-

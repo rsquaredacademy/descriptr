@@ -26,4 +26,3 @@ stat_mode(mtcars$cyl)
 \seealso{
 \code{\link[base]{mean}} \code{\link[stats]{median}}
 }
-

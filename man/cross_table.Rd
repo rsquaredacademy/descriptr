@@ -2,8 +2,8 @@
 % Please edit documentation in R/cross-table.R
 \name{cross_table}
 \alias{cross_table}
-\alias{mosaicplot.cross_table}
 \alias{plot.cross_table}
+\alias{mosaicplot.cross_table}
 \title{Two Way Tables}
 \usage{
 cross_table(var1, var2)
@@ -58,4 +58,3 @@ plot(k, proportional = TRUE)
 # mosaic plots
 mosaicplot(k)
 }
-
