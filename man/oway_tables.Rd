@@ -37,4 +37,3 @@ tway_tables(mt)
 \seealso{
 \code{link{freq_table}} \code{link{cross_table}}
 }
-

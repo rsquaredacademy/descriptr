@@ -21,4 +21,3 @@ stat_range(mtcars$mpg)
 \seealso{
 \code{\link[base]{range}}
 }
-

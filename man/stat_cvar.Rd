@@ -22,4 +22,3 @@ stat_cvar(mtcars$mpg)
 \seealso{
 \code{\link[stats]{var}} \code{\link[stats]{sd}}
 }
-

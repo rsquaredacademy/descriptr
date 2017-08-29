@@ -51,4 +51,3 @@ hist(k)
 \seealso{
 \code{link{freq_table}} \code{link{cross_table}}
 }
-

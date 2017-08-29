@@ -26,4 +26,3 @@ computation takes place.
 rindex(mtcars$mpg, 21)
 rindex(mtcars$mpg, 22)
 }
-

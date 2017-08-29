@@ -28,4 +28,3 @@ Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Proced
 \seealso{
 \code{skewness}
 }
-

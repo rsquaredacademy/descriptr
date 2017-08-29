@@ -55,4 +55,3 @@ summary_stats(mtcars$mpg)
 \code{\link[base]{summary}} \code{\link{freq_cont}}
 \code{\link{freq_table}} \code{\link{cross_table}}
 }
-

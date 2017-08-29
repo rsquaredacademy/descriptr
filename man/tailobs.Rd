@@ -31,4 +31,3 @@ tailobs(mtcars$mpg, 5, type = "high")
 \seealso{
 \code{\link[dplyr]{top_n}}
 }
-
