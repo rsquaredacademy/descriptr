@@ -1,63 +1,62 @@
+#' @importFrom forcats fct_unique fct_count
 freq_table2 <- function(data, name) UseMethod("freq_table2")
 
 freq_table2.default <- function(data, name) {
-    
-  # variable name
-  var_name = name
+
+  var_name <- name
 
   # exclude missing data
-  data <- na.omit(data)
+  dat <- data %>%
+    select(name) %>%
+    pull(1) %>%
+    na.omit()
+
+  if (!is.factor(dat)) {
+      stop('data must be categorical/qualitative')
+  }
 
   # levels
-  if (is.factor(data)) {
-    level_names <- levels(data)
-  }
-
-  # copy of data
-  data1 <- data
-
-  data <- as.numeric(data)
+  level_names <- levels(dat)
 
   # length of input
-  data_len <- length(data)  
-  
+  data_len <- length(dat)
+
   # unique values in the input
-  cq <- unique(sort(data))
-  
+  cq <- forcats::fct_unique(dat)
+
   # count of unique values in the input
-  result <- as.vector(table(data))
-  
+  result <- dat %>%
+    fct_count %>%
+    pull(2)
+
   # length of result
   len <- length(result)
-  
+
   # cumulative frequency
   cum <- cumsum(result)
-  
+
   # percent
   per <- percent(result, data_len)
-  
+
   # cumulative percent
   cum_per <- percent(cum, data_len)
-  
+
   # matrix
-  if (is.factor(data1)) {
-    ftable <- cbind(level_names, result, cum, per, cum_per)
-  } else {
-    ftable <- cbind(cq, result, cum, per, cum_per)
-  }
-  
-  # modify column names of the matrix
-  colnames(ftable) <- c("Levels", "Frequency", "Cum Frequency", 
-                        "Percent", "Cum Percent")
+  ftable <- tibble(Levels = level_names,
+                   Frequency = result,
+                   `Cum Frequency` = cum,
+                   Percent = per,
+                   `Cum Percent` = cum_per)
 
   result <- list(
     ftable = ftable,
     varname = var_name
   )
-  
+
+
   class(result) <- "freq_table2"
   return(result)
-  
+
 }
 
 
