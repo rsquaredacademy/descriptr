@@ -48,8 +48,6 @@ Shiny App
 
 If you want to explore the package using a shiny app, please click [here](http://rsquaredlabs.com:3838/explorer/).
 
-<iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen></iframe>
-
 Vignettes
 ---------
 
