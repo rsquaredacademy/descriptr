@@ -28,6 +28,7 @@
 #'
 #' @examples
 #' k <- cross_table(mtcars$cyl, mtcars$am)
+#' k
 #'
 #' # bar plots
 #' plot(k)
