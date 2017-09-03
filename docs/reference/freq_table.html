@@ -115,19 +115,9 @@ following components</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># frequency table</span>
-<span class='fu'>freq_table</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       4      |      11      |      11      |     34.38    |     34.38    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       6      |       7      |      18      |     21.88    |     56.25    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       8      |      14      |      32      |     43.75    |      100     |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; 
-#&gt; </div><div class='input'><span class='fu'>freq_table</span>(<span class='fu'>as.factor</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>))</div><div class='output co'>#&gt;                                Variable: cyl)                                
+<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
+<span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
+<span class='fu'>freq_table</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
 #&gt; |--------------------------------------------------------------------------|
 #&gt; |                                Cumulative                    Cumulative  |
 #&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -141,8 +131,10 @@ following components</p>
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'># barplot</span>
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>freq_table</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)
-<span class='fu'>barplot</span>(<span class='no'>k</span>)</div><img src='freq_table-6.png' alt='' width='540' height='400' /></pre>
+<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
+<span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>freq_table</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
+<span class='fu'>barplot</span>(<span class='no'>k</span>)</div><img src='freq_table-4.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

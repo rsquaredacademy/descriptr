@@ -120,11 +120,43 @@ following components:</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>cross_table</span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>, <span class='no'>mtcars</span>$<span class='no'>am</span>)
-
+<span class='no'>k</span></div><div class='output co'>#&gt;     Cell Contents
+#&gt;  |---------------|
+#&gt;  |     Frequency |
+#&gt;  |       Percent |
+#&gt;  |       Row Pct |
+#&gt;  |       Col Pct |
+#&gt;  |---------------|
+#&gt; 
+#&gt;  Total Observations:  32 
+#&gt; 
+#&gt; -------------------------------------------------------------
+#&gt; |              |                     am                     |
+#&gt; -------------------------------------------------------------
+#&gt; |          cyl |            0 |            1 |    Row Total |
+#&gt; -------------------------------------------------------------
+#&gt; |            4 |            3 |            8 |           11 |
+#&gt; |              |        0.094 |         0.25 |              |
+#&gt; |              |         0.27 |         0.73 |         0.34 |
+#&gt; |              |         0.16 |         0.62 |              |
+#&gt; -------------------------------------------------------------
+#&gt; |            6 |            4 |            3 |            7 |
+#&gt; |              |        0.125 |        0.094 |              |
+#&gt; |              |         0.57 |         0.43 |         0.22 |
+#&gt; |              |         0.21 |         0.23 |              |
+#&gt; -------------------------------------------------------------
+#&gt; |            8 |           12 |            2 |           14 |
+#&gt; |              |        0.375 |        0.062 |              |
+#&gt; |              |         0.86 |         0.14 |         0.44 |
+#&gt; |              |         0.63 |         0.15 |              |
+#&gt; -------------------------------------------------------------
+#&gt; | Column Total |           19 |           13 |           32 |
+#&gt; |              |        0.594 |        0.406 |              |
+#&gt; -------------------------------------------------------------</div><div class='input'>
 <span class='co'># bar plots</span>
-<span class='fu'>plot</span>(<span class='no'>k</span>)</div><img src='cross_table-2.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>beside</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='cross_table-4.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='cross_table-6.png' alt='' width='540' height='400' /><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><img src='cross_table-4.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>beside</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='cross_table-6.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='cross_table-8.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># mosaic plots</span>
-<span class='fu'>mosaicplot</span>(<span class='no'>k</span>)</div><img src='cross_table-8.png' alt='' width='540' height='400' /></pre>
+<span class='fu'>mosaicplot</span>(<span class='no'>k</span>)</div><img src='cross_table-10.png' alt='' width='540' height='400' /></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

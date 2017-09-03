@@ -59,7 +59,7 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to descriptr</h1>
             
-            <h4 class="date">2017-06-01</h4>
+            <h4 class="date">2017-09-03</h4>
           </div>
 
     
@@ -86,15 +86,15 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <pre><code>## -----------------------------------------------------------------------
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 ## -----------------------------------------------------------------------
-## |      mpg      |   numeric   |    NA     |    12     |     37.5      |
+## |      mpg      |   numeric   |    NA     |     0     |       0       |
 ## |      cyl      |   factor    |   4 6 8   |    12     |     37.5      |
-## |     disp      |   numeric   |    NA     |     0     |       0       |
-## |      hp       |   numeric   |    NA     |    12     |     37.5      |
-## |     drat      |   numeric   |    NA     |     0     |       0       |
-## |      wt       |   numeric   |    NA     |     0     |       0       |
-## |     qsec      |   numeric   |    NA     |    12     |     37.5      |
-## |      vs       |   factor    |    0 1    |     0     |       0       |
-## |      am       |   factor    |    0 1    |    12     |     37.5      |
+## |     disp      |   numeric   |    NA     |    12     |     37.5      |
+## |      hp       |   numeric   |    NA     |     0     |       0       |
+## |     drat      |   numeric   |    NA     |    12     |     37.5      |
+## |      wt       |   numeric   |    NA     |    12     |     37.5      |
+## |     qsec      |   numeric   |    NA     |     0     |       0       |
+## |      vs       |   factor    |    0 1    |    12     |     37.5      |
+## |      am       |   factor    |    0 1    |     0     |       0       |
 ## |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
 ## |     carb      |   factor    |1 2 3 4 6 8|     0     |       0       |
 ## -----------------------------------------------------------------------
@@ -220,7 +220,9 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <h2 class="hasAnchor">
 <html><body><a href="#frequency-table-categorical-data" class="anchor"> </a></body></html>Frequency Table (Categorical Data)</h2>
 <p>The <code>freq_table</code> function creates frequency tables for categorical variables.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mtcars$cyl)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
+mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
+<span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mt$cyl)</code></pre></div>
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
 ## |                                Cumulative                    Cumulative  |
@@ -236,7 +238,9 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <h3 class="hasAnchor">
 <html><body><a href="#bar-plot" class="anchor"> </a></body></html>Bar Plot</h3>
 <p>A barplot method has been defined.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mtcars$cyl)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
+mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
+k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mt$cyl)
 <span class="kw">barplot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/ftable_bar-1.png" width="672"></p>
 </div>

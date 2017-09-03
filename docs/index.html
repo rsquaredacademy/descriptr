@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Descriptive Statistics &amp; Distributions Exploration • descriptr</title>
+<title>Generate Descriptive Statistics &amp; Explore Statistical Distributions  • descriptr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -63,18 +63,17 @@
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="descriptr" class="section level1">
-<h1 class="hasAnchor">
-<html><body><a href="#descriptr" class="anchor"> </a></body></html>descriptr <img src="descriptr.jpg" align="right">
-</h1>
-<p><a href="https://cran.r-project.org/package=descriptr"><img src="http://www.r-pkg.org/badges/version/descriptr" alt="CRAN_Status_Badge"></a> <a href="https://travis-ci.org/rsquaredacademy/descriptr"><img src="https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/rsquaredacademy/descriptr"><img src="https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/rsquaredacademy/descriptr?branch=master"><img src="https://img.shields.io/codecov/c/github/rsquaredacademy/descriptr/master.svg" alt="Coverage Status"></a> <a href="https://cran.r-project.org/package=descriptr"><img src="https://cranlogs.r-pkg.org/badges/grand-total/descriptr"></a></p>
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#descriptr" class="anchor"> </a>descriptr</h1></div>
+
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#overview" class="anchor"> </a></body></html>Overview</h2>
+<a href="#overview" class="anchor"> </a>Overview</h2>
 <p>The goal of descriptr is to ease the process of generating descriptive statistics and exploring statistical distributions.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#installation" class="anchor"> </a></body></html>Installation</h2>
+<a href="#installation" class="anchor"> </a>Installation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install descriptr from CRAN</span>
 <span class="kw">install.packages</span>(<span class="st">"descriptr"</span>)
 
@@ -82,27 +81,25 @@
 <span class="co"># install.packages("devtools")</span>
 devtools::<span class="kw">install_github</span>(<span class="st">"rsquaredacademy/descriptr"</span>)</code></pre></div>
 </div>
-<div id="usage" class="section level2">
+<div id="features" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#usage" class="anchor"> </a></body></html>Usage</h2>
+<a href="#features" class="anchor"> </a>Features</h2>
 <div id="descriptive-statistics" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#descriptive-statistics" class="anchor"> </a></body></html>Descriptive Statistics</h3>
-<p>The following functions are available for generating descriptive statistics:</p>
+<a href="#descriptive-statistics" class="anchor"> </a>Descriptive Statistics</h3>
 <ul>
-<li><code>summary_stats</code></li>
-<li><code>cross_table</code></li>
-<li><code>freq_table</code></li>
-<li><code>freq_cont</code></li>
-<li><code>group_summary</code></li>
-<li><code>oway_tables</code></li>
-<li><code>tway_tables</code></li>
+<li>Summary Statistics</li>
+<li>Two Way Tables</li>
+<li>One Way Table</li>
+<li>One Way Table (Continuous Data)</li>
+<li>Group Wise Summary</li>
+<li>Multiple One Way Tables</li>
+<li>Multiple Two Way Tables</li>
 </ul>
 </div>
 <div id="explore-distributions" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#explore-distributions" class="anchor"> </a></body></html>Explore Distributions</h3>
-<p>Functions have been defined to visualize and compute percentiles/probabilities for the following distributions:</p>
+<a href="#explore-distributions" class="anchor"> </a>Explore Distributions</h3>
 <ul>
 <li>Normal</li>
 <li>Binomial</li>
@@ -110,6 +107,168 @@ devtools::<span class="kw">install_github</span>(<span class="st">"rsquaredacade
 <li>F</li>
 <li>t</li>
 </ul>
+</div>
+</div>
+<div id="shiny-app" class="section level2">
+<h2 class="hasAnchor">
+<a href="#shiny-app" class="anchor"> </a>Shiny App</h2>
+<p>If you want to explore the package using a shiny app, please click <a href="http://rsquaredlabs.com:3838/explorer/">here</a>.</p>
+<iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="vignettes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#vignettes" class="anchor"> </a>Vignettes</h2>
+<ul>
+<li><a href="http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html">Descriptive Statistics</a></li>
+<li><a href="http://www.rsquaredacademy.com/descriptr/articles/distributions.html">Statistical Distributions</a></li>
+</ul>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"> </a>Usage</h2>
+<div id="summary-statistics" class="section level5">
+<h5 class="hasAnchor">
+<a href="#summary-statistics" class="anchor"> </a>Summary Statistics</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/summary_stats.html">summary_stats</a></span>(mtcars$mpg)
+<span class="co">#&gt;                         Univariate Analysis                          </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  N                       32.00      Variance                36.32 </span>
+<span class="co">#&gt;  Missing                  0.00      Std Deviation            6.03 </span>
+<span class="co">#&gt;  Mean                    20.09      Range                   23.50 </span>
+<span class="co">#&gt;  Median                  19.20      Interquartile Range      7.38 </span>
+<span class="co">#&gt;  Mode                    10.40      Uncorrected SS       14042.31 </span>
+<span class="co">#&gt;  Trimmed Mean            19.95      Corrected SS          1126.05 </span>
+<span class="co">#&gt;  Skewness                 0.67      Coeff Variation         30.00 </span>
+<span class="co">#&gt;  Kurtosis                -0.02      Std Error Mean           1.07 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;                               Quantiles                               </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;               Quantile                            Value                </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;              Max                                  33.90                </span>
+<span class="co">#&gt;              99%                                  33.44                </span>
+<span class="co">#&gt;              95%                                  30.09                </span>
+<span class="co">#&gt;              90%                                  31.30                </span>
+<span class="co">#&gt;              Q3                                   22.80                </span>
+<span class="co">#&gt;              Median                               19.20                </span>
+<span class="co">#&gt;              Q1                                   15.43                </span>
+<span class="co">#&gt;              10%                                  14.34                </span>
+<span class="co">#&gt;              5%                                   12.00                </span>
+<span class="co">#&gt;              1%                                   10.40                </span>
+<span class="co">#&gt;              Min                                  10.40                </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;                             Extreme Values                            </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;                 Low                                High                </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   Obs                        Value       Obs                        Value </span>
+<span class="co">#&gt;   15                         10.4        20                         33.9  </span>
+<span class="co">#&gt;   16                         10.4        18                         32.4  </span>
+<span class="co">#&gt;   24                         13.3        19                         30.4  </span>
+<span class="co">#&gt;    7                         14.3        28                         30.4  </span>
+<span class="co">#&gt;   17                         14.7        26                         27.3</span></code></pre></div>
+</div>
+<div id="two-way-table" class="section level5">
+<h5 class="hasAnchor">
+<a href="#two-way-table" class="anchor"> </a>Two Way Table</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
+<span class="co">#&gt;     Cell Contents</span>
+<span class="co">#&gt;  |---------------|</span>
+<span class="co">#&gt;  |     Frequency |</span>
+<span class="co">#&gt;  |       Percent |</span>
+<span class="co">#&gt;  |       Row Pct |</span>
+<span class="co">#&gt;  |       Col Pct |</span>
+<span class="co">#&gt;  |---------------|</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Total Observations:  32 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span>
+<span class="co">#&gt; |              |                           gear                            |</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span>
+<span class="co">#&gt; |          cyl |            3 |            4 |            5 |    Row Total |</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span>
+<span class="co">#&gt; |            4 |            1 |            8 |            2 |           11 |</span>
+<span class="co">#&gt; |              |        0.031 |         0.25 |        0.062 |              |</span>
+<span class="co">#&gt; |              |         0.09 |         0.73 |         0.18 |         0.34 |</span>
+<span class="co">#&gt; |              |         0.07 |         0.67 |          0.4 |              |</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span>
+<span class="co">#&gt; |            6 |            2 |            4 |            1 |            7 |</span>
+<span class="co">#&gt; |              |        0.062 |        0.125 |        0.031 |              |</span>
+<span class="co">#&gt; |              |         0.29 |         0.57 |         0.14 |         0.22 |</span>
+<span class="co">#&gt; |              |         0.13 |         0.33 |          0.2 |              |</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span>
+<span class="co">#&gt; |            8 |           12 |            0 |            2 |           14 |</span>
+<span class="co">#&gt; |              |        0.375 |            0 |        0.062 |              |</span>
+<span class="co">#&gt; |              |         0.86 |            0 |         0.14 |         0.44 |</span>
+<span class="co">#&gt; |              |          0.8 |            0 |          0.4 |              |</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span>
+<span class="co">#&gt; | Column Total |           15 |           12 |            5 |           32 |</span>
+<span class="co">#&gt; |              |        0.468 |        0.375 |        0.155 |              |</span>
+<span class="co">#&gt; ----------------------------------------------------------------------------</span></code></pre></div>
+</div>
+<div id="one-way-table" class="section level5">
+<h5 class="hasAnchor">
+<a href="#one-way-table" class="anchor"> </a>One Way Table</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/freq_table.html">freq_table</a></span>(mtcars$cyl)
+<span class="co">#&gt;                                Variable: cyl                                 </span>
+<span class="co">#&gt; |--------------------------------------------------------------------------|</span>
+<span class="co">#&gt; |                                Cumulative                    Cumulative  |</span>
+<span class="co">#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |</span>
+<span class="co">#&gt; |--------------------------------------------------------------------------|</span>
+<span class="co">#&gt; |       4      |      11      |      11      |     34.38    |     34.38    |</span>
+<span class="co">#&gt; |--------------------------------------------------------------------------|</span>
+<span class="co">#&gt; |       6      |       7      |      18      |     21.88    |     56.25    |</span>
+<span class="co">#&gt; |--------------------------------------------------------------------------|</span>
+<span class="co">#&gt; |       8      |      14      |      32      |     43.75    |      100     |</span>
+<span class="co">#&gt; |--------------------------------------------------------------------------|</span></code></pre></div>
+</div>
+<div id="one-way-table-continuous-data" class="section level5">
+<h5 class="hasAnchor">
+<a href="#one-way-table-continuous-data" class="anchor"> </a>One Way Table (Continuous Data)</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/freq_cont.html">freq_cont</a></span>(mtcars$mpg)
+<span class="co">#&gt;                                 Variable: mpg                                 </span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span>
+<span class="co">#&gt; |                                 Cumulative                    Cumulative  |</span>
+<span class="co">#&gt; |     Bins      |  Frequency   |   Frequency  |   Percent    |    Percent   |</span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span>
+<span class="co">#&gt; | 10.4  - 15.1  |      6       |      6       |        18.75 |        18.75 |</span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span>
+<span class="co">#&gt; | 15.1  - 19.8  |      12      |      18      |         37.5 |        56.25 |</span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span>
+<span class="co">#&gt; | 19.8  - 24.5  |      8       |      26      |           25 |        81.25 |</span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span>
+<span class="co">#&gt; | 24.5  - 29.2  |      2       |      28      |         6.25 |         87.5 |</span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span>
+<span class="co">#&gt; | 29.2  - 33.9  |      4       |      32      |         12.5 |          100 |</span>
+<span class="co">#&gt; |---------------------------------------------------------------------------|</span></code></pre></div>
+</div>
+<div id="group-summary" class="section level5">
+<h5 class="hasAnchor">
+<a href="#group-summary" class="anchor"> </a>Group Summary</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/group_summary.html">group_summary</a></span>(mtcars$cyl, mtcars$mpg)
+<span class="co">#&gt;                                        mpg by cyl                                         </span>
+<span class="co">#&gt; -----------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; |     Statistic/Levels|                    4|                    6|                    8|</span>
+<span class="co">#&gt; -----------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; |                  Obs|                   11|                    7|                   14|</span>
+<span class="co">#&gt; |              Minimum|                 21.4|                 17.8|                 10.4|</span>
+<span class="co">#&gt; |              Maximum|                 33.9|                 21.4|                 19.2|</span>
+<span class="co">#&gt; |                 Mean|                26.66|                19.74|                 15.1|</span>
+<span class="co">#&gt; |               Median|                   26|                 19.7|                 15.2|</span>
+<span class="co">#&gt; |                 Mode|                 22.8|                   21|                 10.4|</span>
+<span class="co">#&gt; |       Std. Deviation|                 4.51|                 1.45|                 2.56|</span>
+<span class="co">#&gt; |             Variance|                20.34|                 2.11|                 6.55|</span>
+<span class="co">#&gt; |             Skewness|                 0.35|                -0.26|                -0.46|</span>
+<span class="co">#&gt; |             Kurtosis|                -1.43|                -1.83|                 0.33|</span>
+<span class="co">#&gt; |       Uncorrected SS|              8023.83|              2741.14|              3277.34|</span>
+<span class="co">#&gt; |         Corrected SS|               203.39|                12.68|                 85.2|</span>
+<span class="co">#&gt; |      Coeff Variation|                16.91|                 7.36|                16.95|</span>
+<span class="co">#&gt; |      Std. Error Mean|                 1.36|                 0.55|                 0.68|</span>
+<span class="co">#&gt; |                Range|                 12.5|                  3.6|                  8.8|</span>
+<span class="co">#&gt; |  Interquartile Range|                  7.6|                 2.35|                 1.85|</span>
+<span class="co">#&gt; -----------------------------------------------------------------------------------------</span></code></pre></div>
+<p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
 </div>
@@ -127,6 +286,8 @@ devtools::<span class="kw">install_github</span>(<span class="st">"rsquaredacade
 </li>
 <li>Learn more at <br><a href="http://www.rsquaredacademy.com">http://​www.rsquaredacademy.com</a>
 </li>
+<li>Shiny App at <br><a href="http://rsquaredlabs.com:3838/explorer/">http://​rsquaredlabs.com:3838/​explorer/​</a>
+</li>
 </ul>
 <h2>License</h2>
 <p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
@@ -134,6 +295,15 @@ devtools::<span class="kw">install_github</span>(<span class="st">"rsquaredacade
 <ul class="list-unstyled">
 <li>Aravind Hebbali <br><small class="roles"> Author, maintainer </small> </li>
 </ul>
+<html><body>
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=descriptr"><img src="http://www.r-pkg.org/badges/version/descriptr" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://travis-ci.org/rsquaredacademy/descriptr"><img src="https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/rsquaredacademy/descriptr"><img src="https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=descriptr"><img src="https://cranlogs.r-pkg.org/badges/grand-total/descriptr"></a></li>
+</ul>
+</body></html>
 </div>
 
 </div>
