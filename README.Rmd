@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# descriptr <img src="descriptr.jpg" align="right" />
+# descriptr 
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
@@ -23,8 +23,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The goal of descriptr is to ease the process of generating descriptive
-statistics and exploring statistical distributions.
+The goal of descriptr is to ease the process of generating descriptive statistics and exploring statistical distributions.
 
 ## Installation
 
@@ -37,25 +36,20 @@ install.packages("descriptr")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
 
-## Usage
+## Features
 
 ### Descriptive Statistics
 
-The following functions are available for generating descriptive statistics:
-
-- `summary_stats`
-- `cross_table`
-- `freq_table`
-- `freq_cont`
-- `group_summary`
-- `oway_tables`
-- `tway_tables`
+- Summary Statistics
+- Two Way Tables
+- One Way Table
+- One Way Table (Continuous Data)
+- Group Wise Summary
+- Multiple One Way Tables
+- Multiple Two Way Tables
 
 
 ### Explore Distributions
-
-Functions have been defined to visualize and compute percentiles/probabilities
-for the following distributions:
 
 - Normal
 - Binomial
@@ -63,3 +57,54 @@ for the following distributions:
 - F
 - t
 
+
+## Shiny App
+
+If you want to explore the package using a shiny app, please click [here](http://rsquaredlabs.com:3838/explorer/).
+
+<iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen></iframe>
+
+## Vignettes
+
+- [Descriptive Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
+- [Statistical Distributions](http://www.rsquaredacademy.com/descriptr/articles/distributions.html)
+
+## Usage
+
+##### Summary Statistics
+
+```{r load, eval=TRUE, echo=FALSE}
+library(descriptr)
+mtcars$cyl <- as.factor(mtcars$cyl)
+```
+
+```{r descript1}
+summary_stats(mtcars$mpg)
+```
+
+##### Two Way Table
+
+```{r descript2}
+cross_table(mtcars$cyl, mtcars$gear)
+```
+
+##### One Way Table
+
+```{r descript3}
+freq_table(mtcars$cyl)
+```
+
+##### One Way Table (Continuous Data)
+
+```{r descript4}
+freq_cont(mtcars$mpg)
+```
+
+##### Group Summary
+
+```{r descript5}
+group_summary(mtcars$cyl, mtcars$mpg)
+```
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
+By participating in this project you agree to abide by its terms.
