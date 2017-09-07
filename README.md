@@ -204,4 +204,8 @@ group_summary(mtcars$cyl, mtcars$mpg)
 #> -----------------------------------------------------------------------------------------
 ```
 
+## License
+
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
