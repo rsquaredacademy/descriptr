@@ -14,7 +14,8 @@ Imports:
     dplyr,
     magrittr,
     tibble,
-    forcats
+    forcats,
+    shiny
 Suggests:
     covr,
     testthat,
