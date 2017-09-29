@@ -10,17 +10,27 @@ Description: Generate descriptive statistics such as measures of location,
 Depends:
     R(>= 3.2.4)
 Imports:
-    graphics,
     dplyr,
-    magrittr,
-    tibble,
     forcats,
-    shiny
+    graphics,
+    magrittr,
+    shiny,
+    tibble
 Suggests:
     covr,
-    testthat,
+    haven,
+    jsonlite,
     knitr,
-    rmarkdown
+    lubridate,
+    readr,
+    readxl,
+    rmarkdown,
+    scales,
+    shinyBS,
+    shinythemes,
+    stringr,
+    testthat,
+    tools
 License: MIT + file LICENSE
 URL: https://rsquaredacademy.github.io/descriptr/, https://github.com/rsquaredacademy/descriptr
 BugReports: https://github.com/rsquaredacademy/descriptr/issues
