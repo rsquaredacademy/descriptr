@@ -233,17 +233,53 @@ print_screen <- function(x) {
 
 print_fcont <- function(data) {
 
-    cat(format(paste('Variable:', data$varname), width = 77, justify = 'centre'), '\n')
-    cat("|---------------------------------------------------------------------------|
-|                                 Cumulative                    Cumulative  |
-|     Bins      |  Frequency   |   Frequency  |   Percent    |    Percent   |
-|---------------------------------------------------------------------------|")
+  blen <- data %>%
+    use_series(breaks) %>%
+    nchar %>%
+    max 
+
+  blen2 <- blen %>%
+    multiply_by(2) %>%
+    add(4)  
+
+  flen <- data %>%
+    use_series(frequency) %>%
+    nchar %>%
+    max %>%
+    max(9)
+
+  clen <- data %>%
+    use_series(cumulative) %>%
+    nchar %>%
+    max %>%
+    max(13)
+
+  total <- blen2 + flen + clen + 39
+  dash <- total - 2
+
+  col_names <- c('Bins', ' Frequency', ' Cum Frequency', ' Percent', ' Cum Percent')
+  col_widths <- c(blen2, flen, clen, 13, 13)
+  len_names <- 5
+
+  cat(format(paste('Variable:', data$varname), width = total, justify = 'centre'), '\n')
+  cat("|")
+  cat(rep("-", dash), sep = "")
+  cat("|\n")
+  cat("|")
+  for (i in seq_len(len_names)) {
+    cat(format(col_names[i], width = col_widths[i], justify = 'centre'), "|", sep = " ")
+  }
+  cat("\n|")
+  cat(rep("-", dash), sep = "")
+  cat("|")
     for (i in seq_len(data$bins)) {
         k <- i + 1
-        cat("\n|", formata(data$breaks[i], 1, 5), "-", formata(data$breaks[k], 1, 5), "|",
-            formata(data$frequency[i], 2, 12), "|", formata(data$cumulative[i], 2, 12), "|",
-            formatas(data$percent[i], 2, 12), "|", formatas(data$cum_percent[i], 2, 12), "|")
-        cat("\n|---------------------------------------------------------------------------|")
+        cat("\n|", formata(data$breaks[i], 1, blen), "-", formata(data$breaks[k], 1, blen), "|",
+            formata(data$frequency[i], 2, flen), "|", formata(data$cumulative[i], 2, clen), "|",
+            formata(data$percent[i], 2, 12), "|", formata(data$cum_percent[i], 2, 12), "|")
+        cat("\n|")
+        cat(rep("-", dash), sep = "")
+        cat("|")
     }
 
 }
