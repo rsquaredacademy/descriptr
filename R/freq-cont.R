@@ -1,4 +1,5 @@
 #' @importFrom graphics hist
+#' @importFrom magrittr use_series multiply_by add
 #' @title Frequency Distribution of Continuous Data
 #' @description \code{freq_cont} returns the frequency distribution of
 #' continuous by splitting the data into equidistant intervals created based on
