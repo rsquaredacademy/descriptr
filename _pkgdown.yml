@@ -1,6 +1,31 @@
 templates:
   params:
-    bootswatch: cerulean
+    bootswatch: cosmo
+
+navbar:
+  title: "descriptr"
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Guides"
+      menu:
+        - text: "Descriptive Statistics"
+          href: articles/descriptive-stats.html
+        - text: "Distributions"
+          href: articles/distributions.html
+    - text: "Reference"
+      menu:
+        - text: "Functions"
+          href: reference/index.html
+        - text: "Media"
+          href: articles/reference-media.html
+        - text: "News"
+          href: news/index.html
+  right:
+   - icon: fa-github
+     href: https://github.com/rsquaredacademy/descriptr
+
 
 home:
   links:
@@ -8,10 +33,17 @@ home:
     href: http://www.rsquaredacademy.com
   - text: Shiny App
     href: http://rsquaredlabs.com:3838/explorer/
+  - text: Docker Image
+    href: https://hub.docker.com/r/rsquaredacademy/descriptr/
 
 
 
 reference:
+- title: Shiny App
+
+  contents:
+  - launch_descriptr
+
 - title: Data Screening
   desc: >
     The `screener()` function will screen data frames and return details such

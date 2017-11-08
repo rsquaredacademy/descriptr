@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introduction to descriptr • descriptr</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container template-vignette">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -29,19 +29,46 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">Home</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Guides
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../articles/index.html">Articles</a>
+      <a href="../articles/descriptive-stats.html">Descriptive Statistics</a>
+    </li>
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
+  </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reference
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../news/index.html">News</a>
+      <a href="../reference/index.html">Functions</a>
+    </li>
+    <li>
+      <a href="../articles/reference-media.html">Media</a>
+    </li>
+    <li>
+      <a href="../news/index.html">News</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
@@ -59,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to descriptr</h1>
             
-            <h4 class="date">2017-09-03</h4>
+            <h4 class="date">2017-10-27</h4>
           </div>
 
     
@@ -80,8 +107,8 @@
 <html><body><a href="#data-screening" class="anchor"> </a></body></html>Data Screening</h2>
 <p>The <code>screener</code> function will screen a data set and return the following: - Column/Variable Names - Data Type - Levels (in case of categorical data) - Number of missing observations - % of missing observations</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span>:<span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span>:<span class="dv">11</span>)], factor)
-mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nrow</span>(mt), <span class="dv">12</span>), <span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">ncol</span>(mt), <span class="dv">6</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span>
+mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)], factor)
+mt[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mt), <span class="dv">12</span>), <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mt), <span class="dv">6</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span>
 <span class="kw"><a href="../reference/screener.html">screener</a></span>(mt)</code></pre></div>
 <pre><code>## -----------------------------------------------------------------------
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
@@ -108,7 +135,7 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <h2 class="hasAnchor">
 <html><body><a href="#summary-statistics" class="anchor"> </a></body></html>Summary Statistics</h2>
 <p>The <code>summary_stats</code> function returns a comprehensive set of statistics for <strong>continuous</strong> data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/summary_stats.html">summary_stats</a></span>(mtcars$mpg)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/summary_stats.html">summary_stats</a></span>(mtcars<span class="op">$</span>mpg)</code></pre></div>
 <pre><code>##                         Univariate Analysis                          
 ## 
 ##  N                       32.00      Variance                36.32 
@@ -151,7 +178,7 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <h2 class="hasAnchor">
 <html><body><a href="#cross-tabulation" class="anchor"> </a></body></html>Cross Tabulation</h2>
 <p>The <code>cross_table</code> function creates two way tables of categorical variables. It is <strong>not necessary</strong> to coerce a variable to type <code>factor</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)</code></pre></div>
 <pre><code>##     Cell Contents
 ##  |---------------|
 ##  |     Frequency |
@@ -189,21 +216,21 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <div id="grouped-bar-plots" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#grouped-bar-plots" class="anchor"> </a></body></html>Grouped Bar Plots</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)
 <span class="kw">plot</span>(k, <span class="dt">beside =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/cross_group-1.png" width="672"></p>
 </div>
 <div id="stacked-bar-plots" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#stacked-bar-plots" class="anchor"> </a></body></html>Stacked Bar Plots</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)
 <span class="kw">plot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/cross_stack-1.png" width="672"></p>
 </div>
 <div id="proportional-bar-plots" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#proportional-bar-plots" class="anchor"> </a></body></html>Proportional Bar Plots</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)
 <span class="kw">plot</span>(k, <span class="dt">proportional =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/cross_prop-1.png" width="672"></p>
 </div>
@@ -211,7 +238,7 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <h3 class="hasAnchor">
 <html><body><a href="#mosaic-plots" class="anchor"> </a></body></html>Mosaic Plots</h3>
 <p>Mosaic plots can be created using the <code>mosaciplot</code> method.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars$cyl, mtcars$gear)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cross_table.html">cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)
 <span class="kw">mosaicplot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/mosaic-1.png" width="672"></p>
 </div>
@@ -221,8 +248,8 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span>:<span class="kw">nro
 <html><body><a href="#frequency-table-categorical-data" class="anchor"> </a></body></html>Frequency Table (Categorical Data)</h2>
 <p>The <code>freq_table</code> function creates frequency tables for categorical variables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
-<span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mt$cyl)</code></pre></div>
+mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)
+<span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mt<span class="op">$</span>cyl)</code></pre></div>
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
 ## |                                Cumulative                    Cumulative  |
@@ -239,8 +266,8 @@ mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
 <html><body><a href="#bar-plot" class="anchor"> </a></body></html>Bar Plot</h3>
 <p>A barplot method has been defined.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
-k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mt$cyl)
+mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)
+k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_table.html">freq_table</a></span>(mt<span class="op">$</span>cyl)
 <span class="kw">barplot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/ftable_bar-1.png" width="672"></p>
 </div>
@@ -249,25 +276,24 @@ k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_tabl
 <h2 class="hasAnchor">
 <html><body><a href="#frequency-table-continuous-data" class="anchor"> </a></body></html>Frequency Table (Continuous Data)</h2>
 <p>The <code>freq_cont</code> function creates frequency tables for continuous variables. The default number of intervals is 5.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/freq_cont.html">freq_cont</a></span>(mtcars$mpg, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/freq_cont.html">freq_cont</a></span>(mtcars<span class="op">$</span>mpg, <span class="dv">4</span>)</code></pre></div>
 <pre><code>##                                 Variable: mpg                                 
 ## |---------------------------------------------------------------------------|
-## |                                 Cumulative                    Cumulative  |
-## |     Bins      |  Frequency   |   Frequency  |   Percent    |    Percent   |
+## |      Bins       | Frequency | Cum Frequency |   Percent    | Cum Percent  |
 ## |---------------------------------------------------------------------------|
-## | 10.4  - 16.3  |      10      |      10      |        31.25 |        31.25 |
+## |  10.4  -  16.3  |    10     |      10       |    31.25     |    31.25     |
 ## |---------------------------------------------------------------------------|
-## | 16.3  - 22.1  |      13      |      23      |        40.62 |        71.88 |
+## |  16.3  -  22.1  |    13     |      23       |    40.62     |    71.88     |
 ## |---------------------------------------------------------------------------|
-## | 22.1  -  28   |      5       |      28      |        15.62 |         87.5 |
+## |  22.1  -   28   |     5     |      28       |    15.62     |     87.5     |
 ## |---------------------------------------------------------------------------|
-## |  28   - 33.9  |      4       |      32      |         12.5 |          100 |
+## |   28   -  33.9  |     4     |      32       |     12.5     |     100      |
 ## |---------------------------------------------------------------------------|</code></pre>
 <div id="histogram" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#histogram" class="anchor"> </a></body></html>Histogram</h3>
 <p>A <code>hist</code> method has been defined.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_cont.html">freq_cont</a></span>(mtcars$mpg, <span class="dv">4</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_cont.html">freq_cont</a></span>(mtcars<span class="op">$</span>mpg, <span class="dv">4</span>)
 <span class="kw">hist</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/fcont_hist-1.png" width="672"></p>
 </div>
@@ -277,8 +303,8 @@ k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/freq_tabl
 <html><body><a href="#group-summary" class="anchor"> </a></body></html>Group Summary</h2>
 <p>The <code>group_summary</code> function returns descriptive statistics of a continuous variable for the different levels of a categorical variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
-<span class="kw"><a href="../reference/group_summary.html">group_summary</a></span>(mt$cyl, mt$mpg)</code></pre></div>
+mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)
+<span class="kw"><a href="../reference/group_summary.html">group_summary</a></span>(mt<span class="op">$</span>cyl, mt<span class="op">$</span>mpg)</code></pre></div>
 <pre><code>##                                        mpg by cyl                                         
 ## -----------------------------------------------------------------------------------------
 ## |     Statistic/Levels|                    4|                    6|                    8|
@@ -305,8 +331,8 @@ mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
 <html><body><a href="#box-plot" class="anchor"> </a></body></html>Box Plot</h3>
 <p>A <code>boxplot</code> method has been defined.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt$cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt$cyl)
-k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/group_summary.html">group_summary</a></span>(mt$cyl, mt$mpg)
+mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)
+k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/group_summary.html">group_summary</a></span>(mt<span class="op">$</span>cyl, mt<span class="op">$</span>mpg)
 <span class="kw">boxplot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/gsum_boxplot-1.png" width="672"></p>
 </div>
@@ -316,7 +342,7 @@ k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/group_sum
 <html><body><a href="#multiple-one-way-tables" class="anchor"> </a></body></html>Multiple One Way Tables</h2>
 <p>The <code>oway_tables</code> function creates multiple one way tables by creating a frequency table for each categorical variable in a data frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span>:<span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span>:<span class="dv">11</span>)], factor)
+mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)], factor)
 <span class="kw"><a href="../reference/oway_tables.html">oway_tables</a></span>(mt)</code></pre></div>
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
@@ -389,7 +415,7 @@ mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</sp
 <html><body><a href="#multiple-two-way-tables" class="anchor"> </a></body></html>Multiple Two Way Tables</h2>
 <p>The <code>tway_tables</code> function creates multiple two way tables by creating a cross table for each unique pair of categorical variables in a data frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span>mtcars
-mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span>:<span class="dv">10</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span>:<span class="dv">10</span>)], factor)
+mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">10</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">10</span>)], factor)
 <span class="kw"><a href="../reference/oway_tables.html">tway_tables</a></span>(mt)</code></pre></div>
 <pre><code>##     Cell Contents
 ##  |---------------|
@@ -565,7 +591,7 @@ mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</sp
 
 
       <footer><div class="copyright">
-  <p>Developed by Aravind Hebbali.</p>
+  <p>Developed by Aravind Hebbali, Rsquared Academy.</p>
 </div>
 
 <div class="pkgdown">
