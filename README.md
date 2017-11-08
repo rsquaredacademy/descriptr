@@ -3,7 +3,7 @@
 descriptr
 =========
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![Coverage Status](https://img.shields.io/codecov/c/github/rsquaredacademy/descriptr/master.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) [![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/joethorley/stability-badges#stable) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
 
 Overview
 --------
@@ -48,6 +48,8 @@ Shiny App
 
 If you want to explore the package using a shiny app, please click [here](http://rsquaredlabs.com:3838/explorer/).
 
+<iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen>
+</iframe>
 Vignettes
 ---------
 
@@ -160,21 +162,20 @@ freq_table(mtcars$cyl)
 
 ``` r
 freq_cont(mtcars$mpg)
-#>                                 Variable: mpg                                 
-#> |---------------------------------------------------------------------------|
-#> |                                 Cumulative                    Cumulative  |
-#> |     Bins      |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#> |---------------------------------------------------------------------------|
-#> | 10.4  - 15.1  |      6       |      6       |        18.75 |        18.75 |
-#> |---------------------------------------------------------------------------|
-#> | 15.1  - 19.8  |      12      |      18      |         37.5 |        56.25 |
-#> |---------------------------------------------------------------------------|
-#> | 19.8  - 24.5  |      8       |      26      |           25 |        81.25 |
-#> |---------------------------------------------------------------------------|
-#> | 24.5  - 29.2  |      2       |      28      |         6.25 |         87.5 |
-#> |---------------------------------------------------------------------------|
-#> | 29.2  - 33.9  |      4       |      32      |         12.5 |          100 |
-#> |---------------------------------------------------------------------------|
+#>                               Variable: mpg                               
+#> |-----------------------------------------------------------------------|
+#> |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
+#> |-----------------------------------------------------------------------|
+#> | 10.4 - 15.1 |     6     |       6       |    18.75     |    18.75     |
+#> |-----------------------------------------------------------------------|
+#> | 15.1 - 19.8 |    12     |      18       |     37.5     |    56.25     |
+#> |-----------------------------------------------------------------------|
+#> | 19.8 - 24.5 |     8     |      26       |      25      |    81.25     |
+#> |-----------------------------------------------------------------------|
+#> | 24.5 - 29.2 |     2     |      28       |     6.25     |     87.5     |
+#> |-----------------------------------------------------------------------|
+#> | 29.2 - 33.9 |     4     |      32       |     12.5     |     100      |
+#> |-----------------------------------------------------------------------|
 ```
 
 ##### Group Summary
@@ -203,9 +204,5 @@ group_summary(mtcars$cyl, mtcars$mpg)
 #> |  Interquartile Range|                  7.6|                 2.35|                 1.85|
 #> -----------------------------------------------------------------------------------------
 ```
-
-## License
-
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
