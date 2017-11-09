@@ -12,7 +12,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# descriptr 
+descriptr: Generate descriptive statistics and explore distributions
+----------
+
+**Author:** [Aravind Hebbali]()<br/>
+**License:** [MIT](https://opensource.org/licenses/MIT)
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
@@ -59,7 +63,7 @@ devtools::install_github("rsquaredacademy/descriptr")
 
 ## Shiny App
 
-If you want to explore the package using a shiny app, please click [here](http://rsquaredlabs.com:3838/explorer/).
+Use `launch_descriptr()` to explore the package using a shiny app.
 
 <iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen></iframe>
 

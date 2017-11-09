@@ -1,7 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-descriptr
-=========
+descriptr: Generate descriptive statistics and explore distributions
+--------------------------------------------------------------------
+
+**Author:** [Aravind Hebbali]()<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
 
@@ -46,7 +48,7 @@ Features
 Shiny App
 ---------
 
-If you want to explore the package using a shiny app, please click [here](http://rsquaredlabs.com:3838/explorer/).
+Use `launch_descriptr()` to explore the package using a shiny app.
 
 <iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen>
 </iframe>
