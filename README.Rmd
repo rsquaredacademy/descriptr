@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-descriptr: Generate descriptive statistics and explore distributions
+descriptr: Generate descriptive statistics and explore distributions <img src="descriptr.jpg" align="right" />
 ----------
 
 **Author:** [Aravind Hebbali]()<br/>
@@ -22,6 +22,7 @@ descriptr: Generate descriptive statistics and explore distributions
 [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
+
 
 
 ## Overview
