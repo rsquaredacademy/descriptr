@@ -317,6 +317,18 @@ pol_t <- function(l1, l2, df, col) {
 
 }
 
+trimmed_mean <- function(x) {
+  mean(x, trim = 0.05)
+}
+
+quant1 <- function(x) {
+  quantile(x, probs = 0.25)
+}
+
+quant3 <- function(x) {
+  quantile(x, probs = 0.75)
+}
+
 
 # ss <- function(x) {
 #     return(x ^ 2)

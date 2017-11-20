@@ -167,6 +167,13 @@ k <- group_summary(mt$cyl, mt$mpg)
 boxplot(k)
 ```
 
+## Multi Column Statistics
+
+Use `multistats()` to generate descriptive/summary statistics for multiple columns of a tibble/data.frame.
+
+```{r multistats}
+multistats(mtcars, mpg, disp, hp, wt, qsec)
+```
 
 ## Multiple One Way Tables
 
