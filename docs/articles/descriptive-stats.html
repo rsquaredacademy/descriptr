@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to descriptr</h1>
             
-            <h4 class="date">2017-10-27</h4>
+            <h4 class="date">2017-11-20</h4>
           </div>
 
     
@@ -113,17 +113,17 @@ mt[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</s
 <pre><code>## -----------------------------------------------------------------------
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 ## -----------------------------------------------------------------------
-## |      mpg      |   numeric   |    NA     |     0     |       0       |
+## |      mpg      |   numeric   |    NA     |    12     |     37.5      |
 ## |      cyl      |   factor    |   4 6 8   |    12     |     37.5      |
 ## |     disp      |   numeric   |    NA     |    12     |     37.5      |
 ## |      hp       |   numeric   |    NA     |     0     |       0       |
-## |     drat      |   numeric   |    NA     |    12     |     37.5      |
+## |     drat      |   numeric   |    NA     |     0     |       0       |
 ## |      wt       |   numeric   |    NA     |    12     |     37.5      |
 ## |     qsec      |   numeric   |    NA     |     0     |       0       |
-## |      vs       |   factor    |    0 1    |    12     |     37.5      |
-## |      am       |   factor    |    0 1    |     0     |       0       |
-## |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
-## |     carb      |   factor    |1 2 3 4 6 8|     0     |       0       |
+## |      vs       |   factor    |    0 1    |     0     |       0       |
+## |      am       |   factor    |    0 1    |    12     |     37.5      |
+## |     gear      |   factor    |   3 4 5   |     0     |       0       |
+## |     carb      |   factor    |1 2 3 4 6 8|    12     |     37.5      |
 ## -----------------------------------------------------------------------
 ## 
 ##  Overall Missing Values           72 
@@ -336,6 +336,22 @@ k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/group_sum
 <span class="kw">boxplot</span>(k)</code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/gsum_boxplot-1.png" width="672"></p>
 </div>
+</div>
+<div id="multi-column-statistics" class="section level2">
+<h2 class="hasAnchor">
+<html><body><a href="#multi-column-statistics" class="anchor"> </a></body></html>Multi Column Statistics</h2>
+<p>Use <code><a href="../reference/multistats.html">multistats()</a></code> to generate descriptive/summary statistics for multiple columns of a tibble/data.frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/multistats.html">multistats</a></span>(mtcars, mpg, disp, hp, wt, qsec)</code></pre></div>
+<pre><code>## # A tibble: 5 x 16
+##    vars    min     max      mean    t_mean  median   mode   range
+##   &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1  disp 71.100 472.000 230.72188 228.00000 196.300 275.80 400.900
+## 2    hp 52.000 335.000 146.68750 143.56667 123.000 110.00 283.000
+## 3   mpg 10.400  33.900  20.09062  19.95333  19.200  10.40  23.500
+## 4  qsec 14.500  22.900  17.84875  17.79200  17.710  17.02   8.400
+## 5    wt  1.513   5.424   3.21725   3.20050   3.325   3.44   3.911
+## # ... with 8 more variables: variance &lt;dbl&gt;, stdev &lt;dbl&gt;, skew &lt;dbl&gt;,
+## #   kurtosis &lt;dbl&gt;, coeff_var &lt;dbl&gt;, q1 &lt;dbl&gt;, q3 &lt;dbl&gt;, iqrange &lt;dbl&gt;</code></pre>
 </div>
 <div id="multiple-one-way-tables" class="section level2">
 <h2 class="hasAnchor">
@@ -581,6 +597,7 @@ mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</sp
       <li><a href="#frequency-table-categorical-data">Frequency Table (Categorical Data)</a></li>
       <li><a href="#frequency-table-continuous-data">Frequency Table (Continuous Data)</a></li>
       <li><a href="#group-summary">Group Summary</a></li>
+      <li><a href="#multi-column-statistics">Multi Column Statistics</a></li>
       <li><a href="#multiple-one-way-tables">Multiple One Way Tables</a></li>
       <li><a href="#multiple-two-way-tables">Multiple Two Way Tables</a></li>
       </ul>

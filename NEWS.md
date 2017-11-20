@@ -1,3 +1,11 @@
+# descriptr 0.2.0.9000
+
+## New Features
+
+- shiny app for interactive analysis
+- multi column statistics
+([#6](https://github.com/rsquaredacademy/descriptr/issues/6))
+
 # descriptr 0.2.0
 
 This is a minor release containing bug fixes. 

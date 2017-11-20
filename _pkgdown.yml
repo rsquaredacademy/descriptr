@@ -70,8 +70,10 @@ reference:
   - hist.freq_cont
   - group_summary
   - boxplot.group_summary
+  - multistats
   - oway_tables
   - tway_tables
+  - descriptr
 
 - title: Distributions
   desc: >
