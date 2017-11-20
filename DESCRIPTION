@@ -1,7 +1,7 @@
 Package: descriptr
 Type: Package
 Title: Generate Descriptive Statistics & Explore Statistical Distributions 
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: c(
     person("Aravind", "Hebbali", email = "hebbali.aravind@gmail.com", role = c("aut", "cre")),
     person("Rsquared", "Academy", role = c("cph", "fnd"))
@@ -18,7 +18,9 @@ Imports:
     graphics,
     magrittr,
     shiny,
-    tibble
+    tibble,
+    rlang,
+    tidyr
 Suggests:
     covr,
     haven,
