@@ -1,10 +1,10 @@
 #' @importFrom stats quantile
 #' @title Descriptive Statistics
-#' @description \code{summary_stats} returns a whole range of descriptive
+#' @description \code{ds_summary_stats} returns a whole range of descriptive
 #' statistics for continuous data.
 #' @param data a numeric vector
-#' @return \code{summary_stats} returns an object of class
-#' \code{"summary_stats"}. An object of class \code{"summary_stats"}
+#' @return \code{ds_summary_stats} returns an object of class
+#' \code{"ds_summary_stats"}. An object of class \code{"ds_summary_stats"}
 #' is a list containing the following components
 #'
 #' \item{obs}{number of observations}
@@ -36,27 +36,30 @@
 #' \item{highobs}{five highest observations}
 #' \item{lowobsi}{index of five lowest observations}
 #' \item{highobsi}{index of five highest observations}
+#' @section Deprecated Function:
+#' \code{summary_stats()} has been deprecated. Instead use
+#' \code{ds_summary_stats()}.
 #' @examples
-#' summary_stats(mtcars$mpg)
-#' @seealso \code{\link[base]{summary}} \code{\link{freq_cont}}
-#' \code{\link{freq_table}} \code{\link{cross_table}}
+#' ds_summary_stats(mtcars$mpg)
+#' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
+#' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #' @export
 #'
-summary_stats <- function(data) UseMethod('summary_stats')
+ds_summary_stats <- function(data) UseMethod('ds_summary_stats')
 
 #' @export
 #'
-summary_stats.default <- function(data) {
+ds_summary_stats.default <- function(data) {
 
     if(!is.numeric(data)) {
       stop('data must be numeric')
     }
 
     data <- na.omit(data)
-    low <- tailobs(data, 5, 'low')
-    high <- tailobs(data, 5, 'high')
-    low_val <- rindex(data, low)
-    high_val <- rindex(data, high)
+    low <- ds_tailobs(data, 5, 'low')
+    high <- ds_tailobs(data, 5, 'high')
+    low_val <- ds_rindex(data, low)
+    high_val <- ds_rindex(data, high)
 
     result <- list(
         obs = length(data),
@@ -65,15 +68,15 @@ summary_stats.default <- function(data) {
         tavg = mean(data, trim = 0.05),
         stdev = sd(data),
         variance = var(data),
-        skew = skewness(data),
-        kurtosis = kurtosis(data),
+        skew = ds_skewness(data),
+        kurtosis = ds_kurtosis(data),
         uss = stat_uss(data),
-        css = stat_css(data),
-        cvar = stat_cvar(data),
+        css = ds_css(data),
+        cvar = ds_cvar(data),
         sem = std_error(data),
         median = median(data),
-        mode = stat_mode(data),
-        range = stat_range(data),
+        mode = ds_mode(data),
+        range = ds_range(data),
         min = min(data), Max = max(data),
         iqrange = IQR(data),
         per99 = quantile(data, 0.99),
@@ -90,11 +93,22 @@ summary_stats.default <- function(data) {
         highobsi = high_val
     )
 
-    class(result) <- 'summary_stats'
+    class(result) <- 'ds_summary_stats'
     return(result)
 }
 
 #' @export
-print.summary_stats <- function(x, ...) {
+#' @rdname ds_summary_stats
+#' @usage NULL
+#'
+summary_stats <- function(data) {
+
+  .Deprecated("ds_summary_stats()")
+  ds_summary_stats(data)
+
+}
+
+#' @export
+print.ds_summary_stats <- function(x, ...) {
   print_stats(x)
 }

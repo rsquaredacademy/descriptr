@@ -47,11 +47,11 @@ screener(mt)
 
 ## Summary Statistics
 
-The `summary_stats` function returns a comprehensive set of statistics for 
+The `ds_summary_stats` function returns a comprehensive set of statistics for 
 **continuous** data. 
 
 ```{r summary}
-summary_stats(mtcars$mpg)
+ds_summary_stats(mtcars$mpg)
 ```
 
 

@@ -83,7 +83,7 @@ mtcars$cyl <- as.factor(mtcars$cyl)
 ```
 
 ```{r descript1}
-summary_stats(mtcars$mpg)
+ds_summary_stats(mtcars$mpg)
 ```
 
 ##### Two Way Table

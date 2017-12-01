@@ -60,7 +60,7 @@ reference:
     The following functions ease the process of generating and visualizing
     descriptive statistics for categorical and continuous data.
   contents:
-  - summary_stats
+  - ds_summary_stats
   - cross_table
   - plot.cross_table
   - mosaicplot.cross_table
