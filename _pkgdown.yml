@@ -101,17 +101,17 @@ reference:
   desc: >
     A set of functions used to generate `summary_stats`.
   contents:
-  - kurtosis
-  - skewness
-  - stat_mode
-  - stat_range
-  - stat_mdev
-  - stat_cvar
-  - stat_css
-  - gmean
-  - hmean
-  - tailobs
-  - rindex
+  - ds_kurtosis
+  - ds_skewness
+  - ds_mode
+  - ds_range
+  - ds_mdev
+  - ds_cvar
+  - ds_css
+  - ds_gmean
+  - ds_hmean
+  - ds_tailobs
+  - ds_rindex
 
 - title: Data
   desc: >
