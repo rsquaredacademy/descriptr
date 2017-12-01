@@ -103,12 +103,12 @@ mosaicplot(k)
 
 ## Frequency Table (Categorical Data)
 
-The `freq_table` function creates frequency tables for categorical variables. 
+The `dsfreq_table()` function creates frequency tables for categorical variables. 
 
 ```{r ftable}
 mt <- mtcars
 mt$cyl <- as.factor(mt$cyl)
-freq_table(mt$cyl)
+ds_freq_table(mt$cyl)
 ```
 
 
@@ -119,7 +119,7 @@ A barplot method has been defined.
 ```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
 mt <- mtcars
 mt$cyl <- as.factor(mt$cyl)
-k <- freq_table(mt$cyl)
+k <- ds_freq_table(mt$cyl)
 barplot(k)
 ```
 

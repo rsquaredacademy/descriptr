@@ -1,8 +1,8 @@
 context('freq_table')
 
-test_that('output from freq_table matches expected results', {
+test_that('output from ds_freq_table matches expected results', {
 
-  k <- freq_table(as.factor(mtcars$cyl))
+  k <- ds_freq_table(as.factor(mtcars$cyl))
   expect_equivalent(k$ftable[[1]], c("4", "6", "8"))
   expect_equivalent(k$ftable[[2]], c(11, 7, 14))
   expect_equivalent(k$ftable[[3]], c(11, 18, 32))
@@ -11,8 +11,8 @@ test_that('output from freq_table matches expected results', {
   expect_equivalent(k$varname, 'cyl)')
 })
 
-test_that('freq_table returns appropriate errors', {
+test_that('ds_freq_table returns appropriate errors', {
 
-  expect_error(freq_table('mtcars$cyl'), 'data must be categorical/qualitative')
+  expect_error(ds_freq_table('mtcars$cyl'), 'data must be categorical/qualitative')
 
 })

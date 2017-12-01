@@ -64,8 +64,8 @@ reference:
   - cross_table
   - plot.cross_table
   - mosaicplot.cross_table
-  - freq_table
-  - barplot.freq_table
+  - ds_freq_table
+  - barplot.ds_freq_table
   - freq_cont
   - hist.freq_cont
   - group_summary

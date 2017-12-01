@@ -95,7 +95,7 @@ cross_table(mtcars$cyl, mtcars$gear)
 ##### One Way Table
 
 ```{r descript3}
-freq_table(mtcars$cyl)
+ds_freq_table(mtcars$cyl)
 ```
 
 ##### One Way Table (Continuous Data)
