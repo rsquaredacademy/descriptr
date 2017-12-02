@@ -13,22 +13,25 @@
 #' @return percentile for the \code{probs} based on \code{num_df}, \code{den_df}
 #' and \code{type} or probability value for \code{perc} based on \code{num_df},
 #' \code{den_df} and \code{type}
+#' @section Deprecated Functions:
+#' \code{f_plot()}, \code{f_prob()} and \code{f_per()} have been deprecated.
+#' Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and \code{dist_f_perc()}.
 #' @examples
 #' # visualize F distribution
-#' f_plot()
-#' f_plot(6, 10, normal = TRUE)
+#' dist_f_plot()
+#' dist_f_plot(6, 10, normal = TRUE)
 #'
 #' # compute\/visualize probability from a given quantile
-#' f_per(0.95, 3, 30, 'lower')
-#' f_per(0.125, 9, 35, 'upper')
+#' dist_f_perc(0.95, 3, 30, 'lower')
+#' dist_f_perc(0.125, 9, 35, 'upper')
 #'
 #' # compute\/visualize quantiles out of given probability
-#' f_prob(2.35, 5, 32)
-#' f_prob(1.5222, 9, 35, type = "upper")
+#' dist_f_prob(2.35, 5, 32)
+#' dist_f_prob(1.5222, 9, 35, type = "upper")
 #' @seealso \code{\link[stats]{FDist}}
 #' @export
 #'
-f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
+dist_f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
 
     if (!is.numeric(num_df)) {
       stop('Numerator DF must be numeric/integer')
@@ -90,13 +93,22 @@ f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
 }
 
 
+#' @export
+#' @rdname dist_f_plot
+#' @usage NULL
+#'
+f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
+
+  .Deprecated("dist_f_plot()")
+  dist_f_plot(num_df, den_df, normal)
+
+}
 
 
-
-#' @rdname f_plot
+#' @rdname dist_f_plot
 #' @export
 #'
-f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper")) {
+dist_f_perc <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper")) {
 
   if (!is.numeric(num_df)) {
     stop('Numerator DF must be numeric/integer')
@@ -197,12 +209,22 @@ f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "uppe
 
 }
 
+#' @export
+#' @rdname dist_f_plot
+#' @usage NULL
+#'
+f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper")) {
+
+  .Deprecated("dist_f_perc()")
+  dist_f_perc(probs, num_df, den_df, type)
+
+}
 
 
-#' @rdname f_plot
+#' @rdname dist_f_plot
 #' @export
 #'
-f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
+dist_f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
 
   if (!is.numeric(perc)) {
     stop('perc must be numeric/integer')
@@ -300,5 +322,16 @@ f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
 
   result <- list(probs = pp, mean = fm, stdev = fsd)
   invisible(result)
+
+}
+
+#' @export
+#' @rdname dist_f_plot
+#' @usage NULL
+#'
+f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
+
+  .Deprecated("dist_f_prob()")
+  dist_f_prob(perc, num_df, den_df, type)
 
 }

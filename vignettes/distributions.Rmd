@@ -243,8 +243,8 @@ Visualize how changes in degrees of freedom affect the shape of the F
 distribution.
 
 ```{r f_plot, fig.width=7, fig.height=7, fig.align='centre'}
-f_plot()
-f_plot(6, 10, normal = TRUE)
+dist_f_plot()
+dist_f_plot(6, 10, normal = TRUE)
 ```
 
 ### Percentiles
@@ -262,13 +262,13 @@ Let X be an F random variable with 4 numerator degrees of freedom and 5
 denominator degrees of freedom. What is the upper twenth percentile?
 
 ```{r f_per1, fig.width=7, fig.height=7, fig.align='centre'}
-f_per(0.20, 4, 5, 'upper')
+dist_f_perc(0.20, 4, 5, 'upper')
 ```
 
 What is the 35th percentile?
 
 ```{r f_per2, fig.width=7, fig.height=7, fig.align='centre'}
-f_per(0.35, 4, 5, 'lower')
+dist_f_perc(0.35, 4, 5, 'lower')
 ```
 
 ### Probabilities
@@ -286,14 +286,14 @@ What is the probability that an F random variable with 4 numerator degrees of
 freedom and 5 denominator degrees of freedom is greater than 3.89?
 
 ```{r f_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-f_prob(3.89, 4, 5, 'upper')
+dist_f_prob(3.89, 4, 5, 'upper')
 ```
 
 What is the probability that an F random variable with 4 numerator degrees of 
 freedom and 5 denominator degrees of freedom is less than 2.63?
 
 ```{r f_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-f_prob(2.63, 4, 5, 'lower')
+dist_f_prob(2.63, 4, 5, 'lower')
 ```
 
 

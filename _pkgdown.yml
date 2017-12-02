@@ -67,7 +67,7 @@ reference:
   - ds_freq_table
   - barplot.ds_freq_table
   - ds_freq_cont
-  - hist.freq_cont
+  - hist.ds_freq_cont
   - ds_group_summary
   - boxplot.ds_group_summary
   - ds_multi_stats
@@ -90,9 +90,9 @@ reference:
   - dist_chi_plot
   - dist_chi_per
   - dist_chi_prob
-  - f_plot
-  - f_per
-  - f_prob
+  - dist_f_plot
+  - dist_f_per
+  - dist_f_prob
   - t_plot
   - t_per
   - t_prob
