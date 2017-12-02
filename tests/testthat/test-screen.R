@@ -1,11 +1,11 @@
-context("screener")
+context("ds_screener")
 
-test_that("output from screener matches the expected result", {
+test_that("output from ds_screener matches the expected result", {
 
     mt <- mtcars
     mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
     mt[sample(1:nrow(mt), 12), c(2, 4, 7:10)] <- NA
-    k <- screener(mt)
+    k <- ds_screener(mt)
 
     expect_equal(k$Rows, nrow(mt))
     expect_equal(k$Columns, ncol(mt))
@@ -37,6 +37,6 @@ test_that("output from screener matches the expected result", {
 })
 
 
-test_that("screener throws the appropriate error", {
-    expect_error(screener(mtcars$mpg), "y must be a data frame")
+test_that("ds_screener throws the appropriate error", {
+    expect_error(ds_screener(mtcars$mpg), "y must be a data frame")
 })

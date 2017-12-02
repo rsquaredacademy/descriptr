@@ -1,15 +1,15 @@
 #' @importFrom graphics legend
 #' @importFrom stats complete.cases
 #' @title Screen Data Frames
-#' @description screener will screen data frames and return details such
-#' as variable names, class, levels and missing values. \code{plot.screener}
+#' @description \code{ds_screener} will screen data frames and return details such
+#' as variable names, class, levels and missing values. \code{plot.ds_screener}
 #' creates bar plots to visualize % of missing observations for each variable
 #' in a data frame.
 #' @param y a data frame
-#' @param x an object of class \code{screener}
+#' @param x an object of class \code{ds_screener}
 #' @param ... further arguments to be passed to or from methods
-#' @return \code{screeneer} returns an object of class \code{"screener"}.
-#' An object of class \code{"screener"} is a list containing the
+#' @return \code{ds_screener} returns an object of class \code{"ds_screener"}.
+#' An object of class \code{"ds_screener"} is a list containing the
 #' following components
 #'
 #' \item{Rows}{number of rows in the data frame}
@@ -27,23 +27,26 @@
 #' data frame}
 #' \item{MissingCols}{total number of columns with missing observations in the
 #' data frame}
+#' @section Deprecated Function:
+#' \code{screener()} has been deprecated. Instead
+#' use \code{ds_screener()}.
 #' @examples
 #' # screen data
 #' mt <- mtcars
 #' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
 #' mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
-#' screener(mt)
+#' ds_screener(mt)
 #'
 #' # visualize missing data
-#' k <- screener(mt)
+#' k <- ds_screener(mt)
 #' plot(k)
 #' @export
 #'
-screener <- function(y) UseMethod('screener')
+ds_screener <- function(y) UseMethod('ds_screener')
 
 #' @export
 #'
-screener.default <- function(y) {
+ds_screener.default <- function(y) {
 
     if (!is.data.frame(y)) {
         stop('y must be a data frame')
@@ -76,23 +79,33 @@ screener.default <- function(y) {
                    MissingTotPer = mtotalper, MissingRows = mrows,
                    MissingCols = mcols)
 
-    class(result) <- 'screener'
+    class(result) <- 'ds_screener'
 
     return(result)
 }
 
+#' @export
+#' @rdname ds_screener
+#' @usage NULL
+#'
+screener <- function(y) {
+
+  .Deprecated("ds_screener()")
+  ds_screener(y)
+
+}
 
 #' @export
-print.screener <- function(x, ...) {
+print.ds_screener <- function(x, ...) {
     print_screen(x)
 }
 
 
 
-#' @rdname screener
+#' @rdname ds_screener
 #' @export
 #'
-plot.screener <- function(x, ...) {
+plot.ds_screener <- function(x, ...) {
 
     dat <- x$MissingPer
     ymax <- max(dat) * 1.5

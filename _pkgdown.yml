@@ -51,9 +51,9 @@ reference:
     creates bar plots to visualize % of missing observations for each variable
     in a data frame.
   contents:
-  - screener
-  - screener.default
-  - plot.screener
+  - ds_screener
+  - ds_screener.default
+  - plot.ds_screener
 
 - title: Descriptive Statistics
   desc: >

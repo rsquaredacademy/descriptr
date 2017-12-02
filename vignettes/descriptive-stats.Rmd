@@ -29,7 +29,7 @@ visualize statistical distributions.
 
 ## Data Screening
 
-The `screener` function will screen a data set and return the following:
+The `ds_screener()` function will screen a data set and return the following:
 - Column/Variable Names
 - Data Type
 - Levels (in case of categorical data)
@@ -41,7 +41,7 @@ The `screener` function will screen a data set and return the following:
 mt <- mtcars
 mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
 mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
-screener(mt)
+ds_screener(mt)
 ```
 
 
