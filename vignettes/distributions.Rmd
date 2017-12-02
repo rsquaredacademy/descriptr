@@ -115,7 +115,7 @@ Visualize how changes in number of trials and the probability of success affect
 the shape of the binomial distribution.
 
 ```{r binom_plot, fig.width=7, fig.height=7, fig.align='centre'}
-binom_plot(10, 0.3)
+dist_binom_plot(10, 0.3)
 ```
 
 ### Percentiles 
@@ -130,11 +130,11 @@ binom_plot(10, 0.3)
 
 
 ```{r binom_per1, fig.width=7, fig.height=7, fig.align='centre'}
-binom_perc(10, 0.5, 0.05)
+dist_binom_perc(10, 0.5, 0.05)
 ```
 
 ```{r binom_per2, fig.width=7, fig.height=7, fig.align='centre'}
-binom_perc(10, 0.5, 0.05, 'upper')
+dist_binom_perc(10, 0.5, 0.05, 'upper')
 ```
 
 ### Probabilities
@@ -154,26 +154,26 @@ health insurance. What is the probability that exactly 4 of the 15 sampled
 have no health insurance?
 
 ```{r binom_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-binom_prob(12, 0.2, 4, type = 'exact')
+dist_binom_prob(12, 0.2, 4, type = 'exact')
 ```
 
 What is the probability that at most one of those sampled has no health 
 insurance?
 
 ```{r binom_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-binom_prob(12, 0.2, 1, 'lower')
+dist_binom_prob(12, 0.2, 1, 'lower')
 ```
 
 What is the probability that more than seven have no health insurance?
 
 ```{r binom_prob3, fig.width=7, fig.height=7, fig.align='centre'}
-binom_prob(12, 0.2, 8, 'upper')
+dist_binom_prob(12, 0.2, 8, 'upper')
 ```
 
 What is the probability that fewer than 5 have no health insurance?
 
 ```{r binom_prob4, fig.width=7, fig.height=7, fig.align='centre'}
-binom_prob(12, 0.2, c(0, 4), 'interval')
+dist_binom_prob(12, 0.2, c(0, 4), 'interval')
 ```
 
 

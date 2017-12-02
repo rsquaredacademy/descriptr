@@ -14,23 +14,27 @@
 #' \item{avg}{mean of the binomial distribution}
 #' \item{stdev}{standard deviation of the binomial distribution}
 #' \item{prob}{probability of s success}
+#' @section Deprecated Functions:
+#' \code{binom_plot()}, \code{binom_prob()}, \code{binom_perc()} have been
+#' deprecated. Instead use \code{dist_binom_plot()},
+#' \code{dist_binom_prob()} and \code{dist_binom_perc()}
 #' @examples
 #' # visualize binomial distribution
-#' binom_plot(10, 0.3)
+#' dist_binom_plot(10, 0.3)
 #'
 #' # compute\/visualize probability from a given quantile
-#' binom_prob(10, 0.3, 4, type = 'exact')
-#' binom_prob(10, 0.3, 4, type = 'lower')
-#' binom_prob(10, 0.3, 4, type = 'upper')
-#' binom_prob(10, 0.3, c(4, 6), type = 'interval')
+#' dist_binom_prob(10, 0.3, 4, type = 'exact')
+#' dist_binom_prob(10, 0.3, 4, type = 'lower')
+#' dist_binom_prob(10, 0.3, 4, type = 'upper')
+#' dist_binom_prob(10, 0.3, c(4, 6), type = 'interval')
 #'
 #' # compute\/visualize quantiles out of given probability
-#' binom_perc(10, 0.5, 0.05)
-#' binom_perc(10, 0.5, 0.05, "upper")
+#' dist_binom_perc(10, 0.5, 0.05)
+#' dist_binom_perc(10, 0.5, 0.05, "upper")
 #' @seealso \code{\link[stats]{Binomial}}
 #' @export
 #'
-binom_plot <- function(n, p) {
+dist_binom_plot <- function(n, p) {
 
   if(!is.numeric(n)) {
     stop('n must be numeric/integer')
@@ -64,11 +68,22 @@ binom_plot <- function(n, p) {
 
 }
 
+#' @export
+#' @rdname dist_binom_plot
+#' @usage NULL
+#'
+binom_plot <- function(n, p) {
 
-#' @rdname binom_plot
+  .Deprecated("dist_binom_plot()")
+  dist_binom_plot(n, p)
+
+}
+
+
+#' @rdname dist_binom_plot
 #' @export
 #'
-binom_prob <- function(n, p, s,
+dist_binom_prob <- function(n, p, s,
                        type = c("lower", "upper", "exact", "interval")) {
 
     method <- match.arg(type)
@@ -168,11 +183,23 @@ binom_prob <- function(n, p, s,
 
 }
 
+#' @export
+#' @rdname dist_binom_plot
+#' @usage NULL
+#'
+binom_prob <- function(n, p) {
 
-#' @rdname binom_plot
+  .Deprecated("dist_binom_prob()")
+  dist_binom_prob(n, p, s, type)
+
+}
+
+
+
+#' @rdname dist_binom_plot
 #' @export
 #'
-binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
+dist_binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
 
     if(!is.numeric(n)) {
       stop('n must be numeric/integer')
@@ -233,5 +260,17 @@ binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
                             ') > ', tp), side = 3)
 
     }
+
+}
+
+
+#' @export
+#' @rdname dist_binom_plot
+#' @usage NULL
+#'
+binom_perc <- function(n, p) {
+
+  .Deprecated("dist_binom_perc()")
+  dist_binom_perc(n, p, tp, type)
 
 }

@@ -84,9 +84,9 @@ reference:
   - norm_plot
   - norm_per
   - norm_prob
-  - binom_plot
-  - binom_perc
-  - binom_prob
+  - dist_binom_plot
+  - dist_binom_perc
+  - dist_binom_prob
   - chi_plot
   - chi_per
   - chi_prob
