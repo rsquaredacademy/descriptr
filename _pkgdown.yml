@@ -42,7 +42,7 @@ reference:
 - title: Shiny App
 
   contents:
-  - launch_descriptr
+  - ds_launch_shiny_app
 
 - title: Data Screening
   desc: >
