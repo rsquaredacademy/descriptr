@@ -12,23 +12,27 @@
 #' \code{sd} as the chi square distribution is drawn
 #' @return percentile for the \code{probs} based on \code{df} and \code{type} or
 #' probability value for \code{perc} based on \code{df} and \code{type}
+#' @section Deprecated Functions:
+#' \code{chi_plot()}, \code{chi_prob()} and \code{chi_per()} have been
+#' deprecated. Instead use \code{dist_chi_plot()}, \code{dist_chi_prob()} and
+#' \code{dist_chi_perc()}.
 #' @examples
 #' # visualize chi square distribution
-#' chi_plot()
-#' chi_plot(df = 5)
-#' chi_plot(df = 5, normal = TRUE)
+#' dist_chi_plot()
+#' dist_chi_plot(df = 5)
+#' dist_chi_plot(df = 5, normal = TRUE)
 #'
 #' # compute\/visualize quantiles out of given probability
-#' chi_per(0.165, 8, 'upper')
-#' chi_per(0.22, 13, 'upper')
+#' dist_chi_perc(0.165, 8, 'upper')
+#' dist_chi_perc(0.22, 13, 'upper')
 #'
 #' # compute\/visualize probability from a given quantile.
-#' chi_prob(13.58, 11, 'lower')
-#' chi_prob(15.72, 13, 'upper')
+#' dist_chi_prob(13.58, 11, 'lower')
+#' dist_chi_prob(15.72, 13, 'upper')
 #' @seealso \code{\link[stats]{Chisquare}}
 #' @export
 #'
-chi_plot <- function(df = 3, normal = FALSE) {
+dist_chi_plot <- function(df = 3, normal = FALSE) {
 
     if (!is.numeric(df)) {
       stop('df must be numeric/integer')
@@ -83,11 +87,21 @@ chi_plot <- function(df = 3, normal = FALSE) {
 
 }
 
+#' @export
+#' @rdname dist_chi_plot
+#' @usage NULL
+#'
+chi_plot <- function(df = 3, normal = FALSE) {
 
-#' @rdname chi_plot
+  .Deprecated("dist_chi_plot()")
+  dist_chi_plot(df, normal)
+
+}
+
+#' @rdname dist_chi_plot
 #' @export
 #'
-chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
+dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 
   if(!is.numeric(probs)) {
     stop('probs must be numeric')
@@ -182,11 +196,21 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 
 }
 
+#' @export
+#' @rdname dist_chi_plot
+#' @usage NULL
+#'
+chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 
-#' @rdname chi_plot
+  .Deprecated("dist_chi_perc()")
+  dist_chi_perc(probs, df, type)
+
+}
+
+#' @rdname dist_chi_plot
 #' @export
 #'
-chi_prob <- function(perc, df, type = c("lower", "upper")) {
+dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
 
    if (!is.numeric(df)) {
      stop('df must be numeric/integer')
@@ -276,5 +300,16 @@ chi_prob <- function(perc, df, type = c("lower", "upper")) {
 
   result <- list(prob = pp, mean = chim, stdev = chisd)
   invisible(result)
+
+}
+
+#' @export
+#' @rdname dist_chi_plot
+#' @usage NULL
+#'
+chi_prob <- function(perc, df, type = c("lower", "upper")) {
+
+  .Deprecated("dist_chi_prob()")
+  dist_chi_prob(perc, df, type)
 
 }

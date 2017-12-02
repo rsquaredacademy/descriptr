@@ -185,8 +185,8 @@ Visualize how changes in degrees of freedom affect the shape of the chi square
 distribution.
 
 ```{r chi_plot, fig.width=7, fig.height=7, fig.align='centre'}
-chi_plot(df = 5)
-chi_plot(df = 5, normal = TRUE)
+dist_chi_plot(df = 5)
+dist_chi_plot(df = 5, normal = TRUE)
 ```
 
 ### Percentiles
@@ -202,13 +202,13 @@ Let X be a chi-square random variable with 8 degrees of freedom. What is the
 upper fifth percentile? 
 
 ```{r chi_per1, fig.width=7, fig.height=7, fig.align='centre'}
-chi_per(0.05, 8, 'upper')
+dist_chi_perc(0.05, 8, 'upper')
 ```
 
 What is the tenth percentile?
 
 ```{r chi_per2, fig.width=7, fig.height=7, fig.align='centre'}
-chi_per(0.10, 8, 'lower')
+dist_chi_perc(0.10, 8, 'lower')
 ```
 
 ### Probability
@@ -225,14 +225,14 @@ What is the probability that a chi-square random variable with 12 degrees of
 freedom is greater than 8.79?
 
 ```{r chi_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-chi_prob(8.79, 12, 'upper')
+dist_chi_prob(8.79, 12, 'upper')
 ```
 
 What is the probability that a chi-square random variable with 12 degrees of 
 freedom is greater than 8.62?
 
 ```{r chi_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-chi_prob(8.62, 12, 'lower')
+dist_chi_prob(8.62, 12, 'lower')
 ```
 
 ## F Distribution

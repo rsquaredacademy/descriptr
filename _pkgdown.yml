@@ -87,9 +87,9 @@ reference:
   - dist_binom_plot
   - dist_binom_perc
   - dist_binom_prob
-  - chi_plot
-  - chi_per
-  - chi_prob
+  - dist_chi_plot
+  - dist_chi_per
+  - dist_chi_prob
   - f_plot
   - f_per
   - f_prob
