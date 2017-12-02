@@ -57,10 +57,10 @@ ds_group_summary.default <- function(fvar, cvar) {
 
     split_dat <- tapply(cvar, list(fvar), function(fvar) {
                       c(length(fvar), min(fvar), max(fvar), mean(fvar),
-                      median(fvar), stat_mode(fvar), sd(fvar), var(fvar),
-                      skewness(fvar), kurtosis(fvar), stat_uss(fvar),
-                      stat_css(fvar), stat_cvar(fvar), std_error(fvar),
-                      stat_range(fvar), IQR(fvar))
+                      median(fvar), ds_mode(fvar), sd(fvar), var(fvar),
+                      ds_skewness(fvar), ds_kurtosis(fvar), stat_uss(fvar),
+                      ds_css(fvar), ds_cvar(fvar), std_error(fvar),
+                      ds_range(fvar), IQR(fvar))
                  })
 
     splito <- sapply(split_dat, round, 2)

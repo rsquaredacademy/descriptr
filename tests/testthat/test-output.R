@@ -2,7 +2,7 @@ context('print')
 
 test_that('output from print_cross matches expected output', {
 
-    k <- cross_table(mtcars$cyl, mtcars$vs)
+    k <- ds_cross_table(mtcars$cyl, mtcars$vs)
     pim <- "    Cell Contents
 |---------------|
 |     Frequency |
@@ -43,7 +43,7 @@ test_that('output from print_screener matches expected output', {
     mt <- mtcars
     mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
     mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
-    k <- screener(mt)
+    k <- ds_screener(mt)
     pim <- "-----------------------------------------------------------------------
 |  Column Name  |  Data Type  |  Levels  |  Missing  |  Missing (%)  |
     -----------------------------------------------------------------------
@@ -71,8 +71,8 @@ test_that('output from print_screener matches expected output', {
 
 test_that("output from print_fcont matches the expected result", {
 
-    k <- freq_cont(mtcars$mpg)
-    pim <- "                              Variable: mpg                               
+    k <- ds_freq_cont(mtcars$mpg)
+    pim <- "                              Variable: mpg
 |-----------------------------------------------------------------------|
 |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
 |-----------------------------------------------------------------------|
@@ -93,7 +93,7 @@ test_that("output from print_fcont matches the expected result", {
 
 test_that("output from freq_table matches the expected result", {
 
-    k <- freq_table(as.factor(mtcars$cyl))
+    k <- ds_freq_table(as.factor(mtcars$cyl))
     pim <- "                               Variable: cyl)
 |--------------------------------------------------------------------------|
     |                                Cumulative                    Cumulative  |
@@ -114,7 +114,7 @@ test_that("output from group_summary matches the expected result", {
 
     mt <- mtcars
     mt$cyl <- as.factor(mt$cyl)
-    k <- group_summary(mt$cyl, mt$mpg)
+    k <- ds_group_summary(mt$cyl, mt$mpg)
     pim <- "                                       mpg by cyl
 -----------------------------------------------------------------------------------------
 |     Statistic/Levels|                    4|                    6|                    8|
@@ -211,7 +211,7 @@ test_that("output from print_ftable2 matches the expected result", {
 |       8      |       1      |      32      |     3.12     |      100     |
 |--------------------------------------------------------------------------|
 "
-    expect_output(oway_tables(mt), pim)
+    expect_output(ds_oway_tables(mt), pim)
 })
 
 
@@ -302,7 +302,7 @@ test_that("output from print_cross2 matches the expected result", {
 -------------------------------------------------------------
 
 "
-    expect_output(tway_tables(mt), pim)
+    expect_output(ds_tway_tables(mt), pim)
 })
 
 

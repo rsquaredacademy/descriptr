@@ -3,9 +3,12 @@
 \name{ds_freq_table}
 \alias{ds_freq_table}
 \alias{freq_table}
+\alias{barplot.ds_freq_table}
 \title{Frequency Table: Categorical Data}
 \usage{
 ds_freq_table(data)
+
+\method{barplot}{ds_freq_table}(height, ...)
 }
 \arguments{
 \item{data}{numeric or factor vector}

@@ -101,7 +101,7 @@ print.ds_freq_table <- function(x, ...) {
 
 
 
-#' @rdname freq_table
+#' @rdname ds_freq_table
 #' @export
 #'
 barplot.ds_freq_table <- function(height, ...) {

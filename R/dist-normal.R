@@ -27,9 +27,9 @@
 #' dist_norm_prob(c(-1.74, 1.83), type = 'both')
 #'
 #' # compute\/visualize quantiles out of given probability
-#' dist_norm_per(0.95, mean = 2, sd = 1.36)
-#' dist_norm_per(0.3, mean = 2, sd = 1.36, type = 'upper')
-#' dist_norm_per(0.95, mean = 2, sd = 1.36, type = 'both')
+#' dist_norm_perc(0.95, mean = 2, sd = 1.36)
+#' dist_norm_perc(0.3, mean = 2, sd = 1.36, type = 'upper')
+#' dist_norm_perc(0.95, mean = 2, sd = 1.36, type = 'both')
 #' @seealso \code{\link[stats]{Normal}}
 #' @export
 #'

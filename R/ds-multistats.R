@@ -19,9 +19,9 @@ ds_multi_stats <- function(x, ...) {
     gather(vars, values) %>%
     group_by(vars) %>%
     summarise_all(funs(min = min, max = max, mean = mean, t_mean = trimmed_mean,
-      median = median, mode = stat_mode, range = stat_range, variance = var,
-      stdev = sd, skew = skewness, kurtosis = kurtosis, coeff_var = stat_cvar,
-      q1 = quant1, q3 = quant3,iqrange = IQR)
+      median = median, mode = ds_mode, range = ds_range, variance = var,
+      stdev = sd, skew = ds_skewness, kurtosis = ds_kurtosis, coeff_var = ds_cvar,
+      q1 = quant1, q3 = quant3, iqrange = IQR)
     )
 }
 

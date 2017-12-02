@@ -97,7 +97,7 @@ ds_tway_tables <- function(data) {
 }
 
 #' @export
-#' @rdname ds_tway_tables
+#' @rdname ds_oway_tables
 #' @usage NULL
 #'
 tway_tables <- function(data) {
