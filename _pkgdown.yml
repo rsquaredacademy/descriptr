@@ -61,9 +61,9 @@ reference:
     descriptive statistics for categorical and continuous data.
   contents:
   - ds_summary_stats
-  - cross_table
-  - plot.cross_table
-  - mosaicplot.cross_table
+  - ds_cross_table
+  - plot.ds_cross_table
+  - mosaicplot.ds_cross_table
   - ds_freq_table
   - barplot.ds_freq_table
   - ds_freq_cont

@@ -1,8 +1,8 @@
-context('cross_table')
+context('ds_cross_table')
 
-test_that('output from cross_table matches expected results', {
+test_that('output from ds_cross_table matches expected results', {
 
-    k <- cross_table(hsb$ses, hsb$female)
+    k <- ds_cross_table(hsb$ses, hsb$female)
 
     expect_equal(k$obs, 200)
 
@@ -49,16 +49,16 @@ test_that('output from cross_table matches expected results', {
 })
 
 
-test_that('ouput from plot.cross_table matches expected output', {
+test_that('ouput from plot.ds_cross_table matches expected output', {
 
     # stacked bar plot
-    k <- cross_table(mtcars$cyl, mtcars$vs)
+    k <- ds_cross_table(mtcars$cyl, mtcars$vs)
     h <- plot(k)
     exptd <- matrix(c(1, 3, 14, 10, 4, 0), nrow = 3)
     expect_equivalent(h$data, exptd)
 
     # proportional bar plot
-    k <- cross_table(mtcars$cyl, mtcars$vs)
+    k <- ds_cross_table(mtcars$cyl, mtcars$vs)
     h <- plot(k, proportional = TRUE)
     exptd <- matrix(c(5.56, 16.67, 77.78, 71.43, 28.57, 0.00), nrow = 3)
     expect_equivalent(h$data, exptd)
@@ -66,9 +66,9 @@ test_that('ouput from plot.cross_table matches expected output', {
 })
 
 
-test_that('output from mosaicplot.cross_table returns expected output', {
+test_that('output from mosaicplot.ds_cross_table returns expected output', {
 
-    k <- cross_table(mtcars$cyl, mtcars$vs)
+    k <- ds_cross_table(mtcars$cyl, mtcars$vs)
     h <- mosaicplot(k)
     exptd <- matrix(c(1, 3, 14, 10, 4, 0), nrow = 3)
     expect_equivalent(h$data, exptd)

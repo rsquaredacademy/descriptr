@@ -1,7 +1,7 @@
 #' @importFrom graphics barplot mosaicplot
 #' @importFrom grDevices rainbow
 #' @title Two Way Tables
-#' @description \code{cross_table} creates two way tables of categorical
+#' @description \code{ds_cross_tablecross_table} creates two way tables of categorical
 #' variables. The tables created can be visualized as barplots and mosaicplots.
 #' @param var1 First categorical variable
 #' @param var2 Second categorical variable
@@ -11,8 +11,8 @@
 #' @param proportional a logical value. If TRUE, the height of the bars is
 #' proportional
 #' @param ... further arguments to be passed to or from methods.
-#' @return \code{cross_table} returns an object of class \code{"cross_table"}.
-#' An object of class \code{"cross_table"} is a list containing at least the
+#' @return \code{ds_cross_table} returns an object of class \code{"ds_cross_table"}.
+#' An object of class \code{"ds_cross_table"} is a list containing at least the
 #' following components:
 #'
 #' \item{obs}{obs number of observations}
@@ -25,9 +25,10 @@
 #' \item{col_percent}{table of column percentages}
 #' \item{column_totals}{total of columns}
 #' \item{percent_column}{total of columns as a percentage}
-#'
+#' @section Deprecated Function:
+#' \code{ds_cross_table()} has been deprecated. Instead use \code{ds_cross_table()}.
 #' @examples
-#' k <- cross_table(mtcars$cyl, mtcars$am)
+#' k <- ds_cross_table(mtcars$cyl, mtcars$am)
 #' k
 #'
 #' # bar plots
@@ -39,10 +40,10 @@
 #' mosaicplot(k)
 #' @export
 #'
-cross_table <- function(var1, var2) UseMethod("cross_table")
+ds_cross_table <- function(var1, var2) UseMethod("ds_cross_table")
 
 #' @export
-cross_table.default <- function(var1, var2) {
+ds_cross_table <- function(var1, var2) {
 
     var_1 <- l(deparse(substitute(var1)))
     var_2 <- l(deparse(substitute(var2)))
@@ -82,21 +83,32 @@ cross_table.default <- function(var1, var2) {
         column_totals = coltotal, percent_column = col_pct)
 
 
-    class(result) <- "cross_table"
+    class(result) <- "ds_cross_table"
     return(result)
 }
 
 #' @export
-print.cross_table <- function(x, ...) {
+#' @rdname ds_cross_table
+#' @usage NULL
+#'
+cross_table <- function(var1, var2) {
+
+  .Deprecated("ds_cross_table()")
+  ds_cross_table(var1, var2)
+
+}
+
+#' @export
+print.ds_cross_table <- function(x, ...) {
     print_cross(x)
 }
 
 
 
 #' @export
-#' @rdname cross_table
+#' @rdname ds_cross_table
 #'
-plot.cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
+plot.ds_cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
     i_data <- x$twowaytable
     nb <- ncol(i_data)
     bdata <- i_data[, c(-1, -nb)]
@@ -132,9 +144,9 @@ plot.cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
 
 
 #' @export
-#' @rdname cross_table
+#' @rdname ds_cross_table
 #'
-mosaicplot.cross_table <- function(x, ...) {
+mosaicplot.ds_cross_table <- function(x, ...) {
     i_data <- x$twowaytable
     nb <- ncol(i_data)
     mdata <- i_data[, c(-1, -nb)]

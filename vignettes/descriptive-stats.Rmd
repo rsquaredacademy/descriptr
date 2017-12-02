@@ -57,11 +57,11 @@ ds_summary_stats(mtcars$mpg)
 
 ## Cross Tabulation
 
-The `cross_table` function creates two way tables of categorical variables. It
+The `ds_cross_table` function creates two way tables of categorical variables. It
 is **not necessary** to coerce a variable to type `factor`.
 
 ```{r cross}
-cross_table(mtcars$cyl, mtcars$gear)
+ds_cross_table(mtcars$cyl, mtcars$gear)
 ```
 
 A plot method has been defined which will generate:
@@ -70,7 +70,7 @@ A plot method has been defined which will generate:
 ### Grouped Bar Plots
 
 ```{r cross_group, fig.width=7, fig.height=7, fig.align='centre'}
-k <- cross_table(mtcars$cyl, mtcars$gear)
+k <- ds_cross_table(mtcars$cyl, mtcars$gear)
 plot(k, beside = TRUE)
 ```
 
@@ -78,7 +78,7 @@ plot(k, beside = TRUE)
 ### Stacked Bar Plots
 
 ```{r cross_stack, fig.width=7, fig.height=7, fig.align='centre'}
-k <- cross_table(mtcars$cyl, mtcars$gear)
+k <- ds_cross_table(mtcars$cyl, mtcars$gear)
 plot(k)
 ```
 
@@ -86,7 +86,7 @@ plot(k)
 ### Proportional Bar Plots
 
 ```{r cross_prop, fig.width=7, fig.height=7, fig.align='centre'}
-k <- cross_table(mtcars$cyl, mtcars$gear)
+k <- ds_cross_table(mtcars$cyl, mtcars$gear)
 plot(k, proportional = TRUE)
 ```
 
@@ -96,7 +96,7 @@ plot(k, proportional = TRUE)
 Mosaic plots can be created using the `mosaciplot` method.
 
 ```{r mosaic, fig.width=7, fig.height=7, fig.align='centre'}
-k <- cross_table(mtcars$cyl, mtcars$gear)
+k <- ds_cross_table(mtcars$cyl, mtcars$gear)
 mosaicplot(k)
 ```
 
