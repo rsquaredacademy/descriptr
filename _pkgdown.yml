@@ -93,9 +93,9 @@ reference:
   - dist_f_plot
   - dist_f_per
   - dist_f_prob
-  - t_plot
-  - t_per
-  - t_prob
+  - dist_t_plot
+  - dist_t_per
+  - dist_t_prob
 
 - title: Other Functions
   desc: >

@@ -304,7 +304,7 @@ dist_f_prob(2.63, 4, 5, 'lower')
 Visualize how degrees of freedom affect the shape of t distribution.
 
 ```{r t_plot, fig.width=7, fig.height=7, fig.align='centre'}
-t_plot(df = 8)
+dist_t_plot(df = 8)
 ```
 
 ### Percentiles
@@ -320,19 +320,19 @@ t_plot(df = 8)
 What is the upper fifteenth percentile? 
 
 ```{r t_per1, fig.width=7, fig.height=7, fig.align='centre'}
-t_per(0.15, 8, 'upper')
+dist_t_perc(0.15, 8, 'upper')
 ```
 
 What is the eleventh percentile? 
 
 ```{r t_per2, fig.width=7, fig.height=7, fig.align='centre'}
-t_per(0.11, 8, 'lower')
+dist_t_perc(0.11, 8, 'lower')
 ```
 
 What is the area of the curve that has 95% of the t values? 
 
 ```{r t_per3, fig.width=7, fig.height=7, fig.align='centre'}
-t_per(0.8, 8, 'both')
+dist_t_perc(0.8, 8, 'both')
 ```
 
 
@@ -351,23 +351,23 @@ Let T follow a t-distribution with r = 6 df.
 What is the probability that the value of T is less than 2?
  
 ```{r t_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2, 6, 'lower')
+dist_t_prob(2, 6, 'lower')
 ```
 
 What is the probability that the value of T is greater than 2?
  
 ```{r t_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2, 6, 'upper')
+dist_t_prob(2, 6, 'upper')
 ```
 
 What is the probability that the value of T is between -2 and 2?
  
 ```{r t_prob3, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2, 6, 'both')
+dist_t_prob(2, 6, 'both')
 ```
 
 What is the probability that the absolute value of T is greater than 2?
 
 ```{r t_prob4, fig.width=7, fig.height=7, fig.align='centre'}
-t_prob(2, 6, 'interval')
+dist_t_prob(2, 6, 'interval')
 ```
