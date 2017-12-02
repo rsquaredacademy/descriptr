@@ -12,24 +12,28 @@
 #' @return percentile for the \code{probs} based on \code{mean}, \code{sd} and
 #' \code{type} or probability value for \code{perc} based on \code{mean},
 #' \code{sd} and \code{type}
+#' @section Deprecated Functions:
+#' \code{norm_plot()}, \code{norm_prob()} and \code{norm_per()} have been
+#' deprecated. Instead use \code{dist_norm_plot()}, \code{dist_norm_prob()} and
+#' \code{dist_norm_per()}.
 #' @examples
 #' # visualize normal distribution
-#' norm_plot()
-#' norm_plot(mean = 2, sd = 0.6)
+#' dist_norm_plot()
+#' dist_norm_plot(mean = 2, sd = 0.6)
 #'
 #' # compute\/visualize probability from a given quantile
-#' norm_prob(3.78, mean = 2, sd = 1.36)
-#' norm_prob(3.43, mean = 2, sd = 1.36, type = 'upper')
-#' norm_prob(c(-1.74, 1.83), type = 'both')
+#' dist_norm_prob(3.78, mean = 2, sd = 1.36)
+#' dist_norm_prob(3.43, mean = 2, sd = 1.36, type = 'upper')
+#' dist_norm_prob(c(-1.74, 1.83), type = 'both')
 #'
 #' # compute\/visualize quantiles out of given probability
-#' norm_per(0.95, mean = 2, sd = 1.36)
-#' norm_per(0.3, mean = 2, sd = 1.36, type = 'upper')
-#' norm_per(0.95, mean = 2, sd = 1.36, type = 'both')
+#' dist_norm_per(0.95, mean = 2, sd = 1.36)
+#' dist_norm_per(0.3, mean = 2, sd = 1.36, type = 'upper')
+#' dist_norm_per(0.95, mean = 2, sd = 1.36, type = 'both')
 #' @seealso \code{\link[stats]{Normal}}
 #' @export
 #'
-norm_plot <- function(mean = 0, sd = 1) {
+dist_norm_plot <- function(mean = 0, sd = 1) {
 
     if (!is.numeric(mean)) {
       stop('mean must be numeric/integer')
@@ -72,7 +76,7 @@ norm_plot <- function(mean = 0, sd = 1) {
              expression(paste(mu, '+3', sigma)))
 
   ll <- l[3:9]
-  
+
   for (i in seq_len(length(texts))) {
       mtext(side = 1, text = texts[i], outer = FALSE, at = ll[i],
             line = 2.5, col = "#4B0082")
@@ -86,12 +90,22 @@ norm_plot <- function(mean = 0, sd = 1) {
 
 }
 
+#' @export
+#' @rdname dist_norm_plot
+#' @usage NULL
+#'
+norm_plot <- function(mean = 0, sd = 1) {
+
+  .Deprecated("dist_norm_plot()")
+  dist_norm_plot(mean, sd)
+
+}
 
 
-#' @rdname norm_plot
+#' @rdname dist_norm_plot
 #' @export
 #'
-norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
+dist_norm_perc <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
 
   if (!is.numeric(mean)) {
     stop('mean must be numeric/integer')
@@ -209,11 +223,23 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
 
 }
 
+#' @export
+#' @rdname dist_norm_plot
+#' @usage NULL
+#'
+norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
 
-#' @rdname norm_plot
+  .Deprecated("dist_norm_perc()")
+  dist_norm_perc(probs, mean, sd, type)
+
+}
+
+
+
+#' @rdname dist_norm_plot
 #' @export
 #'
-norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
+dist_norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
 
   method <- match.arg(type)
 
@@ -337,3 +363,15 @@ norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")
   invisible(result)
 
 }
+
+#' @export
+#' @rdname dist_norm_plot
+#' @usage NULL
+#'
+norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
+
+  .Deprecated("dist_norm_prob()")
+  dist_norm_prob(perc, mean, sd, type)
+
+}
+

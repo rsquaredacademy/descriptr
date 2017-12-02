@@ -42,7 +42,7 @@ normal distribution.
 - Normal distribution plot
 
 ```{r norm_plot, fig.width=7, fig.height=7, fig.align='centre'}
-norm_plot(mean = 2, sd = 0.6)
+dist_norm_plot(mean = 2, sd = 0.6)
 ```
 
 ### Percentiles
@@ -60,21 +60,21 @@ and standard deviation 3. The teacher wants to give 10% of the class an A.
 What should be the cutoff to determine who gets an A?
 
 ```{r norm_per1, fig.width=7, fig.height=7, fig.align='centre'}
-norm_per(0.10, 60, 3, 'upper')
+dist_norm_perc(0.10, 60, 3, 'upper')
 ```
 
 The teacher wants to give lower 15% of the class a D. What cutoff should the 
 teacher use to determine who gets an D?
 
 ```{r norm_per2, fig.width=7, fig.height=7, fig.align='centre'}
-norm_per(0.85, 60, 3, 'lower')
+dist_norm_perc(0.85, 60, 3, 'lower')
 ```
 
 The teacher wants to give middle 50% of the class a B. What cutoff should the 
 teacher use to determine who gets an B?
 
 ```{r norm_per3, fig.width=7, fig.height=7, fig.align='centre'}
-norm_per(0.5, 60, 3, 'both')
+dist_norm_perc(0.5, 60, 3, 'both')
 ```
 
 ###  Probabilities
@@ -91,20 +91,20 @@ Let X be the IQ of a randomly selected student of a school. Assume X ~ N(90, 4).
 What is the probability that a randomly selected student has an IQ below 80?
 
 ```{r norm_prob1, fig.width=7, fig.height=7, fig.align='centre'}
-norm_prob(80, mean = 90, sd = 4)
+dist_norm_prob(80, mean = 90, sd = 4)
 ```
 
 What is the probability that a randomly selected student has an IQ above 100?
 
 ```{r norm_prob2, fig.width=7, fig.height=7, fig.align='centre'}
-norm_prob(100, mean = 90, sd = 4, type = 'upper')
+dist_norm_prob(100, mean = 90, sd = 4, type = 'upper')
 ```
 
 What is the probability that a randomly selected student has an IQ 
 between 85 and 100?
 
 ```{r norm_prob3, fig.width=7, fig.height=7, fig.align='centre'}
-norm_prob(c(85, 100), mean = 90, sd = 4, type = 'both')
+dist_norm_prob(c(85, 100), mean = 90, sd = 4, type = 'both')
 ```
 
 ## Binomial Distribution

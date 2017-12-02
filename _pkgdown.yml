@@ -81,9 +81,9 @@ reference:
     Compute/visualize probability from a given quantile and quantiles out of
     given probability.
   contents:
-  - norm_plot
-  - norm_per
-  - norm_prob
+  - dist_norm_plot
+  - dist_norm_per
+  - dist_norm_prob
   - dist_binom_plot
   - dist_binom_perc
   - dist_binom_prob
