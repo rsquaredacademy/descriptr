@@ -167,12 +167,12 @@ k <- ds_group_summary(mt$cyl, mt$mpg)
 boxplot(k)
 ```
 
-## Multi Column Statistics
+## Multiple Variable Statistics 
 
-Use `multistats()` to generate descriptive/summary statistics for multiple columns of a tibble/data.frame.
+The `ds_multi_stats()` function generates summary/descriptive statistics for multiple variables in a data frame/tibble.
 
 ```{r multistats}
-multistats(mtcars, mpg, disp, hp, wt, qsec)
+ds_multi_stats(mtcars, mpg, disp, hp)
 ```
 
 ## Multiple One Way Tables
@@ -198,13 +198,7 @@ mt[, c(2, 8:10)] <- lapply(mt[, c(2, 8:10)], factor)
 ds_tway_tables(mt)
 ```
 
-## Multiple Variable Statistics 
 
-The `ds_multi_stats()` function generates summary/descriptive statistics for multiple variables in a data frame/tibble.
-
-```{r multistats}
-ds_multi_stats(mtcars, mpg, disp, hp)
-```
 
 
 

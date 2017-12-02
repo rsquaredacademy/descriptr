@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • descriptr</title>
+<title>Range � ds_range • descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -102,74 +102,55 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>Range</h1>
     </div>
 
-    <div class="contents">
-    <div id="descriptr-0-2-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#descriptr-0-2-0-9000" class="anchor"> </a>descriptr 0.2.0.9000</h1>
-<div id="new-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-features" class="anchor"> </a>New Features</h2>
-<ul>
-<li>shiny app for interactive analysis</li>
-<li>multi column statistics (<a href="https://github.com/rsquaredacademy/descriptr/issues/6">#6</a>)</li>
-</ul>
-</div>
-</div>
-    <div id="descriptr-0-2-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#descriptr-0-2-0" class="anchor"> </a>descriptr 0.2.0</h1>
-<p>This is a minor release containing bug fixes.</p>
-<div id="bug-fixes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"> </a>Bug Fixes</h2>
-<ul>
-<li>multiple one way table returns an error (<a href="https://github.com/rsquaredacademy/descriptr/issues/2">#2</a>)</li>
-<li>ftable returned by freq_table must be data.frame or tibble (<a href="https://github.com/rsquaredacademy/descriptr/issues/3">#3</a>)</li>
-<li>multiple one way table returns an error (<a href="https://github.com/rsquaredacademy/descriptr/issues/4">#4</a>)</li>
-</ul>
-</div>
-</div>
-    <div id="descriptr-0-1-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#descriptr-0-1-1" class="anchor"> </a>descriptr 0.1.1</h1>
-<div id="bug-fixes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"> </a>Bug Fixes</h2>
-<ul>
-<li>typo in <code><a href="../reference/ds_group_summary.html">group_summary()</a></code>; maximum and minimum were reversed</li>
-<li>
-<code><a href="../reference/dist_norm_plot.html">norm_plot()</a></code> was non-reactive to changes in standard deviation (#<a href="https://github.com/rsquaredacademy/descriptr/issues/1">1</a>).</li>
-</ul>
-</div>
-</div>
-    <div id="descriptr-0-1-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#descriptr-0-1-0" class="anchor"> </a>descriptr 0.1.0</h1>
-<ul>
-<li>First release</li>
-</ul>
-</div>
-    </div>
+    
+    <p>Compute the range of a numeric vector</p>
+    
+
+    <pre><span class='fu'>ds_range</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <dl class="dl-horizontal">
+      <dt>x</dt>
+      <dd>a numeric vector</dd>
+    </dl>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Range of <code>x</code></p>
+    
+    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated Function</h2>
+
+    <p></p>
+    <p><code>stat_range()</code> has been deprecated. Instead use <code>ds_range()</code>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='http://www.rdocumentation.org/packages/base/topics/range'>range</a></code></p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>ds_range</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt; [1] 23.5</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#descriptr-0-2-0-9000">0.2.0.9000</a></li>
-        <li><a href="#descriptr-0-2-0">0.2.0</a></li>
-        <li><a href="#descriptr-0-1-1">0.1.1</a></li>
-        <li><a href="#descriptr-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#deprecated-function">Deprecated Function</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
+  </div>
 </div>
 
       <footer>

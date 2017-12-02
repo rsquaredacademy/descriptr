@@ -93,8 +93,8 @@
 <h2 class="hasAnchor">
 <a href="#descriptr-generate-descriptive-statistics-and-explore-distributions" class="anchor"> </a>descriptr: Generate descriptive statistics and explore distributions <img src="descriptr.jpg" align="right">
 </h2>
-<p><strong>Author:</strong> <a href="https://aravindhebbali.github.io/">Aravind Hebbali</a><br><strong>License:</strong> <a href="https://opensource.org/licenses/MIT">MIT</a></p>
-<p><a href="https://cran.r-project.org/package=descriptr"><img src="http://www.r-pkg.org/badges/version/descriptr" alt="CRAN_Status_Badge"></a> <a href="https://travis-ci.org/rsquaredacademy/descriptr"><img src="https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/rsquaredacademy/descriptr"><img src="https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/github/rsquaredacademy/descriptr?branch=master"><img src="https://img.shields.io/codecov/c/github/rsquaredacademy/descriptr/master.svg"></a> <a href="https://cran.r-project.org/package=descriptr"><img src="https://cranlogs.r-pkg.org/badges/grand-total/descriptr"></a> <a href=""><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a></p>
+<p><strong>Author:</strong> <a href="">Aravind Hebbali</a><br><strong>License:</strong> <a href="https://opensource.org/licenses/MIT">MIT</a></p>
+<p><a href="https://cran.r-project.org/package=descriptr"><img src="http://www.r-pkg.org/badges/version/descriptr" alt="CRAN_Status_Badge"></a> <a href="https://travis-ci.org/rsquaredacademy/descriptr"><img src="https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/rsquaredacademy/descriptr"><img src="https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://cran.r-project.org/package=descriptr"><img src="https://cranlogs.r-pkg.org/badges/grand-total/descriptr"></a></p>
 </div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -142,9 +142,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="shiny-app" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny-app" class="anchor"> </a>Shiny App</h2>
-<p>Use <code><a href="reference/launch_descriptr.html">launch_descriptr()</a></code> to explore the package using a shiny app.</p>
-<iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen>
-</iframe>
+<p>Use <code><a href="reference/ds_launch_shiny_app.html">ds_launch_shiny_app()</a></code> to explore the package using a shiny app.</p>
 </div>
 <div id="vignettes" class="section level2">
 <h2 class="hasAnchor">
@@ -160,7 +158,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="summary-statistics" class="section level5">
 <h5 class="hasAnchor">
 <a href="#summary-statistics" class="anchor"> </a>Summary Statistics</h5>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/summary_stats.html">summary_stats</a></span>(mtcars<span class="op">$</span>mpg)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/ds_summary_stats.html">ds_summary_stats</a></span>(mtcars<span class="op">$</span>mpg)
 <span class="co">#&gt;                         Univariate Analysis                          </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  N                       32.00      Variance                36.32 </span>
@@ -202,7 +200,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="two-way-table" class="section level5">
 <h5 class="hasAnchor">
 <a href="#two-way-table" class="anchor"> </a>Two Way Table</h5>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/cross_table.html">cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/ds_cross_table.html">ds_cross_table</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>gear)
 <span class="co">#&gt;     Cell Contents</span>
 <span class="co">#&gt;  |---------------|</span>
 <span class="co">#&gt;  |     Frequency |</span>
@@ -240,7 +238,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="one-way-table" class="section level5">
 <h5 class="hasAnchor">
 <a href="#one-way-table" class="anchor"> </a>One Way Table</h5>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/freq_table.html">freq_table</a></span>(mtcars<span class="op">$</span>cyl)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/ds_freq_table.html">ds_freq_table</a></span>(mtcars<span class="op">$</span>cyl)
 <span class="co">#&gt;                                Variable: cyl                                 </span>
 <span class="co">#&gt; |--------------------------------------------------------------------------|</span>
 <span class="co">#&gt; |                                Cumulative                    Cumulative  |</span>
@@ -256,7 +254,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="one-way-table-continuous-data" class="section level5">
 <h5 class="hasAnchor">
 <a href="#one-way-table-continuous-data" class="anchor"> </a>One Way Table (Continuous Data)</h5>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/freq_cont.html">freq_cont</a></span>(mtcars<span class="op">$</span>mpg)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars<span class="op">$</span>mpg)
 <span class="co">#&gt;                               Variable: mpg                               </span>
 <span class="co">#&gt; |-----------------------------------------------------------------------|</span>
 <span class="co">#&gt; |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |</span>
@@ -275,7 +273,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="group-summary" class="section level5">
 <h5 class="hasAnchor">
 <a href="#group-summary" class="anchor"> </a>Group Summary</h5>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/group_summary.html">group_summary</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>mpg)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/ds_group_summary.html">ds_group_summary</a></span>(mtcars<span class="op">$</span>cyl, mtcars<span class="op">$</span>mpg)
 <span class="co">#&gt;                                        mpg by cyl                                         </span>
 <span class="co">#&gt; -----------------------------------------------------------------------------------------</span>
 <span class="co">#&gt; |     Statistic/Levels|                    4|                    6|                    8|</span>
@@ -297,6 +295,19 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <span class="co">#&gt; |                Range|                 12.5|                  3.6|                  8.8|</span>
 <span class="co">#&gt; |  Interquartile Range|                  7.6|                 2.35|                 1.85|</span>
 <span class="co">#&gt; -----------------------------------------------------------------------------------------</span></code></pre></div>
+</div>
+<div id="multiple-variable-statistics" class="section level5">
+<h5 class="hasAnchor">
+<a href="#multiple-variable-statistics" class="anchor"> </a>Multiple Variable Statistics</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/ds_multi_stats.html">ds_multi_stats</a></span>(mtcars, mpg, disp, hp)
+<span class="co">#&gt; # A tibble: 3 x 16</span>
+<span class="co">#&gt;    vars   min   max      mean    t_mean median  mode range   variance</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1  disp  71.1 472.0 230.72188 228.00000  196.3 275.8 400.9 15360.7998</span>
+<span class="co">#&gt; 2    hp  52.0 335.0 146.68750 143.56667  123.0 110.0 283.0  4700.8669</span>
+<span class="co">#&gt; 3   mpg  10.4  33.9  20.09062  19.95333   19.2  10.4  23.5    36.3241</span>
+<span class="co">#&gt; # ... with 7 more variables: stdev &lt;dbl&gt;, skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   coeff_var &lt;dbl&gt;, q1 &lt;dbl&gt;, q3 &lt;dbl&gt;, iqrange &lt;dbl&gt;</span></code></pre></div>
 <p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
@@ -323,8 +334,8 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li> <a href="https://aravindhebbali.github.io/" target="_blank">Aravind Hebbali</a> <br><small class="roles"> Author, maintainer </small> </li>
-<li> <a href="http://​www.rsquaredacademy.com" target="_blank">Rsquared Academy</a> <br><small class="roles"> Copyright holder, funder </small> </li>
+<li>Aravind Hebbali <br><small class="roles"> Author, maintainer </small> </li>
+<li>Rsquared Academy <br><small class="roles"> Copyright holder, funder </small> </li>
 </ul>
 </div>
 
@@ -332,7 +343,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://aravindhebbali.github.io/" target="_blank">Aravind Hebbali</a>, <a href="http://​www.rsquaredacademy.com" target="_blank">Rsquared Academy</a>.</p>
+  <p>Developed by Aravind Hebbali, Rsquared Academy.</p>
 </div>
 
 <div class="pkgdown">

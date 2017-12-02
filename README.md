@@ -5,7 +5,7 @@ descriptr: Generate descriptive statistics and explore distributions <img src="d
 
 **Author:** [Aravind Hebbali]()<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![Coverage Status](https://img.shields.io/codecov/c/github/rsquaredacademy/descriptr/master.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
 
 Overview
 --------
@@ -48,10 +48,8 @@ Features
 Shiny App
 ---------
 
-Use `launch_descriptr()` to explore the package using a shiny app.
+Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
-<iframe width="860" height="515" src="https://www.youtube.com/embed/videoseries?list=PLDfCKV3ey8-dFSZJID3TxQpqroNKDIKys" frameborder="0" allowfullscreen>
-</iframe>
 Vignettes
 ---------
 
@@ -64,7 +62,7 @@ Usage
 ##### Summary Statistics
 
 ``` r
-summary_stats(mtcars$mpg)
+ds_summary_stats(mtcars$mpg)
 #>                         Univariate Analysis                          
 #> 
 #>  N                       32.00      Variance                36.32 
@@ -107,7 +105,7 @@ summary_stats(mtcars$mpg)
 ##### Two Way Table
 
 ``` r
-cross_table(mtcars$cyl, mtcars$gear)
+ds_cross_table(mtcars$cyl, mtcars$gear)
 #>     Cell Contents
 #>  |---------------|
 #>  |     Frequency |
@@ -146,7 +144,7 @@ cross_table(mtcars$cyl, mtcars$gear)
 ##### One Way Table
 
 ``` r
-freq_table(mtcars$cyl)
+ds_freq_table(mtcars$cyl)
 #>                                Variable: cyl                                 
 #> |--------------------------------------------------------------------------|
 #> |                                Cumulative                    Cumulative  |
@@ -163,7 +161,7 @@ freq_table(mtcars$cyl)
 ##### One Way Table (Continuous Data)
 
 ``` r
-freq_cont(mtcars$mpg)
+ds_freq_cont(mtcars$mpg)
 #>                               Variable: mpg                               
 #> |-----------------------------------------------------------------------|
 #> |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -183,7 +181,7 @@ freq_cont(mtcars$mpg)
 ##### Group Summary
 
 ``` r
-group_summary(mtcars$cyl, mtcars$mpg)
+ds_group_summary(mtcars$cyl, mtcars$mpg)
 #>                                        mpg by cyl                                         
 #> -----------------------------------------------------------------------------------------
 #> |     Statistic/Levels|                    4|                    6|                    8|
@@ -205,6 +203,20 @@ group_summary(mtcars$cyl, mtcars$mpg)
 #> |                Range|                 12.5|                  3.6|                  8.8|
 #> |  Interquartile Range|                  7.6|                 2.35|                 1.85|
 #> -----------------------------------------------------------------------------------------
+```
+
+##### Multiple Variable Statistics
+
+``` r
+ds_multi_stats(mtcars, mpg, disp, hp)
+#> # A tibble: 3 x 16
+#>    vars   min   max      mean    t_mean median  mode range   variance
+#>   <chr> <dbl> <dbl>     <dbl>     <dbl>  <dbl> <dbl> <dbl>      <dbl>
+#> 1  disp  71.1 472.0 230.72188 228.00000  196.3 275.8 400.9 15360.7998
+#> 2    hp  52.0 335.0 146.68750 143.56667  123.0 110.0 283.0  4700.8669
+#> 3   mpg  10.4  33.9  20.09062  19.95333   19.2  10.4  23.5    36.3241
+#> # ... with 7 more variables: stdev <dbl>, skew <dbl>, kurtosis <dbl>,
+#> #   coeff_var <dbl>, q1 <dbl>, q3 <dbl>, iqrange <dbl>
 ```
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
