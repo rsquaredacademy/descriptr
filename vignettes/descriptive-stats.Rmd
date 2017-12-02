@@ -177,25 +177,25 @@ multistats(mtcars, mpg, disp, hp, wt, qsec)
 
 ## Multiple One Way Tables
 
-The `oway_tables` function creates multiple one way tables by creating a 
+The `ds_oway_tables()` function creates multiple one way tables by creating a 
 frequency table for each categorical variable in a data frame.
 
 ```{r oway}
 mt <- mtcars
 mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-oway_tables(mt)
+ds_oway_tables(mt)
 ```
 
 
 ## Multiple Two Way Tables
 
-The `tway_tables` function creates multiple two way tables by creating a cross
+The `ds_tway_tables()` function creates multiple two way tables by creating a cross
 table for each unique pair of categorical variables in a data frame.
 
 ```{r tway}
 mt <- mtcars
 mt[, c(2, 8:10)] <- lapply(mt[, c(2, 8:10)], factor)
-tway_tables(mt)
+ds_tway_tables(mt)
 ```
 
 

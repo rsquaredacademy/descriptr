@@ -1,26 +1,29 @@
 #' @title Multiple One & Two Way Tables
-#' @description \code{oway_tables} creates multiple one way tables by creating
+#' @description \code{ds_oway_tables} creates multiple one way tables by creating
 #' a frequency table for each categorical variable in a data frame.
-#' \code{tway_tables} creates multiple two way tables by creating a cross
+#' \code{ds_tway_tables} creates multiple two way tables by creating a cross
 #' table for each unique pair of categorical variables in a data frame.
 #' @param data a data frame
-#' @details \code{oway_tables} is a extension of the \code{freq_table}
+#' @details \code{ds_oway_tables} is a extension of the \code{ds_freq_table}
 #' function. It creates a frequency table for each categorical variable in the
-#' dataframe. \code{tway_tables} is a extension of the \code{cross_table}
+#' dataframe. \code{ds_tway_tables} is a extension of the \code{ds_cross_table}
 #' function. It creates a two way table for each unique pair of categorical
 #' variables in the dataframe.
+#' @section Deprecated Functions:
+#' \code{oway_tables()} and \code{tway_tables()} have been deprecated. Instead
+#' use \code{ds_oway_tables()} and \code{ds_tway_tables()}.
 #' @examples
 #' mt <- mtcars
 #' mt[, c(2, 8, 9)] <- lapply(mt[, c(2, 8, 9)], factor)
 #' # multiple one way tables
-#' oway_tables(mt)
+#' ds_oway_tables(mt)
 #'
 #' # multiple two way tables
-#' tway_tables(mt)
-#' @seealso \code{link{freq_table}} \code{link{cross_table}}
+#' ds_tway_tables(mt)
+#' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
 #' @export
 #'
-oway_tables <- function(data) {
+ds_oway_tables <- function(data) {
 
     if (!is.data.frame(data)) {
         stop('data must be a data frame')
@@ -42,11 +45,22 @@ oway_tables <- function(data) {
 
 }
 
+#' @export
+#' @rdname ds_oway_tables
+#' @usage NULL
+#'
+oway_tables <- function(data) {
 
-#' @rdname oway_tables
+  .Deprecated("ds_oway_tables()")
+  ds_oway_tables(data)
+
+}
+
+
+#' @rdname ds_oway_tables
 #' @export
 #'
-tway_tables <- function(data) {
+ds_tway_tables <- function(data) {
 
     if (!is.data.frame(data)) {
         stop('data must be a data frame')
@@ -79,5 +93,16 @@ tway_tables <- function(data) {
             print(k)
         }
     }
+
+}
+
+#' @export
+#' @rdname ds_tway_tables
+#' @usage NULL
+#'
+tway_tables <- function(data) {
+
+  .Deprecated("ds_tway_tables()")
+  ds_tway_tables(data)
 
 }
