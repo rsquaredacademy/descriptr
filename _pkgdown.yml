@@ -66,7 +66,7 @@ reference:
   - mosaicplot.cross_table
   - ds_freq_table
   - barplot.ds_freq_table
-  - freq_cont
+  - ds_freq_cont
   - hist.freq_cont
   - group_summary
   - boxplot.group_summary

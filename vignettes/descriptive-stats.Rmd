@@ -103,7 +103,7 @@ mosaicplot(k)
 
 ## Frequency Table (Categorical Data)
 
-The `dsfreq_table()` function creates frequency tables for categorical variables. 
+The `ds_freq_table()` function creates frequency tables for categorical variables. 
 
 ```{r ftable}
 mt <- mtcars
@@ -126,11 +126,11 @@ barplot(k)
 
 ## Frequency Table (Continuous Data)
 
-The `freq_cont` function creates frequency tables for continuous variables. The
+The `ds_freq_cont` function creates frequency tables for continuous variables. The
 default number of intervals is 5.
 
 ```{r fcont}
-freq_cont(mtcars$mpg, 4)
+ds_freq_cont(mtcars$mpg, 4)
 ```
 
 
@@ -139,7 +139,7 @@ freq_cont(mtcars$mpg, 4)
 A `hist` method has been defined.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
-k <- freq_cont(mtcars$mpg, 4)
+k <- ds_freq_cont(mtcars$mpg, 4)
 hist(k)
 ```
 

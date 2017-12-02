@@ -1,17 +1,17 @@
 #' @importFrom graphics hist
 #' @importFrom magrittr use_series multiply_by add
 #' @title Frequency Distribution of Continuous Data
-#' @description \code{freq_cont} returns the frequency distribution of
+#' @description \code{ds_freq_cont} returns the frequency distribution of
 #' continuous by splitting the data into equidistant intervals created based on
-#' the number of bins specified. \code{hist.freq_cont} creates histogram
-#' for the frequency table created using \code{freq_cont}
+#' the number of bins specified. \code{hist.ds_freq_cont} creates histogram
+#' for the frequency table created using \code{ds_freq_cont}
 #' @param data numeric vector
 #' @param bins number of intervals into which the data must be split
-#' @param x an object of class \code{freq_cont}
+#' @param x an object of class \code{ds_freq_cont}
 #' @param col color of the bars
 #' @param ... further arguments to be passed to or from methods
-#' @return \code{freq_cont} returns an object of class \code{"freq_cont"}
-#' An object of class \code{"freq_cont"} is a list containing the
+#' @return \code{ds_freq_cont} returns an object of class \code{"ds_freq_cont"}
+#' An object of class \code{"ds_freq_cont"} is a list containing the
 #' following components
 #'
 #' \item{breaks}{lower/upper boundaries of intervals}
@@ -22,21 +22,23 @@
 #' \item{bins}{bins}
 #' \item{data}{data}
 #' \item{varname}{name of the data}
+#' @section Deprecated Functions:
+#' \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
 #' @examples
 #' # frequency table
-#' freq_cont(mtcars$mpg, 4)
+#' ds_freq_cont(mtcars$mpg, 4)
 #'
 #' # histogram
-#' k <- freq_cont(mtcars$mpg, 4)
+#' k <- ds_freq_cont(mtcars$mpg, 4)
 #' hist(k)
-#' @seealso \code{link{freq_table}} \code{link{cross_table}}
+#' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
 #' @export
 #'
-freq_cont <- function(data, bins = 5) UseMethod("freq_cont")
+ds_freq_cont <- function(data, bins = 5) UseMethod("ds_freq_cont")
 
 
 #' @export
-freq_cont.default <- function(data, bins = 5) {
+ds_freq_cont.default <- function(data, bins = 5) {
 
   if(!is.numeric(data)) {
     stop('data must be numeric')
@@ -68,20 +70,31 @@ freq_cont.default <- function(data, bins = 5) {
               data = data,
               varname = var_name)
 
-  class(out) <- "freq_cont"
+  class(out) <- "ds_freq_cont"
   return(out)
 }
 
+#' @export
+#' @rdname ds_freq_cont
+#' @usage NULL
+#'
+freq_cont <- function(data, bins = 5) {
+
+  .Deprecated("ds_freq_cont()")
+  ds_freq_cont(data, bins)
+
+}
+
 
 #' @export
-print.freq_cont <- function(x, ...) {
+print.ds_freq_cont <- function(x, ...) {
   print_fcont(x)
 }
 
-#' @rdname freq_cont
+#' @rdname ds_freq_cont
 #' @export
 #'
-hist.freq_cont <- function(x, col = 'blue', ...) {
+hist.ds_freq_cont <- function(x, col = 'blue', ...) {
 
   ymax <- max(x$frequency) + 2
   h <-  hist(x$data, breaks = x$breaks,
