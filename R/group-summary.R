@@ -1,16 +1,16 @@
 #' @importFrom stats median sd var IQR
 #' @importFrom graphics boxplot
 #' @title Descriptive Statistics By Group
-#' @description \code{group_summary} returns descriptive statistics of a
+#' @description \code{ds_group_summary} returns descriptive statistics of a
 #' continuous variable for the different levels of a categorical variable.
 #' \code{boxplot.group_summary} creates boxplots of the continuous variable
 #' for the different levels of the categorical variable.
 #' @param fvar a factor variable
 #' @param cvar a continuous variable
-#' @param x an object of the class \code{group_summary}
+#' @param x an object of the class \code{ds_group_summary}
 #' @param ... further arguments to be passed to or from methods
-#' @return \code{group_summary} returns an object of class \code{"group_summary"}.
-#' An object of class \code{"group_summary"} is a list containing the
+#' @return \code{ds_group_summary} returns an object of class \code{"ds_group_summary"}.
+#' An object of class \code{"ds_group_summary"} is a list containing the
 #' following components:
 #'
 #' \item{stats}{a data frame containing descriptive statistics for the different
@@ -18,26 +18,26 @@
 #' \item{plotdata}{data for boxplot method}
 #' \item{xvar}{name of the categorical variable}
 #' \item{yvar}{name of the continuous variable}
+#' @section Deprecated Function:
+#' \code{ds_group_summary()} has been deprecated. Instead
+#' use \code{ds_group_summary()}.
 #' @examples
-#' # group summary
+#' # ds_group summary
 #' mt <- mtcars
 #' mt$cyl <- as.factor(mt$cyl)
-#' group_summary(mt$cyl, mt$mpg)
+#' ds_group_summary(mt$cyl, mt$mpg)
 #'
 #' # boxplot
-#' k <- group_summary(mt$cyl, mt$mpg)
+#' k <- ds_group_summary(mt$cyl, mt$mpg)
 #' boxplot(k)
-#' @seealso \code{link{summary_stats}}
+#' @seealso \code{link{ds_summary_stats}}
 #' @export
 #'
-group_summary <- function(fvar, cvar) UseMethod('group_summary')
-
-
-
+ds_group_summary <- function(fvar, cvar) UseMethod('ds_group_summary')
 
 #' @export
 #'
-group_summary.default <- function(fvar, cvar) {
+ds_group_summary.default <- function(fvar, cvar) {
 
     if (!is.factor(fvar)) {
         stop('fvar must be an object of type factor')
@@ -81,21 +81,31 @@ group_summary.default <- function(fvar, cvar) {
                    xvar  = xname,
                    yvar  = yname)
 
-    class(result) <- 'group_summary'
+    class(result) <- 'ds_group_summary'
     return(result)
 }
 
+#' @export
+#' @rdname ds_group_summary
+#' @usage NULL
+#'
+group_summary <- function(fvar, cvar) {
+
+  .Deprecated("ds_group_summary()")
+  ds_group_summary(fvar, cvar)
+
+}
 
 #' @export
-print.group_summary <- function(x, ...) {
+print.ds_group_summary <- function(x, ...) {
     print_group(x)
 }
 
 
-#' @rdname group_summary
+#' @rdname ds_group_summary
 #' @export
 #'
-boxplot.group_summary <- function(x, ...) {
+boxplot.ds_group_summary <- function(x, ...) {
     n <- nlevels(factor(x$plotdata[[1]]))
     boxplot(x$plotdata[[2]] ~ x$plotdata[[1]],
         col = rainbow(n), xlab = x$xvar,

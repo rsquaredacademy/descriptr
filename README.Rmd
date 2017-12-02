@@ -107,7 +107,7 @@ ds_freq_cont(mtcars$mpg)
 ##### Group Summary
 
 ```{r descript5}
-group_summary(mtcars$cyl, mtcars$mpg)
+ds_group_summary(mtcars$cyl, mtcars$mpg)
 ```
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).

@@ -146,24 +146,24 @@ hist(k)
 
 ## Group Summary
 
-The `group_summary` function returns descriptive statistics of a continuous
+The `ds_group_summary()` function returns descriptive statistics of a continuous
 variable for the different levels of a categorical variable.
 
 ```{r gsummary}
 mt <- mtcars
 mt$cyl <- as.factor(mt$cyl)
-group_summary(mt$cyl, mt$mpg)
+ds_group_summary(mt$cyl, mt$mpg)
 ```
 
 
 ### Box Plot
 
-A `boxplot` method has been defined.
+A `boxplot()` method has been defined.
 
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
 mt <- mtcars
 mt$cyl <- as.factor(mt$cyl)
-k <- group_summary(mt$cyl, mt$mpg)
+k <- ds_group_summary(mt$cyl, mt$mpg)
 boxplot(k)
 ```
 

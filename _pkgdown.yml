@@ -68,8 +68,8 @@ reference:
   - barplot.ds_freq_table
   - ds_freq_cont
   - hist.freq_cont
-  - group_summary
-  - boxplot.group_summary
+  - ds_group_summary
+  - boxplot.ds_group_summary
   - multistats
   - oway_tables
   - tway_tables
