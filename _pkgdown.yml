@@ -70,7 +70,7 @@ reference:
   - hist.freq_cont
   - ds_group_summary
   - boxplot.ds_group_summary
-  - multistats
+  - ds_multi_stats
   - ds_oway_tables
   - ds_tway_tables
   - descriptr

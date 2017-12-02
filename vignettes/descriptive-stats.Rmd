@@ -198,4 +198,13 @@ mt[, c(2, 8:10)] <- lapply(mt[, c(2, 8:10)], factor)
 ds_tway_tables(mt)
 ```
 
+## Multiple Variable Statistics 
+
+The `ds_multi_stats()` function generates summary/descriptive statistics for multiple variables in a data frame/tibble.
+
+```{r multistats}
+ds_multi_stats(mtcars, mpg, disp, hp)
+```
+
+
 

@@ -1,16 +1,18 @@
 #' @importFrom rlang quos
 #' @importFrom tidyr gather
 #' @importFrom dplyr group_by summarise_all funs
-#' @title Multi Variable Statistics
+#' @title Multiple Variable Statistics
 #' @description Summary/descriptive statistics for multiple variables
 #' @param x a tibble/data.frame
 #' @param ... columns in \code{x}
 #' @return a tibble
+#' @section Deprecated Function:
+#' \code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
 #' @examples
-#' multistats(mtcars, mpg, disp, hp)
+#' ds_multi_stats(mtcars, mpg, disp, hp)
 #' @export
 #'
-multistats <- function(x, ...) {
+ds_multi_stats <- function(x, ...) {
   vars <- quos(...)
   x %>%
     select(!!!vars) %>%
@@ -21,4 +23,15 @@ multistats <- function(x, ...) {
       stdev = sd, skew = skewness, kurtosis = kurtosis, coeff_var = stat_cvar,
       q1 = quant1, q3 = quant3,iqrange = IQR)
     )
+}
+
+#' @export
+#' @rdname ds_multi_stats
+#' @usage NULL
+#'
+multistats <- function(x, ...) {
+
+  .Deprecated("ds_multi_stats()")
+  ds_multi_stats(x, ...)
+
 }

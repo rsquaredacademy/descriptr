@@ -110,5 +110,12 @@ ds_freq_cont(mtcars$mpg)
 ds_group_summary(mtcars$cyl, mtcars$mpg)
 ```
 
+##### Multiple Variable Statistics
+
+```{r descriptr6}
+ds_multi_stats(mtcars, mpg, disp, hp)
+```
+
+
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
 By participating in this project you agree to abide by its terms.
