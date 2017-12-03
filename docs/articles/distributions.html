@@ -376,7 +376,7 @@
 <h3 class="hasAnchor">
 <html><body><a href="#distribution-shape-4" class="anchor"> </a></body></html>Distribution Shape</h3>
 <p>Visualize how degrees of freedom affect the shape of t distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_plot</a></span>(<span class="dt">df =</span> <span class="dv">8</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_plot</a></span>(<span class="dt">df =</span> <span class="dv">8</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_plot-1.png" width="672"></p>
 </div>
 <div id="percentiles-4" class="section level3">
@@ -394,13 +394,13 @@
 <li>type: lower/upper/both tail</li>
 </ul>
 <p>What is the upper fifteenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_perc</a></span>(<span class="fl">0.15</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.15</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_per1-1.png" width="672"></p>
 <p>What is the eleventh percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_perc</a></span>(<span class="fl">0.11</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.11</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_per2-1.png" width="672"></p>
 <p>What is the area of the curve that has 95% of the t values?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_perc</a></span>(<span class="fl">0.8</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.8</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_per3-1.png" width="672"></p>
 </div>
 </div>
@@ -421,16 +421,16 @@
 </ul>
 <p>Let T follow a t-distribution with r = 6 df.</p>
 <p>What is the probability that the value of T is less than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'lower'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob1-1.png" width="672"></p>
 <p>What is the probability that the value of T is greater than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'upper'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob2-1.png" width="672"></p>
 <p>What is the probability that the value of T is between -2 and 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'both'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob3-1.png" width="672"></p>
 <p>What is the probability that the absolute value of T is greater than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t_plot.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'interval'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'interval'</span>)</code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob4-1.png" width="672"></p>
 </div>
 </div>

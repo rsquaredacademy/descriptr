@@ -1,7 +1,7 @@
 #' @importFrom stats dt qt pt
 #' @title Visualize t Distribution
 #' @description Visualize how degrees of freedom affect the shape of t
-#' distribution. compute\/visualize quantiles out of given probability and
+#' distribution, visualize quantiles out of given probability and
 #' probability from a given quantile.
 #' @param probs a probability value
 #' @param perc a quantile value
@@ -13,6 +13,7 @@
 #' @section Deprecated Functions:
 #' \code{t_plot()}, \code{t_prob()} and \code{t_per()} have been deprecated.
 #' Instead use \code{dist_t_plot()}, \code{dist_t_prob()} and \code{dist_t_perc()}.
+#' @family dist_t
 #' @examples
 #' # visualize t distribution
 #' dist_t_plot()
@@ -30,7 +31,11 @@
 #' dist_t_prob(1.445, 7, 'interval')
 #' dist_t_prob(1.6, 7, 'both')
 #' @seealso \code{\link[stats]{TDist}}
+#' @name dist_t
+NULL
+
 #' @export
+#' @rdname dist_t
 #'
 dist_t_plot <- function(df = 3) {
 
@@ -61,7 +66,7 @@ dist_t_plot <- function(df = 3) {
 }
 
 #' @export
-#' @rdname dist_t_plot
+#' @rdname dist_t
 #' @usage NULL
 #'
 t_plot <- function(df = 3) {
@@ -71,7 +76,7 @@ t_plot <- function(df = 3) {
 
 }
 
-#' @rdname dist_t_plot
+#' @rdname dist_t
 #' @export
 #'
 dist_t_perc <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
@@ -184,7 +189,7 @@ dist_t_perc <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")
 }
 
 #' @export
-#' @rdname dist_t_plot
+#' @rdname dist_t
 #' @usage NULL
 #'
 t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
@@ -194,7 +199,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 
 }
 
-#' @rdname dist_t_plot
+#' @rdname dist_t
 #' @export
 #'
 dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
@@ -350,7 +355,7 @@ dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")
 }
 
 #' @export
-#' @rdname dist_t_plot
+#' @rdname dist_t
 #' @usage NULL
 #'
 t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {

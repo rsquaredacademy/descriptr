@@ -52,8 +52,6 @@ reference:
     in a data frame.
   contents:
   - ds_screener
-  - ds_screener.default
-  - plot.ds_screener
 
 - title: Descriptive Statistics
   desc: >
@@ -62,18 +60,12 @@ reference:
   contents:
   - ds_summary_stats
   - ds_cross_table
-  - plot.ds_cross_table
-  - mosaicplot.ds_cross_table
   - ds_freq_table
-  - barplot.ds_freq_table
   - ds_freq_cont
-  - hist.ds_freq_cont
   - ds_group_summary
-  - boxplot.ds_group_summary
   - ds_multi_stats
   - ds_oway_tables
   - ds_tway_tables
-  - descriptr
 
 - title: Distributions
   desc: >
@@ -93,9 +85,7 @@ reference:
   - dist_f_plot
   - dist_f_per
   - dist_f_prob
-  - dist_t_plot
-  - dist_t_per
-  - dist_t_prob
+  - dist_t
 
 - title: Other Functions
   desc: >
