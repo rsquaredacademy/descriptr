@@ -7,7 +7,7 @@ tabPanel('Multiple 1 Way Tables', value = 'tab_mult1',
       ),
       column(4, align = 'right',
         actionButton(inputId='multonelink1', label="Help", icon = icon("question-circle"),
-          onclick ="window.open('http://google.com', '_blank')"),
+          onclick ="window.open('http://www.rsquaredacademy.com/descriptr/reference/ds_oway_tables.html', '_blank')"),
         actionButton(inputId='multonelink3', label="Demo", icon = icon("video-camera"),
           onclick ="window.open('http://google.com', '_blank')")
       )
