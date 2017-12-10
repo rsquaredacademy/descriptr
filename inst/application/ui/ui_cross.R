@@ -14,7 +14,7 @@ tabPanel('Cross Table', value = 'tab_cross',
                 actionButton(inputId='crosstablink1', label="Help", icon = icon("question-circle"),
                   onclick ="window.open('http://www.rsquaredacademy.com/descriptr/reference/ds_cross_table.html', '_blank')"),
                 actionButton(inputId='crosstablink3', label="Demo", icon = icon("video-camera"),
-                  onclick ="window.open('http://google.com', '_blank')")
+                  onclick ="window.open('https://www.youtube.com/watch?v=_93BIFMIaGg', '_blank')")
               )
             ),
             hr(),

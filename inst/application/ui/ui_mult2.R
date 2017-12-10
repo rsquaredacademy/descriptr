@@ -9,7 +9,7 @@ tabPanel('Multiple 2 Way Tables', value = 'tab_mult2',
         actionButton(inputId='multwo1', label="Help", icon = icon("question-circle"),
           onclick ="window.open('http://www.rsquaredacademy.com/descriptr/reference/ds_oway_tables.html', '_blank')"),
         actionButton(inputId='multwo3', label="Demo", icon = icon("video-camera"),
-          onclick ="window.open('http://google.com', '_blank')")
+          onclick ="window.open('https://www.youtube.com/watch?v=VNixr1mVqSI', '_blank')")
       )
     ),
     hr(),

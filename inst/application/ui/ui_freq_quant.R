@@ -12,7 +12,7 @@ tabPanel('Frequency - II', value = 'tab_fquant',
                actionButton(inputId='fquantlink1', label="Help", icon = icon("question-circle"),
                  onclick ="window.open('http://www.rsquaredacademy.com/descriptr/reference/ds_freq_cont.html', '_blank')"),
                actionButton(inputId='fquantlink3', label="Demo", icon = icon("video-camera"),
-                 onclick ="window.open('http://google.com', '_blank')")
+                 onclick ="window.open('https://www.youtube.com/watch?v=ft1L6VnJEog', '_blank')")
              )
            ),
            hr(),
