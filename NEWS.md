@@ -1,4 +1,4 @@
-# descriptr 0.2.0.9000
+# descriptr 0.3.0
 
 ## New Features
 

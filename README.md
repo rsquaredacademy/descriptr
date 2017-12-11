@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-descriptr: Generate descriptive statistics and explore distributions <img src="descriptr.jpg" align="right" />
---------------------------------------------------------------------------------------------------------------
+descriptr: Generate descriptive statistics and explore distributions
+--------------------------------------------------------------------
 
-**Author:** [Aravind Hebbali]()<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
+**Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
 
@@ -34,6 +34,7 @@ Features
 -   One Way Table
 -   One Way Table (Continuous Data)
 -   Group Wise Summary
+-   Multiple Column Descriptive Statistics
 -   Multiple One Way Tables
 -   Multiple Two Way Tables
 
