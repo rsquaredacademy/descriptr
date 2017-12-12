@@ -10,3 +10,4 @@
 ^docs$
 ^README-.*\.png$
 ^CONDUCT\.md$
+^revdep$
