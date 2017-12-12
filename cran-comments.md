@@ -11,6 +11,6 @@ This is a minor release to fix bugs.
 
 ## Reverse dependencies
 
-There are no reverse dependencies.
+We checked 1 dependency (olsrr) and it returned a NOTE.
 
 
