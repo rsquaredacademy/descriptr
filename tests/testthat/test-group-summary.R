@@ -31,7 +31,7 @@ test_that("ds_group_summary throws the appropriate error", {
   mt$cyl <- as.factor(mt$cyl)
   mt$am <- as.factor(mt$am)
 
-    expect_error(ds_group_summary(mtcars, cyl, mpg),
+    expect_error(ds_group_summary(mtcars, gear, mpg),
                  "gvar must be an object of type factor")
     expect_error(ds_group_summary(mt, cyl, am),
                  "cvar must be numeric")
