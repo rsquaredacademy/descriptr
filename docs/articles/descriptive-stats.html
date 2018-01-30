@@ -110,13 +110,13 @@
 <pre><code>## -----------------------------------------------------------------------
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 ## -----------------------------------------------------------------------
-## |      mpg      |   numeric   |    NA     |     0     |       0       |
+## |      mpg      |   numeric   |    NA     |    12     |     37.5      |
 ## |      cyl      |   factor    |   4 6 8   |    12     |     37.5      |
-## |     disp      |   numeric   |    NA     |    12     |     37.5      |
-## |      hp       |   numeric   |    NA     |     0     |       0       |
+## |     disp      |   numeric   |    NA     |     0     |       0       |
+## |      hp       |   numeric   |    NA     |    12     |     37.5      |
 ## |     drat      |   numeric   |    NA     |    12     |     37.5      |
 ## |      wt       |   numeric   |    NA     |     0     |       0       |
-## |     qsec      |   numeric   |    NA     |    12     |     37.5      |
+## |     qsec      |   numeric   |    NA     |     0     |       0       |
 ## |      vs       |   factor    |    0 1    |    12     |     37.5      |
 ## |      am       |   factor    |    0 1    |    12     |     37.5      |
 ## |     gear      |   factor    |   3 4 5   |     0     |       0       |
@@ -246,7 +246,7 @@
 <p>The <code><a href="../reference/ds_freq_table.html">ds_freq_table()</a></code> function creates frequency tables for categorical variables.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mt<span class="op">$</span>cyl)</a></code></pre></div>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mt, cyl)</a></code></pre></div>
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
 ## |                                Cumulative                    Cumulative  |
@@ -264,7 +264,7 @@
 <p>A barplot method has been defined.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mt<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mt, cyl)</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">barplot</span>(k)</a></code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/ftable_bar-1.png" width="672"></p>
 </div>

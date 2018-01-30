@@ -94,7 +94,9 @@ ds_cross_table(mtcars, cyl, gear)
 ##### One Way Table
 
 ```{r descript3}
-ds_freq_table(mtcars$cyl)
+mt <- mtcars
+mt$cyl <- as.factor(mt$cyl)
+ds_freq_table(mt, cyl)
 ```
 
 ##### One Way Table (Continuous Data)

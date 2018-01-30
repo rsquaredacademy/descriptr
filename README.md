@@ -149,7 +149,9 @@ ds_cross_table(mtcars, cyl, gear)
 ##### One Way Table
 
 ``` r
-ds_freq_table(mtcars$cyl)
+mt <- mtcars
+mt$cyl <- as.factor(mt$cyl)
+ds_freq_table(mt, cyl)
 #>                                Variable: cyl                                 
 #> |--------------------------------------------------------------------------|
 #> |                                Cumulative                    Cumulative  |
