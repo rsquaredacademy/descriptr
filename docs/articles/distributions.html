@@ -6,10 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Exploring Distributions • descriptr</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -83,7 +83,7 @@
     <div class="page-header toc-ignore">
       <h1>Exploring Distributions</h1>
             
-            <h4 class="date">2017-12-12</h4>
+            <h4 class="date">2018-01-30</h4>
           </div>
 
     
@@ -105,14 +105,14 @@
 </ul>
 <div id="normal-distribution" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#normal-distribution" class="anchor"> </a></body></html>Normal Distribution</h2>
+<a href="#normal-distribution" class="anchor"></a>Normal Distribution</h2>
 <div id="distribution-shape" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#distribution-shape" class="anchor"> </a></body></html>Distribution Shape</h3>
+<a href="#distribution-shape" class="anchor"></a>Distribution Shape</h3>
 <p>Visualize how changes in mean and standard deviation affect the shape of the normal distribution.</p>
 <div id="input" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input" class="anchor"> </a></body></html>Input</h5>
+<a href="#input" class="anchor"></a>Input</h5>
 <ul>
 <li>mean: mean of the normal distribution</li>
 <li>sd: standard deviation of the normal distribution</li>
@@ -120,23 +120,23 @@
 </div>
 <div id="output" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#output" class="anchor"> </a></body></html>Output</h5>
+<a href="#output" class="anchor"></a>Output</h5>
 <ul>
 <li>Normal distribution plot</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_plot</a></span>(<span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="fl">0.6</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_plot</a></span>(<span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="fl">0.6</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_plot-1.png" width="672"></p>
 </div>
 </div>
 <div id="percentiles" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#percentiles" class="anchor"> </a></body></html>Percentiles</h3>
+<a href="#percentiles" class="anchor"></a>Percentiles</h3>
 <div id="calculate-and-visualize-quantiles-out-of-given-probability-" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-and-visualize-quantiles-out-of-given-probability-" class="anchor"> </a></body></html>Calculate and visualize quantiles out of given probability.</h4>
+<a href="#calculate-and-visualize-quantiles-out-of-given-probability-" class="anchor"></a>Calculate and visualize quantiles out of given probability.</h4>
 <div id="input-1" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-1" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-1" class="anchor"></a>Input</h5>
 <ul>
 <li>probs: a probability value</li>
 <li>mean: mean of the normal distribution</li>
@@ -144,26 +144,26 @@
 <li>type: lower/upper tail</li>
 </ul>
 <p>Suppose X, the grade on a exam, is normally distributed with mean 60 and standard deviation 3. The teacher wants to give 10% of the class an A. What should be the cutoff to determine who gets an A?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_perc</a></span>(<span class="fl">0.10</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_perc</a></span>(<span class="fl">0.10</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per1-1.png" width="672"></p>
 <p>The teacher wants to give lower 15% of the class a D. What cutoff should the teacher use to determine who gets an D?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_perc</a></span>(<span class="fl">0.85</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_perc</a></span>(<span class="fl">0.85</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per2-1.png" width="672"></p>
 <p>The teacher wants to give middle 50% of the class a B. What cutoff should the teacher use to determine who gets an B?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_perc</a></span>(<span class="fl">0.5</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_perc</a></span>(<span class="fl">0.5</span>, <span class="dv">60</span>, <span class="dv">3</span>, <span class="st">'both'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_per3-1.png" width="672"></p>
 </div>
 </div>
 </div>
 <div id="probabilities" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#probabilities" class="anchor"> </a></body></html>Probabilities</h3>
+<a href="#probabilities" class="anchor"></a>Probabilities</h3>
 <div id="calculate-and-visualize-probability-from-a-given-quantile" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-and-visualize-probability-from-a-given-quantile" class="anchor"> </a></body></html>Calculate and visualize probability from a given quantile</h4>
+<a href="#calculate-and-visualize-probability-from-a-given-quantile" class="anchor"></a>Calculate and visualize probability from a given quantile</h4>
 <div id="input-2" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-2" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-2" class="anchor"></a>Input</h5>
 <ul>
 <li>perc: a quantile value</li>
 <li>mean: mean of the normal distribution</li>
@@ -171,13 +171,13 @@
 <li>type: lower/upper/both tail</li>
 </ul>
 <p>Let X be the IQ of a randomly selected student of a school. Assume X ~ N(90, 4). What is the probability that a randomly selected student has an IQ below 80?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_prob</a></span>(<span class="dv">80</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_prob</a></span>(<span class="dv">80</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob1-1.png" width="672"></p>
 <p>What is the probability that a randomly selected student has an IQ above 100?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_prob</a></span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_prob</a></span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob2-1.png" width="672"></p>
 <p>What is the probability that a randomly selected student has an IQ between 85 and 100?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_prob</a></span>(<span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">100</span>), <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/dist_norm_plot.html">dist_norm_prob</a></span>(<span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">100</span>), <span class="dt">mean =</span> <span class="dv">90</span>, <span class="dt">sd =</span> <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'both'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/norm_prob3-1.png" width="672"></p>
 </div>
 </div>
@@ -185,45 +185,45 @@
 </div>
 <div id="binomial-distribution" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#binomial-distribution" class="anchor"> </a></body></html>Binomial Distribution</h2>
+<a href="#binomial-distribution" class="anchor"></a>Binomial Distribution</h2>
 <div id="distribution-shape-1" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#distribution-shape-1" class="anchor"> </a></body></html>Distribution Shape</h3>
+<a href="#distribution-shape-1" class="anchor"></a>Distribution Shape</h3>
 <p>Visualize how changes in number of trials and the probability of success affect the shape of the binomial distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_plot</a></span>(<span class="dv">10</span>, <span class="fl">0.3</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_plot</a></span>(<span class="dv">10</span>, <span class="fl">0.3</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_plot-1.png" width="672"></p>
 </div>
 <div id="percentiles-1" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#percentiles-1" class="anchor"> </a></body></html>Percentiles</h3>
+<a href="#percentiles-1" class="anchor"></a>Percentiles</h3>
 <div id="calculate-and-visualize-quantiles-out-of-given-probability" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-and-visualize-quantiles-out-of-given-probability" class="anchor"> </a></body></html>Calculate and visualize quantiles out of given probability</h4>
+<a href="#calculate-and-visualize-quantiles-out-of-given-probability" class="anchor"></a>Calculate and visualize quantiles out of given probability</h4>
 <div id="input-3" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-3" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-3" class="anchor"></a>Input</h5>
 <ul>
 <li>p: a single aggregated probability of multiple trials</li>
 <li>n: the number of trials</li>
 <li>tp: the probability of success in a trial</li>
 <li>type: lower/upper tail</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_per1-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_perc</a></span>(<span class="dv">10</span>, <span class="fl">0.5</span>, <span class="fl">0.05</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_per2-1.png" width="672"></p>
 </div>
 </div>
 </div>
 <div id="probabilities-1" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#probabilities-1" class="anchor"> </a></body></html>Probabilities</h3>
+<a href="#probabilities-1" class="anchor"></a>Probabilities</h3>
 <div id="calculate-and-visualize-probability-from-a-given-quantile-1" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-and-visualize-probability-from-a-given-quantile-1" class="anchor"> </a></body></html>Calculate and visualize probability from a given quantile</h4>
+<a href="#calculate-and-visualize-probability-from-a-given-quantile-1" class="anchor"></a>Calculate and visualize probability from a given quantile</h4>
 <div id="input-4" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-4" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-4" class="anchor"></a>Input</h5>
 <ul>
 <li>p: probability of success</li>
 <li>n: the number of trials</li>
@@ -231,16 +231,16 @@
 <li>type: lower/upper/interval/exact tail</li>
 </ul>
 <p>Assume twenty-percent (20%) of Magemill have no health insurance. Randomly sample n = 12 Magemillians. Let X denote the number in the sample with no health insurance. What is the probability that exactly 4 of the 15 sampled have no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'exact'</span>)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">4</span>, <span class="dt">type =</span> <span class="st">'exact'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob1-1.png" width="672"></p>
 <p>What is the probability that at most one of those sampled has no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">1</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob2-1.png" width="672"></p>
 <p>What is the probability that more than seven have no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob3-1.png" width="672"></p>
 <p>What is the probability that fewer than 5 have no health insurance?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="st">'interval'</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/dist_binom_plot.html">dist_binom_prob</a></span>(<span class="dv">12</span>, <span class="fl">0.2</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="st">'interval'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/binom_prob4-1.png" width="672"></p>
 </div>
 </div>
@@ -248,58 +248,58 @@
 </div>
 <div id="chi-square-distribution" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#chi-square-distribution" class="anchor"> </a></body></html>Chi Square Distribution</h2>
+<a href="#chi-square-distribution" class="anchor"></a>Chi Square Distribution</h2>
 <div id="distribution-shape-2" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#distribution-shape-2" class="anchor"> </a></body></html>Distribution Shape</h3>
+<a href="#distribution-shape-2" class="anchor"></a>Distribution Shape</h3>
 <p>Visualize how changes in degrees of freedom affect the shape of the chi square distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_plot</a></span>(<span class="dt">df =</span> <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_plot</a></span>(<span class="dt">df =</span> <span class="dv">5</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/chi_plot-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_plot</a></span>(<span class="dt">df =</span> <span class="dv">5</span>, <span class="dt">normal =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_plot</a></span>(<span class="dt">df =</span> <span class="dv">5</span>, <span class="dt">normal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/chi_plot-2.png" width="672"></p>
 </div>
 <div id="percentiles-2" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#percentiles-2" class="anchor"> </a></body></html>Percentiles</h3>
+<a href="#percentiles-2" class="anchor"></a>Percentiles</h3>
 <div id="calculate-quantiles-out-of-given-probability" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-quantiles-out-of-given-probability" class="anchor"> </a></body></html>Calculate quantiles out of given probability</h4>
+<a href="#calculate-quantiles-out-of-given-probability" class="anchor"></a>Calculate quantiles out of given probability</h4>
 <div id="input-5" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-5" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-5" class="anchor"></a>Input</h5>
 <ul>
 <li>probs: a probability value</li>
 <li>df: degrees of freedom</li>
 <li>type: lower/upper tail</li>
 </ul>
 <p>Let X be a chi-square random variable with 8 degrees of freedom. What is the upper fifth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_perc</a></span>(<span class="fl">0.05</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_perc</a></span>(<span class="fl">0.05</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/chi_per1-1.png" width="672"></p>
 <p>What is the tenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_perc</a></span>(<span class="fl">0.10</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_perc</a></span>(<span class="fl">0.10</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/chi_per2-1.png" width="672"></p>
 </div>
 </div>
 </div>
 <div id="probability" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#probability" class="anchor"> </a></body></html>Probability</h3>
+<a href="#probability" class="anchor"></a>Probability</h3>
 <div id="calculate-probability-from-a-given-quantile-" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-probability-from-a-given-quantile-" class="anchor"> </a></body></html>Calculate probability from a given quantile.</h4>
+<a href="#calculate-probability-from-a-given-quantile-" class="anchor"></a>Calculate probability from a given quantile.</h4>
 <div id="input-6" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-6" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-6" class="anchor"></a>Input</h5>
 <ul>
 <li>perc: a quantile value</li>
 <li>df: degrees of freedom</li>
 <li>type: lower/upper tail</li>
 </ul>
 <p>What is the probability that a chi-square random variable with 12 degrees of freedom is greater than 8.79?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_prob</a></span>(<span class="fl">8.79</span>, <span class="dv">12</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_prob</a></span>(<span class="fl">8.79</span>, <span class="dv">12</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/chi_prob1-1.png" width="672"></p>
 <p>What is the probability that a chi-square random variable with 12 degrees of freedom is greater than 8.62?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_prob</a></span>(<span class="fl">8.62</span>, <span class="dv">12</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/dist_chi_plot.html">dist_chi_prob</a></span>(<span class="fl">8.62</span>, <span class="dv">12</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/chi_prob2-1.png" width="672"></p>
 </div>
 </div>
@@ -307,25 +307,25 @@
 </div>
 <div id="f-distribution" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#f-distribution" class="anchor"> </a></body></html>F Distribution</h2>
+<a href="#f-distribution" class="anchor"></a>F Distribution</h2>
 <div id="distribution-shape-3" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#distribution-shape-3" class="anchor"> </a></body></html>Distribution Shape</h3>
+<a href="#distribution-shape-3" class="anchor"></a>Distribution Shape</h3>
 <p>Visualize how changes in degrees of freedom affect the shape of the F distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_plot</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_plot</a></span>()</a></code></pre></div>
 <p><img src="distributions_files/figure-html/f_plot-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_plot</a></span>(<span class="dv">6</span>, <span class="dv">10</span>, <span class="dt">normal =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_plot</a></span>(<span class="dv">6</span>, <span class="dv">10</span>, <span class="dt">normal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/f_plot-2.png" width="672"></p>
 </div>
 <div id="percentiles-3" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#percentiles-3" class="anchor"> </a></body></html>Percentiles</h3>
+<a href="#percentiles-3" class="anchor"></a>Percentiles</h3>
 <div id="calculate-quantiles-out-of-given-probability-1" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-quantiles-out-of-given-probability-1" class="anchor"> </a></body></html>Calculate quantiles out of given probability</h4>
+<a href="#calculate-quantiles-out-of-given-probability-1" class="anchor"></a>Calculate quantiles out of given probability</h4>
 <div id="input-7" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-7" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-7" class="anchor"></a>Input</h5>
 <ul>
 <li>probs: a probability value</li>
 <li>num_df: nmerator degrees of freedom</li>
@@ -333,23 +333,23 @@
 <li>type: lower/upper tail</li>
 </ul>
 <p>Let X be an F random variable with 4 numerator degrees of freedom and 5 denominator degrees of freedom. What is the upper twenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_perc</a></span>(<span class="fl">0.20</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_perc</a></span>(<span class="fl">0.20</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/f_per1-1.png" width="672"></p>
 <p>What is the 35th percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_perc</a></span>(<span class="fl">0.35</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_perc</a></span>(<span class="fl">0.35</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/f_per2-1.png" width="672"></p>
 </div>
 </div>
 </div>
 <div id="probabilities-2" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#probabilities-2" class="anchor"> </a></body></html>Probabilities</h3>
+<a href="#probabilities-2" class="anchor"></a>Probabilities</h3>
 <div id="calculate-probability-from-a-given-quantile--1" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-probability-from-a-given-quantile--1" class="anchor"> </a></body></html>Calculate probability from a given quantile.</h4>
+<a href="#calculate-probability-from-a-given-quantile--1" class="anchor"></a>Calculate probability from a given quantile.</h4>
 <div id="input-8" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-8" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-8" class="anchor"></a>Input</h5>
 <ul>
 <li>perc: a quantile value</li>
 <li>num_df: nmerator degrees of freedom</li>
@@ -357,10 +357,10 @@
 <li>type: lower/upper tail</li>
 </ul>
 <p>What is the probability that an F random variable with 4 numerator degrees of freedom and 5 denominator degrees of freedom is greater than 3.89?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_prob</a></span>(<span class="fl">3.89</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_prob</a></span>(<span class="fl">3.89</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/f_prob1-1.png" width="672"></p>
 <p>What is the probability that an F random variable with 4 numerator degrees of freedom and 5 denominator degrees of freedom is less than 2.63?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_prob</a></span>(<span class="fl">2.63</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/dist_f_plot.html">dist_f_prob</a></span>(<span class="fl">2.63</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/f_prob2-1.png" width="672"></p>
 </div>
 </div>
@@ -368,49 +368,49 @@
 </div>
 <div id="t-distribution" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#t-distribution" class="anchor"> </a></body></html>t Distribution</h2>
+<a href="#t-distribution" class="anchor"></a>t Distribution</h2>
 <div id="distribution-shape-4" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#distribution-shape-4" class="anchor"> </a></body></html>Distribution Shape</h3>
+<a href="#distribution-shape-4" class="anchor"></a>Distribution Shape</h3>
 <p>Visualize how degrees of freedom affect the shape of t distribution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_plot</a></span>(<span class="dt">df =</span> <span class="dv">8</span>)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_plot</a></span>(<span class="dt">df =</span> <span class="dv">8</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_plot-1.png" width="672"></p>
 </div>
 <div id="percentiles-4" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#percentiles-4" class="anchor"> </a></body></html>Percentiles</h3>
+<a href="#percentiles-4" class="anchor"></a>Percentiles</h3>
 <div id="calculate-quantiles-out-of-given-probability-2" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-quantiles-out-of-given-probability-2" class="anchor"> </a></body></html>Calculate quantiles out of given probability</h4>
+<a href="#calculate-quantiles-out-of-given-probability-2" class="anchor"></a>Calculate quantiles out of given probability</h4>
 <div id="input-9" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-9" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-9" class="anchor"></a>Input</h5>
 <ul>
 <li>probs: a probability value</li>
 <li>df: degrees of freedom</li>
 <li>type: lower/upper/both tail</li>
 </ul>
 <p>What is the upper fifteenth percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.15</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.15</span>, <span class="dv">8</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_per1-1.png" width="672"></p>
 <p>What is the eleventh percentile?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.11</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.11</span>, <span class="dv">8</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_per2-1.png" width="672"></p>
 <p>What is the area of the curve that has 95% of the t values?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.8</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_perc</a></span>(<span class="fl">0.8</span>, <span class="dv">8</span>, <span class="st">'both'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_per3-1.png" width="672"></p>
 </div>
 </div>
 </div>
 <div id="probabilities-3" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#probabilities-3" class="anchor"> </a></body></html>Probabilities</h3>
+<a href="#probabilities-3" class="anchor"></a>Probabilities</h3>
 <div id="calculate-probability-from-a-given-quantile--2" class="section level4">
 <h4 class="hasAnchor">
-<html><body><a href="#calculate-probability-from-a-given-quantile--2" class="anchor"> </a></body></html>Calculate probability from a given quantile.</h4>
+<a href="#calculate-probability-from-a-given-quantile--2" class="anchor"></a>Calculate probability from a given quantile.</h4>
 <div id="input-10" class="section level5">
 <h5 class="hasAnchor">
-<html><body><a href="#input-10" class="anchor"> </a></body></html>Input</h5>
+<a href="#input-10" class="anchor"></a>Input</h5>
 <ul>
 <li>perc: a quantile value</li>
 <li>df: degrees of freedom</li>
@@ -418,16 +418,16 @@
 </ul>
 <p>Let T follow a t-distribution with r = 6 df.</p>
 <p>What is the probability that the value of T is less than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'lower'</span>)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'lower'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob1-1.png" width="672"></p>
 <p>What is the probability that the value of T is greater than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'upper'</span>)</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'upper'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob2-1.png" width="672"></p>
 <p>What is the probability that the value of T is between -2 and 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'both'</span>)</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'both'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob3-1.png" width="672"></p>
 <p>What is the probability that the absolute value of T is greater than 2?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'interval'</span>)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="../reference/dist_t.html">dist_t_prob</a></span>(<span class="dv">2</span>, <span class="dv">6</span>, <span class="st">'interval'</span>)</a></code></pre></div>
 <p><img src="distributions_files/figure-html/t_prob4-1.png" width="672"></p>
 </div>
 </div>
@@ -438,7 +438,8 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#normal-distribution">Normal Distribution</a></li>
       <li><a href="#binomial-distribution">Binomial Distribution</a></li>
