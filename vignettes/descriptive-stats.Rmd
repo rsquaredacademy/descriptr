@@ -130,7 +130,7 @@ The `ds_freq_cont` function creates frequency tables for continuous variables. T
 default number of intervals is 5.
 
 ```{r fcont}
-ds_freq_cont(mtcars$mpg, 4)
+ds_freq_cont(mtcars, mpg, 4)
 ```
 
 
@@ -139,7 +139,7 @@ ds_freq_cont(mtcars$mpg, 4)
 A `hist` method has been defined.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_freq_cont(mtcars$mpg, 4)
+k <- ds_freq_cont(mtcars, mpg, 4)
 hist(k)
 ```
 

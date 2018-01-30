@@ -6,12 +6,14 @@
 \alias{hist.ds_freq_cont}
 \title{Frequency Distribution of Continuous Data}
 \usage{
-ds_freq_cont(data, bins = 5)
+ds_freq_cont(data, variable, bins = 5)
 
 \method{hist}{ds_freq_cont}(x, col = "blue", ...)
 }
 \arguments{
-\item{data}{numeric vector}
+\item{data}{a \code{data.frame} or a \code{tibble}}
+
+\item{variable}{numeric; column in \code{data}}
 
 \item{bins}{number of intervals into which the data must be split}
 
@@ -48,10 +50,10 @@ for the frequency table created using \code{ds_freq_cont}
 
 \examples{
 # frequency table
-ds_freq_cont(mtcars$mpg, 4)
+ds_freq_cont(mtcars, mpg, 4)
 
 # histogram
-k <- ds_freq_cont(mtcars$mpg, 4)
+k <- ds_freq_cont(mtcars, mpg, 4)
 hist(k)
 }
 \seealso{

@@ -5,7 +5,8 @@
 #' continuous by splitting the data into equidistant intervals created based on
 #' the number of bins specified. \code{hist.ds_freq_cont} creates histogram
 #' for the frequency table created using \code{ds_freq_cont}
-#' @param data numeric vector
+#' @param data a \code{data.frame} or a \code{tibble}
+#' @param variable numeric; column in \code{data}
 #' @param bins number of intervals into which the data must be split
 #' @param x an object of class \code{ds_freq_cont}
 #' @param col color of the bars
@@ -26,22 +27,29 @@
 #' \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
 #' @examples
 #' # frequency table
-#' ds_freq_cont(mtcars$mpg, 4)
+#' ds_freq_cont(mtcars, mpg, 4)
 #'
 #' # histogram
-#' k <- ds_freq_cont(mtcars$mpg, 4)
+#' k <- ds_freq_cont(mtcars, mpg, 4)
 #' hist(k)
 #' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
 #' @export
 #'
-ds_freq_cont <- function(data, bins = 5) UseMethod("ds_freq_cont")
+ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
 
 
 #' @export
-ds_freq_cont.default <- function(data, bins = 5) {
+ds_freq_cont.default <- function(data, variable,  bins = 5) {
 
-  if(!is.numeric(data)) {
-    stop('data must be numeric')
+  varyable <- enquo(variable)
+
+  fdata <-
+    data %>%
+    pull(!! varyable) %>%
+    na.omit
+
+  if(!is.numeric(fdata)) {
+    stop('variable must be numeric')
   }
 
   if(!is.numeric(bins)) {
@@ -52,12 +60,15 @@ ds_freq_cont.default <- function(data, bins = 5) {
     bins <- as.integer(bins)
   }
 
-  var_name <- l(deparse(substitute(data)))
-  data <- na.omit(data)
+  var_name <-
+    data %>%
+    select(!! varyable) %>%
+    names
+
   n_bins <- bins
-  inta <- intervals(data, bins)
-  result <- freq(data, bins, inta)
-  data_len <- length(data)
+  inta <- intervals(fdata, bins)
+  result <- freq(fdata, bins, inta)
+  data_len <- length(fdata)
   cum <- cumsum(result)
   per <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
@@ -67,7 +78,7 @@ ds_freq_cont.default <- function(data, bins = 5) {
               percent = per,
               cum_percent = cum_per,
               bins = n_bins,
-              data = data,
+              data = fdata,
               varname = var_name)
 
   class(out) <- "ds_freq_cont"
@@ -81,7 +92,6 @@ ds_freq_cont.default <- function(data, bins = 5) {
 freq_cont <- function(data, bins = 5) {
 
   .Deprecated("ds_freq_cont()")
-  ds_freq_cont(data, bins)
 
 }
 

@@ -168,7 +168,7 @@ ds_freq_table(mt, cyl)
 ##### One Way Table (Continuous Data)
 
 ``` r
-ds_freq_cont(mtcars$mpg)
+ds_freq_cont(mtcars, mpg)
 #>                               Variable: mpg                               
 #> |-----------------------------------------------------------------------|
 #> |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
