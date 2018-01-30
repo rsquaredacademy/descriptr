@@ -111,16 +111,16 @@
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 ## -----------------------------------------------------------------------
 ## |      mpg      |   numeric   |    NA     |    12     |     37.5      |
-## |      cyl      |   factor    |   4 6 8   |    12     |     37.5      |
-## |     disp      |   numeric   |    NA     |     0     |       0       |
+## |      cyl      |   factor    |   4 6 8   |     0     |       0       |
+## |     disp      |   numeric   |    NA     |    12     |     37.5      |
 ## |      hp       |   numeric   |    NA     |    12     |     37.5      |
-## |     drat      |   numeric   |    NA     |    12     |     37.5      |
+## |     drat      |   numeric   |    NA     |     0     |       0       |
 ## |      wt       |   numeric   |    NA     |     0     |       0       |
-## |     qsec      |   numeric   |    NA     |     0     |       0       |
-## |      vs       |   factor    |    0 1    |    12     |     37.5      |
-## |      am       |   factor    |    0 1    |    12     |     37.5      |
-## |     gear      |   factor    |   3 4 5   |     0     |       0       |
-## |     carb      |   factor    |1 2 3 4 6 8|     0     |       0       |
+## |     qsec      |   numeric   |    NA     |    12     |     37.5      |
+## |      vs       |   factor    |    0 1    |     0     |       0       |
+## |      am       |   factor    |    0 1    |     0     |       0       |
+## |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
+## |     carb      |   factor    |1 2 3 4 6 8|    12     |     37.5      |
 ## -----------------------------------------------------------------------
 ## 
 ##  Overall Missing Values           72 
@@ -273,7 +273,7 @@
 <h2 class="hasAnchor">
 <a href="#frequency-table-continuous-data" class="anchor"></a>Frequency Table (Continuous Data)</h2>
 <p>The <code>ds_freq_cont</code> function creates frequency tables for continuous variables. The default number of intervals is 5.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars<span class="op">$</span>mpg, <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars, mpg, <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##                                 Variable: mpg                                 
 ## |---------------------------------------------------------------------------|
 ## |      Bins       | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -290,7 +290,7 @@
 <h3 class="hasAnchor">
 <a href="#histogram" class="anchor"></a>Histogram</h3>
 <p>A <code>hist</code> method has been defined.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars<span class="op">$</span>mpg, <span class="dv">4</span>)</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars, mpg, <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">hist</span>(k)</a></code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/fcont_hist-1.png" width="672"></p>
 </div>

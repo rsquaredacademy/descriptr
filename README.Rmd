@@ -102,7 +102,7 @@ ds_freq_table(mt, cyl)
 ##### One Way Table (Continuous Data)
 
 ```{r descript4}
-ds_freq_cont(mtcars$mpg)
+ds_freq_cont(mtcars, mpg)
 ```
 
 ##### Group Summary

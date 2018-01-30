@@ -2,7 +2,7 @@ context('ds_freq_cont')
 
 test_that('output from ds_freq_cont matches expected result', {
 
-  k <- ds_freq_cont(mtcars$mpg, bins = 4)
+  k <- ds_freq_cont(mtcars, mpg, bins = 4)
   expect_equivalent(k$breaks, c(10.400, 16.275, 22.150, 28.025, 33.900))
   expect_equivalent(k$frequency, c(10, 13, 5, 4))
   expect_equivalent(k$cumulative, c(10, 23, 28, 32))
@@ -16,8 +16,10 @@ test_that('output from ds_freq_cont matches expected result', {
 
 test_that('ds_freq_cont returns appropriate errors', {
 
-  expect_error(ds_freq_cont('mtcars$mpg'), 'data must be numeric')
-  expect_error(ds_freq_cont(as.factor(mtcars$mpg)), 'data must be numeric')
-  expect_error(ds_freq_cont(mtcars$mpg, '5'), 'bins must be integer value')
+  mt <- mtcars
+  mt$cyl <- as.factor(mt$cyl)
+
+  expect_error(ds_freq_cont(mt, cyl), 'variable must be numeric')
+  expect_error(ds_freq_cont(mtcars, mpg, '5'), 'bins must be integer value')
 
 })
