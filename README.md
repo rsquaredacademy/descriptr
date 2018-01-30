@@ -1,19 +1,25 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-descriptr: Generate descriptive statistics and explore distributions <img src="hex_descriptr.png" align="right" />
-------------------------------------------------------------------------------------------------------------------
 
-**Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
+## descriptr: Generate descriptive statistics and explore distributions <img src="hex_descriptr.png" align="right" />
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![Coverage Status](https://img.shields.io/codecov/c/github/rsquaredacademy/descriptr/master.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+**Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/>
+**License:**
+[MIT](https://opensource.org/licenses/MIT)
 
-Overview
---------
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
+[![Travis-CI Build
+Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
 
-The goal of descriptr is to ease the process of generating descriptive statistics and exploring statistical distributions.
+## Overview
 
-Installation
-------------
+The goal of descriptr is to ease the process of generating descriptive
+statistics and exploring statistical distributions.
+
+## Installation
 
 ``` r
 # install descriptr from CRAN
@@ -24,46 +30,44 @@ install.packages("descriptr")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
 
-Features
---------
+## Features
 
 ### Descriptive Statistics
 
--   Summary Statistics
--   Two Way Tables
--   One Way Table
--   One Way Table (Continuous Data)
--   Group Wise Summary
--   Multiple Column Descriptive Statistics
--   Multiple One Way Tables
--   Multiple Two Way Tables
+  - Summary Statistics
+  - Two Way Tables
+  - One Way Table
+  - One Way Table (Continuous Data)
+  - Group Wise Summary
+  - Multiple Column Descriptive Statistics
+  - Multiple One Way Tables
+  - Multiple Two Way Tables
 
 ### Explore Distributions
 
--   Normal
--   Binomial
--   Chi Square
--   F
--   t
+  - Normal
+  - Binomial
+  - Chi Square
+  - F
+  - t
 
-Shiny App
----------
+## Shiny App
 
 Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
-Vignettes
----------
+## Vignettes
 
--   [Descriptive Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
--   [Statistical Distributions](http://www.rsquaredacademy.com/descriptr/articles/distributions.html)
+  - [Descriptive
+    Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
+  - [Statistical
+    Distributions](http://www.rsquaredacademy.com/descriptr/articles/distributions.html)
 
-Usage
------
+## Usage
 
 ##### Summary Statistics
 
 ``` r
-ds_summary_stats(mtcars$mpg)
+ds_summary_stats(mtcars, mpg)
 #>                         Univariate Analysis                          
 #> 
 #>  N                       32.00      Variance                36.32 
@@ -211,13 +215,15 @@ ds_group_summary(mtcars$cyl, mtcars$mpg)
 ``` r
 ds_multi_stats(mtcars, mpg, disp, hp)
 #> # A tibble: 3 x 16
-#>    vars   min   max      mean    t_mean median  mode range   variance
-#>   <chr> <dbl> <dbl>     <dbl>     <dbl>  <dbl> <dbl> <dbl>      <dbl>
-#> 1  disp  71.1 472.0 230.72188 228.00000  196.3 275.8 400.9 15360.7998
-#> 2    hp  52.0 335.0 146.68750 143.56667  123.0 110.0 283.0  4700.8669
-#> 3   mpg  10.4  33.9  20.09062  19.95333   19.2  10.4  23.5    36.3241
-#> # ... with 7 more variables: stdev <dbl>, skew <dbl>, kurtosis <dbl>,
-#> #   coeff_var <dbl>, q1 <dbl>, q3 <dbl>, iqrange <dbl>
+#>   vars    min   max  mean t_mean median  mode range variance  stdev  skew
+#>   <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl> <dbl>    <dbl>  <dbl> <dbl>
+#> 1 disp   71.1 472   231    228    196   276   401    15361   124    0.420
+#> 2 hp     52.0 335   147    144    123   110   283     4701    68.6  0.799
+#> 3 mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672
+#> # ... with 5 more variables: kurtosis <dbl>, coeff_var <dbl>, q1 <dbl>,
+#> #   q3 <dbl>, iqrange <dbl>
 ```
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.

@@ -5,10 +5,12 @@
 \alias{summary_stats}
 \title{Descriptive Statistics}
 \usage{
-ds_summary_stats(data)
+ds_summary_stats(data, variable)
 }
 \arguments{
-\item{data}{a numeric vector}
+\item{data}{a \code{data.frame} or a \code{tibble}}
+
+\item{variable}{numeric; column in \code{data}}
 }
 \value{
 \code{ds_summary_stats} returns an object of class
@@ -56,7 +58,7 @@ statistics for continuous data.
 }
 
 \examples{
-ds_summary_stats(mtcars$mpg)
+ds_summary_stats(mtcars, mpg)
 }
 \seealso{
 \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
