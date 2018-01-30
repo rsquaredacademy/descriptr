@@ -3,6 +3,7 @@
 #' @title Two Way Tables
 #' @description \code{ds_cross_tablecross_table} creates two way tables of categorical
 #' variables. The tables created can be visualized as barplots and mosaicplots.
+#' @param data a \code{data.frame} or a \code{tibble}
 #' @param var1 First categorical variable
 #' @param var2 Second categorical variable
 #' @param x An object of class cross_table
@@ -28,7 +29,7 @@
 #' @section Deprecated Function:
 #' \code{ds_cross_table()} has been deprecated. Instead use \code{ds_cross_table()}.
 #' @examples
-#' k <- ds_cross_table(mtcars$cyl, mtcars$am)
+#' k <- ds_cross_table(mtcars, cyl, am)
 #' k
 #'
 #' # bar plots
@@ -40,21 +41,34 @@
 #' mosaicplot(k)
 #' @export
 #'
-ds_cross_table <- function(var1, var2) UseMethod("ds_cross_table")
+ds_cross_table <- function(data, var1, var2) UseMethod("ds_cross_table")
 
 #' @export
-ds_cross_table <- function(var1, var2) {
+ds_cross_table <- function(data, var1, var2) {
 
-    var_1 <- l(deparse(substitute(var1)))
-    var_2 <- l(deparse(substitute(var2)))
-    var_names <- c(var_1, var_2)
-    x <- as.matrix(table(var1, var2))
+  var_1 <- enquo(var1)
+  var_2 <- enquo(var2)
+
+  var_names <-
+    data %>%
+    select(!! var_1, !! var_2) %>%
+    names
+
+  varone <-
+    data %>%
+    pull(!! var_1)
+
+  vartwo <-
+    data %>%
+    pull(!! var_2)
+
+    x <- as.matrix(table(varone, vartwo))
     rownames(x) <- NULL
-    n <- length(var1)
-    if (is.factor(var1)) {
-        row_name <- levels(var1)
+    n <- length(varone)
+    if (is.factor(varone)) {
+        row_name <- levels(varone)
     } else {
-        row_name <- unique(sort(var1))
+        row_name <- unique(sort(varone))
     }
     per_mat <- round(x/n, 3)
     row_pct <- apply(per_mat, 1, sum)
@@ -72,10 +86,10 @@ ds_cross_table <- function(var1, var2) {
     ccent <- apply(ccent, c(1, 2), rounda)
     x <- cbind(x, rowtotal)
     x <- cbind(unname(row_name), x)
-    if (is.factor(var2)) {
-        col_name <- levels(var2)
+    if (is.factor(vartwo)) {
+        col_name <- levels(vartwo)
     } else {
-        col_name <- unique(sort(var2))
+        col_name <- unique(sort(vartwo))
     }
 
     result <- list(obs = n, var2_levels = col_name, var1_levels = row_name, varnames = var_names,
@@ -94,7 +108,6 @@ ds_cross_table <- function(var1, var2) {
 cross_table <- function(var1, var2) {
 
   .Deprecated("ds_cross_table()")
-  ds_cross_table(var1, var2)
 
 }
 
