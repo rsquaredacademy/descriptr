@@ -7,13 +7,15 @@
 \alias{mosaicplot.ds_cross_table}
 \title{Two Way Tables}
 \usage{
-ds_cross_table(var1, var2)
+ds_cross_table(data, var1, var2)
 
 \method{plot}{ds_cross_table}(x, beside = FALSE, proportional = FALSE, ...)
 
 \method{mosaicplot}{ds_cross_table}(x, ...)
 }
 \arguments{
+\item{data}{a \code{data.frame} or a \code{tibble}}
+
 \item{var1}{First categorical variable}
 
 \item{var2}{Second categorical variable}
@@ -54,7 +56,7 @@ variables. The tables created can be visualized as barplots and mosaicplots.
 }
 
 \examples{
-k <- ds_cross_table(mtcars$cyl, mtcars$am)
+k <- ds_cross_table(mtcars, cyl, am)
 k
 
 # bar plots

@@ -110,7 +110,7 @@ ds_summary_stats(mtcars, mpg)
 ##### Two Way Table
 
 ``` r
-ds_cross_table(mtcars$cyl, mtcars$gear)
+ds_cross_table(mtcars, cyl, gear)
 #>     Cell Contents
 #>  |---------------|
 #>  |     Frequency |
