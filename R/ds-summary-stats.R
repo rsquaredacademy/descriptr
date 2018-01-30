@@ -1,8 +1,10 @@
 #' @importFrom stats quantile
+#' @importFrom rlang enquo !!
 #' @title Descriptive Statistics
 #' @description \code{ds_summary_stats} returns a whole range of descriptive
 #' statistics for continuous data.
-#' @param data a numeric vector
+#' @param data a \code{data.frame} or a \code{tibble}
+#' @param variable numeric; column in \code{data}
 #' @return \code{ds_summary_stats} returns an object of class
 #' \code{"ds_summary_stats"}. An object of class \code{"ds_summary_stats"}
 #' is a list containing the following components
@@ -40,53 +42,58 @@
 #' \code{summary_stats()} has been deprecated. Instead use
 #' \code{ds_summary_stats()}.
 #' @examples
-#' ds_summary_stats(mtcars$mpg)
+#' ds_summary_stats(mtcars, mpg)
 #' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
 #' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #' @export
 #'
-ds_summary_stats <- function(data) UseMethod('ds_summary_stats')
+ds_summary_stats <- function(data, variable) UseMethod('ds_summary_stats')
 
 #' @export
 #'
-ds_summary_stats.default <- function(data) {
+ds_summary_stats.default <- function(data, variable) {
 
-    if(!is.numeric(data)) {
+    vary <- enquo(variable)
+    sdata <-
+      data %>%
+      pull(!!vary) %>%
+      na.omit
+
+    if(!is.numeric(sdata)) {
       stop('data must be numeric')
     }
 
-    data <- na.omit(data)
-    low <- ds_tailobs(data, 5, 'low')
-    high <- ds_tailobs(data, 5, 'high')
-    low_val <- ds_rindex(data, low)
-    high_val <- ds_rindex(data, high)
+    low <- ds_tailobs(sdata, 5, 'low')
+    high <- ds_tailobs(sdata, 5, 'high')
+    low_val <- ds_rindex(sdata, low)
+    high_val <- ds_rindex(sdata, high)
 
     result <- list(
-        obs = length(data),
-        missing = sum(is.na(data)),
-        avg = mean(data),
-        tavg = mean(data, trim = 0.05),
-        stdev = sd(data),
-        variance = var(data),
-        skew = ds_skewness(data),
-        kurtosis = ds_kurtosis(data),
-        uss = stat_uss(data),
-        css = ds_css(data),
-        cvar = ds_cvar(data),
-        sem = std_error(data),
-        median = median(data),
-        mode = ds_mode(data),
-        range = ds_range(data),
-        min = min(data), Max = max(data),
-        iqrange = IQR(data),
-        per99 = quantile(data, 0.99),
-        per90 = quantile(data, 0.95),
-        per95 = quantile(data, 0.90),
-        per75 = quantile(data, 0.75),
-        per25 = quantile(data, 0.25),
-        per10 = quantile(data, 0.10),
-        per5 = quantile(data, 0.05),
-        per1 = quantile(data, 0.01),
+        obs = length(sdata),
+        missing = sum(is.na(sdata)),
+        avg = mean(sdata),
+        tavg = mean(sdata, trim = 0.05),
+        stdev = sd(sdata),
+        variance = var(sdata),
+        skew = ds_skewness(sdata),
+        kurtosis = ds_kurtosis(sdata),
+        uss = stat_uss(sdata),
+        css = ds_css(sdata),
+        cvar = ds_cvar(sdata),
+        sem = std_error(sdata),
+        median = median(sdata),
+        mode = ds_mode(sdata),
+        range = ds_range(sdata),
+        min = min(sdata), Max = max(sdata),
+        iqrange = IQR(sdata),
+        per99 = quantile(sdata, 0.99),
+        per90 = quantile(sdata, 0.95),
+        per95 = quantile(sdata, 0.90),
+        per75 = quantile(sdata, 0.75),
+        per25 = quantile(sdata, 0.25),
+        per10 = quantile(sdata, 0.10),
+        per5 = quantile(sdata, 0.05),
+        per1 = quantile(sdata, 0.01),
         lowobs = low,
         highobs = high,
         lowobsi = low_val,
@@ -104,7 +111,7 @@ ds_summary_stats.default <- function(data) {
 summary_stats <- function(data) {
 
   .Deprecated("ds_summary_stats()")
-  ds_summary_stats(data)
+  # ds_summary_stats(data)
 
 }
 
