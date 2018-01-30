@@ -1,8 +1,12 @@
 context('print')
 
+mt <- mtcars
+mt$cyl <- as.factor(mt$cyl)
+mt$vs <- as.factor(mt$vs)
+
 test_that('output from print_cross matches expected output', {
 
-    k <- ds_cross_table(mtcars$cyl, mtcars$vs)
+    k <- ds_cross_table(mt, cyl, vs)
     pim <- "    Cell Contents
 |---------------|
 |     Frequency |
@@ -71,7 +75,7 @@ test_that('output from print_screener matches expected output', {
 
 test_that("output from print_fcont matches the expected result", {
 
-    k <- ds_freq_cont(mtcars$mpg)
+    k <- ds_freq_cont(mtcars, mpg)
     pim <- "                              Variable: mpg
 |-----------------------------------------------------------------------|
 |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -93,7 +97,7 @@ test_that("output from print_fcont matches the expected result", {
 
 test_that("output from freq_table matches the expected result", {
 
-    k <- ds_freq_table(as.factor(mtcars$cyl))
+    k <- ds_freq_table(mt, cyl)
     pim <- "                               Variable: cyl)
 |--------------------------------------------------------------------------|
     |                                Cumulative                    Cumulative  |
@@ -112,9 +116,7 @@ test_that("output from freq_table matches the expected result", {
 
 test_that("output from group_summary matches the expected result", {
 
-    mt <- mtcars
-    mt$cyl <- as.factor(mt$cyl)
-    k <- ds_group_summary(mt$cyl, mt$mpg)
+    k <- ds_group_summary(mt, cyl, mpg)
     pim <- "                                       mpg by cyl
 -----------------------------------------------------------------------------------------
 |     Statistic/Levels|                    4|                    6|                    8|
