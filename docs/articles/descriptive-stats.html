@@ -110,14 +110,14 @@
 <pre><code>## -----------------------------------------------------------------------
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 ## -----------------------------------------------------------------------
-## |      mpg      |   numeric   |    NA     |    12     |     37.5      |
+## |      mpg      |   numeric   |    NA     |     0     |       0       |
 ## |      cyl      |   factor    |   4 6 8   |     0     |       0       |
 ## |     disp      |   numeric   |    NA     |    12     |     37.5      |
 ## |      hp       |   numeric   |    NA     |    12     |     37.5      |
 ## |     drat      |   numeric   |    NA     |     0     |       0       |
 ## |      wt       |   numeric   |    NA     |     0     |       0       |
 ## |     qsec      |   numeric   |    NA     |    12     |     37.5      |
-## |      vs       |   factor    |    0 1    |     0     |       0       |
+## |      vs       |   factor    |    0 1    |    12     |     37.5      |
 ## |      am       |   factor    |    0 1    |     0     |       0       |
 ## |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
 ## |     carb      |   factor    |1 2 3 4 6 8|    12     |     37.5      |
@@ -301,7 +301,7 @@
 <p>The <code><a href="../reference/ds_group_summary.html">ds_group_summary()</a></code> function returns descriptive statistics of a continuous variable for the different levels of a categorical variable.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mt<span class="op">$</span>cyl, mt<span class="op">$</span>mpg)</a></code></pre></div>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mt, cyl, mpg)</a></code></pre></div>
 <pre><code>##                                        mpg by cyl                                         
 ## -----------------------------------------------------------------------------------------
 ## |     Statistic/Levels|                    4|                    6|                    8|
@@ -329,7 +329,7 @@
 <p>A <code>boxplot()</code> method has been defined.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mt<span class="op">$</span>cyl, mt<span class="op">$</span>mpg)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mt, cyl, mpg)</a>
 <a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">boxplot</span>(k)</a></code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/gsum_boxplot-1.png" width="672"></p>
 </div>

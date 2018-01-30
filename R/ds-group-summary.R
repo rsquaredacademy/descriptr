@@ -5,8 +5,9 @@
 #' continuous variable for the different levels of a categorical variable.
 #' \code{boxplot.group_summary} creates boxplots of the continuous variable
 #' for the different levels of the categorical variable.
-#' @param fvar a factor variable
-#' @param cvar a continuous variable
+#' @param data a \code{data.frame} or a \code{tibble}
+#' @param gvar factor; column in \code{data}
+#' @param cvar continuous; column in \code{data}
 #' @param x an object of the class \code{ds_group_summary}
 #' @param ... further arguments to be passed to or from methods
 #' @return \code{ds_group_summary} returns an object of class \code{"ds_group_summary"}.
@@ -25,42 +26,60 @@
 #' # ds_group summary
 #' mt <- mtcars
 #' mt$cyl <- as.factor(mt$cyl)
-#' ds_group_summary(mt$cyl, mt$mpg)
+#' ds_group_summary(mt, cyl, mpg)
 #'
 #' # boxplot
-#' k <- ds_group_summary(mt$cyl, mt$mpg)
+#' k <- ds_group_summary(mt, cyl, mpg)
 #' boxplot(k)
 #' @seealso \code{link{ds_summary_stats}}
 #' @export
 #'
-ds_group_summary <- function(fvar, cvar) UseMethod('ds_group_summary')
+ds_group_summary <- function(data, gvar, cvar) UseMethod('ds_group_summary')
 
 #' @export
 #'
-ds_group_summary.default <- function(fvar, cvar) {
+ds_group_summary.default <- function(data, gvar, cvar) {
 
-    if (!is.factor(fvar)) {
-        stop('fvar must be an object of type factor')
+  g_var <- enquo(gvar)
+  c_var <- enquo(cvar)
+
+  gvar <-
+    data %>%
+    pull(!! g_var)
+
+  cvar <-
+    data %>%
+    pull(!! c_var)
+
+    if (!is.factor(gvar)) {
+        stop('gvar must be an object of type factor')
     }
 
     if (!is.numeric(cvar)) {
         stop('cvar must be numeric')
     }
 
-    if (length(fvar) != length(cvar)) {
-        stop('fvar and cvar must be of the same length')
+    if (length(gvar) != length(cvar)) {
+        stop('gvar and cvar must be of the same length')
     }
 
-    xname <- l(deparse(substitute(fvar)))
-    yname <- l(deparse(substitute(cvar)))
+    xname <-
+      data %>%
+      select(!! g_var) %>%
+      names
+
+    yname <-
+      data %>%
+      select(!! c_var) %>%
+      names
 
 
-    split_dat <- tapply(cvar, list(fvar), function(fvar) {
-                      c(length(fvar), min(fvar), max(fvar), mean(fvar),
-                      median(fvar), ds_mode(fvar), sd(fvar), var(fvar),
-                      ds_skewness(fvar), ds_kurtosis(fvar), stat_uss(fvar),
-                      ds_css(fvar), ds_cvar(fvar), std_error(fvar),
-                      ds_range(fvar), IQR(fvar))
+    split_dat <- tapply(cvar, list(gvar), function(gvar) {
+                      c(length(gvar), min(gvar), max(gvar), mean(gvar),
+                      median(gvar), ds_mode(gvar), sd(gvar), var(gvar),
+                      ds_skewness(gvar), ds_kurtosis(gvar), stat_uss(gvar),
+                      ds_css(gvar), ds_cvar(gvar), std_error(gvar),
+                      ds_range(gvar), IQR(gvar))
                  })
 
     splito <- sapply(split_dat, round, 2)
@@ -71,9 +90,9 @@ ds_group_summary.default <- function(fvar, cvar) {
                 'Std. Error Mean', 'Range', 'Interquartile Range')
 
     out <- data.frame(rnames, splito)
-    names(out) <- c('Statistic/Levels', levels(fvar))
+    names(out) <- c('Statistic/Levels', levels(gvar))
 
-    plot_data <- data.frame(fvar, cvar)
+    plot_data <- data.frame(gvar, cvar)
     names(plot_data) <- c(xname, yname)
 
     result <- list(stats  = out,
@@ -92,7 +111,6 @@ ds_group_summary.default <- function(fvar, cvar) {
 group_summary <- function(fvar, cvar) {
 
   .Deprecated("ds_group_summary()")
-  ds_group_summary(fvar, cvar)
 
 }
 

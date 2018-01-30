@@ -4,7 +4,7 @@ test_that("output from ds_group_summary matches the expected result", {
 
     mt <- mtcars
     mt$cyl <- as.factor(mt$cyl)
-    k <- ds_group_summary(mt$cyl, mt$mpg)
+    k <- ds_group_summary(mt, cyl, mpg)
     metrics <- c("Obs", "Minimum", "Maximum", "Mean", "Median", "Mode",
                  "Std. Deviation", "Variance", "Skewness", "Kurtosis",
                  "Uncorrected SS", "Corrected SS", "Coeff Variation",
@@ -27,11 +27,13 @@ test_that("output from ds_group_summary matches the expected result", {
 
 test_that("ds_group_summary throws the appropriate error", {
 
-    expect_error(ds_group_summary(mtcars$cyl, mtcars$mpg),
-                 "fvar must be an object of type factor")
-    expect_error(ds_group_summary(as.factor(mtcars$cyl), "mtcars$mpg"),
+  mt <- mtcars
+  mt$cyl <- as.factor(mt$cyl)
+  mt$am <- as.factor(mt$am)
+
+    expect_error(ds_group_summary(mtcars, cyl, mpg),
+                 "gvar must be an object of type factor")
+    expect_error(ds_group_summary(mt, cyl, am),
                  "cvar must be numeric")
-    expect_error(ds_group_summary(as.factor(mtcars$cyl), mtcars$mpg[-1]),
-                 "fvar and cvar must be of the same length")
 
 })
