@@ -6,7 +6,8 @@
 #' returns the frequency, cumulative frequency, frequency percent and cumulative
 #' frequency percent. \code{barplot.ds_freq_table} creates bar plot for the
 #' frequency table created using \code{ds_freq_table}
-#' @param data numeric or factor vector
+#' @param data a \code{data.frame} or a \code{tibble}
+#' @param variable column in \code{data}
 #' @param height an object of class \code{ds_freq_table}
 #' @param ... further arguments to be passed to or from methods
 #' @return \code{ds_freq_table} returns an object of class \code{"ds_freq_table"}.
@@ -21,35 +22,45 @@
 #' # frequency table
 #' mt <- mtcars
 #' mt$cyl <- as.factor(mt$cyl)
-#' ds_freq_table(mt$cyl)
+#' ds_freq_table(mt, cyl)
 #'
 #' # barplot
 #' mt <- mtcars
 #' mt$cyl <- as.factor(mt$cyl)
-#' k <- ds_freq_table(mt$cyl)
+#' k <- ds_freq_table(mt, cyl)
 #' barplot(k)
 #' @seealso \code{link{ds_freq_cont}} \code{link{ds_cross_table}}
 #' @export
 #'
-ds_freq_table <- function(data) UseMethod("ds_freq_table")
+ds_freq_table <- function(data, variable) UseMethod("ds_freq_table")
 
 #' @export
-ds_freq_table.default <- function(data) {
+ds_freq_table.default <- function(data, variable) {
 
-  if (!is.factor(data)) {
-    stop('data must be categorical/qualitative')
+  varyable <- enquo(variable)
+
+  fdata <-
+    data %>%
+    pull(!! varyable) %>%
+    na.omit
+
+  if (!is.factor(fdata)) {
+    stop('variable must be categorical/qualitative')
   }
 
-  var_name = l(deparse(substitute(data)))
-  data <- na.omit(data)
-  level_names <- levels(data)
-  data_len <- length(data)
+  var_name <-
+    data %>%
+    select(!! varyable) %>%
+    names
+
+  level_names <- levels(fdata)
+  data_len <- length(fdata)
 
   # unique values in the input
-  cq <- forcats::fct_unique(data)
+  cq <- forcats::fct_unique(fdata)
 
   # count of unique values in the input
-  result <- data %>%
+  result <- fdata %>%
     fct_count %>%
     pull(2)
 
@@ -90,7 +101,7 @@ ds_freq_table.default <- function(data) {
 freq_table <- function(data) {
 
   .Deprecated("ds_freq_table()")
-  ds_freq_table(data)
+
 
 }
 
