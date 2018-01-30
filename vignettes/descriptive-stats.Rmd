@@ -152,7 +152,7 @@ variable for the different levels of a categorical variable.
 ```{r gsummary}
 mt <- mtcars
 mt$cyl <- as.factor(mt$cyl)
-ds_group_summary(mt$cyl, mt$mpg)
+ds_group_summary(mt, cyl, mpg)
 ```
 
 
@@ -163,7 +163,7 @@ A `boxplot()` method has been defined.
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
 mt <- mtcars
 mt$cyl <- as.factor(mt$cyl)
-k <- ds_group_summary(mt$cyl, mt$mpg)
+k <- ds_group_summary(mt, cyl, mpg)
 boxplot(k)
 ```
 

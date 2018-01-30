@@ -188,7 +188,9 @@ ds_freq_cont(mtcars, mpg)
 ##### Group Summary
 
 ``` r
-ds_group_summary(mtcars$cyl, mtcars$mpg)
+mt <- mtcars
+mt$cyl <- as.factor(mt$cyl)
+ds_group_summary(mt, cyl, mpg)
 #>                                        mpg by cyl                                         
 #> -----------------------------------------------------------------------------------------
 #> |     Statistic/Levels|                    4|                    6|                    8|
