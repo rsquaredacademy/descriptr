@@ -56,7 +56,7 @@ devtools::install_github("rsquaredacademy/descriptr")
 Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
 ## Vignettes
-<<<<<<< HEAD
+
 
   - [Descriptive
     Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
@@ -97,11 +97,7 @@ str(mtcarz)
 ##### Summary Statistics
 
 ``` r
-<<<<<<< HEAD
 ds_summary_stats(mtcarz, mpg)
-=======
-ds_summary_stats(mtcars, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #>                         Univariate Analysis                          
 #> 
 #>  N                       32.00      Variance                36.32 
@@ -144,11 +140,7 @@ ds_summary_stats(mtcars, mpg)
 ##### Two Way Table
 
 ``` r
-<<<<<<< HEAD
 ds_cross_table(mtcarz, cyl, gear)
-=======
-ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #>     Cell Contents
 #>  |---------------|
 #>  |     Frequency |
@@ -187,13 +179,7 @@ ds_cross_table(mtcars, cyl, gear)
 ##### One Way Table
 
 ``` r
-<<<<<<< HEAD
 ds_freq_table(mtcarz, cyl)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_freq_table(mt, cyl)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #>                                Variable: cyl                                 
 #> |--------------------------------------------------------------------------|
 #> |                                Cumulative                    Cumulative  |
@@ -210,11 +196,7 @@ ds_freq_table(mt, cyl)
 ##### One Way Table (Continuous Data)
 
 ``` r
-<<<<<<< HEAD
 ds_freq_cont(mtcarz, mpg)
-=======
-ds_freq_cont(mtcars, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #>                               Variable: mpg                               
 #> |-----------------------------------------------------------------------|
 #> |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -234,13 +216,7 @@ ds_freq_cont(mtcars, mpg)
 ##### Group Summary
 
 ``` r
-<<<<<<< HEAD
 ds_group_summary(mtcarz, cyl, mpg)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_group_summary(mt, cyl, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #>                                        mpg by cyl                                         
 #> -----------------------------------------------------------------------------------------
 #> |     Statistic/Levels|                    4|                    6|                    8|
