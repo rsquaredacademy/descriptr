@@ -168,7 +168,13 @@ use <code>ds_group_summary()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># ds_group summary</span>
+<<<<<<< HEAD
 <span class='fu'>ds_group_summary</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt;                                        mpg by cyl                                         
+=======
+<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
+<span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
+<span class='fu'>ds_group_summary</span>(<span class='no'>mt</span>, <span class='no'>cyl</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt;                                        mpg by cyl                                         
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #&gt; -----------------------------------------------------------------------------------------
 #&gt; |     Statistic/Levels|                    4|                    6|                    8|
 #&gt; -----------------------------------------------------------------------------------------
@@ -190,7 +196,11 @@ use <code>ds_group_summary()</code>.</p>
 #&gt; |  Interquartile Range|                  7.6|                 2.35|                 1.85|
 #&gt; -----------------------------------------------------------------------------------------</div><div class='input'>
 <span class='co'># boxplot</span>
+<<<<<<< HEAD
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_group_summary</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>mpg</span>)
+=======
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_group_summary</span>(<span class='no'>mt</span>, <span class='no'>cyl</span>, <span class='no'>mpg</span>)
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <span class='fu'>boxplot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_group_summary-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

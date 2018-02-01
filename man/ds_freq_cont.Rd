@@ -50,10 +50,17 @@ for the frequency table created using \code{ds_freq_cont}
 
 \examples{
 # frequency table
+<<<<<<< HEAD
 ds_freq_cont(mtcarz, mpg, 4)
 
 # histogram
 k <- ds_freq_cont(mtcarz, mpg, 4)
+=======
+ds_freq_cont(mtcars, mpg, 4)
+
+# histogram
+k <- ds_freq_cont(mtcars, mpg, 4)
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 hist(k)
 }
 \seealso{

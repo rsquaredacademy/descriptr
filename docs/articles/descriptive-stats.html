@@ -83,7 +83,11 @@
     <div class="page-header toc-ignore">
       <h1>Introduction to descriptr</h1>
             
+<<<<<<< HEAD
             <h4 class="date">2018-02-01</h4>
+=======
+            <h4 class="date">2018-01-30</h4>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
           </div>
 
     
@@ -121,12 +125,20 @@
 <h2 class="hasAnchor">
 <a href="#data-screening" class="anchor"></a>Data Screening</h2>
 <p>The <code><a href="../reference/ds_screener.html">ds_screener()</a></code> function will screen a data set and return the following: - Column/Variable Names - Data Type - Levels (in case of categorical data) - Number of missing observations - % of missing observations</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/ds_screener.html">ds_screener</a></span>(mtcarz)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)], factor)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">mt[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mt), <span class="dv">12</span>), <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mt), <span class="dv">6</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="../reference/ds_screener.html">ds_screener</a></span>(mt)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>## -----------------------------------------------------------------------
 ## |  Column Name  |  Data Type  |  Levels   |  Missing  |  Missing (%)  |
 ## -----------------------------------------------------------------------
 ## |      mpg      |   numeric   |    NA     |     0     |       0       |
 ## |      cyl      |   factor    |   4 6 8   |     0     |       0       |
+<<<<<<< HEAD
 ## |     disp      |   numeric   |    NA     |     0     |       0       |
 ## |      hp       |   numeric   |    NA     |     0     |       0       |
 ## |     drat      |   numeric   |    NA     |     0     |       0       |
@@ -136,6 +148,17 @@
 ## |      am       |   factor    |    0 1    |     0     |       0       |
 ## |     gear      |   factor    |   3 4 5   |     0     |       0       |
 ## |     carb      |   factor    |1 2 3 4 6 8|     0     |       0       |
+=======
+## |     disp      |   numeric   |    NA     |    12     |     37.5      |
+## |      hp       |   numeric   |    NA     |    12     |     37.5      |
+## |     drat      |   numeric   |    NA     |     0     |       0       |
+## |      wt       |   numeric   |    NA     |     0     |       0       |
+## |     qsec      |   numeric   |    NA     |    12     |     37.5      |
+## |      vs       |   factor    |    0 1    |    12     |     37.5      |
+## |      am       |   factor    |    0 1    |     0     |       0       |
+## |     gear      |   factor    |   3 4 5   |    12     |     37.5      |
+## |     carb      |   factor    |1 2 3 4 6 8|    12     |     37.5      |
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ## -----------------------------------------------------------------------
 ## 
 ##  Overall Missing Values           0 
@@ -147,7 +170,11 @@
 <h2 class="hasAnchor">
 <a href="#summary-statistics" class="anchor"></a>Summary Statistics</h2>
 <p>The <code>ds_summary_stats</code> function returns a comprehensive set of statistics for <strong>continuous</strong> data.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/ds_summary_stats.html">ds_summary_stats</a></span>(mtcarz, mpg)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/ds_summary_stats.html">ds_summary_stats</a></span>(mtcars, mpg)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##                         Univariate Analysis                          
 ## 
 ##  N                       32.00      Variance                36.32 
@@ -189,8 +216,13 @@
 <div id="cross-tabulation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cross-tabulation" class="anchor"></a>Cross Tabulation</h2>
+<<<<<<< HEAD
 <p>The <code>ds_cross_table</code> function creates two way tables of categorical variables.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a></code></pre></div>
+=======
+<p>The <code>ds_cross_table</code> function creates two way tables of categorical variables. It is <strong>not necessary</strong> to coerce a variable to type <code>factor</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcars, cyl, gear)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##     Cell Contents
 ##  |---------------|
 ##  |     Frequency |
@@ -228,30 +260,50 @@
 <div id="grouped-bar-plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#grouped-bar-plots" class="anchor"></a>Grouped Bar Plots</h3>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">plot</span>(k, <span class="dt">beside =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcars, cyl, gear)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">plot</span>(k, <span class="dt">beside =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/cross_group-1.png" width="672"></p>
 </div>
 <div id="stacked-bar-plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#stacked-bar-plots" class="anchor"></a>Stacked Bar Plots</h3>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">plot</span>(k)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcars, cyl, gear)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">plot</span>(k)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/cross_stack-1.png" width="672"></p>
 </div>
 <div id="proportional-bar-plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#proportional-bar-plots" class="anchor"></a>Proportional Bar Plots</h3>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">plot</span>(k, <span class="dt">proportional =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcars, cyl, gear)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">plot</span>(k, <span class="dt">proportional =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/cross_prop-1.png" width="672"></p>
 </div>
 <div id="mosaic-plots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mosaic-plots" class="anchor"></a>Mosaic Plots</h3>
 <p>Mosaic plots can be created using the <code>mosaciplot</code> method.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">mosaicplot</span>(k)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span>(mtcars, cyl, gear)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">mosaicplot</span>(k)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/mosaic-1.png" width="672"></p>
 </div>
 </div>
@@ -259,7 +311,13 @@
 <h2 class="hasAnchor">
 <a href="#frequency-table-categorical-data" class="anchor"></a>Frequency Table (Categorical Data)</h2>
 <p>The <code><a href="../reference/ds_freq_table.html">ds_freq_table()</a></code> function creates frequency tables for categorical variables.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mtcarz, cyl)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mt, cyl)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
 ## |                                Cumulative                    Cumulative  |
@@ -275,8 +333,15 @@
 <h3 class="hasAnchor">
 <a href="#bar-plot" class="anchor"></a>Bar Plot</h3>
 <p>A barplot method has been defined.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mtcarz, cyl)</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">barplot</span>(k)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span>(mt, cyl)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">barplot</span>(k)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/ftable_bar-1.png" width="672"></p>
 </div>
 </div>
@@ -284,7 +349,11 @@
 <h2 class="hasAnchor">
 <a href="#frequency-table-continuous-data" class="anchor"></a>Frequency Table (Continuous Data)</h2>
 <p>The <code>ds_freq_cont</code> function creates frequency tables for continuous variables. The default number of intervals is 5.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcarz, mpg, <span class="dv">4</span>)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars, mpg, <span class="dv">4</span>)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##                                 Variable: mpg                                 
 ## |---------------------------------------------------------------------------|
 ## |      Bins       | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -301,8 +370,13 @@
 <h3 class="hasAnchor">
 <a href="#histogram" class="anchor"></a>Histogram</h3>
 <p>A <code>hist</code> method has been defined.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcarz, mpg, <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">hist</span>(k)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcars, mpg, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">hist</span>(k)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/fcont_hist-1.png" width="672"></p>
 </div>
 </div>
@@ -310,7 +384,13 @@
 <h2 class="hasAnchor">
 <a href="#group-summary" class="anchor"></a>Group Summary</h2>
 <p>The <code><a href="../reference/ds_group_summary.html">ds_group_summary()</a></code> function returns descriptive statistics of a continuous variable for the different levels of a categorical variable.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mt, cyl, mpg)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##                                        mpg by cyl                                         
 ## -----------------------------------------------------------------------------------------
 ## |     Statistic/Levels|                    4|                    6|                    8|
@@ -336,16 +416,28 @@
 <h3 class="hasAnchor">
 <a href="#box-plot" class="anchor"></a>Box Plot</h3>
 <p>A <code>boxplot()</code> method has been defined.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">boxplot</span>(k)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">mt<span class="op">$</span>cyl &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mt<span class="op">$</span>cyl)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mt, cyl, mpg)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">boxplot</span>(k)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <p><img src="descriptive-stats_files/figure-html/gsum_boxplot-1.png" width="672"></p>
 </div>
 </div>
 <div id="multiple-variable-statistics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multiple-variable-statistics" class="anchor"></a>Multiple Variable Statistics</h2>
+<<<<<<< HEAD
 <p>The <code><a href="../reference/ds_multi_stats.html">ds_multi_stats()</a></code> function generates summary/descriptive statistics for variables in a data frame/tibble.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/ds_multi_stats.html">ds_multi_stats</a></span>(mtcarz, mpg, disp, hp)</a></code></pre></div>
+=======
+<p>The <code><a href="../reference/ds_multi_stats.html">ds_multi_stats()</a></code> function generates summary/descriptive statistics for multiple variables in a data frame/tibble.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="../reference/ds_multi_stats.html">ds_multi_stats</a></span>(mtcars, mpg, disp, hp)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>## # A tibble: 3 x 16
 ##   vars    min   max  mean t_mean median  mode range variance  stdev  skew
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -359,7 +451,13 @@
 <h2 class="hasAnchor">
 <a href="#multiple-one-way-tables" class="anchor"></a>Multiple One Way Tables</h2>
 <p>The <code><a href="../reference/ds_oway_tables.html">ds_oway_tables()</a></code> function creates multiple one way tables by creating a frequency table for each categorical variable in a data frame.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_oway_tables</a></span>(mtcarz)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">11</span>)], factor)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_oway_tables</a></span>(mt)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##                                Variable: cyl                                 
 ## |--------------------------------------------------------------------------|
 ## |                                Cumulative                    Cumulative  |
@@ -430,7 +528,13 @@
 <h2 class="hasAnchor">
 <a href="#multiple-two-way-tables" class="anchor"></a>Multiple Two Way Tables</h2>
 <p>The <code><a href="../reference/ds_oway_tables.html">ds_tway_tables()</a></code> function creates multiple two way tables by creating a cross table for each unique pair of categorical variables in a data frame.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_tway_tables</a></span>(mtcarz)</a></code></pre></div>
+=======
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">mt &lt;-<span class="st"> </span>mtcars</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">10</span>)] &lt;-<span class="st"> </span><span class="kw">lapply</span>(mt[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">8</span><span class="op">:</span><span class="dv">10</span>)], factor)</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_tway_tables</a></span>(mt)</a></code></pre></div>
+>>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 <pre><code>##     Cell Contents
 ##  |---------------|
 ##  |     Frequency |
