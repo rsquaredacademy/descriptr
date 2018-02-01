@@ -88,55 +88,31 @@ str(mtcarz)
 ##### Summary Statistics
 
 ```{r descript1}
-<<<<<<< HEAD
 ds_summary_stats(mtcarz, mpg)
-=======
-ds_summary_stats(mtcars, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 ##### Two Way Table
 
 ```{r descript2}
-<<<<<<< HEAD
 ds_cross_table(mtcarz, cyl, gear)
-=======
-ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 ##### One Way Table
 
 ```{r descript3}
-<<<<<<< HEAD
 ds_freq_table(mtcarz, cyl)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_freq_table(mt, cyl)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 ##### One Way Table (Continuous Data)
 
 ```{r descript4}
-<<<<<<< HEAD
 ds_freq_cont(mtcarz, mpg)
-=======
-ds_freq_cont(mtcars, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 ##### Group Summary
 
 ```{r descript5}
-<<<<<<< HEAD
 ds_group_summary(mtcarz, cyl, mpg)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_group_summary(mt, cyl, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 ##### Multiple Variable Statistics

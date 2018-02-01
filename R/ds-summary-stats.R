@@ -42,11 +42,7 @@
 #' \code{summary_stats()} has been deprecated. Instead use
 #' \code{ds_summary_stats()}.
 #' @examples
-<<<<<<< HEAD
 #' ds_summary_stats(mtcarz, mpg)
-=======
-#' ds_summary_stats(mtcars, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 #' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
 #' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #' @export
@@ -115,10 +111,6 @@ ds_summary_stats.default <- function(data, variable) {
 summary_stats <- function(data) {
 
   .Deprecated("ds_summary_stats()")
-<<<<<<< HEAD
-=======
-  # ds_summary_stats(data)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 
 }
 

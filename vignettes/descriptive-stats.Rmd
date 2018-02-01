@@ -56,11 +56,7 @@ The `ds_summary_stats` function returns a comprehensive set of statistics for
 **continuous** data. 
 
 ```{r summary}
-<<<<<<< HEAD
 ds_summary_stats(mtcarz, mpg)
-=======
-ds_summary_stats(mtcars, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 
@@ -69,11 +65,7 @@ ds_summary_stats(mtcars, mpg)
 The `ds_cross_table` function creates two way tables of categorical variables. 
 
 ```{r cross}
-<<<<<<< HEAD
 ds_cross_table(mtcarz, cyl, gear)
-=======
-ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 A plot method has been defined which will generate:
@@ -82,11 +74,7 @@ A plot method has been defined which will generate:
 ### Grouped Bar Plots
 
 ```{r cross_group, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_cross_table(mtcarz, cyl, gear)
-=======
-k <- ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 plot(k, beside = TRUE)
 ```
 
@@ -94,11 +82,7 @@ plot(k, beside = TRUE)
 ### Stacked Bar Plots
 
 ```{r cross_stack, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_cross_table(mtcarz, cyl, gear)
-=======
-k <- ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 plot(k)
 ```
 
@@ -106,11 +90,7 @@ plot(k)
 ### Proportional Bar Plots
 
 ```{r cross_prop, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_cross_table(mtcarz, cyl, gear)
-=======
-k <- ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 plot(k, proportional = TRUE)
 ```
 
@@ -120,11 +100,7 @@ plot(k, proportional = TRUE)
 Mosaic plots can be created using the `mosaciplot` method.
 
 ```{r mosaic, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_cross_table(mtcarz, cyl, gear)
-=======
-k <- ds_cross_table(mtcars, cyl, gear)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 mosaicplot(k)
 ```
 
@@ -134,13 +110,7 @@ mosaicplot(k)
 The `ds_freq_table()` function creates frequency tables for categorical variables. 
 
 ```{r ftable}
-<<<<<<< HEAD
 ds_freq_table(mtcarz, cyl)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_freq_table(mt, cyl)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 
@@ -149,13 +119,7 @@ ds_freq_table(mt, cyl)
 A barplot method has been defined.
 
 ```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_freq_table(mtcarz, cyl)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-k <- ds_freq_table(mt, cyl)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 barplot(k)
 ```
 
@@ -166,11 +130,7 @@ The `ds_freq_cont` function creates frequency tables for continuous variables.
 The default number of intervals is 5.
 
 ```{r fcont}
-<<<<<<< HEAD
 ds_freq_cont(mtcarz, mpg, 4)
-=======
-ds_freq_cont(mtcars, mpg, 4)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 
@@ -179,11 +139,7 @@ ds_freq_cont(mtcars, mpg, 4)
 A `hist` method has been defined.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_freq_cont(mtcarz, mpg, 4)
-=======
-k <- ds_freq_cont(mtcars, mpg, 4)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 hist(k)
 ```
 
@@ -194,13 +150,7 @@ The `ds_group_summary()` function returns descriptive statistics of a continuous
 variable for the different levels of a categorical variable.
 
 ```{r gsummary}
-<<<<<<< HEAD
 ds_group_summary(mtcarz, cyl, mpg)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_group_summary(mt, cyl, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 ```
 
 
@@ -209,13 +159,7 @@ ds_group_summary(mt, cyl, mpg)
 A `boxplot()` method has been defined.
 
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
-<<<<<<< HEAD
 k <- ds_group_summary(mtcarz, cyl, mpg)
-=======
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-k <- ds_group_summary(mt, cyl, mpg)
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 boxplot(k)
 ```
 
