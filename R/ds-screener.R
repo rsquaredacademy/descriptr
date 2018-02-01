@@ -32,14 +32,7 @@
 #' use \code{ds_screener()}.
 #' @examples
 #' # screen data
-#' mt <- mtcars
-#' mt[, c(2, 8:11)] <- lapply(mt[, c(2, 8:11)], factor)
-#' mt[sample(1:nrow(mt), 12), sample(1:ncol(mt), 6)] <- NA
-#' ds_screener(mt)
-#'
-#' # visualize missing data
-#' k <- ds_screener(mt)
-#' plot(k)
+#' ds_screener(mtcarz)
 #' @export
 #'
 ds_screener <- function(y) UseMethod('ds_screener')

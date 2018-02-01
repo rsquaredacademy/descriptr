@@ -72,16 +72,16 @@ reference:
     given probability.
   contents:
   - dist_norm_plot
-  - dist_norm_per
+  - dist_norm_perc
   - dist_norm_prob
   - dist_binom_plot
   - dist_binom_perc
   - dist_binom_prob
   - dist_chi_plot
-  - dist_chi_per
+  - dist_chi_perc
   - dist_chi_prob
   - dist_f_plot
-  - dist_f_per
+  - dist_f_perc
   - dist_f_prob
   - dist_t
 
@@ -107,3 +107,4 @@ reference:
     illustrate the functions as well as for running tests.
   contents:
   - hsb
+  - mtcarz

@@ -12,8 +12,8 @@
 #' @section Deprecated function:
 #' \code{tailobs()} has been deprecated. Instead use \code{ds_tailobs()}.
 #' @examples
-#' ds_tailobs(mtcars$mpg, 5)
-#' ds_tailobs(mtcars$mpg, 5, type = "high")
+#' ds_tailobs(mtcarz$mpg, 5)
+#' ds_tailobs(mtcarz$mpg, 5, type = "high")
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
 #'

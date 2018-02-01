@@ -9,7 +9,7 @@
 #' @section Deprecated Function:
 #' \code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
 #' @examples
-#' ds_multi_stats(mtcars, mpg, disp, hp)
+#' ds_multi_stats(mtcarz, mpg, disp, hp)
 #' @export
 #'
 ds_multi_stats <- function(x, ...) {
