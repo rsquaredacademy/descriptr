@@ -84,15 +84,6 @@ str(mtcarz)
 #>  $ gear: Factor w/ 3 levels "3","4","5": 2 2 2 1 1 1 1 2 2 2 ...
 #>  $ carb: Factor w/ 6 levels "1","2","3","4",..: 4 4 1 1 2 1 4 2 2 4 ...
 ```
-=======
-
-  - [Descriptive
-    Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
-  - [Statistical
-    Distributions](http://www.rsquaredacademy.com/descriptr/articles/distributions.html)
-
-## Usage
->>>>>>> 349d1f18bf529b4b500e5f2d09a66bdea33360cb
 
 ##### Summary Statistics
 
