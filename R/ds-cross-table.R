@@ -29,7 +29,7 @@
 #' @section Deprecated Function:
 #' \code{ds_cross_table()} has been deprecated. Instead use \code{ds_cross_table()}.
 #' @examples
-#' k <- ds_cross_table(mtcars, cyl, am)
+#' k <- ds_cross_table(mtcarz, cyl, am)
 #' k
 #'
 #' # bar plots

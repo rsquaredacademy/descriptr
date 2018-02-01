@@ -20,14 +20,10 @@
 #' \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
 #' @examples
 #' # frequency table
-#' mt <- mtcars
-#' mt$cyl <- as.factor(mt$cyl)
-#' ds_freq_table(mt, cyl)
+#' ds_freq_table(mtcarz, cyl)
 #'
 #' # barplot
-#' mt <- mtcars
-#' mt$cyl <- as.factor(mt$cyl)
-#' k <- ds_freq_table(mt, cyl)
+#' k <- ds_freq_table(mtcarz, cyl)
 #' barplot(k)
 #' @seealso \code{link{ds_freq_cont}} \code{link{ds_cross_table}}
 #' @export

@@ -24,5 +24,5 @@ Summary/descriptive statistics for multiple variables
 }
 
 \examples{
-ds_multi_stats(mtcars, mpg, disp, hp)
+ds_multi_stats(mtcarz, mpg, disp, hp)
 }

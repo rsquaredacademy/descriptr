@@ -58,7 +58,7 @@ statistics for continuous data.
 }
 
 \examples{
-ds_summary_stats(mtcars, mpg)
+ds_summary_stats(mtcarz, mpg)
 }
 \seealso{
 \code{\link[base]{summary}} \code{\link{ds_freq_cont}}

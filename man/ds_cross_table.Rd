@@ -56,7 +56,7 @@ variables. The tables created can be visualized as barplots and mosaicplots.
 }
 
 \examples{
-k <- ds_cross_table(mtcars, cyl, am)
+k <- ds_cross_table(mtcarz, cyl, am)
 k
 
 # bar plots

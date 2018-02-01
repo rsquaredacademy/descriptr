@@ -24,12 +24,10 @@
 #' use \code{ds_group_summary()}.
 #' @examples
 #' # ds_group summary
-#' mt <- mtcars
-#' mt$cyl <- as.factor(mt$cyl)
-#' ds_group_summary(mt, cyl, mpg)
+#' ds_group_summary(mtcarz, cyl, mpg)
 #'
 #' # boxplot
-#' k <- ds_group_summary(mt, cyl, mpg)
+#' k <- ds_group_summary(mtcarz, cyl, mpg)
 #' boxplot(k)
 #' @seealso \code{link{ds_summary_stats}}
 #' @export

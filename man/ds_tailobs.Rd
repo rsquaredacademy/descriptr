@@ -31,8 +31,8 @@ takes place.
 }
 
 \examples{
-ds_tailobs(mtcars$mpg, 5)
-ds_tailobs(mtcars$mpg, 5, type = "high")
+ds_tailobs(mtcarz$mpg, 5)
+ds_tailobs(mtcarz$mpg, 5, type = "high")
 }
 \seealso{
 \code{\link[dplyr]{top_n}}

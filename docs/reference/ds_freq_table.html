@@ -160,9 +160,7 @@ following components</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># frequency table</span>
-<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
-<span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
-<span class='fu'>ds_freq_table</span>(<span class='no'>mt</span>, <span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
+<span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
 #&gt; |--------------------------------------------------------------------------|
 #&gt; |                                Cumulative                    Cumulative  |
 #&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
@@ -176,9 +174,7 @@ following components</p>
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'># barplot</span>
-<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
-<span class='no'>mt</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'>as.factor</span>(<span class='no'>mt</span>$<span class='no'>cyl</span>)
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mt</span>, <span class='no'>cyl</span>)
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)
 <span class='fu'>barplot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_table-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

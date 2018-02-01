@@ -34,13 +34,11 @@ use \code{ds_oway_tables()} and \code{ds_tway_tables()}.
 }
 
 \examples{
-mt <- mtcars
-mt[, c(2, 8, 9)] <- lapply(mt[, c(2, 8, 9)], factor)
 # multiple one way tables
-ds_oway_tables(mt)
+ds_oway_tables(mtcarz)
 
 # multiple two way tables
-ds_tway_tables(mt)
+ds_tway_tables(mtcarz)
 }
 \seealso{
 \code{link{ds_freq_table}} \code{link{ds_cross_table}}

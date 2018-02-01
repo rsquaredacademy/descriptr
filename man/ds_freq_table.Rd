@@ -40,14 +40,10 @@ frequency table created using \code{ds_freq_table}
 
 \examples{
 # frequency table
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_freq_table(mt, cyl)
+ds_freq_table(mtcarz, cyl)
 
 # barplot
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-k <- ds_freq_table(mt, cyl)
+k <- ds_freq_table(mtcarz, cyl)
 barplot(k)
 }
 \seealso{

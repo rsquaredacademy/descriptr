@@ -74,49 +74,51 @@ Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
 ## Usage
 
-##### Summary Statistics
+We will use a modified version of the `mtcars` data set in the below examples. The only difference between the data sets is related to the 
+variable types.
 
 ```{r load, eval=TRUE, echo=FALSE}
 library(descriptr)
-mtcars$cyl <- as.factor(mtcars$cyl)
 ```
 
+```{r egdata}
+str(mtcarz)
+```
+
+##### Summary Statistics
+
 ```{r descript1}
-ds_summary_stats(mtcars, mpg)
+ds_summary_stats(mtcarz, mpg)
 ```
 
 ##### Two Way Table
 
 ```{r descript2}
-ds_cross_table(mtcars, cyl, gear)
+ds_cross_table(mtcarz, cyl, gear)
 ```
 
 ##### One Way Table
 
 ```{r descript3}
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_freq_table(mt, cyl)
+ds_freq_table(mtcarz, cyl)
 ```
 
 ##### One Way Table (Continuous Data)
 
 ```{r descript4}
-ds_freq_cont(mtcars, mpg)
+ds_freq_cont(mtcarz, mpg)
 ```
 
 ##### Group Summary
 
 ```{r descript5}
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-ds_group_summary(mt, cyl, mpg)
+ds_group_summary(mtcarz, cyl, mpg)
 ```
 
 ##### Multiple Variable Statistics
 
 ```{r descriptr6}
-ds_multi_stats(mtcars, mpg, disp, hp)
+ds_multi_stats(mtcarz, mpg, disp, hp)
 ```
 
 
