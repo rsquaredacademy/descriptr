@@ -8,7 +8,7 @@
 #' frequency table created using \code{ds_freq_table}
 #' @param data a \code{data.frame} or a \code{tibble}
 #' @param variable column in \code{data}
-#' @param height an object of class \code{ds_freq_table}
+#' @param x an object of class \code{ds_freq_table}
 #' @param ... further arguments to be passed to or from methods
 #' @return \code{ds_freq_table} returns an object of class \code{"ds_freq_table"}.
 #' An object of class \code{"ds_freq_table"} is a list containing the
@@ -24,7 +24,7 @@
 #'
 #' # barplot
 #' k <- ds_freq_table(mtcarz, cyl)
-#' barplot(k)
+#' plot(k)
 #' @seealso \code{link{ds_freq_cont}} \code{link{ds_cross_table}}
 #' @export
 #'
@@ -82,7 +82,8 @@ ds_freq_table.default <- function(data, variable) {
 
   result <- list(
     ftable = ftable,
-    varname = var_name
+    varname = var_name,
+    data = data
   )
 
   class(result) <- "ds_freq_table"
@@ -107,21 +108,34 @@ print.ds_freq_table <- function(x, ...) {
 }
 
 
-
+#' @importFrom ggplot2 ylab
 #' @rdname ds_freq_table
 #' @export
 #'
-barplot.ds_freq_table <- function(height, ...) {
-    j <- as.numeric(height$ftable[[2]])
-    h <- j
-    ymax <- max(h)
-    cols <- length(j)
-    x_names <- height$ftable[[1]]
-    k <- barplot(j, col = topo.colors(cols),
-                 main = paste('Bar Plot of', height$varname),
-                 xlab = height$varname,
-                 ylab = 'Frequency',
-                 ylim = c(0, ymax[1]),
-                 names.arg = x_names)
-    graphics::text(k, h, labels = j, adj = 0.5, pos = 1)
+plot.ds_freq_table <- function(x, ...) {
+
+  x_lab <-
+    x %>%
+    use_series(varname) %>%
+    extract(1)
+
+  k <-
+    x %>%
+    use_series(varname) %>%
+    extract(1) %>%
+    sym
+
+  p <-
+    x %>%
+    use_series(data) %>%
+    select(x = !!k) %>%
+    ggplot() +
+    geom_bar(aes(x = x), fill = "blue") +
+    xlab(x_lab) + ylab("Count") +
+    ggtitle(paste("Bar plot of", x_lab))
+
+  print(p)
+
+  result <- list(plot = p)
+  invisible(result)
 }

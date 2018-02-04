@@ -108,7 +108,7 @@ A barplot method has been defined.
 
 ```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_freq_table(mtcarz, cyl)
-barplot(k)
+plot(k)
 ```
 
 

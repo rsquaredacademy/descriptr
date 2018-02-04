@@ -117,7 +117,7 @@ frequency table created using <code>ds_freq_table</code></p>
     <pre class="usage"><span class='fu'>ds_freq_table</span>(<span class='no'>data</span>, <span class='no'>variable</span>)
 
 <span class='co'># S3 method for ds_freq_table</span>
-<span class='fu'>barplot</span>(<span class='no'>height</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -131,7 +131,7 @@ frequency table created using <code>ds_freq_table</code></p>
       <td><p>column in <code>data</code></p></td>
     </tr>
     <tr>
-      <th>height</th>
+      <th>x</th>
       <td><p>an object of class <code>ds_freq_table</code></p></td>
     </tr>
     <tr>
@@ -175,7 +175,7 @@ following components</p>
 #&gt; </div><div class='input'>
 <span class='co'># barplot</span>
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)
-<span class='fu'>barplot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_table-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_table-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
