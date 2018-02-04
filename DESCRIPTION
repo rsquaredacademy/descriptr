@@ -12,9 +12,11 @@ Depends:
 Imports:
     dplyr,
     forcats,
+    ggplot2,
     graphics,
     magrittr,
     rlang,
+    scales,
     shiny,
     tibble,
     tidyr
@@ -32,7 +34,8 @@ Suggests:
     shinythemes,
     stringr,
     testthat,
-    tools
+    tools,
+    vdiffr
 License: MIT + file LICENSE
 URL: https://rsquaredacademy.github.io/descriptr/, https://github.com/rsquaredacademy/descriptr
 BugReports: https://github.com/rsquaredacademy/descriptr/issues

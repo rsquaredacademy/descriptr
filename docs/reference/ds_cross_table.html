@@ -115,10 +115,7 @@ variables. The tables created can be visualized as barplots and mosaicplots.</p>
     <pre class="usage"><span class='fu'>ds_cross_table</span>(<span class='no'>data</span>, <span class='no'>var1</span>, <span class='no'>var2</span>)
 
 <span class='co'># S3 method for ds_cross_table</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>beside</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ds_cross_table</span>
-<span class='fu'>mosaicplot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>stacked</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -140,7 +137,7 @@ variables. The tables created can be visualized as barplots and mosaicplots.</p>
       <td><p>An object of class cross_table</p></td>
     </tr>
     <tr>
-      <th>beside</th>
+      <th>stacked</th>
       <td><p>a logical value. If FALSE, the columns of height are portrayed
 as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.</p></td>
     </tr>
@@ -213,9 +210,7 @@ following components:</p>
 #&gt; |              |        0.594 |        0.406 |              |
 #&gt; -------------------------------------------------------------</div><div class='input'>
 <span class='co'># bar plots</span>
-<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>beside</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
-<span class='co'># mosaic plots</span>
-<span class='fu'>mosaicplot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>stacked</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
