@@ -148,7 +148,7 @@ A `boxplot()` method has been defined.
 
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_group_summary(mtcarz, cyl, mpg)
-boxplot(k)
+plot(k)
 ```
 
 ## Multiple Variable Statistics 

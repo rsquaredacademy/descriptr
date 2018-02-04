@@ -28,7 +28,7 @@
 #'
 #' # boxplot
 #' k <- ds_group_summary(mtcarz, cyl, mpg)
-#' boxplot(k)
+#' plot(k)
 #' @seealso \code{link{ds_summary_stats}}
 #' @export
 #'
@@ -96,7 +96,8 @@ ds_group_summary.default <- function(data, gvar, cvar) {
     result <- list(stats  = out,
                    plotdata = plot_data,
                    xvar  = xname,
-                   yvar  = yname)
+                   yvar  = yname,
+                   data = data)
 
     class(result) <- 'ds_group_summary'
     return(result)
@@ -117,14 +118,43 @@ print.ds_group_summary <- function(x, ...) {
     print_group(x)
 }
 
-
+#' @importFrom ggplot2 geom_boxplot
 #' @rdname ds_group_summary
 #' @export
 #'
-boxplot.ds_group_summary <- function(x, ...) {
-    n <- nlevels(factor(x$plotdata[[1]]))
-    boxplot(x$plotdata[[2]] ~ x$plotdata[[1]],
-        col = rainbow(n), xlab = x$xvar,
-        ylab = x$yvar,
-        main = paste('Box Plot of', x$yvar, 'by', x$xvar))
+plot.ds_group_summary <- function(x, ...) {
+
+  x_lab <-
+    x %>%
+    use_series(xvar)
+
+  y_lab <-
+    x %>%
+    use_series(yvar)
+
+  k <-
+    x %>%
+    use_series(xvar) %>%
+    sym
+
+  j <-
+    x %>%
+    use_series(yvar) %>%
+    sym
+
+  p <-
+    x %>%
+    use_series(data) %>%
+    select(x = !!k, y = !!j) %>%
+    ggplot() +
+    geom_boxplot(aes(x = x, y = y), fill = "blue") +
+    xlab(x_lab) + ylab(y_lab) +
+    ggtitle(paste(y_lab , "by", x_lab))
+
+  print(p)
+
+  result <- list(plot = p)
+  invisible(result)
+
+
 }

@@ -3,12 +3,12 @@
 \name{ds_group_summary}
 \alias{ds_group_summary}
 \alias{group_summary}
-\alias{boxplot.ds_group_summary}
+\alias{plot.ds_group_summary}
 \title{Descriptive Statistics By Group}
 \usage{
 ds_group_summary(data, gvar, cvar)
 
-\method{boxplot}{ds_group_summary}(x, ...)
+\method{plot}{ds_group_summary}(x, ...)
 }
 \arguments{
 \item{data}{a \code{data.frame} or a \code{tibble}}
@@ -50,7 +50,7 @@ ds_group_summary(mtcarz, cyl, mpg)
 
 # boxplot
 k <- ds_group_summary(mtcarz, cyl, mpg)
-boxplot(k)
+plot(k)
 }
 \seealso{
 \code{link{ds_summary_stats}}
