@@ -51,26 +51,23 @@ test_that('output from ds_cross_table matches expected results', {
 
 test_that('ouput from plot.ds_cross_table matches expected output', {
 
-    # stacked bar plot
-    k <- ds_cross_table(mtcars, cyl, vs)
-    h <- plot(k)
-    exptd <- matrix(c(1, 3, 14, 10, 4, 0), nrow = 3)
-    expect_equivalent(h$data, exptd)
+  skip_on_cran()
 
-    # proportional bar plot
-    k <- ds_cross_table(mtcars, cyl, vs)
-    h <- plot(k, proportional = TRUE)
-    exptd <- matrix(c(5.56, 16.67, 77.78, 71.43, 28.57, 0.00), nrow = 3)
-    expect_equivalent(h$data, exptd)
+  # cross table
+  k <- ds_cross_table(mtcarz, cyl, gear)
 
-})
+  # bar plot
+  p1 <- plot(k)
+  vdiffr::expect_doppelganger('cross_bar', p1$plot)
 
+  # stacked bar plot
+  p2 <- plot(k, stacked = TRUE)
+  vdiffr::expect_doppelganger('cross_bar_stacked', p2$plot)
 
-test_that('output from mosaicplot.ds_cross_table returns expected output', {
-
-    k <- ds_cross_table(mtcars, cyl, vs)
-    h <- mosaicplot(k)
-    exptd <- matrix(c(1, 3, 14, 10, 4, 0), nrow = 3)
-    expect_equivalent(h$data, exptd)
+  # proportional bar plot
+  p3 <- plot(k, proportional = TRUE)
+  vdiffr::expect_doppelganger('cross_bar_proportional', p3$plot)
 
 })
+
+

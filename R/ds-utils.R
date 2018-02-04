@@ -350,3 +350,11 @@ quant3 <- function(x) {
 #     ret <- format(x, width = w, justify = "right")
 #     return(ret)
 # }
+
+#' @importFrom rlang sym
+string_to_name <- function(x, index = 1) {
+  x %>%
+    use_series(varnames) %>%
+    extract(index) %>%
+    sym
+}

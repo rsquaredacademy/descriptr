@@ -9,7 +9,6 @@
 #' @param variable numeric; column in \code{data}
 #' @param bins number of intervals into which the data must be split
 #' @param x an object of class \code{ds_freq_cont}
-#' @param col color of the bars
 #' @param ... further arguments to be passed to or from methods
 #' @return \code{ds_freq_cont} returns an object of class \code{"ds_freq_cont"}
 #' An object of class \code{"ds_freq_cont"} is a list containing the
@@ -31,7 +30,7 @@
 #'
 #' # histogram
 #' k <- ds_freq_cont(mtcarz, mpg, 4)
-#' hist(k)
+#' plot(k)
 #' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
 #' @export
 #'
@@ -101,15 +100,42 @@ print.ds_freq_cont <- function(x, ...) {
   print_fcont(x)
 }
 
+#' @importFrom tibble add_column
+#' @importFrom ggplot2 geom_col
 #' @rdname ds_freq_cont
 #' @export
 #'
-hist.ds_freq_cont <- function(x, col = 'blue', ...) {
+plot.ds_freq_cont <- function(x, ...) {
 
-  ymax <- max(x$frequency) + 2
-  h <-  hist(x$data, breaks = x$breaks,
-        main = paste('Histogram of', x$varname),
-        xlab = x$varname, ylab = 'Frequency', ylim = c(0, ymax), col = col)
-  text(h$mids, h$counts + 1, labels = h$counts, adj = 0.5, pos = 1)
+  x_lab <-
+    x %>%
+    use_series(varname)
+
+  k <-
+    x %>%
+    use_series(varname) %>%
+    extract(1) %>%
+    sym
+
+  bins <-
+    x %>%
+    use_series(frequency) %>%
+    length
+
+  p <-
+    x %>%
+    use_series(frequency) %>%
+    as_tibble %>%
+    add_column(x = seq_len(bins), .before = 1) %>%
+    ggplot() +
+    geom_col(aes(x = x, y = value), width = 0.999,
+             fill = "blue", color = "black") +
+    xlab(x_lab) + ylab("Count") +
+    ggtitle(paste("Histogram of", x_lab))
+
+  print(p)
+
+  result <- list(plot = p)
+  invisible(result)
 
 }

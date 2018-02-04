@@ -1,11 +1,8 @@
 context('freq_table')
 
-mt <- mtcars
-mt$cyl <- as.factor(mt$cyl)
-
 test_that('output from ds_freq_table matches expected results', {
 
-  k <- ds_freq_table(mt, cyl)
+  k <- ds_freq_table(mtcarz, cyl)
   expect_equivalent(k$ftable[[1]], c("4", "6", "8"))
   expect_equivalent(k$ftable[[2]], c(11, 7, 14))
   expect_equivalent(k$ftable[[3]], c(11, 18, 32))
@@ -17,5 +14,15 @@ test_that('output from ds_freq_table matches expected results', {
 test_that('ds_freq_table returns appropriate errors', {
 
   expect_error(ds_freq_table(mtcars, mpg), 'variable must be categorical/qualitative')
+
+})
+
+test_that("output from ds_freq_table plot is as expected", {
+
+  skip_on_cran()
+
+  k <- ds_freq_table(mtcarz, cyl)
+  p <- plot(k)
+  vdiffr::expect_doppelganger('ds_freq_bar', p$plot)
 
 })

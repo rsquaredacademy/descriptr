@@ -37,3 +37,15 @@ test_that("ds_group_summary throws the appropriate error", {
                  "cvar must be numeric")
 
 })
+
+
+test_that("output from ds_group_summary plot is as expected", {
+
+  skip_on_cran()
+
+  k <- ds_group_summary(mtcarz, cyl, mpg)
+  p <- plot(k)
+  vdiffr::expect_doppelganger('group_summary', p$plot)
+
+})
+

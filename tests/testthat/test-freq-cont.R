@@ -23,3 +23,13 @@ test_that('ds_freq_cont returns appropriate errors', {
   expect_error(ds_freq_cont(mtcars, mpg, '5'), 'bins must be integer value')
 
 })
+
+test_that("output from ds_freq_cont plot is as expected", {
+
+  skip_on_cran()
+
+  k <- ds_freq_cont(mtcarz, mpg)
+  p <- plot(k)
+  vdiffr::expect_doppelganger('ds_freq_cont', p$plot)
+
+})

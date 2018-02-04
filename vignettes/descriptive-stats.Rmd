@@ -1,6 +1,5 @@
 ---
 title: "Introduction to descriptr"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to descriptr}
@@ -75,7 +74,7 @@ A plot method has been defined which will generate:
 
 ```{r cross_group, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_cross_table(mtcarz, cyl, gear)
-plot(k, beside = TRUE)
+plot(k)
 ```
 
 
@@ -83,7 +82,7 @@ plot(k, beside = TRUE)
 
 ```{r cross_stack, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_cross_table(mtcarz, cyl, gear)
-plot(k)
+plot(k, stacked = TRUE)
 ```
 
 
@@ -93,17 +92,6 @@ plot(k)
 k <- ds_cross_table(mtcarz, cyl, gear)
 plot(k, proportional = TRUE)
 ```
-
-
-### Mosaic Plots
-
-Mosaic plots can be created using the `mosaciplot` method.
-
-```{r mosaic, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_cross_table(mtcarz, cyl, gear)
-mosaicplot(k)
-```
-
 
 ## Frequency Table (Categorical Data)
 
@@ -120,7 +108,7 @@ A barplot method has been defined.
 
 ```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_freq_table(mtcarz, cyl)
-barplot(k)
+plot(k)
 ```
 
 
@@ -140,7 +128,7 @@ A `hist` method has been defined.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_freq_cont(mtcarz, mpg, 4)
-hist(k)
+plot(k)
 ```
 
 
@@ -160,7 +148,7 @@ A `boxplot()` method has been defined.
 
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_group_summary(mtcarz, cyl, mpg)
-boxplot(k)
+plot(k)
 ```
 
 ## Multiple Variable Statistics 

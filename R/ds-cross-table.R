@@ -7,7 +7,7 @@
 #' @param var1 First categorical variable
 #' @param var2 Second categorical variable
 #' @param x An object of class cross_table
-#' @param beside a logical value. If FALSE, the columns of height are portrayed
+#' @param stacked a logical value. If FALSE, the columns of height are portrayed
 #' as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.
 #' @param proportional a logical value. If TRUE, the height of the bars is
 #' proportional
@@ -34,11 +34,8 @@
 #'
 #' # bar plots
 #' plot(k)
-#' plot(k, beside = TRUE)
+#' plot(k, stacked = TRUE)
 #' plot(k, proportional = TRUE)
-#'
-#' # mosaic plots
-#' mosaicplot(k)
 #' @export
 #'
 ds_cross_table <- function(data, var1, var2) UseMethod("ds_cross_table")
@@ -94,7 +91,7 @@ ds_cross_table <- function(data, var1, var2) {
 
     result <- list(obs = n, var2_levels = col_name, var1_levels = row_name, varnames = var_names,
         twowaytable = x, percent_table = per_mat, row_percent = rcent, column_percent = ccent,
-        column_totals = coltotal, percent_column = col_pct)
+        column_totals = coltotal, percent_column = col_pct, data = data)
 
 
     class(result) <- "ds_cross_table"
@@ -117,80 +114,74 @@ print.ds_cross_table <- function(x, ...) {
 }
 
 
-
+#' @importFrom ggplot2 ggplot aes geom_bar xlab ggtitle labs scale_y_continuous
+#' @importFrom tibble as_tibble
+#' @importFrom scales percent_format
+#' @importFrom magrittr extract
 #' @export
 #' @rdname ds_cross_table
 #'
-plot.ds_cross_table <- function(x, beside = FALSE, proportional = FALSE, ...) {
-    i_data <- x$twowaytable
-    nb <- ncol(i_data)
-    bdata <- i_data[, c(-1, -nb)]
-    ln <- length(x$var2_levels)
-    bardata <- matrix(as.numeric(bdata), ncol = ln)
-    cols <- nrow(bardata)
+plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
 
+  x_lab <-
+    x %>%
+    use_series(varnames) %>%
+    extract(1)
+
+  y_lab <-
+    x %>%
+    use_series(varnames) %>%
+    extract(2)
+
+  k <- string_to_name(x)
+  j <- string_to_name(x, 2)
 
     # proportional stacked bar plots
-    if (proportional == TRUE) {
+    if (proportional) {
 
-        colbar <- colSums(bardata)
-        nh <- nrow(bardata)
-        h <- rep(colbar, nh)
-        hichka <- matrix(h, nrow = nh, byrow = T)
-        propo_data <- round((bardata/hichka) * 100, 2)
-        barplot(propo_data, col = rainbow(cols), main = paste(x$varnames[1],
-            "by", x$varnames[2]), xlab = x$varnames[2], ylab = x$varnames[1],
-            legend.text = T)
-        result <- list(data = propo_data)
+      p <-
+        x %>%
+        use_series(data) %>%
+        select(x = !! k, y = !! j) %>%
+        table %>%
+        as_tibble %>%
+        ggplot(aes(x = x, y = n, fill = y)) +
+        geom_bar(stat = "identity", position = "fill") +
+        scale_y_continuous(labels=percent_format()) +
+        xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
+        labs(fill = y_lab)
 
     } else {
 
-        barplot(bardata, col = rainbow(cols), beside = beside,
-                main = paste(x$varnames[1], "by", x$varnames[2]),
-                xlab = x$varnames[2], ylab = x$varnames[1],
-                legend.text = T)
-        result <- list(data = bardata)
+      if (stacked) {
+
+        p <-
+          x %>%
+          use_series(data) %>%
+          select(x = !! k, y = !! j) %>%
+          ggplot() +
+          geom_bar(aes(x, fill = y), position = "stack") +
+          xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
+          labs(fill = y_lab)
+
+      } else {
+
+        p <-
+          x %>%
+          use_series(data) %>%
+          select(x = !! k, y = !! j) %>%
+          ggplot() +
+          geom_bar(aes(x, fill = y), position = "dodge") +
+          xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
+          labs(fill = y_lab)
+
+      }
+
     }
 
-    invisible(result)
+  print(p)
+  result <- list(plot = p)
+  invisible(result)
+
 }
 
-
-#' @export
-#' @rdname ds_cross_table
-#'
-mosaicplot.ds_cross_table <- function(x, ...) {
-    i_data <- x$twowaytable
-    nb <- ncol(i_data)
-    mdata <- i_data[, c(-1, -nb)]
-    ln <- length(x$var2_levels)
-    modata <- matrix(as.numeric(mdata), ncol = ln)
-    colnames(modata) <- x$var2_levels
-    rownames(modata) <- x$var1_levels
-    cols <- nrow(modata)
-    mosaicplot(modata, col = rainbow(cols), off = 5,
-               xlab = x$varnames[1], ylab = x$varnames[2],
-               main = paste(x$varnames[1], "by", x$varnames[2]))
-
-    # x axis position
-    cpr <- ncol(x$row_percent)
-    rp <- x$row_percent[, cpr]
-    crp <- cumsum(rp)
-    lcrp <- length(crp)
-    f1 <- (crp[-lcrp] + diff(cumsum(rp)) / 2)
-    xpos <- c(rp[1] / 2, f1)
-
-    # y axis position
-    nr <- nrow(x$row_percent)
-    for (i in seq_len(nr)) {
-        rpy <- rev(x$row_percent[i, -cpr])
-        crpy <- cumsum(rpy)
-        lcrpy <- length(crpy)
-        f1 <- (crpy[-lcrpy] + diff(cumsum(rpy)) / 2)
-        ypos <- c(rpy[1] / 2, f1)
-        text(x = xpos[i], y = ypos, labels = paste(rpy * 100, '%'), cex = 0.6)
-    }
-
-    result <- list(data = modata)
-    invisible(result)
-}
