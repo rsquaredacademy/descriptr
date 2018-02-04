@@ -25,6 +25,3 @@ takes place.
 \examples{
 ds_cvar(mtcars$mpg)
 }
-\seealso{
-\code{\link[stats]{var}} \code{\link[stats]{sd}}
-}

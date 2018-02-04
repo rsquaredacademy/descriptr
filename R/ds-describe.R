@@ -341,7 +341,6 @@ stat_mdev <- function(x) {
 #' \code{stat_cvar()} has been deprecated. Instead use \code{ds_cvar()}.
 #' @examples
 #' ds_cvar(mtcars$mpg)
-#' @seealso \code{\link[stats]{var}} \code{\link[stats]{sd}}
 #' @export
 #'
 ds_cvar <- function(x) {
