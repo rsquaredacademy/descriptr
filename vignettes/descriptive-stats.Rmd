@@ -128,7 +128,7 @@ A `hist` method has been defined.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_freq_cont(mtcarz, mpg, 4)
-hist(k)
+plot(k)
 ```
 
 

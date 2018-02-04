@@ -117,7 +117,7 @@ for the frequency table created using <code>ds_freq_cont</code></p>
     <pre class="usage"><span class='fu'>ds_freq_cont</span>(<span class='no'>data</span>, <span class='no'>variable</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>5</span>)
 
 <span class='co'># S3 method for ds_freq_cont</span>
-<span class='fu'>hist</span>(<span class='no'>x</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -137,10 +137,6 @@ for the frequency table created using <code>ds_freq_cont</code></p>
     <tr>
       <th>x</th>
       <td><p>an object of class <code>ds_freq_cont</code></p></td>
-    </tr>
-    <tr>
-      <th>col</th>
-      <td><p>color of the bars</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -188,7 +184,7 @@ following components</p>
 #&gt; |---------------------------------------------------------------------------|</div><div class='input'>
 <span class='co'># histogram</span>
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_cont</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>, <span class='fl'>4</span>)
-<span class='fu'>hist</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_cont-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_cont-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
