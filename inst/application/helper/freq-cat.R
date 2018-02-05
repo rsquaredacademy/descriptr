@@ -1,72 +1,94 @@
 source('helper/utils.R')
 source('helper/output.R')
 
-freq_table <- function(dframe, x) UseMethod("freq_table")
+ds_freq_table <- function(data, variable) UseMethod("ds_freq_table")
 
-freq_table.default <- function(dframe, x) {
+ds_freq_table.default <- function(data, variable) {
 
-  if (!is.data.frame(dframe)) {
-    stop('dframe must be a data frame')
-  }  
+  fdata <-
+    data %>%
+    pull(!! sym(variable)) %>%
+    na.omit
 
-  if (!is.character(x)) {
-    stop('x must be character')
+  if (!is.factor(fdata)) {
+    stop('variable must be categorical/qualitative')
   }
 
-  if (!x %in% colnames(dframe)) {
-    stop('x must be a column in dframe')
-  }
+  var_name <-
+    data %>%
+    select(!! sym(variable)) %>%
+    names
 
-  var_name <- x
-  data <- dframe %>%
-          select_(x) %>%
-          as.data.frame() %>%
-          unlist() %>%
-          na.omit() %>% 
-          as.factor()
-          
-  level_names <- levels(data)
+  level_names <- levels(fdata)
+  data_len <- length(fdata)
 
-  data_len <- length(data)
-  result <- as.vector(table(data))
+  # unique values in the input
+  cq <- forcats::fct_unique(fdata)
+
+  # count of unique values in the input
+  result <- fdata %>%
+    fct_count %>%
+    pull(2)
+
+  # length of result
   len <- length(result)
+
+  # cumulative frequency
   cum <- cumsum(result)
+
+  # percent
   per <- percent(result, data_len)
+
+  # cumulative percent
   cum_per <- percent(cum, data_len)
 
-  ftable <- cbind(level_names, result, cum, per, cum_per)
-  
+  # matrix
+  ftable <- tibble(Levels = level_names,
+                   Frequency = result,
+                   `Cum Frequency` = cum,
+                   Percent = per,
+                   `Cum Percent` = cum_per)
 
-  colnames(ftable) <- c("Levels", "Frequency", "Cum Frequency",
-                        "Percent", "Cum Percent")
 
   result <- list(
     ftable = ftable,
-    varname = var_name
+    varname = var_name,
+    data = data
   )
 
-  class(result) <- "freq_table"
+  class(result) <- "ds_freq_table"
   return(result)
 
 }
 
-
-print.freq_table <- function(data) {
-  print_ftable(data)
+print.ds_freq_table <- function(x, ...) {
+  print_ftable(x)
 }
 
+plot.ds_freq_table <- function(x, ...) {
 
-barplot.freq_table <- function(height, ...) {
-    j <- as.numeric(height$ftable[, 2])
-    h <- j
-    ymax <- max(h)
-    cols <- length(j)
-    x_names <- height$ftable[, 1]
-    k <- barplot(j, col = topo.colors(cols),
-                 main = paste('Bar Plot of', height$varname),
-                 xlab = height$varname,
-                 ylab = 'Frequency',
-                 ylim = c(0, ymax[1]),
-                 names.arg = x_names)
-    graphics::text(k, h, labels = j, adj = 0.5, pos = 1)
+  x_lab <-
+    x %>%
+    use_series(varname) %>%
+    extract(1)
+
+  k <-
+    x %>%
+    use_series(varname) %>%
+    extract(1) %>%
+    sym
+
+  p <-
+    x %>%
+    use_series(data) %>%
+    select(x = !!k) %>%
+    ggplot() +
+    geom_bar(aes(x = x), fill = "blue") +
+    xlab(x_lab) + ylab("Count") +
+    ggtitle(paste("Bar plot of", x_lab))
+
+  print(p)
+
+  result <- list(plot = p)
+  invisible(result)
 }

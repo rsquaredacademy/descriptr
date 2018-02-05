@@ -1,40 +1,36 @@
 source('helper/utils.R')
 source('helper/output.R')
 
-freq_cont <- function(dframe, x, bins = 5) UseMethod("freq_cont")
+ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
 
-freq_cont.default <- function(dframe, x, bins = 5) {
+ds_freq_cont.default <- function(data, variable,  bins = 5) {
 
-  if(!is.data.frame(dframe)) {
-    stop('dframe must be a data frame')
+  fdata <-
+    data %>%
+    pull(!! sym(variable)) %>%
+    na.omit
+
+  if(!is.numeric(fdata)) {
+    stop('variable must be numeric')
   }
 
   if(!is.numeric(bins)) {
     stop('bins must be integer value')
   }
 
-  if (!is.character(x)) {
-    stop('x must be character')
-  }
-
-  if (!x %in% colnames(dframe)) {
-    stop('x must be a column in dframe')
-  }
-
   if(is.numeric(bins)) {
     bins <- as.integer(bins)
   }
 
-  var_name <- x
-  data <- dframe %>%
-          select_(x) %>%
-          as.data.frame() %>%
-          unlist() %>%
-          na.omit()
+  var_name <-
+    data %>%
+    select(!! sym(variable)) %>%
+    names
+
   n_bins <- bins
-  inta <- intervals(data, bins)
-  result <- freq(data, bins, inta)
-  data_len <- length(data)
+  inta <- intervals(fdata, bins)
+  result <- freq(fdata, bins, inta)
+  data_len <- length(fdata)
   cum <- cumsum(result)
   per <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
@@ -44,27 +40,48 @@ freq_cont.default <- function(dframe, x, bins = 5) {
               percent = per,
               cum_percent = cum_per,
               bins = n_bins,
-              data = data,
+              data = fdata,
               varname = var_name)
 
-  class(out) <- "freq_cont"
+  class(out) <- "ds_freq_cont"
   return(out)
 }
 
-
-print.freq_cont <- function(x, ...) {
+print.ds_freq_cont <- function(x, ...) {
   print_fcont(x)
 }
 
+plot.ds_freq_cont <- function(x, ...) {
 
-hist.freq_cont <- function(x, col = 'blue', ...) {
+  x_lab <-
+    x %>%
+    use_series(varname)
 
-  ymax <- max(x$frequency) + 2
-  h <-  hist(x$data, breaks = x$breaks,
-        main = paste('Histogram of', x$varname),
-        xlab = x$varname, ylab = 'Frequency', ylim = c(0, ymax), col = col)
-  text(h$mids, h$counts + 1, labels = h$counts, adj = 0.5, pos = 1)
+  k <-
+    x %>%
+    use_series(varname) %>%
+    extract(1) %>%
+    sym
+
+  bins <-
+    x %>%
+    use_series(frequency) %>%
+    length
+
+  p <-
+    x %>%
+    use_series(frequency) %>%
+    as_tibble %>%
+    add_column(x = seq_len(bins), .before = 1) %>%
+    ggplot() +
+    geom_col(aes(x = x, y = value), width = 0.999,
+             fill = "blue", color = "black") +
+    xlab(x_lab) + ylab("Count") +
+    ggtitle(paste("Histogram of", x_lab))
+
+  print(p)
+
+  result <- list(plot = p)
+  invisible(result)
 
 }
-
-

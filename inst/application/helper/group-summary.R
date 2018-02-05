@@ -2,88 +2,108 @@ source('helper/utils.R')
 source('helper/output.R')
 source('helper/describe.R')
 
-group_summary <- function(dframe, x, y) UseMethod('group_summary')
+ds_group_summary <- function(data, gvar, cvar) UseMethod('ds_group_summary')
 
-group_summary.default <- function(dframe, x, y) {
+ds_group_summary.default <- function(data, gvar, cvar) {
 
-    if(!is.data.frame(dframe)) {
-      stop('dframe must be a data frame')
-    }
+  xname <-
+    data %>%
+    select(!! sym(gvar)) %>%
+    names
 
-    if (!is.character(x)) {
-      stop('x must be character')
-    }
+  yname <-
+    data %>%
+    select(!! sym(cvar)) %>%
+    names
 
-    if (!x %in% colnames(dframe)) {
-      stop('x must be a column in dframe')
-    }
+  gvar <-
+    data %>%
+    pull(!! sym(gvar))
 
-    if (!is.character(y)) {
-      stop('y must be character')
-    }
+  cvar <-
+    data %>%
+    pull(!! sym(cvar))
 
-    if (!y %in% colnames(dframe)) {
-      stop('y must be a column in dframe')
-    }
+  if (!is.factor(gvar)) {
+    stop('gvar must be an object of type factor')
+  }
 
-    xname <- x
-    yname <- y
+  if (!is.numeric(cvar)) {
+    stop('cvar must be numeric')
+  }
 
-    dfr <- dframe %>%
-             select_(x, y) %>%
-             as.data.frame() %>%
-             na.omit()
+  if (length(gvar) != length(cvar)) {
+    stop('gvar and cvar must be of the same length')
+  }
 
-    x <- dfr %>%
-           select_(x) %>%
-           as.data.frame() %>%
-           unlist() 
+  split_dat <- tapply(cvar, list(gvar), function(gvar) {
+    c(length(gvar), min(gvar), max(gvar), mean(gvar),
+      median(gvar), ds_mode(gvar), sd(gvar), var(gvar),
+      ds_skewness(gvar), ds_kurtosis(gvar), stat_uss(gvar),
+      ds_css(gvar), ds_cvar(gvar), std_error(gvar),
+      ds_range(gvar), IQR(gvar))
+  })
 
-    y <- dfr %>%
-           select_(y) %>%
-           as.data.frame() %>%
-           unlist() 
+  splito <- sapply(split_dat, round, 2)
 
-    split_dat <- tapply(y, list(x), function(x) {
-                      c(length(x), min(x), max(x), mean(x), median(x),
-                      descriptr::stat_mode(x), sd(x), var(x), skewness(x),
-                      kurtosis(x), stat_uss(x),
-                      stat_css(x), stat_cvar(x),
-                      std_error(x), stat_range(x), IQR(x))
-                 })
+  rnames <- c('Obs', 'Minimum', 'Maximum', 'Mean', 'Median', 'Mode',
+              'Std. Deviation', 'Variance', 'Skewness', 'Kurtosis',
+              'Uncorrected SS', 'Corrected SS', 'Coeff Variation',
+              'Std. Error Mean', 'Range', 'Interquartile Range')
 
-    splito <- sapply(split_dat, round, 2)
+  out <- data.frame(rnames, splito)
+  names(out) <- c('Statistic/Levels', levels(gvar))
 
-    rnames <- c('Obs', 'Maximum', 'Minimum', 'Mean', 'Median', 'Mode',
-                'Std. Deviation', 'Variance', 'Skewness', 'Kurtosis',
-                'Uncorrected SS', 'Corrected SS', 'Coeff Variation',
-                'Std. Error Mean', 'Range', 'Interquartile Range')
+  plot_data <- data.frame(gvar, cvar)
+  names(plot_data) <- c(xname, yname)
 
-    out <- data.frame(rnames, splito)
-    names(out) <- c('Statistic/Levels', levels(x))
+  result <- list(stats  = out,
+                 plotdata = plot_data,
+                 xvar  = xname,
+                 yvar  = yname,
+                 data = data)
 
-    plot_data <- data.frame(x, y)
-    names(plot_data) <- c(xname, yname)
-
-    result <- list(stats  = out,
-                   plotdata = plot_data,
-                   xvar  = xname,
-                   yvar  = yname)
-
-    class(result) <- 'group_summary'
-    return(result)
+  class(result) <- 'ds_group_summary'
+  return(result)
 }
 
-
-print.group_summary <- function(x, ...) {
-    print_group(x)
+print.ds_group_summary <- function(x, ...) {
+  print_group(x)
 }
 
+plot.ds_group_summary <- function(x, ...) {
 
-boxplot.group_summary <- function(x, ...) {
-    n <- nlevels(factor(x$plotdata[[1]]))
-    boxplot(x$plotdata[[2]] ~ x$plotdata[[1]],
-        col = rainbow(n), xlab = x$xvar,
-        ylab = x$yvar,
-        main = paste('Box Plot of', x$yvar, 'by', x$xvar))
+  x_lab <-
+    x %>%
+    use_series(xvar)
+
+  y_lab <-
+    x %>%
+    use_series(yvar)
+
+  k <-
+    x %>%
+    use_series(xvar) %>%
+    sym
+
+  j <-
+    x %>%
+    use_series(yvar) %>%
+    sym
+
+  p <-
+    x %>%
+    use_series(data) %>%
+    select(x = !!k, y = !!j) %>%
+    ggplot() +
+    geom_boxplot(aes(x = x, y = y), fill = "blue") +
+    xlab(x_lab) + ylab(y_lab) +
+    ggtitle(paste(y_lab , "by", x_lab))
+
+  print(p)
+
+  result <- list(plot = p)
+  invisible(result)
+
+
 }

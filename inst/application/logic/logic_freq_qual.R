@@ -23,7 +23,7 @@ observeEvent(input$finalok, {
                       inputId = "var_table",
                       choices = names(num_data))
 
-    }  
+    }
 })
 
 observeEvent(input$submit_part_train_per, {
@@ -41,7 +41,7 @@ observeEvent(input$submit_part_train_per, {
                       inputId = "var_table",
                       choices = names(num_data))
 
-    }  
+    }
 })
 
 # selected data
@@ -54,7 +54,7 @@ d_freq_qual <- eventReactive(input$submit_fqual, {
 })
 
 fqual_out <- eventReactive(input$submit_fqual, {
-  ki <- freq_table(d_freq_qual(), as.character(input$var_table))
+  ki <- ds_freq_table(final_split$train, as.character(input$var_table))
   ki
 })
 
@@ -72,7 +72,7 @@ output$freq_qual <- renderPrint({
 })
 
 output$qual_vert <- renderPlot({
-    barplot(fqual_out())
+    plot(fqual_out())
 })
 
 # output$qual_horiz <- renderPlot({
