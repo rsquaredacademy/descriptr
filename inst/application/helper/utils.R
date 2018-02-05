@@ -380,3 +380,10 @@ fg <- function(x, w) {
 fs <- function() {
   rep("  ")
 }
+
+string_to_name <- function(x, index = 1) {
+  x %>%
+    use_series(varnames) %>%
+    extract(index) %>%
+    sym
+}

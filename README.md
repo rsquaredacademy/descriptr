@@ -57,7 +57,6 @@ Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
 ## Vignettes
 
-
   - [Descriptive
     Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
   - [Statistical
