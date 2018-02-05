@@ -1,5 +1,3 @@
-source('helper/group-summary.R')
-
 # descriptive statistics
 # observe({
 
@@ -101,8 +99,9 @@ d_group_summary <- eventReactive(input$submit_gsummary, {
 
 
 gsummary_out <- eventReactive(input$submit_gsummary, {
-  ko <- ds_group_summary(d_group_summary(), as.character(input$var_group),
-                        as.character(input$var_grp_summary))
+  ko <- ds_group_summary(d_group_summary(),
+                         !! sym(as.character(input$var_group)),
+                         !! sym(as.character(input$var_grp_summary)))
   ko
 })
 
