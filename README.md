@@ -13,6 +13,9 @@ Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](http
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
+[![Coverage
+status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
+![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 
 ## Overview
 

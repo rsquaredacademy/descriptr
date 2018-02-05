@@ -1,14 +1,3 @@
-source('helper/freq-cont.R')
-
-# descriptive statistics
-# observe({
-#     updateSelectInput(session,
-#                       inputId = "var_freq_quant",
-#                       choices = names(data()),
-#                       selected = '')
-
-# })
-
 observeEvent(input$finalok, {
     num_data <- final_split$train[, sapply(final_split$train, is.numeric)]
     if (is.null(dim(num_data))) {
@@ -113,7 +102,9 @@ fil_quant_data <- reactive({
 })
 
 fquant_out <- eventReactive(input$submit_fquant, {
-  ko <- ds_freq_cont(fil_quant_data(), as.character(input$var_freq_quant), input$bins)
+  ko <- ds_freq_cont(fil_quant_data(),
+                     !! sym(as.character(input$var_freq_quant)),
+                     input$bins)
   ko
 })
 

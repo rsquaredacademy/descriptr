@@ -1,5 +1,3 @@
-source('helper/cross-table.R')
-
 observeEvent(input$finalok, {
 
     num_data <- final_split$train[, sapply(final_split$train, is.factor)]
@@ -64,8 +62,8 @@ conames <- reactive({
 
 
 cross_out <- eventReactive(input$submit_cross, {
-  k <- ds_cross_table(final_split$train, as.character(input$var1_cross),
-    as.character(input$var2_cross))
+  k <- ds_cross_table(final_split$train, !! sym(as.character(input$var1_cross)),
+    !! sym(as.character(input$var2_cross)))
   k
 })
 

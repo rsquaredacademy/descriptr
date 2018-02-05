@@ -1,5 +1,3 @@
-source("helper/summary-stats.R")
-
 observeEvent(input$finalok, {
     num_data <- final_split$train[, sapply(final_split$train, is.numeric)]
     if (is.null(dim(num_data))) {
@@ -61,7 +59,7 @@ observeEvent(input$submit_part_train_per, {
 d_summary <- eventReactive(input$submit_summary, {
   # validate(need(input$var_summary != '', 'Please select a variable.'))
   req(input$var_summary)
-  ds_summary_stats(final_split$train, input$var_summary)
+  ds_summary_stats(final_split$train, !! sym(input$var_summary))
 })
 
 
