@@ -41,7 +41,7 @@
 ds_cross_table <- function(data, var1, var2) UseMethod("ds_cross_table")
 
 #' @export
-ds_cross_table <- function(data, var1, var2) {
+ds_cross_table.default <- function(data, var1, var2) {
 
   var_1 <- enquo(var1)
   var_2 <- enquo(var2)
