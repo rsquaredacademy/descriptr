@@ -11,7 +11,7 @@
 #' @export
 #'
 ds_launch_shiny_app <- function() {
-    shiny::runApp(appDir = system.file("application", package = "descriptr"))
+  shiny::runApp(appDir = system.file("application", package = "descriptr"))
 }
 
 #' @export
@@ -19,8 +19,6 @@ ds_launch_shiny_app <- function() {
 #' @usage NULL
 #'
 launch_descriptr <- function(data) {
-
   .Deprecated("ds_launch_shiny_app()")
   ds_launch_shiny_app()
-
 }

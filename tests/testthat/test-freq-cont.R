@@ -1,7 +1,6 @@
-context('ds_freq_cont')
+context("ds_freq_cont")
 
-test_that('output from ds_freq_cont matches expected result', {
-
+test_that("output from ds_freq_cont matches expected result", {
   k <- ds_freq_cont(mtcars, mpg, bins = 4)
   expect_equivalent(k$breaks, c(10.400, 16.275, 22.150, 28.025, 33.900))
   expect_equivalent(k$frequency, c(10, 13, 5, 4))
@@ -11,25 +10,20 @@ test_that('output from ds_freq_cont matches expected result', {
   expect_equal(k$bins, 4)
   expect_equal(k$data, mtcars$mpg)
   expect_equivalent(k$varname, "mpg")
-
 })
 
-test_that('ds_freq_cont returns appropriate errors', {
-
+test_that("ds_freq_cont returns appropriate errors", {
   mt <- mtcars
   mt$cyl <- as.factor(mt$cyl)
 
-  expect_error(ds_freq_cont(mt, cyl), 'variable must be numeric')
-  expect_error(ds_freq_cont(mtcars, mpg, '5'), 'bins must be integer value')
-
+  expect_error(ds_freq_cont(mt, cyl), "variable must be numeric")
+  expect_error(ds_freq_cont(mtcars, mpg, "5"), "bins must be integer value")
 })
 
 test_that("output from ds_freq_cont plot is as expected", {
-
   skip_on_cran()
 
   k <- ds_freq_cont(mtcarz, mpg)
   p <- plot(k)
-  vdiffr::expect_doppelganger('ds_freq_cont', p$plot)
-
+  vdiffr::expect_doppelganger("ds_freq_cont", p$plot)
 })

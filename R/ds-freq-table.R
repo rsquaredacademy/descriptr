@@ -32,22 +32,21 @@ ds_freq_table <- function(data, variable) UseMethod("ds_freq_table")
 
 #' @export
 ds_freq_table.default <- function(data, variable) {
-
   varyable <- enquo(variable)
 
   fdata <-
     data %>%
     pull(!! varyable) %>%
-    na.omit
+    na.omit()
 
   if (!is.factor(fdata)) {
-    stop('variable must be categorical/qualitative')
+    stop("variable must be categorical/qualitative")
   }
 
   var_name <-
     data %>%
     select(!! varyable) %>%
-    names
+    names()
 
   level_names <- levels(fdata)
   data_len <- length(fdata)
@@ -57,7 +56,7 @@ ds_freq_table.default <- function(data, variable) {
 
   # count of unique values in the input
   result <- fdata %>%
-    fct_count %>%
+    fct_count() %>%
     pull(2)
 
   # length of result
@@ -73,11 +72,13 @@ ds_freq_table.default <- function(data, variable) {
   cum_per <- percent(cum, data_len)
 
   # matrix
-  ftable <- tibble(Levels = level_names,
-                   Frequency = result,
-                   `Cum Frequency` = cum,
-                   Percent = per,
-                   `Cum Percent` = cum_per)
+  ftable <- tibble(
+    Levels = level_names,
+    Frequency = result,
+    `Cum Frequency` = cum,
+    Percent = per,
+    `Cum Percent` = cum_per
+  )
 
 
   result <- list(
@@ -88,7 +89,6 @@ ds_freq_table.default <- function(data, variable) {
 
   class(result) <- "ds_freq_table"
   return(result)
-
 }
 
 #' @export
@@ -96,10 +96,7 @@ ds_freq_table.default <- function(data, variable) {
 #' @usage NULL
 #'
 freq_table <- function(data) {
-
   .Deprecated("ds_freq_table()")
-
-
 }
 
 #' @export
@@ -113,7 +110,6 @@ print.ds_freq_table <- function(x, ...) {
 #' @export
 #'
 plot.ds_freq_table <- function(x, ...) {
-
   x_lab <-
     x %>%
     use_series(varname) %>%
@@ -123,12 +119,12 @@ plot.ds_freq_table <- function(x, ...) {
     x %>%
     use_series(varname) %>%
     extract(1) %>%
-    sym
+    sym()
 
   p <-
     x %>%
     use_series(data) %>%
-    select(x = !!k) %>%
+    select(x = !! k) %>%
     ggplot() +
     geom_bar(aes(x = x), fill = "blue") +
     xlab(x_lab) + ylab("Count") +

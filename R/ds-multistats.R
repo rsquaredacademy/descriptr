@@ -15,14 +15,15 @@
 ds_multi_stats <- function(x, ...) {
   vars <- quos(...)
   x %>%
-    select(!!!vars) %>%
+    select(!!! vars) %>%
     gather(vars, values) %>%
     group_by(vars) %>%
-    summarise_all(funs(min = min, max = max, mean = mean, t_mean = trimmed_mean,
+    summarise_all(funs(
+      min = min, max = max, mean = mean, t_mean = trimmed_mean,
       median = median, mode = ds_mode, range = ds_range, variance = var,
       stdev = sd, skew = ds_skewness, kurtosis = ds_kurtosis, coeff_var = ds_cvar,
-      q1 = quant1, q3 = quant3, iqrange = IQR)
-    )
+      q1 = quant1, q3 = quant3, iqrange = IQR
+    ))
 }
 
 #' @export
@@ -30,8 +31,6 @@ ds_multi_stats <- function(x, ...) {
 #' @usage NULL
 #'
 multistats <- function(x, ...) {
-
   .Deprecated("ds_multi_stats()")
   ds_multi_stats(x, ...)
-
 }
