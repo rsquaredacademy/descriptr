@@ -38,31 +38,30 @@ ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
 
 
 #' @export
-ds_freq_cont.default <- function(data, variable,  bins = 5) {
-
+ds_freq_cont.default <- function(data, variable, bins = 5) {
   varyable <- enquo(variable)
 
   fdata <-
     data %>%
     pull(!! varyable) %>%
-    na.omit
+    na.omit()
 
-  if(!is.numeric(fdata)) {
-    stop('variable must be numeric')
+  if (!is.numeric(fdata)) {
+    stop("variable must be numeric")
   }
 
-  if(!is.numeric(bins)) {
-    stop('bins must be integer value')
+  if (!is.numeric(bins)) {
+    stop("bins must be integer value")
   }
 
-  if(is.numeric(bins)) {
+  if (is.numeric(bins)) {
     bins <- as.integer(bins)
   }
 
   var_name <-
     data %>%
     select(!! varyable) %>%
-    names
+    names()
 
   n_bins <- bins
   inta <- intervals(fdata, bins)
@@ -71,14 +70,16 @@ ds_freq_cont.default <- function(data, variable,  bins = 5) {
   cum <- cumsum(result)
   per <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
-  out <- list(breaks = inta,
-              frequency = result,
-              cumulative = cum,
-              percent = per,
-              cum_percent = cum_per,
-              bins = n_bins,
-              data = fdata,
-              varname = var_name)
+  out <- list(
+    breaks = inta,
+    frequency = result,
+    cumulative = cum,
+    percent = per,
+    cum_percent = cum_per,
+    bins = n_bins,
+    data = fdata,
+    varname = var_name
+  )
 
   class(out) <- "ds_freq_cont"
   return(out)
@@ -89,9 +90,7 @@ ds_freq_cont.default <- function(data, variable,  bins = 5) {
 #' @usage NULL
 #'
 freq_cont <- function(data, bins = 5) {
-
   .Deprecated("ds_freq_cont()")
-
 }
 
 
@@ -106,7 +105,6 @@ print.ds_freq_cont <- function(x, ...) {
 #' @export
 #'
 plot.ds_freq_cont <- function(x, ...) {
-
   x_lab <-
     x %>%
     use_series(varname)
@@ -115,21 +113,23 @@ plot.ds_freq_cont <- function(x, ...) {
     x %>%
     use_series(varname) %>%
     extract(1) %>%
-    sym
+    sym()
 
   bins <-
     x %>%
     use_series(frequency) %>%
-    length
+    length()
 
   p <-
     x %>%
     use_series(frequency) %>%
-    as_tibble %>%
+    as_tibble() %>%
     add_column(x = seq_len(bins), .before = 1) %>%
     ggplot() +
-    geom_col(aes(x = x, y = value), width = 0.999,
-             fill = "blue", color = "black") +
+    geom_col(
+      aes(x = x, y = value), width = 0.999,
+      fill = "blue", color = "black"
+    ) +
     xlab(x_lab) + ylab("Count") +
     ggtitle(paste("Histogram of", x_lab))
 
@@ -137,5 +137,4 @@ plot.ds_freq_cont <- function(x, ...) {
 
   result <- list(plot = p)
   invisible(result)
-
 }

@@ -17,23 +17,22 @@
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
-ds_tailobs <- function(data, n, type = c('low', 'high')) {
-
-  if(!is.numeric(data)) {
-    stop('data must be numeric')
+ds_tailobs <- function(data, n, type = c("low", "high")) {
+  if (!is.numeric(data)) {
+    stop("data must be numeric")
   }
 
-  if(!is.numeric(n)) {
-    stop('n must be numeric')
+  if (!is.numeric(n)) {
+    stop("n must be numeric")
   }
 
-  if(n > length(data)) {
-    stop('n must be less than the length of data')
+  if (n > length(data)) {
+    stop("n must be less than the length of data")
   }
 
   method <- match.arg(type)
 
-  if (method == 'low') {
+  if (method == "low") {
     result <- data %>%
       na.omit() %>%
       sort() %>%
@@ -46,18 +45,15 @@ ds_tailobs <- function(data, n, type = c('low', 'high')) {
   }
 
   return(result)
-
 }
 
 #' @export
 #' @rdname ds_tailobs
 #' @usage NULL
 #'
-tailobs <- function(data, n, type = c('low', 'high')) {
-
+tailobs <- function(data, n, type = c("low", "high")) {
   .Deprecated("ds_tailobs()")
   ds_tailobs(data, n, type)
-
 }
 
 #' @title Geometric Mean
@@ -76,9 +72,8 @@ tailobs <- function(data, n, type = c('low', 'high')) {
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
 ds_gmean <- function(x, ...) {
-
-  if(!is.numeric(x)) {
-    stop('x must be numeric')
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
   }
 
   prod(x) ^ (1 / length(x))
@@ -89,10 +84,8 @@ ds_gmean <- function(x, ...) {
 #' @usage NULL
 #'
 gmean <- function(x, ...) {
-
   .Deprecated("ds_gmean()")
   ds_gmean(x, ...)
-
 }
 
 
@@ -112,12 +105,11 @@ gmean <- function(x, ...) {
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
 ds_hmean <- function(x, ...) {
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
 
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
-
-    length(x) / sum(sapply(x, div_by))
+  length(x) / sum(sapply(x, div_by))
 }
 
 #' @export
@@ -125,10 +117,8 @@ ds_hmean <- function(x, ...) {
 #' @usage NULL
 #'
 hmean <- function(x, ...) {
-
   .Deprecated("ds_hmean()")
   ds_hmean(x, ...)
-
 }
 
 
@@ -150,23 +140,22 @@ hmean <- function(x, ...) {
 #' @export
 #'
 ds_mode <- function(x) {
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
 
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
+  Freq <- NULL
+  mode <- x %>%
+    table() %>%
+    as.data.frame(stringsAsFactors = FALSE) %>%
+    arrange(desc(Freq)) %>%
+    filter(Freq == max(Freq)) %>%
+    select(contains(".")) %>%
+    unlist() %>%
+    as.numeric() %>%
+    min()
 
-    Freq <- NULL
-    mode <- x %>%
-            table() %>%
-            as.data.frame(stringsAsFactors = FALSE) %>%
-            arrange(desc(Freq)) %>%
-            filter(Freq == max(Freq)) %>%
-            select(contains(".")) %>%
-            unlist() %>%
-            as.numeric() %>%
-            min()
-
-    return(mode)
+  return(mode)
 }
 
 #' @export
@@ -174,10 +163,8 @@ ds_mode <- function(x) {
 #' @usage NULL
 #'
 stat_mode <- function(x) {
-
   .Deprecated("ds_mode()")
   ds_mode(x)
-
 }
 
 
@@ -194,17 +181,16 @@ stat_mode <- function(x) {
 #' @export
 #'
 ds_range <- function(x) {
+  if (!is.numeric(x)) {
+    stop("data must be numeric")
+  }
 
-    if(!is.numeric(x)) {
-      stop('data must be numeric')
-    }
+  out <- x %>%
+    na.omit() %>%
+    range() %>%
+    diff()
 
-    out <- x %>%
-      na.omit() %>%
-      range() %>%
-      diff()
-
-    return(out)
+  return(out)
 }
 
 #' @export
@@ -212,10 +198,8 @@ ds_range <- function(x) {
 #' @usage NULL
 #'
 stat_range <- function(x) {
-
   .Deprecated("ds_range()")
   ds_range(x)
-
 }
 
 #' @title Kurtosis
@@ -233,16 +217,15 @@ stat_range <- function(x) {
 #' @export
 #'
 ds_kurtosis <- function(x) {
-
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
-    n <- length(x)
-    summation <- sums(x, 4)
-    part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
-    part2 <- (3 * (n - 1) ^ 2) / ((n - 2) * (n -3))
-    result <- (part1 * summation) - part2
-    return(result)
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
+  n <- length(x)
+  summation <- sums(x, 4)
+  part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
+  part2 <- (3 * (n - 1) ^ 2) / ((n - 2) * (n - 3))
+  result <- (part1 * summation) - part2
+  return(result)
 }
 
 #' @export
@@ -250,10 +233,8 @@ ds_kurtosis <- function(x) {
 #' @usage NULL
 #'
 kurtosis <- function(x) {
-
   .Deprecated("ds_kurtosis()")
   ds_kurtosis(x)
-
 }
 
 
@@ -272,14 +253,13 @@ kurtosis <- function(x) {
 #' @export
 #'
 ds_skewness <- function(x) {
-
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
-    n <- length(x)
-    summation <- sums(x, 3)
-    result <- (n / ((n -1) * (n -2))) * summation
-    return(result)
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
+  n <- length(x)
+  summation <- sums(x, 3)
+  result <- (n / ((n - 1) * (n - 2))) * summation
+  return(result)
 }
 
 #' @export
@@ -287,10 +267,8 @@ ds_skewness <- function(x) {
 #' @usage NULL
 #'
 skewness <- function(x) {
-
   .Deprecated("ds_skewness()")
   ds_skewness(x)
-
 }
 
 
@@ -311,14 +289,13 @@ skewness <- function(x) {
 #' @export
 #'
 ds_mdev <- function(x) {
-
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
-    x <- na.omit(x)
-    m <- mean(x)
-    result <- sum(sapply(x, md_helper, m)) / length(x)
-    return(result)
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
+  x <- na.omit(x)
+  m <- mean(x)
+  result <- sum(sapply(x, md_helper, m)) / length(x)
+  return(result)
 }
 
 #' @export
@@ -326,10 +303,8 @@ ds_mdev <- function(x) {
 #' @usage NULL
 #'
 stat_mdev <- function(x) {
-
   .Deprecated("ds_mdev()")
   ds_mdev(x)
-
 }
 
 #' @title Coefficient of Variation
@@ -344,12 +319,10 @@ stat_mdev <- function(x) {
 #' @export
 #'
 ds_cvar <- function(x) {
-
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
-    (sd(x) / mean(x)) * 100
-
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
+  (sd(x) / mean(x)) * 100
 }
 
 #' @export
@@ -357,10 +330,8 @@ ds_cvar <- function(x) {
 #' @usage NULL
 #'
 stat_cvar <- function(x) {
-
   .Deprecated("ds_cvar()")
   ds_cvar(x)
-
 }
 
 
@@ -378,17 +349,16 @@ stat_cvar <- function(x) {
 #' @export
 #'
 ds_css <- function(x) {
+  if (!is.numeric(x)) {
+    stop("x must be numeric")
+  }
 
-    if(!is.numeric(x)) {
-      stop('x must be numeric')
-    }
-
-    y <- mean(x, na.rm = TRUE)
-    x %>%
-      na.omit() %>%
-      `-`(y) %>%
-      `^`(2) %>%
-      sum()
+  y <- mean(x, na.rm = TRUE)
+  x %>%
+    na.omit() %>%
+    `-`(y) %>%
+    `^`(2) %>%
+    sum()
 }
 
 #' @export
@@ -396,10 +366,8 @@ ds_css <- function(x) {
 #' @usage NULL
 #'
 stat_css <- function(x) {
-
   .Deprecated("ds_css()")
   ds_css(x)
-
 }
 
 
@@ -419,23 +387,22 @@ stat_css <- function(x) {
 #' @export
 #'
 ds_rindex <- function(data, values) {
+  if (!is.numeric(data)) {
+    stop("data must be numeric")
+  }
 
-    if(!is.numeric(data)) {
-      stop('data must be numeric')
-    }
+  if (!is.numeric(values)) {
+    stop("values must be numeric")
+  }
 
-    if(!is.numeric(values)) {
-      stop('values must be numeric')
-    }
-
-    data <- na.omit(data)
-    values <- na.omit(values)
-    out <- c()
-    for (i in seq_along(values)) {
-        k <- return_pos(data, values[i])
-        out <- c(out, k)
-    }
-    return(unique(out))
+  data <- na.omit(data)
+  values <- na.omit(values)
+  out <- c()
+  for (i in seq_along(values)) {
+    k <- return_pos(data, values[i])
+    out <- c(out, k)
+  }
+  return(unique(out))
 }
 
 #' @export
@@ -443,8 +410,6 @@ ds_rindex <- function(data, values) {
 #' @usage NULL
 #'
 rindex <- function(data, values) {
-
   .Deprecated("ds_rindex()")
   ds_rindex(data, values)
-
 }

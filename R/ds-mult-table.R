@@ -22,25 +22,23 @@
 #' @export
 #'
 ds_oway_tables <- function(data) {
+  if (!is.data.frame(data)) {
+    stop("data must be a data frame")
+  }
 
-    if (!is.data.frame(data)) {
-        stop('data must be a data frame')
-    }
+  is.fact <- sapply(data, is.factor)
 
-    is.fact <- sapply(data, is.factor)
+  if (!any(is.fact == TRUE)) {
+    stop("data has no factor variables")
+  }
 
-    if (!any(is.fact == TRUE)) {
-        stop('data has no factor variables')
-    }
-
-    factors.df <- data[, is.fact]
-    nam <- names(factors.df)
-    nc <- ncol(factors.df)
-    for (i in seq_len(nc)) {
-        k <- freq_table2(factors.df[i], nam[i])
-        print(k)
-    }
-
+  factors.df <- data[, is.fact]
+  nam <- names(factors.df)
+  nc <- ncol(factors.df)
+  for (i in seq_len(nc)) {
+    k <- freq_table2(factors.df[i], nam[i])
+    print(k)
+  }
 }
 
 #' @export
@@ -48,10 +46,8 @@ ds_oway_tables <- function(data) {
 #' @usage NULL
 #'
 oway_tables <- function(data) {
-
   .Deprecated("ds_oway_tables()")
   ds_oway_tables(data)
-
 }
 
 
@@ -59,39 +55,39 @@ oway_tables <- function(data) {
 #' @export
 #'
 ds_tway_tables <- function(data) {
+  if (!is.data.frame(data)) {
+    stop("data must be a data frame")
+  }
 
-    if (!is.data.frame(data)) {
-        stop('data must be a data frame')
-    }
+  is.fact <- sapply(data, is.factor)
 
-    is.fact <- sapply(data, is.factor)
+  if (sum(is.fact) < 2) {
+    stop("data must have at least two factor variables")
+  }
 
-    if (sum(is.fact) < 2) {
-        stop('data must have at least two factor variables')
-    }
+  factors.df <- data[, is.fact]
+  nc <- ncol(factors.df)
+  nam <- names(factors.df)
+  n <- nc - 1
 
-    factors.df <- data[, is.fact]
-    nc <- ncol(factors.df)
-    nam <- names(factors.df)
-    n <- nc - 1
-
-    cat(formatter("    Cell Contents\n"),
+  cat(
+    formatter("    Cell Contents\n"),
     "|---------------|\n",
     "|", formatter("Frequency"), "|\n",
     "|", formatter("Percent"), "|\n",
     "|", formatter("Row Pct"), "|\n",
     "|", formatter("Col Pct"), "|\n",
     "|---------------|\n\n",
-    "Total Observations: ", nrow(data), "\n\n")
+    "Total Observations: ", nrow(data), "\n\n"
+  )
 
-    for (i in seq_len(n)) {
-        p <- i + 1
-        for (j in p:nc) {
-            k <- cross_table2(factors.df[[i]], factors.df[[j]], nam[i], nam[j])
-            print(k)
-        }
+  for (i in seq_len(n)) {
+    p <- i + 1
+    for (j in p:nc) {
+      k <- cross_table2(factors.df[[i]], factors.df[[j]], nam[i], nam[j])
+      print(k)
     }
-
+  }
 }
 
 #' @export
@@ -99,8 +95,6 @@ ds_tway_tables <- function(data) {
 #' @usage NULL
 #'
 tway_tables <- function(data) {
-
   .Deprecated("ds_tway_tables()")
   ds_tway_tables(data)
-
 }
