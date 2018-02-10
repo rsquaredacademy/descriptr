@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## descriptr: Generate descriptive statistics and explore distributions <img src="hex_descriptr.png" align="right" />
+## descriptr: Generate descriptive statistics and explore distributions
 
 **Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/>
 **License:**
