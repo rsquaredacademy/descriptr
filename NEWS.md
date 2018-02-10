@@ -1,3 +1,25 @@
+# descriptr 0.4.0
+
+## New Features
+
+We have completely revamped the API. All the functions now
+take a `data.frame` or `tibble` as the first argument followed 
+by the variable names. The variable names need not be surrounded
+by single/double quotes anymore. Please view the guide for 
+more details.
+
+- use ggplot for all plots
+([#8](https://github.com/rsquaredacademy/descriptr/issues/8))
+
+## Bug Fixes
+
+- update shiny app
+([#16](https://github.com/rsquaredacademy/descriptr/issues/16))
+- error in percentiles in `ds_summary_stats`
+([#22](https://github.com/rsquaredacademy/descriptr/issues/22))
+
+
+
 # descriptr 0.3.0
 
 ## New Features
