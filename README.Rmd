@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-descriptr: Generate descriptive statistics and explore distributions <img src="hex_descriptr.png" align="right" />
+descriptr: Generate descriptive statistics and explore distributions 
 ----------
 
 **Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/>

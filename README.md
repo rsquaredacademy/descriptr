@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## descriptr: Generate descriptive statistics and explore distributions <img src="hex_descriptr.png" align="right" />
+## descriptr: Generate descriptive statistics and explore distributions
 
 **Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/>
 **License:**
@@ -108,8 +108,8 @@ ds_summary_stats(mtcarz, mpg)
 #> 
 #>              Max                                  33.90                
 #>              99%                                  33.44                
-#>              95%                                  30.09                
-#>              90%                                  31.30                
+#>              95%                                  31.30                
+#>              90%                                  30.09                
 #>              Q3                                   22.80                
 #>              Median                               19.20                
 #>              Q1                                   15.43                
