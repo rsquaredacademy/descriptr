@@ -1,4 +1,4 @@
-This is a minor release to fix bugs.
+This is a minor release with API changes and bug fixes.
 
 ## Test environments
 * local Windows 10, R 3.4.3
