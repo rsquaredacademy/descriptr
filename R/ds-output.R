@@ -202,6 +202,8 @@ print_screen <- function(x) {
     lapply(nchar) %>%
     unlist() %>%
     max()
+  # If there are several classes, join them into one string:
+  x$Types <- lapply(x$Types, paste, collapse = ", ")
   lengths <- list(x$Variables, x$Types, xlev, x$Missing, x$MissingPer)
   n <- length(columns)
   nlist <- list()
