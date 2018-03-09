@@ -1,6 +1,6 @@
 # Exit ---------------------------------------------------------------
 observe({
-    if (input$mainpage == "exit") {
+    if (isTRUE(input$mainpage == "exit")) {
     stopApp()
   }
 })
