@@ -33,12 +33,14 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
   method <- match.arg(type)
 
   if (method == "low") {
-    result <- data %>%
+    result <-
+      data %>%
       na.omit() %>%
       sort() %>%
       `[`(1:n)
   } else {
-    result <- data %>%
+    result <-
+      data %>%
       na.omit() %>%
       sort(decreasing = TRUE) %>%
       `[`(1:n)
@@ -71,12 +73,18 @@ tailobs <- function(data, n, type = c("low", "high")) {
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(x, ...) {
+ds_gmean <- function(x, na.rm = FALSE, ...) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   prod(x) ^ (1 / length(x))
+
 }
 
 #' @export
@@ -104,12 +112,18 @@ gmean <- function(x, ...) {
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(x, ...) {
+ds_hmean <- function(x, na.rm = FALSE, ...) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   length(x) / sum(sapply(x, div_by))
+
 }
 
 #' @export
@@ -120,9 +134,6 @@ hmean <- function(x, ...) {
   .Deprecated("ds_hmean()")
   ds_hmean(x, ...)
 }
-
-
-
 
 #' @importFrom dplyr arrange desc filter select contains
 #' @title Mode
@@ -139,13 +150,19 @@ hmean <- function(x, ...) {
 #' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
 #'
-ds_mode <- function(x) {
+ds_mode <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   Freq <- NULL
-  mode <- x %>%
+
+  x %>%
     table() %>%
     as.data.frame(stringsAsFactors = FALSE) %>%
     arrange(desc(Freq)) %>%
@@ -155,7 +172,6 @@ ds_mode <- function(x) {
     as.numeric() %>%
     min()
 
-  return(mode)
 }
 
 #' @export
@@ -180,17 +196,20 @@ stat_mode <- function(x) {
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(x) {
+ds_range <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("data must be numeric")
   }
 
-  out <- x %>%
-    na.omit() %>%
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
+  x %>%
     range() %>%
     diff()
 
-  return(out)
 }
 
 #' @export
@@ -216,16 +235,22 @@ stat_range <- function(x) {
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(x) {
+ds_kurtosis <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   n <- length(x)
   summation <- sums(x, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
   part2 <- (3 * (n - 1) ^ 2) / ((n - 2) * (n - 3))
-  result <- (part1 * summation) - part2
-  return(result)
+  (part1 * summation) - part2
+
 }
 
 #' @export
@@ -252,14 +277,20 @@ kurtosis <- function(x) {
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_skewness <- function(x) {
+ds_skewness <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   n <- length(x)
   summation <- sums(x, 3)
-  result <- (n / ((n - 1) * (n - 2))) * summation
-  return(result)
+  (n / ((n - 1) * (n - 2))) * summation
+
 }
 
 #' @export
@@ -288,14 +319,19 @@ skewness <- function(x) {
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(x) {
+ds_mdev <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
-  x <- na.omit(x)
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   m <- mean(x)
-  result <- sum(sapply(x, md_helper, m)) / length(x)
-  return(result)
+  sum(sapply(x, md_helper, m)) / length(x)
+
 }
 
 #' @export
@@ -318,11 +354,18 @@ stat_mdev <- function(x) {
 #' ds_cvar(mtcars$mpg)
 #' @export
 #'
-ds_cvar <- function(x) {
+ds_cvar <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   (sd(x) / mean(x)) * 100
+
 }
 
 #' @export
@@ -348,17 +391,23 @@ stat_cvar <- function(x) {
 #' @references \href{http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm}{NIST/SEMATECH e-Handbook of Statistical Methods}
 #' @export
 #'
-ds_css <- function(x) {
+ds_css <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
-  y <- mean(x, na.rm = TRUE)
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
+  y <- mean(x)
+
   x %>%
-    na.omit() %>%
     `-`(y) %>%
     `^`(2) %>%
     sum()
+
 }
 
 #' @export
