@@ -307,6 +307,23 @@ print_ftable <- function(x) {
     cat("|")
     cat("\n|--------------------------------------------------------------------------|\n")
   }
+  if (x$na_count > 0) {
+    na_percent <- format((x$na_count / x$n) * 100, nsmall = 2)
+    cat("|", formatter_freq("Missing"))
+    cat("|", formatter_freq(x$na_count))
+    cat("|",  formatter_freq("-"))
+    cat("|", formatter_freq(na_percent))
+    cat("|", formatter_freq("-"))
+    cat("|")
+    cat("\n|--------------------------------------------------------------------------|\n")
+  }
+  cat("|", formatter_freq("Total"))
+  cat("|", formatter_freq(x$n))
+  cat("|",  formatter_freq("-"))
+  cat("|", formatter_freq("100.00"))
+  cat("|", formatter_freq("-"))
+  cat("|")
+  cat("\n|--------------------------------------------------------------------------|\n")
   cat("\n\n")
 }
 
