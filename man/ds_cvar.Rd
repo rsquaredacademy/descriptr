@@ -5,10 +5,12 @@
 \alias{stat_cvar}
 \title{Coefficient of Variation}
 \usage{
-ds_cvar(x)
+ds_cvar(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector containing the values whose mode is to be computed}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \description{
 Compute the coefficient of variation

@@ -5,10 +5,12 @@
 \alias{stat_css}
 \title{Corrected Sum of Squares}
 \usage{
-ds_css(x)
+ds_css(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector containing the values whose mode is to be computed}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Corrected sum of squares of \code{x}

@@ -5,10 +5,12 @@
 \alias{stat_range}
 \title{Range}
 \usage{
-ds_range(x)
+ds_range(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Range of \code{x}

@@ -5,10 +5,12 @@
 \alias{stat_mode}
 \title{Mode}
 \usage{
-ds_mode(x)
+ds_mode(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector containing the values whose mode is to be computed}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Mode of \code{x}

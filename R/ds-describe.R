@@ -62,6 +62,7 @@ tailobs <- function(data, n, type = c("low", "high")) {
 #' @description Compute the geometric mean
 #' @param x a numeric vector containing the values whose geometric mean is to be
 #' computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
@@ -101,6 +102,7 @@ gmean <- function(x, ...) {
 #' @description Compute the harmonic mean
 #' @param x a numeric vector containing the values whose harmonic mean is to be
 #' computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
@@ -139,6 +141,7 @@ hmean <- function(x, ...) {
 #' @title Mode
 #' @description Compute the sample mode
 #' @param x a numeric vector containing the values whose mode is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Mode of \code{x}
@@ -188,6 +191,7 @@ stat_mode <- function(x) {
 #' @title Range
 #' @description Compute the range of a numeric vector
 #' @param x a numeric vector
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
 #' @section Deprecated Function:
 #' \code{stat_range()} has been deprecated. Instead use \code{ds_range()}.
@@ -224,6 +228,7 @@ stat_range <- function(x) {
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
 #' @param x a numeric vector containing the values whose kurtosis is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Kurtosis of \code{x}
@@ -266,6 +271,7 @@ kurtosis <- function(x) {
 #' @title Skewness
 #' @description Compute the skewness of a probability distribution.
 #' @param x a numeric vector containing the values whose skewness is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Skewness of \code{x}
@@ -306,6 +312,7 @@ skewness <- function(x) {
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
 #' @param x a numeric vector
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details The \code{stat_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
@@ -346,6 +353,7 @@ stat_mdev <- function(x) {
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
 #' @param x a numeric vector containing the values whose mode is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @section Deprecated Function:
@@ -381,6 +389,7 @@ stat_cvar <- function(x) {
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
 #' @param x a numeric vector containing the values whose mode is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Corrected sum of squares of \code{x}
