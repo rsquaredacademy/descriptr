@@ -33,12 +33,14 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
   method <- match.arg(type)
 
   if (method == "low") {
-    result <- data %>%
+    result <-
+      data %>%
       na.omit() %>%
       sort() %>%
       `[`(1:n)
   } else {
-    result <- data %>%
+    result <-
+      data %>%
       na.omit() %>%
       sort(decreasing = TRUE) %>%
       `[`(1:n)
@@ -60,6 +62,7 @@ tailobs <- function(data, n, type = c("low", "high")) {
 #' @description Compute the geometric mean
 #' @param x a numeric vector containing the values whose geometric mean is to be
 #' computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
@@ -71,12 +74,18 @@ tailobs <- function(data, n, type = c("low", "high")) {
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(x, ...) {
+ds_gmean <- function(x, na.rm = FALSE, ...) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   prod(x) ^ (1 / length(x))
+
 }
 
 #' @export
@@ -93,6 +102,7 @@ gmean <- function(x, ...) {
 #' @description Compute the harmonic mean
 #' @param x a numeric vector containing the values whose harmonic mean is to be
 #' computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
@@ -104,12 +114,18 @@ gmean <- function(x, ...) {
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(x, ...) {
+ds_hmean <- function(x, na.rm = FALSE, ...) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   length(x) / sum(sapply(x, div_by))
+
 }
 
 #' @export
@@ -121,13 +137,11 @@ hmean <- function(x, ...) {
   ds_hmean(x, ...)
 }
 
-
-
-
 #' @importFrom dplyr arrange desc filter select contains
 #' @title Mode
 #' @description Compute the sample mode
 #' @param x a numeric vector containing the values whose mode is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Mode of \code{x}
@@ -139,13 +153,19 @@ hmean <- function(x, ...) {
 #' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
 #'
-ds_mode <- function(x) {
+ds_mode <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   Freq <- NULL
-  mode <- x %>%
+
+  x %>%
     table() %>%
     as.data.frame(stringsAsFactors = FALSE) %>%
     arrange(desc(Freq)) %>%
@@ -155,7 +175,6 @@ ds_mode <- function(x) {
     as.numeric() %>%
     min()
 
-  return(mode)
 }
 
 #' @export
@@ -172,6 +191,7 @@ stat_mode <- function(x) {
 #' @title Range
 #' @description Compute the range of a numeric vector
 #' @param x a numeric vector
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
 #' @section Deprecated Function:
 #' \code{stat_range()} has been deprecated. Instead use \code{ds_range()}.
@@ -180,17 +200,20 @@ stat_mode <- function(x) {
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(x) {
+ds_range <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("data must be numeric")
   }
 
-  out <- x %>%
-    na.omit() %>%
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
+  x %>%
     range() %>%
     diff()
 
-  return(out)
 }
 
 #' @export
@@ -205,6 +228,7 @@ stat_range <- function(x) {
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
 #' @param x a numeric vector containing the values whose kurtosis is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Kurtosis of \code{x}
@@ -216,16 +240,22 @@ stat_range <- function(x) {
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(x) {
+ds_kurtosis <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   n <- length(x)
   summation <- sums(x, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
   part2 <- (3 * (n - 1) ^ 2) / ((n - 2) * (n - 3))
-  result <- (part1 * summation) - part2
-  return(result)
+  (part1 * summation) - part2
+
 }
 
 #' @export
@@ -241,6 +271,7 @@ kurtosis <- function(x) {
 #' @title Skewness
 #' @description Compute the skewness of a probability distribution.
 #' @param x a numeric vector containing the values whose skewness is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Skewness of \code{x}
@@ -252,14 +283,20 @@ kurtosis <- function(x) {
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_skewness <- function(x) {
+ds_skewness <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   n <- length(x)
   summation <- sums(x, 3)
-  result <- (n / ((n - 1) * (n - 2))) * summation
-  return(result)
+  (n / ((n - 1) * (n - 2))) * summation
+
 }
 
 #' @export
@@ -275,6 +312,7 @@ skewness <- function(x) {
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
 #' @param x a numeric vector
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details The \code{stat_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
@@ -288,14 +326,19 @@ skewness <- function(x) {
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(x) {
+ds_mdev <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
-  x <- na.omit(x)
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   m <- mean(x)
-  result <- sum(sapply(x, md_helper, m)) / length(x)
-  return(result)
+  sum(sapply(x, md_helper, m)) / length(x)
+
 }
 
 #' @export
@@ -310,6 +353,7 @@ stat_mdev <- function(x) {
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
 #' @param x a numeric vector containing the values whose mode is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @section Deprecated Function:
@@ -318,11 +362,18 @@ stat_mdev <- function(x) {
 #' ds_cvar(mtcars$mpg)
 #' @export
 #'
-ds_cvar <- function(x) {
+ds_cvar <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
+
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
   (sd(x) / mean(x)) * 100
+
 }
 
 #' @export
@@ -338,6 +389,7 @@ stat_cvar <- function(x) {
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
 #' @param x a numeric vector containing the values whose mode is to be computed
+#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Corrected sum of squares of \code{x}
@@ -348,17 +400,23 @@ stat_cvar <- function(x) {
 #' @references \href{http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm}{NIST/SEMATECH e-Handbook of Statistical Methods}
 #' @export
 #'
-ds_css <- function(x) {
+ds_css <- function(x, na.rm = FALSE) {
+
   if (!is.numeric(x)) {
     stop("x must be numeric")
   }
 
-  y <- mean(x, na.rm = TRUE)
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+
+  y <- mean(x)
+
   x %>%
-    na.omit() %>%
     `-`(y) %>%
     `^`(2) %>%
     sum()
+
 }
 
 #' @export

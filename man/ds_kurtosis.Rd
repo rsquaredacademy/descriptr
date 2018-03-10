@@ -5,10 +5,12 @@
 \alias{kurtosis}
 \title{Kurtosis}
 \usage{
-ds_kurtosis(x)
+ds_kurtosis(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector containing the values whose kurtosis is to be computed}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Kurtosis of \code{x}

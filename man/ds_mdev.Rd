@@ -5,10 +5,12 @@
 \alias{stat_mdev}
 \title{Mean Absolute Deviation}
 \usage{
-ds_mdev(x)
+ds_mdev(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Mean absolute deviation of \code{x}

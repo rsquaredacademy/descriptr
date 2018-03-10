@@ -13,7 +13,9 @@
 #' @export
 #'
 ds_multi_stats <- function(x, ...) {
+
   vars <- quos(...)
+
   x %>%
     select(!!! vars) %>%
     gather(vars, values) %>%
@@ -21,9 +23,9 @@ ds_multi_stats <- function(x, ...) {
     summarise_all(funs(
       min = min, max = max, mean = mean, t_mean = trimmed_mean,
       median = median, mode = ds_mode, range = ds_range, variance = var,
-      stdev = sd, skew = ds_skewness, kurtosis = ds_kurtosis, coeff_var = ds_cvar,
-      q1 = quant1, q3 = quant3, iqrange = IQR
-    ))
+      stdev = sd, skew = ds_skewness, kurtosis = ds_kurtosis,
+      coeff_var = ds_cvar, q1 = quant1, q3 = quant3, iqrange = IQR),
+      na.rm = TRUE)
 }
 
 #' @export

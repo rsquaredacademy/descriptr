@@ -300,15 +300,24 @@ pol_t <- function(l1, l2, df, col) {
   polygon(x, y, col = col)
 }
 
-trimmed_mean <- function(x) {
+trimmed_mean <- function(x, na.rm = FALSE) {
+  if (na.rm) {
+    x <- na.omit(x)
+  }
   mean(x, trim = 0.05)
 }
 
-quant1 <- function(x) {
+quant1 <- function(x, na.rm = FALSE) {
+  if (na.rm) {
+    x <- na.omit(x)
+  }
   quantile(x, probs = 0.25)
 }
 
-quant3 <- function(x) {
+quant3 <- function(x, na.rm = FALSE) {
+  if (na.rm) {
+    x <- na.omit(x)
+  }
   quantile(x, probs = 0.75)
 }
 

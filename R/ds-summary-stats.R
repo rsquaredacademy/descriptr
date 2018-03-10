@@ -52,7 +52,13 @@ ds_summary_stats <- function(data, variable) UseMethod("ds_summary_stats")
 #' @export
 #'
 ds_summary_stats.default <- function(data, variable) {
+
   vary <- enquo(variable)
+
+  odata <-
+    data %>%
+    pull(!! vary)
+
   sdata <-
     data %>%
     pull(!! vary) %>%
@@ -68,8 +74,8 @@ ds_summary_stats.default <- function(data, variable) {
   high_val <- ds_rindex(sdata, high)
 
   result <- list(
-    obs = length(sdata),
-    missing = sum(is.na(sdata)),
+    obs = length(odata),
+    missing = sum(is.na(odata)),
     avg = mean(sdata),
     tavg = mean(sdata, trim = 0.05),
     stdev = sd(sdata),

@@ -5,10 +5,12 @@
 \alias{skewness}
 \title{Skewness}
 \usage{
-ds_skewness(x)
+ds_skewness(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector containing the values whose skewness is to be computed}
+
+\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Skewness of \code{x}
