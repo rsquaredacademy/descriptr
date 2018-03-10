@@ -39,6 +39,7 @@ ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
 
 #' @export
 ds_freq_cont.default <- function(data, variable, bins = 5) {
+
   varyable <- enquo(variable)
 
   fdata <-
@@ -63,14 +64,43 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
     select(!! varyable) %>%
     names()
 
-  n_bins <- bins
-  inta <- intervals(fdata, bins)
-  result <- freq(fdata, bins, inta)
+  n_bins   <- bins
+  inta     <- intervals(fdata, bins)
+  result   <- freq(fdata, bins, inta)
   data_len <- length(fdata)
-  cum <- cumsum(result)
-  per <- percent(result, data_len)
-  cum_per <- percent(cum, data_len)
+  cum      <- cumsum(result)
+  per      <- percent(result, data_len)
+  cum_per  <- percent(cum, data_len)
+
+  na_count <-
+    data %>%
+    pull(!! varyable) %>%
+    is.na() %>%
+    sum()
+
+  if (na_count > 0) {
+    na_freq <- na_count
+  } else {
+    na_freq <- 0
+  }
+
+  n_obs <-
+    data %>%
+    pull(!! varyable) %>%
+    length()
+
+  lower_n <- n_bins + 1
+
+  freq_data <-
+    tibble(lower = inta[-lower_n],
+           upper = inta[-1],
+           frequency = result,
+           cumulative = cum,
+           freq_percent = per,
+           cum_percent = cum_per)
+
   out <- list(
+    freq_data = freq_data,
     breaks = inta,
     frequency = result,
     cumulative = cum,
@@ -78,6 +108,8 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
     cum_percent = cum_per,
     bins = n_bins,
     data = fdata,
+    na_count = na_freq,
+    n = n_obs,
     varname = var_name
   )
 

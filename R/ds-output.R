@@ -239,22 +239,27 @@ print_screen <- function(x) {
 
 
 print_fcont <- function(data) {
-  blen <- data %>%
+
+  blen <-
+    data %>%
     use_series(breaks) %>%
     nchar() %>%
     max()
 
-  blen2 <- blen %>%
+  blen2 <-
+    blen %>%
     multiply_by(2) %>%
     add(4)
 
-  flen <- data %>%
+  flen <-
+    data %>%
     use_series(frequency) %>%
     nchar() %>%
     max() %>%
     max(9)
 
-  clen <- data %>%
+  clen <-
+    data %>%
     use_series(cumulative) %>%
     nchar() %>%
     max() %>%
@@ -289,6 +294,29 @@ print_fcont <- function(data) {
     cat(rep("-", dash), sep = "")
     cat("|")
   }
+  cat("\n")
+  nlen <- blen * 2 + 4
+  if (data$na_count > 0) {
+    na_percent <- format((data$na_count / data$n) * 100, nsmall = 2)
+    cat("|", format("Missing", width = nlen, justify = "centre"))
+    cat("|", format(as.character(round(data$na_count, 2)), width = flen, justify = "centre"))
+    cat(" |",  format("-", width = clen, justify = "centre"))
+    cat(" |", format(as.character(na_percent), width = 12, justify = "centre"))
+    cat(" |", format("-", width = 12, justify = "centre"))
+    cat(" |")
+    cat("\n|")
+    cat(rep("-", dash), sep = "")
+    cat("|\n")
+  }
+  cat("|", format("Total", width = nlen, justify = "centre"))
+  cat("|", format(as.character(data$n), width = flen, justify = "centre"))
+  cat(" |",  format("-", width = clen, justify = "centre"))
+  cat(" |", format("100.00", width = 12, justify = "centre"))
+  cat(" |", format("-", width = 12, justify = "centre"))
+  cat(" |")
+  cat("\n|")
+  cat(rep("-", dash), sep = "")
+  cat("|")
 }
 
 
