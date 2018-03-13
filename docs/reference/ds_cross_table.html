@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Two Way Tables — ds_cross_table â€¢ descriptr</title>
+<title>Two way table — ds_cross_table â€¢ descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -104,12 +104,12 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Two Way Tables</h1>
+    <h1>Two way table</h1>
     </div>
 
     
-    <p><code>ds_cross_tablecross_table</code> creates two way tables of categorical
-variables. The tables created can be visualized as barplots and mosaicplots.</p>
+    <p>Creates two way tables of categorical variables. The tables created can be
+visualized as barplots and mosaicplots.</p>
     
 
     <pre class="usage"><span class='fu'>ds_cross_table</span>(<span class='no'>data</span>, <span class='no'>var1</span>, <span class='no'>var2</span>)
@@ -122,33 +122,32 @@ variables. The tables created can be visualized as barplots and mosaicplots.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>a <code>data.frame</code> or a <code>tibble</code></p></td>
+      <td><p>A <code>data.frame</code> or a <code>tibble</code>.</p></td>
     </tr>
     <tr>
       <th>var1</th>
-      <td><p>First categorical variable</p></td>
+      <td><p>First categorical variable.</p></td>
     </tr>
     <tr>
       <th>var2</th>
-      <td><p>Second categorical variable</p></td>
+      <td><p>Second categorical variable.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>An object of class cross_table</p></td>
+      <td><p>An object of class <code>cross_table</code>.</p></td>
     </tr>
     <tr>
       <th>stacked</th>
-      <td><p>a logical value. If FALSE, the columns of height are portrayed
-as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.</p></td>
+      <td><p>If <code>FALSE</code>, the columns of height are portrayed
+as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtaposed bars.</p></td>
     </tr>
     <tr>
       <th>proportional</th>
-      <td><p>a logical value. If TRUE, the height of the bars is
-proportional</p></td>
+      <td><p>If <code>TRUE</code>, the height of the bars is proportional.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>further arguments to be passed to or from methods.</p></td>
+      <td><p>Further arguments to be passed to or from methods.</p></td>
     </tr>
     </table>
     
@@ -157,21 +156,22 @@ proportional</p></td>
     <p><code>ds_cross_table</code> returns an object of class <code>"ds_cross_table"</code>.
 An object of class <code>"ds_cross_table"</code> is a list containing at least the
 following components:</p>
-<dt>obs</dt><dd><p>obs number of observations</p></dd>
-<dt>var2_levels</dt><dd><p>levels of the second categorical variable</p></dd>
-<dt>var1_levels</dt><dd><p>levels of the first categorical variable</p></dd>
-<dt>varnames</dt><dd><p>names of the variables</p></dd>
-<dt>twowaytable</dt><dd><p>table of the variables</p></dd>
-<dt>percent_table</dt><dd><p>table of percentages</p></dd>
-<dt>row_percent</dt><dd><p>table of row percentages</p></dd>
-<dt>col_percent</dt><dd><p>table of column percentages</p></dd>
-<dt>column_totals</dt><dd><p>total of columns</p></dd>
-<dt>percent_column</dt><dd><p>total of columns as a percentage</p></dd>
+<dt>obs</dt><dd><p>Number of observations.</p></dd>
+<dt>var2_levels</dt><dd><p>Levels of the second categorical variable.</p></dd>
+<dt>var1_levels</dt><dd><p>Levels of the first categorical variable.</p></dd>
+<dt>varnames</dt><dd><p>Names of the variables.</p></dd>
+<dt>twowaytable</dt><dd><p>Table of the variables.</p></dd>
+<dt>percent_table</dt><dd><p>Table of percentages.</p></dd>
+<dt>row_percent</dt><dd><p>Table of row percentages.</p></dd>
+<dt>col_percent</dt><dd><p>Table of column percentages.</p></dd>
+<dt>column_totals</dt><dd><p>Total of columns.</p></dd>
+<dt>percent_column</dt><dd><p>Total of columns as a percentage.</p></dd>
 
     
-    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated Function</h2>
+    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated function</h2>
 
-    <p><code>ds_cross_table()</code> has been deprecated. Instead use <code>ds_cross_table()</code>.</p>
+    <p><code>ds_cross_table()</code> has been deprecated. Instead use
+<code>ds_cross_table()</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -210,7 +210,8 @@ following components:</p>
 #&gt; |              |        0.594 |        0.406 |              |
 #&gt; -------------------------------------------------------------</div><div class='input'>
 <span class='co'># bar plots</span>
-<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>stacked</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>stacked</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -219,7 +220,7 @@ following components:</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#deprecated-function">Deprecated Function</a></li>
+      <li><a href="#deprecated-function">Deprecated function</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

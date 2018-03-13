@@ -6,13 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize Chi Square Distribution — dist_chi_plot â€¢ descriptr</title>
+<title>Visualize chi square distribution — dist_chi_plot â€¢ descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -101,44 +104,54 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualize Chi Square Distribution</h1>
+    <h1>Visualize chi square distribution</h1>
     </div>
 
     
     <p>Visualize how changes in degrees of freedom affect the shape of
-the chi square distribution. compute\/visualize quantiles out of given
+the chi square distribution. Compute &amp; visualize quantiles out of given
 probability and probability from a given quantile.</p>
     
 
-    <pre><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>dist_chi_perc</span>(<span class='kw'>probs</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>))
 
 <span class='fu'>dist_chi_prob</span>(<span class='no'>perc</span>, <span class='no'>df</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>df</dt>
-      <dd>degrees of freedom</dd>
-      <dt>normal</dt>
-      <dd>logical; if <code>TRUE</code>, normal curve with same <code>mean</code> and
-<code>sd</code> as the chi square distribution is drawn</dd>
-      <dt>probs</dt>
-      <dd>a probability value</dd>
-      <dt>type</dt>
-      <dd>lower tail or upper tail</dd>
-      <dt>perc</dt>
-      <dd>a quantile value</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>df</th>
+      <td><p>Degrees of freedom.</p></td>
+    </tr>
+    <tr>
+      <th>normal</th>
+      <td><p>If <code>TRUE</code>, normal curve with same <code>mean</code> and
+<code>sd</code> as the chi square distribution is drawn.</p></td>
+    </tr>
+    <tr>
+      <th>probs</th>
+      <td><p>Probability value.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>Lower tail or upper tail.</p></td>
+    </tr>
+    <tr>
+      <th>perc</th>
+      <td><p>Quantile value.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>percentile for the <code>probs</code> based on <code>df</code> and <code>type</code> or
-probability value for <code>perc</code> based on <code>df</code> and <code>type</code></p>
+    <p>Percentile for the <code>probs</code> based on <code>df</code> and <code>type</code> or
+probability value for <code>perc</code> based on <code>df</code> and <code>type</code>.</p>
     
-    <h2 class="hasAnchor" id="deprecated-functions"><a class="anchor" href="#deprecated-functions"></a>Deprecated Functions</h2>
+    <h2 class="hasAnchor" id="deprecated-functions"><a class="anchor" href="#deprecated-functions"></a>Deprecated functions</h2>
 
-    <p></p>
     <p><code>chi_plot()</code>, <code>chi_prob()</code> and <code>chi_per()</code> have been
 deprecated. Instead use <code>dist_chi_plot()</code>, <code>dist_chi_prob()</code> and
 <code>dist_chi_perc()</code>.</p>
@@ -150,11 +163,12 @@ deprecated. Instead use <code>dist_chi_plot()</code>, <code>dist_chi_prob()</cod
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># visualize chi square distribution</span>
-<span class='fu'>dist_chi_plot</span>()</div><img src='dist_chi_plot-2.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><img src='dist_chi_plot-4.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><img src='dist_chi_plot-6.png' alt='' width='540' height='400' /><div class='input'>
-<span class='co'># compute\/visualize quantiles out of given probability</span>
-<span class='fu'>dist_chi_perc</span>(<span class='fl'>0.165</span>, <span class='fl'>8</span>, <span class='st'>'upper'</span>)</div><img src='dist_chi_plot-8.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>dist_chi_perc</span>(<span class='fl'>0.22</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><img src='dist_chi_plot-10.png' alt='' width='540' height='400' /><div class='input'>
-<span class='co'># compute\/visualize probability from a given quantile.</span>
-<span class='fu'>dist_chi_prob</span>(<span class='fl'>13.58</span>, <span class='fl'>11</span>, <span class='st'>'lower'</span>)</div><img src='dist_chi_plot-12.png' alt='' width='540' height='400' /><div class='input'><span class='fu'>dist_chi_prob</span>(<span class='fl'>15.72</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><img src='dist_chi_plot-14.png' alt='' width='540' height='400' /></pre>
+<span class='fu'>dist_chi_plot</span>()</div><div class='img'><img src='dist_chi_plot-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='dist_chi_plot-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='dist_chi_plot-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># visualize quantiles out of given probability</span>
+<span class='fu'>dist_chi_perc</span>(<span class='fl'>0.165</span>, <span class='fl'>8</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_perc</span>(<span class='fl'>0.22</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># visualize probability from a given quantile.</span>
+<span class='fu'>dist_chi_prob</span>(<span class='fl'>13.58</span>, <span class='fl'>11</span>, <span class='st'>'lower'</span>)</div><div class='img'><img src='dist_chi_plot-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_prob</span>(<span class='fl'>15.72</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -163,7 +177,7 @@ deprecated. Instead use <code>dist_chi_plot()</code>, <code>dist_chi_prob()</cod
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#deprecated-functions">Deprecated Functions</a></li>
+      <li><a href="#deprecated-functions">Deprecated functions</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

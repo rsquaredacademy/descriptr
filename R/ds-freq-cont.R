@@ -1,29 +1,35 @@
-#' @importFrom graphics hist
-#' @importFrom magrittr use_series multiply_by add
-#' @title Frequency Distribution of Continuous Data
-#' @description \code{ds_freq_cont} returns the frequency distribution of
-#' continuous by splitting the data into equidistant intervals created based on
-#' the number of bins specified. \code{hist.ds_freq_cont} creates histogram
-#' for the frequency table created using \code{ds_freq_cont}
-#' @param data a \code{data.frame} or a \code{tibble}
-#' @param variable numeric; column in \code{data}
-#' @param bins number of intervals into which the data must be split
-#' @param x an object of class \code{ds_freq_cont}
-#' @param ... further arguments to be passed to or from methods
-#' @return \code{ds_freq_cont} returns an object of class \code{"ds_freq_cont"}
+#' Frequency distribution of continuous data
+#'
+#' Frequency distribution of continuous data by splitting into equidistant
+#' intervals created based on the number of bins specified.
+#' \code{hist.ds_freq_cont()} creates histogram for the frequency table
+#' created using \code{ds_freq_cont()}.
+#'
+#' @param data A \code{data.frame} or a \code{tibble}.
+#' @param variable Column in \code{data}.
+#' @param bins Number of intervals into which the data must be split.
+#' @param x An object of class \code{ds_freq_cont}.
+#' @param ... Further arguments to be passed to or from methods.
+#'
+#' @return \code{ds_freq_cont()} returns an object of class \code{"ds_freq_cont"}
 #' An object of class \code{"ds_freq_cont"} is a list containing the
 #' following components
 #'
-#' \item{breaks}{lower/upper boundaries of intervals}
-#' \item{frequency}{frequecy of the intervals}
-#' \item{cumulative}{cumulative frequency}
-#' \item{percent}{frequency as percent}
-#' \item{cum_percent}{cumulative frequency as percent}
-#' \item{bins}{bins}
-#' \item{data}{data}
-#' \item{varname}{name of the data}
-#' @section Deprecated Functions:
+#' \item{breaks}{Lower/upper boundaries of intervals.}
+#' \item{frequency}{Frequecy of the intervals.}
+#' \item{cumulative}{Cumulative frequency.}
+#' \item{percent}{Frequency as percent.}
+#' \item{cum_percent}{Cumulative frequency as percent.}
+#' \item{bins}{Number of bins.}
+#' \item{data}{Data.}
+#' \item{varname}{Name of the variable.}
+#'
+#' @section Deprecated functions:
 #' \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
+#'
+#' @importFrom graphics hist
+#' @importFrom magrittr use_series multiply_by add
+#'
 #' @examples
 #' # frequency table
 #' ds_freq_cont(mtcarz, mpg, 4)
@@ -31,7 +37,9 @@
 #' # histogram
 #' k <- ds_freq_cont(mtcarz, mpg, 4)
 #' plot(k)
-#' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
+#'
+#' @seealso \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
+#'
 #' @export
 #'
 ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")

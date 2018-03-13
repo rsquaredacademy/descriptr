@@ -4,47 +4,46 @@
 \alias{ds_screener}
 \alias{screener}
 \alias{plot.ds_screener}
-\title{Screen Data Frames}
+\title{Screen data}
 \usage{
 ds_screener(y)
 
 \method{plot}{ds_screener}(x, ...)
 }
 \arguments{
-\item{y}{a data frame}
+\item{y}{A \code{tibble} or a \code{data.frame}.}
 
-\item{x}{an object of class \code{ds_screener}}
+\item{x}{An object of class \code{ds_screener}.}
 
-\item{...}{further arguments to be passed to or from methods}
+\item{...}{Further arguments to be passed to or from methods.}
 }
 \value{
-\code{ds_screener} returns an object of class \code{"ds_screener"}.
+\code{ds_screener()} returns an object of class \code{"ds_screener"}.
 An object of class \code{"ds_screener"} is a list containing the
-following components
+following components:
 
-\item{Rows}{number of rows in the data frame}
-\item{Columns}{number of columns in the data frame}
-\item{Variables}{names of the variables in the data frame}
-\item{Types}{class of the variables in the data frame}
-\item{Count}{length of the variables in the data frame}
-\item{nlevels}{number of levels of a factor variable}
-\item{levels}{levels of factor variables in the data frame}
-\item{Missing}{number of missing observations in each variable}
-\item{MissingPer}{Percent of missing observations in each variable}
-\item{MissingTotal}{total number of missing observations in the data frame}
-\item{MissingTotPer}{total percent of missing observations in the data frame}
-\item{MissingRows}{total number of rows with missing observations in the
-data frame}
-\item{MissingCols}{total number of columns with missing observations in the
-data frame}
+\item{Rows}{Number of rows in the data frame.}
+\item{Columns}{Number of columns in the data frame.}
+\item{Variables}{Names of the variables in the data frame.}
+\item{Types}{Class of the variables in the data frame.}
+\item{Count}{Length of the variables in the data frame.}
+\item{nlevels}{Number of levels of a factor variable.}
+\item{levels}{Levels of factor variables in the data frame.}
+\item{Missing}{Number of missing observations in each variable.}
+\item{MissingPer}{Percent of missing observations in each variable.}
+\item{MissingTotal}{Total number of missing observations in the data frame.}
+\item{MissingTotPer}{Total percent of missing observations in the data frame.}
+\item{MissingRows}{Total number of rows with missing observations in the
+data frame.}
+\item{MissingCols}{Total number of columns with missing observations in the
+data frame.}
 }
 \description{
-\code{ds_screener} will screen data frames and return details such
-as variable names, class, levels and missing values. \code{plot.ds_screener}
-creates bar plots to visualize % of missing observations for each variable
-in a data frame.
+Screen data  and return details such as variable names, class, levels and
+missing values. \code{plot.ds_screener()} creates bar plots to visualize %
+of missing observations for each variable in a data set.
 }
-\section{Deprecated Function}{
+\section{Deprecated function}{
 
 \code{screener()} has been deprecated. Instead
 use \code{ds_screener()}.
@@ -53,4 +52,5 @@ use \code{ds_screener()}.
 \examples{
 # screen data
 ds_screener(mtcarz)
+
 }

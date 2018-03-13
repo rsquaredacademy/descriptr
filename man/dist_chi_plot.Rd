@@ -7,7 +7,7 @@
 \alias{chi_per}
 \alias{dist_chi_prob}
 \alias{chi_prob}
-\title{Visualize Chi Square Distribution}
+\title{Visualize chi square distribution}
 \usage{
 dist_chi_plot(df = 3, normal = FALSE)
 
@@ -16,27 +16,27 @@ dist_chi_perc(probs = 0.95, df = 3, type = c("lower", "upper"))
 dist_chi_prob(perc, df, type = c("lower", "upper"))
 }
 \arguments{
-\item{df}{degrees of freedom}
+\item{df}{Degrees of freedom.}
 
-\item{normal}{logical; if \code{TRUE}, normal curve with same \code{mean} and
-\code{sd} as the chi square distribution is drawn}
+\item{normal}{If \code{TRUE}, normal curve with same \code{mean} and
+\code{sd} as the chi square distribution is drawn.}
 
-\item{probs}{a probability value}
+\item{probs}{Probability value.}
 
-\item{type}{lower tail or upper tail}
+\item{type}{Lower tail or upper tail.}
 
-\item{perc}{a quantile value}
+\item{perc}{Quantile value.}
 }
 \value{
-percentile for the \code{probs} based on \code{df} and \code{type} or
-probability value for \code{perc} based on \code{df} and \code{type}
+Percentile for the \code{probs} based on \code{df} and \code{type} or
+probability value for \code{perc} based on \code{df} and \code{type}.
 }
 \description{
 Visualize how changes in degrees of freedom affect the shape of
-the chi square distribution. compute\/visualize quantiles out of given
+the chi square distribution. Compute & visualize quantiles out of given
 probability and probability from a given quantile.
 }
-\section{Deprecated Functions}{
+\section{Deprecated functions}{
 
 \code{chi_plot()}, \code{chi_prob()} and \code{chi_per()} have been
 deprecated. Instead use \code{dist_chi_plot()}, \code{dist_chi_prob()} and
@@ -49,13 +49,14 @@ dist_chi_plot()
 dist_chi_plot(df = 5)
 dist_chi_plot(df = 5, normal = TRUE)
 
-# compute\\/visualize quantiles out of given probability
+# visualize quantiles out of given probability
 dist_chi_perc(0.165, 8, 'upper')
 dist_chi_perc(0.22, 13, 'upper')
 
-# compute\\/visualize probability from a given quantile.
+# visualize probability from a given quantile.
 dist_chi_prob(13.58, 11, 'lower')
 dist_chi_prob(15.72, 13, 'upper')
+
 }
 \seealso{
 \code{\link[stats]{Chisquare}}

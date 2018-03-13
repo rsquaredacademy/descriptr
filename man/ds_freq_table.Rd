@@ -4,36 +4,36 @@
 \alias{ds_freq_table}
 \alias{freq_table}
 \alias{plot.ds_freq_table}
-\title{Frequency Table: Categorical Data}
+\title{Frequency table}
 \usage{
 ds_freq_table(data, variable)
 
 \method{plot}{ds_freq_table}(x, ...)
 }
 \arguments{
-\item{data}{a \code{data.frame} or a \code{tibble}}
+\item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{variable}{column in \code{data}}
+\item{variable}{Column in \code{data}.}
 
-\item{x}{an object of class \code{ds_freq_table}}
+\item{x}{An object of class \code{ds_freq_table}.}
 
-\item{...}{further arguments to be passed to or from methods}
+\item{...}{Further arguments to be passed to or from methods.}
 }
 \value{
 \code{ds_freq_table} returns an object of class \code{"ds_freq_table"}.
 An object of class \code{"ds_freq_table"} is a list containing the
-following components
+following components:
 
-\item{ftable}{frequency table}
-\item{varname}{name of the data}
+\item{ftable}{Frequency table.}
+\item{varname}{Name of the variable.}
 }
 \description{
-\code{ds_freq_table} creates frequency table for factor data and
-returns the frequency, cumulative frequency, frequency percent and cumulative
-frequency percent. \code{barplot.ds_freq_table} creates bar plot for the
-frequency table created using \code{ds_freq_table}
+Frequency table for factor data and returns the frequency, cumulative
+frequency, frequency percent and cumulative frequency percent.
+\code{barplot.ds_freq_table()} creates bar plot for the
+frequency table created using \code{ds_freq_table()}.
 }
-\section{Deprecated Function}{
+\section{Deprecated function}{
 
 \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
 }
@@ -45,7 +45,8 @@ ds_freq_table(mtcarz, cyl)
 # barplot
 k <- ds_freq_table(mtcarz, cyl)
 plot(k)
+
 }
 \seealso{
-\code{link{ds_freq_cont}} \code{link{ds_cross_table}}
+\code{\link{ds_freq_cont}} \code{\link{ds_cross_table}}
 }

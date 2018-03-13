@@ -4,44 +4,44 @@
 \alias{ds_freq_cont}
 \alias{freq_cont}
 \alias{plot.ds_freq_cont}
-\title{Frequency Distribution of Continuous Data}
+\title{Frequency distribution of continuous data}
 \usage{
 ds_freq_cont(data, variable, bins = 5)
 
 \method{plot}{ds_freq_cont}(x, ...)
 }
 \arguments{
-\item{data}{a \code{data.frame} or a \code{tibble}}
+\item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{variable}{numeric; column in \code{data}}
+\item{variable}{Column in \code{data}.}
 
-\item{bins}{number of intervals into which the data must be split}
+\item{bins}{Number of intervals into which the data must be split.}
 
-\item{x}{an object of class \code{ds_freq_cont}}
+\item{x}{An object of class \code{ds_freq_cont}.}
 
-\item{...}{further arguments to be passed to or from methods}
+\item{...}{Further arguments to be passed to or from methods.}
 }
 \value{
-\code{ds_freq_cont} returns an object of class \code{"ds_freq_cont"}
+\code{ds_freq_cont()} returns an object of class \code{"ds_freq_cont"}
 An object of class \code{"ds_freq_cont"} is a list containing the
 following components
 
-\item{breaks}{lower/upper boundaries of intervals}
-\item{frequency}{frequecy of the intervals}
-\item{cumulative}{cumulative frequency}
-\item{percent}{frequency as percent}
-\item{cum_percent}{cumulative frequency as percent}
-\item{bins}{bins}
-\item{data}{data}
-\item{varname}{name of the data}
+\item{breaks}{Lower/upper boundaries of intervals.}
+\item{frequency}{Frequecy of the intervals.}
+\item{cumulative}{Cumulative frequency.}
+\item{percent}{Frequency as percent.}
+\item{cum_percent}{Cumulative frequency as percent.}
+\item{bins}{Number of bins.}
+\item{data}{Data.}
+\item{varname}{Name of the variable.}
 }
 \description{
-\code{ds_freq_cont} returns the frequency distribution of
-continuous by splitting the data into equidistant intervals created based on
-the number of bins specified. \code{hist.ds_freq_cont} creates histogram
-for the frequency table created using \code{ds_freq_cont}
+Frequency distribution of continuous data by splitting into equidistant
+intervals created based on the number of bins specified.
+\code{hist.ds_freq_cont()} creates histogram for the frequency table
+created using \code{ds_freq_cont()}.
 }
-\section{Deprecated Functions}{
+\section{Deprecated functions}{
 
 \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
 }
@@ -53,7 +53,8 @@ ds_freq_cont(mtcarz, mpg, 4)
 # histogram
 k <- ds_freq_cont(mtcarz, mpg, 4)
 plot(k)
+
 }
 \seealso{
-\code{link{ds_freq_table}} \code{link{ds_cross_table}}
+\code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 }

@@ -3,26 +3,27 @@
 \name{ds_multi_stats}
 \alias{ds_multi_stats}
 \alias{multistats}
-\title{Multiple Variable Statistics}
+\title{Multiple variable statistics}
 \usage{
 ds_multi_stats(x, ...)
 }
 \arguments{
-\item{x}{a tibble/data.frame}
+\item{x}{A \code{tibble} or a \code{data.frame}.}
 
-\item{...}{columns in \code{x}}
+\item{...}{Columns in \code{x}.}
 }
 \value{
-a tibble
+A tibble.
 }
 \description{
-Summary/descriptive statistics for multiple variables
+Descriptive statistics for multiple variables.
 }
-\section{Deprecated Function}{
+\section{Deprecated function}{
 
 \code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
 }
 
 \examples{
 ds_multi_stats(mtcarz, mpg, disp, hp)
+
 }

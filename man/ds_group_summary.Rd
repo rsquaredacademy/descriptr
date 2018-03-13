@@ -4,41 +4,40 @@
 \alias{ds_group_summary}
 \alias{group_summary}
 \alias{plot.ds_group_summary}
-\title{Descriptive Statistics By Group}
+\title{Groupwise descriptive statistics}
 \usage{
 ds_group_summary(data, gvar, cvar)
 
 \method{plot}{ds_group_summary}(x, ...)
 }
 \arguments{
-\item{data}{a \code{data.frame} or a \code{tibble}}
+\item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{gvar}{factor; column in \code{data}}
+\item{gvar}{Column in \code{data}.}
 
-\item{cvar}{continuous; column in \code{data}}
+\item{cvar}{Column in \code{data}.}
 
-\item{x}{an object of the class \code{ds_group_summary}}
+\item{x}{An object of the class \code{ds_group_summary}.}
 
-\item{...}{further arguments to be passed to or from methods}
+\item{...}{Further arguments to be passed to or from methods.}
 }
 \value{
-\code{ds_group_summary} returns an object of class \code{"ds_group_summary"}.
+\code{ds_group_summary()} returns an object of class \code{"ds_group_summary"}.
 An object of class \code{"ds_group_summary"} is a list containing the
 following components:
 
-\item{stats}{a data frame containing descriptive statistics for the different
-levels of the factor variable}
-\item{plotdata}{data for boxplot method}
-\item{xvar}{name of the categorical variable}
-\item{yvar}{name of the continuous variable}
+\item{stats}{A data frame containing descriptive statistics for the different
+levels of the factor variable.}
+\item{plotdata}{Data for boxplot method.}
+\item{xvar}{Name of the categorical variable.}
+\item{yvar}{Name of the continuous variable.}
 }
 \description{
-\code{ds_group_summary} returns descriptive statistics of a
-continuous variable for the different levels of a categorical variable.
-\code{boxplot.group_summary} creates boxplots of the continuous variable
-for the different levels of the categorical variable.
+Descriptive statistics of a continuous variable for the different levels of
+a categorical variable. \code{boxplot.group_summary()} creates boxplots of
+the continuous variable for the different levels of the categorical variable.
 }
-\section{Deprecated Function}{
+\section{Deprecated function}{
 
 \code{ds_group_summary()} has been deprecated. Instead
 use \code{ds_group_summary()}.
@@ -51,7 +50,8 @@ ds_group_summary(mtcarz, cyl, mpg)
 # boxplot
 k <- ds_group_summary(mtcarz, cyl, mpg)
 plot(k)
+
 }
 \seealso{
-\code{link{ds_summary_stats}}
+\code{\link{ds_summary_stats}}
 }

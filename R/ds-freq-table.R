@@ -1,23 +1,29 @@
+#' Frequency table
+#'
+#' Frequency table for factor data and returns the frequency, cumulative
+#' frequency, frequency percent and cumulative frequency percent.
+#' \code{barplot.ds_freq_table()} creates bar plot for the
+#' frequency table created using \code{ds_freq_table()}.
+#'
+#' @param data A \code{data.frame} or a \code{tibble}.
+#' @param variable Column in \code{data}.
+#' @param x An object of class \code{ds_freq_table}.
+#' @param ... Further arguments to be passed to or from methods.
+#'
+#' @return \code{ds_freq_table} returns an object of class \code{"ds_freq_table"}.
+#' An object of class \code{"ds_freq_table"} is a list containing the
+#' following components:
+#'
+#' \item{ftable}{Frequency table.}
+#' \item{varname}{Name of the variable.}
+#'
+#' @section Deprecated function:
+#' \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
+#'
 #' @importFrom grDevices topo.colors
 #' @importFrom tibble tibble
 #' @importFrom dplyr pull last
-#' @title Frequency Table: Categorical Data
-#' @description \code{ds_freq_table} creates frequency table for factor data and
-#' returns the frequency, cumulative frequency, frequency percent and cumulative
-#' frequency percent. \code{barplot.ds_freq_table} creates bar plot for the
-#' frequency table created using \code{ds_freq_table}
-#' @param data a \code{data.frame} or a \code{tibble}
-#' @param variable column in \code{data}
-#' @param x an object of class \code{ds_freq_table}
-#' @param ... further arguments to be passed to or from methods
-#' @return \code{ds_freq_table} returns an object of class \code{"ds_freq_table"}.
-#' An object of class \code{"ds_freq_table"} is a list containing the
-#' following components
 #'
-#' \item{ftable}{frequency table}
-#' \item{varname}{name of the data}
-#' @section Deprecated Function:
-#' \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
 #' @examples
 #' # frequency table
 #' ds_freq_table(mtcarz, cyl)
@@ -25,7 +31,9 @@
 #' # barplot
 #' k <- ds_freq_table(mtcarz, cyl)
 #' plot(k)
-#' @seealso \code{link{ds_freq_cont}} \code{link{ds_cross_table}}
+#'
+#' @seealso \code{\link{ds_freq_cont}} \code{\link{ds_cross_table}}
+#'
 #' @export
 #'
 ds_freq_table <- function(data, variable) UseMethod("ds_freq_table")

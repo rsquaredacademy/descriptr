@@ -1,37 +1,45 @@
-#' @importFrom stats dbinom pbinom qbinom
-#' @importFrom graphics axis mtext
-#' @title Visualize Binomial Distribution
-#' @description Visualize how changes in number of trials and the probability of
-#' success affect the shape of the binomial distribution. compute\/visualize
-#' probability from a given quantile and quantiles out of given probability.
-#' @param n number of trials
-#' @param p aggregate probability
-#' @param s number of success
-#' @param tp the probability of success in a trial
-#' @param type lower/upper/exact/interval
-#' @return a list containing the following components:
+#' Visualize binomial distribution
 #'
-#' \item{avg}{mean of the binomial distribution}
-#' \item{stdev}{standard deviation of the binomial distribution}
-#' \item{prob}{probability of s success}
-#' @section Deprecated Functions:
+#' Visualize how changes in number of trials and the probability of
+#' success affect the shape of the binomial distribution. Compute & visualize
+#' probability from a given quantile and quantiles out of given probability.
+#'
+#' @param n Number of trials.
+#' @param p Aggregate probability.
+#' @param s Number of success.
+#' @param tp Probability of success in a trial.
+#' @param type Lower/upper/exact/interval.
+#'
+#' @return A list containing the following components:
+#'
+#' \item{avg}{Mean of the binomial distribution,}
+#' \item{stdev}{Standard deviation of the binomial distribution.}
+#' \item{prob}{Probability of success.}
+#'
+#' @section Deprecated functions:
 #' \code{binom_plot()}, \code{binom_prob()}, \code{binom_perc()} have been
 #' deprecated. Instead use \code{dist_binom_plot()},
-#' \code{dist_binom_prob()} and \code{dist_binom_perc()}
+#' \code{dist_binom_prob()} and \code{dist_binom_perc()}.
+#'
+#' @importFrom stats dbinom pbinom qbinom
+#' @importFrom graphics axis mtext
+#'
 #' @examples
 #' # visualize binomial distribution
 #' dist_binom_plot(10, 0.3)
 #'
-#' # compute\/visualize probability from a given quantile
+#' # visualize probability from a given quantile
 #' dist_binom_prob(10, 0.3, 4, type = 'exact')
 #' dist_binom_prob(10, 0.3, 4, type = 'lower')
 #' dist_binom_prob(10, 0.3, 4, type = 'upper')
 #' dist_binom_prob(10, 0.3, c(4, 6), type = 'interval')
 #'
-#' # compute\/visualize quantiles out of given probability
+#' # visualize quantiles out of given probability
 #' dist_binom_perc(10, 0.5, 0.05)
 #' dist_binom_perc(10, 0.5, 0.05, "upper")
+#'
 #' @seealso \code{\link[stats]{Binomial}}
+#'
 #' @export
 #'
 dist_binom_plot <- function(n, p) {
