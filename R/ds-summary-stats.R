@@ -1,50 +1,57 @@
-#' @importFrom stats quantile
-#' @importFrom rlang enquo !!
-#' @title Descriptive Statistics
-#' @description \code{ds_summary_stats} returns a whole range of descriptive
-#' statistics for continuous data.
-#' @param data a \code{data.frame} or a \code{tibble}
-#' @param variable numeric; column in \code{data}
-#' @return \code{ds_summary_stats} returns an object of class
+#' @title Descriptive statistics
+#'
+#' @description Range of descriptive statistics for continuous data.
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param variable Column in \code{data}.
+#'
+#' @return \code{ds_summary_stats()} returns an object of class
 #' \code{"ds_summary_stats"}. An object of class \code{"ds_summary_stats"}
 #' is a list containing the following components
 #'
-#' \item{obs}{number of observations}
-#' \item{missing}{number of missing observations}
-#' \item{avg}{mean}
-#' \item{tavg}{5 percent trimmed mean}
-#' \item{stdev}{standard deviation}
-#' \item{variance}{variance}
-#' \item{skew}{skewness}
-#' \item{kurtosis}{kurtosis}
-#' \item{uss}{uncorrected sum of squares}
-#' \item{css}{corrected sum of squares}
-#' \item{cvar}{coefficient of variation}
-#' \item{sem}{standard error of mean}
-#' \item{median}{median}
-#' \item{mode}{mode}
-#' \item{range}{range}
-#' \item{min}{minimum value}
-#' \item{iqrange}{inter quartile range}
-#' \item{per99}{99th percentile}
-#' \item{per95}{95th percentile}
-#' \item{per90}{90th percentile}
-#' \item{per75}{75th percentile}
-#' \item{per25}{25th percentile}
-#' \item{per10}{10th percentile}
-#' \item{per5}{5th percentile}
-#' \item{per1}{1st percentile}
-#' \item{lowobs}{five lowest observations}
-#' \item{highobs}{five highest observations}
-#' \item{lowobsi}{index of five lowest observations}
-#' \item{highobsi}{index of five highest observations}
-#' @section Deprecated Function:
+#' \item{obs}{Number of observations.}
+#' \item{missing}{Number of missing observations.}
+#' \item{avg}{Mean.}
+#' \item{tavg}{5 percent trimmed mean.}
+#' \item{stdev}{Standard deviation.}
+#' \item{variance}{Variance.}
+#' \item{skew}{Skewness.}
+#' \item{kurtosis}{Kurtosis.}
+#' \item{uss}{Uncorrected sum of squares.}
+#' \item{css}{Corrected sum of squares.}
+#' \item{cvar}{Coefficient of variation.}
+#' \item{sem}{Standard error of mean.}
+#' \item{median}{Median.}
+#' \item{mode}{Mode.}
+#' \item{range}{Range.}
+#' \item{min}{Minimum value.}
+#' \item{iqrange}{Inter quartile range.}
+#' \item{per99}{99th percentile.}
+#' \item{per95}{95th percentile.}
+#' \item{per90}{90th percentile.}
+#' \item{per75}{75th percentile.}
+#' \item{per25}{25th percentile.}
+#' \item{per10}{10th percentile.}
+#' \item{per5}{5th percentile.}
+#' \item{per1}{1st percentile.}
+#' \item{lowobs}{Five lowest observations.}
+#' \item{highobs}{Five highest observations.}
+#' \item{lowobsi}{Index of five lowest observations.}
+#' \item{highobsi}{Index of five highest observations.}
+#'
+#' @section Deprecated function:
 #' \code{summary_stats()} has been deprecated. Instead use
 #' \code{ds_summary_stats()}.
+#'
 #' @examples
 #' ds_summary_stats(mtcarz, mpg)
+#'
+#' @importFrom stats quantile
+#' @importFrom rlang enquo !!
+#'
 #' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
 #' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
+#'
 #' @export
 #'
 ds_summary_stats <- function(data, variable) UseMethod("ds_summary_stats")

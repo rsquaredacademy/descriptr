@@ -7,7 +7,7 @@
 \alias{f_per}
 \alias{dist_f_prob}
 \alias{f_prob}
-\title{Visualize F Distribution}
+\title{Visualize f distribution}
 \usage{
 dist_f_plot(num_df = 4, den_df = 30, normal = FALSE)
 
@@ -17,33 +17,34 @@ dist_f_perc(probs = 0.95, num_df = 3, den_df = 30, type = c("lower",
 dist_f_prob(perc, num_df, den_df, type = c("lower", "upper"))
 }
 \arguments{
-\item{num_df}{degrees of freedom associated with the numerator of f statistic}
+\item{num_df}{Degrees of freedom associated with the numerator of f statistic.}
 
-\item{den_df}{degrees of freedom associated with the denominator of f statistic}
+\item{den_df}{Degrees of freedom associated with the denominator of f statistic.}
 
-\item{normal}{logical; if \code{TRUE}, normal curve with same \code{mean} and
-\code{sd} as the F distribution is drawn}
+\item{normal}{If \code{TRUE}, normal curve with same \code{mean} and
+\code{sd} as the F distribution is drawn.}
 
-\item{probs}{a probability value}
+\item{probs}{Probability value.}
 
-\item{type}{lower tail or upper tail}
+\item{type}{Lower tail or upper tail.}
 
-\item{perc}{a quantile value}
+\item{perc}{Quantile value.}
 }
 \value{
-percentile for the \code{probs} based on \code{num_df}, \code{den_df}
+Percentile for the \code{probs} based on \code{num_df}, \code{den_df}
 and \code{type} or probability value for \code{perc} based on \code{num_df},
-\code{den_df} and \code{type}
+\code{den_df} and \code{type}.
 }
 \description{
 Visualize how changes in degrees of freedom affect the
-shape of the F distribution. Compute\/visualize quantiles out of given
+shape of the F distribution. Compute & visualize quantiles out of given
 probability and probability from a given quantile.
 }
-\section{Deprecated Functions}{
+\section{Deprecated functions}{
 
 \code{f_plot()}, \code{f_prob()} and \code{f_per()} have been deprecated.
-Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and \code{dist_f_perc()}.
+Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and
+\code{dist_f_perc()}.
 }
 
 \examples{
@@ -51,13 +52,14 @@ Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and \code{dist_f_perc()}.
 dist_f_plot()
 dist_f_plot(6, 10, normal = TRUE)
 
-# compute\\/visualize probability from a given quantile
+# visualize probability from a given quantile
 dist_f_perc(0.95, 3, 30, 'lower')
 dist_f_perc(0.125, 9, 35, 'upper')
 
-# compute\\/visualize quantiles out of given probability
+# visualize quantiles out of given probability
 dist_f_prob(2.35, 5, 32)
 dist_f_prob(1.5222, 9, 35, type = "upper")
+
 }
 \seealso{
 \code{\link[stats]{FDist}}

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## descriptr: Generate descriptive statistics and explore distributions <img src="hex_descriptr.png" align="right" />
+## descriptr: Generate descriptive statistics <img src="hex_descriptr.png" align="right" />
 
 **Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/>
 **License:**
@@ -37,14 +37,14 @@ devtools::install_github("rsquaredacademy/descriptr")
 
 ### Descriptive Statistics
 
-  - Summary Statistics
-  - Two Way Tables
-  - One Way Table
-  - One Way Table (Continuous Data)
-  - Group Wise Summary
-  - Multiple Column Descriptive Statistics
-  - Multiple One Way Tables
-  - Multiple Two Way Tables
+  - Summary statistics
+  - Two way tables
+  - One way table
+  - One way table (Continuous Data)
+  - Group wise summary
+  - Multiple variable statistics
+  - Multiple one way tables
+  - Multiple two way tables
 
 ### Explore Distributions
 
@@ -184,6 +184,8 @@ ds_freq_table(mtcarz, cyl)
 #> |--------------------------------------------------------------------------|
 #> |       8      |      14      |      32      |     43.75    |      100     |
 #> |--------------------------------------------------------------------------|
+#> |     Total    |      32      |       -      |    100.00    |       -      |
+#> |--------------------------------------------------------------------------|
 ```
 
 ##### One Way Table (Continuous Data)
@@ -203,6 +205,8 @@ ds_freq_cont(mtcarz, mpg)
 #> | 24.5 - 29.2 |     2     |      28       |     6.25     |     87.5     |
 #> |-----------------------------------------------------------------------|
 #> | 29.2 - 33.9 |     4     |      32       |     12.5     |     100      |
+#> |-----------------------------------------------------------------------|
+#> |    Total    |    32     |       -       |    100.00    |      -       |
 #> |-----------------------------------------------------------------------|
 ```
 

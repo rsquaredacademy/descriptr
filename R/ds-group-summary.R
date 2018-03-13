@@ -1,27 +1,32 @@
-#' @importFrom stats median sd var IQR
-#' @importFrom graphics boxplot
-#' @title Descriptive Statistics By Group
-#' @description \code{ds_group_summary} returns descriptive statistics of a
-#' continuous variable for the different levels of a categorical variable.
-#' \code{boxplot.group_summary} creates boxplots of the continuous variable
-#' for the different levels of the categorical variable.
-#' @param data a \code{data.frame} or a \code{tibble}
-#' @param gvar factor; column in \code{data}
-#' @param cvar continuous; column in \code{data}
-#' @param x an object of the class \code{ds_group_summary}
-#' @param ... further arguments to be passed to or from methods
-#' @return \code{ds_group_summary} returns an object of class \code{"ds_group_summary"}.
+#' Groupwise descriptive statistics
+#'
+#' Descriptive statistics of a continuous variable for the different levels of
+#' a categorical variable. \code{boxplot.group_summary()} creates boxplots of
+#' the continuous variable for the different levels of the categorical variable.
+#'
+#' @param data A \code{data.frame} or a \code{tibble}.
+#' @param gvar Column in \code{data}.
+#' @param cvar Column in \code{data}.
+#' @param x An object of the class \code{ds_group_summary}.
+#' @param ... Further arguments to be passed to or from methods.
+#'
+#' @return \code{ds_group_summary()} returns an object of class \code{"ds_group_summary"}.
 #' An object of class \code{"ds_group_summary"} is a list containing the
 #' following components:
 #'
-#' \item{stats}{a data frame containing descriptive statistics for the different
-#' levels of the factor variable}
-#' \item{plotdata}{data for boxplot method}
-#' \item{xvar}{name of the categorical variable}
-#' \item{yvar}{name of the continuous variable}
-#' @section Deprecated Function:
+#' \item{stats}{A data frame containing descriptive statistics for the different
+#' levels of the factor variable.}
+#' \item{plotdata}{Data for boxplot method.}
+#' \item{xvar}{Name of the categorical variable.}
+#' \item{yvar}{Name of the continuous variable.}
+#'
+#' @section Deprecated function:
 #' \code{ds_group_summary()} has been deprecated. Instead
 #' use \code{ds_group_summary()}.
+#'
+#' @importFrom stats median sd var IQR
+#' @importFrom graphics boxplot
+#'
 #' @examples
 #' # ds_group summary
 #' ds_group_summary(mtcarz, cyl, mpg)
@@ -29,7 +34,9 @@
 #' # boxplot
 #' k <- ds_group_summary(mtcarz, cyl, mpg)
 #' plot(k)
-#' @seealso \code{link{ds_summary_stats}}
+#'
+#' @seealso \code{\link{ds_summary_stats}}
+#'
 #' @export
 #'
 ds_group_summary <- function(data, gvar, cvar) UseMethod("ds_group_summary")

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Descriptive Statistics — ds_summary_stats â€¢ descriptr</title>
+<title>Descriptive statistics — ds_summary_stats â€¢ descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -104,12 +104,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Descriptive Statistics</h1>
+    <h1>Descriptive statistics</h1>
     </div>
 
     
-    <p><code>ds_summary_stats</code> returns a whole range of descriptive
-statistics for continuous data.</p>
+    <p>Range of descriptive statistics for continuous data.</p>
     
 
     <pre class="usage"><span class='fu'>ds_summary_stats</span>(<span class='no'>data</span>, <span class='no'>variable</span>)</pre>
@@ -119,51 +118,51 @@ statistics for continuous data.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>a <code>data.frame</code> or a <code>tibble</code></p></td>
+      <td><p>A <code>data.frame</code> or <code>tibble</code>.</p></td>
     </tr>
     <tr>
       <th>variable</th>
-      <td><p>numeric; column in <code>data</code></p></td>
+      <td><p>Column in <code>data</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>ds_summary_stats</code> returns an object of class
+    <p><code>ds_summary_stats()</code> returns an object of class
 <code>"ds_summary_stats"</code>. An object of class <code>"ds_summary_stats"</code>
 is a list containing the following components</p>
-<dt>obs</dt><dd><p>number of observations</p></dd>
-<dt>missing</dt><dd><p>number of missing observations</p></dd>
-<dt>avg</dt><dd><p>mean</p></dd>
-<dt>tavg</dt><dd><p>5 percent trimmed mean</p></dd>
-<dt>stdev</dt><dd><p>standard deviation</p></dd>
-<dt>variance</dt><dd><p>variance</p></dd>
-<dt>skew</dt><dd><p>skewness</p></dd>
-<dt>kurtosis</dt><dd><p>kurtosis</p></dd>
-<dt>uss</dt><dd><p>uncorrected sum of squares</p></dd>
-<dt>css</dt><dd><p>corrected sum of squares</p></dd>
-<dt>cvar</dt><dd><p>coefficient of variation</p></dd>
-<dt>sem</dt><dd><p>standard error of mean</p></dd>
-<dt>median</dt><dd><p>median</p></dd>
-<dt>mode</dt><dd><p>mode</p></dd>
-<dt>range</dt><dd><p>range</p></dd>
-<dt>min</dt><dd><p>minimum value</p></dd>
-<dt>iqrange</dt><dd><p>inter quartile range</p></dd>
-<dt>per99</dt><dd><p>99th percentile</p></dd>
-<dt>per95</dt><dd><p>95th percentile</p></dd>
-<dt>per90</dt><dd><p>90th percentile</p></dd>
-<dt>per75</dt><dd><p>75th percentile</p></dd>
-<dt>per25</dt><dd><p>25th percentile</p></dd>
-<dt>per10</dt><dd><p>10th percentile</p></dd>
-<dt>per5</dt><dd><p>5th percentile</p></dd>
-<dt>per1</dt><dd><p>1st percentile</p></dd>
-<dt>lowobs</dt><dd><p>five lowest observations</p></dd>
-<dt>highobs</dt><dd><p>five highest observations</p></dd>
-<dt>lowobsi</dt><dd><p>index of five lowest observations</p></dd>
-<dt>highobsi</dt><dd><p>index of five highest observations</p></dd>
+<dt>obs</dt><dd><p>Number of observations.</p></dd>
+<dt>missing</dt><dd><p>Number of missing observations.</p></dd>
+<dt>avg</dt><dd><p>Mean.</p></dd>
+<dt>tavg</dt><dd><p>5 percent trimmed mean.</p></dd>
+<dt>stdev</dt><dd><p>Standard deviation.</p></dd>
+<dt>variance</dt><dd><p>Variance.</p></dd>
+<dt>skew</dt><dd><p>Skewness.</p></dd>
+<dt>kurtosis</dt><dd><p>Kurtosis.</p></dd>
+<dt>uss</dt><dd><p>Uncorrected sum of squares.</p></dd>
+<dt>css</dt><dd><p>Corrected sum of squares.</p></dd>
+<dt>cvar</dt><dd><p>Coefficient of variation.</p></dd>
+<dt>sem</dt><dd><p>Standard error of mean.</p></dd>
+<dt>median</dt><dd><p>Median.</p></dd>
+<dt>mode</dt><dd><p>Mode.</p></dd>
+<dt>range</dt><dd><p>Range.</p></dd>
+<dt>min</dt><dd><p>Minimum value.</p></dd>
+<dt>iqrange</dt><dd><p>Inter quartile range.</p></dd>
+<dt>per99</dt><dd><p>99th percentile.</p></dd>
+<dt>per95</dt><dd><p>95th percentile.</p></dd>
+<dt>per90</dt><dd><p>90th percentile.</p></dd>
+<dt>per75</dt><dd><p>75th percentile.</p></dd>
+<dt>per25</dt><dd><p>25th percentile.</p></dd>
+<dt>per10</dt><dd><p>10th percentile.</p></dd>
+<dt>per5</dt><dd><p>5th percentile.</p></dd>
+<dt>per1</dt><dd><p>1st percentile.</p></dd>
+<dt>lowobs</dt><dd><p>Five lowest observations.</p></dd>
+<dt>highobs</dt><dd><p>Five highest observations.</p></dd>
+<dt>lowobsi</dt><dd><p>Index of five lowest observations.</p></dd>
+<dt>highobsi</dt><dd><p>Index of five highest observations.</p></dd>
 
     
-    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated Function</h2>
+    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated function</h2>
 
     <p><code>summary_stats()</code> has been deprecated. Instead use
 <code>ds_summary_stats()</code>.</p>
@@ -192,8 +191,8 @@ is a list containing the following components</p>
 #&gt; 
 #&gt;              Max                                  33.90                
 #&gt;              99%                                  33.44                
-#&gt;              95%                                  30.09                
-#&gt;              90%                                  31.30                
+#&gt;              95%                                  31.30                
+#&gt;              90%                                  30.09                
 #&gt;              Q3                                   22.80                
 #&gt;              Median                               19.20                
 #&gt;              Q1                                   15.43                
@@ -211,7 +210,8 @@ is a list containing the following components</p>
 #&gt;   16                         10.4        18                         32.4  
 #&gt;   24                         13.3        19                         30.4  
 #&gt;    7                         14.3        28                         30.4  
-#&gt;   17                         14.7        26                         27.3  </div></pre>
+#&gt;   17                         14.7        26                         27.3  </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -220,7 +220,7 @@ is a list containing the following components</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#deprecated-function">Deprecated Function</a></li>
+      <li><a href="#deprecated-function">Deprecated function</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

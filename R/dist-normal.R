@@ -1,36 +1,44 @@
-#' @importFrom graphics curve
-#' @importFrom stats qnorm pnorm
-#' @title Visualize Normal Distribution
-#' @description Visualize how changes in mean and standard deviation affect the
-#' shape of the normal distribution. compute\/visualize quantiles out of given
+#' Visualize normal distribution
+#'
+#' Visualize how changes in mean and standard deviation affect the
+#' shape of the normal distribution. Compute & visualize quantiles out of given
 #' probability  and probability from a given quantile.
-#' @param perc a quantile value
-#' @param probs a probability value
-#' @param mean mean of the normal distribution
-#' @param sd standard deviation of the normal distribution
-#' @param type lower tail, upper tail or both
-#' @return percentile for the \code{probs} based on \code{mean}, \code{sd} and
+#'
+#' @param perc Quantile value.
+#' @param probs Probability value.
+#' @param mean Mean of the normal distribution.
+#' @param sd Standard deviation of the normal distribution.
+#' @param type Lower tail, upper tail or both.
+#'
+#' @return Percentile for the \code{probs} based on \code{mean}, \code{sd} and
 #' \code{type} or probability value for \code{perc} based on \code{mean},
-#' \code{sd} and \code{type}
-#' @section Deprecated Functions:
+#' \code{sd} and \code{type}.
+#'
+#' @section Deprecated functions:
 #' \code{norm_plot()}, \code{norm_prob()} and \code{norm_per()} have been
 #' deprecated. Instead use \code{dist_norm_plot()}, \code{dist_norm_prob()} and
 #' \code{dist_norm_per()}.
+#'
+#' @importFrom graphics curve
+#' @importFrom stats qnorm pnorm
+#'
 #' @examples
 #' # visualize normal distribution
 #' dist_norm_plot()
 #' dist_norm_plot(mean = 2, sd = 0.6)
 #'
-#' # compute\/visualize probability from a given quantile
+#' # visualize probability from a given quantile
 #' dist_norm_prob(3.78, mean = 2, sd = 1.36)
 #' dist_norm_prob(3.43, mean = 2, sd = 1.36, type = 'upper')
 #' dist_norm_prob(c(-1.74, 1.83), type = 'both')
 #'
-#' # compute\/visualize quantiles out of given probability
+#' # visualize quantiles out of given probability
 #' dist_norm_perc(0.95, mean = 2, sd = 1.36)
 #' dist_norm_perc(0.3, mean = 2, sd = 1.36, type = 'upper')
 #' dist_norm_perc(0.95, mean = 2, sd = 1.36, type = 'both')
+#'
 #' @seealso \code{\link[stats]{Normal}}
+#'
 #' @export
 #'
 dist_norm_plot <- function(mean = 0, sd = 1) {

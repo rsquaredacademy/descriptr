@@ -4,52 +4,52 @@
 \alias{ds_cross_table}
 \alias{cross_table}
 \alias{plot.ds_cross_table}
-\title{Two Way Tables}
+\title{Two way table}
 \usage{
 ds_cross_table(data, var1, var2)
 
 \method{plot}{ds_cross_table}(x, stacked = FALSE, proportional = FALSE, ...)
 }
 \arguments{
-\item{data}{a \code{data.frame} or a \code{tibble}}
+\item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{var1}{First categorical variable}
+\item{var1}{First categorical variable.}
 
-\item{var2}{Second categorical variable}
+\item{var2}{Second categorical variable.}
 
-\item{x}{An object of class cross_table}
+\item{x}{An object of class \code{cross_table}.}
 
-\item{stacked}{a logical value. If FALSE, the columns of height are portrayed
-as stacked bars, and if TRUE the columns are portrayed as juxtaposed bars.}
+\item{stacked}{If \code{FALSE}, the columns of height are portrayed
+as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.}
 
-\item{proportional}{a logical value. If TRUE, the height of the bars is
-proportional}
+\item{proportional}{If \code{TRUE}, the height of the bars is proportional.}
 
-\item{...}{further arguments to be passed to or from methods.}
+\item{...}{Further arguments to be passed to or from methods.}
 }
 \value{
 \code{ds_cross_table} returns an object of class \code{"ds_cross_table"}.
 An object of class \code{"ds_cross_table"} is a list containing at least the
 following components:
 
-\item{obs}{obs number of observations}
-\item{var2_levels}{levels of the second categorical variable}
-\item{var1_levels}{levels of the first categorical variable}
-\item{varnames}{names of the variables}
-\item{twowaytable}{table of the variables}
-\item{percent_table}{table of percentages}
-\item{row_percent}{table of row percentages}
-\item{col_percent}{table of column percentages}
-\item{column_totals}{total of columns}
-\item{percent_column}{total of columns as a percentage}
+\item{obs}{Number of observations.}
+\item{var2_levels}{Levels of the second categorical variable.}
+\item{var1_levels}{Levels of the first categorical variable.}
+\item{varnames}{Names of the variables.}
+\item{twowaytable}{Table of the variables.}
+\item{percent_table}{Table of percentages.}
+\item{row_percent}{Table of row percentages.}
+\item{col_percent}{Table of column percentages.}
+\item{column_totals}{Total of columns.}
+\item{percent_column}{Total of columns as a percentage.}
 }
 \description{
-\code{ds_cross_tablecross_table} creates two way tables of categorical
-variables. The tables created can be visualized as barplots and mosaicplots.
+Creates two way tables of categorical variables. The tables created can be
+visualized as barplots and mosaicplots.
 }
-\section{Deprecated Function}{
+\section{Deprecated function}{
 
-\code{ds_cross_table()} has been deprecated. Instead use \code{ds_cross_table()}.
+\code{ds_cross_table()} has been deprecated. Instead use
+\code{ds_cross_table()}.
 }
 
 \examples{
@@ -60,4 +60,5 @@ k
 plot(k)
 plot(k, stacked = TRUE)
 plot(k, proportional = TRUE)
+
 }
