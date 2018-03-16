@@ -160,23 +160,25 @@ following components:</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># frequency table</span>
-<span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       4      |      11      |      11      |     34.38    |     34.38    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       6      |       7      |      18      |     21.88    |     56.25    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       8      |      14      |      32      |     43.75    |      100     |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |     Total    |      32      |       -      |    100.00    |       -      |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; 
+<span class='no'>mt</span> <span class='kw'>&lt;-</span> <span class='no'>mtcarz</span>
+<span class='no'>mt</span>[<span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>6</span>, <span class='fl'>9</span>, <span class='fl'>12</span>), <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>8</span>, <span class='fl'>10</span>)] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='fu'>ds_freq_table</span>(<span class='no'>mt</span>, <span class='no'>cyl</span>)</div><div class='output co'>#&gt;                              Variable: cyl                              
+#&gt; -----------------------------------------------------------------------
+#&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+#&gt; -----------------------------------------------------------------------
+#&gt;    4           9              9              32.14            32.14    
+#&gt; -----------------------------------------------------------------------
+#&gt;    6           6             15              21.43            53.57    
+#&gt; -----------------------------------------------------------------------
+#&gt;    8          13             28              46.43             100     
+#&gt; -----------------------------------------------------------------------
+#&gt; Missing        4              -              12.50              -      
+#&gt; -----------------------------------------------------------------------
+#&gt;  Total        32              -             100.00              -      
+#&gt; -----------------------------------------------------------------------
 #&gt; </div><div class='input'>
 <span class='co'># barplot</span>
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)
+<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mt</span>, <span class='no'>cyl</span>)
 <span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_table-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 </div></pre>
   </div>
