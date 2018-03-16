@@ -40,10 +40,12 @@ frequency table created using \code{ds_freq_table()}.
 
 \examples{
 # frequency table
-ds_freq_table(mtcarz, cyl)
+mt <- mtcarz
+mt[c(3, 6, 9, 12), c(2, 3, 5, 6, 8, 10)] <- NA
+ds_freq_table(mt, cyl)
 
 # barplot
-k <- ds_freq_table(mtcarz, cyl)
+k <- ds_freq_table(mt, cyl)
 plot(k)
 
 }
