@@ -5,7 +5,8 @@ freq_table2.default <- function(data, name) {
   var_name <- name
 
   # exclude missing data
-  dat <- data %>%
+  dat <-
+    data %>%
     select(name) %>%
     pull(1) %>%
     na.omit()
@@ -24,7 +25,8 @@ freq_table2.default <- function(data, name) {
   cq <- forcats::fct_unique(dat)
 
   # count of unique values in the input
-  result <- dat %>%
+  result <-
+    dat %>%
     fct_count() %>%
     pull(2)
 
@@ -49,9 +51,33 @@ freq_table2.default <- function(data, name) {
     `Cum Percent` = cum_per
   )
 
+  na_count <-
+    data %>%
+    pull(name) %>%
+    is.na() %>%
+    sum()
+
+  if (na_count > 0) {
+    na_freq <-
+      data %>%
+      pull(name) %>%
+      fct_count() %>%
+      pull(n) %>%
+      last()
+  } else {
+    na_freq <- 0
+  }
+
+  n_obs <-
+    data %>%
+    pull(name) %>%
+    length()
+
   result <- list(
     ftable = ftable,
-    varname = var_name
+    varname = var_name,
+    na_count = na_freq,
+    n = n_obs
   )
 
 
