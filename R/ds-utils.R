@@ -129,6 +129,10 @@ formatnc <- function(x, w) {
 }
 
 
+fs <- function() {
+  x <- rep("  ")
+}
+
 formats <- function() {
   x <- rep("    ")
 }
