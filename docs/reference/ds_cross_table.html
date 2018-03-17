@@ -177,7 +177,7 @@ following components:</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_cross_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>am</span>)
+    <pre class="examples"><div class='input'><span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_cross_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>gear</span>)
 <span class='no'>k</span></div><div class='output co'>#&gt;     Cell Contents
 #&gt;  |---------------|
 #&gt;  |     Frequency |
@@ -188,33 +188,43 @@ following components:</p>
 #&gt; 
 #&gt;  Total Observations:  32 
 #&gt; 
-#&gt; -------------------------------------------------------------
-#&gt; |              |                     am                     |
-#&gt; -------------------------------------------------------------
-#&gt; |          cyl |            0 |            1 |    Row Total |
-#&gt; -------------------------------------------------------------
-#&gt; |            4 |            3 |            8 |           11 |
-#&gt; |              |        0.094 |         0.25 |              |
-#&gt; |              |         0.27 |         0.73 |         0.34 |
-#&gt; |              |         0.16 |         0.62 |              |
-#&gt; -------------------------------------------------------------
-#&gt; |            6 |            4 |            3 |            7 |
-#&gt; |              |        0.125 |        0.094 |              |
-#&gt; |              |         0.57 |         0.43 |         0.22 |
-#&gt; |              |         0.21 |         0.23 |              |
-#&gt; -------------------------------------------------------------
-#&gt; |            8 |           12 |            2 |           14 |
-#&gt; |              |        0.375 |        0.062 |              |
-#&gt; |              |         0.86 |         0.14 |         0.44 |
-#&gt; |              |         0.63 |         0.15 |              |
-#&gt; -------------------------------------------------------------
-#&gt; | Column Total |           19 |           13 |           32 |
-#&gt; |              |        0.594 |        0.406 |              |
-#&gt; -------------------------------------------------------------</div><div class='input'>
+#&gt; ----------------------------------------------------------------------------
+#&gt; |              |                           gear                            |
+#&gt; ----------------------------------------------------------------------------
+#&gt; |          cyl |            3 |            4 |            5 |    Row Total |
+#&gt; ----------------------------------------------------------------------------
+#&gt; |            4 |            1 |            8 |            2 |           11 |
+#&gt; |              |        0.031 |         0.25 |        0.062 |              |
+#&gt; |              |         0.09 |         0.73 |         0.18 |         0.34 |
+#&gt; |              |         0.07 |         0.67 |          0.4 |              |
+#&gt; ----------------------------------------------------------------------------
+#&gt; |            6 |            2 |            4 |            1 |            7 |
+#&gt; |              |        0.062 |        0.125 |        0.031 |              |
+#&gt; |              |         0.29 |         0.57 |         0.14 |         0.22 |
+#&gt; |              |         0.13 |         0.33 |          0.2 |              |
+#&gt; ----------------------------------------------------------------------------
+#&gt; |            8 |           12 |            0 |            2 |           14 |
+#&gt; |              |        0.375 |            0 |        0.062 |              |
+#&gt; |              |         0.86 |            0 |         0.14 |         0.44 |
+#&gt; |              |          0.8 |            0 |          0.4 |              |
+#&gt; ----------------------------------------------------------------------------
+#&gt; | Column Total |           15 |           12 |            5 |           32 |
+#&gt; |              |        0.468 |        0.375 |        0.155 |              |
+#&gt; ----------------------------------------------------------------------------</div><div class='input'>
 <span class='co'># bar plots</span>
 <span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>stacked</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># alternate</span>
-<span class='fu'>ds_twoway_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>am</span>)</div><div class='output co'>#&gt; <span class='error'>Error in summarise(., count = n()): could not find function "summarise"</span></div><div class='input'>
+<span class='fu'>ds_twoway_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>gear</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("cyl", "gear", "count")</span></div><div class='output co'>#&gt; # A tibble: 8 x 6
+#&gt;   cyl   gear  count percent row_percent col_percent
+#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;int&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+#&gt; 1 4     3         1  0.0312      0.0909      0.0667
+#&gt; 2 4     4         8  0.250       0.727       0.667 
+#&gt; 3 4     5         2  0.0625      0.182       0.400 
+#&gt; 4 6     3         2  0.0625      0.286       0.133 
+#&gt; 5 6     4         4  0.125       0.571       0.333 
+#&gt; 6 6     5         1  0.0312      0.143       0.200 
+#&gt; 7 8     3        12  0.375       0.857       0.800 
+#&gt; 8 8     5         2  0.0625      0.143       0.400 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

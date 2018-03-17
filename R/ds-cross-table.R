@@ -33,10 +33,9 @@
 #'
 #' @importFrom graphics barplot mosaicplot
 #' @importFrom grDevices rainbow
-#' @importFrom dplyr ungroup
 #'
 #' @examples
-#' k <- ds_cross_table(mtcarz, cyl, am)
+#' k <- ds_cross_table(mtcarz, cyl, gear)
 #' k
 #'
 #' # bar plots
@@ -45,7 +44,7 @@
 #' plot(k, proportional = TRUE)
 #'
 #' # alternate
-#' ds_twoway_table(mtcarz, cyl, am)
+#' ds_twoway_table(mtcarz, cyl, gear)
 #'
 #' @export
 #'
@@ -186,7 +185,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
   invisible(result)
 }
 
-#' @importFrom dplyr summarise
+#' @importFrom dplyr summarise tally ungroup mutate inner_join
 #' @rdname ds_cross_table
 #' @export
 #'

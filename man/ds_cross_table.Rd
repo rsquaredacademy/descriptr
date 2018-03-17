@@ -56,7 +56,7 @@ visualized as barplots and mosaicplots.
 }
 
 \examples{
-k <- ds_cross_table(mtcarz, cyl, am)
+k <- ds_cross_table(mtcarz, cyl, gear)
 k
 
 # bar plots
@@ -65,6 +65,6 @@ plot(k, stacked = TRUE)
 plot(k, proportional = TRUE)
 
 # alternate
-ds_twoway_table(mtcarz, cyl, am)
+ds_twoway_table(mtcarz, cyl, gear)
 
 }
