@@ -68,7 +68,7 @@ ds_cross_table.default <- function(data, var1, var2) {
 
   x <- as.matrix(table(varone, vartwo))
   rownames(x) <- NULL
-  n <- length(varone)
+  n <- sum(x)
   if (is.factor(varone)) {
     row_name <- levels(varone)
   } else {

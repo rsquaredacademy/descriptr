@@ -12,7 +12,7 @@ cross_table2.default <- function(var1, var2, name_1, name_2) {
   x <- as.matrix(table(var1, var2))
 
   # length of data
-  n <- length(var1)
+  n <- sum(x)
 
   # row names
   row_name <- levels(var1)
