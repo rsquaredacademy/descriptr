@@ -4,11 +4,14 @@
 \alias{ds_cross_table}
 \alias{cross_table}
 \alias{plot.ds_cross_table}
+\alias{ds_twoway_table}
 \title{Two way table}
 \usage{
 ds_cross_table(data, var1, var2)
 
 \method{plot}{ds_cross_table}(x, stacked = FALSE, proportional = FALSE, ...)
+
+ds_twoway_table(data, var1, var2)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}

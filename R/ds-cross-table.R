@@ -33,6 +33,7 @@
 #'
 #' @importFrom graphics barplot mosaicplot
 #' @importFrom grDevices rainbow
+#' @importFrom dplyr ungroup
 #'
 #' @examples
 #' k <- ds_cross_table(mtcarz, cyl, am)
@@ -68,7 +69,7 @@ ds_cross_table.default <- function(data, var1, var2) {
 
   x <- as.matrix(table(varone, vartwo))
   rownames(x) <- NULL
-  n <- length(varone)
+  n <- sum(x)
   if (is.factor(varone)) {
     row_name <- levels(varone)
   } else {
@@ -180,4 +181,55 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
   print(p)
   result <- list(plot = p)
   invisible(result)
+}
+
+#' @rdname ds_cross_table
+#' @export
+#'
+ds_twoway_table <- function(data, var1, var2) {
+
+  var_1 <- enquo(var1)
+  var_2 <- enquo(var2)
+
+  group <-
+    data %>%
+    select(!! var_1, !! var_2) %>%
+    drop_na() %>%
+    group_by(!! var_1, !! var_2) %>%
+    summarise(count = n())
+
+  total <-
+    group %>%
+    pull(count) %>%
+    sum()
+
+  div_by <-
+    data %>%
+    group_by(!! var_2) %>%
+    drop_na() %>%
+    tally() %>%
+    pull(n)
+
+
+  group2 <-
+    data %>%
+    select(!! var_1, !! var_2) %>%
+    drop_na() %>%
+    group_by(!! var_2, !! var_1) %>%
+    summarise(count = n()) %>%
+    mutate(
+      col_percent = count / sum(count)
+    ) %>%
+    ungroup()
+
+  group %<>%
+    mutate(
+      percent     = count / total,
+      row_percent = count / sum(count)
+    ) %>%
+    ungroup()
+
+  result <- inner_join(group, group2)
+  return(result)
+
 }

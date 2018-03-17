@@ -64,6 +64,11 @@ reference:
   - ds_multi_stats
   - ds_oway_tables
   - ds_tway_tables
+  - ds_measures_location
+  - ds_measures_variation
+  - ds_measures_symmetry
+  - ds_percentiles
+  - ds_extreme_obs
 
 - title: Distributions
   desc: >

@@ -74,8 +74,18 @@ md_helper <- function(x, y) {
   abs(x - y)
 }
 
-
-std_error <- function(x) {
+#' Standard error of mean
+#'
+#' Returns the standard error of mean.
+#'
+#' @param x A numeric vector.
+#'
+#' @examples
+#' ds_std_error(mtcars$mpg)
+#'
+#' @export
+#'
+ds_std_error <- function(x) {
   sd(x) / (length(x) ^ 0.5)
 }
 

@@ -92,7 +92,7 @@ ds_summary_stats.default <- function(data, variable) {
     uss = stat_uss(sdata),
     css = ds_css(sdata),
     cvar = ds_cvar(sdata),
-    sem = std_error(sdata),
+    sem = ds_std_error(sdata),
     median = median(sdata),
     mode = ds_mode(sdata),
     range = ds_range(sdata),
