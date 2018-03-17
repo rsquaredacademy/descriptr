@@ -44,6 +44,9 @@
 #' plot(k, stacked = TRUE)
 #' plot(k, proportional = TRUE)
 #'
+#' # alternate
+#' ds_twoway_table(mtcarz, cyl, am)
+#'
 #' @export
 #'
 ds_cross_table <- function(data, var1, var2) UseMethod("ds_cross_table")
@@ -183,6 +186,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
   invisible(result)
 }
 
+#' @importFrom dplyr summarise
 #' @rdname ds_cross_table
 #' @export
 #'

@@ -64,4 +64,7 @@ plot(k)
 plot(k, stacked = TRUE)
 plot(k, proportional = TRUE)
 
+# alternate
+ds_twoway_table(mtcarz, cyl, am)
+
 }
