@@ -1,3 +1,144 @@
+#' Measures of location
+#'
+#' Returns the measures of location such as mean, median & mode.
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param column Column in \code{data}.
+#' @param trim The fraction of values to be trimmed before computing
+#'   the mean.
+#'
+#' @examples
+#' ds_measures_location(mtcarz, mpg)
+#'
+#' @importFrom tidyr drop_na
+#'
+#' @export
+#'
+ds_measures_location <- function(data, column, trim = 0.05) {
+
+  var <- enquo(column)
+
+  data %>%
+    select(!! var) %>%
+    drop_na() %>%
+    summarise_all(funs(mean = mean, trim_mean = mean(., trim = trim),
+                       median = median, mode = ds_mode)) %>%
+    as_tibble()
+
+}
+
+#' Measures of variation
+#'
+#' Returns the measures of location such as range, variance and standard
+#'   deviation.
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param column Column in \code{data}.
+#'
+#' @examples
+#' ds_measures_variation(mtcarz, mpg)
+#'
+#' @export
+#'
+ds_measures_variation <- function(data, column) {
+
+  var <- enquo(column)
+
+  data %>%
+    select(!! var) %>%
+    drop_na() %>%
+    summarise_all(funs(range = ds_range, iqr = IQR, variance = var, sd = sd,
+                       coeff_var = ds_cvar, std_error = ds_std_error)) %>%
+    as_tibble()
+}
+
+#' Measures of symmetry
+#'
+#' Returns the measures of symmetry such as skewness and kurtosis.
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param column Column in \code{data}.
+#'
+#' @examples
+#' ds_measures_symmetry(mtcarz, mpg)
+#'
+#' @export
+#'
+ds_measures_symmetry <- function(data, column) {
+
+  var <- enquo(column)
+
+  data %>%
+    select(!! var) %>%
+    drop_na() %>%
+    summarise_all(funs(skewness = ds_skewness, kurtosis = ds_kurtosis)) %>%
+    as_tibble()
+}
+
+
+#' Percentiles
+#'
+#' Returns the percentiles
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param column Column in \code{data}.
+#'
+#' @examples
+#' ds_percentiles(mtcarz, mpg)
+#'
+#' @export
+#'
+ds_percentiles <- function(data, column) {
+
+  var <- enquo(column)
+
+  data %>%
+    select(!! var) %>%
+    drop_na() %>%
+    summarise_all(funs(min    = min,
+                       per1   = quantile(., 0.01),
+                       per5   = quantile(., 0.05),
+                       per10  = quantile(., 0.10),
+                       q1     = quantile(., 0.25),
+                       median = median,
+                       q3     = quantile(., 0.75),
+                       per95  = quantile(., 0.95),
+                       per90  = quantile(., 0.90),
+                       per99  = quantile(., 0.99),
+                       max    = max)) %>%
+    as_tibble()
+}
+
+#' Extreme observations
+#'
+#' Returns the most extreme observations.
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param column Column in \code{data}.
+#'
+#' @examples
+#' ds_extreme_obs(mtcarz, mpg)
+#'
+#' @export
+#'
+ds_extreme_obs <- function(data, column) {
+
+  var <- enquo(column)
+
+  na_data <-
+    data %>%
+    select(!! var) %>%
+    drop_na() %>%
+    pull(1)
+
+  tibble(type = c(rep("high", 5), rep("low", 5)),
+         value = c(ds_tailobs(na_data, 5, "high"),
+                   ds_tailobs(na_data, 5, "low")),
+         index = ds_rindex(na_data, value))
+
+
+}
+
 #' @importFrom magrittr %>%
 #' @importFrom stats na.omit
 #' @title Tail Observations
