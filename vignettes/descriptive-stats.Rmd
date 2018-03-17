@@ -61,14 +61,19 @@ ds_summary_stats(mtcarz, mpg)
 
 ## Cross Tabulation
 
-The `ds_cross_table` function creates two way tables of categorical variables. 
+The `ds_cross_table()` function creates two way tables of categorical variables. 
 
 ```{r cross}
 ds_cross_table(mtcarz, cyl, gear)
 ```
 
-A plot method has been defined which will generate:
+`ds_twoway_table()` will return a tibble.
 
+```{r cross_tibble}
+ds_twoway_table(mtcarz, cyl, gear)
+```
+
+A plot method has been defined which will generate:
 
 ### Grouped Bar Plots
 
