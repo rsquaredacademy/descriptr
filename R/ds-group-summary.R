@@ -83,7 +83,7 @@ ds_group_summary.default <- function(data, gvar, cvar) {
       length(gvar), min(gvar), max(gvar), mean(gvar),
       median(gvar), ds_mode(gvar), sd(gvar), var(gvar),
       ds_skewness(gvar), ds_kurtosis(gvar), stat_uss(gvar),
-      ds_css(gvar), ds_cvar(gvar), std_error(gvar),
+      ds_css(gvar), ds_cvar(gvar), ds_std_error(gvar),
       ds_range(gvar), IQR(gvar)
     )
   })
