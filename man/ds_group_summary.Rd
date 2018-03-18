@@ -28,9 +28,9 @@ following components:
 
 \item{stats}{A data frame containing descriptive statistics for the different
 levels of the factor variable.}
+\item{tidy_stats}{A tibble containing descriptive statistics for the different
+levels of the factor variable.}
 \item{plotdata}{Data for boxplot method.}
-\item{xvar}{Name of the categorical variable.}
-\item{yvar}{Name of the continuous variable.}
 }
 \description{
 Descriptive statistics of a continuous variable for the different levels of
@@ -50,6 +50,9 @@ ds_group_summary(mtcarz, cyl, mpg)
 # boxplot
 k <- ds_group_summary(mtcarz, cyl, mpg)
 plot(k)
+
+# tibble
+k$tidy_stats
 
 }
 \seealso{

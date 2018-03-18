@@ -25,7 +25,6 @@ An object of class \code{"ds_freq_table"} is a list containing the
 following components:
 
 \item{ftable}{Frequency table.}
-\item{varname}{Name of the variable.}
 }
 \description{
 Frequency table for factor data and returns the frequency, cumulative
@@ -40,12 +39,10 @@ frequency table created using \code{ds_freq_table()}.
 
 \examples{
 # frequency table
-mt <- mtcarz
-mt[c(3, 6, 9, 12), c(2, 3, 5, 6, 8, 10)] <- NA
-ds_freq_table(mt, cyl)
+ds_freq_table(mtcarz, cyl)
 
 # barplot
-k <- ds_freq_table(mt, cyl)
+k <- ds_freq_table(mtcarz, cyl)
 plot(k)
 
 }

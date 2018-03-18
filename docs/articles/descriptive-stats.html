@@ -318,7 +318,8 @@
 <h2 class="hasAnchor">
 <a href="#group-summary" class="anchor"></a>Group Summary</h2>
 <p>The <code><a href="../reference/ds_group_summary.html">ds_group_summary()</a></code> function returns descriptive statistics of a continuous variable for the different levels of a categorical variable.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">k</a></code></pre></div>
 <pre><code>##                                        mpg by cyl                                         
 ## -----------------------------------------------------------------------------------------
 ## |     Statistic/Levels|                    4|                    6|                    8|
@@ -340,12 +341,22 @@
 ## |                Range|                 12.5|                  3.6|                  8.8|
 ## |  Interquartile Range|                  7.6|                 2.35|                 1.85|
 ## -----------------------------------------------------------------------------------------</code></pre>
+<p><code><a href="../reference/ds_group_summary.html">ds_group_summary()</a></code> returns a tibble which can be used for further analysis.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">k<span class="op">$</span>tidy_stats</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 15
+##   cyl   length   min   max  mean median  mode    sd variance skewness
+##   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 4         11  21.4  33.9  26.7   26.0  22.8  4.51    20.3     0.348
+## 2 6          7  17.8  21.4  19.7   19.7  21.0  1.45     2.11   -0.259
+## 3 8         14  10.4  19.2  15.1   15.2  10.4  2.56     6.55   -0.456
+## # ... with 5 more variables: kurtosis &lt;dbl&gt;, coeff_var &lt;dbl&gt;,
+## #   std_error &lt;dbl&gt;, range &lt;dbl&gt;, iqr &lt;dbl&gt;</code></pre>
 <div id="box-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#box-plot" class="anchor"></a>Box Plot</h3>
 <p>A <code>boxplot()</code> method has been defined.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">plot</span>(k)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">k &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">plot</span>(k)</a></code></pre></div>
 <p><img src="descriptive-stats_files/figure-html/gsum_boxplot-1.png" width="672"></p>
 </div>
 </div>
@@ -353,7 +364,7 @@
 <h2 class="hasAnchor">
 <a href="#multiple-variable-statistics" class="anchor"></a>Multiple Variable Statistics</h2>
 <p>The <code><a href="../reference/ds_multi_stats.html">ds_multi_stats()</a></code> function generates summary/descriptive statistics for variables in a data frame/tibble.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/ds_multi_stats.html">ds_multi_stats</a></span>(mtcarz, mpg, disp, hp)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/ds_multi_stats.html">ds_multi_stats</a></span>(mtcarz, mpg, disp, hp)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 16
 ##   vars    min   max  mean t_mean median  mode range variance  stdev  skew
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -367,7 +378,7 @@
 <h2 class="hasAnchor">
 <a href="#multiple-one-way-tables" class="anchor"></a>Multiple One Way Tables</h2>
 <p>The <code><a href="../reference/ds_oway_tables.html">ds_oway_tables()</a></code> function creates multiple one way tables by creating a frequency table for each categorical variable in a data frame.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_oway_tables</a></span>(mtcarz)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_oway_tables</a></span>(mtcarz)</a></code></pre></div>
 <pre><code>##                              Variable: cyl                              
 ## -----------------------------------------------------------------------
 ## Levels     Frequency    Cum Frequency       Percent        Cum Percent  
@@ -439,7 +450,7 @@
 <h2 class="hasAnchor">
 <a href="#multiple-two-way-tables" class="anchor"></a>Multiple Two Way Tables</h2>
 <p>The <code><a href="../reference/ds_oway_tables.html">ds_tway_tables()</a></code> function creates multiple two way tables by creating a cross table for each unique pair of categorical variables in a data frame.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_tway_tables</a></span>(mtcarz)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="../reference/ds_oway_tables.html">ds_tway_tables</a></span>(mtcarz)</a></code></pre></div>
 <pre><code>##     Cell Contents
 ##  |---------------|
 ##  |     Frequency |

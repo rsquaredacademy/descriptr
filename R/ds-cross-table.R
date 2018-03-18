@@ -12,21 +12,6 @@
 #' @param proportional If \code{TRUE}, the height of the bars is proportional.
 #' @param ... Further arguments to be passed to or from methods.
 #'
-#' @return \code{ds_cross_table} returns an object of class \code{"ds_cross_table"}.
-#' An object of class \code{"ds_cross_table"} is a list containing at least the
-#' following components:
-#'
-#' \item{obs}{Number of observations.}
-#' \item{var2_levels}{Levels of the second categorical variable.}
-#' \item{var1_levels}{Levels of the first categorical variable.}
-#' \item{varnames}{Names of the variables.}
-#' \item{twowaytable}{Table of the variables.}
-#' \item{percent_table}{Table of percentages.}
-#' \item{row_percent}{Table of row percentages.}
-#' \item{col_percent}{Table of column percentages.}
-#' \item{column_totals}{Total of columns.}
-#' \item{percent_column}{Total of columns as a percentage.}
-#'
 #' @section Deprecated function:
 #' \code{ds_cross_table()} has been deprecated. Instead use
 #' \code{ds_cross_table()}.

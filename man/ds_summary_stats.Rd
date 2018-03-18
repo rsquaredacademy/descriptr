@@ -12,41 +12,6 @@ ds_summary_stats(data, variable)
 
 \item{variable}{Column in \code{data}.}
 }
-\value{
-\code{ds_summary_stats()} returns an object of class
-\code{"ds_summary_stats"}. An object of class \code{"ds_summary_stats"}
-is a list containing the following components
-
-\item{obs}{Number of observations.}
-\item{missing}{Number of missing observations.}
-\item{avg}{Mean.}
-\item{tavg}{5 percent trimmed mean.}
-\item{stdev}{Standard deviation.}
-\item{variance}{Variance.}
-\item{skew}{Skewness.}
-\item{kurtosis}{Kurtosis.}
-\item{uss}{Uncorrected sum of squares.}
-\item{css}{Corrected sum of squares.}
-\item{cvar}{Coefficient of variation.}
-\item{sem}{Standard error of mean.}
-\item{median}{Median.}
-\item{mode}{Mode.}
-\item{range}{Range.}
-\item{min}{Minimum value.}
-\item{iqrange}{Inter quartile range.}
-\item{per99}{99th percentile.}
-\item{per95}{95th percentile.}
-\item{per90}{90th percentile.}
-\item{per75}{75th percentile.}
-\item{per25}{25th percentile.}
-\item{per10}{10th percentile.}
-\item{per5}{5th percentile.}
-\item{per1}{1st percentile.}
-\item{lowobs}{Five lowest observations.}
-\item{highobs}{Five highest observations.}
-\item{lowobsi}{Index of five lowest observations.}
-\item{highobsi}{Index of five highest observations.}
-}
 \description{
 Range of descriptive statistics for continuous data.
 }

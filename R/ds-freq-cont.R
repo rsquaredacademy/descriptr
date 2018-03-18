@@ -11,18 +11,7 @@
 #' @param x An object of class \code{ds_freq_cont}.
 #' @param ... Further arguments to be passed to or from methods.
 #'
-#' @return \code{ds_freq_cont()} returns an object of class \code{"ds_freq_cont"}
-#' An object of class \code{"ds_freq_cont"} is a list containing the
-#' following components
-#'
-#' \item{breaks}{Lower/upper boundaries of intervals.}
-#' \item{frequency}{Frequecy of the intervals.}
-#' \item{cumulative}{Cumulative frequency.}
-#' \item{percent}{Frequency as percent.}
-#' \item{cum_percent}{Cumulative frequency as percent.}
-#' \item{bins}{Number of bins.}
-#' \item{data}{Data.}
-#' \item{varname}{Name of the variable.}
+#' @return A tibble.
 #'
 #' @section Deprecated functions:
 #' \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
