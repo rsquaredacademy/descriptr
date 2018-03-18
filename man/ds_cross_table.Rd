@@ -29,22 +29,6 @@ as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars
 
 \item{...}{Further arguments to be passed to or from methods.}
 }
-\value{
-\code{ds_cross_table} returns an object of class \code{"ds_cross_table"}.
-An object of class \code{"ds_cross_table"} is a list containing at least the
-following components:
-
-\item{obs}{Number of observations.}
-\item{var2_levels}{Levels of the second categorical variable.}
-\item{var1_levels}{Levels of the first categorical variable.}
-\item{varnames}{Names of the variables.}
-\item{twowaytable}{Table of the variables.}
-\item{percent_table}{Table of percentages.}
-\item{row_percent}{Table of row percentages.}
-\item{col_percent}{Table of column percentages.}
-\item{column_totals}{Total of columns.}
-\item{percent_column}{Total of columns as a percentage.}
-}
 \description{
 Creates two way tables of categorical variables. The tables created can be
 visualized as barplots and mosaicplots.
@@ -56,12 +40,15 @@ visualized as barplots and mosaicplots.
 }
 
 \examples{
-k <- ds_cross_table(mtcarz, cyl, am)
+k <- ds_cross_table(mtcarz, cyl, gear)
 k
 
 # bar plots
 plot(k)
 plot(k, stacked = TRUE)
 plot(k, proportional = TRUE)
+
+# alternate
+ds_twoway_table(mtcarz, cyl, gear)
 
 }

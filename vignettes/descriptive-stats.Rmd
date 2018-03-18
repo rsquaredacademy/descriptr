@@ -143,7 +143,14 @@ The `ds_group_summary()` function returns descriptive statistics of a continuous
 variable for the different levels of a categorical variable.
 
 ```{r gsummary}
-ds_group_summary(mtcarz, cyl, mpg)
+k <- ds_group_summary(mtcarz, cyl, mpg)
+k
+```
+
+`ds_group_summary()` returns a tibble which can be used for further analysis.
+
+```{r gsummary_tibble}
+k$tidy_stats
 ```
 
 

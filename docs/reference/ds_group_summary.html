@@ -150,9 +150,9 @@ An object of class <code>"ds_group_summary"</code> is a list containing the
 following components:</p>
 <dt>stats</dt><dd><p>A data frame containing descriptive statistics for the different
 levels of the factor variable.</p></dd>
+<dt>tidy_stats</dt><dd><p>A tibble containing descriptive statistics for the different
+levels of the factor variable.</p></dd>
 <dt>plotdata</dt><dd><p>Data for boxplot method.</p></dd>
-<dt>xvar</dt><dd><p>Name of the categorical variable.</p></dd>
-<dt>yvar</dt><dd><p>Name of the continuous variable.</p></dd>
 
     
     <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated function</h2>
@@ -190,7 +190,16 @@ use <code>ds_group_summary()</code>.</p>
 #&gt; -----------------------------------------------------------------------------------------</div><div class='input'>
 <span class='co'># boxplot</span>
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_group_summary</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>mpg</span>)
-<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_group_summary-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_group_summary-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='co'># tibble</span>
+<span class='no'>k</span>$<span class='no'>tidy_stats</span></div><div class='output co'>#&gt; # A tibble: 3 x 15
+#&gt;   cyl   length   min   max  mean median  mode    sd variance skewness kurtosis
+#&gt;   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+#&gt; 1 4         11  21.4  33.9  26.7   26.0  22.8  4.51    20.3     0.348   -1.43 
+#&gt; 2 6          7  17.8  21.4  19.7   19.7  21.0  1.45     2.11   -0.259   -1.83 
+#&gt; 3 8         14  10.4  19.2  15.1   15.2  10.4  2.56     6.55   -0.456    0.330
+#&gt; # ... with 4 more variables: coeff_var &lt;dbl&gt;, std_error &lt;dbl&gt;, range &lt;dbl&gt;,
+#&gt; #   iqr &lt;dbl&gt;</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

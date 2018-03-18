@@ -15,7 +15,6 @@
 #' following components:
 #'
 #' \item{ftable}{Frequency table.}
-#' \item{varname}{Name of the variable.}
 #'
 #' @section Deprecated function:
 #' \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
@@ -26,12 +25,10 @@
 #'
 #' @examples
 #' # frequency table
-#' mt <- mtcarz
-#' mt[c(3, 6, 9, 12), c(2, 3, 5, 6, 8, 10)] <- NA
-#' ds_freq_table(mt, cyl)
+#' ds_freq_table(mtcarz, cyl)
 #'
 #' # barplot
-#' k <- ds_freq_table(mt, cyl)
+#' k <- ds_freq_table(mtcarz, cyl)
 #' plot(k)
 #'
 #' @seealso \code{\link{ds_freq_cont}} \code{\link{ds_cross_table}}

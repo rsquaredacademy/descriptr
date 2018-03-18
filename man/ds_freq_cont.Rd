@@ -22,18 +22,7 @@ ds_freq_cont(data, variable, bins = 5)
 \item{...}{Further arguments to be passed to or from methods.}
 }
 \value{
-\code{ds_freq_cont()} returns an object of class \code{"ds_freq_cont"}
-An object of class \code{"ds_freq_cont"} is a list containing the
-following components
-
-\item{breaks}{Lower/upper boundaries of intervals.}
-\item{frequency}{Frequecy of the intervals.}
-\item{cumulative}{Cumulative frequency.}
-\item{percent}{Frequency as percent.}
-\item{cum_percent}{Cumulative frequency as percent.}
-\item{bins}{Number of bins.}
-\item{data}{Data.}
-\item{varname}{Name of the variable.}
+A tibble.
 }
 \description{
 Frequency distribution of continuous data by splitting into equidistant

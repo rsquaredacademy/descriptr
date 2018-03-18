@@ -16,9 +16,9 @@
 #'
 #' \item{stats}{A data frame containing descriptive statistics for the different
 #' levels of the factor variable.}
+#' \item{tidy_stats}{A tibble containing descriptive statistics for the different
+#' levels of the factor variable.}
 #' \item{plotdata}{Data for boxplot method.}
-#' \item{xvar}{Name of the categorical variable.}
-#' \item{yvar}{Name of the continuous variable.}
 #'
 #' @section Deprecated function:
 #' \code{ds_group_summary()} has been deprecated. Instead
@@ -35,6 +35,9 @@
 #' k <- ds_group_summary(mtcarz, cyl, mpg)
 #' plot(k)
 #'
+#' # tibble
+#' k$tidy_stats
+#'
 #' @seealso \code{\link{ds_summary_stats}}
 #'
 #' @export
@@ -44,6 +47,7 @@ ds_group_summary <- function(data, gvar, cvar) UseMethod("ds_group_summary")
 #' @export
 #'
 ds_group_summary.default <- function(data, gvar, cvar) {
+
   g_var <- enquo(gvar)
   c_var <- enquo(cvar)
 
@@ -103,8 +107,22 @@ ds_group_summary.default <- function(data, gvar, cvar) {
   plot_data <- data.frame(gvar, cvar)
   names(plot_data) <- c(xname, yname)
 
+  tidystats <-
+    data %>%
+    select(!! g_var, !! c_var) %>%
+    drop_na() %>%
+    group_by(!! g_var) %>%
+    summarise(length = length(!! c_var), min = min(!! c_var),
+              max = max(!! c_var), mean  = mean(!! c_var),
+              median= median(!! c_var), mode = ds_mode(!! c_var),
+              sd = sd(!! c_var), variance = var(!! c_var),
+              skewness = ds_skewness(!! c_var), kurtosis = ds_kurtosis(!! c_var),
+              coeff_var = ds_cvar(!! c_var), std_error = ds_std_error(!! c_var),
+              range = ds_range(!! c_var), iqr = IQR(!! c_var))
+
   result <- list(
     stats = out,
+    tidy_stats = tidystats,
     plotdata = plot_data,
     xvar = xname,
     yvar = yname,
