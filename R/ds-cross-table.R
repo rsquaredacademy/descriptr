@@ -171,6 +171,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
 }
 
 #' @importFrom dplyr summarise tally ungroup mutate inner_join
+#' @importFrom magrittr %<>%
 #' @rdname ds_cross_table
 #' @export
 #'
