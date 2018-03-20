@@ -1,8 +1,8 @@
-This is a minor release with API changes and bug fixes.
+This is a patch release for bug fixes.
 
 ## Test environments
-* local Windows 10, R 3.4.3
-* ubuntu 12.04 (on travis-ci), R 3.3.3, R 3.4.3, R-devel
+* local Windows 10, R 3.4.4
+* ubuntu 12.04 (on travis-ci), R 3.3.3, R 3.4.4, R-devel
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -11,6 +11,6 @@ This is a minor release with API changes and bug fixes.
 
 ## Reverse dependencies
 
-We checked 1 dependency (olsrr) and it returned a NOTE.
+We checked 2 dependencies (olsrr and inferr) and it returned a NOTE.
 
 

@@ -1,7 +1,7 @@
 Package: descriptr
 Type: Package
 Title: Generate Descriptive Statistics & Explore Statistical Distributions 
-Version: 0.4.0.9000
+Version: 0.4.1
 Authors@R: person("Aravind", "Hebbali", email = "hebbali.aravind@gmail.com", role = c("aut", "cre"))
 Description: Generate descriptive statistics such as measures of location,
     dispersion, frequency tables, cross tables, group summaries and multiple
@@ -36,7 +36,7 @@ Suggests:
     tools,
     vdiffr
 License: MIT + file LICENSE
-URL: https://rsquaredacademy.github.io/descriptr/, https://github.com/rsquaredacademy/descriptr
+URL: https://descriptr.rsquaredacademy.com/, https://github.com/rsquaredacademy/descriptr
 BugReports: https://github.com/rsquaredacademy/descriptr/issues
 Encoding: UTF-8
 LazyData: true

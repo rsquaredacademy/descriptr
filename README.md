@@ -61,9 +61,9 @@ Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 ## Vignettes
 
   - [Descriptive
-    Statistics](http://www.rsquaredacademy.com/descriptr/articles/descriptive-stats.html)
+    Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
   - [Statistical
-    Distributions](http://www.rsquaredacademy.com/descriptr/articles/distributions.html)
+    Distributions](https://descriptr.rsquaredacademy.com/articles/distributions.html)
 
 ## Usage
 
