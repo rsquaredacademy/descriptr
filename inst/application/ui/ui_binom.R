@@ -13,7 +13,7 @@ tabPanel('Binomial Distribution', value = 'tab_binom',
           ),
           column(4, align = 'right',
             actionButton(inputId='binomdist1', label="Help", icon = icon("question-circle"),
-              onclick ="window.open('https://rsquaredacademy.github.io/descriptr/reference/dist_binom_plot.html', '_blank')")
+              onclick ="window.open('https://descriptr.rsquaredacademy.com/reference/dist_binom_plot.html', '_blank')")
           )
         ),
         hr(),
