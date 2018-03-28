@@ -6,9 +6,9 @@ tabPanel('Binomial Distribution', value = 'tab_binom',
         fluidRow(
           column(8, align = 'left',
             h4('Binomial Distribution'),
-            p('Visualize how changes in number of trials and the probability of 
-              success affect the shape of the binomial distribution. 
-              Compute/visualize probability from a given quantile and quantiles 
+            p('Visualize how changes in number of trials and the probability of
+              success affect the shape of the binomial distribution.
+              Compute/visualize probability from a given quantile and quantiles
               out of given probability.')
           ),
           column(4, align = 'right',
@@ -74,10 +74,10 @@ tabPanel('Binomial Distribution', value = 'tab_binom',
                 numericInput('bperc_n', 'Number of trials', value = 10, min = 1,
                   step = 1
                 ),
-                numericInput('bperc_p', 'Aggregated Probability', value = 0.3,
+                numericInput('bperc_p', 'Probability of Success', value = 0.3,
                   min = 0, max = 1, step = 0.01
                 ),
-                numericInput('bperc_tp', 'Success Probability', value = 0.05,
+                numericInput('bperc_tp', 'Aggregated Probability', value = 0.05,
                   min = 0, max = 0.5, step = 0.01
                 ),
                 selectInput('bperc_tail', 'Tail',
