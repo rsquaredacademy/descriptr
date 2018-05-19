@@ -1,28 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+descriptr: Generate descriptive statistics <img src="hex_descriptr.png" align="right" />
+----------------------------------------------------------------------------------------
 
-## descriptr: Generate descriptive statistics <img src="hex_descriptr.png" align="right" />
+**Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
 
-**Author:** [Aravind Hebbali](http://www.aravindhebbali.com)<br/>
-**License:**
-[MIT](https://opensource.org/licenses/MIT)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![cran checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr) [![Coverage status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
-[![Travis-CI Build
-Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
-[![Coverage
-status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
-![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+Overview
+--------
 
-## Overview
+The goal of descriptr is to ease the process of generating descriptive statistics and exploring statistical distributions.
 
-The goal of descriptr is to ease the process of generating descriptive
-statistics and exploring statistical distributions.
-
-## Installation
+Installation
+------------
 
 ``` r
 # install descriptr from CRAN
@@ -33,43 +24,43 @@ install.packages("descriptr")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
 
-## Features
+Features
+--------
 
 ### Descriptive Statistics
 
-  - Summary statistics
-  - Two way tables
-  - One way table
-  - One way table (Continuous Data)
-  - Group wise summary
-  - Multiple variable statistics
-  - Multiple one way tables
-  - Multiple two way tables
+-   Summary statistics
+-   Two way tables
+-   One way table
+-   One way table (Continuous Data)
+-   Group wise summary
+-   Multiple variable statistics
+-   Multiple one way tables
+-   Multiple two way tables
 
 ### Explore Distributions
 
-  - Normal
-  - Binomial
-  - Chi Square
-  - F
-  - t
+-   Normal
+-   Binomial
+-   Chi Square
+-   F
+-   t
 
-## Shiny App
+Shiny App
+---------
 
 Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
-## Vignettes
+Vignettes
+---------
 
-  - [Descriptive
-    Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
-  - [Statistical
-    Distributions](https://descriptr.rsquaredacademy.com/articles/distributions.html)
+-   [Descriptive Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
+-   [Statistical Distributions](https://descriptr.rsquaredacademy.com/articles/distributions.html)
 
-## Usage
+Usage
+-----
 
-We will use a modified version of the `mtcars` data set in the below
-examples. The only difference between the data sets is related to the
-variable types.
+We will use a modified version of the `mtcars` data set in the below examples. The only difference between the data sets is related to the variable types.
 
 ``` r
 str(mtcarz)
@@ -243,13 +234,11 @@ ds_multi_stats(mtcarz, mpg, disp, hp)
 #> # A tibble: 3 x 16
 #>   vars    min   max  mean t_mean median  mode range variance  stdev  skew
 #>   <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl> <dbl>    <dbl>  <dbl> <dbl>
-#> 1 disp   71.1 472   231    228    196   276   401    15361   124    0.420
-#> 2 hp     52.0 335   147    144    123   110   283     4701    68.6  0.799
+#> 1 disp   71.1 472   231.   228    196.  276.  401.   15361.  124.   0.420
+#> 2 hp     52   335   147.   144.   123   110   283     4701.   68.6  0.799
 #> 3 mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672
 #> # ... with 5 more variables: kurtosis <dbl>, coeff_var <dbl>, q1 <dbl>,
 #> #   q3 <dbl>, iqrange <dbl>
 ```
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
