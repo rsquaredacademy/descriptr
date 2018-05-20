@@ -56,7 +56,7 @@ tabPanel('Summary', value = 'tab_summary',
             br(),
             br(),
 
-            column(12, align = 'center',
+            column(12, align = 'left',
 
                 verbatimTextOutput('summary')
 

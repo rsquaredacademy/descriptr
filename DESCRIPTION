@@ -8,7 +8,7 @@ Description: Generate descriptive statistics such as measures of location,
     one/two way tables. Visualize and compute percentiles/probabilities of 
     normal, t, f, chi square and binomial distributions.
 Depends:
-    R(>= 3.2.4)
+    R(>= 3.2)
 Imports:
     dplyr,
     forcats,
