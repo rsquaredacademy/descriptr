@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • descriptr</title>
+<title>Changelog • descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Changelog" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +53,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">descriptr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">descriptr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -94,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,21 +112,143 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/rsquaredacademy/descriptr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="contents">
-    </div>
+    <div id="descriptr-0-4-1" class="section level1">
+<h1 class="page-header">
+<a href="#descriptr-0-4-1" class="anchor"></a>descriptr 0.4.1<small> 2018-03-20 </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
+<ul>
+<li>Feature request: add turn off button in the app (<a href="https://github.com/rsquaredacademy/descriptr/issues/29"><a href='https://github.com/rsquaredacademy/descriptr/issues/29'>#29</a></a>)</li>
+<li>Show frequency of missing values in frequency table (<a href="https://github.com/rsquaredacademy/descriptr/issues/32"><a href='https://github.com/rsquaredacademy/descriptr/issues/32'>#32</a></a>)</li>
+<li>
+<code><a href="../reference/ds_freq_cont.html">ds_freq_cont()</a></code> should return a tibble (<a href="https://github.com/rsquaredacademy/descriptr/issues/34"><a href='https://github.com/rsquaredacademy/descriptr/issues/34'>#34</a></a>)</li>
+</ul>
+<p>The following now return tibbles to facilitate further analysis:</p>
+<ul>
+<li><code><a href="../reference/ds_cross_table.html">ds_twoway_table()</a></code></li>
+<li><code><a href="../reference/ds_freq_table.html">ds_freq_table()</a></code></li>
+<li><code><a href="../reference/ds_freq_cont.html">ds_freq_cont()</a></code></li>
+<li><code><a href="../reference/ds_group_summary.html">ds_group_summary()</a></code></li>
+</ul>
+<p>New to descriptr are the following which generate summary statistics:</p>
+<ul>
+<li><a href="https://descriptr.rsquaredacademy.com/reference/ds_measures_location.html"><code><a href="../reference/ds_measures_location.html">ds_measures_location()</a></code></a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/reference/ds_measures_variation.html"><code><a href="../reference/ds_measures_variation.html">ds_measures_variation()</a></code></a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/reference/ds_measures_symmetry.html"><code><a href="../reference/ds_measures_symmetry.html">ds_measures_symmetry()</a></code></a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/reference/ds_percentiles.html"><code><a href="../reference/ds_percentiles.html">ds_percentiles()</a></code></a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/reference/ds_extreme_obs.html"><code><a href="../reference/ds_extreme_obs.html">ds_extreme_obs()</a></code></a></li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>
+<code>descriptr:::print_screen()</code> fails if a variable has more than one class (<a href="https://github.com/rsquaredacademy/descriptr/issues/26"><a href='https://github.com/rsquaredacademy/descriptr/issues/26'>#26</a></a>)</li>
+<li>
+<code><a href="../reference/ds_summary_stats.html">ds_summary_stats()</a></code> does not show missing values (<a href="https://github.com/rsquaredacademy/descriptr/issues/30"><a href='https://github.com/rsquaredacademy/descriptr/issues/30'>#30</a></a>)</li>
+<li>Multiple variable statistics throws error in the presence of NA (<a href="https://github.com/rsquaredacademy/descriptr/issues/33"><a href='https://github.com/rsquaredacademy/descriptr/issues/33'>#33</a></a>)</li>
+<li>Error in cross table in presence of NA (<a href="https://github.com/rsquaredacademy/descriptr/issues/40"><a href='https://github.com/rsquaredacademy/descriptr/issues/40'>#40</a></a>)</li>
+</ul>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<p>A big thanks to <a href="https://github.com/GegznaV"><a href='http://github.com/GegznaV'>@GegznaV</a></a> and <a href="https://twitter.com/adam_medcalf"><a href='http://github.com/adam_medcalf'>@adam_medcalf</a></a> who contributed code, opened issues and provided valuable feedback.</p>
+</div>
+</div>
+    <div id="descriptr-0-4-0" class="section level1">
+<h1 class="page-header">
+<a href="#descriptr-0-4-0" class="anchor"></a>descriptr 0.4.0<small> 2018-02-10 </small>
+</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New Features</h2>
+<p>We have completely revamped the API. All the functions now take a <code>data.frame</code> or <code>tibble</code> as the first argument followed by the variable names. The variable names need not be surrounded by single/double quotes anymore. Please view the guide for more details.</p>
+<ul>
+<li>use ggplot for all plots (<a href="https://github.com/rsquaredacademy/descriptr/issues/8"><a href='https://github.com/rsquaredacademy/descriptr/issues/8'>#8</a></a>)</li>
+</ul>
+</div>
+<div id="bug-fixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>update shiny app (<a href="https://github.com/rsquaredacademy/descriptr/issues/16"><a href='https://github.com/rsquaredacademy/descriptr/issues/16'>#16</a></a>)</li>
+<li>error in percentiles in <code>ds_summary_stats</code> (<a href="https://github.com/rsquaredacademy/descriptr/issues/22"><a href='https://github.com/rsquaredacademy/descriptr/issues/22'>#22</a></a>)</li>
+</ul>
+</div>
+</div>
+    <div id="descriptr-0-3-0" class="section level1">
+<h1 class="page-header">
+<a href="#descriptr-0-3-0" class="anchor"></a>descriptr 0.3.0<small> 2017-12-11 </small>
+</h1>
+<div id="new-features-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-2" class="anchor"></a>New Features</h2>
+<ul>
+<li>shiny app for interactive analysis</li>
+<li>multi column statistics (<a href="https://github.com/rsquaredacademy/descriptr/issues/6"><a href='https://github.com/rsquaredacademy/descriptr/issues/6'>#6</a></a>)</li>
+</ul>
+</div>
+</div>
+    <div id="descriptr-0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#descriptr-0-2-0" class="anchor"></a>descriptr 0.2.0<small> 2017-08-31 </small>
+</h1>
+<p>This is a minor release containing bug fixes.</p>
+<div id="bug-fixes-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>multiple one way table returns an error (<a href="https://github.com/rsquaredacademy/descriptr/issues/2"><a href='https://github.com/rsquaredacademy/descriptr/issues/2'>#2</a></a>)</li>
+<li>ftable returned by freq_table must be data.frame or tibble (<a href="https://github.com/rsquaredacademy/descriptr/issues/3"><a href='https://github.com/rsquaredacademy/descriptr/issues/3'>#3</a></a>)</li>
+<li>multiple one way table returns an error (<a href="https://github.com/rsquaredacademy/descriptr/issues/4"><a href='https://github.com/rsquaredacademy/descriptr/issues/4'>#4</a></a>)</li>
+</ul>
+</div>
+</div>
+    <div id="descriptr-0-1-1" class="section level1">
+<h1 class="page-header">
+<a href="#descriptr-0-1-1" class="anchor"></a>descriptr 0.1.1<small> 2017-06-01 </small>
+</h1>
+<div id="bug-fixes-3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>typo in <code><a href="../reference/ds_group_summary.html">group_summary()</a></code>; maximum and minimum were reversed</li>
+<li>
+<code><a href="../reference/dist_norm_plot.html">norm_plot()</a></code> was non-reactive to changes in standard deviation (#<a href="https://github.com/rsquaredacademy/descriptr/issues/1">1</a>).</li>
+</ul>
+</div>
+</div>
+    <div id="descriptr-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#descriptr-0-1-0" class="anchor"></a>descriptr 0.1.0<small> 2016-12-28 </small>
+</h1>
+<ul>
+<li>First release</li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#descriptr-0-4-1">0.4.1</a></li>
+        <li><a href="#descriptr-0-4-0">0.4.0</a></li>
+        <li><a href="#descriptr-0-3-0">0.3.0</a></li>
+        <li><a href="#descriptr-0-2-0">0.2.0</a></li>
+        <li><a href="#descriptr-0-1-1">0.1.1</a></li>
+        <li><a href="#descriptr-0-1-0">0.1.0</a></li>
       </ul>
     </div>
   </div>
@@ -124,15 +257,18 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Aravind Hebbali.</p>
+  <p>Developed by <a href="https://www.aravindhebbali.com">Aravind Hebbali</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
