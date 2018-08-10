@@ -4,7 +4,7 @@ library(shinythemes)
 
 shinyUI(
 
-    navbarPage(HTML("descriptr"), id = 'mainpage',
+    navbarPage(HTML("descriptr - Exploratory Data Analysis"), id = 'mainpage',
 
     source('ui/ui_data.R', local = TRUE)[[1]],
     source('ui/ui_analyze.R', local = TRUE)[[1]],
