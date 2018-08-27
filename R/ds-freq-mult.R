@@ -2,9 +2,9 @@
 freq_table2 <- function(data, name) UseMethod("freq_table2")
 
 freq_table2.default <- function(data, name) {
+
   var_name <- name
 
-  # exclude missing data
   dat <-
     data %>%
     select(name) %>%
@@ -15,40 +15,26 @@ freq_table2.default <- function(data, name) {
     stop("data must be categorical/qualitative")
   }
 
-  # levels
   level_names <- levels(dat)
+  data_len    <- length(dat)
+  cq          <- forcats::fct_unique(dat)
 
-  # length of input
-  data_len <- length(dat)
-
-  # unique values in the input
-  cq <- forcats::fct_unique(dat)
-
-  # count of unique values in the input
   result <-
     dat %>%
     fct_count() %>%
     pull(2)
 
-  # length of result
-  len <- length(result)
-
-  # cumulative frequency
-  cum <- cumsum(result)
-
-  # percent
-  per <- percent(result, data_len)
-
-  # cumulative percent
+  len     <- length(result)
+  cum     <- cumsum(result)
+  per     <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
 
-  # matrix
   ftable <- tibble(
-    Levels = level_names,
-    Frequency = result,
+    Levels          = level_names,
+    Frequency       = result,
     `Cum Frequency` = cum,
-    Percent = per,
-    `Cum Percent` = cum_per
+    Percent         = per,
+    `Cum Percent`   = cum_per
   )
 
   na_count <-
@@ -74,12 +60,11 @@ freq_table2.default <- function(data, name) {
     length()
 
   result <- list(
-    ftable = ftable,
-    varname = var_name,
+    ftable   = ftable,
+    varname  = var_name,
     na_count = na_freq,
-    n = n_obs
+    n        = n_obs
   )
-
 
   class(result) <- "freq_table2"
   return(result)

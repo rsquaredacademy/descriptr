@@ -335,28 +335,6 @@ quant3 <- function(x, na.rm = FALSE) {
   quantile(x, probs = 0.75)
 }
 
-
-# ss <- function(x) {
-#     return(x ^ 2)
-# }
-#
-# fl <- function(x, w) {
-#     x <- as.character(x)
-#     ret <- format(x, width = w, justify = "left")
-#     return(ret)
-# }
-#
-# fc <- function(x, w) {
-#     x <- as.character(x)
-#     ret <- format(x, width = w, justify = "centre")
-#     return(ret)
-# }
-# formatrc <- function(x, w) {
-#     x <- as.character(x)
-#     ret <- format(x, width = w, justify = "right")
-#     return(ret)
-# }
-
 #' @importFrom rlang sym
 string_to_name <- function(x, index = 1) {
   x %>%
