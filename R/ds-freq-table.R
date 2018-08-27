@@ -57,39 +57,27 @@ ds_freq_table.default <- function(data, variable) {
     names()
 
   level_names <- levels(fdata)
-  data_len <- length(fdata)
+  data_len    <- length(fdata)
+  cq          <- forcats::fct_unique(fdata)
 
-  # unique values in the input
-  cq <- forcats::fct_unique(fdata)
-
-  # count of unique values in the input
   result <-
     fdata %>%
     fct_count() %>%
     pull(2)
 
-  # length of result
-  len <- length(result)
-
-  # cumulative frequency
-  cum <- cumsum(result)
-
-  # percent
-  per <- percent(result, data_len)
-
-  # cumulative percent
+  len     <- length(result)
+  cum     <- cumsum(result)
+  per     <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
 
-  # matrix
   ftable <- tibble(
-    Levels = level_names,
-    Frequency = result,
+    Levels          = level_names,
+    Frequency       = result,
     `Cum Frequency` = cum,
-    Percent = per,
-    `Cum Percent` = cum_per
+    Percent         = per,
+    `Cum Percent`   = cum_per
   )
 
-  # missing count
   na_count <-
     data %>%
     pull(!! varyable) %>%
@@ -113,11 +101,11 @@ ds_freq_table.default <- function(data, variable) {
     length()
 
   result <- list(
-    ftable = ftable,
-    varname = var_name,
-    data = data,
+    ftable   = ftable,
+    varname  = var_name,
+    data     = data,
     na_count = na_freq,
-    n = n_obs
+    n        = n_obs
   )
 
   class(result) <- "ds_freq_table"
