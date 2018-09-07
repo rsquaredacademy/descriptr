@@ -89,25 +89,24 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
   lower_n <- n_bins + 1
 
   freq_data <-
-    tibble(lower = inta[-lower_n],
-           upper = inta[-1],
-           frequency = result,
-           cumulative = cum,
+    tibble(lower        = inta[-lower_n],
+           upper        = inta[-1],
+           frequency    = result,
+           cumulative   = cum,
            freq_percent = per,
-           cum_percent = cum_per)
+           cum_percent  = cum_per)
 
-  out <- list(
-    freq_data = freq_data,
-    breaks = inta,
-    frequency = result,
-    cumulative = cum,
-    percent = per,
-    cum_percent = cum_per,
-    bins = n_bins,
-    data = fdata,
-    na_count = na_freq,
-    n = n_obs,
-    varname = var_name
+  out <- list(freq_data   = freq_data,
+              breaks      = inta,
+              frequency   = result,
+              cumulative  = cum,
+              percent     = per,
+              cum_percent = cum_per,
+              bins        = n_bins,
+              data        = fdata,
+              na_count    = na_freq,
+              n           = n_obs,
+              varname     = var_name
   )
 
   class(out) <- "ds_freq_cont"
@@ -134,9 +133,8 @@ print.ds_freq_cont <- function(x, ...) {
 #' @export
 #'
 plot.ds_freq_cont <- function(x, ...) {
-  x_lab <-
-    x %>%
-    use_series(varname)
+  
+  x_lab <- use_series(x, varname)
 
   k <-
     x %>%

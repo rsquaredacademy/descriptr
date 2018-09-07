@@ -43,6 +43,7 @@
 #' @export
 #'
 dist_binom_plot <- function(n, p) {
+
   if (!is.numeric(n)) {
     stop("n must be numeric/integer")
   }
@@ -55,14 +56,14 @@ dist_binom_plot <- function(n, p) {
     stop("p must be between 0 and 1")
   }
 
-  n <- as.integer(n)
-  bm <- round(n * p, 2)
+  n   <- as.integer(n)
+  bm  <- round(n * p, 2)
   bsd <- round(sqrt(bm * (1 - p)), 2)
 
   x <- seq(0, n, 1)
   k <- barplot(
     dbinom(x, n, p),
-    col = "blue",
+    col  = "blue",
     xlab = "No. of success",
     ylab = "Probability",
     ylim = c(0, max(dbinom(x, n, p)) + 0.2),
@@ -119,13 +120,11 @@ dist_binom_prob <- function(n, p, s,
     stop("s must be less than or equal to n")
   }
 
-  n <- as.integer(n)
-  s <- as.integer(s)
-
-  bm <- round(n * p, 2)
+  n   <- as.integer(n)
+  s   <- as.integer(s)
+  bm  <- round(n * p, 2)
   bsd <- round(sqrt(bm * (1 - p)), 2)
-
-  x <- seq(0, n, 1)
+  x   <- seq(0, n, 1)
 
   if (method == "lower") {
     k <- round(pbinom(s, n, p), 3)
@@ -147,12 +146,12 @@ dist_binom_prob <- function(n, p, s,
 
   bp <- barplot(
     dbinom(x, n, p),
-    col = cols,
+    col  = cols,
     xlab = "No. of success",
     ylab = "Probability",
     ylim = c(0, max(dbinom(x, n, p)) + 0.2),
     main = paste("Binomial Distribution: n =", n, ", p =", p),
-    sub = paste("Mean =", bm, ", Std. Dev. =", bsd)
+    sub  = paste("Mean =", bm, ", Std. Dev. =", bsd)
   )
 
   axis(1, at = (bp), labels = (0:n))
@@ -186,6 +185,7 @@ binom_prob <- function(n, p) {
 #' @export
 #'
 dist_binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
+
   if (!is.numeric(n)) {
     stop("n must be numeric/integer")
   }
@@ -206,11 +206,9 @@ dist_binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
     stop("tp must be between 0 and 0.5")
   }
 
-  n <- as.integer(n)
-
+  n      <- as.integer(n)
   method <- match.arg(type)
-
-  x <- seq(0, n, 1)
+  x      <- seq(0, n, 1)
 
   if (method == "lower") {
     k <- round(qbinom(tp, n, p), 3)
@@ -223,7 +221,7 @@ dist_binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
 
   bp <- barplot(
     dbinom(x, n, p),
-    col = cols,
+    col  = cols,
     xlab = "No. of success",
     ylab = "Probability",
     ylim = c(0, max(dbinom(x, n, p)) + 0.2),

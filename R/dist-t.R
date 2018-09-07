@@ -98,49 +98,47 @@ dist_t_perc <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")
     stop("probs must be between 0 and 1")
   }
 
-  df <- as.integer(df)
-
-  method <- match.arg(type)
-
-  l <- seq(-5, 5, 0.01)
-  ln <- length(l)
+  df      <- as.integer(df)
+  method  <- match.arg(type)
+  l       <- seq(-5, 5, 0.01)
+  ln      <- length(l)
 
   if (method == "lower") {
-    pp <- round(qt(probs, df), 3)
-    lc <- c(l[1], pp, l[ln])
-    col <- c("#0000CD", "#6495ED")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    pp    <- round(qt(probs, df), 3)
+    lc    <- c(l[1], pp, l[ln])
+    col   <- c("#0000CD", "#6495ED")
+    l1    <- c(1, 2)
+    l2    <- c(2, 3)
   } else if (method == "upper") {
-    pp <- round(qt(probs, df, lower.tail = F), 3)
-    lc <- c(l[1], pp, l[ln])
-    col <- c("#6495ED", "#0000CD")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    pp    <- round(qt(probs, df, lower.tail = F), 3)
+    lc    <- c(l[1], pp, l[ln])
+    col   <- c("#6495ED", "#0000CD")
+    l1    <- c(1, 2)
+    l2    <- c(2, 3)
   } else {
     alpha <- (1 - probs) / 2
-    pp1 <- round(qt(alpha, df), 3)
-    pp2 <- round(qt(alpha, df, lower.tail = F), 3)
-    pp <- c(pp1, pp2)
-    lc <- c(l[1], pp1, pp2, l[ln])
-    col <- c("#6495ED", "#0000CD", "#6495ED")
-    l1 <- c(1, 2, 3)
-    l2 <- c(2, 3, 4)
+    pp1   <- round(qt(alpha, df), 3)
+    pp2   <- round(qt(alpha, df, lower.tail = F), 3)
+    pp    <- c(pp1, pp2)
+    lc    <- c(l[1], pp1, pp2, l[ln])
+    col   <- c("#6495ED", "#0000CD", "#6495ED")
+    l1    <- c(1, 2, 3)
+    l2    <- c(2, 3, 4)
   }
 
   plot(
     l, dt(l, df),
     type = "l",
-    lwd = 2,
-    col = "blue",
+    lwd  = 2,
+    col  = "blue",
     xlab = "",
     ylab = "",
     xaxt = "n",
     yaxt = "n",
     xlim = c(-5, 5),
     ylim = c(0, max(dt(l, df)) + 0.03),
-    bty = "n",
-    sub = paste("df =", df),
+    bty  = "n",
+    sub  = paste("df =", df),
     main = "t distribution"
   )
 
@@ -197,6 +195,7 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 #' @export
 #'
 dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
+
   if (!is.numeric(perc)) {
     stop("perc must be numeric/integer")
   }
@@ -205,8 +204,7 @@ dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")
     stop("df must be numeric/integer")
   }
 
-  df <- as.integer(df)
-
+  df     <- as.integer(df)
   method <- match.arg(type)
 
   l <- if (abs(perc) < 5) {
@@ -218,17 +216,17 @@ dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")
   ln <- length(l)
 
   if (method == "lower") {
-    pp <- round(pt(perc, df), 3)
-    lc <- c(l[1], perc, l[ln])
+    pp  <- round(pt(perc, df), 3)
+    lc  <- c(l[1], perc, l[ln])
     col <- c("#0000CD", "#6495ED")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else if (method == "upper") {
-    pp <- round(pt(perc, df, lower.tail = F), 3)
-    lc <- c(l[1], perc, l[ln])
+    pp  <- round(pt(perc, df, lower.tail = F), 3)
+    lc  <- c(l[1], perc, l[ln])
     col <- c("#6495ED", "#0000CD")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else if (method == "interval") {
     if (perc < 0) {
       perc <- -perc
@@ -236,11 +234,11 @@ dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")
 
     pp1 <- round(pt(-perc, df), 3)
     pp2 <- round(pt(perc, df, lower.tail = F), 3)
-    pp <- c(pp1, pp2)
-    lc <- c(l[1], -perc, perc, l[ln])
+    pp  <- c(pp1, pp2)
+    lc  <- c(l[1], -perc, perc, l[ln])
     col <- c("#6495ED", "#0000CD", "#6495ED")
-    l1 <- c(1, 2, 3)
-    l2 <- c(2, 3, 4)
+    l1  <- c(1, 2, 3)
+    l2  <- c(2, 3, 4)
   } else {
     if (perc < 0) {
       perc <- -perc
@@ -248,26 +246,26 @@ dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")
 
     pp1 <- round(pt(-perc, df), 3)
     pp2 <- round(pt(perc, df, lower.tail = F), 3)
-    pp <- c(pp1, pp2)
-    lc <- c(l[1], -perc, perc, l[ln])
+    pp  <- c(pp1, pp2)
+    lc  <- c(l[1], -perc, perc, l[ln])
     col <- c("#0000CD", "#6495ED", "#0000CD")
-    l1 <- c(1, 2, 3)
-    l2 <- c(2, 3, 4)
+    l1  <- c(1, 2, 3)
+    l2  <- c(2, 3, 4)
   }
 
   plot(
     l, dt(l, df),
     type = "l",
-    lwd = 2,
-    col = "blue",
+    lwd  = 2,
+    col  = "blue",
     xlab = "",
     ylab = "",
     xaxt = "n",
     yaxt = "n",
     xlim = c(min(l), max(l)),
     ylim = c(0, max(dt(l, df)) + 0.07),
-    bty = "n",
-    sub = paste("df =", df),
+    bty  = "n",
+    sub  = paste("df =", df),
     main = "t distribution"
   )
 
