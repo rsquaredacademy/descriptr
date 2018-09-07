@@ -22,6 +22,7 @@
 #' @export
 #'
 ds_oway_tables <- function(data) {
+
   if (!is.data.frame(data)) {
     stop("data must be a data frame")
   }
@@ -33,12 +34,14 @@ ds_oway_tables <- function(data) {
   }
 
   factors.df <- data[, is.fact]
-  nam <- names(factors.df)
-  nc <- ncol(factors.df)
+  nam        <- names(factors.df)
+  nc         <- ncol(factors.df)
+
   for (i in seq_len(nc)) {
     k <- freq_table2(factors.df[i], nam[i])
     print(k)
   }
+
 }
 
 #' @export
@@ -55,6 +58,7 @@ oway_tables <- function(data) {
 #' @export
 #'
 ds_tway_tables <- function(data) {
+
   if (!is.data.frame(data)) {
     stop("data must be a data frame")
   }
@@ -66,9 +70,9 @@ ds_tway_tables <- function(data) {
   }
 
   factors.df <- data[, is.fact]
-  nc <- ncol(factors.df)
-  nam <- names(factors.df)
-  n <- nc - 1
+  nc         <- ncol(factors.df)
+  nam        <- names(factors.df)
+  n          <- nc - 1
 
   cat(
     formatter("    Cell Contents\n"),

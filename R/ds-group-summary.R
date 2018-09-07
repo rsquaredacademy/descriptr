@@ -50,14 +50,8 @@ ds_group_summary.default <- function(data, gvar, cvar) {
 
   g_var <- enquo(gvar)
   c_var <- enquo(cvar)
-
-  gvar <-
-    data %>%
-    pull(!! g_var)
-
-  cvar <-
-    data %>%
-    pull(!! c_var)
+  gvar  <- pull(data, !! g_var)
+  cvar  <- pull(data, !! c_var)
 
   if (!is.factor(gvar)) {
     stop("gvar must be an object of type factor")
@@ -101,10 +95,9 @@ ds_group_summary.default <- function(data, gvar, cvar) {
     "Std. Error Mean", "Range", "Interquartile Range"
   )
 
-  out <- data.frame(rnames, splito)
-  names(out) <- c("Statistic/Levels", levels(gvar))
-
-  plot_data <- data.frame(gvar, cvar)
+  out              <- data.frame(rnames, splito)
+  names(out)       <- c("Statistic/Levels", levels(gvar))
+  plot_data        <- data.frame(gvar, cvar)
   names(plot_data) <- c(xname, yname)
 
   tidystats <-
@@ -120,13 +113,12 @@ ds_group_summary.default <- function(data, gvar, cvar) {
               coeff_var = ds_cvar(!! c_var), std_error = ds_std_error(!! c_var),
               range = ds_range(!! c_var), iqr = IQR(!! c_var))
 
-  result <- list(
-    stats = out,
-    tidy_stats = tidystats,
-    plotdata = plot_data,
-    xvar = xname,
-    yvar = yname,
-    data = data
+  result <- list(stats      = out,
+                 tidy_stats = tidystats,
+                 plotdata   = plot_data,
+                 xvar       = xname,
+                 yvar       = yname,
+                 data       = data
   )
 
   class(result) <- "ds_group_summary"
@@ -151,13 +143,9 @@ print.ds_group_summary <- function(x, ...) {
 #' @export
 #'
 plot.ds_group_summary <- function(x, ...) {
-  x_lab <-
-    x %>%
-    use_series(xvar)
 
-  y_lab <-
-    x %>%
-    use_series(yvar)
+  x_lab <- use_series(x, xvar)
+  y_lab <- use_series(x, yvar)
 
   k <-
     x %>%
@@ -182,4 +170,5 @@ plot.ds_group_summary <- function(x, ...) {
 
   result <- list(plot = p)
   invisible(result)
+  
 }

@@ -27,18 +27,17 @@ cross_table2.default <- function(var1, var2, name_1, name_2) {
   col_names   <- c(var_names[1], col_name, "Row Total")
   last_line   <- c("Column Total", coltotal, n)
 
-  result <- list(
-    obs = n,
-    variable_levels = col_name,
-    row_name = row_name,
-    variable_names = var_names,
-    column_names = col_names,
-    twowaytable = x,
-    percent_table = per_mat,
-    row_percent = rcent,
-    column_percent = ccent,
-    column_totals = last_line,
-    percent_column = per_mat_col
+  result <- list(obs             = n,
+                 variable_levels = col_name,
+                 row_name        = row_name,
+                 variable_names  = var_names,
+                 column_names    = col_names,
+                 twowaytable     = x,
+                 percent_table   = per_mat,
+                 row_percent     = rcent,
+                 column_percent  = ccent,
+                 column_totals   = last_line,
+                 percent_column  = per_mat_col
   )
 
 

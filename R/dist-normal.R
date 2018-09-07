@@ -54,11 +54,11 @@ dist_norm_plot <- function(mean = 0, sd = 1) {
     stop("sd must be positive")
   }
 
-  x <- xax(mean)
-  l <- seql(mean, sd)
+  x   <- xax(mean)
+  l   <- seql(mean, sd)
   col <- c("#0000CD", "#4682B4", "#6495ED", "#4682B4", "#6495ED")
-  l1 <- c(3, 2, 1, 5, 6)
-  l2 <- c(5, 3, 2, 6, 7)
+  l1  <- c(3, 2, 1, 5, 6)
+  l2  <- c(5, 3, 2, 6, 7)
 
 
   xm <- xmm(mean, sd)
@@ -115,6 +115,7 @@ norm_plot <- function(mean = 0, sd = 1) {
 #' @export
 #'
 dist_norm_perc <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
+
   if (!is.numeric(mean)) {
     stop("mean must be numeric/integer")
   }
@@ -135,34 +136,32 @@ dist_norm_perc <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "up
     stop("probs must be between 0 and 1")
   }
 
-  x <- xax(mean)
-
+  x      <- xax(mean)
   method <- match.arg(type)
-
-  l <- seql(mean, sd)
-  ln <- length(l)
+  l      <- seql(mean, sd)
+  ln     <- length(l)
 
   if (method == "lower") {
-    pp <- round(qnorm(probs, mean, sd), 3)
-    lc <- c(l[1], pp, l[ln])
+    pp  <- round(qnorm(probs, mean, sd), 3)
+    lc  <- c(l[1], pp, l[ln])
     col <- c("#0000CD", "#6495ED")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else if (method == "upper") {
-    pp <- round(qnorm(probs, mean, sd, lower.tail = F), 3)
-    lc <- c(l[1], pp, l[ln])
+    pp  <- round(qnorm(probs, mean, sd, lower.tail = F), 3)
+    lc  <- c(l[1], pp, l[ln])
     col <- c("#6495ED", "#0000CD")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else {
     alpha <- (1 - probs) / 2
     pp1 <- round(qnorm(alpha, mean, sd), 3)
     pp2 <- round(qnorm(alpha, mean, sd, lower.tail = F), 3)
-    pp <- c(pp1, pp2)
-    lc <- c(l[1], pp1, pp2, l[ln])
+    pp  <- c(pp1, pp2)
+    lc  <- c(l[1], pp1, pp2, l[ln])
     col <- c("#6495ED", "#0000CD", "#6495ED")
-    l1 <- c(1, 2, 3)
-    l2 <- c(2, 3, 4)
+    l1  <- c(1, 2, 3)
+    l2  <- c(2, 3, 4)
   }
 
   xm <- xmm(mean, sd)
@@ -175,8 +174,8 @@ dist_norm_perc <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "up
     xlim = c(xm[1], xm[2]),
     ylim = c(0, max(dnorm(x, mean, sd)) + 0.03),
     main = "Normal Distribution",
-    sub = paste("Mean:", mean, " Standard Deviation:", sd),
-    bty = "n"
+    sub  = paste("Mean:", mean, " Standard Deviation:", sd),
+    bty  = "n"
   )
 
   if (method == "lower") {
@@ -239,6 +238,7 @@ norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", 
 #' @export
 #'
 dist_norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
+
   method <- match.arg(type)
 
   if (length(perc) == 2) {
@@ -270,30 +270,30 @@ dist_norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "b
   }
 
   el <- max(abs(perc - mean)) / sd + 1
-  x <- xaxp(mean, el)
-  l <- seqlp(mean, sd, el)
+  x  <- xaxp(mean, el)
+  l  <- seqlp(mean, sd, el)
   ln <- length(l)
 
   if (method == "lower") {
-    pp <- round(pnorm(perc, mean, sd), 3)
-    lc <- c(l[1], perc, l[ln])
+    pp  <- round(pnorm(perc, mean, sd), 3)
+    lc  <- c(l[1], perc, l[ln])
     col <- c("#0000CD", "#6495ED")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else if (method == "upper") {
-    pp <- round(pnorm(perc, mean, sd, lower.tail = F), 3)
-    lc <- c(l[1], perc, l[ln])
+    pp  <- round(pnorm(perc, mean, sd, lower.tail = F), 3)
+    lc  <- c(l[1], perc, l[ln])
     col <- c("#6495ED", "#0000CD")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else {
     pp1 <- round(pnorm(perc[1], mean, sd), 3)
     pp2 <- round(pnorm(perc[2], mean, sd, lower.tail = F), 3)
-    pp <- c(pp1, pp2)
-    lc <- c(l[1], perc[1], perc[2], l[ln])
+    pp  <- c(pp1, pp2)
+    lc  <- c(l[1], perc[1], perc[2], l[ln])
     col <- c("#6495ED", "#0000CD", "#6495ED")
-    l1 <- c(1, 2, 3)
-    l2 <- c(2, 3, 4)
+    l1  <- c(1, 2, 3)
+    l2  <- c(2, 3, 4)
   }
 
   xm <- xmmp(mean, sd, el)
@@ -306,8 +306,8 @@ dist_norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "b
     xlim = c(xm[1], xm[2]),
     ylim = c(0, max(dnorm(x, mean, sd)) + 0.08),
     main = "Normal Distribution",
-    sub = paste("Mean:", mean, " Standard Deviation:", sd),
-    bty = "n"
+    sub  = paste("Mean:", mean, " Standard Deviation:", sd),
+    bty  = "n"
   )
 
   if (method == "lower") {

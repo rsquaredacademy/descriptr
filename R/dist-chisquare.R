@@ -49,24 +49,23 @@ dist_chi_plot <- function(df = 3, normal = FALSE) {
     stop("normal must be logical")
   }
 
-  df <- as.integer(df)
-
-  chim <- round(df, 3)
+  df    <- as.integer(df)
+  chim  <- round(df, 3)
   chisd <- round(sqrt(2 * df), 3)
+  x     <- seq(0, 25, 0.01)
 
-  x <- seq(0, 25, 0.01)
   plot(
     x, dchisq(x, df),
     type = "l",
-    lwd = 2,
-    col = "blue",
+    lwd  = 2,
+    col  = "blue",
     xlab = "",
     ylab = "",
     xaxt = "n",
     yaxt = "n",
     main = paste("Chi Square Distribution: df =", df),
-    sub = paste("Mean =", chim, " Std Dev. =", chisd),
-    bty = "n"
+    sub  = paste("Mean =", chim, " Std Dev. =", chisd),
+    bty  = "n"
   )
 
   if (normal == TRUE) {
@@ -110,6 +109,7 @@ chi_plot <- function(df = 3, normal = FALSE) {
 #' @export
 #'
 dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
+
   if (!is.numeric(probs)) {
     stop("probs must be numeric")
   }
@@ -122,35 +122,32 @@ dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
     stop("probs must be between 0 and 1")
   }
 
-  df <- as.integer(df)
-
+  df     <- as.integer(df)
   method <- match.arg(type)
-
-  chim <- round(df, 3)
-  chisd <- round(sqrt(2 * df), 3)
-
-  l <- chiseql(chim, chisd)
-  ln <- length(l)
+  chim   <- round(df, 3)
+  chisd  <- round(sqrt(2 * df), 3)
+  l      <- chiseql(chim, chisd)
+  ln     <- length(l)
 
   if (method == "lower") {
-    pp <- round(qchisq(probs, df), 3)
-    lc <- c(l[1], pp, l[ln])
+    pp  <- round(qchisq(probs, df), 3)
+    lc  <- c(l[1], pp, l[ln])
     col <- c("#0000CD", "#6495ED")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else {
-    pp <- round(qchisq(probs, df, lower.tail = F), 3)
-    lc <- c(l[1], pp, l[ln])
+    pp  <- round(qchisq(probs, df, lower.tail = F), 3)
+    lc  <- c(l[1], pp, l[ln])
     col <- c("#6495ED", "#0000CD")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   }
   xm <- xmm(chim, chisd)
   plot(
     l, dchisq(l, df),
     type = "l",
-    lwd = 2,
-    col = "blue",
+    lwd  = 2,
+    col  = "blue",
     xlab = "",
     ylab = "",
     xaxt = "n",
@@ -158,8 +155,8 @@ dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
     xlim = c(xm[1], xm[2]),
     ylim = c(0, max(dchisq(l, df)) + 0.03),
     main = paste("Chi Square Distribution: df =", df),
-    sub = paste("Mean =", chim, " Std Dev. =", chisd),
-    bty = "n"
+    sub  = paste("Mean =", chim, " Std Dev. =", chisd),
+    bty  = "n"
   )
 
 
@@ -211,6 +208,7 @@ chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 #' @export
 #'
 dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
+
   if (!is.numeric(df)) {
     stop("df must be numeric/integer")
   }
@@ -220,9 +218,8 @@ dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
   }
 
   method <- match.arg(type)
-
-  chim <- round(df, 3)
-  chisd <- round(sqrt(2 * df), 3)
+  chim   <- round(df, 3)
+  chisd  <- round(sqrt(2 * df), 3)
 
   l <- if (perc < 25) {
     seq(0, 25, 0.01)
@@ -232,24 +229,24 @@ dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
   ln <- length(l)
 
   if (method == "lower") {
-    pp <- round(pchisq(perc, df), 3)
-    lc <- c(l[1], perc, l[ln])
+    pp  <- round(pchisq(perc, df), 3)
+    lc  <- c(l[1], perc, l[ln])
     col <- c("#0000CD", "#6495ED")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   } else {
-    pp <- round(pchisq(perc, df, lower.tail = F), 3)
-    lc <- c(l[1], perc, l[ln])
+    pp  <- round(pchisq(perc, df, lower.tail = F), 3)
+    lc  <- c(l[1], perc, l[ln])
     col <- c("#6495ED", "#0000CD")
-    l1 <- c(1, 2)
-    l2 <- c(2, 3)
+    l1  <- c(1, 2)
+    l2  <- c(2, 3)
   }
 
   plot(
     l, dchisq(l, df),
     type = "l",
-    lwd = 2,
-    col = "blue",
+    lwd  = 2,
+    col  = "blue",
     xlab = "",
     ylab = "",
     xaxt = "n",
@@ -257,8 +254,8 @@ dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
     xlim = c((-chisd - 1), l[ln]),
     ylim = c(0, max(dchisq(l, df)) + 0.03),
     main = paste("Chi Square Distribution: df =", df),
-    sub = paste("Mean =", chim, " Std Dev. =", chisd),
-    bty = "n"
+    sub  = paste("Mean =", chim, " Std Dev. =", chisd),
+    bty  = "n"
   )
 
 

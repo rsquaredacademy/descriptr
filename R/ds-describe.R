@@ -159,6 +159,7 @@ ds_extreme_obs <- function(data, column) {
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
 ds_tailobs <- function(data, n, type = c("low", "high")) {
+
   if (!is.numeric(data)) {
     stop("data must be numeric")
   }
@@ -188,6 +189,7 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
   }
 
   return(result)
+
 }
 
 #' @export
@@ -594,14 +596,17 @@ ds_rindex <- function(data, values) {
     stop("values must be numeric")
   }
 
-  data <- na.omit(data)
+  data   <- na.omit(data)
   values <- na.omit(values)
-  out <- c()
+  out    <- c()
+  
   for (i in seq_along(values)) {
     k <- return_pos(data, values[i])
     out <- c(out, k)
   }
+  
   return(unique(out))
+
 }
 
 #' @export
