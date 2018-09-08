@@ -15,6 +15,7 @@ Imports:
     ggplot2,
     graphics,
     magrittr,
+    purrr,
     rlang,
     scales,
     shiny,
