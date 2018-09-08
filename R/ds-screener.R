@@ -34,6 +34,8 @@
 #'
 #' @importFrom graphics legend
 #' @importFrom stats complete.cases
+#' @importFrom purrr map_chr map_int map
+#' @importFrom magrittr divide_by multiply_by
 #'
 #' @examples
 #' # screen data
@@ -53,11 +55,11 @@ ds_screener.default <- function(y) {
 
   rows     <- nrow(y)
   cols     <- ncol(y)
-  varnames <- names(sapply(y, colnames))
-  datatype <- sapply(y, class)
-  counts   <- sapply(y, length)
-  nlev     <- lapply(y, nlevels)
-  lev      <- lapply(y, levels)
+  varnames <- names(y)
+  datatype <- map_chr(y, class)
+  counts   <- map_int(y, length)
+  nlev     <- map(y, nlevels)
+  lev      <- map(y, levels)
   
   for (i in seq_len(length(lev))) {
     if (is.null(lev[[i]])) {
@@ -65,12 +67,35 @@ ds_screener.default <- function(y) {
     }
   }
   
-  mvalues    <- sapply(y, function(z) sum(is.na(z)))
-  mvaluesper <- round((mvalues / counts) * 100, 2)
-  mtotal     <- sum(is.na(y))
-  mtotalper  <- round((mtotal / sum(counts)) * 100, 2)
-  mrows      <- sum(!complete.cases(y))
-  mcols      <- sum(mvalues != 0)
+  mvalues    <- map_int(y, function(z) sum(is.na(z)))
+  
+  mvaluesper <- 
+    mvalues %>%
+      divide_by(counts) %>%
+      multiply_by(100) %>%
+      round(2)
+  
+  mtotal <- 
+    y %>%
+    is.na() %>%
+    sum()
+  
+  mtotalper <- 
+    mtotal %>%
+    divide_by(sum(counts)) %>%
+    multiply_by(100) %>%
+    round(2)
+
+  mrows <- 
+    y %>%
+    complete.cases() %>%
+    `!` %>%
+    sum()
+
+  mcols <- 
+    mvalues %>%
+    `!=`(0) %>%
+    sum()
 
   result <- list(Rows          = rows, 
                  Columns       = cols, 
