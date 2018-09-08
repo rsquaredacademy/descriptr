@@ -18,6 +18,7 @@
 #'
 #' @importFrom graphics barplot mosaicplot
 #' @importFrom grDevices rainbow
+#' @importFrom magrittr set_rownames divide_by
 #'
 #' @examples
 #' k <- ds_cross_table(mtcarz, cyl, gear)
@@ -46,45 +47,36 @@ ds_cross_table.default <- function(data, var1, var2) {
     select(!! var_1, !! var_2) %>%
     names()
 
-  varone <- pull(data, !! var_1)
-  vartwo <- pull(data, !! var_2)
+  varone   <- pull(data, !! var_1)
+  vartwo   <- pull(data, !! var_2)
+  row_name <- get_names(varone)
+  col_name <- get_names(vartwo)
 
-  x           <- as.matrix(table(varone, vartwo))
-  rownames(x) <- NULL
-  n           <- sum(x)
+  x <- 
+    table(varone, vartwo) %>%
+    as.matrix() %>%
+    set_rownames(NULL)
   
-  if (is.factor(varone)) {
-    row_name <- levels(varone)
-  } else {
-    row_name <- unique(sort(varone))
-  }
+  n <- sum(x)
+  
+  per_mat <- 
+    x %>%
+    divide_by(n) %>%
+    round(3)
 
-  per_mat             <- round(x / n, 3)
-  row_pct             <- apply(per_mat, 1, sum)
-  col_pct             <- apply(per_mat, 2, sum)
-  per_mat             <- cbind(per_mat, row_pct)
-  per_mat             <- suppressWarnings(rbind(per_mat, col_pct))
-  d                   <- dim(per_mat)
-  per_mat[d[1], d[2]] <- 1
-  rowtotal            <- apply(x, 1, sum)
-  coltotal            <- apply(x, 2, sum)
-  rcent               <- row_pct(x, rowtotal)
-  rcent               <- cbind(rcent, row_pct)
-  rcent               <- apply(rcent, c(1, 2), rounda)
-  ccent               <- col_pct(x, coltotal)
-  ccent               <- apply(ccent, c(1, 2), rounda)
-  x                   <- cbind(x, rowtotal)
-  x                   <- cbind(unname(row_name), x)
+  row_pct  <- apply(per_mat, 1, sum)
+  col_pct  <- apply(per_mat, 2, sum)
+  rowtotal <- apply(x, 1, sum)
+  coltotal <- apply(x, 2, sum)
+  finalmat <- prep_per_mat(per_mat, row_pct, col_pct)  
+  rcent    <- prep_rcent(x, rowtotal, row_pct)
+  ccent    <- prep_ccent(x, coltotal)
+  finaltab <- prep_table(x, rowtotal, row_name)
   
-  if (is.factor(vartwo)) {
-    col_name <- levels(vartwo)
-  } else {
-    col_name <- unique(sort(vartwo))
-  }
 
   result <- list(
     obs = n, var2_levels = col_name, var1_levels = row_name, varnames = var_names,
-    twowaytable = x, percent_table = per_mat, row_percent = rcent, column_percent = ccent,
+    twowaytable = finaltab, percent_table = finalmat, row_percent = rcent, column_percent = ccent,
     column_totals = coltotal, percent_column = col_pct, data = data
   )
 
@@ -218,5 +210,52 @@ ds_twoway_table <- function(data, var1, var2) {
 
   result <- inner_join(group, group2)
   return(result)
+
+}
+
+get_names <- function(x) {
+  
+  if (is.factor(x)) {
+    varname <- levels(x)
+  } else {
+    varname <- 
+      x %>%
+      sort() %>%
+      unique()
+  }
+  
+  return(varname)
+  
+}
+
+prep_table <- function(x, rowtotal, row_name) {
+
+  x1 <- cbind(x, rowtotal)
+  cbind(unname(row_name), x1)
+
+}
+
+prep_per_mat <- function(per_mat, row_pct, col_pct) {
+
+  per_mat_1             <- cbind(per_mat, row_pct)
+  per_mat_2             <- suppressWarnings(rbind(per_mat_1, col_pct))
+  d                     <- dim(per_mat_2)
+  per_mat_2[d[1], d[2]] <- 1
+  return(per_mat_2)
+
+}
+
+prep_rcent <- function(x, rowtotal, row_pct) {
+
+  rcent_1 <- row_pct(x, rowtotal)
+  rcent_2 <- cbind(rcent_1, row_pct)
+  apply(rcent_2, c(1, 2), rounda)
+
+}
+
+prep_ccent <- function(x, coltotal) {
+
+  ccent_1 <- col_pct(x, coltotal)
+  apply(ccent_1, c(1, 2), rounda)
 
 }
