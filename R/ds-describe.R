@@ -528,7 +528,7 @@ stat_cvar <- function(x) {
   ds_cvar(x)
 }
 
-
+#' @importFrom magrittr subtract raise_to_power
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
 #' @param x a numeric vector containing the values whose mode is to be computed
@@ -556,8 +556,8 @@ ds_css <- function(x, na.rm = FALSE) {
   y <- mean(x)
 
   x %>%
-    `-`(y) %>%
-    `^`(2) %>%
+    subtract(y) %>%
+    raise_to_power(2) %>%
     sum()
 
 }
