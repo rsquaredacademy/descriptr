@@ -1,9 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-descriptr: Generate descriptive statistics <img src="hex_descriptr.png" height="100px" align="right" />
--------------------------------------------------------------------------------------------------------
-
-**Author:** [Aravind Hebbali](https://www.aravindhebbali.com)<br/> **License:** [MIT](https://opensource.org/licenses/MIT)
+descriptr <img src="hex_descriptr.png" height="100px" align="right" />
+======================================================================
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![cran checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr) [![Coverage status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 
@@ -24,35 +22,13 @@ install.packages("descriptr")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
 
-Features
---------
-
-### Descriptive Statistics
-
--   Summary statistics
--   Two way tables
--   One way table
--   One way table (Continuous Data)
--   Group wise summary
--   Multiple variable statistics
--   Multiple one way tables
--   Multiple two way tables
-
-### Explore Distributions
-
--   Normal
--   Binomial
--   Chi Square
--   F
--   t
-
 Shiny App
 ---------
 
 Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
-Vignettes
----------
+Articles
+--------
 
 -   [Descriptive Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
 -   [Statistical Distributions](https://descriptr.rsquaredacademy.com/articles/distributions.html)
@@ -78,7 +54,7 @@ str(mtcarz)
 #>  $ carb: Factor w/ 6 levels "1","2","3","4",..: 4 4 1 1 2 1 4 2 2 4 ...
 ```
 
-##### Summary Statistics
+#### Summary Statistics
 
 ``` r
 ds_summary_stats(mtcarz, mpg)
@@ -121,7 +97,7 @@ ds_summary_stats(mtcarz, mpg)
 #>   17                         14.7        26                         27.3
 ```
 
-##### Two Way Table
+#### Two Way Table
 
 ``` r
 ds_cross_table(mtcarz, cyl, gear)
@@ -160,7 +136,7 @@ ds_cross_table(mtcarz, cyl, gear)
 #> ----------------------------------------------------------------------------
 ```
 
-##### One Way Table
+#### One Way Table
 
 ``` r
 ds_freq_table(mtcarz, cyl)
@@ -178,7 +154,7 @@ ds_freq_table(mtcarz, cyl)
 #> -----------------------------------------------------------------------
 ```
 
-##### One Way Table (Continuous Data)
+#### One Way Table (Continuous Data)
 
 ``` r
 ds_freq_cont(mtcarz, mpg)
@@ -200,7 +176,7 @@ ds_freq_cont(mtcarz, mpg)
 #> |-----------------------------------------------------------------------|
 ```
 
-##### Group Summary
+#### Group Summary
 
 ``` r
 ds_group_summary(mtcarz, cyl, mpg)
@@ -227,7 +203,7 @@ ds_group_summary(mtcarz, cyl, mpg)
 #> -----------------------------------------------------------------------------------------
 ```
 
-##### Multiple Variable Statistics
+#### Multiple Variable Statistics
 
 ``` r
 ds_multi_stats(mtcarz, mpg, disp, hp)
@@ -240,5 +216,35 @@ ds_multi_stats(mtcarz, mpg, disp, hp)
 #> # ... with 5 more variables: kurtosis <dbl>, coeff_var <dbl>, q1 <dbl>,
 #> #   q3 <dbl>, iqrange <dbl>
 ```
+
+Features
+--------
+
+#### Descriptive Statistics
+
+-   Summary statistics
+-   Two way tables
+-   One way table
+-   One way table (Continuous Data)
+-   Group wise summary
+-   Multiple variable statistics
+-   Multiple one way tables
+-   Multiple two way tables
+
+#### Explore Distributions
+
+-   Normal
+-   Binomial
+-   Chi Square
+-   F
+-   t
+
+Getting Help
+------------
+
+If you encounter a bug, please file a minimal reproducible example using [reprex](https://reprex.tidyverse.org/index.html) on github. For questions and clarifications, use [StackOverflow](https://stackoverflow.com/).
+
+Code of Conduct
+---------------
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
