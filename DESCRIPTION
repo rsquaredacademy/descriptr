@@ -2,7 +2,8 @@ Package: descriptr
 Type: Package
 Title: Generate Descriptive Statistics & Explore Statistical Distributions 
 Version: 0.4.1.9000
-Authors@R: person("Aravind", "Hebbali", email = "hebbali.aravind@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Aravind", "Hebbali", email = "hebbali.aravind@gmail.com", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-9220-9669"))
 Description: Generate descriptive statistics such as measures of location,
     dispersion, frequency tables, cross tables, group summaries and multiple
     one/two way tables. Visualize and compute percentiles/probabilities of 

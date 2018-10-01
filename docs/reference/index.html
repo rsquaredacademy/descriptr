@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +53,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">descriptr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">descriptr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -94,6 +104,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,266 +112,261 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.4.0.9000</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-shiny-app" class="hasAnchor"><a href="#section-shiny-app" class="anchor"></a>Shiny App</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_launch_shiny_app.html">ds_launch_shiny_app</a></code> </p>
-          </td>
-          <td><p>Launch Shiny App</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-data-screening" class="hasAnchor"><a href="#section-data-screening" class="anchor"></a>Data Screening</h2>
-            <p class="section-desc"><p>The <code><a href="../reference/ds_screener.html">screener()</a></code> function will screen data frames and return details such as variable names, class, levels and missing values. The <code>plot.screener()</code> creates bar plots to visualize % of missing observations for each variable in a data frame.</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_screener.html">ds_screener</a></code> <code><a href="ds_screener.html">plot</a></code> </p>
-          </td>
-          <td><p>Screen data</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-descriptive-statistics" class="hasAnchor"><a href="#section-descriptive-statistics" class="anchor"></a>Descriptive Statistics</h2>
-            <p class="section-desc"><p>The following functions ease the process of generating and visualizing descriptive statistics for categorical and continuous data.</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_summary_stats.html">ds_summary_stats</a></code> </p>
-          </td>
-          <td><p>Descriptive statistics</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_cross_table.html">ds_cross_table</a></code> <code><a href="ds_cross_table.html">plot</a></code> <code><a href="ds_cross_table.html">ds_twoway_table</a></code> </p>
-          </td>
-          <td><p>Two way table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_freq_table.html">ds_freq_table</a></code> <code><a href="ds_freq_table.html">plot</a></code> </p>
-          </td>
-          <td><p>Frequency table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_freq_cont.html">ds_freq_cont</a></code> <code><a href="ds_freq_cont.html">plot</a></code> </p>
-          </td>
-          <td><p>Frequency distribution of continuous data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_group_summary.html">ds_group_summary</a></code> <code><a href="ds_group_summary.html">plot</a></code> </p>
-          </td>
-          <td><p>Groupwise descriptive statistics</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_multi_stats.html">ds_multi_stats</a></code> </p>
-          </td>
-          <td><p>Multiple variable statistics</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_oway_tables.html">ds_oway_tables</a></code> <code><a href="ds_oway_tables.html">ds_tway_tables</a></code> </p>
-          </td>
-          <td><p>Multiple One &amp; Two Way Tables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_measures_location.html">ds_measures_location</a></code> </p>
-          </td>
-          <td><p>Measures of location</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_measures_variation.html">ds_measures_variation</a></code> </p>
-          </td>
-          <td><p>Measures of variation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_measures_symmetry.html">ds_measures_symmetry</a></code> </p>
-          </td>
-          <td><p>Measures of symmetry</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_percentiles.html">ds_percentiles</a></code> </p>
-          </td>
-          <td><p>Percentiles</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_extreme_obs.html">ds_extreme_obs</a></code> </p>
-          </td>
-          <td><p>Extreme observations</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-distributions" class="hasAnchor"><a href="#section-distributions" class="anchor"></a>Distributions</h2>
-            <p class="section-desc"><p>Visualize how different parameters affect the shape of a distribution. Compute/visualize probability from a given quantile and quantiles out of given probability.</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_norm_plot.html">dist_norm_plot</a></code> <code><a href="dist_norm_plot.html">dist_norm_perc</a></code> <code><a href="dist_norm_plot.html">dist_norm_prob</a></code> </p>
-          </td>
-          <td><p>Visualize normal distribution</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_binom_plot.html">dist_binom_plot</a></code> <code><a href="dist_binom_plot.html">dist_binom_prob</a></code> <code><a href="dist_binom_plot.html">dist_binom_perc</a></code> </p>
-          </td>
-          <td><p>Visualize binomial distribution</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_chi_plot.html">dist_chi_plot</a></code> <code><a href="dist_chi_plot.html">dist_chi_perc</a></code> <code><a href="dist_chi_plot.html">dist_chi_prob</a></code> </p>
-          </td>
-          <td><p>Visualize chi square distribution</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_f_plot.html">dist_f_plot</a></code> <code><a href="dist_f_plot.html">dist_f_perc</a></code> <code><a href="dist_f_plot.html">dist_f_prob</a></code> </p>
-          </td>
-          <td><p>Visualize f distribution</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dist_t.html">dist_t_plot</a></code> <code><a href="dist_t.html">dist_t_perc</a></code> <code><a href="dist_t.html">dist_t_prob</a></code> </p>
-          </td>
-          <td><p>Visualize t distribution</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-other-functions" class="hasAnchor"><a href="#section-other-functions" class="anchor"></a>Other Functions</h2>
-            <p class="section-desc"><p>A set of functions used to generate <code>summary_stats</code>.</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_kurtosis.html">ds_kurtosis</a></code> </p>
-          </td>
-          <td><p>Kurtosis</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_skewness.html">ds_skewness</a></code> </p>
-          </td>
-          <td><p>Skewness</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_mode.html">ds_mode</a></code> </p>
-          </td>
-          <td><p>Mode</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_range.html">ds_range</a></code> </p>
-          </td>
-          <td><p>Range</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_mdev.html">ds_mdev</a></code> </p>
-          </td>
-          <td><p>Mean Absolute Deviation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_cvar.html">ds_cvar</a></code> </p>
-          </td>
-          <td><p>Coefficient of Variation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_css.html">ds_css</a></code> </p>
-          </td>
-          <td><p>Corrected Sum of Squares</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_gmean.html">ds_gmean</a></code> </p>
-          </td>
-          <td><p>Geometric Mean</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_hmean.html">ds_hmean</a></code> </p>
-          </td>
-          <td><p>Harmonic Mean</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_tailobs.html">ds_tailobs</a></code> </p>
-          </td>
-          <td><p>Tail Observations</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ds_rindex.html">ds_rindex</a></code> </p>
-          </td>
-          <td><p>Index Values</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-            <p class="section-desc"><p>descriptr comes with a built-in dataset <code>hsb</code> which is used to illustrate the functions as well as for running tests.</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="hsb.html">hsb</a></code> </p>
-          </td>
-          <td><p>High School and Beyond Data Set</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mtcarz.html">mtcarz</a></code> </p>
-          </td>
-          <td><p>mtcarz</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-shiny-app" class="hasAnchor"><a href="#section-shiny-app" class="anchor"></a>Shiny App</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_launch_shiny_app.html">ds_launch_shiny_app()</a></code> </p>
+        </td>
+        <td><p>Launch Shiny App</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-screening" class="hasAnchor"><a href="#section-data-screening" class="anchor"></a>Data Screening</h2>
+          <p class="section-desc"><p>The <code><a href="../reference/ds_screener.html">screener()</a></code> function will screen data frames and return details such as variable names, class, levels and missing values. The <code>plot.screener()</code> creates bar plots to visualize % of missing observations for each variable in a data frame.</p></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_screener.html">ds_screener()</a></code> <code><a href="ds_screener.html">plot(<i>&lt;ds_screener&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Screen data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-descriptive-statistics" class="hasAnchor"><a href="#section-descriptive-statistics" class="anchor"></a>Descriptive Statistics</h2>
+          <p class="section-desc"><p>The following functions ease the process of generating and visualizing descriptive statistics for categorical and continuous data.</p></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_summary_stats.html">ds_summary_stats()</a></code> </p>
+        </td>
+        <td><p>Descriptive statistics</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_cross_table.html">ds_cross_table()</a></code> <code><a href="ds_cross_table.html">plot(<i>&lt;ds_cross_table&gt;</i>)</a></code> <code><a href="ds_cross_table.html">ds_twoway_table()</a></code> </p>
+        </td>
+        <td><p>Two way table</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_freq_table.html">ds_freq_table()</a></code> <code><a href="ds_freq_table.html">plot(<i>&lt;ds_freq_table&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Frequency table</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_freq_cont.html">ds_freq_cont()</a></code> <code><a href="ds_freq_cont.html">plot(<i>&lt;ds_freq_cont&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Frequency distribution of continuous data</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_group_summary.html">ds_group_summary()</a></code> <code><a href="ds_group_summary.html">plot(<i>&lt;ds_group_summary&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Groupwise descriptive statistics</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_multi_stats.html">ds_multi_stats()</a></code> </p>
+        </td>
+        <td><p>Multiple variable statistics</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_oway_tables.html">ds_oway_tables()</a></code> <code><a href="ds_oway_tables.html">ds_tway_tables()</a></code> </p>
+        </td>
+        <td><p>Multiple One &amp; Two Way Tables</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_measures_location.html">ds_measures_location()</a></code> </p>
+        </td>
+        <td><p>Measures of location</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_measures_variation.html">ds_measures_variation()</a></code> </p>
+        </td>
+        <td><p>Measures of variation</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_measures_symmetry.html">ds_measures_symmetry()</a></code> </p>
+        </td>
+        <td><p>Measures of symmetry</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_percentiles.html">ds_percentiles()</a></code> </p>
+        </td>
+        <td><p>Percentiles</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_extreme_obs.html">ds_extreme_obs()</a></code> </p>
+        </td>
+        <td><p>Extreme observations</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-distributions" class="hasAnchor"><a href="#section-distributions" class="anchor"></a>Distributions</h2>
+          <p class="section-desc"><p>Visualize how different parameters affect the shape of a distribution. Compute/visualize probability from a given quantile and quantiles out of given probability.</p></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="dist_norm_plot.html">dist_norm_plot()</a></code> <code><a href="dist_norm_plot.html">dist_norm_perc()</a></code> <code><a href="dist_norm_plot.html">dist_norm_prob()</a></code> </p>
+        </td>
+        <td><p>Visualize normal distribution</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="dist_binom_plot.html">dist_binom_plot()</a></code> <code><a href="dist_binom_plot.html">dist_binom_prob()</a></code> <code><a href="dist_binom_plot.html">dist_binom_perc()</a></code> </p>
+        </td>
+        <td><p>Visualize binomial distribution</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="dist_chi_plot.html">dist_chi_plot()</a></code> <code><a href="dist_chi_plot.html">dist_chi_perc()</a></code> <code><a href="dist_chi_plot.html">dist_chi_prob()</a></code> </p>
+        </td>
+        <td><p>Visualize chi square distribution</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="dist_f_plot.html">dist_f_plot()</a></code> <code><a href="dist_f_plot.html">dist_f_perc()</a></code> <code><a href="dist_f_plot.html">dist_f_prob()</a></code> </p>
+        </td>
+        <td><p>Visualize f distribution</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="dist_t.html">dist_t_plot()</a></code> <code><a href="dist_t.html">dist_t_perc()</a></code> <code><a href="dist_t.html">dist_t_prob()</a></code> </p>
+        </td>
+        <td><p>Visualize t distribution</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-other-functions" class="hasAnchor"><a href="#section-other-functions" class="anchor"></a>Other Functions</h2>
+          <p class="section-desc"><p>A set of functions used to generate <code>summary_stats</code>.</p></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_kurtosis.html">ds_kurtosis()</a></code> </p>
+        </td>
+        <td><p>Kurtosis</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_skewness.html">ds_skewness()</a></code> </p>
+        </td>
+        <td><p>Skewness</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_mode.html">ds_mode()</a></code> </p>
+        </td>
+        <td><p>Mode</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_range.html">ds_range()</a></code> </p>
+        </td>
+        <td><p>Range</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_mdev.html">ds_mdev()</a></code> </p>
+        </td>
+        <td><p>Mean Absolute Deviation</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_cvar.html">ds_cvar()</a></code> </p>
+        </td>
+        <td><p>Coefficient of Variation</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_css.html">ds_css()</a></code> </p>
+        </td>
+        <td><p>Corrected Sum of Squares</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_gmean.html">ds_gmean()</a></code> </p>
+        </td>
+        <td><p>Geometric Mean</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_hmean.html">ds_hmean()</a></code> </p>
+        </td>
+        <td><p>Harmonic Mean</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_tailobs.html">ds_tailobs()</a></code> </p>
+        </td>
+        <td><p>Tail Observations</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ds_rindex.html">ds_rindex()</a></code> </p>
+        </td>
+        <td><p>Index Values</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+          <p class="section-desc"><p>descriptr comes with a built-in dataset <code>hsb</code> which is used to illustrate the functions as well as for running tests.</p></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="hsb.html">hsb</a></code> </p>
+        </td>
+        <td><p>High School and Beyond Data Set</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="mtcarz.html">mtcarz</a></code> </p>
+        </td>
+        <td><p>mtcarz</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -378,15 +384,18 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Aravind Hebbali.</p>
+  <p>Developed by <a href='https://www.aravindhebbali.com'>Aravind Hebbali</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
