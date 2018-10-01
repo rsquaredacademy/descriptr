@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Groupwise descriptive statistics � ds_group_summary • descriptr</title>
+<title>Groupwise descriptive statistics — ds_group_summary • descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,24 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Groupwise descriptive statistics — ds_group_summary" />
+
+<meta property="og:description" content="Descriptive statistics of a continuous variable for the different levels of
+a categorical variable. boxplot.group_summary() creates boxplots of
+the continuous variable for the different levels of the categorical variable." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +58,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">descriptr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">descriptr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -94,6 +109,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,24 +117,28 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Groupwise descriptive statistics</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rsquaredacademy/descriptr/blob/master/R/ds-group-summary.R'><code>R/ds-group-summary.R</code></a></small>
+    <div class="hidden name"><code>ds_group_summary.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Descriptive statistics of a continuous variable for the different levels of
 a categorical variable. <code>boxplot.group_summary()</code> creates boxplots of
 the continuous variable for the different levels of the categorical variable.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>ds_group_summary</span>(<span class='no'>data</span>, <span class='no'>gvar</span>, <span class='no'>cvar</span>)
 
 <span class='co'># S3 method for ds_group_summary</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -157,12 +177,13 @@ levels of the factor variable.</p></dd>
     
     <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated function</h2>
 
+    
     <p><code>ds_group_summary()</code> has been deprecated. Instead
 use <code>ds_group_summary()</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='ds_summary_stats.html'>ds_summary_stats</a></code></p>
+    <div class='dont-index'><p><code><a href='ds_summary_stats.html'>ds_summary_stats</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -190,13 +211,13 @@ use <code>ds_group_summary()</code>.</p>
 #&gt; -----------------------------------------------------------------------------------------</div><div class='input'>
 <span class='co'># boxplot</span>
 <span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_group_summary</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>mpg</span>)
-<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_group_summary-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_group_summary-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># tibble</span>
 <span class='no'>k</span>$<span class='no'>tidy_stats</span></div><div class='output co'>#&gt; # A tibble: 3 x 15
 #&gt;   cyl   length   min   max  mean median  mode    sd variance skewness kurtosis
 #&gt;   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-#&gt; 1 4         11  21.4  33.9  26.7   26.0  22.8  4.51    20.3     0.348   -1.43 
-#&gt; 2 6          7  17.8  21.4  19.7   19.7  21.0  1.45     2.11   -0.259   -1.83 
+#&gt; 1 4         11  21.4  33.9  26.7   26    22.8  4.51    20.3     0.348   -1.43 
+#&gt; 2 6          7  17.8  21.4  19.7   19.7  21    1.45     2.11   -0.259   -1.83 
 #&gt; 3 8         14  10.4  19.2  15.1   15.2  10.4  2.56     6.55   -0.456    0.330
 #&gt; # ... with 4 more variables: coeff_var &lt;dbl&gt;, std_error &lt;dbl&gt;, range &lt;dbl&gt;,
 #&gt; #   iqr &lt;dbl&gt;</div><div class='input'>
@@ -221,15 +242,18 @@ use <code>ds_group_summary()</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Aravind Hebbali.</p>
+  <p>Developed by <a href='https://www.aravindhebbali.com'>Aravind Hebbali</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

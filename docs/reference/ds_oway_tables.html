@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple One &amp; Two Way Tables � ds_oway_tables • descriptr</title>
+<title>Multiple One &amp; Two Way Tables — ds_oway_tables • descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Multiple One &amp; Two Way Tables — ds_oway_tables" />
+
+<meta property="og:description" content="ds_oway_tables creates multiple one way tables by creating
+a frequency table for each categorical variable in a data frame.
+ds_tway_tables creates multiple two way tables by creating a cross
+table for each unique pair of categorical variables in a data frame." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">descriptr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">descriptr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -94,6 +110,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,24 +118,28 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Multiple One &amp; Two Way Tables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rsquaredacademy/descriptr/blob/master/R/ds-mult-table.R'><code>R/ds-mult-table.R</code></a></small>
+    <div class="hidden name"><code>ds_oway_tables.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>ds_oway_tables</code> creates multiple one way tables by creating
 a frequency table for each categorical variable in a data frame.
 <code>ds_tway_tables</code> creates multiple two way tables by creating a cross
 table for each unique pair of categorical variables in a data frame.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>ds_oway_tables</span>(<span class='no'>data</span>)
 
 <span class='fu'>ds_tway_tables</span>(<span class='no'>data</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -137,82 +158,83 @@ variables in the dataframe.</p>
     
     <h2 class="hasAnchor" id="deprecated-functions"><a class="anchor" href="#deprecated-functions"></a>Deprecated Functions</h2>
 
+    
     <p><code>oway_tables()</code> and <code>tway_tables()</code> have been deprecated. Instead
 use <code>ds_oway_tables()</code> and <code>ds_tway_tables()</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>link{ds_freq_table}</code> <code>link{ds_cross_table}</code></p>
+    <div class='dont-index'><p><code>link{ds_freq_table}</code> <code>link{ds_cross_table}</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># multiple one way tables</span>
-<span class='fu'>ds_oway_tables</span>(<span class='no'>mtcarz</span>)</div><div class='output co'>#&gt;                                Variable: cyl                                 
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       4      |      11      |      11      |     34.38    |     34.38    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       6      |       7      |      18      |     21.88    |     56.25    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       8      |      14      |      32      |     43.75    |      100     |
-#&gt; |--------------------------------------------------------------------------|
+<span class='fu'>ds_oway_tables</span>(<span class='no'>mtcarz</span>)</div><div class='output co'>#&gt;                              Variable: cyl                              
+#&gt; -----------------------------------------------------------------------
+#&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+#&gt; -----------------------------------------------------------------------
+#&gt;    4          11             11              34.38            34.38    
+#&gt; -----------------------------------------------------------------------
+#&gt;    6           7             18              21.88            56.25    
+#&gt; -----------------------------------------------------------------------
+#&gt;    8          14             32              43.75             100     
+#&gt; -----------------------------------------------------------------------
+#&gt;  Total        32              -             100.00              -      
+#&gt; -----------------------------------------------------------------------
 #&gt; 
+#&gt;                              Variable: vs                               
+#&gt; -----------------------------------------------------------------------
+#&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+#&gt; -----------------------------------------------------------------------
+#&gt;    0          18             18              56.25            56.25    
+#&gt; -----------------------------------------------------------------------
+#&gt;    1          14             32              43.75             100     
+#&gt; -----------------------------------------------------------------------
+#&gt;  Total        32              -             100.00              -      
+#&gt; -----------------------------------------------------------------------
 #&gt; 
-#&gt;                                 Variable: vs                                 
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       0      |      18      |      18      |     56.25    |     56.25    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       1      |      14      |      32      |     43.75    |      100     |
-#&gt; |--------------------------------------------------------------------------|
+#&gt;                              Variable: am                               
+#&gt; -----------------------------------------------------------------------
+#&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+#&gt; -----------------------------------------------------------------------
+#&gt;    0          19             19              59.38            59.38    
+#&gt; -----------------------------------------------------------------------
+#&gt;    1          13             32              40.62             100     
+#&gt; -----------------------------------------------------------------------
+#&gt;  Total        32              -             100.00              -      
+#&gt; -----------------------------------------------------------------------
 #&gt; 
+#&gt;                             Variable: gear                              
+#&gt; -----------------------------------------------------------------------
+#&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+#&gt; -----------------------------------------------------------------------
+#&gt;    3          15             15              46.88            46.88    
+#&gt; -----------------------------------------------------------------------
+#&gt;    4          12             27              37.5             84.38    
+#&gt; -----------------------------------------------------------------------
+#&gt;    5           5             32              15.62             100     
+#&gt; -----------------------------------------------------------------------
+#&gt;  Total        32              -             100.00              -      
+#&gt; -----------------------------------------------------------------------
 #&gt; 
-#&gt;                                 Variable: am                                 
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       0      |      19      |      19      |     59.38    |     59.38    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       1      |      13      |      32      |     40.62    |      100     |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; 
-#&gt; 
-#&gt;                                Variable: gear                                
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       3      |      15      |      15      |     46.88    |     46.88    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       4      |      12      |      27      |     37.5     |     84.38    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       5      |       5      |      32      |     15.62    |      100     |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; 
-#&gt; 
-#&gt;                                Variable: carb                                
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |                                Cumulative                    Cumulative  |
-#&gt; |    Levels    |  Frequency   |   Frequency  |   Percent    |    Percent   |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       1      |       7      |       7      |     21.88    |     21.88    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       2      |      10      |      17      |     31.25    |     53.12    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       3      |       3      |      20      |     9.38     |     62.5     |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       4      |      10      |      30      |     31.25    |     93.75    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       6      |       1      |      31      |     3.12     |     96.88    |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; |       8      |       1      |      32      |     3.12     |      100     |
-#&gt; |--------------------------------------------------------------------------|
-#&gt; 
+#&gt;                             Variable: carb                              
+#&gt; -----------------------------------------------------------------------
+#&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+#&gt; -----------------------------------------------------------------------
+#&gt;    1           7              7              21.88            21.88    
+#&gt; -----------------------------------------------------------------------
+#&gt;    2          10             17              31.25            53.12    
+#&gt; -----------------------------------------------------------------------
+#&gt;    3           3             20              9.38             62.5     
+#&gt; -----------------------------------------------------------------------
+#&gt;    4          10             30              31.25            93.75    
+#&gt; -----------------------------------------------------------------------
+#&gt;    6           1             31              3.12             96.88    
+#&gt; -----------------------------------------------------------------------
+#&gt;    8           1             32              3.12              100     
+#&gt; -----------------------------------------------------------------------
+#&gt;  Total        32              -             100.00              -      
+#&gt; -----------------------------------------------------------------------
 #&gt; </div><div class='input'>
 <span class='co'># multiple two way tables</span>
 <span class='fu'>ds_tway_tables</span>(<span class='no'>mtcarz</span>)</div><div class='output co'>#&gt;     Cell Contents
@@ -480,15 +502,18 @@ use <code>ds_oway_tables()</code> and <code>ds_tway_tables()</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Aravind Hebbali.</p>
+  <p>Developed by <a href='https://www.aravindhebbali.com'>Aravind Hebbali</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

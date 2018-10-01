@@ -1,0 +1,10 @@
+pandoc: 1.19.2.1
+pkgdown: 1.0.0
+pkgdown_sha: ~
+articles:
+  descriptive-stats: descriptive-stats.html
+  distributions: distributions.html
+urls:
+  reference: https://descriptr.rsquaredacademy.com/reference
+  article: https://descriptr.rsquaredacademy.com/articles
+

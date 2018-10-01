@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize chi square distribution � dist_chi_plot • descriptr</title>
+<title>Visualize chi square distribution — dist_chi_plot • descriptr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,24 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Visualize chi square distribution — dist_chi_plot" />
+
+<meta property="og:description" content="Visualize how changes in degrees of freedom affect the shape of
+the chi square distribution. Compute &amp; visualize quantiles out of given
+probability and probability from a given quantile." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +58,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">descriptr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">descriptr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -94,6 +109,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -101,17 +117,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Visualize chi square distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rsquaredacademy/descriptr/blob/master/R/dist-chisquare.R'><code>R/dist-chisquare.R</code></a></small>
+    <div class="hidden name"><code>dist_chi_plot.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Visualize how changes in degrees of freedom affect the shape of
 the chi square distribution. Compute &amp; visualize quantiles out of given
 probability and probability from a given quantile.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
@@ -119,7 +139,7 @@ probability and probability from a given quantile.</p>
 
 <span class='fu'>dist_chi_prob</span>(<span class='no'>perc</span>, <span class='no'>df</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lower"</span>, <span class='st'>"upper"</span>))</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -152,22 +172,23 @@ probability value for <code>perc</code> based on <code>df</code> and <code>type<
     
     <h2 class="hasAnchor" id="deprecated-functions"><a class="anchor" href="#deprecated-functions"></a>Deprecated functions</h2>
 
+    
     <p><code>chi_plot()</code>, <code>chi_prob()</code> and <code>chi_per()</code> have been
 deprecated. Instead use <code>dist_chi_plot()</code>, <code>dist_chi_prob()</code> and
 <code>dist_chi_perc()</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/stats/topics/Chisquare'>Chisquare</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/stats/topics/Chisquare'>Chisquare</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># visualize chi square distribution</span>
-<span class='fu'>dist_chi_plot</span>()</div><div class='img'><img src='dist_chi_plot-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='dist_chi_plot-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='dist_chi_plot-3.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>dist_chi_plot</span>()</div><div class='img'><img src='dist_chi_plot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='img'><img src='dist_chi_plot-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>dist_chi_plot</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>normal</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='dist_chi_plot-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># visualize quantiles out of given probability</span>
-<span class='fu'>dist_chi_perc</span>(<span class='fl'>0.165</span>, <span class='fl'>8</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_perc</span>(<span class='fl'>0.22</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>dist_chi_perc</span>(<span class='fl'>0.165</span>, <span class='fl'>8</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>dist_chi_perc</span>(<span class='fl'>0.22</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># visualize probability from a given quantile.</span>
-<span class='fu'>dist_chi_prob</span>(<span class='fl'>13.58</span>, <span class='fl'>11</span>, <span class='st'>'lower'</span>)</div><div class='img'><img src='dist_chi_plot-6.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>dist_chi_prob</span>(<span class='fl'>15.72</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>dist_chi_prob</span>(<span class='fl'>13.58</span>, <span class='fl'>11</span>, <span class='st'>'lower'</span>)</div><div class='img'><img src='dist_chi_plot-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>dist_chi_prob</span>(<span class='fl'>15.72</span>, <span class='fl'>13</span>, <span class='st'>'upper'</span>)</div><div class='img'><img src='dist_chi_plot-7.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -189,15 +210,18 @@ deprecated. Instead use <code>dist_chi_plot()</code>, <code>dist_chi_prob()</cod
 
       <footer>
       <div class="copyright">
-  <p>Developed by Aravind Hebbali.</p>
+  <p>Developed by <a href='https://www.aravindhebbali.com'>Aravind Hebbali</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
