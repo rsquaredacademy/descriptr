@@ -22,6 +22,7 @@ Imports:
     shiny,
     tibble,
     tidyr,
+    utils,
     vistributions
 Suggests:
     covr,
