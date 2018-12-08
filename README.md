@@ -1,42 +1,50 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-descriptr <img src="hex_descriptr.png" height="100px" align="right" />
-======================================================================
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![cran checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html) [![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr) [![Coverage status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+# descriptr
 
-Overview
---------
+> Generate descriptive
+statistics
 
-The goal of descriptr is to ease the process of generating descriptive statistics and exploring statistical distributions.
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
+[![cran
+checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html)
+[![Travis-CI Build
+Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
+[![Coverage
+status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
+![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 
-Installation
-------------
+## Installation
 
 ``` r
-# install descriptr from CRAN
+# Install release version from CRAN
 install.packages("descriptr")
 
-# the development version from github
+# Install development version from GitHub
 # install.packages("devtools")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
 
-Shiny App
----------
+## Shiny App
 
 Use `ds_launch_shiny_app()` to explore the package using a shiny app.
 
-Articles
---------
+## Articles
 
--   [Descriptive Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
--   [Statistical Distributions](https://descriptr.rsquaredacademy.com/articles/distributions.html)
+  - [Descriptive
+    Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
+  - [Statistical
+    Distributions](https://descriptr.rsquaredacademy.com/articles/distributions.html)
 
-Usage
------
+## Usage
 
-We will use a modified version of the `mtcars` data set in the below examples. The only difference between the data sets is related to the variable types.
+We will use a modified version of the `mtcars` data set in the below
+examples. The only difference between the data sets is related to the
+variable types.
 
 ``` r
 str(mtcarz)
@@ -217,34 +225,26 @@ ds_multi_stats(mtcarz, mpg, disp, hp)
 #> #   q3 <dbl>, iqrange <dbl>
 ```
 
-Features
---------
+## Features
 
-#### Descriptive Statistics
+  - Summary statistics
+  - Two way tables
+  - One way table
+  - One way table (Continuous Data)
+  - Group wise summary
+  - Multiple variable statistics
+  - Multiple one way tables
+  - Multiple two way tables
 
--   Summary statistics
--   Two way tables
--   One way table
--   One way table (Continuous Data)
--   Group wise summary
--   Multiple variable statistics
--   Multiple one way tables
--   Multiple two way tables
+## Getting Help
 
-#### Explore Distributions
+If you encounter a bug, please file a minimal reproducible example using
+[reprex](https://reprex.tidyverse.org/index.html) on github. For
+questions and clarifications, use
+[StackOverflow](https://stackoverflow.com/).
 
--   Normal
--   Binomial
--   Chi Square
--   F
--   t
+## Code of Conduct
 
-Getting Help
-------------
-
-If you encounter a bug, please file a minimal reproducible example using [reprex](https://reprex.tidyverse.org/index.html) on github. For questions and clarifications, use [StackOverflow](https://stackoverflow.com/).
-
-Code of Conduct
----------------
-
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.
