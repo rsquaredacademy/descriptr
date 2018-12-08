@@ -9,7 +9,8 @@
 \usage{
 ds_cross_table(data, var1, var2)
 
-\method{plot}{ds_cross_table}(x, stacked = FALSE, proportional = FALSE, ...)
+\method{plot}{ds_cross_table}(x, stacked = FALSE, proportional = FALSE,
+  ...)
 
 ds_twoway_table(data, var1, var2)
 }

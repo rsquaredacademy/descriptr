@@ -14,7 +14,8 @@ dist_norm_plot(mean = 0, sd = 1)
 dist_norm_perc(probs = 0.95, mean = 0, sd = 1, type = c("lower",
   "upper", "both"))
 
-dist_norm_prob(perc, mean = 0, sd = 1, type = c("lower", "upper", "both"))
+dist_norm_prob(perc, mean = 0, sd = 1, type = c("lower", "upper",
+  "both"))
 }
 \arguments{
 \item{mean}{Mean of the normal distribution.}
