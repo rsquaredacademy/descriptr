@@ -21,7 +21,8 @@ Imports:
     scales,
     shiny,
     tibble,
-    tidyr
+    tidyr,
+    vistributions
 Suggests:
     covr,
     haven,
