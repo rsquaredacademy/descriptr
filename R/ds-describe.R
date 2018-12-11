@@ -10,20 +10,18 @@
 #' @examples
 #' ds_measures_location(mtcarz, mpg)
 #'
-#' @importFrom tidyr drop_na
-#'
 #' @export
 #'
 ds_measures_location <- function(data, column, trim = 0.05) {
 
-  var <- enquo(column)
+  var <- rlang::enquo(column)
 
   data %>%
-    select(!! var) %>%
-    drop_na() %>%
-    summarise_all(funs(mean = mean, trim_mean = mean(., trim = trim),
-                       median = median, mode = ds_mode)) %>%
-    as_tibble()
+    dplyr::select(!! var) %>%
+    tidyr::drop_na() %>%
+    dplyr::summarise_all(dplyr::funs(mean = mean, trim_mean = mean(., trim = trim),
+                       median = stats::median, mode = ds_mode)) %>%
+    tibble::as_tibble()
 
 }
 
@@ -42,14 +40,14 @@ ds_measures_location <- function(data, column, trim = 0.05) {
 #'
 ds_measures_variation <- function(data, column) {
 
-  var <- enquo(column)
+  var <- rlang::enquo(column)
 
   data %>%
-    select(!! var) %>%
-    drop_na() %>%
-    summarise_all(funs(range = ds_range, iqr = IQR, variance = var, sd = sd,
-                       coeff_var = ds_cvar, std_error = ds_std_error)) %>%
-    as_tibble()
+    dplyr::select(!! var) %>%
+    tidyr::drop_na() %>%
+    dplyr::summarise_all(dplyr::funs(range = ds_range, iqr = stats::IQR, variance = stats::var, 
+      sd = stats::sd, coeff_var = ds_cvar, std_error = ds_std_error)) %>%
+    tibble::as_tibble()
 }
 
 #' Measures of symmetry
@@ -66,13 +64,13 @@ ds_measures_variation <- function(data, column) {
 #'
 ds_measures_symmetry <- function(data, column) {
 
-  var <- enquo(column)
+  var <- rlang::enquo(column)
 
   data %>%
-    select(!! var) %>%
-    drop_na() %>%
-    summarise_all(funs(skewness = ds_skewness, kurtosis = ds_kurtosis)) %>%
-    as_tibble()
+    dplyr::select(!! var) %>%
+    tidyr::drop_na() %>%
+    dplyr::summarise_all(dplyr::funs(skewness = ds_skewness, kurtosis = ds_kurtosis)) %>%
+    tibble::as_tibble()
 }
 
 
@@ -90,23 +88,23 @@ ds_measures_symmetry <- function(data, column) {
 #'
 ds_percentiles <- function(data, column) {
 
-  var <- enquo(column)
+  var <- rlang::enquo(column)
 
   data %>%
-    select(!! var) %>%
-    drop_na() %>%
-    summarise_all(funs(min    = min,
-                       per1   = quantile(., 0.01),
-                       per5   = quantile(., 0.05),
-                       per10  = quantile(., 0.10),
-                       q1     = quantile(., 0.25),
-                       median = median,
-                       q3     = quantile(., 0.75),
-                       per95  = quantile(., 0.95),
-                       per90  = quantile(., 0.90),
-                       per99  = quantile(., 0.99),
+    dplyr::select(!! var) %>%
+    tidyr::drop_na() %>%
+    dplyr::summarise_all(dplyr::funs(min    = min,
+                       per1   = stats::quantile(., 0.01),
+                       per5   = stats::quantile(., 0.05),
+                       per10  = stats::quantile(., 0.10),
+                       q1     = stats::quantile(., 0.25),
+                       median = stats::median,
+                       q3     = stats::quantile(., 0.75),
+                       per95  = stats::quantile(., 0.95),
+                       per90  = stats::quantile(., 0.90),
+                       per99  = stats::quantile(., 0.99),
                        max    = max)) %>%
-    as_tibble()
+    tibble::as_tibble()
 }
 
 #' Extreme observations
@@ -123,15 +121,15 @@ ds_percentiles <- function(data, column) {
 #'
 ds_extreme_obs <- function(data, column) {
 
-  var <- enquo(column)
+  var <- rlang::enquo(column)
 
   na_data <-
     data %>%
-    select(!! var) %>%
-    drop_na() %>%
-    pull(1)
+    dplyr::select(!! var) %>%
+    tidyr::drop_na() %>%
+    dplyr::pull(1)
 
-  tibble(type = c(rep("high", 5), rep("low", 5)),
+  tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
          value = c(ds_tailobs(na_data, 5, "high"),
                    ds_tailobs(na_data, 5, "low")),
          index = ds_rindex(na_data, value))
@@ -140,7 +138,6 @@ ds_extreme_obs <- function(data, column) {
 }
 
 #' @importFrom magrittr %>%
-#' @importFrom stats na.omit
 #' @title Tail Observations
 #' @description Returns the n highest/lowest observations from a numeric vector.
 #' @param data a numeric vector
@@ -177,13 +174,13 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
   if (method == "low") {
     result <-
       data %>%
-      na.omit() %>%
+      stats::na.omit() %>%
       sort() %>%
       `[`(1:n)
   } else {
     result <-
       data %>%
-      na.omit() %>%
+      stats::na.omit() %>%
       sort(decreasing = TRUE) %>%
       `[`(1:n)
   }
@@ -224,7 +221,7 @@ ds_gmean <- function(x, na.rm = FALSE, ...) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   prod(x) ^ (1 / length(x))
@@ -264,7 +261,7 @@ ds_hmean <- function(x, na.rm = FALSE, ...) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   length(x) / sum(sapply(x, div_by))
@@ -280,7 +277,6 @@ hmean <- function(x, ...) {
   ds_hmean(x, ...)
 }
 
-#' @importFrom dplyr arrange desc filter select contains
 #' @title Mode
 #' @description Compute the sample mode
 #' @param x a numeric vector containing the values whose mode is to be computed
@@ -303,7 +299,7 @@ ds_mode <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   Freq <- NULL
@@ -311,9 +307,9 @@ ds_mode <- function(x, na.rm = FALSE) {
   x %>%
     table() %>%
     as.data.frame(stringsAsFactors = FALSE) %>%
-    arrange(desc(Freq)) %>%
-    filter(Freq == max(Freq)) %>%
-    select(contains(".")) %>%
+    dplyr::arrange(dplyr::desc(Freq)) %>%
+    dplyr::filter(Freq == max(Freq)) %>%
+    dplyr::select(dplyr::contains(".")) %>%
     unlist() %>%
     as.numeric() %>%
     min()
@@ -350,7 +346,7 @@ ds_range <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   x %>%
@@ -390,7 +386,7 @@ ds_kurtosis <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   n <- length(x)
@@ -433,7 +429,7 @@ ds_skewness <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   n <- length(x)
@@ -476,7 +472,7 @@ ds_mdev <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   m <- mean(x)
@@ -512,10 +508,10 @@ ds_cvar <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
-  (sd(x) / mean(x)) * 100
+  (stats::sd(x) / mean(x)) * 100
 
 }
 
@@ -528,7 +524,6 @@ stat_cvar <- function(x) {
   ds_cvar(x)
 }
 
-#' @importFrom magrittr subtract raise_to_power
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
 #' @param x a numeric vector containing the values whose mode is to be computed
@@ -550,14 +545,14 @@ ds_css <- function(x, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
 
   y <- mean(x)
 
   x %>%
-    subtract(y) %>%
-    raise_to_power(2) %>%
+    magrittr::subtract(y) %>%
+    magrittr::raise_to_power(2) %>%
     sum()
 
 }
@@ -596,8 +591,8 @@ ds_rindex <- function(data, values) {
     stop("values must be numeric")
   }
 
-  data   <- na.omit(data)
-  values <- na.omit(values)
+  data   <- stats::na.omit(data)
+  values <- stats::na.omit(values)
   out    <- c()
   
   for (i in seq_along(values)) {

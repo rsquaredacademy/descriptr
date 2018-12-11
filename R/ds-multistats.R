@@ -10,10 +10,6 @@
 #' @section Deprecated function:
 #' \code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
 #'
-#' @importFrom rlang quos
-#' @importFrom tidyr gather
-#' @importFrom dplyr group_by summarise_all funs
-#'
 #' @examples
 #' ds_multi_stats(mtcarz, mpg, disp, hp)
 #'
@@ -21,17 +17,17 @@
 #'
 ds_multi_stats <- function(x, ...) {
 
-  vars <- quos(...)
+  vars <- rlang::quos(...)
 
   x %>%
-    select(!!! vars) %>%
-    gather(vars, values) %>%
-    group_by(vars) %>%
-    summarise_all(funs(
+    dplyr::select(!!! vars) %>%
+    tidyr::gather(vars, values) %>%
+    dplyr::group_by(vars) %>%
+    dplyr::summarise_all(dplyr::funs(
       min = min, max = max, mean = mean, t_mean = trimmed_mean,
-      median = median, mode = ds_mode, range = ds_range, variance = var,
-      stdev = sd, skew = ds_skewness, kurtosis = ds_kurtosis,
-      coeff_var = ds_cvar, q1 = quant1, q3 = quant3, iqrange = IQR),
+      median = stats::median, mode = ds_mode, range = ds_range, variance = stats::var,
+      stdev = stats::sd, skew = ds_skewness, kurtosis = ds_kurtosis,
+      coeff_var = ds_cvar, q1 = quant1, q3 = quant3, iqrange = stats::IQR),
       na.rm = TRUE)
 }
 

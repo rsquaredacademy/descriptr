@@ -19,9 +19,6 @@
 #' deprecated. Instead use \code{dist_norm_plot()}, \code{dist_norm_prob()} and
 #' \code{dist_norm_per()}.
 #'
-#' @importFrom graphics curve
-#' @importFrom stats qnorm pnorm
-#'
 #' @examples
 #' # visualize normal distribution
 #' dist_norm_plot()

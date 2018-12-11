@@ -18,8 +18,6 @@
 #' Instead use \code{dist_t_plot()}, \code{dist_t_prob()} and
 #' \code{dist_t_perc()}.
 #'
-#' @importFrom stats dt qt pt
-#'
 #' @examples
 #' # visualize t distribution
 #' dist_t_plot()

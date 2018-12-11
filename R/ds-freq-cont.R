@@ -16,9 +16,6 @@
 #' @section Deprecated functions:
 #' \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
 #'
-#' @importFrom graphics hist
-#' @importFrom magrittr use_series multiply_by add
-#'
 #' @examples
 #' # frequency table
 #' ds_freq_cont(mtcarz, mpg, 4)
@@ -37,12 +34,12 @@ ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
 #' @export
 ds_freq_cont.default <- function(data, variable, bins = 5) {
 
-  varyable <- enquo(variable)
+  varyable <- rlang::enquo(variable)
 
   fdata <-
     data %>%
-    pull(!! varyable) %>%
-    na.omit()
+    dplyr::pull(!! varyable) %>%
+    stats::na.omit()
 
   if (!is.numeric(fdata)) {
     stop("variable must be numeric")
@@ -58,7 +55,7 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
 
   var_name <-
     data %>%
-    select(!! varyable) %>%
+    dplyr::select(!! varyable) %>%
     names()
 
   n_bins   <- bins
@@ -71,7 +68,7 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
 
   na_count <-
     data %>%
-    pull(!! varyable) %>%
+    dplyr::pull(!! varyable) %>%
     is.na() %>%
     sum()
 
@@ -83,13 +80,13 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
 
   n_obs <-
     data %>%
-    pull(!! varyable) %>%
+    dplyr::pull(!! varyable) %>%
     length()
 
   lower_n <- n_bins + 1
 
   freq_data <-
-    tibble(lower        = inta[-lower_n],
+    tibble::tibble(lower        = inta[-lower_n],
            upper        = inta[-1],
            frequency    = result,
            cumulative   = cum,
@@ -127,38 +124,37 @@ print.ds_freq_cont <- function(x, ...) {
   print_fcont(x)
 }
 
-#' @importFrom tibble add_column
-#' @importFrom ggplot2 geom_col
+
 #' @rdname ds_freq_cont
 #' @export
 #'
 plot.ds_freq_cont <- function(x, ...) {
-  
-  x_lab <- use_series(x, varname)
+
+  x_lab <- magrittr::use_series(x, varname)
 
   k <-
     x %>%
-    use_series(varname) %>%
-    extract(1) %>%
-    sym()
+    magrittr::use_series(varname) %>%
+    magrittr::extract(1) %>%
+    rlang::sym()
 
   bins <-
     x %>%
-    use_series(frequency) %>%
+    magrittr::use_series(frequency) %>%
     length()
 
   p <-
     x %>%
-    use_series(frequency) %>%
-    as_tibble() %>%
-    add_column(x = seq_len(bins), .before = 1) %>%
-    ggplot() +
-    geom_col(
-      aes(x = x, y = value), width = 0.999,
+    magrittr::use_series(frequency) %>%
+    tibble::as_tibble() %>%
+    tibble::add_column(x = seq_len(bins), .before = 1) %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_col(
+      ggplot2::aes(x = x, y = value), width = 0.999,
       fill = "blue", color = "black"
     ) +
-    xlab(x_lab) + ylab("Count") +
-    ggtitle(paste("Histogram of", x_lab))
+    ggplot2::xlab(x_lab) + ggplot2::ylab("Count") +
+    ggplot2::ggtitle(paste("Histogram of", x_lab))
 
   print(p)
 

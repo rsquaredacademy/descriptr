@@ -12,8 +12,7 @@
 #' @examples
 #' ds_summary_stats(mtcarz, mpg)
 #'
-#' @importFrom stats quantile
-#' @importFrom rlang enquo !!
+#' @importFrom rlang !!
 #'
 #' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
 #' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
@@ -26,16 +25,16 @@ ds_summary_stats <- function(data, variable) UseMethod("ds_summary_stats")
 #'
 ds_summary_stats.default <- function(data, variable) {
 
-  vary <- enquo(variable)
+  vary <- rlang::enquo(variable)
 
   odata <-
     data %>%
-    pull(!! vary)
+    dplyr::pull(!! vary)
 
   sdata <-
     data %>%
-    pull(!! vary) %>%
-    na.omit()
+    dplyr::pull(!! vary) %>%
+    stats::na.omit()
 
   if (!is.numeric(sdata)) {
     stop("data must be numeric")
@@ -50,28 +49,28 @@ ds_summary_stats.default <- function(data, variable) {
     			 missing  = sum(is.na(odata)),
 			     avg      = mean(sdata),
 			     tavg     = mean(sdata, trim = 0.05),
-			     stdev    = sd(sdata),
-			     variance = var(sdata),
+			     stdev    = stats::sd(sdata),
+			     variance = stats::var(sdata),
 			     skew     = ds_skewness(sdata),
 			     kurtosis = ds_kurtosis(sdata),
 			     uss      = stat_uss(sdata),
 			     css      = ds_css(sdata),
 			     cvar     = ds_cvar(sdata),
 			     sem      = ds_std_error(sdata),
-			     median   = median(sdata),
+			     median   = stats::median(sdata),
 			     mode     = ds_mode(sdata),
 			     range    = ds_range(sdata),
 			     min      = min(sdata), 
 			     Max      = max(sdata),
-			     iqrange  = IQR(sdata),
-			     per99    = quantile(sdata, 0.99),
-			     per90    = quantile(sdata, 0.90),
-			     per95    = quantile(sdata, 0.95),
-			     per75    = quantile(sdata, 0.75),
-			     per25    = quantile(sdata, 0.25),
-			     per10    = quantile(sdata, 0.10),
-			     per5     = quantile(sdata, 0.05),
-			     per1     = quantile(sdata, 0.01),
+			     iqrange  = stats::IQR(sdata),
+			     per99    = stats::quantile(sdata, 0.99),
+			     per90    = stats::quantile(sdata, 0.90),
+			     per95    = stats::quantile(sdata, 0.95),
+			     per75    = stats::quantile(sdata, 0.75),
+			     per25    = stats::quantile(sdata, 0.25),
+			     per10    = stats::quantile(sdata, 0.10),
+			     per5     = stats::quantile(sdata, 0.05),
+			     per1     = stats::quantile(sdata, 0.01),
 			     lowobs   = low,
 			     highobs  = high,
 			     lowobsi  = low_val,

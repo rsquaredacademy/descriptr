@@ -21,8 +21,6 @@
 #' Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and
 #' \code{dist_f_perc()}.
 #'
-#' @importFrom stats df qf pf
-#'
 #' @examples
 #' # visualize F distribution
 #' dist_f_plot()

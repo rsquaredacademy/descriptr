@@ -32,11 +32,6 @@
 #' \code{screener()} has been deprecated. Instead
 #' use \code{ds_screener()}.
 #'
-#' @importFrom graphics legend
-#' @importFrom stats complete.cases
-#' @importFrom purrr map_chr map_int map
-#' @importFrom magrittr divide_by multiply_by
-#'
 #' @examples
 #' # screen data
 #' ds_screener(mtcarz)
@@ -56,10 +51,10 @@ ds_screener.default <- function(y) {
   rows     <- nrow(y)
   cols     <- ncol(y)
   varnames <- names(y)
-  datatype <- map_chr(y, class)
-  counts   <- map_int(y, length)
-  nlev     <- map(y, nlevels)
-  lev      <- map(y, levels)
+  datatype <- purrr::map_chr(y, class)
+  counts   <- purrr::map_int(y, length)
+  nlev     <- purrr::map(y, nlevels)
+  lev      <- purrr::map(y, levels)
   
   for (i in seq_len(length(lev))) {
     if (is.null(lev[[i]])) {
@@ -67,12 +62,12 @@ ds_screener.default <- function(y) {
     }
   }
   
-  mvalues    <- map_int(y, function(z) sum(is.na(z)))
+  mvalues    <- purrr::map_int(y, function(z) sum(is.na(z)))
   
   mvaluesper <- 
     mvalues %>%
-      divide_by(counts) %>%
-      multiply_by(100) %>%
+      magrittr::divide_by(counts) %>%
+      magrittr::multiply_by(100) %>%
       round(2)
   
   mtotal <- 
@@ -82,13 +77,13 @@ ds_screener.default <- function(y) {
   
   mtotalper <- 
     mtotal %>%
-    divide_by(sum(counts)) %>%
-    multiply_by(100) %>%
+    magrittr::divide_by(sum(counts)) %>%
+    magrittr::multiply_by(100) %>%
     round(2)
 
   mrows <- 
     y %>%
-    complete.cases() %>%
+    stats::complete.cases() %>%
     `!` %>%
     sum()
 
@@ -141,14 +136,14 @@ plot.ds_screener <- function(x, ...) {
   ymax <- max(dat) * 1.5
   cols <- c("green", "red")[(dat > 10) + 1]
 
-  h <- barplot(dat, 
+  h <- graphics::barplot(dat, 
                main = "Missing Values (%)",
                xlab = "Column Names", 
                ylab = "Percentage",
                col  = cols, 
                ylim = c(0, ymax))
 
-  legend("top", 
+  graphics::legend("top", 
           legend     = c("> 10%", "<= 10%"), 
           fill       = c("red", "green"),
           horiz      = TRUE, 
@@ -157,6 +152,6 @@ plot.ds_screener <- function(x, ...) {
           text.width = 0.7)
 
   line_data <- cbind(h, as.vector(dat))
-  text(line_data[, 1], line_data[, 2] + 2, as.vector(dat))
+  graphics::text(line_data[, 1], line_data[, 2] + 2, as.vector(dat))
 
 }

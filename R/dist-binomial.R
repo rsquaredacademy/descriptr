@@ -21,9 +21,6 @@
 #' deprecated. Instead use \code{dist_binom_plot()},
 #' \code{dist_binom_prob()} and \code{dist_binom_perc()}.
 #'
-#' @importFrom stats dbinom pbinom qbinom
-#' @importFrom graphics axis mtext
-#'
 #' @examples
 #' # visualize binomial distribution
 #' dist_binom_plot(10, 0.3)

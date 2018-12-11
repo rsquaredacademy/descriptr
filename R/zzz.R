@@ -6,7 +6,7 @@
   
   cran_version <- 
     pkgs %>%
-    extract("descriptr", "Version") %>%
+    magrittr::extract("descriptr", "Version") %>%
     package_version()
 
   local_version <- utils::packageVersion("descriptr")

@@ -65,7 +65,7 @@ standardize <- function(x, avg, stdev, p) {
 
 sums <- function(x, q) {
   avg <- mean(x)
-  stdev <- sd(x)
+  stdev <- stats::sd(x)
   result <- sum(sapply(x, standardize, avg, stdev, q))
   return(result)
 }
@@ -86,7 +86,7 @@ md_helper <- function(x, y) {
 #' @export
 #'
 ds_std_error <- function(x) {
-  sd(x) / (length(x) ^ 0.5)
+  stats::sd(x) / (length(x) ^ 0.5)
 }
 
 uss <- function(x, y) {
@@ -207,21 +207,21 @@ fround <- function(x) {
 
 pol_chi <- function(l1, l2, df, col) {
   x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, dchisq(seq(l1, l2, 0.01), df), 0)
-  polygon(x, y, col = col)
+  y <- c(0, stats::dchisq(seq(l1, l2, 0.01), df), 0)
+  graphics::polygon(x, y, col = col)
 }
 
 pol_f <- function(l1, l2, num_df, den_df, col) {
   x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, df(seq(l1, l2, 0.01), num_df, den_df), 0)
-  polygon(x, y, col = col)
+  y <- c(0, stats::df(seq(l1, l2, 0.01), num_df, den_df), 0)
+  graphics::polygon(x, y, col = col)
 }
 
 
 pol_cord <- function(l1, l2, mean, sd, col) {
   x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, dnorm(seq(l1, l2, 0.01), mean, sd), 0)
-  polygon(x, y, col = col)
+  y <- c(0, stats::dnorm(seq(l1, l2, 0.01), mean, sd), 0)
+  graphics::polygon(x, y, col = col)
 }
 
 
@@ -310,35 +310,34 @@ xmn <- function(mean, sd) {
 
 pol_t <- function(l1, l2, df, col) {
   x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, dt(seq(l1, l2, 0.01), df), 0)
-  polygon(x, y, col = col)
+  y <- c(0, stats::dt(seq(l1, l2, 0.01), df), 0)
+  graphics::polygon(x, y, col = col)
 }
 
 trimmed_mean <- function(x, na.rm = FALSE) {
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
   mean(x, trim = 0.05)
 }
 
 quant1 <- function(x, na.rm = FALSE) {
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
-  quantile(x, probs = 0.25)
+  stats::quantile(x, probs = 0.25)
 }
 
 quant3 <- function(x, na.rm = FALSE) {
   if (na.rm) {
-    x <- na.omit(x)
+    x <- stats::na.omit(x)
   }
-  quantile(x, probs = 0.75)
+  stats::quantile(x, probs = 0.75)
 }
 
-#' @importFrom rlang sym
 string_to_name <- function(x, index = 1) {
   x %>%
-    use_series(varnames) %>%
-    extract(index) %>%
-    sym()
+    magrittr::use_series(varnames) %>%
+    magrittr::extract(index) %>%
+    rlang::sym()
 }

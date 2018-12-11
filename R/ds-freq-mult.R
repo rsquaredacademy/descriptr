@@ -1,4 +1,3 @@
-#' @importFrom forcats fct_unique fct_count
 freq_table2 <- function(data, name) UseMethod("freq_table2")
 
 freq_table2.default <- function(data, name) {
@@ -7,9 +6,9 @@ freq_table2.default <- function(data, name) {
 
   dat <-
     data %>%
-    select(name) %>%
-    pull(1) %>%
-    na.omit()
+    dplyr::select(name) %>%
+    dplyr::pull(1) %>%
+    stats::na.omit()
 
   if (!is.factor(dat)) {
     stop("data must be categorical/qualitative")
@@ -21,15 +20,15 @@ freq_table2.default <- function(data, name) {
 
   result <-
     dat %>%
-    fct_count() %>%
-    pull(2)
+    forcats::fct_count() %>%
+    dplyr::pull(2)
 
   len     <- length(result)
   cum     <- cumsum(result)
   per     <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
 
-  ftable <- tibble(
+  ftable <- tibble::tibble(
     Levels          = level_names,
     Frequency       = result,
     `Cum Frequency` = cum,
@@ -39,24 +38,24 @@ freq_table2.default <- function(data, name) {
 
   na_count <-
     data %>%
-    pull(name) %>%
+    dplyr::pull(name) %>%
     is.na() %>%
     sum()
 
   if (na_count > 0) {
     na_freq <-
       data %>%
-      pull(name) %>%
-      fct_count() %>%
-      pull(n) %>%
-      last()
+      dplyr::pull(name) %>%
+      forcats::fct_count() %>%
+      dplyr::pull(n) %>%
+      dplyr::last()
   } else {
     na_freq <- 0
   }
 
   n_obs <-
     data %>%
-    pull(name) %>%
+    dplyr::pull(name) %>%
     length()
 
   result <- list(

@@ -19,9 +19,6 @@
 #' deprecated. Instead use \code{dist_chi_plot()}, \code{dist_chi_prob()} and
 #' \code{dist_chi_perc()}.
 #'
-#' @importFrom stats dchisq qchisq pchisq dnorm
-#' @importFrom graphics plot lines polygon points text abline
-#'
 #' @examples
 #' # visualize chi square distribution
 #' dist_chi_plot()
