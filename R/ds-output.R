@@ -242,25 +242,25 @@ print_fcont <- function(data) {
 
   blen <-
     data %>%
-    use_series(breaks) %>%
+    magrittr::use_series(breaks) %>%
     nchar() %>%
     max()
 
   blen2 <-
     blen %>%
-    multiply_by(2) %>%
-    add(4)
+    magrittr::multiply_by(2) %>%
+    magrittr::add(4)
 
   flen <-
     data %>%
-    use_series(frequency) %>%
+    magrittr::use_series(frequency) %>%
     nchar() %>%
     max() %>%
     max(9)
 
   clen <-
     data %>%
-    use_series(cumulative) %>%
+    magrittr::use_series(cumulative) %>%
     nchar() %>%
     max() %>%
     max(13)

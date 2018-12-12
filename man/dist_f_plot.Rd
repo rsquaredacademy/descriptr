@@ -11,8 +11,8 @@
 \usage{
 dist_f_plot(num_df = 4, den_df = 30, normal = FALSE)
 
-dist_f_perc(probs = 0.95, num_df = 3, den_df = 30, type = c("lower",
-  "upper"))
+dist_f_perc(probs = 0.95, num_df = 3, den_df = 30,
+  type = c("lower", "upper"))
 
 dist_f_prob(perc, num_df, den_df, type = c("lower", "upper"))
 }

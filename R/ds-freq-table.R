@@ -19,10 +19,6 @@
 #' @section Deprecated function:
 #' \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
 #'
-#' @importFrom grDevices topo.colors
-#' @importFrom tibble tibble
-#' @importFrom dplyr pull last
-#'
 #' @examples
 #' # frequency table
 #' ds_freq_table(mtcarz, cyl)
@@ -40,12 +36,12 @@ ds_freq_table <- function(data, variable) UseMethod("ds_freq_table")
 #' @export
 ds_freq_table.default <- function(data, variable) {
 
-  varyable <- enquo(variable)
+  varyable <- rlang::enquo(variable)
 
   fdata <-
     data %>%
-    pull(!! varyable) %>%
-    na.omit()
+    dplyr::pull(!! varyable) %>%
+    stats::na.omit()
 
   if (!is.factor(fdata)) {
     stop("variable must be categorical/qualitative")
@@ -53,7 +49,7 @@ ds_freq_table.default <- function(data, variable) {
 
   var_name <-
     data %>%
-    select(!! varyable) %>%
+    dplyr::select(!! varyable) %>%
     names()
 
   level_names <- levels(fdata)
@@ -62,15 +58,15 @@ ds_freq_table.default <- function(data, variable) {
 
   result <-
     fdata %>%
-    fct_count() %>%
-    pull(2)
+    forcats::fct_count() %>%
+    dplyr::pull(2)
 
   len     <- length(result)
   cum     <- cumsum(result)
   per     <- percent(result, data_len)
   cum_per <- percent(cum, data_len)
 
-  ftable <- tibble(
+  ftable <- tibble::tibble(
     Levels          = level_names,
     Frequency       = result,
     `Cum Frequency` = cum,
@@ -80,24 +76,24 @@ ds_freq_table.default <- function(data, variable) {
 
   na_count <-
     data %>%
-    pull(!! varyable) %>%
+    dplyr::pull(!! varyable) %>%
     is.na() %>%
     sum()
 
   if (na_count > 0) {
     na_freq <-
       data %>%
-      pull(!! varyable) %>%
-      fct_count() %>%
-      pull(n) %>%
-      last()
+      dplyr::pull(!! varyable) %>%
+      forcats::fct_count() %>%
+      dplyr::pull(n) %>%
+      dplyr::last()
   } else {
     na_freq <- 0
   }
 
   n_obs <-
     data %>%
-    pull(!! varyable) %>%
+    dplyr::pull(!! varyable) %>%
     length()
 
   result <- list(
@@ -125,31 +121,29 @@ print.ds_freq_table <- function(x, ...) {
   print_ftable(x)
 }
 
-
-#' @importFrom ggplot2 ylab
 #' @rdname ds_freq_table
 #' @export
 #'
 plot.ds_freq_table <- function(x, ...) {
   x_lab <-
     x %>%
-    use_series(varname) %>%
-    extract(1)
+    magrittr::use_series(varname) %>%
+    magrittr::extract(1)
 
   k <-
     x %>%
-    use_series(varname) %>%
-    extract(1) %>%
-    sym()
+    magrittr::use_series(varname) %>%
+    magrittr::extract(1) %>%
+    rlang::sym()
 
   p <-
     x %>%
-    use_series(data) %>%
-    select(x = !! k) %>%
-    ggplot() +
-    geom_bar(aes(x = x), fill = "blue") +
-    xlab(x_lab) + ylab("Count") +
-    ggtitle(paste("Bar plot of", x_lab))
+    magrittr::use_series(data) %>%
+    dplyr::select(x = !! k) %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(ggplot2::aes(x = x), fill = "blue") +
+    ggplot2::xlab(x_lab) + ggplot2::ylab("Count") +
+    ggplot2::ggtitle(paste("Bar plot of", x_lab))
 
   print(p)
 
