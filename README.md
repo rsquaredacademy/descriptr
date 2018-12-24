@@ -29,10 +29,6 @@ install.packages("descriptr")
 devtools::install_github("rsquaredacademy/descriptr")
 ```
 
-## Shiny App
-
-Use `ds_launch_shiny_app()` to explore the package using a shiny app.
-
 ## Articles
 
   - [Descriptive

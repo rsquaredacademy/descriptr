@@ -19,25 +19,15 @@ Imports:
     purrr,
     rlang,
     scales,
-    shiny,
     tibble,
     tidyr,
     utils,
     vistributions
 Suggests:
     covr,
-    haven,
-    jsonlite,
     knitr,
-    lubridate,
-    readr,
-    readxl,
     rmarkdown,
-    shinyBS,
-    shinythemes,
-    stringr,
     testthat,
-    tools,
     vdiffr
 License: MIT + file LICENSE
 URL: https://descriptr.rsquaredacademy.com/, https://github.com/rsquaredacademy/descriptr

@@ -46,11 +46,6 @@ home:
 
 
 reference:
-- title: Shiny App
-
-  contents:
-  - ds_launch_shiny_app
-
 - title: Data Screening
   desc: >
     The `screener()` function will screen data frames and return details such
