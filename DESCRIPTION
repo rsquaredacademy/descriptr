@@ -19,6 +19,7 @@ Imports:
     purrr,
     rlang,
     scales,
+    stats,
     tibble,
     tidyr,
     utils,

@@ -1,3 +1,5 @@
+#' @importFrom utils available.packages
+#' @importFrom stats runif
 .onAttach <- function(...) {
 
   if (!interactive() || stats::runif(1) > 0.1) return()
@@ -22,7 +24,7 @@
   tip <- sample(tips, 1)
 
   if (behind_cran) {
-    packageStartupMessage("A new version of descriptr (0.4.2) is available with bug fixes and new features.")
+    packageStartupMessage("A new version of descriptr is available with bug fixes and new features.")
   } else {
     packageStartupMessage(paste(strwrap(tip), collapse = "\n"))
   }   
