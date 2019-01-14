@@ -22,7 +22,8 @@ Imports:
     tibble,
     tidyr,
     utils,
-    vistributions
+    vistributions,
+    xplorerr
 Suggests:
     covr,
     knitr,
