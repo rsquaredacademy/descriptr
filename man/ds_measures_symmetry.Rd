@@ -9,12 +9,14 @@ ds_measures_symmetry(data, column)
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
-\item{column}{Column in \code{data}.}
+\item{...}{Column(s) in \code{data}.}
 }
 \description{
 Returns the measures of symmetry such as skewness and kurtosis.
 }
 \examples{
+ds_measures_symmetry(mtcarz)
 ds_measures_symmetry(mtcarz, mpg)
+ds_measures_symmetry(mtcarz, mpg, disp)
 
 }

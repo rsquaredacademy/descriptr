@@ -3,24 +3,40 @@
 #' Returns the measures of location such as mean, median & mode.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
-#' @param column Column in \code{data}.
+#' @param ... Column(s) in \code{data}.
 #' @param trim The fraction of values to be trimmed before computing
 #'   the mean.
 #'
 #' @examples
+#' ds_measures_location(mtcarz)
 #' ds_measures_location(mtcarz, mpg)
+#' ds_measures_location(mtcarz, mpg, disp)
 #'
 #' @export
 #'
-ds_measures_location <- function(data, column, trim = 0.05) {
+ds_measures_location <- function(data, ..., trim = 0.05) {
 
-  var <- rlang::enquo(column)
+  var <- rlang::quos(...)
+
+  if (length(var) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! var)
+  }
 
   data %>%
-    dplyr::select(!! var) %>%
     tidyr::drop_na() %>%
-    dplyr::summarise_all(dplyr::funs(mean = mean, trim_mean = mean(., trim = trim),
-                       median = stats::median, mode = ds_mode)) %>%
+    tidyr::gather(var, values) %>%
+    dplyr::group_by(var) %>%
+    dplyr::summarise_all(dplyr::funs(mean = mean, 
+                                     trim_mean = mean(., trim = trim),
+                                     median = stats::median, 
+                                     mode = ds_mode)) %>%
     tibble::as_tibble()
 
 }
@@ -31,22 +47,38 @@ ds_measures_location <- function(data, column, trim = 0.05) {
 #'   deviation.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
-#' @param column Column in \code{data}.
+#' @param ... Column(s) in \code{data}.
 #'
 #' @examples
+#' ds_measures_variation(mtcarz)
 #' ds_measures_variation(mtcarz, mpg)
+#' ds_measures_variation(mtcarz, mpg, disp)
 #'
 #' @export
 #'
-ds_measures_variation <- function(data, column) {
+ds_measures_variation <- function(data, ...) {
 
-  var <- rlang::enquo(column)
+  var <- rlang::quos(...)
+
+  if (length(var) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! var)
+  }
 
   data %>%
-    dplyr::select(!! var) %>%
     tidyr::drop_na() %>%
-    dplyr::summarise_all(dplyr::funs(range = ds_range, iqr = stats::IQR, variance = stats::var, 
-      sd = stats::sd, coeff_var = ds_cvar, std_error = ds_std_error)) %>%
+    tidyr::gather(var, values) %>%
+    dplyr::group_by(var) %>%
+    dplyr::summarise_all(dplyr::funs(range = ds_range, iqr = stats::IQR, 
+                                     variance = stats::var, sd = stats::sd, 
+                                     coeff_var = ds_cvar, 
+                                     std_error = ds_std_error)) %>%
     tibble::as_tibble()
 }
 
@@ -55,21 +87,36 @@ ds_measures_variation <- function(data, column) {
 #' Returns the measures of symmetry such as skewness and kurtosis.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
-#' @param column Column in \code{data}.
+#' @param ... Column(s) in \code{data}.
 #'
 #' @examples
+#' ds_measures_symmetry(mtcarz)
 #' ds_measures_symmetry(mtcarz, mpg)
+#' ds_measures_symmetry(mtcarz, mpg, disp)
 #'
 #' @export
 #'
 ds_measures_symmetry <- function(data, column) {
 
-  var <- rlang::enquo(column)
+  var <- rlang::quos(...)
+
+  if (length(var) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! var)
+  }
 
   data %>%
-    dplyr::select(!! var) %>%
     tidyr::drop_na() %>%
-    dplyr::summarise_all(dplyr::funs(skewness = ds_skewness, kurtosis = ds_kurtosis)) %>%
+    tidyr::gather(var, values) %>%
+    dplyr::group_by(var) %>%
+    dplyr::summarise_all(dplyr::funs(skewness = ds_skewness,
+                                     kurtosis = ds_kurtosis)) %>%
     tibble::as_tibble()
 }
 
@@ -79,20 +126,34 @@ ds_measures_symmetry <- function(data, column) {
 #' Returns the percentiles
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
-#' @param column Column in \code{data}.
+#' @param ... Column(s) in \code{data}.
 #'
 #' @examples
+#' ds_percentiles(mtcarz)
 #' ds_percentiles(mtcarz, mpg)
+#' ds_percentiles(mtcarz, mpg, disp)
 #'
 #' @export
 #'
 ds_percentiles <- function(data, column) {
 
-  var <- rlang::enquo(column)
+  var <- rlang::quos(...)
+
+  if (length(var) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! var)
+  }
 
   data %>%
-    dplyr::select(!! var) %>%
     tidyr::drop_na() %>%
+    tidyr::gather(var, values) %>%
+    dplyr::group_by(var) %>%
     dplyr::summarise_all(dplyr::funs(min    = min,
                        per1   = stats::quantile(., 0.01),
                        per5   = stats::quantile(., 0.05),
