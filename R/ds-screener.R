@@ -4,7 +4,7 @@
 #' missing values. \code{plot.ds_screener()} creates bar plots to visualize %
 #' of missing observations for each variable in a data set.
 #'
-#' @param y A \code{tibble} or a \code{data.frame}.
+#' @param data A \code{tibble} or a \code{data.frame}.
 #' @param x An object of class \code{ds_screener}.
 #' @param ... Further arguments to be passed to or from methods.
 #'
@@ -34,23 +34,21 @@
 #'
 #' @export
 #'
-ds_screener <- function(y) UseMethod("ds_screener")
+ds_screener <- function(data) UseMethod("ds_screener")
 
 #' @export
 #'
-ds_screener.default <- function(y) {
+ds_screener.default <- function(data) {
   
-  if (!is.data.frame(y)) {
-    stop("y must be a data frame")
-  }
+  check_df(data)
 
-  rows     <- nrow(y)
-  cols     <- ncol(y)
-  varnames <- names(y)
-  datatype <- purrr::map_chr(y, class)
-  counts   <- purrr::map_int(y, length)
-  nlev     <- purrr::map(y, nlevels)
-  lev      <- purrr::map(y, levels)
+  rows     <- nrow(data)
+  cols     <- ncol(data)
+  varnames <- names(data)
+  datatype <- purrr::map_chr(data, class)
+  counts   <- purrr::map_int(data, length)
+  nlev     <- purrr::map(data, nlevels)
+  lev      <- purrr::map(data, levels)
   
   for (i in seq_len(length(lev))) {
     if (is.null(lev[[i]])) {
@@ -58,7 +56,7 @@ ds_screener.default <- function(y) {
     }
   }
   
-  mvalues    <- purrr::map_int(y, function(z) sum(is.na(z)))
+  mvalues    <- purrr::map_int(data, function(z) sum(is.na(z)))
   
   mvaluesper <- 
     mvalues %>%
@@ -67,7 +65,7 @@ ds_screener.default <- function(y) {
       round(2)
   
   mtotal <- 
-    y %>%
+    data %>%
     is.na() %>%
     sum()
   
@@ -78,15 +76,12 @@ ds_screener.default <- function(y) {
     round(2)
 
   mrows <- 
-    y %>%
+    data %>%
     stats::complete.cases() %>%
     `!` %>%
     sum()
 
-  mcols <- 
-    mvalues %>%
-    `!=`(0) %>%
-    sum()
+  mcols <- sum(mvalues != 0)
 
   result <- list(Rows          = rows, 
                  Columns       = cols, 

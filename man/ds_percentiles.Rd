@@ -4,7 +4,7 @@
 \alias{ds_percentiles}
 \title{Percentiles}
 \usage{
-ds_percentiles(data, column)
+ds_percentiles(data, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}

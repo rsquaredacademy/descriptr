@@ -5,12 +5,12 @@
 \alias{plot.ds_screener}
 \title{Screen data}
 \usage{
-ds_screener(y)
+ds_screener(data)
 
 \method{plot}{ds_screener}(x, ...)
 }
 \arguments{
-\item{y}{A \code{tibble} or a \code{data.frame}.}
+\item{data}{A \code{tibble} or a \code{data.frame}.}
 
 \item{x}{An object of class \code{ds_screener}.}
 

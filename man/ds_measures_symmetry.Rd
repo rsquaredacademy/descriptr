@@ -4,7 +4,7 @@
 \alias{ds_measures_symmetry}
 \title{Measures of symmetry}
 \usage{
-ds_measures_symmetry(data, column)
+ds_measures_symmetry(data, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}

@@ -16,6 +16,8 @@
 #'
 ds_measures_location <- function(data, ..., trim = 0.05) {
 
+  check_df(data)
+
   var <- rlang::quos(...)
 
   if (length(var) < 1) {
@@ -58,6 +60,8 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
 #'
 ds_measures_variation <- function(data, ...) {
 
+  check_df(data)
+
   var <- rlang::quos(...)
 
   if (length(var) < 1) {
@@ -96,7 +100,9 @@ ds_measures_variation <- function(data, ...) {
 #'
 #' @export
 #'
-ds_measures_symmetry <- function(data, column) {
+ds_measures_symmetry <- function(data, ...) {
+
+  check_df(data)
 
   var <- rlang::quos(...)
 
@@ -135,7 +141,9 @@ ds_measures_symmetry <- function(data, column) {
 #'
 #' @export
 #'
-ds_percentiles <- function(data, column) {
+ds_percentiles <- function(data, ...) {
+
+  check_df(data)
 
   var <- rlang::quos(...)
 
@@ -181,6 +189,8 @@ ds_percentiles <- function(data, column) {
 #' @export
 #'
 ds_extreme_obs <- function(data, column) {
+
+  check_df(data)
 
   var <- rlang::enquo(column)
 
@@ -529,6 +539,7 @@ ds_css <- function(x, na.rm = FALSE) {
 #' @export
 #'
 ds_rindex <- function(data, values) {
+  
   if (!is.numeric(data)) {
     stop("data must be numeric")
   }
