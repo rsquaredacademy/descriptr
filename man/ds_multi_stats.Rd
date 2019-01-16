@@ -5,10 +5,10 @@
 \alias{multistats}
 \title{Multiple variable statistics}
 \usage{
-ds_multi_stats(x, ...)
+ds_multi_stats(data, ...)
 }
 \arguments{
-\item{x}{A \code{tibble} or a \code{data.frame}.}
+\item{data}{A \code{tibble} or a \code{data.frame}.}
 
 \item{...}{Columns in \code{x}.}
 }
@@ -24,6 +24,7 @@ Descriptive statistics for multiple variables.
 }
 
 \examples{
+ds_multi_stats(mtcarz)
 ds_multi_stats(mtcarz, mpg, disp, hp)
 
 }
