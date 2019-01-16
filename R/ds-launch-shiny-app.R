@@ -1,4 +1,3 @@
-##' @importFrom shiny runApp
 #' @title Launch Shiny App
 #' @description Launches shiny app
 #' @section Deprecated Function:
@@ -29,11 +28,3 @@ ds_launch_shiny_app <- function() {
 
 }
  
-#' @export
-#' @rdname ds_launch_shiny_app
-#' @usage NULL
-#'
-launch_descriptr <- function(data) {
-  .Deprecated("ds_launch_shiny_app()")
-  ds_launch_shiny_app()
-}

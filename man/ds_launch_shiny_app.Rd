@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-launch-shiny-app.R
 \name{ds_launch_shiny_app}
 \alias{ds_launch_shiny_app}
-\alias{launch_descriptr}
 \title{Launch Shiny App}
 \usage{
 ds_launch_shiny_app()
