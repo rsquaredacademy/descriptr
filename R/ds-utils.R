@@ -364,3 +364,34 @@ check_suggests <- function(pkg) {
   }
 
 }
+
+check_df <- function(data) {
+  data_name <- deparse(substitute(data))
+  if (!is.data.frame(data)) {
+    rlang::abort(paste0(data_name, ' must be a `data.frame` or `tibble`.'))
+  }
+}
+
+check_numeric <- function(data, var, var_name) {
+
+  vary      <- rlang::enquo(var)
+  ndata     <- dplyr::pull(data, !! vary)
+  var_class <- class(ndata)
+
+  msg <- paste0(var_name, ' is not a continuous variable. The function expects an object of type `numeric` or `integer` but ', var_name, ' is of type `', var_class, '`.')
+  if (!is.numeric(ndata)) {
+    rlang::abort(msg)
+  }
+}
+
+check_factor <- function(data, var, var_name) {
+
+  vary      <- rlang::enquo(var)
+  fdata     <- dplyr::pull(data, !! vary)
+  var_class <- class(fdata)
+  
+  msg <- paste0(var_name, ' is not a categorical variable. The function expects an object of type `factor` but ', var_name, ' is of type `', var_class, '`.')
+  if (!is.factor(fdata)) {
+    rlang::abort(msg)
+  }
+}
