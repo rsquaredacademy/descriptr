@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-screener.R
 \name{ds_screener}
 \alias{ds_screener}
-\alias{screener}
 \alias{plot.ds_screener}
 \title{Screen data}
 \usage{
@@ -43,12 +42,6 @@ Screen data  and return details such as variable names, class, levels and
 missing values. \code{plot.ds_screener()} creates bar plots to visualize %
 of missing observations for each variable in a data set.
 }
-\section{Deprecated function}{
-
-\code{screener()} has been deprecated. Instead
-use \code{ds_screener()}.
-}
-
 \examples{
 # screen data
 ds_screener(mtcarz)

@@ -5,10 +5,6 @@
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param variable Column in \code{data}.
 #'
-#' @section Deprecated function:
-#' \code{summary_stats()} has been deprecated. Instead use
-#' \code{ds_summary_stats()}.
-#'
 #' @examples
 #' ds_summary_stats(mtcarz, mpg)
 #'
@@ -25,11 +21,8 @@ ds_summary_stats <- function(data, variable) UseMethod("ds_summary_stats")
 #'
 ds_summary_stats.default <- function(data, variable) {
 
-  vary <- rlang::enquo(variable)
-
-  odata <-
-    data %>%
-    dplyr::pull(!! vary)
+  vary  <- rlang::enquo(variable)
+  odata <- dplyr::pull(data, !! vary)
 
   sdata <-
     data %>%
@@ -78,14 +71,6 @@ ds_summary_stats.default <- function(data, variable) {
 
   class(result) <- "ds_summary_stats"
   return(result)
-}
-
-#' @export
-#' @rdname ds_summary_stats
-#' @usage NULL
-#'
-summary_stats <- function(data) {
-  .Deprecated("ds_summary_stats()")
 }
 
 #' @export

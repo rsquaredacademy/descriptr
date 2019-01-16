@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_hmean}
 \alias{ds_hmean}
-\alias{hmean}
 \title{Harmonic Mean}
 \usage{
 ds_hmean(x, na.rm = FALSE, ...)
@@ -23,11 +22,6 @@ Returns the harmonic mean of \code{x}
 \description{
 Compute the harmonic mean
 }
-\section{Deprecated function}{
-
-\code{hmean()} has been deprecated. Instead use \code{ds_hmean()}.
-}
-
 \examples{
 ds_hmean(mtcars$mpg)
 }

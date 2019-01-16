@@ -13,11 +13,6 @@
 #' \code{type} or probability value for the \code{perc} based on \code{df} and
 #' \code{type}.
 #'
-#' @section Deprecated functions:
-#' \code{t_plot()}, \code{t_prob()} and \code{t_per()} have been deprecated.
-#' Instead use \code{dist_t_plot()}, \code{dist_t_prob()} and
-#' \code{dist_t_perc()}.
-#'
 #' @examples
 #' # visualize t distribution
 #' dist_t_plot()
@@ -48,15 +43,6 @@ dist_t_plot <- function(df = 3) {
   warning('`dist_t_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_t
-#' @usage NULL
-#'
-t_plot <- function(df = 3) {
-  .Deprecated("dist_t_plot()")
-  dist_t_plot(df)
-}
-
 #' @rdname dist_t
 #' @export
 #'
@@ -65,14 +51,6 @@ dist_t_perc <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")
   warning('`dist_t_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_t
-#' @usage NULL
-#'
-t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
-  .Deprecated("dist_t_perc()")
-  dist_t_perc(probs, df, type)
-}
 
 #' @rdname dist_t
 #' @export
@@ -80,13 +58,4 @@ t_per <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
 dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   vistributions::vdist_t_prob(perc, df, type)
   warning('`dist_t_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
-}
-
-#' @export
-#' @rdname dist_t
-#' @usage NULL
-#'
-t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
-  .Deprecated("dist_t_prob()")
-  dist_t_prob(perc, df, type)
 }

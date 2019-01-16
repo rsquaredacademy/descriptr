@@ -7,9 +7,6 @@
 #'
 #' @return A tibble.
 #'
-#' @section Deprecated function:
-#' \code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
-#'
 #' @examples
 #' ds_multi_stats(mtcarz)
 #' ds_multi_stats(mtcarz, mpg, disp, hp)
@@ -43,11 +40,3 @@ ds_multi_stats <- function(data, ...) {
       na.rm = TRUE)
 }
 
-#' @export
-#' @rdname ds_multi_stats
-#' @usage NULL
-#'
-multistats <- function(x, ...) {
-  .Deprecated("ds_multi_stats()")
-  ds_multi_stats(x, ...)
-}

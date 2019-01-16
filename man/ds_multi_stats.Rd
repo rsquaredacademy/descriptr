@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-multistats.R
 \name{ds_multi_stats}
 \alias{ds_multi_stats}
-\alias{multistats}
 \title{Multiple variable statistics}
 \usage{
 ds_multi_stats(data, ...)
@@ -18,11 +17,6 @@ A tibble.
 \description{
 Descriptive statistics for multiple variables.
 }
-\section{Deprecated function}{
-
-\code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
-}
-
 \examples{
 ds_multi_stats(mtcarz)
 ds_multi_stats(mtcarz, mpg, disp, hp)

@@ -9,9 +9,6 @@
 #' dataframe. \code{ds_tway_tables} is a extension of the \code{ds_cross_table}
 #' function. It creates a two way table for each unique pair of categorical
 #' variables in the dataframe.
-#' @section Deprecated Functions:
-#' \code{oway_tables()} and \code{tway_tables()} have been deprecated. Instead
-#' use \code{ds_oway_tables()} and \code{ds_tway_tables()}.
 #' @examples
 #' # multiple one way tables
 #' ds_oway_tables(mtcarz)
@@ -44,14 +41,6 @@ ds_oway_tables <- function(data) {
 
 }
 
-#' @export
-#' @rdname ds_oway_tables
-#' @usage NULL
-#'
-oway_tables <- function(data) {
-  .Deprecated("ds_oway_tables()")
-  ds_oway_tables(data)
-}
 
 
 #' @rdname ds_oway_tables
@@ -94,11 +83,3 @@ ds_tway_tables <- function(data) {
   }
 }
 
-#' @export
-#' @rdname ds_oway_tables
-#' @usage NULL
-#'
-tway_tables <- function(data) {
-  .Deprecated("ds_tway_tables()")
-  ds_tway_tables(data)
-}

@@ -208,8 +208,6 @@ ds_extreme_obs <- function(data, column) {
 #' @details Any NA values are stripped from \code{data} before computation
 #' takes place.
 #' @return \code{n} highest/lowest observations from \code{data}
-#' @section Deprecated function:
-#' \code{tailobs()} has been deprecated. Instead use \code{ds_tailobs()}.
 #' @examples
 #' ds_tailobs(mtcarz$mpg, 5)
 #' ds_tailobs(mtcarz$mpg, 5, type = "high")
@@ -250,14 +248,6 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
 
 }
 
-#' @export
-#' @rdname ds_tailobs
-#' @usage NULL
-#'
-tailobs <- function(data, n, type = c("low", "high")) {
-  .Deprecated("ds_tailobs()")
-  ds_tailobs(data, n, type)
-}
 
 #' @title Geometric Mean
 #' @description Compute the geometric mean
@@ -268,8 +258,6 @@ tailobs <- function(data, n, type = c("low", "high")) {
 #' #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Returns the geometric mean of \code{x}
-#' @section Deprecated function:
-#' \code{gmean()} has been deprecated. Instead use \code{ds_gmean()}.
 #' @examples
 #' ds_gmean(mtcars$mpg)
 #' @export
@@ -289,16 +277,6 @@ ds_gmean <- function(x, na.rm = FALSE, ...) {
 
 }
 
-#' @export
-#' @rdname ds_gmean
-#' @usage NULL
-#'
-gmean <- function(x, ...) {
-  .Deprecated("ds_gmean()")
-  ds_gmean(x, ...)
-}
-
-
 #' @title Harmonic Mean
 #' @description Compute the harmonic mean
 #' @param x a numeric vector containing the values whose harmonic mean is to be
@@ -308,8 +286,6 @@ gmean <- function(x, ...) {
 #' #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Returns the harmonic mean of \code{x}
-#' @section Deprecated function:
-#' \code{hmean()} has been deprecated. Instead use \code{ds_hmean()}.
 #' @examples
 #' ds_hmean(mtcars$mpg)
 #' @export
@@ -329,15 +305,6 @@ ds_hmean <- function(x, na.rm = FALSE, ...) {
 
 }
 
-#' @export
-#' @rdname ds_hmean
-#' @usage NULL
-#'
-hmean <- function(x, ...) {
-  .Deprecated("ds_hmean()")
-  ds_hmean(x, ...)
-}
-
 #' @title Mode
 #' @description Compute the sample mode
 #' @param x a numeric vector containing the values whose mode is to be computed
@@ -345,8 +312,6 @@ hmean <- function(x, ...) {
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Mode of \code{x}
-#' @section Deprecated Function:
-#' `stat_mode()` has been deprecated. Instead use `ds_mode()`.
 #' @examples
 #' ds_mode(mtcars$mpg)
 #' ds_mode(mtcars$cyl)
@@ -377,24 +342,12 @@ ds_mode <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_mode
-#' @usage NULL
-#'
-stat_mode <- function(x) {
-  .Deprecated("ds_mode()")
-  ds_mode(x)
-}
-
-
 
 #' @title Range
 #' @description Compute the range of a numeric vector
 #' @param x a numeric vector
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
-#' @section Deprecated Function:
-#' \code{stat_range()} has been deprecated. Instead use \code{ds_range()}.
 #' @examples
 #' ds_range(mtcars$mpg)
 #' @seealso \code{\link[base]{range}}
@@ -416,15 +369,6 @@ ds_range <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_range
-#' @usage NULL
-#'
-stat_range <- function(x) {
-  .Deprecated("ds_range()")
-  ds_range(x)
-}
-
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
 #' @param x a numeric vector containing the values whose kurtosis is to be computed
@@ -432,8 +376,6 @@ stat_range <- function(x) {
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Kurtosis of \code{x}
-#' @section Deprecated Function:
-#' \code{kurtosis()} has been deprecated. Instead use \code{ds_kurtosis()}.
 #' @examples
 #' ds_kurtosis(mtcars$mpg)
 #' @seealso \code{ds_skewness}
@@ -458,16 +400,6 @@ ds_kurtosis <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_kurtosis
-#' @usage NULL
-#'
-kurtosis <- function(x) {
-  .Deprecated("ds_kurtosis()")
-  ds_kurtosis(x)
-}
-
-
 #' @title Skewness
 #' @description Compute the skewness of a probability distribution.
 #' @param x a numeric vector containing the values whose skewness is to be computed
@@ -475,8 +407,6 @@ kurtosis <- function(x) {
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Skewness of \code{x}
-#' @section Deprecated Function:
-#' \code{skewness()} has been deprecated. Instead use \code{ds_skewness()}.
 #' @examples
 #' ds_skewness(mtcars$mpg)
 #' @seealso \code{kurtosis}
@@ -499,16 +429,6 @@ ds_skewness <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_skewness
-#' @usage NULL
-#'
-skewness <- function(x) {
-  .Deprecated("ds_skewness()")
-  ds_skewness(x)
-}
-
-
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
 #' @param x a numeric vector
@@ -519,8 +439,6 @@ skewness <- function(x) {
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
 #' @return Mean absolute deviation of \code{x}
-#' @section Deprecated Function:
-#' \code{stat_mdev()} has been deprecated. Instead use \code{ds_mdev()}.
 #' @examples
 #' ds_mdev(mtcars$mpg)
 #' @seealso \code{\link[stats]{mad}}
@@ -541,14 +459,6 @@ ds_mdev <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_mdev
-#' @usage NULL
-#'
-stat_mdev <- function(x) {
-  .Deprecated("ds_mdev()")
-  ds_mdev(x)
-}
 
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
@@ -556,8 +466,6 @@ stat_mdev <- function(x) {
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
-#' @section Deprecated Function:
-#' \code{stat_cvar()} has been deprecated. Instead use \code{ds_cvar()}.
 #' @examples
 #' ds_cvar(mtcars$mpg)
 #' @export
@@ -576,15 +484,6 @@ ds_cvar <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_cvar
-#' @usage NULL
-#'
-stat_cvar <- function(x) {
-  .Deprecated("ds_cvar()")
-  ds_cvar(x)
-}
-
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
 #' @param x a numeric vector containing the values whose mode is to be computed
@@ -592,8 +491,6 @@ stat_cvar <- function(x) {
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Corrected sum of squares of \code{x}
-#' @section  Deprecated Function:
-#' \code{stat_css()} has been deprecated. Instead use \code{ds_css()}.
 #' @examples
 #' ds_css(mtcars$mpg)
 #' @references \href{http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm}{NIST/SEMATECH e-Handbook of Statistical Methods}
@@ -618,16 +515,6 @@ ds_css <- function(x, na.rm = FALSE) {
 
 }
 
-#' @export
-#' @rdname ds_css
-#' @usage NULL
-#'
-stat_css <- function(x) {
-  .Deprecated("ds_css()")
-  ds_css(x)
-}
-
-
 #' @title Index Values
 #' @description Returns index of values.
 #' @param data a numeric vector
@@ -636,8 +523,6 @@ stat_css <- function(x) {
 #' computation takes place.
 #' @return Index of the \code{values} in \code{data}. In case, \code{data} does
 #' not contain \code{index}, \code{NULL} is returned.
-#' @section Deprecated Function:
-#' \code{rindex()} has been deprecated. Instead use \code{ds_rindex()}.
 #' @examples
 #' ds_rindex(mtcars$mpg, 21)
 #' ds_rindex(mtcars$mpg, 22)
@@ -665,11 +550,3 @@ ds_rindex <- function(data, values) {
 
 }
 
-#' @export
-#' @rdname ds_rindex
-#' @usage NULL
-#'
-rindex <- function(data, values) {
-  .Deprecated("ds_rindex()")
-  ds_rindex(data, values)
-}

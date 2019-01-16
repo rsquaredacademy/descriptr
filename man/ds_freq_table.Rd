@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-freq-table.R
 \name{ds_freq_table}
 \alias{ds_freq_table}
-\alias{freq_table}
 \alias{plot.ds_freq_table}
 \title{Frequency table}
 \usage{
@@ -32,11 +31,6 @@ frequency, frequency percent and cumulative frequency percent.
 \code{barplot.ds_freq_table()} creates bar plot for the
 frequency table created using \code{ds_freq_table()}.
 }
-\section{Deprecated function}{
-
-\code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
-}
-
 \examples{
 # frequency table
 ds_freq_table(mtcarz, cyl)

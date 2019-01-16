@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_skewness}
 \alias{ds_skewness}
-\alias{skewness}
 \title{Skewness}
 \usage{
 ds_skewness(x, na.rm = FALSE)
@@ -22,11 +21,6 @@ Compute the skewness of a probability distribution.
 Any NA values are stripped from \code{x} before computation
 takes place.
 }
-\section{Deprecated Function}{
-
-\code{skewness()} has been deprecated. Instead use \code{ds_skewness()}.
-}
-
 \examples{
 ds_skewness(mtcars$mpg)
 }

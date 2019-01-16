@@ -12,10 +12,6 @@
 #' @param proportional If \code{TRUE}, the height of the bars is proportional.
 #' @param ... Further arguments to be passed to or from methods.
 #'
-#' @section Deprecated function:
-#' \code{ds_cross_table()} has been deprecated. Instead use
-#' \code{ds_cross_table()}.
-#'
 #' @examples
 #' k <- ds_cross_table(mtcarz, cyl, gear)
 #' k
@@ -79,14 +75,6 @@ ds_cross_table.default <- function(data, var1, var2) {
 
   class(result) <- "ds_cross_table"
   return(result)
-}
-
-#' @export
-#' @rdname ds_cross_table
-#' @usage NULL
-#'
-cross_table <- function(var1, var2) {
-  .Deprecated("ds_cross_table()")
 }
 
 #' @export

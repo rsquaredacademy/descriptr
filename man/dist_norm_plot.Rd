@@ -2,11 +2,8 @@
 % Please edit documentation in R/dist-normal.R
 \name{dist_norm_plot}
 \alias{dist_norm_plot}
-\alias{norm_plot}
 \alias{dist_norm_perc}
-\alias{norm_per}
 \alias{dist_norm_prob}
-\alias{norm_prob}
 \title{Visualize normal distribution}
 \usage{
 dist_norm_plot(mean = 0, sd = 1)
@@ -38,13 +35,6 @@ Visualize how changes in mean and standard deviation affect the
 shape of the normal distribution. Compute & visualize quantiles out of given
 probability  and probability from a given quantile.
 }
-\section{Deprecated functions}{
-
-\code{norm_plot()}, \code{norm_prob()} and \code{norm_per()} have been
-deprecated. Instead use \code{dist_norm_plot()}, \code{dist_norm_prob()} and
-\code{dist_norm_per()}.
-}
-
 \examples{
 # visualize normal distribution
 dist_norm_plot()

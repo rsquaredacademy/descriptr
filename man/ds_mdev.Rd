@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_mdev}
 \alias{ds_mdev}
-\alias{stat_mdev}
 \title{Mean Absolute Deviation}
 \usage{
 ds_mdev(x, na.rm = FALSE)
@@ -25,11 +24,6 @@ the statistic used to compute the deviations is not \code{median} but
 \code{mean}. Any NA values are stripped from \code{x} before computation
 takes place
 }
-\section{Deprecated Function}{
-
-\code{stat_mdev()} has been deprecated. Instead use \code{ds_mdev()}.
-}
-
 \examples{
 ds_mdev(mtcars$mpg)
 }

@@ -16,9 +16,6 @@
 #'
 #' \item{ftable}{Frequency table.}
 #'
-#' @section Deprecated function:
-#' \code{freq_table()} has been deprecated. Instead use \code{ds_freq_table()}.
-#'
 #' @examples
 #' # frequency table
 #' ds_freq_table(mtcarz, cyl)
@@ -106,14 +103,6 @@ ds_freq_table.default <- function(data, variable) {
 
   class(result) <- "ds_freq_table"
   return(result)
-}
-
-#' @export
-#' @rdname ds_freq_table
-#' @usage NULL
-#'
-freq_table <- function(data) {
-  .Deprecated("ds_freq_table()")
 }
 
 #' @export

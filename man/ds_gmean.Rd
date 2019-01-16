@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_gmean}
 \alias{ds_gmean}
-\alias{gmean}
 \title{Geometric Mean}
 \usage{
 ds_gmean(x, na.rm = FALSE, ...)
@@ -23,11 +22,6 @@ Returns the geometric mean of \code{x}
 \description{
 Compute the geometric mean
 }
-\section{Deprecated function}{
-
-\code{gmean()} has been deprecated. Instead use \code{ds_gmean()}.
-}
-
 \examples{
 ds_gmean(mtcars$mpg)
 }

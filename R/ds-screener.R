@@ -28,10 +28,6 @@
 #' \item{MissingCols}{Total number of columns with missing observations in the
 #' data frame.}
 #'
-#' @section Deprecated function:
-#' \code{screener()} has been deprecated. Instead
-#' use \code{ds_screener()}.
-#'
 #' @examples
 #' # screen data
 #' ds_screener(mtcarz)
@@ -109,15 +105,6 @@ ds_screener.default <- function(y) {
   class(result) <- "ds_screener"
 
   return(result)
-}
-
-#' @export
-#' @rdname ds_screener
-#' @usage NULL
-#'
-screener <- function(y) {
-  .Deprecated("ds_screener()")
-  ds_screener(y)
 }
 
 #' @export
