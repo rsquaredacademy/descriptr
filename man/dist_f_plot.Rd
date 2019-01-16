@@ -2,11 +2,8 @@
 % Please edit documentation in R/dist-f.R
 \name{dist_f_plot}
 \alias{dist_f_plot}
-\alias{f_plot}
 \alias{dist_f_perc}
-\alias{f_per}
 \alias{dist_f_prob}
-\alias{f_prob}
 \title{Visualize f distribution}
 \usage{
 dist_f_plot(num_df = 4, den_df = 30, normal = FALSE)
@@ -40,13 +37,6 @@ Visualize how changes in degrees of freedom affect the
 shape of the F distribution. Compute & visualize quantiles out of given
 probability and probability from a given quantile.
 }
-\section{Deprecated functions}{
-
-\code{f_plot()}, \code{f_prob()} and \code{f_per()} have been deprecated.
-Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and
-\code{dist_f_perc()}.
-}
-
 \examples{
 # visualize F distribution
 dist_f_plot()

@@ -2,9 +2,7 @@
 % Please edit documentation in R/ds-mult-table.R
 \name{ds_oway_tables}
 \alias{ds_oway_tables}
-\alias{oway_tables}
 \alias{ds_tway_tables}
-\alias{tway_tables}
 \title{Multiple One & Two Way Tables}
 \usage{
 ds_oway_tables(data)
@@ -27,12 +25,6 @@ dataframe. \code{ds_tway_tables} is a extension of the \code{ds_cross_table}
 function. It creates a two way table for each unique pair of categorical
 variables in the dataframe.
 }
-\section{Deprecated Functions}{
-
-\code{oway_tables()} and \code{tway_tables()} have been deprecated. Instead
-use \code{ds_oway_tables()} and \code{ds_tway_tables()}.
-}
-
 \examples{
 # multiple one way tables
 ds_oway_tables(mtcarz)

@@ -16,11 +16,6 @@
 #' \item{stdev}{Standard deviation of the binomial distribution.}
 #' \item{prob}{Probability of success.}
 #'
-#' @section Deprecated functions:
-#' \code{binom_plot()}, \code{binom_prob()}, \code{binom_perc()} have been
-#' deprecated. Instead use \code{dist_binom_plot()},
-#' \code{dist_binom_prob()} and \code{dist_binom_perc()}.
-#'
 #' @examples
 #' # visualize binomial distribution
 #' dist_binom_plot(10, 0.3)
@@ -44,16 +39,6 @@ dist_binom_plot <- function(n, p) {
   warning('`dist_binom_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_binom_plot
-#' @usage NULL
-#'
-binom_plot <- function(n, p) {
-  .Deprecated("dist_binom_plot()")
-  dist_binom_plot(n, p)
-}
-
-
 #' @rdname dist_binom_plot
 #' @export
 #'
@@ -63,31 +48,10 @@ dist_binom_prob <- function(n, p, s,
   warning('`dist_binom_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_binom_plot
-#' @usage NULL
-#'
-binom_prob <- function(n, p) {
-  .Deprecated("dist_binom_prob()")
-  dist_binom_prob(n, p, s, type)
-}
-
-
-
 #' @rdname dist_binom_plot
 #' @export
 #'
 dist_binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
   print(vistributions::vdist_binom_perc(n, p, tp, type))
   warning('`dist_binom_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
-}
-
-
-#' @export
-#' @rdname dist_binom_plot
-#' @usage NULL
-#'
-binom_perc <- function(n, p) {
-  .Deprecated("dist_binom_perc()")
-  dist_binom_perc(n, p, tp, type)
 }

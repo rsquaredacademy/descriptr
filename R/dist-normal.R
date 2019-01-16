@@ -14,11 +14,6 @@
 #' \code{type} or probability value for \code{perc} based on \code{mean},
 #' \code{sd} and \code{type}.
 #'
-#' @section Deprecated functions:
-#' \code{norm_plot()}, \code{norm_prob()} and \code{norm_per()} have been
-#' deprecated. Instead use \code{dist_norm_plot()}, \code{dist_norm_prob()} and
-#' \code{dist_norm_per()}.
-#'
 #' @examples
 #' # visualize normal distribution
 #' dist_norm_plot()
@@ -43,16 +38,6 @@ dist_norm_plot <- function(mean = 0, sd = 1) {
   warning('`dist_normal_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_norm_plot
-#' @usage NULL
-#'
-norm_plot <- function(mean = 0, sd = 1) {
-  .Deprecated("dist_norm_plot()")
-  dist_norm_plot(mean, sd)
-}
-
-
 #' @rdname dist_norm_plot
 #' @export
 #'
@@ -61,30 +46,10 @@ dist_norm_perc <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "up
   warning('`dist_normal_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_norm_plot
-#' @usage NULL
-#'
-norm_per <- function(probs = 0.95, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
-  .Deprecated("dist_norm_perc()")
-  dist_norm_perc(probs, mean, sd, type)
-}
-
-
-
 #' @rdname dist_norm_plot
 #' @export
 #'
 dist_norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
   vistributions::vdist_normal_prob(perc, mean, sd, type)
   warning('`dist_normal_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
-}
-
-#' @export
-#' @rdname dist_norm_plot
-#' @usage NULL
-#'
-norm_prob <- function(perc, mean = 0, sd = 1, type = c("lower", "upper", "both")) {
-  .Deprecated("dist_norm_prob()")
-  dist_norm_prob(perc, mean, sd, type)
 }

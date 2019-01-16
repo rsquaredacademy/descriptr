@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-summary-stats.R
 \name{ds_summary_stats}
 \alias{ds_summary_stats}
-\alias{summary_stats}
 \title{Descriptive statistics}
 \usage{
 ds_summary_stats(data, variable)
@@ -15,12 +14,6 @@ ds_summary_stats(data, variable)
 \description{
 Range of descriptive statistics for continuous data.
 }
-\section{Deprecated function}{
-
-\code{summary_stats()} has been deprecated. Instead use
-\code{ds_summary_stats()}.
-}
-
 \examples{
 ds_summary_stats(mtcarz, mpg)
 

@@ -341,3 +341,57 @@ string_to_name <- function(x, index = 1) {
     magrittr::extract(index) %>%
     rlang::sym()
 }
+
+#' @importFrom utils packageVersion menu install.packages
+check_suggests <- function(pkg) {
+  
+  pkg_flag <- tryCatch(utils::packageVersion(pkg), error = function(e) NA)
+  
+  if (is.na(pkg_flag)) {
+    
+    msg <- message(paste0('\n', pkg, ' must be installed for this functionality.'))
+    
+    if (interactive()) {
+      message(msg, "\nWould you like to install it?")
+      if (utils::menu(c("Yes", "No")) == 1) {
+        utils::install.packages(pkg)
+      } else {
+        stop(msg, call. = FALSE)
+      }
+    } else {
+      stop(msg, call. = FALSE)
+    } 
+  }
+
+}
+
+check_df <- function(data) {
+  data_name <- deparse(substitute(data))
+  if (!is.data.frame(data)) {
+    rlang::abort(paste0(data_name, ' must be a `data.frame` or `tibble`.'))
+  }
+}
+
+check_numeric <- function(data, var, var_name) {
+
+  vary      <- rlang::enquo(var)
+  ndata     <- dplyr::pull(data, !! vary)
+  var_class <- class(ndata)
+
+  msg <- paste0(var_name, ' is not a continuous variable. The function expects an object of type `numeric` or `integer` but ', var_name, ' is of type `', var_class, '`.')
+  if (!is.numeric(ndata)) {
+    rlang::abort(msg)
+  }
+}
+
+check_factor <- function(data, var, var_name) {
+
+  vary      <- rlang::enquo(var)
+  fdata     <- dplyr::pull(data, !! vary)
+  var_class <- class(fdata)
+  
+  msg <- paste0(var_name, ' is not a categorical variable. The function expects an object of type `factor` but ', var_name, ' is of type `', var_class, '`.')
+  if (!is.factor(fdata)) {
+    rlang::abort(msg)
+  }
+}

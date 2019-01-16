@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_kurtosis}
 \alias{ds_kurtosis}
-\alias{kurtosis}
 \title{Kurtosis}
 \usage{
 ds_kurtosis(x, na.rm = FALSE)
@@ -22,11 +21,6 @@ Compute the kurtosis of a probability distribution.
 Any NA values are stripped from \code{x} before computation
 takes place.
 }
-\section{Deprecated Function}{
-
-\code{kurtosis()} has been deprecated. Instead use \code{ds_kurtosis()}.
-}
-
 \examples{
 ds_kurtosis(mtcars$mpg)
 }

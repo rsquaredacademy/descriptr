@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_mode}
 \alias{ds_mode}
-\alias{stat_mode}
 \title{Mode}
 \usage{
 ds_mode(x, na.rm = FALSE)
@@ -22,11 +21,6 @@ Compute the sample mode
 Any NA values are stripped from \code{x} before computation
 takes place.
 }
-\section{Deprecated Function}{
-
-`stat_mode()` has been deprecated. Instead use `ds_mode()`.
-}
-
 \examples{
 ds_mode(mtcars$mpg)
 ds_mode(mtcars$cyl)

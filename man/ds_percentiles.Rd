@@ -4,17 +4,19 @@
 \alias{ds_percentiles}
 \title{Percentiles}
 \usage{
-ds_percentiles(data, column)
+ds_percentiles(data, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
-\item{column}{Column in \code{data}.}
+\item{...}{Column(s) in \code{data}.}
 }
 \description{
 Returns the percentiles
 }
 \examples{
+ds_percentiles(mtcarz)
 ds_percentiles(mtcarz, mpg)
+ds_percentiles(mtcarz, mpg, disp)
 
 }

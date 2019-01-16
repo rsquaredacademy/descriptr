@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-freq-cont.R
 \name{ds_freq_cont}
 \alias{ds_freq_cont}
-\alias{freq_cont}
 \alias{plot.ds_freq_cont}
 \title{Frequency distribution of continuous data}
 \usage{
@@ -30,11 +29,6 @@ intervals created based on the number of bins specified.
 \code{hist.ds_freq_cont()} creates histogram for the frequency table
 created using \code{ds_freq_cont()}.
 }
-\section{Deprecated functions}{
-
-\code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
-}
-
 \examples{
 # frequency table
 ds_freq_cont(mtcarz, mpg, 4)

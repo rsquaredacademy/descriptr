@@ -20,10 +20,6 @@
 #' levels of the factor variable.}
 #' \item{plotdata}{Data for boxplot method.}
 #'
-#' @section Deprecated function:
-#' \code{ds_group_summary()} has been deprecated. Instead
-#' use \code{ds_group_summary()}.
-#'
 #' @examples
 #' # ds_group summary
 #' ds_group_summary(mtcarz, cyl, mpg)
@@ -120,14 +116,6 @@ ds_group_summary.default <- function(data, gvar, cvar) {
 
   class(result) <- "ds_group_summary"
   return(result)
-}
-
-#' @export
-#' @rdname ds_group_summary
-#' @usage NULL
-#'
-group_summary <- function(fvar, cvar) {
-  .Deprecated("ds_group_summary()")
 }
 
 #' @export

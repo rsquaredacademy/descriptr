@@ -16,11 +16,6 @@
 #' and \code{type} or probability value for \code{perc} based on \code{num_df},
 #' \code{den_df} and \code{type}.
 #'
-#' @section Deprecated functions:
-#' \code{f_plot()}, \code{f_prob()} and \code{f_per()} have been deprecated.
-#' Instead use \code{dist_f_plot()}, \code{dist_f_prob()} and
-#' \code{dist_f_perc()}.
-#'
 #' @examples
 #' # visualize F distribution
 #' dist_f_plot()
@@ -43,17 +38,6 @@ dist_f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
   warning('`dist_f_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-
-#' @export
-#' @rdname dist_f_plot
-#' @usage NULL
-#'
-f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
-  .Deprecated("dist_f_plot()")
-  dist_f_plot(num_df, den_df, normal)
-}
-
-
 #' @rdname dist_f_plot
 #' @export
 #'
@@ -61,16 +45,6 @@ dist_f_perc <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower",
   vistributions::vdist_f_perc(probs, num_df, den_df, type)
   warning('`dist_f_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
-
-#' @export
-#' @rdname dist_f_plot
-#' @usage NULL
-#'
-f_per <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper")) {
-  .Deprecated("dist_f_perc()")
-  dist_f_perc(probs, num_df, den_df, type)
-}
-
 
 #' @rdname dist_f_plot
 #' @export
@@ -80,11 +54,3 @@ dist_f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   warning('`dist_f_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_f_plot
-#' @usage NULL
-#'
-f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
-  .Deprecated("dist_f_prob()")
-  dist_f_prob(perc, num_df, den_df, type)
-}

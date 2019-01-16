@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_tailobs}
 \alias{ds_tailobs}
-\alias{tailobs}
 \title{Tail Observations}
 \usage{
 ds_tailobs(data, n, type = c("low", "high"))
@@ -25,11 +24,6 @@ Returns the n highest/lowest observations from a numeric vector.
 Any NA values are stripped from \code{data} before computation
 takes place.
 }
-\section{Deprecated function}{
-
-\code{tailobs()} has been deprecated. Instead use \code{ds_tailobs()}.
-}
-
 \examples{
 ds_tailobs(mtcarz$mpg, 5)
 ds_tailobs(mtcarz$mpg, 5, type = "high")

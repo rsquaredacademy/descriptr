@@ -2,25 +2,34 @@
 #'
 #' Descriptive statistics for multiple variables.
 #'
-#' @param x A \code{tibble} or a \code{data.frame}.
+#' @param data A \code{tibble} or a \code{data.frame}.
 #' @param ... Columns in \code{x}.
 #'
 #' @return A tibble.
 #'
-#' @section Deprecated function:
-#' \code{multistats()} has been deprecated. Instead use \code{ds_multi_stats()}
-#'
 #' @examples
+#' ds_multi_stats(mtcarz)
 #' ds_multi_stats(mtcarz, mpg, disp, hp)
 #'
 #' @export
 #'
-ds_multi_stats <- function(x, ...) {
+ds_multi_stats <- function(data, ...) {
 
   vars <- rlang::quos(...)
 
-  x %>%
-    dplyr::select(!!! vars) %>%
+  if (length(vars) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! vars)
+  }
+
+  data %>%
+    tidyr::drop_na() %>%
     tidyr::gather(vars, values) %>%
     dplyr::group_by(vars) %>%
     dplyr::summarise_all(dplyr::funs(
@@ -31,11 +40,3 @@ ds_multi_stats <- function(x, ...) {
       na.rm = TRUE)
 }
 
-#' @export
-#' @rdname ds_multi_stats
-#' @usage NULL
-#'
-multistats <- function(x, ...) {
-  .Deprecated("ds_multi_stats()")
-  ds_multi_stats(x, ...)
-}

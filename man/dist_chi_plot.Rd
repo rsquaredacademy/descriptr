@@ -2,11 +2,8 @@
 % Please edit documentation in R/dist-chisquare.R
 \name{dist_chi_plot}
 \alias{dist_chi_plot}
-\alias{chi_plot}
 \alias{dist_chi_perc}
-\alias{chi_per}
 \alias{dist_chi_prob}
-\alias{chi_prob}
 \title{Visualize chi square distribution}
 \usage{
 dist_chi_plot(df = 3, normal = FALSE)
@@ -36,13 +33,6 @@ Visualize how changes in degrees of freedom affect the shape of
 the chi square distribution. Compute & visualize quantiles out of given
 probability and probability from a given quantile.
 }
-\section{Deprecated functions}{
-
-\code{chi_plot()}, \code{chi_prob()} and \code{chi_per()} have been
-deprecated. Instead use \code{dist_chi_plot()}, \code{dist_chi_prob()} and
-\code{dist_chi_perc()}.
-}
-
 \examples{
 # visualize chi square distribution
 dist_chi_plot()

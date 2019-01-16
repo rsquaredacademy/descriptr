@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-group-summary.R
 \name{ds_group_summary}
 \alias{ds_group_summary}
-\alias{group_summary}
 \alias{plot.ds_group_summary}
 \title{Groupwise descriptive statistics}
 \usage{
@@ -37,12 +36,6 @@ Descriptive statistics of a continuous variable for the different levels of
 a categorical variable. \code{boxplot.group_summary()} creates boxplots of
 the continuous variable for the different levels of the categorical variable.
 }
-\section{Deprecated function}{
-
-\code{ds_group_summary()} has been deprecated. Instead
-use \code{ds_group_summary()}.
-}
-
 \examples{
 # ds_group summary
 ds_group_summary(mtcarz, cyl, mpg)

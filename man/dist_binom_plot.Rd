@@ -2,11 +2,8 @@
 % Please edit documentation in R/dist-binomial.R
 \name{dist_binom_plot}
 \alias{dist_binom_plot}
-\alias{binom_plot}
 \alias{dist_binom_prob}
-\alias{binom_prob}
 \alias{dist_binom_perc}
-\alias{binom_perc}
 \title{Visualize binomial distribution}
 \usage{
 dist_binom_plot(n, p)
@@ -38,13 +35,6 @@ Visualize how changes in number of trials and the probability of
 success affect the shape of the binomial distribution. Compute & visualize
 probability from a given quantile and quantiles out of given probability.
 }
-\section{Deprecated functions}{
-
-\code{binom_plot()}, \code{binom_prob()}, \code{binom_perc()} have been
-deprecated. Instead use \code{dist_binom_plot()},
-\code{dist_binom_prob()} and \code{dist_binom_perc()}.
-}
-
 \examples{
 # visualize binomial distribution
 dist_binom_plot(10, 0.3)

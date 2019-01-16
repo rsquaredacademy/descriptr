@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_cvar}
 \alias{ds_cvar}
-\alias{stat_cvar}
 \title{Coefficient of Variation}
 \usage{
 ds_cvar(x, na.rm = FALSE)
@@ -19,11 +18,6 @@ Compute the coefficient of variation
 Any NA values are stripped from \code{x} before computation
 takes place.
 }
-\section{Deprecated Function}{
-
-\code{stat_cvar()} has been deprecated. Instead use \code{ds_cvar()}.
-}
-
 \examples{
 ds_cvar(mtcars$mpg)
 }

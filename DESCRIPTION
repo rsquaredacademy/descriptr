@@ -19,10 +19,12 @@ Imports:
     purrr,
     rlang,
     scales,
+    stats,
     tibble,
     tidyr,
     utils,
-    vistributions
+    vistributions,
+    xplorerr
 Suggests:
     covr,
     knitr,

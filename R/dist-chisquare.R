@@ -14,11 +14,6 @@
 #' @return Percentile for the \code{probs} based on \code{df} and \code{type} or
 #' probability value for \code{perc} based on \code{df} and \code{type}.
 #'
-#' @section Deprecated functions:
-#' \code{chi_plot()}, \code{chi_prob()} and \code{chi_per()} have been
-#' deprecated. Instead use \code{dist_chi_plot()}, \code{dist_chi_prob()} and
-#' \code{dist_chi_perc()}.
-#'
 #' @examples
 #' # visualize chi square distribution
 #' dist_chi_plot()
@@ -42,30 +37,12 @@ dist_chi_plot <- function(df = 3, normal = FALSE) {
   warning('`dist_chi_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_chi_plot
-#' @usage NULL
-#'
-chi_plot <- function(df = 3, normal = FALSE) {
-  .Deprecated("dist_chi_plot()")
-  dist_chi_plot(df, normal)
-}
-
 #' @rdname dist_chi_plot
 #' @export
 #'
 dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
   print(vistributions::vdist_chisquare_perc(probs, df, type))
   warning('`dist_chi_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
-}
-
-#' @export
-#' @rdname dist_chi_plot
-#' @usage NULL
-#'
-chi_per <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
-  .Deprecated("dist_chi_perc()")
-  dist_chi_perc(probs, df, type)
 }
 
 #' @rdname dist_chi_plot
@@ -76,11 +53,3 @@ dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
   warning('`dist_chi_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
-#' @export
-#' @rdname dist_chi_plot
-#' @usage NULL
-#'
-chi_prob <- function(perc, df, type = c("lower", "upper")) {
-  .Deprecated("dist_chi_prob()")
-  dist_chi_prob(perc, df, type)
-}

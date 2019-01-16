@@ -4,18 +4,20 @@
 \alias{ds_measures_variation}
 \title{Measures of variation}
 \usage{
-ds_measures_variation(data, column)
+ds_measures_variation(data, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
-\item{column}{Column in \code{data}.}
+\item{...}{Column(s) in \code{data}.}
 }
 \description{
 Returns the measures of location such as range, variance and standard
   deviation.
 }
 \examples{
+ds_measures_variation(mtcarz)
 ds_measures_variation(mtcarz, mpg)
+ds_measures_variation(mtcarz, mpg, disp)
 
 }

@@ -13,9 +13,6 @@
 #'
 #' @return A tibble.
 #'
-#' @section Deprecated functions:
-#' \code{freq_cont()} has been deprecated. Instead use \code{ds_freq_cont()}.
-#'
 #' @examples
 #' # frequency table
 #' ds_freq_cont(mtcarz, mpg, 4)
@@ -108,14 +105,6 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
 
   class(out) <- "ds_freq_cont"
   return(out)
-}
-
-#' @export
-#' @rdname ds_freq_cont
-#' @usage NULL
-#'
-freq_cont <- function(data, bins = 5) {
-  .Deprecated("ds_freq_cont()")
 }
 
 

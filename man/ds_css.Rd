@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_css}
 \alias{ds_css}
-\alias{stat_css}
 \title{Corrected Sum of Squares}
 \usage{
 ds_css(x, na.rm = FALSE)
@@ -22,11 +21,6 @@ Compute the corrected sum of squares
 Any NA values are stripped from \code{x} before computation
 takes place.
 }
-\section{Deprecated Function}{
-
-\code{stat_css()} has been deprecated. Instead use \code{ds_css()}.
-}
-
 \examples{
 ds_css(mtcars$mpg)
 }

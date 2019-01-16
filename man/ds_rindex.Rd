@@ -2,7 +2,6 @@
 % Please edit documentation in R/ds-describe.R
 \name{ds_rindex}
 \alias{ds_rindex}
-\alias{rindex}
 \title{Index Values}
 \usage{
 ds_rindex(data, values)
@@ -23,11 +22,6 @@ Returns index of values.
 Any NA values are stripped from \code{data} and \code{values} before
 computation takes place.
 }
-\section{Deprecated Function}{
-
-\code{rindex()} has been deprecated. Instead use \code{ds_rindex()}.
-}
-
 \examples{
 ds_rindex(mtcars$mpg, 21)
 ds_rindex(mtcars$mpg, 22)
