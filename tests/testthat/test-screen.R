@@ -45,5 +45,5 @@ test_that("output from ds_screener matches the expected result", {
 
 
 test_that("ds_screener throws the appropriate error", {
-  expect_error(ds_screener(mtcars$mpg), "y must be a data frame")
+  expect_error(ds_screener(mtcars$mpg), "data must be a `data.frame` or `tibble`.")
 })
