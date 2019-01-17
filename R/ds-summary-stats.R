@@ -77,3 +77,49 @@ ds_summary_stats.default <- function(data, variable) {
 print.ds_summary_stats <- function(x, ...) {
   print_stats(x)
 }
+
+#' @title Statistics for multiple continuous variables
+#'
+#' @description Range of descriptive statistics for multiple continuous variables.
+#'
+#' @param data A \code{data.frame} or \code{tibble}.
+#' @param ... Column(s) in \code{data}.
+#'
+#' @examples
+#' ds_multi_summary_stats(mtcarz)
+#' ds_multi_summary_stats(mtcarz, mpg, disp)
+#'
+#' @importFrom rlang !!
+#'
+#' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
+#' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
+#'
+#' @export
+#'
+ds_multi_summary_stats <- function(data, ...) {
+  
+  descriptr:::check_df(data)
+  
+  var <- rlang::quos(...)
+  
+  if (length(var) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! var)
+  }
+  
+  col_names <- names(data)
+  for (i in col_names) {
+    cat(cli::rule(center = paste0('Variable: ', i), 
+                  width = options()$width))
+    cat('\n\n')
+    print(ds_summary_stats(data, i))
+    cat('\n\n\n')
+  }
+  
+}
