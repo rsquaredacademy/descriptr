@@ -43,10 +43,6 @@ ds_freq_table.default <- function(data, variable) {
     dplyr::pull(!! varyable) %>%
     stats::na.omit()
 
-  if (!is.factor(fdata)) {
-    stop("variable must be categorical/qualitative")
-  }
-
   var_name <-
     data %>%
     dplyr::select(!! varyable) %>%

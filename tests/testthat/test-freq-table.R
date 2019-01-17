@@ -11,7 +11,7 @@ test_that("output from ds_freq_table matches expected results", {
 })
 
 test_that("ds_freq_table returns appropriate errors", {
-  expect_error(ds_freq_table(mtcars, mpg), "variable must be categorical/qualitative")
+  expect_error(ds_freq_table(mtcars, mpg), "mpg is not a categorical variable. The function expects an object of type `factor` but mpg is of type `numeric`.")
 })
 
 test_that("output from ds_freq_table plot is as expected", {

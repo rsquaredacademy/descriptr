@@ -16,7 +16,7 @@ test_that("ds_freq_cont returns appropriate errors", {
   mt <- mtcars
   mt$cyl <- as.factor(mt$cyl)
 
-  expect_error(ds_freq_cont(mt, cyl), "variable must be numeric")
+  expect_error(ds_freq_cont(mt, cyl), "cyl is not a continuous variable. The function expects an object of type `numeric` or `integer` but cyl is of type `factor`.")
   expect_error(ds_freq_cont(mtcars, mpg, "5"), "bins must be integer value")
 })
 

@@ -41,10 +41,6 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
     dplyr::pull(!! varyable) %>%
     stats::na.omit()
 
-  if (!is.numeric(fdata)) {
-    stop("variable must be numeric")
-  }
-
   if (!is.numeric(bins)) {
     stop("bins must be integer value")
   }
@@ -138,7 +134,7 @@ plot.ds_freq_cont <- function(x, ...) {
   p <-
     x %>%
     magrittr::use_series(frequency) %>%
-    tibble::as_tibble() %>%
+    tibble::enframe(name = NULL) %>%
     tibble::add_column(x = seq_len(bins), .before = 1) %>%
     ggplot2::ggplot() +
     ggplot2::geom_col(

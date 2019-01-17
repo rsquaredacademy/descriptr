@@ -98,7 +98,7 @@ print.ds_summary_stats <- function(x, ...) {
 #'
 ds_multi_summary_stats <- function(data, ...) {
   
-  descriptr:::check_df(data)
+  check_df(data)
   
   var <- rlang::quos(...)
   
