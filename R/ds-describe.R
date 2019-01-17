@@ -193,6 +193,8 @@ ds_extreme_obs <- function(data, column) {
   check_df(data)
 
   var <- rlang::enquo(column)
+  var_name <- deparse(substitute(column))
+  check_numeric(data, !! var, var_name)
 
   na_data <-
     data %>%

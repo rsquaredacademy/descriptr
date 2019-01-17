@@ -39,11 +39,11 @@ test_that("ds_group_summary throws the appropriate error", {
 
   expect_error(
     ds_group_summary(mtcars, gear, mpg),
-    "gvar must be an object of type factor"
+    "gear is not a categorical variable. The function expects an object of type `factor` but gear is of type `numeric`."
   )
   expect_error(
     ds_group_summary(mt, cyl, am),
-    "cvar must be numeric"
+    "am is not a continuous variable. The function expects an object of type `numeric` or `integer` but am is of type `factor`."
   )
 })
 

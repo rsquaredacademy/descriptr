@@ -35,7 +35,7 @@
 #'
 dist_f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
   vistributions::vdist_f_plot(num_df, den_df, normal)
-  warning('`dist_f_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_f_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_f_plot
@@ -43,7 +43,7 @@ dist_f_plot <- function(num_df = 4, den_df = 30, normal = FALSE) {
 #'
 dist_f_perc <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower", "upper")) {
   vistributions::vdist_f_perc(probs, num_df, den_df, type)
-  warning('`dist_f_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_f_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_f_plot
@@ -51,6 +51,6 @@ dist_f_perc <- function(probs = 0.95, num_df = 3, den_df = 30, type = c("lower",
 #'
 dist_f_prob <- function(perc, num_df, den_df, type = c("lower", "upper")) {
   vistributions::vdist_f_prob(perc, num_df, den_df, type)
-  warning('`dist_f_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_f_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 

@@ -31,8 +31,13 @@ ds_cross_table <- function(data, var1, var2) UseMethod("ds_cross_table")
 #' @export
 ds_cross_table.default <- function(data, var1, var2) {
 
+  check_df(data)
+  var1_name <- deparse(substitute(var1))
+  var2_name <- deparse(substitute(var2))
   var_1 <- rlang::enquo(var1)
   var_2 <- rlang::enquo(var2)
+  check_factor(data, !! var_1, var1_name)
+  check_factor(data, !! var_2, var2_name)
 
   var_names <-
     data %>%
@@ -145,8 +150,14 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
 #'
 ds_twoway_table <- function(data, var1, var2) {
 
+  check_df(data)
+  var1_name <- deparse(substitute(var1))
+  var2_name <- deparse(substitute(var2))
+  
   var_1 <- rlang::enquo(var1)
   var_2 <- rlang::enquo(var2)
+  check_factor(data, !! var_1, var1_name)
+  check_factor(data, !! var_2, var2_name)
 
   group <-
     data %>%

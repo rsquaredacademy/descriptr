@@ -65,3 +65,27 @@ test_that("ouput from plot.ds_cross_table matches expected output", {
   p3 <- plot(k, proportional = TRUE)
   vdiffr::expect_doppelganger("cross_bar_proportional", p3$plot)
 })
+
+test_that("ds_cross_table throws appropriate error", {
+
+  x <- 1:10
+  expect_error(ds_cross_table(x), 'data must be a `data.frame` or `tibble`.')
+  expect_error(ds_cross_table(mtcarz, mpg, cyl), 'mpg is not a categorical variable. The function expects an object of type `factor` but mpg is of type `numeric`.')
+  expect_error(ds_cross_table(mtcarz, cyl, disp), 'disp is not a categorical variable. The function expects an object of type `factor` but disp is of type `numeric`.')
+
+})
+
+test_that("output from ds_twoway_table is as expected", {
+  actual <- sum(ds_twoway_table(mtcarz, cyl, gear)[[3]])
+  expected <- 32
+  expect_equal(actual, expected)
+})
+
+test_that("ds_twoway_table throws appropriate error", {
+
+  x <- 1:10
+  expect_error(ds_twoway_table(x), 'data must be a `data.frame` or `tibble`.')
+  expect_error(ds_twoway_table(mtcarz, mpg, cyl), 'mpg is not a categorical variable. The function expects an object of type `factor` but mpg is of type `numeric`.')
+  expect_error(ds_twoway_table(mtcarz, cyl, disp), 'disp is not a categorical variable. The function expects an object of type `factor` but disp is of type `numeric`.')
+
+})

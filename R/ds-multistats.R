@@ -15,6 +15,8 @@
 #'
 ds_multi_stats <- function(data, ...) {
 
+  check_df(data)
+
   vars <- rlang::quos(...)
 
   if (length(vars) < 1) {

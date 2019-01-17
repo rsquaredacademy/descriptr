@@ -41,22 +41,18 @@ ds_group_summary <- function(data, gvar, cvar) UseMethod("ds_group_summary")
 #'
 ds_group_summary.default <- function(data, gvar, cvar) {
 
+  check_df(data)
+  gvar_name <- deparse(substitute(gvar))
+  cvar_name <- deparse(substitute(cvar))
+
   g_var <- rlang::enquo(gvar)
   c_var <- rlang::enquo(cvar)
+
+  check_numeric(data, !! c_var, cvar_name)
+  check_factor(data, !! g_var, gvar_name)
+
   gvar  <- dplyr::pull(data, !! g_var)
   cvar  <- dplyr::pull(data, !! c_var)
-
-  if (!is.factor(gvar)) {
-    stop("gvar must be an object of type factor")
-  }
-
-  if (!is.numeric(cvar)) {
-    stop("cvar must be numeric")
-  }
-
-  if (length(gvar) != length(cvar)) {
-    stop("gvar and cvar must be of the same length")
-  }
 
   xname <-
     data %>%

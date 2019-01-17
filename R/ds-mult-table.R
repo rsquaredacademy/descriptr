@@ -20,9 +20,7 @@
 #'
 ds_oway_tables <- function(data) {
 
-  if (!is.data.frame(data)) {
-    stop("data must be a data frame")
-  }
+  check_df(data)
 
   is.fact <- sapply(data, is.factor)
 
@@ -48,9 +46,7 @@ ds_oway_tables <- function(data) {
 #'
 ds_tway_tables <- function(data) {
 
-  if (!is.data.frame(data)) {
-    stop("data must be a data frame")
-  }
+  check_df(data)
 
   is.fact <- sapply(data, is.factor)
 
