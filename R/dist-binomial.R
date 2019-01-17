@@ -36,7 +36,7 @@
 #'
 dist_binom_plot <- function(n, p) {
   print(vistributions::vdist_binom_plot(n, p))
-  warning('`dist_binom_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_binom_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_binom_plot
@@ -45,7 +45,7 @@ dist_binom_plot <- function(n, p) {
 dist_binom_prob <- function(n, p, s,
                             type = c("lower", "upper", "exact", "interval")) {
   print(vistributions::vdist_binom_prob(n, p, s, type))
-  warning('`dist_binom_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_binom_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_binom_plot
@@ -53,5 +53,5 @@ dist_binom_prob <- function(n, p, s,
 #'
 dist_binom_perc <- function(n, p, tp, type = c("lower", "upper")) {
   print(vistributions::vdist_binom_perc(n, p, tp, type))
-  warning('`dist_binom_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_binom_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }

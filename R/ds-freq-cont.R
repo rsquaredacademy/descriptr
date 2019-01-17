@@ -31,7 +31,10 @@ ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
 #' @export
 ds_freq_cont.default <- function(data, variable, bins = 5) {
 
+  check_df(data)
+  var_name <- deparse(substitute(variable))
   varyable <- rlang::enquo(variable)
+  check_numeric(data, !! varyable, var_name)
 
   fdata <-
     data %>%

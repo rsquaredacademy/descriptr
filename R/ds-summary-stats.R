@@ -21,17 +21,17 @@ ds_summary_stats <- function(data, variable) UseMethod("ds_summary_stats")
 #'
 ds_summary_stats.default <- function(data, variable) {
 
+	check_df(data)
   vary  <- rlang::enquo(variable)
+  var_name <- deparse(substitute(variable))
+  check_numeric(data, !! vary, var_name)
+
   odata <- dplyr::pull(data, !! vary)
 
   sdata <-
     data %>%
     dplyr::pull(!! vary) %>%
     stats::na.omit()
-
-  if (!is.numeric(sdata)) {
-    stop("data must be numeric")
-  }
 
   low      <- ds_tailobs(sdata, 5, "low")
   high     <- ds_tailobs(sdata, 5, "high")

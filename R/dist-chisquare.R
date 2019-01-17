@@ -34,7 +34,7 @@
 #'
 dist_chi_plot <- function(df = 3, normal = FALSE) {
   vistributions::vdist_chisquare_plot(df, normal) 
-  warning('`dist_chi_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_chi_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_chi_plot
@@ -42,7 +42,7 @@ dist_chi_plot <- function(df = 3, normal = FALSE) {
 #'
 dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
   print(vistributions::vdist_chisquare_perc(probs, df, type))
-  warning('`dist_chi_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_chi_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_chi_plot
@@ -50,6 +50,6 @@ dist_chi_perc <- function(probs = 0.95, df = 3, type = c("lower", "upper")) {
 #'
 dist_chi_prob <- function(perc, df, type = c("lower", "upper")) {
   print(vistributions::vdist_chisquare_prob(perc, df, type))
-  warning('`dist_chi_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_chi_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 

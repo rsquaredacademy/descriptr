@@ -40,7 +40,7 @@ NULL
 #'
 dist_t_plot <- function(df = 3) {
   vistributions::vdist_t_plot(df)
-  warning('`dist_t_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_t_plot()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 #' @rdname dist_t
@@ -48,7 +48,7 @@ dist_t_plot <- function(df = 3) {
 #'
 dist_t_perc <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")) {
   vistributions::vdist_t_perc(probs, df, type)
-  warning('`dist_t_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_t_perc()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }
 
 
@@ -57,5 +57,5 @@ dist_t_perc <- function(probs = 0.95, df = 4, type = c("lower", "upper", "both")
 #'
 dist_t_prob <- function(perc, df, type = c("lower", "upper", "interval", "both")) {
   vistributions::vdist_t_prob(perc, df, type)
-  warning('`dist_t_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
+  rlang::warn('`dist_t_prob()` has been soft deprecated and will be removed in the next version of descriptr. Please use the vistributions package for visualizing probability distributions.')
 }

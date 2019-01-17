@@ -205,34 +205,6 @@ fround <- function(x) {
   format(round(x, 2), nsmall = 2)
 }
 
-pol_chi <- function(l1, l2, df, col) {
-  x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, stats::dchisq(seq(l1, l2, 0.01), df), 0)
-  graphics::polygon(x, y, col = col)
-}
-
-pol_f <- function(l1, l2, num_df, den_df, col) {
-  x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, stats::df(seq(l1, l2, 0.01), num_df, den_df), 0)
-  graphics::polygon(x, y, col = col)
-}
-
-
-pol_cord <- function(l1, l2, mean, sd, col) {
-  x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, stats::dnorm(seq(l1, l2, 0.01), mean, sd), 0)
-  graphics::polygon(x, y, col = col)
-}
-
-
-xaxp <- function(mean, el) {
-  xl <- mean - el
-  xu <- mean + el
-  x <- seq(xl, xu, 0.01)
-  return(x)
-}
-
-
 seqlp <- function(mean, sd, el) {
   if (el > 4) {
     lmin <- mean - (el * sd)
@@ -260,29 +232,12 @@ xmmp <- function(mean, sd, el) {
   return(out)
 }
 
-
-xax <- function(mean) {
-  xl <- mean - 3
-  xu <- mean + 3
-  x <- seq(xl, xu, 0.01)
-  return(x)
-}
-
-
 seql <- function(mean, sd) {
   lmin <- mean - (5 * sd)
   lmax <- mean + (5 * sd)
   l <- seq(lmin, lmax, sd)
   return(l)
 }
-
-chiseql <- function(mean, sd) {
-  lmin <- mean - (5 * sd)
-  lmax <- mean + (5 * sd)
-  l <- seq(lmin, lmax, 0.01)
-  return(l)
-}
-
 
 xmm <- function(mean, sd) {
   xmin <- mean - (5 * sd)
@@ -305,13 +260,6 @@ xmn <- function(mean, sd) {
   xmax <- mean + 3 * sd
   out <- c(xmin, xmax)
   return(out)
-}
-
-
-pol_t <- function(l1, l2, df, col) {
-  x <- c(l1, seq(l1, l2, 0.01), l2)
-  y <- c(0, stats::dt(seq(l1, l2, 0.01), df), 0)
-  graphics::polygon(x, y, col = col)
 }
 
 trimmed_mean <- function(x, na.rm = FALSE) {

@@ -166,3 +166,144 @@ test_that("ds_gmean throws the appropriate error", {
   expect_error(ds_gmean("mtcars$mpg"), "x must be numeric")
   expect_error(ds_gmean(as.factor(mtcars$mpg)), "x must be numeric")
 })
+
+test_that("output from ds_measures_location is as expected", {
+
+  actual <- round(sum(ds_measures_location(mtcarz)[[2]]), 2)
+  expected <- 422.16
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_measures_location is as expected", {
+
+  actual <- round(sum(ds_measures_location(mtcarz, mpg)[[2]]), 2)
+  expected <- 20.09
+  expect_equal(actual, expected)
+
+})
+
+test_that("ds_measures_location throws appropriate errors", {
+
+  x <- 1:10
+  expect_error(ds_measures_location(x), 'data must be a `data.frame` or `tibble`.')
+
+})
+
+test_that("ds_measures_location throws appropriate errors", {
+
+  mt <- dplyr::select(mtcarz, cyl, gear, am)
+  expect_error(ds_measures_location(mt), 'Data has no continuous variables.')
+
+})
+
+test_that("output from ds_measures_variation is as expected", {
+
+  actual <- round(sum(ds_measures_variation(mtcarz)[[2]]), 2)
+  expected <- 721.88
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_measures_variation is as expected", {
+
+  actual <- round(sum(ds_measures_variation(mtcarz, mpg)[[2]]), 2)
+  expected <- 23.5
+  expect_equal(actual, expected)
+
+})
+
+test_that("ds_measures_variation throws appropriate errors", {
+
+  x <- 1:10
+  expect_error(ds_measures_variation(x), 'data must be a `data.frame` or `tibble`.')
+
+})
+
+test_that("ds_measures_variation throws appropriate errors", {
+
+  mt <- dplyr::select(mtcarz, cyl, gear, am)
+  expect_error(ds_measures_variation(mt), 'Data has no continuous variables.')
+
+})
+
+test_that("output from ds_measures_symmetry is as expected", {
+
+  actual <- round(sum(ds_measures_symmetry(mtcarz)[[2]]), 2)
+  expected <- 3.06
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_measures_symmetry is as expected", {
+
+  actual <- round(sum(ds_measures_symmetry(mtcarz, mpg)[[2]]), 2)
+  expected <- 0.67
+  expect_equal(actual, expected)
+
+})
+
+test_that("ds_measures_symmetry throws appropriate errors", {
+
+  x <- 1:10
+  expect_error(ds_measures_symmetry(x), 'data must be a `data.frame` or `tibble`.')
+
+})
+
+test_that("ds_measures_symmetry throws appropriate errors", {
+
+  mt <- dplyr::select(mtcarz, cyl, gear, am)
+  expect_error(ds_measures_symmetry(mt), 'Data has no continuous variables.')
+
+})
+
+test_that("output from ds_percentiles is as expected", {
+
+  actual <- round(sum(ds_percentiles(mtcarz)[[2]]), 2)
+  expected <- 152.27
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_percentiles is as expected", {
+
+  actual <- round(sum(ds_percentiles(mtcarz, mpg)[[2]]), 2)
+  expected <- 10.4
+  expect_equal(actual, expected)
+
+})
+
+test_that("ds_percentiles throws appropriate errors", {
+
+  x <- 1:10
+  expect_error(ds_percentiles(x), 'data must be a `data.frame` or `tibble`.')
+
+})
+
+test_that("ds_percentiles throws appropriate errors", {
+
+  mt <- dplyr::select(mtcarz, cyl, gear, am)
+  expect_error(ds_percentiles(mt), 'Data has no continuous variables.')
+
+})
+
+test_that("output from ds_extreme_obs is as expected", {
+
+  actual <- round(sum(ds_extreme_obs(mtcarz, mpg)[[2]]), 2)
+  expected <- 217.5
+  expect_equal(actual, expected)
+
+})
+
+test_that("ds_extreme_obs throws appropriate errors", {
+
+  x <- 1:10
+  expect_error(ds_extreme_obs(x), 'data must be a `data.frame` or `tibble`.')
+
+})
+
+test_that("ds_extreme_obs throws appropriate errors", {
+
+  expect_error(ds_extreme_obs(mtcarz, cyl), 'cyl is not a continuous variable. The function expects an object of type `numeric` or `integer` but cyl is of type `factor`.')
+
+})

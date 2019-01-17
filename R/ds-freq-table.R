@@ -33,7 +33,10 @@ ds_freq_table <- function(data, variable) UseMethod("ds_freq_table")
 #' @export
 ds_freq_table.default <- function(data, variable) {
 
+  check_df(data)
+  var_name <- deparse(substitute(variable))
   varyable <- rlang::enquo(variable)
+  check_factor(data, !! varyable, var_name)
 
   fdata <-
     data %>%
