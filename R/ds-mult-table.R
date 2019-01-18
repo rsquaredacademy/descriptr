@@ -83,7 +83,7 @@ ds_auto_cross_table <- function(data, ...) {
       rlang::abort("Data has no categorical variables.")
     }
     if (length(is_factor) < 2) {
-      rlang::abort("Stacked bar plot requires 2 categorical variables.")
+      rlang::abort("Two way table requires at least 2 categorical variables.")
     } else {
       plot_data <- data[is_factor]
     }
