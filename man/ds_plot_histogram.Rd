@@ -12,6 +12,8 @@ ds_plot_histogram(data, ..., bins = 5, fill = "blue")
 \item{...}{Column(s) in \code{data}.}
 
 \item{bins}{Number of bins in the histogram.}
+
+\item{fill}{Color of the histogram.}
 }
 \description{
 Creates histograms if the data has continuous variables.

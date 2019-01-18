@@ -9,6 +9,9 @@
 #' ds_plot_scatter(mtcarz)
 #' ds_plot_scatter(mtcarz, mpg, disp, hp)
 #'
+#' @importFrom rlang sym
+#' @importFrom utils combn
+#'
 #' @export
 #'
 ds_plot_scatter <- function(data, ...) {
@@ -67,6 +70,7 @@ ds_plot_scatter <- function(data, ...) {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param bins Number of bins in the histogram.
+#' @param fill Color of the histogram.
 #'
 #' @examples
 #' ds_plot_histogram(mtcarz)
