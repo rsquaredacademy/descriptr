@@ -52,3 +52,9 @@ test_that("output from ds_summary_stats is as expected", {
 	expect_output(print(actual), expected)
 	
 })
+
+test_that("ds_multi_summary_stats throws appropriate errors", {
+  fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
+  expect_error(ds_multi_summary_stats(fdata), 'Data has no continuous variables.')
+  expect_error(ds_multi_summary_stats(mtcarz, cyl, gear), 'Data has no continuous variables.')
+})

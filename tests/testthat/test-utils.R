@@ -139,3 +139,7 @@ test_that("output from stat_uss matches the expected result", {
 test_that("output from div_by matches the expected result", {
   expect_equal(div_by(2), 0.5)
 })
+
+test_that("output from uss is as expected", {
+  expect_equal(uss(4, 2), 4)
+})
