@@ -16,8 +16,6 @@ Creates box plots if the data has both categorical & continuous variables.
 }
 \examples{
 ds_plot_box_group(mtcarz)
-ds_plot_box_group(mtcarz, cyl, mpg)
 ds_plot_box_group(mtcarz, cyl, gear, mpg)
-ds_plot_box_group(mtcarz, cyl, gear, mpg, disp)
 
 }

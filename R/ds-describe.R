@@ -505,7 +505,6 @@ ds_cvar <- function(x, na.rm = FALSE) {
 #' @return Corrected sum of squares of \code{x}
 #' @examples
 #' ds_css(mtcars$mpg)
-#' @references \href{http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm}{NIST/SEMATECH e-Handbook of Statistical Methods}
 #' @export
 #'
 ds_css <- function(x, na.rm = FALSE) {

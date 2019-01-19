@@ -15,7 +15,8 @@ ds_plot_bar_grouped(data, ...)
 Creates grouped bar plots if the data has categorical variables.
 }
 \examples{
-ds_plot_bar_grouped(mtcarz)
+mt <- dplyr::select(mtcarz, cyl, gear, am)
+ds_plot_bar_grouped(mt)
 ds_plot_bar_grouped(mtcarz, cyl, gear)
 
 }

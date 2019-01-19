@@ -111,6 +111,10 @@ ds_multi_summary_stats <- function(data, ...) {
   } else {
     data %<>%
       dplyr::select(!!! var)
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }  
   }
   
   col_names <- names(data)
