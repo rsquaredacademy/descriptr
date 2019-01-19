@@ -299,3 +299,5 @@ test_that("output from print_cross2 matches the expected result", {
 "
   expect_output(ds_tway_tables(mt), pim)
 })
+
+
