@@ -15,7 +15,8 @@ ds_plot_bar_stacked(data, ...)
 Creates stacked bar plots if the data has categorical variables.
 }
 \examples{
-ds_plot_bar_stacked(mtcarz)
+mt <- dplyr::select(mtcarz, cyl, gear, am)
+ds_plot_bar_stacked(mt)
 ds_plot_bar_stacked(mtcarz, cyl, gear)
 
 }

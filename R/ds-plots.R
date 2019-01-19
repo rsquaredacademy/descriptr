@@ -304,7 +304,8 @@ ds_plot_box_single <- function(data, ...) {
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
-#' ds_plot_bar_stacked(mtcarz)
+#' mt <- dplyr::select(mtcarz, cyl, gear, am)
+#' ds_plot_bar_stacked(mt)
 #' ds_plot_bar_stacked(mtcarz, cyl, gear)
 #'
 #' @export
@@ -366,7 +367,8 @@ ds_plot_bar_stacked <- function(data, ...) {
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
-#' ds_plot_bar_grouped(mtcarz)
+#' mt <- dplyr::select(mtcarz, cyl, gear, am)
+#' ds_plot_bar_grouped(mt)
 #' ds_plot_bar_grouped(mtcarz, cyl, gear)
 #'
 #' @export
@@ -431,9 +433,7 @@ ds_plot_bar_grouped <- function(data, ...) {
 #'
 #' @examples
 #' ds_plot_box_group(mtcarz)
-#' ds_plot_box_group(mtcarz, cyl, mpg)
 #' ds_plot_box_group(mtcarz, cyl, gear, mpg)
-#' ds_plot_box_group(mtcarz, cyl, gear, mpg, disp)
 #'
 #' @export
 #'
