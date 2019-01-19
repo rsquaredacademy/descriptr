@@ -24,6 +24,3 @@ takes place.
 \examples{
 ds_css(mtcars$mpg)
 }
-\references{
-\href{http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm}{NIST/SEMATECH e-Handbook of Statistical Methods}
-}
