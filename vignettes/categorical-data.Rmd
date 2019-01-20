@@ -1,0 +1,97 @@
+use---
+title: "Categorical Data"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Categorical Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE, message=FALSE}
+library(descriptr)
+library(dplyr)
+```
+
+## Cross Tabulation
+
+The `ds_cross_table()` function creates two way tables of categorical variables. 
+
+```{r cross}
+ds_cross_table(mtcarz, cyl, gear)
+```
+
+If you want the above result as a tibble, use `ds_twoway_table()`.
+
+```{r cross_tibble}
+ds_twoway_table(mtcarz, cyl, gear)
+```
+
+A plot method has been defined which will generate:
+
+### Grouped Bar Plots
+
+```{r cross_group, fig.width=7, fig.height=7, fig.align='centre'}
+k <- ds_cross_table(mtcarz, cyl, gear)
+plot(k)
+```
+
+### Stacked Bar Plots
+
+```{r cross_stack, fig.width=7, fig.height=7, fig.align='centre'}
+k <- ds_cross_table(mtcarz, cyl, gear)
+plot(k, stacked = TRUE)
+```
+
+### Proportional Bar Plots
+
+```{r cross_prop, fig.width=7, fig.height=7, fig.align='centre'}
+k <- ds_cross_table(mtcarz, cyl, gear)
+plot(k, proportional = TRUE)
+```
+
+## Frequency Table 
+
+The `ds_freq_table()` function creates frequency tables for categorical variables. 
+
+```{r ftable}
+ds_freq_table(mtcarz, cyl)
+```
+
+### Bar Plot
+
+```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
+k <- ds_freq_table(mtcarz, cyl)
+plot(k)
+```
+
+## Multiple One Way Tables
+
+The `ds_auto_freq_table()` function creates multiple one way tables by creating a 
+frequency table for each categorical variable in a data frame. You can also 
+specify a subset of variables if you do not want all the variables in the data 
+set to be used.
+
+```{r oway}
+ds_auto_freq_table(mtcarz)
+```
+
+## Multiple Two Way Tables
+
+The `ds_auto_cross_table()` function creates multiple two way tables by creating a 
+cross table for each unique pair of categorical variables in a data frame. You 
+can also specify a subset of variables if you do not want all the variables in 
+the data set to be used.
+
+```{r tway}
+ds_auto_cross_table(mtcarz, cyl, gear, am)
+```
+

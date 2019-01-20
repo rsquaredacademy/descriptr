@@ -4,12 +4,12 @@
 \alias{ds_summary_stats}
 \title{Descriptive statistics}
 \usage{
-ds_summary_stats(data, variable)
+ds_summary_stats(data, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
-\item{variable}{Column in \code{data}.}
+\item{...}{Column(s) in \code{data}.}
 }
 \description{
 Range of descriptive statistics for continuous data.
@@ -19,6 +19,6 @@ ds_summary_stats(mtcarz, mpg)
 
 }
 \seealso{
-\code{\link[base]{summary}} \code{\link{ds_freq_cont}}
+\code{\link[base]{summary}} 
 \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 }

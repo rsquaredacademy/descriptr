@@ -432,7 +432,8 @@ ds_plot_bar_grouped <- function(data, ...) {
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
-#' ds_plot_box_group(mtcarz)
+#' mt <- dplyr::select(mtcarz, cyl, disp, mpg)
+#' ds_plot_box_group(mt)
 #' ds_plot_box_group(mtcarz, cyl, gear, mpg)
 #'
 #' @export

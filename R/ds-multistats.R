@@ -8,12 +8,15 @@
 #' @return A tibble.
 #'
 #' @examples
-#' ds_multi_stats(mtcarz)
-#' ds_multi_stats(mtcarz, mpg, disp, hp)
+#' ds_tidy_stats(mtcarz)
+#' ds_tidy_stats(mtcarz, mpg, disp, hp)
+#'
+#' @section Deprecated Functions:
+#' \code{ds_multi_stats()} have been deprecated. Instead use \code{ds_tidy_stats()}.
 #'
 #' @export
 #'
-ds_multi_stats <- function(data, ...) {
+ds_tidy_stats <- function(data, ...) {
 
   check_df(data)
 
@@ -42,3 +45,11 @@ ds_multi_stats <- function(data, ...) {
       na.rm = TRUE)
 }
 
+#' @export
+#' @rdname ds_tidy_stats
+#' @usage NULL
+#'
+ds_multi_stats <- function(data, ...) {
+  .Deprecated("ds_tidy_stats()")
+  ds_tidy_stats(data, ...)
+}

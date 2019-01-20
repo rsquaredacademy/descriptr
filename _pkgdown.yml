@@ -19,10 +19,12 @@ navbar:
       href: index.html
     - text: "Guides"
       menu:
-        - text: "Descriptive Statistics"
-          href: articles/descriptive-stats.html
-        - text: "Distributions"
-          href: articles/distributions.html
+        - text: "Continuous Data"
+          href: articles/continuous-data.html
+        - text: "Categorical Data"
+          href: articles/categorical-data.html
+        - text: "Visualization"
+          href: articles/visualization.html
     - text: "Reference"
       menu:
         - text: "Functions"
@@ -55,45 +57,50 @@ reference:
   contents:
   - ds_screener
 
-- title: Descriptive Statistics
+- title: Continuous Data
   desc: >
     The following functions ease the process of generating and visualizing
-    descriptive statistics for categorical and continuous data.
+    descriptive statistics for continuous data.
   contents:
+  - ds_auto_summary_stats
   - ds_summary_stats
-  - ds_cross_table
-  - ds_freq_table
-  - ds_freq_cont
-  - ds_group_summary
-  - ds_multi_stats
-  - ds_oway_tables
-  - ds_tway_tables
+  - ds_tidy_stats
   - ds_measures_location
   - ds_measures_variation
   - ds_measures_symmetry
   - ds_percentiles
   - ds_extreme_obs
 
-- title: Distributions
+- title: Categorical Data
   desc: >
-    Visualize how different parameters affect the shape of a distribution.
-    Compute/visualize probability from a given quantile and quantiles out of
-    given probability.
+    The following functions ease the process of generating and visualizing
+    descriptive statistics for categorical data. 
   contents:
-  - dist_norm_plot
-  - dist_norm_perc
-  - dist_norm_prob
-  - dist_binom_plot
-  - dist_binom_perc
-  - dist_binom_prob
-  - dist_chi_plot
-  - dist_chi_perc
-  - dist_chi_prob
-  - dist_f_plot
-  - dist_f_perc
-  - dist_f_prob
-  - dist_t
+  - ds_freq_table
+  - ds_cross_table
+  - ds_auto_freq_table
+  - ds_auto_cross_table
 
+- title: Grouped Summary 
+  desc: >
+    The following functions generate grouped summary statistics.
+  contents:
+  - ds_group_summary
+  - ds_auto_group_summary
+
+- title: Visualization
+  desc: >
+    The following functions generate plots for different data types.
+  contents:
+  - ds_plot_scatter
+  - ds_plot_histogram
+  - ds_plot_density
+  - ds_plot_bar
+  - ds_plot_box_single
+  - ds_plot_box_group
+  - ds_plot_bar_stacked
+  - ds_plot_bar_grouped
+ 
 - title: Other Functions
   desc: >
     A set of functions used to generate `summary_stats`.

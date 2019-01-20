@@ -62,6 +62,8 @@ str(mtcarz)
 
 ``` r
 ds_summary_stats(mtcarz, mpg)
+#> ------------------------------ Variable: mpg ------------------------------
+#> 
 #>                         Univariate Analysis                          
 #> 
 #>  N                       32.00      Variance                36.32 
@@ -104,7 +106,7 @@ ds_summary_stats(mtcarz, mpg)
 #### Frequency Distribution
 
 ``` r
-ds_freq_cont(mtcarz, mpg)
+ds_freq_table(mtcarz, mpg)
 #>                               Variable: mpg                               
 #> |-----------------------------------------------------------------------|
 #> |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -213,6 +215,9 @@ ds_group_summary(mtcarz, cyl, mpg)
 
 ``` r
 ds_multi_stats(mtcarz, mpg, disp, hp)
+#> Warning: 'ds_multi_stats' is deprecated.
+#> Use 'ds_tidy_stats()' instead.
+#> See help("Deprecated")
 #> # A tibble: 3 x 16
 #>   vars    min   max  mean t_mean median  mode range variance  stdev  skew
 #>   <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl> <dbl>    <dbl>  <dbl> <dbl>

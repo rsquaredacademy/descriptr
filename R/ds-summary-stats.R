@@ -3,23 +3,55 @@
 #' @description Range of descriptive statistics for continuous data.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
-#' @param variable Column in \code{data}.
+#' @param ... Column(s) in \code{data}.
 #'
 #' @examples
 #' ds_summary_stats(mtcarz, mpg)
 #'
 #' @importFrom rlang !!
 #'
-#' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
+#' @seealso \code{\link[base]{summary}} 
 #' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #'
 #' @export
 #'
-ds_summary_stats <- function(data, variable) UseMethod("ds_summary_stats")
+ds_summary_stats <- function(data, ...) {
+  
+  check_df(data)
+  
+  var <- rlang::quos(...)
+  
+  if (length(var) < 1) {
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }
+    data <- data[, is_num]
+  } else {
+    data %<>%
+      dplyr::select(!!! var)
+    is_num <- sapply(data, is.numeric)
+    if (!any(is_num == TRUE)) {
+      rlang::abort("Data has no continuous variables.")
+    }  
+  }
+  
+  col_names <- names(data)
+  for (i in col_names) {
+    cat(cli::rule(center = paste0('Variable: ', i), 
+                  width = options()$width))
+    cat('\n\n')
+    print(ds_summary(data, i))
+    cat('\n\n\n')
+  }
+  
+}
 
-#' @export
-#'
-ds_summary_stats.default <- function(data, variable) {
+
+
+ds_summary <- function(data, variable) UseMethod("ds_summary")
+
+ds_summary.default <- function(data, variable) {
 
 	check_df(data)
   vary  <- rlang::enquo(variable)
@@ -69,61 +101,11 @@ ds_summary_stats.default <- function(data, variable) {
 			     lowobsi  = low_val,
 			     highobsi = high_val)
 
-  class(result) <- "ds_summary_stats"
+  class(result) <- "ds_summary"
   return(result)
 }
 
-#' @export
-print.ds_summary_stats <- function(x, ...) {
+print.ds_summary <- function(x, ...) {
   print_stats(x)
 }
 
-#' @title Statistics for multiple continuous variables
-#'
-#' @description Range of descriptive statistics for multiple continuous variables.
-#'
-#' @param data A \code{data.frame} or \code{tibble}.
-#' @param ... Column(s) in \code{data}.
-#'
-#' @examples
-#' ds_multi_summary_stats(mtcarz)
-#' ds_multi_summary_stats(mtcarz, mpg, disp)
-#'
-#' @importFrom rlang !!
-#'
-#' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
-#' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
-#'
-#' @export
-#'
-ds_multi_summary_stats <- function(data, ...) {
-  
-  check_df(data)
-  
-  var <- rlang::quos(...)
-  
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
-    }
-    data <- data[, is_num]
-  } else {
-    data %<>%
-      dplyr::select(!!! var)
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
-    }  
-  }
-  
-  col_names <- names(data)
-  for (i in col_names) {
-    cat(cli::rule(center = paste0('Variable: ', i), 
-                  width = options()$width))
-    cat('\n\n')
-    print(ds_summary_stats(data, i))
-    cat('\n\n\n')
-  }
-  
-}

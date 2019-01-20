@@ -6,12 +6,12 @@
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
-#' ds_auto_summary(mtcarz)
-#' ds_auto_summary(mtcarz, disp, hp)
+#' ds_auto_summary_stats(mtcarz)
+#' ds_auto_summary_stats(mtcarz, disp, hp)
 #'
 #' @export
 #'
-ds_auto_summary <- function(data, ...) {
+ds_auto_summary_stats <- function(data, ...) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -50,7 +50,7 @@ ds_auto_summary <- function(data, ...) {
     cat(cli::rule(center = paste0('Frequency Distribution'),
                   width = options()$width))
     cat('\n\n')
-    print(ds_freq_cont(data, i))
+    print(ds_freq_table(data, i))
     cat('\n\n\n')
   }
 }

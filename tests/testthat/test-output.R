@@ -72,7 +72,7 @@ test_that("output from print_screener matches expected output", {
 
 
 test_that("output from print_fcont matches the expected result", {
-  k <- ds_freq_cont(mtcars, mpg)
+  k <- ds_freq_table(mtcars, mpg)
   pim <- "                              Variable: mpg
 |-----------------------------------------------------------------------|
 |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
@@ -207,7 +207,7 @@ test_that("output from print_ftable2 matches the expected result", {
 |       8      |       1      |      32      |     3.12     |      100     |
 |--------------------------------------------------------------------------|
 "
-  expect_output(ds_oway_tables(mt), pim)
+  expect_output(ds_auto_freq_table(mt), pim)
 })
 
 
@@ -297,7 +297,7 @@ test_that("output from print_cross2 matches the expected result", {
 -------------------------------------------------------------
 
 "
-  expect_output(ds_tway_tables(mt), pim)
+  expect_output(ds_auto_cross_table(mt), pim)
 })
 
 

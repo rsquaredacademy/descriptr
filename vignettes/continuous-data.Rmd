@@ -1,0 +1,180 @@
+---
+title: "Continuous Data"
+author: "Aravind Hebbali"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Continuous Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE, message=FALSE}
+library(descriptr)
+library(dplyr)
+```
+
+## Introduction
+
+Descriptive statistics enables us to present the data in a more meaningful way 
+and to discern any patterns existing in the data. They can be useful for two 
+purposes:
+
+- provide basic information about variables in a data set
+- highlight potential relationships between variables
+
+This document introduces you to a basic set of functions that describe data
+continuous data. The other two vignettes introduce you to functions that
+describe categorical data and visualization options.
+
+## Data
+
+We have modified the `mtcars` data to create a new data set `mtcarz`. The only
+difference between the two data sets is related to the variable types. 
+
+```{r egdata}
+str(mtcarz)
+```
+
+## Data Screening
+
+The `ds_screener()` function will screen a data set and return the following:
+- Column/Variable Names
+- Data Type
+- Levels (in case of categorical data)
+- Number of missing observations
+- % of missing observations
+
+
+```{r screener}
+ds_screener(mtcarz)
+```
+
+
+## Summary Statistics
+
+The `ds_summary_stats` function returns a comprehensive set of statistics 
+including measures of location, variation, symmetry and extreme observations.
+
+```{r summary}
+ds_summary_stats(mtcarz, mpg)
+```
+
+## Frequency Distribution
+
+The `ds_freq_table` function creates frequency tables for continuous variables. 
+The default number of intervals is 5.
+
+```{r fcont}
+ds_freq_table(mtcarz, mpg, 4)
+```
+
+### Histogram
+
+A `hist` method has been defined which will generate a histogram.
+
+```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
+k <- ds_freq_table(mtcarz, mpg, 4)
+plot(k)
+```
+
+## Auto Summary
+
+If you want to view summary statistics and frequency tables of all or subset of
+variables in a data set, use `ds_auto_summary()`.
+
+```{r auto-summary}
+ds_auto_summary_stats(mtcarz, disp, mpg)
+```
+
+## Group Summary
+
+The `ds_group_summary()` function returns descriptive statistics of a continuous
+variable for the different levels of a categorical variable.
+
+```{r gsummary}
+k <- ds_group_summary(mtcarz, cyl, mpg)
+k
+```
+
+`ds_group_summary()` returns a tibble which can be used for further analysis.
+
+```{r gsummary_tibble}
+k$tidy_stats
+```
+
+### Box Plot
+
+A `boxplot()` method has been defined for comparing distributions.
+
+```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
+k <- ds_group_summary(mtcarz, cyl, mpg)
+plot(k)
+```
+
+### Multiple Variables
+
+If you want grouped summary statistics for multiple variables in a data set, use
+`ds_auto_group_summary()`.
+
+```{r auto-group-summary}
+ds_auto_group_summary(mtcarz, cyl, gear, mpg)
+```
+
+## Multiple Variable Statistics 
+
+The `ds_tidy_stats()` function generates summary/descriptive statistics for 
+variables in a data frame/tibble.
+
+```{r multistats}
+ds_tidy_stats(mtcarz, mpg, disp, hp)
+```
+
+## Measures
+
+If you want to view the measure of location, variation, symmetry, percentiles 
+and extreme observations as tibbles, use the below functions. All of them, 
+except for `ds_extreme_obs()` will work with single or multiple variables. If 
+you do not specify the variables, they will return the results for all the 
+continuous variables in the data set.
+
+#### Measures of Location
+
+```{r mloc}
+ds_measures_location(mtcarz)
+```
+
+#### Measures of Variation
+
+```{r mvar}
+ds_measures_variation(mtcarz)
+```
+
+#### Measures of Symmetry
+
+```{r msym}
+ds_measures_symmetry(mtcarz)
+```
+
+#### Percentiles
+
+```{r mperc}
+ds_percentiles(mtcarz)
+```
+
+#### Extreme Observations
+
+```{r mextreme}
+ds_extreme_obs(mtcarz, mpg)
+```
+
+
+
+

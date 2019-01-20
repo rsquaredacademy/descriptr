@@ -5,7 +5,7 @@
 \alias{plot.ds_freq_table}
 \title{Frequency table}
 \usage{
-ds_freq_table(data, variable)
+ds_freq_table(data, variable, bins = 5)
 
 \method{plot}{ds_freq_table}(x, ...)
 }
@@ -14,32 +14,34 @@ ds_freq_table(data, variable)
 
 \item{variable}{Column in \code{data}.}
 
+\item{bins}{Number of intervals into which the data must be split.}
+
 \item{x}{An object of class \code{ds_freq_table}.}
 
 \item{...}{Further arguments to be passed to or from methods.}
 }
-\value{
-\code{ds_freq_table} returns an object of class \code{"ds_freq_table"}.
-An object of class \code{"ds_freq_table"} is a list containing the
-following components:
-
-\item{ftable}{Frequency table.}
-}
 \description{
-Frequency table for factor data and returns the frequency, cumulative
-frequency, frequency percent and cumulative frequency percent.
-\code{barplot.ds_freq_table()} creates bar plot for the
-frequency table created using \code{ds_freq_table()}.
+Frequency table for categorical and continuous data and returns the 
+frequency, cumulative frequency, frequency percent and cumulative frequency 
+percent. \code{plot.ds_freq_table()} creates bar plot for the categorical 
+data and histogram for continuous data.
 }
 \examples{
-# frequency table
+# categorical data
 ds_freq_table(mtcarz, cyl)
 
 # barplot
 k <- ds_freq_table(mtcarz, cyl)
 plot(k)
 
+# continuous data
+ds_freq_table(mtcarz, mpg)
+
+# barplot
+k <- ds_freq_table(mtcarz, mpg)
+plot(k)
+
 }
 \seealso{
-\code{\link{ds_freq_cont}} \code{\link{ds_cross_table}}
+\code{\link{ds_cross_table}}
 }
