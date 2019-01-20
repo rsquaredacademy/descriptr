@@ -1,35 +1,4 @@
-#' Frequency distribution of continuous data
-#'
-#' Frequency distribution of continuous data by splitting into equidistant
-#' intervals created based on the number of bins specified.
-#' \code{hist.ds_freq_cont()} creates histogram for the frequency table
-#' created using \code{ds_freq_cont()}.
-#'
-#' @param data A \code{data.frame} or a \code{tibble}.
-#' @param variable Column in \code{data}.
-#' @param bins Number of intervals into which the data must be split.
-#' @param x An object of class \code{ds_freq_cont}.
-#' @param ... Further arguments to be passed to or from methods.
-#'
-#' @return A tibble.
-#'
-#' @examples
-#' # frequency table
-#' ds_freq_cont(mtcarz, mpg, 4)
-#'
-#' # histogram
-#' k <- ds_freq_cont(mtcarz, mpg, 4)
-#' plot(k)
-#'
-#' @seealso \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
-#'
-#' @export
-#'
-ds_freq_cont <- function(data, variable, bins = 5) UseMethod("ds_freq_cont")
-
-
-#' @export
-ds_freq_cont.default <- function(data, variable, bins = 5) {
+ds_freq_numeric <- function(data, variable, bins = 5) {
 
   check_df(data)
   var_name <- deparse(substitute(variable))
@@ -102,21 +71,10 @@ ds_freq_cont.default <- function(data, variable, bins = 5) {
               varname     = var_name
   )
 
-  class(out) <- "ds_freq_cont"
   return(out)
 }
 
-
-#' @export
-print.ds_freq_cont <- function(x, ...) {
-  print_fcont(x)
-}
-
-
-#' @rdname ds_freq_cont
-#' @export
-#'
-plot.ds_freq_cont <- function(x, ...) {
+plot_ds_freq_numeric <- function(x, ...) {
 
   x_lab <- magrittr::use_series(x, varname)
 

@@ -10,7 +10,7 @@
 #'
 #' @importFrom rlang !!
 #'
-#' @seealso \code{\link[base]{summary}} \code{\link{ds_freq_cont}}
+#' @seealso \code{\link[base]{summary}} 
 #' \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #'
 #' @export

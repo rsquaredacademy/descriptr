@@ -61,7 +61,7 @@ ds_summary_stats(mtcarz, mpg)
 #### Frequency Distribution
 
 ```{r descript4}
-ds_freq_cont(mtcarz, mpg)
+ds_freq_table(mtcarz, mpg)
 ```
 
 ### Categorical Data
