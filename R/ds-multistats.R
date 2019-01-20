@@ -49,7 +49,7 @@ ds_tidy_stats <- function(data, ...) {
 #' @rdname ds_tidy_stats
 #' @usage NULL
 #'
-ds_multi_stats <- function(data) {
+ds_multi_stats <- function(data, ...) {
   .Deprecated("ds_tidy_stats()")
   ds_tidy_stats(data, ...)
 }
