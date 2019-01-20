@@ -50,7 +50,7 @@ ds_auto_summary_stats <- function(data, ...) {
     cat(cli::rule(center = paste0('Frequency Distribution'),
                   width = options()$width))
     cat('\n\n')
-    print(ds_freq_cont(data, i))
+    print(ds_freq_table(data, i))
     cat('\n\n\n')
   }
 }
