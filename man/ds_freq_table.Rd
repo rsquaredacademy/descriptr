@@ -2,9 +2,12 @@
 % Please edit documentation in R/ds-freq-table.R
 \name{ds_freq_table}
 \alias{ds_freq_table}
+\alias{plot.ds_freq_table}
 \title{Frequency table}
 \usage{
 ds_freq_table(data, variable, bins = 5)
+
+\method{plot}{ds_freq_table}(x, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}

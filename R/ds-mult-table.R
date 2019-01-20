@@ -129,6 +129,6 @@ ds_tway_tables <- function(data) {
 #' @usage NULL
 #'
 ds_oway_tables <- function(data) {
-  .Deprecated("ds_auto_tabulation()")
-  ds_auto_tabulation(data)
+  .Deprecated("ds_auto_freq_table()")
+  ds_auto_freq_table(data)
 }

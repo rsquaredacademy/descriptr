@@ -71,6 +71,7 @@ print.ds_freq_table <- function(x, ...) {
   
 }
 
+#' @rdname ds_freq_table
 #' @export
 #'
 plot.ds_freq_table <- function(x, ...) {
