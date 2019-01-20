@@ -1,22 +1,22 @@
 #' @title Multiple One & Two Way Tables
-#' @description \code{ds_auto_tabulation} creates multiple one way tables by creating
+#' @description \code{ds_auto_freq_table} creates multiple one way tables by creating
 #' a frequency table for each categorical variable in a data frame.
 #' \code{ds_auto_cross_table} creates multiple two way tables by creating a cross
 #' table for each unique pair of categorical variables in a data frame.
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
-#' @details \code{ds_auto_tabulation} is a extension of the \code{ds_freq_table}
+#' @details \code{ds_auto_freq_table} is a extension of the \code{ds_freq_table}
 #' function. It creates a frequency table for each categorical variable in the
 #' dataframe. \code{ds_auto_cross_table} is a extension of the \code{ds_cross_table}
 #' function. It creates a two way table for each unique pair of categorical
 #' variables in the dataframe.
 #' @section Deprecated Functions:
 #' \code{ds_oway_tables()} and \code{ds_tway_tables()} have been deprecated. 
-#' Instead use \code{ds_auto_tabulation()} and \code{ds_auto_cross_table()}.
+#' Instead use \code{ds_auto_freq_table()} and \code{ds_auto_cross_table()}.
 #' @examples
 #' # multiple one way tables
-#' ds_auto_tabulation(mtcarz)
-#' ds_auto_tabulation(mtcarz, cyl, gear)
+#' ds_auto_freq_table(mtcarz)
+#' ds_auto_freq_table(mtcarz, cyl, gear)
 #'
 #' # multiple two way tables
 #' ds_auto_cross_table(mtcarz)
@@ -24,7 +24,7 @@
 #' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
 #' @export
 #'
-ds_auto_tabulation <- function(data, ...) {
+ds_auto_freq_table <- function(data, ...) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -61,7 +61,7 @@ ds_auto_tabulation <- function(data, ...) {
 
 
 
-#' @rdname ds_auto_tabulation
+#' @rdname ds_auto_freq_table
 #' @export
 #'
 ds_auto_cross_table <- function(data, ...) {
@@ -116,7 +116,7 @@ ds_auto_cross_table <- function(data, ...) {
 }
 
 #' @export
-#' @rdname ds_auto_tabulation
+#' @rdname ds_auto_freq_table
 #' @usage NULL
 #'
 ds_tway_tables <- function(data) {
@@ -125,7 +125,7 @@ ds_tway_tables <- function(data) {
 }
 
 #' @export
-#' @rdname ds_auto_tabulation
+#' @rdname ds_auto_freq_table
 #' @usage NULL
 #'
 ds_oway_tables <- function(data) {

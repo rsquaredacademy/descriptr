@@ -15,7 +15,7 @@ test_that("ds_auto_group_summary throws errors as expected", {
   expect_error(ds_auto_group_summary(mtcarz, mpg, disp), 'Data has no categorical variables.')
 })
 
-test_that("ds_auto_tabulation throws errors as expected", {
+test_that("ds_auto_freq_table throws errors as expected", {
   expect_error(ds_auto_tabulation(ndata), 'Data has no categorical variables.')
   expect_error(ds_auto_tabulation(mtcarz, mpg, disp), 'Data has no categorical variables.')
 })
