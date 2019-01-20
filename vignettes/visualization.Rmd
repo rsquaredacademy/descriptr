@@ -1,0 +1,89 @@
+---
+title: "Visualization"
+author: "Aravind Hebbali"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualization}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE, message=FALSE}
+library(descriptr)
+library(dplyr)
+```
+
+## Data
+
+We have modified the `mtcars` data to create a new data set `mtcarz`. The only
+difference between the two data sets is related to the variable types. 
+
+```{r egdata}
+str(mtcarz)
+```
+
+### Continuous Data
+
+The following functions will create plots for all or subset of continuous 
+variables in the data set.
+
+#### Histograms
+
+```{r hist}
+ds_plot_histogram(mtcarz)
+```
+
+#### Density Plots
+
+```{r hist}
+ds_plot_density(mtcarz)
+```
+
+#### Box Plots
+
+```{r hist}
+ds_plot_box_single(mtcarz)
+```
+
+#### Scatter Plots
+
+```{r hist}
+ds_plot_scatter(mtcarz, mpg, disp, hp)
+```
+
+### Categorical Data
+
+The following functions will create plots for all or subset of categorical 
+variables in the data set.
+
+#### Bar Plot
+
+```{r hist}
+ds_plot_bar(mtcarz)
+```
+
+#### Stacked Bar Plot
+
+```{r hist}
+ds_plot_bar_stacked(mtcarz, cyl, gear, am)
+```
+
+#### Grouped Bar Plot
+
+```{r hist}
+ds_plot_bar_grouped(mtcarz, cyl, gear, am)
+```
+
+#### Grouped Box Plots
+
+```{r hist}
+ds_plot_box_group(mtcarz, cyl, gear, mpg, disp)
+```
