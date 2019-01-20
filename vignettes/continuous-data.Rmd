@@ -91,7 +91,7 @@ If you want to view summary statistics and frequency tables of all or subset of
 variables in a data set, use `ds_auto_summary()`.
 
 ```{r auto-summary}
-ds_auto_summary(mtcarz, disp, mpg)
+ds_auto_summary_stats(mtcarz, disp, mpg)
 ```
 
 ## Group Summary
