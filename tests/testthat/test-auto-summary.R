@@ -4,8 +4,8 @@ ndata <- dplyr::select(mtcarz, mpg, disp, hp, wt, qsec, drat)
 fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
 
 test_that("ds_auto_summary throws errors as expected", {
-  expect_error(ds_auto_summary(fdata), 'Data has no continuous variables.')
-  expect_error(ds_auto_summary(mtcarz, cyl, gear), 'Data has no continuous variables.')
+  expect_error(ds_auto_summary_stats(fdata), 'Data has no continuous variables.')
+  expect_error(ds_auto_summary_stats(mtcarz, cyl, gear), 'Data has no continuous variables.')
 })
 
 test_that("ds_auto_group_summary throws errors as expected", {
@@ -91,7 +91,7 @@ test_that("output from ds_auto_summary is as expected", {
 
 
 "
-expect_output(ds_auto_summary(mtcarz, mpg), pim)
+expect_output(ds_auto_summary_stats(mtcarz, mpg), pim)
 })
 
 test_that("output from ds_auto_group_summary is as expected", {
