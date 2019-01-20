@@ -43,19 +43,19 @@ ds_plot_histogram(mtcarz)
 
 #### Density Plots
 
-```{r hist}
+```{r density}
 ds_plot_density(mtcarz)
 ```
 
 #### Box Plots
 
-```{r hist}
+```{r box_single}
 ds_plot_box_single(mtcarz)
 ```
 
 #### Scatter Plots
 
-```{r hist}
+```{r scatter}
 ds_plot_scatter(mtcarz, mpg, disp, hp)
 ```
 
@@ -66,24 +66,24 @@ variables in the data set.
 
 #### Bar Plot
 
-```{r hist}
+```{r bar}
 ds_plot_bar(mtcarz)
 ```
 
 #### Stacked Bar Plot
 
-```{r hist}
+```{r bar_stacked}
 ds_plot_bar_stacked(mtcarz, cyl, gear, am)
 ```
 
 #### Grouped Bar Plot
 
-```{r hist}
+```{r bar_grouped}
 ds_plot_bar_grouped(mtcarz, cyl, gear, am)
 ```
 
 #### Grouped Box Plots
 
-```{r hist}
+```{r box_group}
 ds_plot_box_group(mtcarz, cyl, gear, mpg, disp)
 ```
