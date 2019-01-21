@@ -86,3 +86,12 @@ plot.ds_freq_table <- function(x, ...) {
 	}
 
 }
+
+#' @export
+#' @rdname ds_freq_table
+#' @usage NULL
+#'
+ds_freq_cont <- function(data, variable, bins) {
+  .Deprecated("ds_freq_table()")
+  ds_freq_table(data, variable, bins)
+}

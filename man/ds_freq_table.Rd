@@ -3,6 +3,7 @@
 \name{ds_freq_table}
 \alias{ds_freq_table}
 \alias{plot.ds_freq_table}
+\alias{ds_freq_cont}
 \title{Frequency table}
 \usage{
 ds_freq_table(data, variable, bins = 5)
