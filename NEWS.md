@@ -1,3 +1,39 @@
+# descriptr 0.5.0
+
+## New Features
+
+- `ds_tiy_stats()` will detect continuous variables in the data set and return
+summary statistics for all of them. ([#68](https://github.com/rsquaredacademy/descriptr/issues/68))
+- `ds_auto_summary_stats()` will detect all continuous variables in the data 
+set and return summary statistics and frequency tables for all of them. 
+([#69](https://github.com/rsquaredacademy/descriptr/issues/69))
+- `ds_plot_*()` family of functions will detect continuous and categorical 
+variables in the data set and generate appropriate plots. ([#70](https://github.com/rsquaredacademy/descriptr/issues/70))
+- `ds_launch_shiny_app()` will check if suggested packages are available and 
+offer to install the missing packages. ([#76](https://github.com/rsquaredacademy/descriptr/issues/76))
+- `ds_measures_*()` family of functions now accept multiple arguments. ([#78](https://github.com/rsquaredacademy/descriptr/issues/78))
+- `ds_auto_freq_table()` and `ds_auto_cross_table()` allow users to specify a 
+subset of variables. ([#83](https://github.com/rsquaredacademy/descriptr/issues/83))
+- `ds_freq_table()` now works for both continuous and categorical data. ([#90](https://github.com/rsquaredacademy/descriptr/issues/90))
+- Some minor improvements to the error messages. ([#51](https://github.com/rsquaredacademy/descriptr/issues/51))
+
+## Deprecation
+
+All the `ds_*` functions related to visualizing probability distributions have
+been soft deprecated and will be removed in the next release. Please use the 
+[vistributions](https://cran.r-project.org/package=vistributions) package going forward.
+
+The shiny app has been soft-deprecated and will be removed in the next release. 
+Please use the [xplorerr](https://cran.r-project.org/package=xplorerr) package 
+going forward.
+
+The following functions have been soft-deprecated and will be removed in the 
+next release:
+
+- `ds_freq_cont()`
+- `ds_oway_tables()`
+- `ds_tway_tables()`
+
 # descriptr 0.4.1
 
 ## New Features
