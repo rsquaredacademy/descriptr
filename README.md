@@ -31,8 +31,11 @@ devtools::install_github("rsquaredacademy/descriptr")
 
 ## Articles
 
-  - [Descriptive
-    Statistics](https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html)
+  - [Continuous
+    Data](https://descriptr.rsquaredacademy.com/articles/continuous-data.html)
+  - [Categorical
+    Data](https://descriptr.rsquaredacademy.com/articles/categorical-data.html)
+  - [Visualization](https://descriptr.rsquaredacademy.com/articles/visualization.html)
 
 ## Usage
 
@@ -214,10 +217,7 @@ ds_group_summary(mtcarz, cyl, mpg)
 #### Multiple Variable Statistics
 
 ``` r
-ds_multi_stats(mtcarz, mpg, disp, hp)
-#> Warning: 'ds_multi_stats' is deprecated.
-#> Use 'ds_tidy_stats()' instead.
-#> See help("Deprecated")
+ds_tidy_stats(mtcarz, mpg, disp, hp)
 #> # A tibble: 3 x 16
 #>   vars    min   max  mean t_mean median  mode range variance  stdev  skew
 #>   <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl> <dbl>    <dbl>  <dbl> <dbl>

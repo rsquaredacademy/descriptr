@@ -23,13 +23,6 @@ library(dplyr)
 
 ## Introduction
 
-Descriptive statistics enables us to present the data in a more meaningful way 
-and to discern any patterns existing in the data. They can be useful for two 
-purposes:
-
-- provide basic information about variables in a data set
-- highlight potential relationships between variables
-
 This document introduces you to a basic set of functions that describe data
 continuous data. The other two vignettes introduce you to functions that
 describe categorical data and visualization options.
@@ -52,11 +45,9 @@ The `ds_screener()` function will screen a data set and return the following:
 - Number of missing observations
 - % of missing observations
 
-
 ```{r screener}
 ds_screener(mtcarz)
 ```
-
 
 ## Summary Statistics
 
@@ -66,6 +57,15 @@ including measures of location, variation, symmetry and extreme observations.
 ```{r summary}
 ds_summary_stats(mtcarz, mpg)
 ```
+
+You can pass multiple variables as shown below:
+
+```{r summary2}
+ds_summary_stats(mtcarz, mpg, disp)
+```
+
+If you do not specify any variables, it will detect all the continuous 
+variables in the data set and return summary statistics for each of them.
 
 ## Frequency Distribution
 
@@ -78,7 +78,7 @@ ds_freq_table(mtcarz, mpg, 4)
 
 ### Histogram
 
-A `hist` method has been defined which will generate a histogram.
+A `plot()` method has been defined which will generate a histogram.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_freq_table(mtcarz, mpg, 4)
@@ -112,7 +112,7 @@ k$tidy_stats
 
 ### Box Plot
 
-A `boxplot()` method has been defined for comparing distributions.
+A `plot()` method has been defined for comparing distributions.
 
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_group_summary(mtcarz, cyl, mpg)
@@ -130,7 +130,7 @@ ds_auto_group_summary(mtcarz, cyl, gear, mpg)
 
 ## Multiple Variable Statistics 
 
-The `ds_tidy_stats()` function generates summary/descriptive statistics for 
+The `ds_tidy_stats()` function returns summary/descriptive statistics for 
 variables in a data frame/tibble.
 
 ```{r multistats}

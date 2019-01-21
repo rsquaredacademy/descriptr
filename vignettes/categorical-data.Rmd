@@ -21,6 +21,20 @@ library(descriptr)
 library(dplyr)
 ```
 
+## Introduction
+
+In this document, we will introduce you to functions for exploring and 
+visualizing categorical data.
+
+## Data
+
+We have modified the `mtcars` data to create a new data set `mtcarz`. The only
+difference between the two data sets is related to the variable types. 
+
+```{r egdata}
+str(mtcarz)
+```
+
 ## Cross Tabulation
 
 The `ds_cross_table()` function creates two way tables of categorical variables. 
@@ -35,7 +49,7 @@ If you want the above result as a tibble, use `ds_twoway_table()`.
 ds_twoway_table(mtcarz, cyl, gear)
 ```
 
-A plot method has been defined which will generate:
+A `plot()` method has been defined which will generate:
 
 ### Grouped Bar Plots
 
@@ -60,13 +74,13 @@ plot(k, proportional = TRUE)
 
 ## Frequency Table 
 
-The `ds_freq_table()` function creates frequency tables for categorical variables. 
+The `ds_freq_table()` function creates frequency tables.
 
 ```{r ftable}
 ds_freq_table(mtcarz, cyl)
 ```
 
-### Bar Plot
+A `plot()` method has been defined which will create a bar plot.
 
 ```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
 k <- ds_freq_table(mtcarz, cyl)
@@ -76,7 +90,7 @@ plot(k)
 ## Multiple One Way Tables
 
 The `ds_auto_freq_table()` function creates multiple one way tables by creating a 
-frequency table for each categorical variable in a data frame. You can also 
+frequency table for each categorical variable in a data set. You can also 
 specify a subset of variables if you do not want all the variables in the data 
 set to be used.
 
@@ -87,7 +101,7 @@ ds_auto_freq_table(mtcarz)
 ## Multiple Two Way Tables
 
 The `ds_auto_cross_table()` function creates multiple two way tables by creating a 
-cross table for each unique pair of categorical variables in a data frame. You 
+cross table for each unique pair of categorical variables in a data set. You 
 can also specify a subset of variables if you do not want all the variables in 
 the data set to be used.
 
