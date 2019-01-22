@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds-auto-summary.R
 \name{ds_auto_summary_stats}
 \alias{ds_auto_summary_stats}
-\title{Summary statistics}
+\title{Descriptive statistics and frquency tables}
 \usage{
 ds_auto_summary_stats(data, ...)
 }
@@ -12,7 +12,7 @@ ds_auto_summary_stats(data, ...)
 \item{...}{Column(s) in \code{data}.}
 }
 \description{
-Generate summary statistics for all continuous variables in data.
+Generate summary statistics & frequency table for all continuous variables in data.
 }
 \examples{
 ds_auto_summary_stats(mtcarz)

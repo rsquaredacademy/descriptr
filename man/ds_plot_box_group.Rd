@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds-plots.R
 \name{ds_plot_box_group}
 \alias{ds_plot_box_group}
-\title{Compate distributions}
+\title{Compare distributions}
 \usage{
 ds_plot_box_group(data, ...)
 }

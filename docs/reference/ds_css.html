@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/descriptive-stats.html">Descriptive Statistics</a>
+      <a href="../articles/continuous-data.html">Continuous Data</a>
     </li>
     <li>
-      <a href="../articles/distributions.html">Distributions</a>
+      <a href="../articles/categorical-data.html">Categorical Data</a>
+    </li>
+    <li>
+      <a href="../articles/visualization.html">Visualization</a>
     </li>
   </ul>
 </li>
@@ -158,15 +161,6 @@
     <p>Any NA values are stripped from <code>x</code> before computation
 takes place.</p>
     
-    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated Function</h2>
-
-    
-    <p><code>stat_css()</code> has been deprecated. Instead use <code>ds_css()</code>.</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p><a href='http://www.itl.nist.gov/div898/handbook/prc/section4/prc421.htm'>NIST/SEMATECH e-Handbook of Statistical Methods</a></p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ds_css</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>)</div><div class='output co'>#&gt; [1] 1126.047</div></pre>
@@ -179,10 +173,6 @@ takes place.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#deprecated-function">Deprecated Function</a></li>
-
-      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

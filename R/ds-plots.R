@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' ds_plot_scatter(mtcarz)
-#' ds_plot_scatter(mtcarz, mpg, disp, hp)
+#' ds_plot_scatter(mtcarz, mpg, disp)
 #'
 #' @importFrom rlang sym
 #' @importFrom utils combn
@@ -424,7 +424,7 @@ ds_plot_bar_grouped <- function(data, ...) {
 }
 
 
-#' Compate distributions
+#' Compare distributions
 #'
 #' Creates box plots if the data has both categorical & continuous variables.
 #'

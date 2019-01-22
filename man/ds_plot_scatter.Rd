@@ -16,6 +16,6 @@ Creates scatter plots if the data has continuous variables.
 }
 \examples{
 ds_plot_scatter(mtcarz)
-ds_plot_scatter(mtcarz, mpg, disp, hp)
+ds_plot_scatter(mtcarz, mpg, disp)
 
 }

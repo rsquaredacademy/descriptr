@@ -1,212 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/index.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/articles/distributions.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/index.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/news/index.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_launch_shiny_app.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_summary_stats.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_cross_table.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_freq_table.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_freq_cont.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_group_summary.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_multi_stats.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/conduct</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/license-text</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_screener.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_oway_tables.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/dist_norm_plot.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/dist_binom_plot.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/dist_chi_plot.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/dist_f_plot.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/dist_t.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_measures_location.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_measures_variation.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_measures_symmetry.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_percentiles.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_extreme_obs.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_kurtosis.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_skewness.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_mode.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_range.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_mdev.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_cvar.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_css.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_gmean.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_hmean.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_tailobs.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/ds_rindex.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/hsb.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://descriptr.rsquaredacademy.com/reference/mtcarz.html</loc>
-  <lastmod>2018-09-29T18:17:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/index.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/descriptr.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/dist_binom_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/dist_chi_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/dist_f_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/dist_norm_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/dist_t.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_auto_freq_table.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_auto_group_summary.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_auto_summary_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_cross_table.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_css.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_cvar.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_extreme_obs.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_freq_table.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_gmean.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_group_summary.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_hmean.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_kurtosis.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_launch_shiny_app.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_mdev.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_measures_location.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_measures_symmetry.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_measures_variation.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_mode.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_percentiles.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_bar.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_bar_grouped.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_bar_stacked.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_box_group.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_box_single.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_density.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_histogram.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_plot_scatter.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_range.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_rindex.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_screener.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_skewness.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_std_error.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_summary_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_tailobs.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/ds_tidy_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/hsb.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/reference/mtcarz.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/articles/categorical-data.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/articles/continuous-data.html</loc>
+  </url>
+  <url>
+    <loc>https://descriptr.rsquaredacademy.com/articles/visualization.html</loc>
+  </url>
 </urlset>

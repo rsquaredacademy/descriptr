@@ -1,6 +1,6 @@
-use---
+---
 title: "Categorical Data"
-author: "Vignette Author"
+author: "Aravind Hebbali"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
