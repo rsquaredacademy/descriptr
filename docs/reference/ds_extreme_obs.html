@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/descriptive-stats.html">Descriptive Statistics</a>
+      <a href="../articles/continuous-data.html">Continuous Data</a>
     </li>
     <li>
-      <a href="../articles/distributions.html">Distributions</a>
+      <a href="../articles/categorical-data.html">Categorical Data</a>
+    </li>
+    <li>
+      <a href="../articles/visualization.html">Visualization</a>
     </li>
   </ul>
 </li>
@@ -151,19 +154,19 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_extreme_obs</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 3</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>ds_extreme_obs</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 3</span><span>
 #&gt;    type  value index
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> high   33.9    20
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> high   32.4    18
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> high   30.4    19
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> high   30.4    28
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> high   27.3    26
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> low    10.4    15
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> low    10.4    16
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> low    13.3    24
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> low    14.3     7
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> low    14.7    17</div><div class='input'>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> high   33.9    20
+#&gt; </span><span style='color: #555555;'> 2</span><span> high   32.4    18
+#&gt; </span><span style='color: #555555;'> 3</span><span> high   30.4    19
+#&gt; </span><span style='color: #555555;'> 4</span><span> high   30.4    28
+#&gt; </span><span style='color: #555555;'> 5</span><span> high   27.3    26
+#&gt; </span><span style='color: #555555;'> 6</span><span> low    10.4    15
+#&gt; </span><span style='color: #555555;'> 7</span><span> low    10.4    16
+#&gt; </span><span style='color: #555555;'> 8</span><span> low    13.3    24
+#&gt; </span><span style='color: #555555;'> 9</span><span> low    14.3     7
+#&gt; </span><span style='color: #555555;'>10</span><span> low    14.7    17</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

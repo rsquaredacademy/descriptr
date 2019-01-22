@@ -64,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -81,10 +81,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/descriptive-stats.html">Descriptive Statistics</a>
+      <a href="../articles/continuous-data.html">Continuous Data</a>
     </li>
     <li>
-      <a href="../articles/distributions.html">Distributions</a>
+      <a href="../articles/categorical-data.html">Categorical Data</a>
+    </li>
+    <li>
+      <a href="../articles/visualization.html">Visualization</a>
     </li>
   </ul>
 </li>
@@ -136,7 +139,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ds_measures_variation</span>(<span class='no'>data</span>, <span class='no'>column</span>)</pre>
+    <pre class="usage"><span class='fu'>ds_measures_variation</span>(<span class='no'>data</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,17 +149,29 @@
       <td><p>A <code>data.frame</code> or <code>tibble</code>.</p></td>
     </tr>
     <tr>
-      <th>column</th>
-      <td><p>Column in <code>data</code>.</p></td>
+      <th>...</th>
+      <td><p>Column(s) in <code>data</code>.</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_measures_variation</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 6</span><span>
-#&gt;   range   iqr variance    sd coeff_var std_error
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  23.5  7.38     36.3  6.03      30.0      1.07</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>ds_measures_variation</span>(<span class='no'>mtcarz</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 7</span><span>
+#&gt;   var    range     iqr  variance      sd coeff_var std_error
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> disp  401.   205.    </span><span style='text-decoration: underline;'>15</span><span>361.    124.         53.7   21.9   
+#&gt; </span><span style='color: #555555;'>2</span><span> drat    2.17   0.840     0.286   0.535      14.9    0.094</span><span style='text-decoration: underline;'>5</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span> hp    283     83.5    </span><span style='text-decoration: underline;'>4</span><span>701.     68.6        46.7   12.1   
+#&gt; </span><span style='color: #555555;'>4</span><span> mpg    23.5    7.38     36.3     6.03       30.0    1.07  
+#&gt; </span><span style='color: #555555;'>5</span><span> qsec    8.40   2.01      3.19    1.79       10.0    0.316 
+#&gt; </span><span style='color: #555555;'>6</span><span> wt      3.91   1.03      0.957   0.978      30.4    0.173 </div><div class='input'><span class='fu'>ds_measures_variation</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+#&gt;   var   range   iqr variance    sd coeff_var std_error
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> mpg    23.5  7.38     36.3  6.03      30.0      1.07</div><div class='input'><span class='fu'>ds_measures_variation</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>, <span class='no'>disp</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 7</span><span>
+#&gt;   var   range    iqr variance     sd coeff_var std_error
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> disp  401.  205.    </span><span style='text-decoration: underline;'>15</span><span>361.  124.        53.7     21.9 
+#&gt; </span><span style='color: #555555;'>2</span><span> mpg    23.5   7.38     36.3   6.03      30.0      1.07</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

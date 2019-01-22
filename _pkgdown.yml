@@ -65,6 +65,7 @@ reference:
   - ds_auto_summary_stats
   - ds_summary_stats
   - ds_tidy_stats
+  - ds_freq_table
   - ds_measures_location
   - ds_measures_variation
   - ds_measures_symmetry

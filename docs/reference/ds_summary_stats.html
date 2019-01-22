@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -80,10 +80,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/descriptive-stats.html">Descriptive Statistics</a>
+      <a href="../articles/continuous-data.html">Continuous Data</a>
     </li>
     <li>
-      <a href="../articles/distributions.html">Distributions</a>
+      <a href="../articles/categorical-data.html">Categorical Data</a>
+    </li>
+    <li>
+      <a href="../articles/visualization.html">Visualization</a>
     </li>
   </ul>
 </li>
@@ -134,7 +137,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ds_summary_stats</span>(<span class='no'>data</span>, <span class='no'>variable</span>)</pre>
+    <pre class="usage"><span class='fu'>ds_summary_stats</span>(<span class='no'>data</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,25 +147,21 @@
       <td><p>A <code>data.frame</code> or <code>tibble</code>.</p></td>
     </tr>
     <tr>
-      <th>variable</th>
-      <td><p>Column in <code>data</code>.</p></td>
+      <th>...</th>
+      <td><p>Column(s) in <code>data</code>.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated function</h2>
-
-    
-    <p><code>summary_stats()</code> has been deprecated. Instead use
-<code>ds_summary_stats()</code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></code> <code><a href='ds_freq_cont.html'>ds_freq_cont</a></code>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></code> 
 <code><a href='ds_freq_table.html'>ds_freq_table</a></code> <code><a href='ds_cross_table.html'>ds_cross_table</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_summary_stats</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt;                         Univariate Analysis                          
+    <pre class="examples"><div class='input'><span class='fu'>ds_summary_stats</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt; --------------------------------- Variable: mpg --------------------------------
+#&gt; 
+#&gt;                         Univariate Analysis                          
 #&gt; 
 #&gt;  N                       32.00      Variance                36.32 
 #&gt;  Missing                  0.00      Std Deviation            6.03 
@@ -198,7 +197,10 @@
 #&gt;   16                         10.4        18                         32.4  
 #&gt;   24                         13.3        19                         30.4  
 #&gt;    7                         14.3        28                         30.4  
-#&gt;   17                         14.7        26                         27.3  </div><div class='input'>
+#&gt;   17                         14.7        26                         27.3  
+#&gt; 
+#&gt; 
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -206,8 +208,6 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#deprecated-function">Deprecated function</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>

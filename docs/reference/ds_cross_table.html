@@ -64,7 +64,7 @@ visualized as barplots and mosaicplots." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -81,10 +81,13 @@ visualized as barplots and mosaicplots." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/descriptive-stats.html">Descriptive Statistics</a>
+      <a href="../articles/continuous-data.html">Continuous Data</a>
     </li>
     <li>
-      <a href="../articles/distributions.html">Distributions</a>
+      <a href="../articles/categorical-data.html">Categorical Data</a>
+    </li>
+    <li>
+      <a href="../articles/visualization.html">Visualization</a>
     </li>
   </ul>
 </li>
@@ -178,12 +181,6 @@ as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtapose
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="deprecated-function"><a class="anchor" href="#deprecated-function"></a>Deprecated function</h2>
-
-    
-    <p><code>ds_cross_table()</code> has been deprecated. Instead use
-<code>ds_cross_table()</code>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_cross_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>gear</span>)
@@ -223,26 +220,24 @@ as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtapose
 <span class='co'># bar plots</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>k</span>, <span class='kw'>stacked</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>k</span>, <span class='kw'>proportional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># alternate</span>
-<span class='fu'>ds_twoway_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>gear</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("cyl", "gear", "count")</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 6</span><span>
+<span class='fu'>ds_twoway_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>, <span class='no'>gear</span>)</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("cyl", "gear", "count")</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 6</span><span>
 #&gt;   cyl   gear  count percent row_percent col_percent
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 4     3         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.090</span><span style='text-decoration: underline;'>9</span><span>      0.066</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 4     4         8  0.25        0.727       0.667 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 4     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.182       0.4   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 6     3         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.286       0.133 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 6     4         4  0.125       0.571       0.333 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 6     5         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.143       0.2   
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span> 8     3        12  0.375       0.857       0.8   
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span> 8     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.143       0.4   </div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 4     3         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.090</span><span style='text-decoration: underline;'>9</span><span>      0.066</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> 4     4         8  0.25        0.727       0.667 
+#&gt; </span><span style='color: #555555;'>3</span><span> 4     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.182       0.4   
+#&gt; </span><span style='color: #555555;'>4</span><span> 6     3         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.286       0.133 
+#&gt; </span><span style='color: #555555;'>5</span><span> 6     4         4  0.125       0.571       0.333 
+#&gt; </span><span style='color: #555555;'>6</span><span> 6     5         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.143       0.2   
+#&gt; </span><span style='color: #555555;'>7</span><span> 8     3        12  0.375       0.857       0.8   
+#&gt; </span><span style='color: #555555;'>8</span><span> 8     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.143       0.4   </div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#deprecated-function">Deprecated function</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

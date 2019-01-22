@@ -31,12 +31,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Generate Descriptive Statistics &amp; Explore Statistical Distributions ">
-<meta property="og:description" content="Generate descriptive statistics such as measures of location,
-    dispersion, frequency tables, cross tables, group summaries and multiple
-    one/two way tables. Visualize and compute percentiles/probabilities of 
-    normal, t, f, chi square and binomial distributions.">
-<meta name="twitter:card" content="summary">
+<script src="pkgdown.js"></script>
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -55,7 +50,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -72,10 +67,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/descriptive-stats.html">Descriptive Statistics</a>
+      <a href="articles/continuous-data.html">Continuous Data</a>
     </li>
     <li>
-      <a href="articles/distributions.html">Distributions</a>
+      <a href="articles/categorical-data.html">Categorical Data</a>
+    </li>
+    <li>
+      <a href="articles/visualization.html">Visualization</a>
     </li>
   </ul>
 </li>
@@ -139,8 +137,9 @@
 <h2 class="hasAnchor">
 <a href="#articles" class="anchor"></a>Articles</h2>
 <ul>
-<li><a href="https://descriptr.rsquaredacademy.com/articles/descriptive-stats.html">Descriptive Statistics</a></li>
-<li><a href="https://descriptr.rsquaredacademy.com/articles/distributions.html">Statistical Distributions</a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/articles/continuous-data.html">Continuous Data</a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/articles/categorical-data.html">Categorical Data</a></li>
+<li><a href="https://descriptr.rsquaredacademy.com/articles/visualization.html">Visualization</a></li>
 </ul>
 </div>
 <div id="usage" class="section level2">
@@ -160,86 +159,78 @@
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  $ am  : Factor w/ 2 levels "0","1": 2 2 2 1 1 1 1 1 1 1 ...</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  $ gear: Factor w/ 3 levels "3","4","5": 2 2 2 1 1 1 1 2 2 2 ...</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  $ carb: Factor w/ 6 levels "1","2","3","4",..: 4 4 1 1 2 1 4 2 2 4 ...</span></a></code></pre></div>
+<div id="continuous-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#continuous-data" class="anchor"></a>Continuous Data</h3>
 <div id="summary-statistics" class="section level4">
 <h4 class="hasAnchor">
 <a href="#summary-statistics" class="anchor"></a>Summary Statistics</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/ds_summary_stats.html">ds_summary_stats</a></span>(mtcarz, mpg)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;                         Univariate Analysis                          </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; ------------------------------ Variable: mpg ------------------------------</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;  N                       32.00      Variance                36.32 </span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;  Missing                  0.00      Std Deviation            6.03 </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  Mean                    20.09      Range                   23.50 </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  Median                  19.20      Interquartile Range      7.38 </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  Mode                    10.40      Uncorrected SS       14042.31 </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  Trimmed Mean            19.95      Corrected SS          1126.05 </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  Skewness                 0.67      Coeff Variation         30.00 </span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  Kurtosis                -0.02      Std Error Mean           1.07 </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;                               Quantiles                               </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;                         Univariate Analysis                          </span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  N                       32.00      Variance                36.32 </span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  Missing                  0.00      Std Deviation            6.03 </span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  Mean                    20.09      Range                   23.50 </span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  Median                  19.20      Interquartile Range      7.38 </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  Mode                    10.40      Uncorrected SS       14042.31 </span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  Trimmed Mean            19.95      Corrected SS          1126.05 </span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  Skewness                 0.67      Coeff Variation         30.00 </span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  Kurtosis                -0.02      Std Error Mean           1.07 </span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;               Quantile                            Value                </span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;                               Quantiles                               </span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;              Max                                  33.90                </span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;              99%                                  33.44                </span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;              95%                                  31.30                </span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;              90%                                  30.09                </span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;              Q3                                   22.80                </span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;              Median                               19.20                </span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;              Q1                                   15.43                </span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;              10%                                  14.34                </span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;              5%                                   12.00                </span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;              1%                                   10.40                </span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;              Min                                  10.40                </span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;                             Extreme Values                            </span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;               Quantile                            Value                </span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;              Max                                  33.90                </span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;              99%                                  33.44                </span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;              95%                                  31.30                </span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;              90%                                  30.09                </span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;              Q3                                   22.80                </span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;              Median                               19.20                </span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt;              Q1                                   15.43                </span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt;              10%                                  14.34                </span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt;              5%                                   12.00                </span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt;              1%                                   10.40                </span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt;              Min                                  10.40                </span></a>
 <a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;                 Low                                High                </span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;                             Extreme Values                            </span></a>
 <a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt;   Obs                        Value       Obs                        Value </span></a>
-<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt;   15                         10.4        20                         33.9  </span></a>
-<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt;   16                         10.4        18                         32.4  </span></a>
-<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt;   24                         13.3        19                         30.4  </span></a>
-<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">#&gt;    7                         14.3        28                         30.4  </span></a>
-<a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt;   17                         14.7        26                         27.3</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt;                 Low                                High                </span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt;   Obs                        Value       Obs                        Value </span></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt;   15                         10.4        20                         33.9  </span></a>
+<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">#&gt;   16                         10.4        18                         32.4  </span></a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt;   24                         13.3        19                         30.4  </span></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="co">#&gt;    7                         14.3        28                         30.4  </span></a>
+<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="co">#&gt;   17                         14.7        26                         27.3</span></a></code></pre></div>
 </div>
-<div id="two-way-table" class="section level4">
+<div id="frequency-distribution" class="section level4">
 <h4 class="hasAnchor">
-<a href="#two-way-table" class="anchor"></a>Two Way Table</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt;     Cell Contents</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;  |---------------|</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;  |     Frequency |</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;  |       Percent |</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;  |       Row Pct |</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;  |       Col Pct |</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;  |---------------|</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;  Total Observations:  32 </span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; |              |                           gear                            |</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; |          cyl |            3 |            4 |            5 |    Row Total |</span></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; |            4 |            1 |            8 |            2 |           11 |</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; |              |        0.031 |         0.25 |        0.062 |              |</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; |              |         0.09 |         0.73 |         0.18 |         0.34 |</span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; |              |         0.07 |         0.67 |          0.4 |              |</span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; |            6 |            2 |            4 |            1 |            7 |</span></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; |              |        0.062 |        0.125 |        0.031 |              |</span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; |              |         0.29 |         0.57 |         0.14 |         0.22 |</span></a>
-<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; |              |         0.13 |         0.33 |          0.2 |              |</span></a>
-<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; |            8 |           12 |            0 |            2 |           14 |</span></a>
-<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt; |              |        0.375 |            0 |        0.062 |              |</span></a>
-<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; |              |         0.86 |            0 |         0.14 |         0.44 |</span></a>
-<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; |              |          0.8 |            0 |          0.4 |              |</span></a>
-<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; | Column Total |           15 |           12 |            5 |           32 |</span></a>
-<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; |              |        0.468 |        0.375 |        0.155 |              |</span></a>
-<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a></code></pre></div>
+<a href="#frequency-distribution" class="anchor"></a>Frequency Distribution</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/ds_freq_table.html">ds_freq_table</a></span>(mtcarz, mpg)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt;                               Variable: mpg                               </span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; | 10.4 - 15.1 |     6     |       6       |    18.75     |    18.75     |</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; | 15.1 - 19.8 |    12     |      18       |     37.5     |    56.25     |</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; | 19.8 - 24.5 |     8     |      26       |      25      |    81.25     |</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; | 24.5 - 29.2 |     2     |      28       |     6.25     |     87.5     |</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; | 29.2 - 33.9 |     4     |      32       |     12.5     |     100      |</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; |    Total    |    32     |       -       |    100.00    |      -       |</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a></code></pre></div>
 </div>
+</div>
+<div id="categorical-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#categorical-data" class="anchor"></a>Categorical Data</h3>
 <div id="one-way-table" class="section level4">
 <h4 class="hasAnchor">
 <a href="#one-way-table" class="anchor"></a>One Way Table</h4>
@@ -257,30 +248,48 @@
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  Total        32              -             100.00              -      </span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; -----------------------------------------------------------------------</span></a></code></pre></div>
 </div>
-<div id="one-way-table-continuous-data" class="section level4">
+<div id="two-way-table" class="section level4">
 <h4 class="hasAnchor">
-<a href="#one-way-table-continuous-data" class="anchor"></a>One Way Table (Continuous Data)</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/ds_freq_cont.html">ds_freq_cont</a></span>(mtcarz, mpg)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;                               Variable: mpg                               </span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; | 10.4 - 15.1 |     6     |       6       |    18.75     |    18.75     |</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; | 15.1 - 19.8 |    12     |      18       |     37.5     |    56.25     |</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; | 19.8 - 24.5 |     8     |      26       |      25      |    81.25     |</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; | 24.5 - 29.2 |     2     |      28       |     6.25     |     87.5     |</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; | 29.2 - 33.9 |     4     |      32       |     12.5     |     100      |</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; |    Total    |    32     |       -       |    100.00    |      -       |</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; |-----------------------------------------------------------------------|</span></a></code></pre></div>
+<a href="#two-way-table" class="anchor"></a>Two Way Table</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/ds_cross_table.html">ds_cross_table</a></span>(mtcarz, cyl, gear)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;     Cell Contents</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;  |---------------|</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;  |     Frequency |</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;  |       Percent |</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;  |       Row Pct |</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;  |       Col Pct |</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;  |---------------|</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;  Total Observations:  32 </span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; |              |                           gear                            |</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; |          cyl |            3 |            4 |            5 |    Row Total |</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; |            4 |            1 |            8 |            2 |           11 |</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; |              |        0.031 |         0.25 |        0.062 |              |</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; |              |         0.09 |         0.73 |         0.18 |         0.34 |</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; |              |         0.07 |         0.67 |          0.4 |              |</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; |            6 |            2 |            4 |            1 |            7 |</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; |              |        0.062 |        0.125 |        0.031 |              |</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; |              |         0.29 |         0.57 |         0.14 |         0.22 |</span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; |              |         0.13 |         0.33 |          0.2 |              |</span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt; |            8 |           12 |            0 |            2 |           14 |</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="co">#&gt; |              |        0.375 |            0 |        0.062 |              |</span></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="co">#&gt; |              |         0.86 |            0 |         0.14 |         0.44 |</span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="co">#&gt; |              |          0.8 |            0 |          0.4 |              |</span></a>
+<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb6-32" data-line-number="32"><span class="co">#&gt; | Column Total |           15 |           12 |            5 |           32 |</span></a>
+<a class="sourceLine" id="cb6-33" data-line-number="33"><span class="co">#&gt; |              |        0.468 |        0.375 |        0.155 |              |</span></a>
+<a class="sourceLine" id="cb6-34" data-line-number="34"><span class="co">#&gt; ----------------------------------------------------------------------------</span></a></code></pre></div>
 </div>
-<div id="group-summary" class="section level4">
-<h4 class="hasAnchor">
-<a href="#group-summary" class="anchor"></a>Group Summary</h4>
+</div>
+<div id="group-summary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#group-summary" class="anchor"></a>Group Summary</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/ds_group_summary.html">ds_group_summary</a></span>(mtcarz, cyl, mpg)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt;                                        mpg by cyl                                         </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; -----------------------------------------------------------------------------------------</span></a>
@@ -303,11 +312,10 @@
 <a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; |                Range|                 12.5|                  3.6|                  8.8|</span></a>
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; |  Interquartile Range|                  7.6|                 2.35|                 1.85|</span></a>
 <a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; -----------------------------------------------------------------------------------------</span></a></code></pre></div>
-</div>
 <div id="multiple-variable-statistics" class="section level4">
 <h4 class="hasAnchor">
 <a href="#multiple-variable-statistics" class="anchor"></a>Multiple Variable Statistics</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/ds_multi_stats.html">ds_multi_stats</a></span>(mtcarz, mpg, disp, hp)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/ds_tidy_stats.html">ds_tidy_stats</a></span>(mtcarz, mpg, disp, hp)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; # A tibble: 3 x 16</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   vars    min   max  mean t_mean median  mode range variance  stdev  skew</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></a>
@@ -318,6 +326,7 @@
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; #   q3 &lt;dbl&gt;, iqrange &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 </div>
+</div>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h2>
@@ -325,7 +334,6 @@
 <li>Summary statistics</li>
 <li>Two way tables</li>
 <li>One way table</li>
-<li>One way table (Continuous Data)</li>
 <li>Group wise summary</li>
 <li>Multiple variable statistics</li>
 <li>Multiple one way tables</li>
