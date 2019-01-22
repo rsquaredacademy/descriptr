@@ -25,6 +25,8 @@ navbar:
           href: articles/categorical-data.html
         - text: "Visualization"
           href: articles/visualization.html
+        - text: "Tests and Coverage"
+          href: articles/tests_and_coverage.html  
     - text: "Reference"
       menu:
         - text: "Functions"
