@@ -3,7 +3,7 @@
 \name{ds_tidy_stats}
 \alias{ds_tidy_stats}
 \alias{ds_multi_stats}
-\title{Multiple variable statistics}
+\title{Tidy descriptive statistics}
 \usage{
 ds_tidy_stats(data, ...)
 }

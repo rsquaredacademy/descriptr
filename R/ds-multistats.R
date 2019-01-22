@@ -1,4 +1,4 @@
-#' Multiple variable statistics
+#' Tidy descriptive statistics
 #'
 #' Descriptive statistics for multiple variables.
 #'

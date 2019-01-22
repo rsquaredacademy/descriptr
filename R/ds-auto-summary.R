@@ -1,6 +1,6 @@
-#' Summary statistics
+#' Descriptive statistics and frquency tables
 #'
-#' Generate summary statistics for all continuous variables in data.
+#' Generate summary statistics & frequency table for all continuous variables in data.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
