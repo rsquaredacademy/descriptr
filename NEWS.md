@@ -19,7 +19,7 @@ subset of variables. ([#83](https://github.com/rsquaredacademy/descriptr/issues/
 
 ## Deprecation
 
-All the `ds_*` functions related to visualizing probability distributions have
+All the `dist_*` functions related to visualizing probability distributions have
 been soft deprecated and will be removed in the next release. Please use the 
 [vistributions](https://cran.r-project.org/package=vistributions) package going forward.
 
