@@ -98,7 +98,7 @@
       <h1>Continuous Data</h1>
                         <h4 class="author">Aravind Hebbali</h4>
             
-            <h4 class="date">2019-01-22</h4>
+            <h4 class="date">2019-02-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rsquaredacademy/descriptr/blob/master/vignettes/continuous-data.Rmd"><code>vignettes/continuous-data.Rmd</code></a></small>
       <div class="hidden name"><code>continuous-data.Rmd</code></div>
@@ -551,20 +551,39 @@
 <a class="sourceLine" id="cb11-45" data-line-number="45"><span class="co">#&gt; |  Interquartile Range|                  3.9|                 7.08|                 10.2|</span></a>
 <a class="sourceLine" id="cb11-46" data-line-number="46"><span class="co">#&gt; -----------------------------------------------------------------------------------------</span></a></code></pre></div>
 </div>
+<div id="combination-of-categories" class="section level3">
+<h3 class="hasAnchor">
+<a href="#combination-of-categories" class="anchor"></a>Combination of Categories</h3>
+<p>To look at the descriptive statistics of a continuous variable for different combinations of levels of two or more categorical variables, use <code><a href="../reference/ds_group_summary_interact.html">ds_group_summary_interact()</a></code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/ds_group_summary_interact.html">ds_group_summary_interact</a></span>(mtcarz, mpg, cyl, gear)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; # A tibble: 8 x 17</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;   cyl   gear    min   max  mean t_mean median  mode range variance  stdev</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 1 4     3      21.5  21.5  21.5   21.5   21.5  21.5  0       NA    NA    </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 2 6     3      18.1  21.4  19.8   19.8   19.8  18.1  3.30     5.44  2.33 </span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 3 8     3      10.4  19.2  15.0   15.0   15.2  10.4  8.80     7.70  2.77 </span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 4 4     4      21.4  33.9  26.9   26.9   25.8  22.8 12.5     23.1   4.81 </span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; 5 6     4      17.8  21    19.8   19.8   20.1  21    3.20     2.41  1.55 </span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; 6 4     5      26    30.4  28.2   28.2   28.2  26    4.40     9.68  3.11 </span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 7 6     5      19.7  19.7  19.7   19.7   19.7  19.7  0       NA    NA    </span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 8 8     5      15    15.8  15.4   15.4   15.4  15    0.8      0.32  0.566</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; # ... with 6 more variables: skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;, coeff_var &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; #   q1 &lt;dbl&gt;, q3 &lt;dbl&gt;, iqrange &lt;dbl&gt;</span></a></code></pre></div>
+</div>
 </div>
 <div id="multiple-variable-statistics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multiple-variable-statistics" class="anchor"></a>Multiple Variable Statistics</h2>
 <p>The <code><a href="../reference/ds_tidy_stats.html">ds_tidy_stats()</a></code> function returns summary/descriptive statistics for variables in a data frame/tibble.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/ds_tidy_stats.html">ds_tidy_stats</a></span>(mtcarz, mpg, disp, hp)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; # A tibble: 3 x 16</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;   vars    min   max  mean t_mean median  mode range variance  stdev  skew</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 1 disp   71.1 472   231.   228    196.  276.  401.   15361.  124.   0.420</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 2 hp     52   335   147.   144.   123   110   283     4701.   68.6  0.799</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 3 mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; # ... with 5 more variables: kurtosis &lt;dbl&gt;, coeff_var &lt;dbl&gt;, q1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; #   q3 &lt;dbl&gt;, iqrange &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/ds_tidy_stats.html">ds_tidy_stats</a></span>(mtcarz, mpg, disp, hp)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 3 x 16</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   vars    min   max  mean t_mean median  mode range variance  stdev  skew</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; 1 disp   71.1 472   231.   228    196.  276.  401.   15361.  124.   0.420</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; 2 hp     52   335   147.   144.   123   110   283     4701.   68.6  0.799</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 3 mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; # ... with 5 more variables: kurtosis &lt;dbl&gt;, coeff_var &lt;dbl&gt;, q1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; #   q3 &lt;dbl&gt;, iqrange &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="measures" class="section level2">
 <h2 class="hasAnchor">
@@ -573,77 +592,77 @@
 <div id="measures-of-location" class="section level4">
 <h4 class="hasAnchor">
 <a href="#measures-of-location" class="anchor"></a>Measures of Location</h4>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/ds_measures_location.html">ds_measures_location</a></span>(mtcarz)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   var     mean trim_mean median   mode</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; 1 disp  231.      228    196.   276.  </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; 2 drat    3.60      3.58   3.70   3.07</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 3 hp    147.      144.   123    110   </span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; 4 mpg    20.1      20.0   19.2   10.4 </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; 5 qsec   17.8      17.8   17.7   17.0 </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; 6 wt      3.22      3.20   3.32   3.44</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/ds_measures_location.html">ds_measures_location</a></span>(mtcarz)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;   var     mean trim_mean median   mode</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 1 disp  231.      228    196.   276.  </span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; 2 drat    3.60      3.58   3.70   3.07</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 3 hp    147.      144.   123    110   </span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 4 mpg    20.1      20.0   19.2   10.4 </span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt; 5 qsec   17.8      17.8   17.7   17.0 </span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; 6 wt      3.22      3.20   3.32   3.44</span></a></code></pre></div>
 </div>
 <div id="measures-of-variation" class="section level4">
 <h4 class="hasAnchor">
 <a href="#measures-of-variation" class="anchor"></a>Measures of Variation</h4>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/ds_measures_variation.html">ds_measures_variation</a></span>(mtcarz)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;   var    range     iqr  variance      sd coeff_var std_error</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 1 disp  401.   205.    15361.    124.         53.7   21.9   </span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; 2 drat    2.17   0.840     0.286   0.535      14.9    0.0945</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 3 hp    283     83.5    4701.     68.6        46.7   12.1   </span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 4 mpg    23.5    7.38     36.3     6.03       30.0    1.07  </span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt; 5 qsec    8.40   2.01      3.19    1.79       10.0    0.316 </span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; 6 wt      3.91   1.03      0.957   0.978      30.4    0.173</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/ds_measures_variation.html">ds_measures_variation</a></span>(mtcarz)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;   var    range     iqr  variance      sd coeff_var std_error</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 1 disp  401.   205.    15361.    124.         53.7   21.9   </span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 2 drat    2.17   0.840     0.286   0.535      14.9    0.0945</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 3 hp    283     83.5    4701.     68.6        46.7   12.1   </span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 4 mpg    23.5    7.38     36.3     6.03       30.0    1.07  </span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; 5 qsec    8.40   2.01      3.19    1.79       10.0    0.316 </span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; 6 wt      3.91   1.03      0.957   0.978      30.4    0.173</span></a></code></pre></div>
 </div>
 <div id="measures-of-symmetry" class="section level4">
 <h4 class="hasAnchor">
 <a href="#measures-of-symmetry" class="anchor"></a>Measures of Symmetry</h4>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/ds_measures_symmetry.html">ds_measures_symmetry</a></span>(mtcarz)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;   var   skewness kurtosis</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 1 disp     0.420  -1.07  </span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 2 drat     0.293  -0.450 </span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 3 hp       0.799   0.275 </span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 4 mpg      0.672  -0.0220</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; 5 qsec     0.406   0.865 </span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; 6 wt       0.466   0.417</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../reference/ds_measures_symmetry.html">ds_measures_symmetry</a></span>(mtcarz)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;   var   skewness kurtosis</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; 1 disp     0.420  -1.07  </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; 2 drat     0.293  -0.450 </span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; 3 hp       0.799   0.275 </span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; 4 mpg      0.672  -0.0220</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt; 5 qsec     0.406   0.865 </span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; 6 wt       0.466   0.417</span></a></code></pre></div>
 </div>
 <div id="percentiles" class="section level4">
 <h4 class="hasAnchor">
 <a href="#percentiles" class="anchor"></a>Percentiles</h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../reference/ds_percentiles.html">ds_percentiles</a></span>(mtcarz)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 12</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;   var     min  per1  per5 per10     q1 median     q3  per95  per90  per99</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; 1 disp  71.1  72.5  77.4  80.6  121.   196.   326    449    396.   468.  </span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; 2 drat   2.76  2.76  2.85  3.01   3.08   3.70   3.92   4.31   4.21   4.78</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; 3 hp    52    55.1  63.6  66     96.5  123    180    254.   244.   313.  </span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; 4 mpg   10.4  10.4  12.0  14.3   15.4   19.2   22.8   31.3   30.1   33.4 </span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt; 5 qsec  14.5  14.5  15.0  15.5   16.9   17.7   18.9   20.1   20.0   22.1 </span></a>
-<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; 6 wt     1.51  1.54  1.74  1.96   2.58   3.32   3.61   5.29   4.05   5.40</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; # ... with 1 more variable: max &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/ds_percentiles.html">ds_percentiles</a></span>(mtcarz)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 12</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt;   var     min  per1  per5 per10     q1 median     q3  per95  per90  per99</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; 1 disp  71.1  72.5  77.4  80.6  121.   196.   326    449    396.   468.  </span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; 2 drat   2.76  2.76  2.85  3.01   3.08   3.70   3.92   4.31   4.21   4.78</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; 3 hp    52    55.1  63.6  66     96.5  123    180    254.   244.   313.  </span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; 4 mpg   10.4  10.4  12.0  14.3   15.4   19.2   22.8   31.3   30.1   33.4 </span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; 5 qsec  14.5  14.5  15.0  15.5   16.9   17.7   18.9   20.1   20.0   22.1 </span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; 6 wt     1.51  1.54  1.74  1.96   2.58   3.32   3.61   5.29   4.05   5.40</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; # ... with 1 more variable: max &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 <div id="extreme-observations" class="section level4">
 <h4 class="hasAnchor">
 <a href="#extreme-observations" class="anchor"></a>Extreme Observations</h4>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/ds_extreme_obs.html">ds_extreme_obs</a></span>(mtcarz, mpg)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 3</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt;    type  value index</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt;  1 high   33.9    20</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;  2 high   32.4    18</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt;  3 high   30.4    19</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt;  4 high   30.4    28</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt;  5 high   27.3    26</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt;  6 low    10.4    15</span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt;  7 low    10.4    16</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt;  8 low    13.3    24</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt;  9 low    14.3     7</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; 10 low    14.7    17</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/ds_extreme_obs.html">ds_extreme_obs</a></span>(mtcarz, mpg)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 3</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt;    type  value index</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt;  1 high   33.9    20</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt;  2 high   32.4    18</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt;  3 high   30.4    19</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt;  4 high   30.4    28</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="co">#&gt;  5 high   27.3    26</span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co">#&gt;  6 low    10.4    15</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co">#&gt;  7 low    10.4    16</span></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="co">#&gt;  8 low    13.3    24</span></a>
+<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co">#&gt;  9 low    14.3     7</span></a>
+<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="co">#&gt; 10 low    14.7    17</span></a></code></pre></div>
 </div>
 </div>
   </div>

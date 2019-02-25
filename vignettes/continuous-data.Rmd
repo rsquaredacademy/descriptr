@@ -128,6 +128,16 @@ If you want grouped summary statistics for multiple variables in a data set, use
 ds_auto_group_summary(mtcarz, cyl, gear, mpg)
 ```
 
+### Combination of Categories
+
+To look at the descriptive statistics of a continuous variable for different 
+combinations of levels of two or more categorical variables, use 
+`ds_group_summary_interact()`.
+
+```{r interact-summary}
+ds_group_summary_interact(mtcarz, mpg, cyl, gear)
+```
+
 ## Multiple Variable Statistics 
 
 The `ds_tidy_stats()` function returns summary/descriptive statistics for 

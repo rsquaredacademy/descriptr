@@ -89,6 +89,7 @@ reference:
     The following functions generate grouped summary statistics.
   contents:
   - ds_group_summary
+  - ds_group_summary_interact
   - ds_auto_group_summary
 
 - title: Visualization

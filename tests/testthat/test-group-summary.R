@@ -55,3 +55,5 @@ test_that("output from ds_group_summary plot is as expected", {
   p <- plot(k)
   vdiffr::expect_doppelganger("group_summary", p$plot)
 })
+
+
