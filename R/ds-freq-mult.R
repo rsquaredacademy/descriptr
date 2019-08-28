@@ -14,19 +14,22 @@ freq_table2.default <- function(data, name) {
     stop("data must be categorical/qualitative")
   }
 
-  level_names <- levels(dat)
-  data_len    <- length(dat)
-  cq          <- forcats::fct_unique(dat)
+  cq <-
+    dat %>%
+    sort() %>%
+    unique()
 
   result <-
     dat %>%
-    forcats::fct_count() %>%
-    dplyr::pull(2)
+    table() %>%
+    as.vector()
 
-  len     <- length(result)
-  cum     <- cumsum(result)
-  per     <- percent(result, data_len)
-  cum_per <- percent(cum, data_len)
+  level_names <- levels(dat)
+  data_len    <- length(dat)
+  len         <- length(result)
+  cum         <- cumsum(result)
+  per         <- percent(result, data_len)
+  cum_per     <- percent(cum, data_len)
 
   ftable <- tibble::tibble(
     Levels          = level_names,
