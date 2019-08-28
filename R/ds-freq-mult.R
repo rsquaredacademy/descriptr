@@ -14,19 +14,22 @@ freq_table2.default <- function(data, name) {
     stop("data must be categorical/qualitative")
   }
 
-  level_names <- levels(dat)
-  data_len    <- length(dat)
-  cq          <- forcats::fct_unique(dat)
+  cq <-
+    dat %>%
+    sort() %>%
+    unique()
 
   result <-
     dat %>%
-    forcats::fct_count() %>%
-    dplyr::pull(2)
+    table() %>%
+    as.vector()
 
-  len     <- length(result)
-  cum     <- cumsum(result)
-  per     <- percent(result, data_len)
-  cum_per <- percent(cum, data_len)
+  level_names <- levels(dat)
+  data_len    <- length(dat)
+  len         <- length(result)
+  cum         <- cumsum(result)
+  per         <- percent(result, data_len)
+  cum_per     <- percent(cum, data_len)
 
   ftable <- tibble::tibble(
     Levels          = level_names,
@@ -42,21 +45,24 @@ freq_table2.default <- function(data, name) {
     is.na() %>%
     sum()
 
-  if (na_count > 0) {
-    na_freq <-
-      data %>%
-      dplyr::pull(name) %>%
-      forcats::fct_count() %>%
-      dplyr::pull(n) %>%
-      dplyr::last()
-  } else {
-    na_freq <- 0
-  }
-
   n_obs <-
     data %>%
     dplyr::pull(name) %>%
     length()
+
+  if (na_count > 0) {
+    na_data <- dplyr::pull(data, !! varyable)
+
+    var_count <-
+      na_data %>%
+      table() %>%
+      as.vector() %>%
+      sum()
+
+    na_freq <- n_obs - var_count
+  } else {
+    na_freq <- 0
+  }
 
   result <- list(
     ftable   = ftable,
