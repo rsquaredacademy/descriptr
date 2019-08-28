@@ -35,10 +35,10 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
     tidyr::drop_na() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
-    dplyr::summarise_all(dplyr::funs(mean = mean, 
-                                     trim_mean = mean(., trim = trim),
-                                     median = stats::median, 
-                                     mode = ds_mode)) %>%
+    dplyr::summarise_all(list(mean      = mean,
+                              trim_mean = ~ mean(., trim = trim),
+                              median    = stats::median,
+                              mode      = ds_mode)) %>%
     tibble::as_tibble()
 
 }
@@ -79,10 +79,12 @@ ds_measures_variation <- function(data, ...) {
     tidyr::drop_na() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
-    dplyr::summarise_all(dplyr::funs(range = ds_range, iqr = stats::IQR, 
-                                     variance = stats::var, sd = stats::sd, 
-                                     coeff_var = ds_cvar, 
-                                     std_error = ds_std_error)) %>%
+    dplyr::summarise_all(list(range     = ds_range,
+                              iqr       = stats::IQR,
+                              variance  = stats::var,
+                              sd        = stats::sd,
+                              coeff_var = ds_cvar,
+                              std_error = ds_std_error)) %>%
     tibble::as_tibble()
 }
 
@@ -121,8 +123,11 @@ ds_measures_symmetry <- function(data, ...) {
     tidyr::drop_na() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
-    dplyr::summarise_all(dplyr::funs(skewness = ds_skewness,
-                                     kurtosis = ds_kurtosis)) %>%
+    dplyr::summarise_all(
+      list(
+        skewness = ds_skewness,
+        kurtosis = ds_kurtosis)
+      ) %>%
     tibble::as_tibble()
 }
 
@@ -162,17 +167,19 @@ ds_percentiles <- function(data, ...) {
     tidyr::drop_na() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
-    dplyr::summarise_all(dplyr::funs(min    = min,
-                       per1   = stats::quantile(., 0.01),
-                       per5   = stats::quantile(., 0.05),
-                       per10  = stats::quantile(., 0.10),
-                       q1     = stats::quantile(., 0.25),
-                       median = stats::median,
-                       q3     = stats::quantile(., 0.75),
-                       per95  = stats::quantile(., 0.95),
-                       per90  = stats::quantile(., 0.90),
-                       per99  = stats::quantile(., 0.99),
-                       max    = max)) %>%
+    dplyr::summarise_all(
+      list(min    = min,
+           per1   = ~ stats::quantile(., 0.01),
+           per5   = ~ stats::quantile(., 0.05),
+           per10  = ~ stats::quantile(., 0.10),
+           q1     = ~ stats::quantile(., 0.25),
+           median = stats::median,
+           q3     = ~ stats::quantile(., 0.75),
+           per95  = ~ stats::quantile(., 0.95),
+           per90  = ~ stats::quantile(., 0.90),
+           per99  = ~ stats::quantile(., 0.99),
+           max    = max)
+      ) %>%
     tibble::as_tibble()
 }
 
@@ -540,7 +547,7 @@ ds_css <- function(x, na.rm = FALSE) {
 #' @export
 #'
 ds_rindex <- function(data, values) {
-  
+
   if (!is.numeric(data)) {
     stop("data must be numeric")
   }
@@ -552,12 +559,12 @@ ds_rindex <- function(data, values) {
   data   <- stats::na.omit(data)
   values <- stats::na.omit(values)
   out    <- c()
-  
+
   for (i in seq_along(values)) {
     k <- return_pos(data, values[i])
     out <- c(out, k)
   }
-  
+
   return(unique(out))
 
 }
