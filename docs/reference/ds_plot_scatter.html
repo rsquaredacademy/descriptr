@@ -144,7 +144,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ds_plot_scatter</span>(<span class='no'>data</span>, <span class='kw'>print_plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>ds_plot_scatter</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>print_plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,19 +154,19 @@
       <td><p>A <code>data.frame</code> or <code>tibble</code>.</p></td>
     </tr>
     <tr>
-      <th>print_plot</th>
-      <td><p>logical; if <code>TRUE</code>, prints the plot else returns a plot object.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>Column(s) in <code>data</code>.</p></td>
+    </tr>
+    <tr>
+      <th>print_plot</th>
+      <td><p>logical; if <code>TRUE</code>, prints the plot else returns a plot object.</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_plot_scatter</span>(<span class='no'>mtcarz</span>)</div><div class='input'><span class='fu'>ds_plot_scatter</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>, <span class='no'>disp</span>)</div><div class='output co'>#&gt; <span class='error'>Error: Scatter plot requires 2 continuous variables.</span></div><div class='img'><img src='ds_plot_scatter-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>ds_plot_scatter</span>(<span class='no'>mtcarz</span>)</div><div class='input'><span class='fu'>ds_plot_scatter</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>, <span class='no'>disp</span>)</div><div class='img'><img src='ds_plot_scatter-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='ds_plot_scatter-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

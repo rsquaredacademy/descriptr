@@ -4,14 +4,14 @@
 \alias{ds_plot_scatter}
 \title{Generate scatter plots}
 \usage{
-ds_plot_scatter(data, print_plot = TRUE, ...)
+ds_plot_scatter(data, ..., print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
-\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
-
 \item{...}{Column(s) in \code{data}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates scatter plots if the data has continuous variables.
