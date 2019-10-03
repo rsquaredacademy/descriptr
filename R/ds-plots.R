@@ -15,7 +15,7 @@
 #'
 #' @export
 #'
-ds_plot_scatter <- function(data, print_plot = TRUE, ...) {
+ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
