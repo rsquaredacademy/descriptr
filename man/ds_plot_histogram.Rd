@@ -4,7 +4,8 @@
 \alias{ds_plot_histogram}
 \title{Generate histograms}
 \usage{
-ds_plot_histogram(data, ..., bins = 5, fill = "blue")
+ds_plot_histogram(data, ..., bins = 5, fill = "blue",
+  print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
@@ -14,6 +15,8 @@ ds_plot_histogram(data, ..., bins = 5, fill = "blue")
 \item{bins}{Number of bins in the histogram.}
 
 \item{fill}{Color of the histogram.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates histograms if the data has continuous variables.

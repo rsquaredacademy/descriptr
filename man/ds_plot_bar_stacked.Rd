@@ -4,12 +4,14 @@
 \alias{ds_plot_bar_stacked}
 \title{Generate stacked bar plots}
 \usage{
-ds_plot_bar_stacked(data, ...)
+ds_plot_bar_stacked(data, ..., print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
 \item{...}{Column(s) in \code{data}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates stacked bar plots if the data has categorical variables.

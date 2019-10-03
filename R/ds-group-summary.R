@@ -8,6 +8,7 @@
 #' @param gvar Column in \code{data}.
 #' @param cvar Column in \code{data}.
 #' @param x An object of the class \code{ds_group_summary}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
 #'
 #' @return \code{ds_group_summary()} returns an object of class \code{"ds_group_summary"}.
@@ -122,7 +123,7 @@ print.ds_group_summary <- function(x, ...) {
 #' @rdname ds_group_summary
 #' @export
 #'
-plot.ds_group_summary <- function(x, ...) {
+plot.ds_group_summary <- function(x, print_plot = TRUE, ...) {
 
   x_lab <- magrittr::use_series(x, xvar)
   y_lab <- magrittr::use_series(x, yvar)
@@ -146,9 +147,10 @@ plot.ds_group_summary <- function(x, ...) {
     ggplot2::xlab(x_lab) + ggplot2::ylab(y_lab) +
     ggplot2::ggtitle(paste(y_lab, "by", x_lab))
 
-  print(p)
+  if (print_plot) {
+    print(p)
+  } else {
+    return(p)
+  }
 
-  result <- list(plot = p)
-  invisible(result)
-  
 }

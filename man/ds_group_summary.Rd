@@ -7,7 +7,7 @@
 \usage{
 ds_group_summary(data, gvar, cvar)
 
-\method{plot}{ds_group_summary}(x, ...)
+\method{plot}{ds_group_summary}(x, print_plot = TRUE, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}
@@ -17,6 +17,8 @@ ds_group_summary(data, gvar, cvar)
 \item{cvar}{Column in \code{data}.}
 
 \item{x}{An object of the class \code{ds_group_summary}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 
 \item{...}{Further arguments to be passed to or from methods.}
 }

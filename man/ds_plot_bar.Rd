@@ -4,7 +4,7 @@
 \alias{ds_plot_bar}
 \title{Generate bar plots}
 \usage{
-ds_plot_bar(data, ..., fill = "blue")
+ds_plot_bar(data, ..., fill = "blue", print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
@@ -12,6 +12,8 @@ ds_plot_bar(data, ..., fill = "blue")
 \item{...}{Column(s) in \code{data}.}
 
 \item{fill}{Color of the bars.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates bar plots if the data has categorical variables.
