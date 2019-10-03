@@ -3,6 +3,7 @@
 #' Creates scatter plots if the data has continuous variables.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
@@ -14,7 +15,7 @@
 #'
 #' @export
 #'
-ds_plot_scatter <- function(data, ...) {
+ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -58,8 +59,11 @@ ds_plot_scatter <- function(data, ...) {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -71,6 +75,7 @@ ds_plot_scatter <- function(data, ...) {
 #' @param ... Column(s) in \code{data}.
 #' @param bins Number of bins in the histogram.
 #' @param fill Color of the histogram.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' ds_plot_histogram(mtcarz)
@@ -79,7 +84,8 @@ ds_plot_scatter <- function(data, ...) {
 #'
 #' @export
 #'
-ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue') {
+ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
+                              print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -112,13 +118,16 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue') {
     x <- num_var[i]
     p <-
       ggplot2::ggplot(data = plot_data) +
-      ggplot2::geom_histogram(ggplot2::aes(x = !! rlang::sym(x)), bins = bins, 
+      ggplot2::geom_histogram(ggplot2::aes(x = !! rlang::sym(x)), bins = bins,
         fill = fill)
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -130,6 +139,7 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue') {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param color Color of the plot.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' ds_plot_density(mtcarz)
@@ -138,7 +148,7 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue') {
 #'
 #' @export
 #'
-ds_plot_density <- function(data, ..., color = 'blue') {
+ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -175,8 +185,11 @@ ds_plot_density <- function(data, ..., color = 'blue') {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -187,6 +200,7 @@ ds_plot_density <- function(data, ..., color = 'blue') {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param fill Color of the bars.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' ds_plot_bar(mtcarz)
@@ -195,7 +209,7 @@ ds_plot_density <- function(data, ..., color = 'blue') {
 #'
 #' @export
 #'
-ds_plot_bar <- function(data, ..., fill = 'blue') {
+ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -232,8 +246,11 @@ ds_plot_bar <- function(data, ..., fill = 'blue') {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -244,6 +261,7 @@ ds_plot_bar <- function(data, ..., fill = 'blue') {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' ds_plot_box_single(mtcarz)
@@ -252,7 +270,7 @@ ds_plot_bar <- function(data, ..., fill = 'blue') {
 #'
 #' @export
 #'
-ds_plot_box_single <- function(data, ...) {
+ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -290,8 +308,11 @@ ds_plot_box_single <- function(data, ...) {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -302,6 +323,7 @@ ds_plot_box_single <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' mt <- dplyr::select(mtcarz, cyl, gear, am)
@@ -310,7 +332,7 @@ ds_plot_box_single <- function(data, ...) {
 #'
 #' @export
 #'
-ds_plot_bar_stacked <- function(data, ...) {
+ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -354,8 +376,11 @@ ds_plot_bar_stacked <- function(data, ...) {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -365,6 +390,7 @@ ds_plot_bar_stacked <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' mt <- dplyr::select(mtcarz, cyl, gear, am)
@@ -373,7 +399,7 @@ ds_plot_bar_stacked <- function(data, ...) {
 #'
 #' @export
 #'
-ds_plot_bar_grouped <- function(data, ...) {
+ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -418,8 +444,11 @@ ds_plot_bar_grouped <- function(data, ...) {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }
 
@@ -430,6 +459,7 @@ ds_plot_bar_grouped <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
 #' mt <- dplyr::select(mtcarz, cyl, disp, mpg)
@@ -438,7 +468,7 @@ ds_plot_bar_grouped <- function(data, ...) {
 #'
 #' @export
 #'
-ds_plot_box_group <- function(data, ...) {
+ds_plot_box_group <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
   var <- rlang::quos(...)
@@ -475,7 +505,7 @@ ds_plot_box_group <- function(data, ...) {
   is_num    <- sapply(plot_data, is.numeric)
   is_factor <- sapply(plot_data, is.factor)
   num_data  <- plot_data[is_num]
-  fact_data <- plot_data[is_factor] 
+  fact_data <- plot_data[is_factor]
   fact_var  <- names(fact_data)
   num_var   <- names(num_data)
   combs     <- expand.grid(fact_var, num_var)
@@ -491,7 +521,10 @@ ds_plot_box_group <- function(data, ...) {
     myplots[[i]] <- p
   }
 
-  result <- gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  } else {
+    return(myplots)
+  }
 
 }

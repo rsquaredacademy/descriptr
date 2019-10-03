@@ -15,19 +15,22 @@ ds_freq_factor <- function(data, variable) {
     dplyr::select(!! varyable) %>%
     names()
 
-  level_names <- levels(fdata)
-  data_len    <- length(fdata)
-  cq          <- forcats::fct_unique(fdata)
+  cq <-
+    fdata %>%
+    sort() %>%
+    unique()
 
   result <-
     fdata %>%
-    forcats::fct_count() %>%
-    dplyr::pull(2)
+    table() %>%
+    as.vector()
 
-  len     <- length(result)
-  cum     <- cumsum(result)
-  per     <- percent(result, data_len)
-  cum_per <- percent(cum, data_len)
+  level_names <- levels(fdata)
+  data_len    <- length(fdata)
+  len         <- length(result)
+  cum         <- cumsum(result)
+  per         <- percent(result, data_len)
+  cum_per     <- percent(cum, data_len)
 
   ftable <- tibble::tibble(
     Levels          = level_names,
@@ -43,21 +46,24 @@ ds_freq_factor <- function(data, variable) {
     is.na() %>%
     sum()
 
-  if (na_count > 0) {
-    na_freq <-
-      data %>%
-      dplyr::pull(!! varyable) %>%
-      forcats::fct_count() %>%
-      dplyr::pull(n) %>%
-      dplyr::last()
-  } else {
-    na_freq <- 0
-  }
-
   n_obs <-
     data %>%
     dplyr::pull(!! varyable) %>%
     length()
+
+  if (na_count > 0) {
+    na_data <- dplyr::pull(data, !! varyable)
+
+    var_count <-
+      na_data %>%
+      table() %>%
+      as.vector() %>%
+      sum()
+
+    na_freq <- n_obs - var_count
+  } else {
+    na_freq <- 0
+  }
 
   result <- list(
     ftable   = ftable,
@@ -66,13 +72,13 @@ ds_freq_factor <- function(data, variable) {
     na_count = na_freq,
     n        = n_obs
   )
-  
+
   return(result)
 }
 
 
 plot_ds_freq_factor <- function(x, ...) {
-  
+
   x_lab <-
     x %>%
     magrittr::use_series(varname) %>%

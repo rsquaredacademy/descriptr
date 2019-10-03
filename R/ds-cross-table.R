@@ -10,6 +10,7 @@
 #' @param stacked If \code{FALSE}, the columns of height are portrayed
 #' as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.
 #' @param proportional If \code{TRUE}, the height of the bars is proportional.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
 #'
 #' @examples
@@ -49,14 +50,14 @@ ds_cross_table.default <- function(data, var1, var2) {
   row_name <- get_names(varone)
   col_name <- get_names(vartwo)
 
-  x <- 
+  x <-
     table(varone, vartwo) %>%
     as.matrix() %>%
     magrittr::set_rownames(NULL)
-  
+
   n <- sum(x)
-  
-  per_mat <- 
+
+  per_mat <-
     x %>%
     magrittr::divide_by(n) %>%
     round(3)
@@ -65,11 +66,11 @@ ds_cross_table.default <- function(data, var1, var2) {
   col_pct  <- apply(per_mat, 2, sum)
   rowtotal <- apply(x, 1, sum)
   coltotal <- apply(x, 2, sum)
-  finalmat <- prep_per_mat(per_mat, row_pct, col_pct)  
+  finalmat <- prep_per_mat(per_mat, row_pct, col_pct)
   rcent    <- prep_rcent(x, rowtotal, row_pct)
   ccent    <- prep_ccent(x, coltotal)
   finaltab <- prep_table(x, rowtotal, row_name)
-  
+
 
   result <- list(
     obs = n, var2_levels = col_name, var1_levels = row_name, varnames = var_names,
@@ -90,7 +91,8 @@ print.ds_cross_table <- function(x, ...) {
 #' @export
 #' @rdname ds_cross_table
 #'
-plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
+plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
+                                print_plot = TRUE,...) {
 
   x_lab <-
     x %>%
@@ -139,9 +141,12 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE, ...) {
     }
   }
 
-  print(p)
-  result <- list(plot = p)
-  invisible(result)
+  if (print_plot) {
+    print(p)
+  } else {
+    return(p)
+  }
+
 }
 
 #' @importFrom magrittr %<>%
@@ -153,7 +158,7 @@ ds_twoway_table <- function(data, var1, var2) {
   check_df(data)
   var1_name <- deparse(substitute(var1))
   var2_name <- deparse(substitute(var2))
-  
+
   var_1 <- rlang::enquo(var1)
   var_2 <- rlang::enquo(var2)
   check_factor(data, !! var_1, var1_name)
@@ -203,18 +208,18 @@ ds_twoway_table <- function(data, var1, var2) {
 }
 
 get_names <- function(x) {
-  
+
   if (is.factor(x)) {
     varname <- levels(x)
   } else {
-    varname <- 
+    varname <-
       x %>%
       sort() %>%
       unique()
   }
-  
+
   return(varname)
-  
+
 }
 
 prep_table <- function(x, rowtotal, row_name) {

@@ -12,7 +12,6 @@ Depends:
 Imports:
     cli,
     dplyr,
-    forcats,
     ggplot2,
     graphics,
     gridExtra,

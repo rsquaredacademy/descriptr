@@ -39,7 +39,7 @@ ds_screener <- function(data) UseMethod("ds_screener")
 #' @export
 #'
 ds_screener.default <- function(data) {
-  
+
   check_df(data)
 
   rows     <- nrow(data)
@@ -49,33 +49,33 @@ ds_screener.default <- function(data) {
   counts   <- purrr::map_int(data, length)
   nlev     <- purrr::map(data, nlevels)
   lev      <- purrr::map(data, levels)
-  
+
   for (i in seq_len(length(lev))) {
     if (is.null(lev[[i]])) {
       lev[[i]] <- NA
     }
   }
-  
+
   mvalues    <- purrr::map_int(data, function(z) sum(is.na(z)))
-  
-  mvaluesper <- 
+
+  mvaluesper <-
     mvalues %>%
       magrittr::divide_by(counts) %>%
       magrittr::multiply_by(100) %>%
       round(2)
-  
-  mtotal <- 
+
+  mtotal <-
     data %>%
     is.na() %>%
     sum()
-  
-  mtotalper <- 
+
+  mtotalper <-
     mtotal %>%
     magrittr::divide_by(sum(counts)) %>%
     magrittr::multiply_by(100) %>%
     round(2)
 
-  mrows <- 
+  mrows <-
     data %>%
     stats::complete.cases() %>%
     `!` %>%
@@ -83,17 +83,17 @@ ds_screener.default <- function(data) {
 
   mcols <- sum(mvalues != 0)
 
-  result <- list(Rows          = rows, 
-                 Columns       = cols, 
+  result <- list(Rows          = rows,
+                 Columns       = cols,
                  Variables     = varnames,
-                 Types         = datatype, 
-                 Count         = counts, 
+                 Types         = datatype,
+                 Count         = counts,
                  nlevels       = nlev,
-                 levels        = lev, 
+                 levels        = lev,
                  Missing       = mvalues,
-                 MissingPer    = mvaluesper, 
+                 MissingPer    = mvaluesper,
                  MissingTotal  = mtotal,
-                 MissingTotPer = mtotalper, 
+                 MissingTotPer = mtotalper,
                  MissingRows   = mrows,
                  MissingCols   = mcols)
 
@@ -118,19 +118,19 @@ plot.ds_screener <- function(x, ...) {
   ymax <- max(dat) * 1.5
   cols <- c("green", "red")[(dat > 10) + 1]
 
-  h <- graphics::barplot(dat, 
+  h <- graphics::barplot(dat,
                main = "Missing Values (%)",
-               xlab = "Column Names", 
+               xlab = "Column Names",
                ylab = "Percentage",
-               col  = cols, 
+               col  = cols,
                ylim = c(0, ymax))
 
-  graphics::legend("top", 
-          legend     = c("> 10%", "<= 10%"), 
+  graphics::legend("top",
+          legend     = c("> 10%", "<= 10%"),
           fill       = c("red", "green"),
-          horiz      = TRUE, 
-          title      = "% Missing", 
-          cex        = 0.5, 
+          horiz      = TRUE,
+          title      = "% Missing",
+          cex        = 0.5,
           text.width = 0.7)
 
   line_data <- cbind(h, as.vector(dat))

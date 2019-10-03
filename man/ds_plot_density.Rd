@@ -4,7 +4,7 @@
 \alias{ds_plot_density}
 \title{Generate density plots}
 \usage{
-ds_plot_density(data, ..., color = "blue")
+ds_plot_density(data, ..., color = "blue", print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
@@ -12,6 +12,8 @@ ds_plot_density(data, ..., color = "blue")
 \item{...}{Column(s) in \code{data}.}
 
 \item{color}{Color of the plot.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates density plots if the data has continuous variables.

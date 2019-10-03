@@ -9,7 +9,7 @@
 ds_cross_table(data, var1, var2)
 
 \method{plot}{ds_cross_table}(x, stacked = FALSE, proportional = FALSE,
-  ...)
+  print_plot = TRUE, ...)
 
 ds_twoway_table(data, var1, var2)
 }
@@ -26,6 +26,8 @@ ds_twoway_table(data, var1, var2)
 as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.}
 
 \item{proportional}{If \code{TRUE}, the height of the bars is proportional.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 
 \item{...}{Further arguments to be passed to or from methods.}
 }

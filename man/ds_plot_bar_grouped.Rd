@@ -4,12 +4,14 @@
 \alias{ds_plot_bar_grouped}
 \title{Generate grouped bar plots}
 \usage{
-ds_plot_bar_grouped(data, ...)
+ds_plot_bar_grouped(data, ..., print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
 \item{...}{Column(s) in \code{data}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates grouped bar plots if the data has categorical variables.

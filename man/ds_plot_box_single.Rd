@@ -4,12 +4,14 @@
 \alias{ds_plot_box_single}
 \title{Generate box plots}
 \usage{
-ds_plot_box_single(data, ...)
+ds_plot_box_single(data, ..., print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
 \item{...}{Column(s) in \code{data}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Creates box plots if the data has continuous variables.

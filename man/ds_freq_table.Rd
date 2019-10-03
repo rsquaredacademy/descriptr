@@ -8,7 +8,7 @@
 \usage{
 ds_freq_table(data, variable, bins = 5)
 
-\method{plot}{ds_freq_table}(x, ...)
+\method{plot}{ds_freq_table}(x, print_plot = TRUE, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}
@@ -19,12 +19,14 @@ ds_freq_table(data, variable, bins = 5)
 
 \item{x}{An object of class \code{ds_freq_table}.}
 
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
+
 \item{...}{Further arguments to be passed to or from methods.}
 }
 \description{
-Frequency table for categorical and continuous data and returns the 
-frequency, cumulative frequency, frequency percent and cumulative frequency 
-percent. \code{plot.ds_freq_table()} creates bar plot for the categorical 
+Frequency table for categorical and continuous data and returns the
+frequency, cumulative frequency, frequency percent and cumulative frequency
+percent. \code{plot.ds_freq_table()} creates bar plot for the categorical
 data and histogram for continuous data.
 }
 \examples{
