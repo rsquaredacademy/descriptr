@@ -99,8 +99,6 @@ plot_ds_freq_factor <- function(x, ...) {
     ggplot2::xlab(x_lab) + ggplot2::ylab("Count") +
     ggplot2::ggtitle(paste("Bar plot of", x_lab))
 
-  print(p)
+  return(p)
 
-  result <- list(plot = p)
-  invisible(result)
 }

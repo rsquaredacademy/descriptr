@@ -102,8 +102,6 @@ plot_ds_freq_numeric <- function(x, ...) {
     ggplot2::xlab(x_lab) + ggplot2::ylab("Count") +
     ggplot2::ggtitle(paste("Histogram of", x_lab))
 
-  print(p)
+  return(p)
 
-  result <- list(plot = p)
-  invisible(result)
 }
