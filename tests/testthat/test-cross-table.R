@@ -35,7 +35,7 @@ test_that("output from ds_cross_table matches expected results", {
 
   expect_equivalent(k$row_percent[, 2], c(0.68, 0.51, 0.50))
 
-  expect_equivalent(k$row_percent[, 3], c(0.24, 0.48, 0.29))
+  expect_equivalent(k$row_percent[, 3], c(0.23, 0.48, 0.29))
 
   expect_equivalent(k$column_percent[, 1], c(0.16, 0.52, 0.32))
 
