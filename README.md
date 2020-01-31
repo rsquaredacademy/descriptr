@@ -3,8 +3,7 @@
 
 # descriptr
 
-> Generate descriptive
-statistics
+> Generate descriptive statistics
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![cran
@@ -244,9 +243,3 @@ If you encounter a bug, please file a minimal reproducible example using
 [reprex](https://reprex.tidyverse.org/index.html) on github. For
 questions and clarifications, use
 [StackOverflow](https://stackoverflow.com/).
-
-## Code of Conduct
-
-Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
