@@ -1,3 +1,7 @@
+# descriptr 0.5.1
+
+This is a patch release to fix CRAN errors.
+
 # descriptr 0.5.0
 
 ## New Features
