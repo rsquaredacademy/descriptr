@@ -159,14 +159,15 @@ test_that("ds_hmean throws the appropriate error", {
 
 test_that("output from ds_gmean matches the expected output", {
   expect_equal(round(ds_gmean(mtcars$mpg), 2), 19.25)
+  expect_equal(round(ds_gmean(mpg, mtcars), 2), 19.25)
   expect_equal(round(ds_gmean(mtcars$disp), 2), 197.32)
   expect_equal(round(ds_gmean(mtcars$hp), 2), 131.88)
 })
 
 
 test_that("ds_gmean throws the appropriate error", {
-  expect_error(ds_gmean("mtcars$mpg"), "x must be numeric")
-  expect_error(ds_gmean(as.factor(mtcars$mpg)), "x must be numeric")
+  expect_error(ds_gmean("mtcars$mpg"), "Geometric mean can be calculated only for numeric data. The variable you have selected is of type character.")
+  expect_error(ds_gmean(as.factor(mtcars$mpg)), "Geometric mean can be calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 test_that("output from ds_measures_location is as expected", {

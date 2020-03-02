@@ -269,30 +269,35 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
 
 
 #' @title Geometric Mean
-#' @description Compute the geometric mean
-#' @param x a numeric vector containing the values whose geometric mean is to be
-#' computed
+#' @description Computes the geometric mean
+#' @param x a numeric vector
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
-#' #' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Returns the geometric mean of \code{x}
 #' @examples
 #' ds_gmean(mtcars$mpg)
+#' ds_gmean(mpg, mtcars)
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(x, na.rm = FALSE, ...) {
+ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
 
-  prod(x) ^ (1 / length(x))
+  prod(z) ^ (1 / length(z))
 
 }
 
