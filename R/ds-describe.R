@@ -410,29 +410,36 @@ ds_range <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
-#' @param x a numeric vector containing the values whose kurtosis is to be computed
+#' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Kurtosis of \code{x}
 #' @examples
 #' ds_kurtosis(mtcars$mpg)
+#' ds_kurtosis(mpg, mtcars)
 #' @seealso \code{ds_skewness}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(x, na.rm = FALSE) {
+ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
 
-  n <- length(x)
-  summation <- sums(x, 4)
+  n <- length(z)
+  summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
   part2 <- (3 * (n - 1) ^ 2) / ((n - 2) * (n - 3))
   (part1 * summation) - part2

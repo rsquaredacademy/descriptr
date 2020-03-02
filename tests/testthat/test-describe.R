@@ -48,6 +48,7 @@ test_that("ds_skewness returns the appropriate error", {
 
 test_that("output from ds_kurtosis matches expected result", {
   expect_equal(round(ds_kurtosis(mtcars$mpg), 3), -0.022)
+  expect_equal(round(ds_kurtosis(mpg, mtcars), 3), -0.022)
   expect_equal(round(ds_kurtosis(mtcars$disp), 3), -1.068)
   expect_equal(round(ds_kurtosis(mtcars$hp), 3), 0.275)
   expect_equal(round(ds_kurtosis(mtcars$drat), 3), -0.450)
@@ -57,8 +58,8 @@ test_that("output from ds_kurtosis matches expected result", {
 
 
 test_that("ds_kurtosis returns the appropriate error", {
-  expect_error(round(ds_kurtosis("mtcars$mpg"), 3), "x must be numeric")
-  expect_error(round(ds_kurtosis(as.factor(mtcars$mpg)), 3), "x must be numeric")
+  expect_error(round(ds_kurtosis("mtcars$mpg"), 3), "Kurtosis is calculated only for numeric data. The variable you have selected is of type character.")
+  expect_error(round(ds_kurtosis(as.factor(mtcars$mpg)), 3), "Kurtosis is calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 
