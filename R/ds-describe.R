@@ -364,29 +364,38 @@ ds_mode <- function(x, na.rm = FALSE) {
 
 #' @title Range
 #' @description Compute the range of a numeric vector
-#' @param x a numeric vector
+#' @param x a numeric vector or column name.
+#' @param data a \code{data.frame} or \code{tibble}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
 #' @examples
 #' ds_range(mtcars$mpg)
+#' ds_range(mpg, mtcars)
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(x, na.rm = FALSE) {
+ds_range <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("data must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
-
-  x %>%
-    range() %>%
-    diff()
+  max(z) - min(z)
 
 }
+
+
 
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.

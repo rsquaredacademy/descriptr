@@ -108,6 +108,7 @@ test_that("ds_mode returns the appropriate error", {
 
 test_that("output from ds_range matches the expected result", {
   expect_equal(ds_range(mtcars$mpg), 23.5)
+  expect_equal(ds_range(mpg, mtcars), 23.5)
   expect_equal(ds_range(mtcars$disp), 400.9)
   expect_equal(ds_range(mtcars$hp), 283)
   expect_equal(ds_range(mtcars$drat), 2.17)
@@ -117,8 +118,8 @@ test_that("output from ds_range matches the expected result", {
 
 
 test_that("ds_range returns the appropriate error", {
-  expect_error(ds_range("mtcars$mpg"), "data must be numeric")
-  expect_error(ds_range(as.factor(mtcars$mpg)), "data must be numeric")
+  expect_error(ds_range("mtcars$mpg"), "Range can be calculated only for numeric data. The variable you have selected is character.")
+  expect_error(ds_range(as.factor(mtcars$mpg)), "Range can be calculated only for numeric data. The variable you have selected is factor.")
 })
 
 
