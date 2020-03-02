@@ -485,30 +485,39 @@ ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
 #' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details The \code{stat_mdev} function computes the mean absolute deviation
+#' @details The \code{ds_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
-#' @return Mean absolute deviation of \code{x}
 #' @examples
 #' ds_mdev(mtcars$mpg)
+#' ds_mdev(mpg, mtcars)
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(x, na.rm = FALSE) {
+ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
 
-  m <- mean(x)
-  sum(sapply(x, md_helper, m)) / length(x)
+  m <- mean(z)
+  sum(sapply(z, md_helper, m)) / length(z)
 
 }
 

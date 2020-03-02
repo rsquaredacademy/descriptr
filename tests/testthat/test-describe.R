@@ -128,6 +128,7 @@ test_that("ds_range returns the appropriate error", {
 
 test_that("output from ds_mdev matches the expected result", {
   expect_equal(round(ds_mdev(mtcars$mpg), 3), 4.714)
+  expect_equal(round(ds_mdev(mpg, mtcars), 3), 4.714)
   expect_equal(round(ds_mdev(mtcars$disp), 3), 108.786)
   expect_equal(round(ds_mdev(mtcars$hp), 3), 56.48)
   expect_equal(round(ds_mdev(mtcars$drat), 3), 0.453)
@@ -142,8 +143,8 @@ test_that("output from ds_mdev matches the expected result", {
 })
 
 test_that("ds_mdev returns the appropriate error", {
-  expect_error(ds_mdev("mtcars$mpg"), "x must be numeric")
-  expect_error(ds_mdev(as.factor(mtcars$mpg)), "x must be numeric")
+  expect_error(ds_mdev("mtcars$mpg"), "Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type character.")
+  expect_error(ds_mdev(as.factor(mtcars$mpg)), "Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 

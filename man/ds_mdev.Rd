@@ -4,21 +4,20 @@
 \alias{ds_mdev}
 \title{Mean Absolute Deviation}
 \usage{
-ds_mdev(x, na.rm = FALSE)
+ds_mdev(x, data = NULL, na.rm = FALSE)
 }
 \arguments{
 \item{x}{a numeric vector}
 
+\item{data}{a \code{data.frame} or \code{tibble}}
+
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
-}
-\value{
-Mean absolute deviation of \code{x}
 }
 \description{
 Compute the mean absolute deviation about the mean
 }
 \details{
-The \code{stat_mdev} function computes the mean absolute deviation
+The \code{ds_mdev} function computes the mean absolute deviation
 about the mean. It is different from \code{mad} in \code{stats} package as
 the statistic used to compute the deviations is not \code{median} but
 \code{mean}. Any NA values are stripped from \code{x} before computation
@@ -26,6 +25,7 @@ takes place
 }
 \examples{
 ds_mdev(mtcars$mpg)
+ds_mdev(mpg, mtcars)
 }
 \seealso{
 \code{\link[stats]{mad}}
