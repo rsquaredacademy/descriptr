@@ -146,13 +146,14 @@ test_that("ds_mdev returns the appropriate error", {
 
 test_that("output from ds_hmean matches the expected output", {
   expect_equal(round(ds_hmean(mtcars$mpg), 2), 18.44)
+  expect_equal(round(ds_hmean(mpg, mtcars), 2), 18.44)
   expect_equal(round(ds_hmean(mtcars$disp), 2), 166.8)
   expect_equal(round(ds_hmean(mtcars$hp), 2), 118.23)
 })
 
 test_that("ds_hmean throws the appropriate error", {
-  expect_error(ds_hmean("mtcars$mpg"), "x must be numeric")
-  expect_error(ds_hmean(as.factor(mtcars$mpg)), "x must be numeric")
+  expect_error(ds_hmean("mtcars$mpg"), "Harmonic mean can be calculated only for numeric data. The variable you have selected is character.")
+  expect_error(ds_hmean(as.factor(mtcars$mpg)), "Harmonic mean can be calculated only for numeric data. The variable you have selected is factor.")
 })
 
 

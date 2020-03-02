@@ -297,30 +297,36 @@ ds_gmean <- function(x, na.rm = FALSE, ...) {
 }
 
 #' @title Harmonic Mean
-#' @description Compute the harmonic mean
-#' @param x a numeric vector containing the values whose harmonic mean is to be
-#' computed
+#' @description Computes the harmonic mean
+#' @param x a numeric vector.
+#' @param data a \code{data.frame} or \code{tibble}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
-#' #' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Returns the harmonic mean of \code{x}
 #' @examples
 #' ds_hmean(mtcars$mpg)
+#' ds_hmean(mpg, mtcars)
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(x, na.rm = FALSE, ...) {
+ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
 
-  length(x) / sum(sapply(x, div_by))
+  length(z) / sum(sapply(z, div_by))
 
 }
 
