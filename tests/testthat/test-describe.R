@@ -32,6 +32,7 @@ test_that("ds_rindex returns the appropriate error", {
 
 test_that("output from ds_skewness matches expected result", {
   expect_equal(round(ds_skewness(mtcars$mpg), 3), 0.672)
+  expect_equal(round(ds_skewness(mpg, mtcars), 3), 0.672)
   expect_equal(round(ds_skewness(mtcars$disp), 3), 0.420)
   expect_equal(round(ds_skewness(mtcars$hp), 3), 0.799)
   expect_equal(round(ds_skewness(mtcars$drat), 3), 0.293)
@@ -41,8 +42,8 @@ test_that("output from ds_skewness matches expected result", {
 
 
 test_that("ds_skewness returns the appropriate error", {
-  expect_error(round(ds_skewness("mtcars$mpg"), 3), "x must be numeric")
-  expect_error(round(ds_skewness(as.factor(mtcars$mpg)), 3), "x must be numeric")
+  expect_error(round(ds_skewness("mtcars$mpg"), 3), "Skewness is calculated only for numeric data. The variable you have selected is of type character.")
+  expect_error(round(ds_skewness(as.factor(mtcars$mpg)), 3), "Skewness is calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 
