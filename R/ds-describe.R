@@ -524,25 +524,33 @@ ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
-#' @param x a numeric vector containing the values whose mode is to be computed
+#' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
 #' @examples
 #' ds_cvar(mtcars$mpg)
+#' ds_cvar(mpg, mtcars)
 #' @export
 #'
-ds_cvar <- function(x, na.rm = FALSE) {
+ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
 
-  (stats::sd(x) / mean(x)) * 100
+  (stats::sd(z) / mean(z)) * 100
 
 }
 

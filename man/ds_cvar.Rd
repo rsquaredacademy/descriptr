@@ -4,20 +4,19 @@
 \alias{ds_cvar}
 \title{Coefficient of Variation}
 \usage{
-ds_cvar(x, na.rm = FALSE)
+ds_cvar(x, data = NULL, na.rm = FALSE)
 }
 \arguments{
-\item{x}{a numeric vector containing the values whose mode is to be computed}
+\item{x}{a numeric vector}
+
+\item{data}{a \code{data.frame} or \code{tibble}}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \description{
 Compute the coefficient of variation
 }
-\details{
-Any NA values are stripped from \code{x} before computation
-takes place.
-}
 \examples{
 ds_cvar(mtcars$mpg)
+ds_cvar(mpg, mtcars)
 }

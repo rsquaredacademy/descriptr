@@ -83,13 +83,14 @@ test_that("ds_css returns the appropriate error", {
 
 test_that("output from ds_cvar matches the expected result", {
   expect_equal(round(ds_cvar(mtcars$mpg), 3), 29.999)
+  expect_equal(round(ds_cvar(mpg, mtcars), 3), 29.999)
   expect_equal(round(ds_cvar(mtcars$disp), 3), 53.718)
 })
 
 
 test_that("ds_cvar returns the appropriate error", {
-  expect_error(ds_cvar("mtcars$mpg"), "x must be numeric")
-  expect_error(ds_cvar(as.factor(mtcars$mpg)), "x must be numeric")
+  expect_error(ds_cvar("mtcars$mpg"), "Coefficient of variation is calculated only for numeric data. The variable you have selected is of type character.")
+  expect_error(ds_cvar(as.factor(mtcars$mpg)), "Coefficient of variation is calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 
