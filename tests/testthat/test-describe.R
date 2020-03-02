@@ -64,6 +64,7 @@ test_that("ds_kurtosis returns the appropriate error", {
 
 test_that("ds_css matches `Sum Sq` from anova", {
   expect_equal(round(ds_css(mtcars$mpg)), round(anova(lm(mpg ~ 1, data = mtcars))[[2]]))
+  expect_equal(round(ds_css(mpg, mtcars)), round(anova(lm(mpg ~ 1, data = mtcars))[[2]]))
   expect_equal(round(ds_css(mtcars$disp)), round(anova(lm(disp ~ 1, data = mtcars))[[2]]))
   expect_equal(round(ds_css(mtcars$hp)), round(anova(lm(hp ~ 1, data = mtcars))[[2]]))
   expect_equal(round(ds_css(mtcars$drat)), round(anova(lm(drat ~ 1, data = mtcars))[[2]]))
@@ -73,8 +74,8 @@ test_that("ds_css matches `Sum Sq` from anova", {
 
 
 test_that("ds_css returns the appropriate error", {
-  expect_error(round(ds_css("mtcars$mpg")), "x must be numeric")
-  expect_error(round(ds_css(as.factor(mtcars$mpg))), "x must be numeric")
+  expect_error(round(ds_css("mtcars$mpg")), "Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type character.")
+  expect_error(round(ds_css(as.factor(mtcars$mpg))), "Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 

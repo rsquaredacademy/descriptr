@@ -525,31 +525,33 @@ ds_cvar <- function(x, na.rm = FALSE) {
 
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
-#' @param x a numeric vector containing the values whose mode is to be computed
+#' @param x a numeric vector.
+#' @param data a \code{data.frame} or \code{tibble}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Corrected sum of squares of \code{x}
 #' @examples
 #' ds_css(mtcars$mpg)
+#' ds_css(mpg, mtcars)
 #' @export
 #'
-ds_css <- function(x, na.rm = FALSE) {
+ds_css <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- na.omit(z)
   }
 
-  y <- mean(x)
-
-  x %>%
-    magrittr::subtract(y) %>%
-    magrittr::raise_to_power(2) %>%
-    sum()
+  sum((z - mean(z)) ^ 2)
 
 }
 
