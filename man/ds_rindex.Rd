@@ -18,10 +18,6 @@ not contain \code{index}, \code{NULL} is returned.
 \description{
 Returns index of values.
 }
-\details{
-Any NA values are stripped from \code{data} and \code{values} before
-computation takes place.
-}
 \examples{
 ds_rindex(mtcars$mpg, 21)
 ds_rindex(mtcars$mpg, 22)

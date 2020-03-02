@@ -164,11 +164,6 @@
     <p>Index of the <code>values</code> in <code>data</code>. In case, <code>data</code> does
 not contain <code>index</code>, <code>NULL</code> is returned.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Any NA values are stripped from <code>data</code> and <code>values</code> before
-computation takes place.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ds_rindex</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='fl'>21</span>)</div><div class='output co'>#&gt; [1] 1 2</div><div class='input'><span class='fu'>ds_rindex</span>(<span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='fl'>22</span>)</div><div class='output co'>#&gt; NULL</div></pre>
@@ -179,8 +174,6 @@ computation takes place.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

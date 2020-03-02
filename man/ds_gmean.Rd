@@ -9,6 +9,8 @@ ds_gmean(x, data = NULL, na.rm = FALSE, ...)
 \arguments{
 \item{x}{a numeric vector}
 
+\item{data}{a \code{data.frame} or \code{tibble}}
+
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 
 \item{...}{further arguments passed to or from other methods}

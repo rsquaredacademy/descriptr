@@ -271,6 +271,7 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
 #' @title Geometric Mean
 #' @description Computes the geometric mean
 #' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' @examples
@@ -294,7 +295,7 @@ ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   prod(z) ^ (1 / length(z))
@@ -328,7 +329,7 @@ ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   length(z) / sum(sapply(z, div_by))
@@ -400,7 +401,7 @@ ds_range <- function(x, data = NULL, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
   max(z) - min(z)
 
@@ -435,7 +436,7 @@ ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   n <- length(z)
@@ -473,7 +474,7 @@ ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   n <- length(z)
@@ -513,7 +514,7 @@ ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   m <- mean(z)
@@ -547,7 +548,7 @@ ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   (stats::sd(z) / mean(z)) * 100
@@ -579,7 +580,7 @@ ds_css <- function(x, data = NULL, na.rm = FALSE) {
   }
 
   if (na.rm) {
-    z <- na.omit(z)
+    z <- stats::na.omit(z)
   }
 
   sum((z - mean(z)) ^ 2)
@@ -590,8 +591,6 @@ ds_css <- function(x, data = NULL, na.rm = FALSE) {
 #' @description Returns index of values.
 #' @param data a numeric vector
 #' @param values a numeric vector containing the values whose index is returned
-#' @details Any NA values are stripped from \code{data} and \code{values} before
-#' computation takes place.
 #' @return Index of the \code{values} in \code{data}. In case, \code{data} does
 #' not contain \code{index}, \code{NULL} is returned.
 #' @examples
@@ -618,7 +617,7 @@ ds_rindex <- function(data, values) {
     out <- c(out, k)
   }
 
-  return(unique(out))
+  unique(out)
 
 }
 
