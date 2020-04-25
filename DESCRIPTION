@@ -23,7 +23,6 @@ Imports:
     tibble,
     tidyr,
     utils,
-    vistributions,
     xplorerr
 Suggests:
     covr,
