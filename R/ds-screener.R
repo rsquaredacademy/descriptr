@@ -97,13 +97,14 @@ print.ds_screener <- function(x, ...) {
 #'
 plot.ds_screener <- function(x, ...) {
 
+  `% Missing`  <- NULL
   mydat        <- data.frame(x = names(x$MissingPer), y = x$MissingPer)
   mydat$y      <- mydat$y / 100
   mydat$color  <- ifelse(mydat$y >= 0.1, ">= 10%", "< 10%")
   names(mydat) <- c("x", "y", "% Missing")
 
   ggplot2::ggplot(mydat) +
-    ggplot2::geom_col(ggplot2::aes(x = reorder(x, y), y = y, fill = `% Missing`)) +
+    ggplot2::geom_col(ggplot2::aes(x = stats::reorder(x, y), y = y, fill = `% Missing`)) +
     ggplot2::scale_y_continuous(labels = scales::percent_format()) +
     ggplot2::xlab("Column") + ggplot2::ylab("Percentage") +
     ggplot2::ggtitle("Missing Values (%)") +
