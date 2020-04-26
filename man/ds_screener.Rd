@@ -45,5 +45,10 @@ of missing observations for each variable in a data set.
 \examples{
 # screen data
 ds_screener(mtcarz)
+ds_screener(airquality)
+
+# plot
+x <- ds_screener(airquality)
+plot(x)
 
 }

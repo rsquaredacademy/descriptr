@@ -31,6 +31,11 @@
 #' @examples
 #' # screen data
 #' ds_screener(mtcarz)
+#' ds_screener(airquality)
+#'
+#' # plot
+#' x <- ds_screener(airquality)
+#' plot(x)
 #'
 #' @export
 #'
@@ -45,10 +50,10 @@ ds_screener.default <- function(data) {
   rows     <- nrow(data)
   cols     <- ncol(data)
   varnames <- names(data)
-  datatype <- purrr::map_chr(data, class)
-  counts   <- purrr::map_int(data, length)
-  nlev     <- purrr::map(data, nlevels)
-  lev      <- purrr::map(data, levels)
+  datatype <- sapply(data, class)
+  counts   <- sapply(data, length)
+  nlev     <- lapply(data, nlevels)
+  lev      <- lapply(data, levels)
 
   for (i in seq_len(length(lev))) {
     if (is.null(lev[[i]])) {
@@ -56,32 +61,12 @@ ds_screener.default <- function(data) {
     }
   }
 
-  mvalues    <- purrr::map_int(data, function(z) sum(is.na(z)))
-
-  mvaluesper <-
-    mvalues %>%
-      magrittr::divide_by(counts) %>%
-      magrittr::multiply_by(100) %>%
-      round(2)
-
-  mtotal <-
-    data %>%
-    is.na() %>%
-    sum()
-
-  mtotalper <-
-    mtotal %>%
-    magrittr::divide_by(sum(counts)) %>%
-    magrittr::multiply_by(100) %>%
-    round(2)
-
-  mrows <-
-    data %>%
-    stats::complete.cases() %>%
-    `!` %>%
-    sum()
-
-  mcols <- sum(mvalues != 0)
+  mvalues    <- sapply(data, function(z) sum(is.na(z)))
+  mvaluesper <- round((mvalues / counts) * 100, 2)
+  mtotal     <- sum(is.na(data))
+  mtotalper  <- round((mtotal / sum(counts)) * 100, 2)
+  mrows      <- sum(!stats::complete.cases(data))
+  mcols      <- sum(mvalues != 0)
 
   result <- list(Rows          = rows,
                  Columns       = cols,
@@ -107,33 +92,21 @@ print.ds_screener <- function(x, ...) {
   print_screen(x)
 }
 
-
-
 #' @rdname ds_screener
 #' @export
 #'
 plot.ds_screener <- function(x, ...) {
 
-  dat  <- x$MissingPer
-  ymax <- max(dat) * 1.5
-  cols <- c("green", "red")[(dat > 10) + 1]
+  mydat        <- data.frame(x = names(x$MissingPer), y = x$MissingPer)
+  mydat$y      <- mydat$y / 100
+  mydat$color  <- ifelse(mydat$y >= 0.1, ">= 10%", "< 10%")
+  names(mydat) <- c("x", "y", "% Missing")
 
-  h <- graphics::barplot(dat,
-               main = "Missing Values (%)",
-               xlab = "Column Names",
-               ylab = "Percentage",
-               col  = cols,
-               ylim = c(0, ymax))
-
-  graphics::legend("top",
-          legend     = c("> 10%", "<= 10%"),
-          fill       = c("red", "green"),
-          horiz      = TRUE,
-          title      = "% Missing",
-          cex        = 0.5,
-          text.width = 0.7)
-
-  line_data <- cbind(h, as.vector(dat))
-  graphics::text(line_data[, 1], line_data[, 2] + 2, as.vector(dat))
+  ggplot2::ggplot(mydat) +
+    ggplot2::geom_col(ggplot2::aes(x = reorder(x, y), y = y, fill = `% Missing`)) +
+    ggplot2::scale_y_continuous(labels = scales::percent_format()) +
+    ggplot2::xlab("Column") + ggplot2::ylab("Percentage") +
+    ggplot2::ggtitle("Missing Values (%)") +
+    ggplot2::scale_fill_manual(values = c("green", "red"))
 
 }
