@@ -10,7 +10,6 @@ Description: Generate descriptive statistics such as measures of location,
 Depends:
     R(>= 3.2)
 Imports:
-    cli,
     dplyr,
     ggplot2,
     gridExtra,

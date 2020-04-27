@@ -322,3 +322,11 @@ check_factor <- function(data, var, var_name) {
     rlang::abort(msg)
   }
 }
+
+ds_rule <- function(text = NULL) {
+  con_wid  <- options()$width
+  text_len <- nchar(text) + 2
+  dash_len <- (con_wid - text_len) / 2
+  cat(paste(rep("-", dash_len)), ' ', text, ' ', 
+      paste(rep("-", dash_len)), sep = "")
+}
