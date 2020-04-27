@@ -93,7 +93,7 @@ ds_group_summary.default <- function(data, gvar, cvar) {
   tidystats <-
     data %>%
     dplyr::select(!! g_var, !! c_var) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::group_by(!! g_var) %>%
     dplyr::summarise(length = length(!! c_var), min = min(!! c_var),
               max = max(!! c_var), mean  = mean(!! c_var),

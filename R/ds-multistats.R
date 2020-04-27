@@ -34,7 +34,7 @@ ds_tidy_stats <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(vars, values) %>%
     dplyr::group_by(vars) %>%
     dplyr::summarise_all(

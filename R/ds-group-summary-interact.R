@@ -39,7 +39,7 @@ ds_group_summary_interact <- function(data, cvar, ...) {
 
   data %>%
     dplyr::select(!!c_var, !!! g_var) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::mutate(
       Levels = interaction(!!! g_var)
     ) %>%

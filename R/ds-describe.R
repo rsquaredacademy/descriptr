@@ -32,7 +32,7 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(mean      = mean,
@@ -76,7 +76,7 @@ ds_measures_variation <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(range     = ds_range,
@@ -120,7 +120,7 @@ ds_measures_symmetry <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(
@@ -164,7 +164,7 @@ ds_percentiles <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(
@@ -206,7 +206,7 @@ ds_extreme_obs <- function(data, column) {
   na_data <-
     data %>%
     dplyr::select(!! var) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::pull(1)
 
   tibble::tibble(type = c(rep("high", 5), rep("low", 5)),

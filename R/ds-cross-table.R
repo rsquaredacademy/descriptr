@@ -167,7 +167,7 @@ ds_twoway_table <- function(data, var1, var2) {
   group <-
     data %>%
     dplyr::select(!! var_1, !! var_2) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::group_by(!! var_1, !! var_2) %>%
     dplyr::summarise(count = dplyr::n())
 
@@ -179,7 +179,7 @@ ds_twoway_table <- function(data, var1, var2) {
   div_by <-
     data %>%
     dplyr::group_by(!! var_2) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::tally() %>%
     dplyr::pull(n)
 
@@ -187,7 +187,7 @@ ds_twoway_table <- function(data, var1, var2) {
   group2 <-
     data %>%
     dplyr::select(!! var_1, !! var_2) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::group_by(!! var_2, !! var_1) %>%
     dplyr::summarise(count = dplyr::n()) %>%
     dplyr::mutate(

@@ -47,8 +47,6 @@ ds_summary_stats <- function(data, ...) {
   
 }
 
-
-
 ds_summary <- function(data, variable) UseMethod("ds_summary")
 
 ds_summary.default <- function(data, variable) {
