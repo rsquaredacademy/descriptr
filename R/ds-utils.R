@@ -266,11 +266,7 @@ quant3 <- function(x, na.rm = FALSE) {
 }
 
 string_to_name <- function(x, index = 1) {
-  
-  x %>%
-    magrittr::use_series(varnames) %>%
-    magrittr::extract(index) %>%
-    rlang::sym()
+  rlang::sym(x$varnames[index])
 }
 
 #' @importFrom utils packageVersion menu install.packages
