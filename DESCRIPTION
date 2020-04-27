@@ -21,14 +21,14 @@ Imports:
     stats,
     tibble,
     tidyr,
-    utils,
-    xplorerr
+    utils
 Suggests:
     covr,
     knitr,
     rmarkdown,
     testthat,
-    vdiffr
+    vdiffr,
+    xplorerr
 License: MIT + file LICENSE
 URL: https://descriptr.rsquaredacademy.com/, https://github.com/rsquaredacademy/descriptr
 BugReports: https://github.com/rsquaredacademy/descriptr/issues
