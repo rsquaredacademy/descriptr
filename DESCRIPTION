@@ -12,7 +12,6 @@ Depends:
 Imports:
     dplyr,
     ggplot2,
-    gridExtra,
     magrittr,
     purrr,
     rlang,
@@ -23,6 +22,7 @@ Imports:
     utils
 Suggests:
     covr,
+    gridExtra,
     knitr,
     rmarkdown,
     testthat,

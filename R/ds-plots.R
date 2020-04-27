@@ -57,9 +57,11 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
       ggplot2::ggplot(data = plot_data) +
       ggplot2::geom_point(ggplot2::aes(x = !! rlang::sym(x), y = !! rlang::sym(y)))
     myplots[[i]] <- p
+    names(myplots)[[i]] <- paste(y, "v", x)
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -121,9 +123,11 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
       ggplot2::geom_histogram(ggplot2::aes(x = !! rlang::sym(x)), bins = bins,
         fill = fill)
     myplots[[i]] <- p
+    names(myplots)[[i]] <- x
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -183,9 +187,11 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
       ggplot2::ggplot(data = plot_data) +
       ggplot2::geom_density(ggplot2::aes(x = !! rlang::sym(x)), color = color)
     myplots[[i]] <- p
+    names(myplots)[[i]] <- x
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -244,9 +250,11 @@ ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
       ggplot2::ggplot(data = plot_data) +
       ggplot2::geom_bar(ggplot2::aes(x = !! rlang::sym(x)), fill = fill)
     myplots[[i]] <- p
+    names(myplots)[[i]] <- x
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -306,9 +314,11 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
       ggplot2::geom_boxplot(ggplot2::aes(x = factor(1), y = !! rlang::sym(x))) +
       ggplot2::labs(x = ' ')
     myplots[[i]] <- p
+    names(myplots)[[i]] <- x
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -374,9 +384,11 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
       ggplot2::ggplot(data = plot_data) +
       ggplot2::geom_bar(ggplot2::aes(x = !! rlang::sym(x), fill = !! rlang::sym(y)))
     myplots[[i]] <- p
+    names(myplots)[[i]] <- paste(y, "v", x)
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -442,9 +454,11 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
       ggplot2::geom_bar(ggplot2::aes(x = !! rlang::sym(x), fill = !! rlang::sym(y)),
         position = 'dodge')
     myplots[[i]] <- p
+    names(myplots)[[i]] <- paste(y, "v", x)
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
@@ -519,9 +533,11 @@ ds_plot_box_group <- function(data, ..., print_plot = TRUE) {
       ggplot2::ggplot(data = plot_data) +
       ggplot2::geom_boxplot(ggplot2::aes(x = !! rlang::sym(x), y = !! rlang::sym(y)))
     myplots[[i]] <- p
+    names(myplots)[[i]] <- paste(y, "v", x)
   }
 
   if (print_plot) {
+    check_suggests('gridExtra')
     gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
   } else {
     return(myplots)
