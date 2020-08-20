@@ -4,8 +4,7 @@
 \alias{ds_plot_histogram}
 \title{Generate histograms}
 \usage{
-ds_plot_histogram(data, ..., bins = 5, fill = "blue",
-  print_plot = TRUE)
+ds_plot_histogram(data, ..., bins = 5, fill = "blue", print_plot = TRUE)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}

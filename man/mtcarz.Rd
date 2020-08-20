@@ -4,7 +4,9 @@
 \name{mtcarz}
 \alias{mtcarz}
 \title{mtcarz}
-\format{An object of class \code{data.frame} with 32 rows and 11 columns.}
+\format{
+An object of class \code{data.frame} with 32 rows and 11 columns.
+}
 \usage{
 mtcarz
 }
