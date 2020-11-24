@@ -5,17 +5,19 @@
 
 > Generate descriptive statistics
 
+<!-- badges: start -->
+
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![cran
 checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html)
-[![Travis-CI Build
-Status](https://travis-ci.org/rsquaredacademy/descriptr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/descriptr)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/descriptr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/descriptr)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)
+[![R build
+status](https://github.com/rsquaredacademy/descriptr/workflows/R-CMD-check/badge.svg)](https://github.com/rsquaredacademy/descriptr/actions)
 [![Coverage
 status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
+[![status](https://tinyverse.netlify.com/badge/descriptr)](https://CRAN.R-project.org/package=descriptr)
 ![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)  
+<!-- badges: end -->
 
 ## Installation
 
@@ -64,7 +66,7 @@ str(mtcarz)
 
 ``` r
 ds_summary_stats(mtcarz, mpg)
-#> ------------------------------ Variable: mpg ------------------------------
+#> -------------------------------- Variable: mpg --------------------------------
 #> 
 #>                         Univariate Analysis                          
 #> 
