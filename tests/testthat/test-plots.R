@@ -19,6 +19,7 @@ test_that("output from ds_plot_histogram is as expected", {
 })
 
 test_that("output from ds_plot_density is as expected", {
+  skip_if(getRversion() > '4.0.3')
   p <- ds_plot_density(mtcarz, mpg, disp, hp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_density_1", p[[1]])
   vdiffr::expect_doppelganger("ds_plot_density_2", p[[2]])
