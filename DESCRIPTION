@@ -10,31 +10,27 @@ Description: Generate descriptive statistics such as measures of location,
 Depends:
     R(>= 3.2)
 Imports:
-    cli,
     dplyr,
     ggplot2,
-    graphics,
-    gridExtra,
     magrittr,
-    purrr,
     rlang,
     scales,
     stats,
     tibble,
     tidyr,
-    utils,
-    vistributions,
-    xplorerr
+    utils
 Suggests:
     covr,
+    gridExtra,
     knitr,
     rmarkdown,
     testthat,
-    vdiffr
+    vdiffr,
+    xplorerr
 License: MIT + file LICENSE
 URL: https://descriptr.rsquaredacademy.com/, https://github.com/rsquaredacademy/descriptr
 BugReports: https://github.com/rsquaredacademy/descriptr/issues
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

@@ -19,6 +19,6 @@ ds_summary_stats(mtcarz, mpg)
 
 }
 \seealso{
-\code{\link[base]{summary}} 
+\code{\link[base]{summary}}
 \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 }

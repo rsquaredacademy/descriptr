@@ -214,7 +214,24 @@ data frame.</p></dd>
 #&gt;  Overall Missing Values           0 
 #&gt;  Percentage of Missing Values     0 %
 #&gt;  Rows with Missing Values         0 
-#&gt;  Columns With Missing Values      0 </div><div class='input'>
+#&gt;  Columns With Missing Values      0 </div><div class='input'><span class='fu'>ds_screener</span>(<span class='no'>airquality</span>)</div><div class='output co'>#&gt; ----------------------------------------------------------------------
+#&gt; |  Column Name  |  Data Type  |  Levels  |  Missing  |  Missing (%)  |
+#&gt; ----------------------------------------------------------------------
+#&gt; |     Ozone     |   integer   |    NA    |    37     |     24.18     |
+#&gt; |    Solar.R    |   integer   |    NA    |     7     |     4.58      |
+#&gt; |     Wind      |   numeric   |    NA    |     0     |       0       |
+#&gt; |     Temp      |   integer   |    NA    |     0     |       0       |
+#&gt; |     Month     |   integer   |    NA    |     0     |       0       |
+#&gt; |      Day      |   integer   |    NA    |     0     |       0       |
+#&gt; ----------------------------------------------------------------------
+#&gt; 
+#&gt;  Overall Missing Values           44 
+#&gt;  Percentage of Missing Values     4.79 %
+#&gt;  Rows with Missing Values         42 
+#&gt;  Columns With Missing Values      2 </div><div class='input'>
+<span class='co'># plot</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_screener</span>(<span class='no'>airquality</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>)</div><div class='img'><img src='ds_screener-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

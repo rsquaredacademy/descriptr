@@ -17,6 +17,13 @@ test_that("ds_group_summary_interact throws the appropriate error", {
   )
 
   expect_error(
+    ds_group_summary_interact(mtcarz, mpg, cyl, disp, hp),
+    "Below grouping variables are not categorical: 
+- disp
+- hp"
+  )
+
+  expect_error(
     ds_group_summary_interact(mtcarz, mpg, cyl, hp),
     "Below grouping variables are not categorical: 
 - hp"

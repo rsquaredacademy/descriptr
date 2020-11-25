@@ -3,7 +3,6 @@
 \docType{package}
 \name{descriptr}
 \alias{descriptr}
-\alias{descriptr-package}
 \title{\code{descriptr} package}
 \description{
 Generate descriptive statistics and explore statistical distributions

@@ -4,10 +4,12 @@
 \alias{ds_range}
 \title{Range}
 \usage{
-ds_range(x, na.rm = FALSE)
+ds_range(x, data = NULL, na.rm = FALSE)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{x}{a numeric vector or column name.}
+
+\item{data}{a \code{data.frame} or \code{tibble}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
@@ -19,6 +21,7 @@ Compute the range of a numeric vector
 }
 \examples{
 ds_range(mtcars$mpg)
+ds_range(mpg, mtcars)
 }
 \seealso{
 \code{\link[base]{range}}

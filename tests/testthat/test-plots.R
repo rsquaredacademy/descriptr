@@ -1,5 +1,10 @@
 context("test-plots")
 
+test_that("output from ds_screener is as expected", {
+  p <- ds_screener(airquality)
+  vdiffr::expect_doppelganger("ds_screener_1", p)
+})
+
 test_that("output from ds_plot_scatter is as expected", {
   p <- ds_plot_scatter(mtcarz, mpg, disp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_scatter_1", p[[1]])
@@ -14,6 +19,7 @@ test_that("output from ds_plot_histogram is as expected", {
 })
 
 test_that("output from ds_plot_density is as expected", {
+  skip_if(getRversion() > '4.0.3')
   p <- ds_plot_density(mtcarz, mpg, disp, hp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_density_1", p[[1]])
   vdiffr::expect_doppelganger("ds_plot_density_2", p[[2]])

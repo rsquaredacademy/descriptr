@@ -4,15 +4,10 @@
 
   if (!interactive() || stats::runif(1) > 0.1) return()
 
-  pkgs <- utils::available.packages()
-
-  cran_version <-
-    pkgs %>%
-    magrittr::extract("descriptr", "Version") %>%
-    package_version()
-
+  pkgs          <- utils::available.packages()
+  cran_version  <- package_version(pkgs["descriptr", "Version"])
   local_version <- utils::packageVersion("descriptr")
-  behind_cran <- cran_version > local_version
+  behind_cran   <- cran_version > local_version
 
   tips <- c(
     "Learn more about descriptr at https://github.com/rsquaredacademy/descriptr/.",

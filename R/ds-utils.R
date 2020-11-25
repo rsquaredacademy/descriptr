@@ -1,26 +1,20 @@
 formatter_freq <- function(x) {
-  x %>%
-    as.character() %>%
-    format(width = 13, justify = "centre")
+  return(format(as.character(x), width = 13, justify = "centre"))
 }
 
 
 formatter <- function(x) {
-  x %>%
-    as.character() %>%
-    format(width = 13, justify = "right")
+  return(format(as.character(x), width = 13, justify = "right"))
 }
 
 percent <- function(x, y) {
   out <- round((x / y) * 100, 2)
+  return(out)
 }
 
 
 formata <- function(x, round, width, justify = "centre") {
-  x %>%
-    round(round) %>%
-    as.character() %>%
-    format(width = width, justify = justify)
+  return(format(as.character(round(x, round)), width = width, justify = justify))
 }
 
 formatas <- function(x, round, width, justify = "centre") {
@@ -64,8 +58,8 @@ standardize <- function(x, avg, stdev, p) {
 
 
 sums <- function(x, q) {
-  avg <- mean(x)
-  stdev <- stats::sd(x)
+  avg    <- mean(x)
+  stdev  <- stats::sd(x)
   result <- sum(sapply(x, standardize, avg, stdev, q))
   return(result)
 }
@@ -99,9 +93,7 @@ stat_uss <- function(x) {
 
 
 formatl <- function(x) {
-  x %>%
-    format(nsmall = 2) %>%
-    format(width = 20, justify = "left")
+  return(format(format(x, nsmall = 2), width = 20, justify = "left"))
 }
 
 formatol <- function(x, w) {
@@ -110,32 +102,22 @@ formatol <- function(x, w) {
 
 
 formatr <- function(x, w) {
-  x %>%
-    rounda() %>%
-    format(nsmall = 2, width = w, justify = "right")
+  format(rounda(x), nsmall = 2, width = w, justify = "right")
 }
 
 
 formatc <- function(x, w) {
   if (is.numeric(x)) {
-    ret <- x %>%
-      round(2) %>%
-      as.character(x) %>%
-      format(width = w, justify = "centre")
+    ret <- format(as.character(round(x, 2)), width = w, justify = "centre")
   } else {
-    ret <- x %>%
-      as.character(x) %>%
-      format(width = w, justify = "centre")
+    ret <- format(as.character(x), width = w, justify = "centre")
   }
   return(ret)
 }
 
 
 formatnc <- function(x, w) {
-  x %>%
-    round(2) %>%
-    format(nsmall = 2) %>%
-    format(width = w, justify = "centre")
+  format(format(round(x, 2), nsmall = 2), width = w, justify = "centre")
 }
 
 
@@ -235,14 +217,14 @@ xmmp <- function(mean, sd, el) {
 seql <- function(mean, sd) {
   lmin <- mean - (5 * sd)
   lmax <- mean + (5 * sd)
-  l <- seq(lmin, lmax, sd)
+  l    <- seq(lmin, lmax, sd)
   return(l)
 }
 
 xmm <- function(mean, sd) {
   xmin <- mean - (5 * sd)
   xmax <- mean + (5 * sd)
-  out <- c(xmin, xmax)
+  out  <- c(xmin, xmax)
   return(out)
 }
 
@@ -250,7 +232,7 @@ xmm <- function(mean, sd) {
 seqln <- function(mean, sd) {
   lmin <- mean - 3 * sd
   lmax <- mean + 3 * sd
-  l <- seq(lmin, lmax, sd)
+  l    <- seq(lmin, lmax, sd)
   return(l)
 }
 
@@ -258,7 +240,7 @@ seqln <- function(mean, sd) {
 xmn <- function(mean, sd) {
   xmin <- mean - 3 * sd
   xmax <- mean + 3 * sd
-  out <- c(xmin, xmax)
+  out  <- c(xmin, xmax)
   return(out)
 }
 
@@ -284,10 +266,7 @@ quant3 <- function(x, na.rm = FALSE) {
 }
 
 string_to_name <- function(x, index = 1) {
-  x %>%
-    magrittr::use_series(varnames) %>%
-    magrittr::extract(index) %>%
-    rlang::sym()
+  rlang::sym(x$varnames[index])
 }
 
 #' @importFrom utils packageVersion menu install.packages
@@ -342,4 +321,12 @@ check_factor <- function(data, var, var_name) {
   if (!is.factor(fdata)) {
     rlang::abort(msg)
   }
+}
+
+ds_rule <- function(text = NULL) {
+  con_wid  <- options()$width
+  text_len <- nchar(text) + 2
+  dash_len <- (con_wid - text_len) / 2
+  cat(paste(rep("-", dash_len)), ' ', text, ' ', 
+      paste(rep("-", dash_len)), sep = "")
 }

@@ -32,7 +32,7 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(mean      = mean,
@@ -76,7 +76,7 @@ ds_measures_variation <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(range     = ds_range,
@@ -120,7 +120,7 @@ ds_measures_symmetry <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(
@@ -164,7 +164,7 @@ ds_percentiles <- function(data, ...) {
   }
 
   data %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(
@@ -206,7 +206,7 @@ ds_extreme_obs <- function(data, column) {
   na_data <-
     data %>%
     dplyr::select(!! var) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::pull(1)
 
   tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
@@ -269,58 +269,70 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
 
 
 #' @title Geometric Mean
-#' @description Compute the geometric mean
-#' @param x a numeric vector containing the values whose geometric mean is to be
-#' computed
+#' @description Computes the geometric mean
+#' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
-#' #' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Returns the geometric mean of \code{x}
 #' @examples
 #' ds_gmean(mtcars$mpg)
+#' ds_gmean(mpg, mtcars)
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(x, na.rm = FALSE, ...) {
+ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  prod(x) ^ (1 / length(x))
+  prod(z) ^ (1 / length(z))
 
 }
 
 #' @title Harmonic Mean
-#' @description Compute the harmonic mean
-#' @param x a numeric vector containing the values whose harmonic mean is to be
-#' computed
+#' @description Computes the harmonic mean
+#' @param x a numeric vector.
+#' @param data a \code{data.frame} or \code{tibble}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
-#' #' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Returns the harmonic mean of \code{x}
 #' @examples
 #' ds_hmean(mtcars$mpg)
+#' ds_hmean(mpg, mtcars)
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(x, na.rm = FALSE, ...) {
+ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  length(x) / sum(sapply(x, div_by))
+  length(z) / sum(sapply(z, div_by))
 
 }
 
@@ -364,55 +376,71 @@ ds_mode <- function(x, na.rm = FALSE) {
 
 #' @title Range
 #' @description Compute the range of a numeric vector
-#' @param x a numeric vector
+#' @param x a numeric vector or column name.
+#' @param data a \code{data.frame} or \code{tibble}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
 #' @examples
 #' ds_range(mtcars$mpg)
+#' ds_range(mpg, mtcars)
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(x, na.rm = FALSE) {
+ds_range <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("data must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
-
-  x %>%
-    range() %>%
-    diff()
+  max(z) - min(z)
 
 }
 
+
+
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
-#' @param x a numeric vector containing the values whose kurtosis is to be computed
+#' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Kurtosis of \code{x}
 #' @examples
 #' ds_kurtosis(mtcars$mpg)
+#' ds_kurtosis(mpg, mtcars)
 #' @seealso \code{ds_skewness}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(x, na.rm = FALSE) {
+ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  n <- length(x)
-  summation <- sums(x, 4)
+  n <- length(z)
+  summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
   part2 <- (3 * (n - 1) ^ 2) / ((n - 2) * (n - 3))
   (part1 * summation) - part2
@@ -421,29 +449,36 @@ ds_kurtosis <- function(x, na.rm = FALSE) {
 
 #' @title Skewness
 #' @description Compute the skewness of a probability distribution.
-#' @param x a numeric vector containing the values whose skewness is to be computed
+#' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Skewness of \code{x}
 #' @examples
 #' ds_skewness(mtcars$mpg)
+#' ds_skewness(mpg, mtcars)
 #' @seealso \code{kurtosis}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_skewness <- function(x, na.rm = FALSE) {
+ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Skewness is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  n <- length(x)
-  summation <- sums(x, 3)
+  n <- length(z)
+  summation <- sums(z, 3)
   (n / ((n - 1) * (n - 2))) * summation
 
 }
@@ -451,85 +486,104 @@ ds_skewness <- function(x, na.rm = FALSE) {
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
 #' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details The \code{stat_mdev} function computes the mean absolute deviation
+#' @details The \code{ds_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
-#' @return Mean absolute deviation of \code{x}
 #' @examples
 #' ds_mdev(mtcars$mpg)
+#' ds_mdev(mpg, mtcars)
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(x, na.rm = FALSE) {
+ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  m <- mean(x)
-  sum(sapply(x, md_helper, m)) / length(x)
+  m <- mean(z)
+  sum(sapply(z, md_helper, m)) / length(z)
 
 }
 
 
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
-#' @param x a numeric vector containing the values whose mode is to be computed
+#' @param x a numeric vector
+#' @param data a \code{data.frame} or \code{tibble}
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
 #' @examples
 #' ds_cvar(mtcars$mpg)
+#' ds_cvar(mpg, mtcars)
 #' @export
 #'
-ds_cvar <- function(x, na.rm = FALSE) {
+ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  (stats::sd(x) / mean(x)) * 100
+  (stats::sd(z) / mean(z)) * 100
 
 }
 
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
-#' @param x a numeric vector containing the values whose mode is to be computed
+#' @param x a numeric vector.
+#' @param data a \code{data.frame} or \code{tibble}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
-#' @return Corrected sum of squares of \code{x}
 #' @examples
 #' ds_css(mtcars$mpg)
+#' ds_css(mpg, mtcars)
 #' @export
 #'
-ds_css <- function(x, na.rm = FALSE) {
+ds_css <- function(x, data = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  if (is.null(data)) {
+    z <- x
+  } else {
+    y <- deparse(substitute(x))
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    z <- stats::na.omit(z)
   }
 
-  y <- mean(x)
-
-  x %>%
-    magrittr::subtract(y) %>%
-    magrittr::raise_to_power(2) %>%
-    sum()
+  sum((z - mean(z)) ^ 2)
 
 }
 
@@ -537,8 +591,6 @@ ds_css <- function(x, na.rm = FALSE) {
 #' @description Returns index of values.
 #' @param data a numeric vector
 #' @param values a numeric vector containing the values whose index is returned
-#' @details Any NA values are stripped from \code{data} and \code{values} before
-#' computation takes place.
 #' @return Index of the \code{values} in \code{data}. In case, \code{data} does
 #' not contain \code{index}, \code{NULL} is returned.
 #' @examples
@@ -565,7 +617,7 @@ ds_rindex <- function(data, values) {
     out <- c(out, k)
   }
 
-  return(unique(out))
+  unique(out)
 
 }
 

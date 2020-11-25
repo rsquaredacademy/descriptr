@@ -4,26 +4,23 @@
 \alias{ds_hmean}
 \title{Harmonic Mean}
 \usage{
-ds_hmean(x, na.rm = FALSE, ...)
+ds_hmean(x, data = NULL, na.rm = FALSE, ...)
 }
 \arguments{
-\item{x}{a numeric vector containing the values whose harmonic mean is to be
-computed}
+\item{x}{a numeric vector.}
+
+\item{data}{a \code{data.frame} or \code{tibble}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 
-\item{...}{further arguments passed to or from other methods
-#' @details Any NA values are stripped from \code{x} before computation
-takes place.}
-}
-\value{
-Returns the harmonic mean of \code{x}
+\item{...}{further arguments passed to or from other methods}
 }
 \description{
-Compute the harmonic mean
+Computes the harmonic mean
 }
 \examples{
 ds_hmean(mtcars$mpg)
+ds_hmean(mpg, mtcars)
 }
 \seealso{
 \code{\link{ds_gmean}} \code{\link[base]{mean}}

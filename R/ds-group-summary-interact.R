@@ -23,29 +23,23 @@ ds_group_summary_interact <- function(data, cvar, ...) {
   check_numeric(data, !! c_var, cvar_name)
 
   g_var <- rlang::quos(...)
-  non_type <-
-    data %>%
-    dplyr::select(!!! g_var) %>%
-    purrr::keep(purrr::negate(is.factor)) %>%
-    colnames()
+  gdata <- dplyr::select(data, !!! g_var)
+  nums  <- unlist(lapply(gdata, is.numeric))
+  non_type <- colnames(gdata[nums])
 
   error_message <- paste0("Below grouping variables are not categorical: \n",
                     paste("-", non_type, collapse = "\n"))
 
   if (length(non_type) > 0) {
-  	rlang::abort(error_message)
+  	stop(error_message)
   }
 
-  cnames <-
-    data %>%
-    dplyr::select(!!! g_var) %>%
-    purrr::keep(is.factor) %>%
-    colnames()
-
+  cats <- unlist(lapply(gdata, is.factor))
+  cnames <- colnames(gdata[cats])
 
   data %>%
     dplyr::select(!!c_var, !!! g_var) %>%
-    tidyr::drop_na() %>%
+    na.omit() %>%
     dplyr::mutate(
       Levels = interaction(!!! g_var)
     ) %>%

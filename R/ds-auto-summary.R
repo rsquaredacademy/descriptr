@@ -39,20 +39,19 @@ ds_auto_summary_stats <- function(data, ...) {
   num_var <- names(plot_data)
 
   for (i in num_var) {
-    cat(cli::rule(center = paste0('Variable: ', i),
-                  width = options()$width))
+
+    ds_rule(paste0('Variable: ', i))
     cat('\n\n')
-    cat(cli::rule(center = paste0('Summary Statistics'),
-                  width = options()$width))
+    ds_rule(paste0('Summary Statistics'))
     cat('\n\n')
     print(ds_summary_stats(data, i))
     cat('\n\n')
-    cat(cli::rule(center = paste0('Frequency Distribution'),
-                  width = options()$width))
+    ds_rule(paste0('Frequency Distribution'))
     cat('\n\n')
     print(ds_freq_table(data, i))
     cat('\n\n\n')
   }
+
 }
 
 #' Tabulation

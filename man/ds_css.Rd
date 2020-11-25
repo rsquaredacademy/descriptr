@@ -4,23 +4,19 @@
 \alias{ds_css}
 \title{Corrected Sum of Squares}
 \usage{
-ds_css(x, na.rm = FALSE)
+ds_css(x, data = NULL, na.rm = FALSE)
 }
 \arguments{
-\item{x}{a numeric vector containing the values whose mode is to be computed}
+\item{x}{a numeric vector.}
+
+\item{data}{a \code{data.frame} or \code{tibble}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
-}
-\value{
-Corrected sum of squares of \code{x}
 }
 \description{
 Compute the corrected sum of squares
 }
-\details{
-Any NA values are stripped from \code{x} before computation
-takes place.
-}
 \examples{
 ds_css(mtcars$mpg)
+ds_css(mpg, mtcars)
 }
