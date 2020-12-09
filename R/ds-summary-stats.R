@@ -51,7 +51,7 @@ ds_summary <- function(data, variable) UseMethod("ds_summary")
 
 ds_summary.default <- function(data, variable) {
 
-	check_df(data)
+  check_df(data)
   vary  <- rlang::enquo(variable)
   var_name <- deparse(substitute(variable))
   check_numeric(data, !! vary, var_name)
@@ -69,35 +69,35 @@ ds_summary.default <- function(data, variable) {
   high_val <- ds_rindex(sdata, high)
 
   result <- list(obs      = length(odata),
-    			 missing  = sum(is.na(odata)),
-			     avg      = mean(sdata),
-			     tavg     = mean(sdata, trim = 0.05),
-			     stdev    = stats::sd(sdata),
-			     variance = stats::var(sdata),
-			     skew     = ds_skewness(sdata),
-			     kurtosis = ds_kurtosis(sdata),
-			     uss      = stat_uss(sdata),
-			     css      = ds_css(sdata),
-			     cvar     = ds_cvar(sdata),
-			     sem      = ds_std_error(sdata),
-			     median   = stats::median(sdata),
-			     mode     = ds_mode(sdata),
-			     range    = ds_range(sdata),
-			     min      = min(sdata),
-			     Max      = max(sdata),
-			     iqrange  = stats::IQR(sdata),
-			     per99    = stats::quantile(sdata, 0.99),
-			     per90    = stats::quantile(sdata, 0.90),
-			     per95    = stats::quantile(sdata, 0.95),
-			     per75    = stats::quantile(sdata, 0.75),
-			     per25    = stats::quantile(sdata, 0.25),
-			     per10    = stats::quantile(sdata, 0.10),
-			     per5     = stats::quantile(sdata, 0.05),
-			     per1     = stats::quantile(sdata, 0.01),
-			     lowobs   = low,
-			     highobs  = high,
-			     lowobsi  = low_val,
-			     highobsi = high_val)
+           missing  = sum(is.na(odata)),
+           avg      = mean(sdata),
+           tavg     = mean(sdata, trim = 0.05),
+           stdev    = stats::sd(sdata),
+           variance = stats::var(sdata),
+           skew     = ds_skewness(sdata),
+           kurtosis = ds_kurtosis(sdata),
+           uss      = stat_uss(sdata),
+           css      = ds_css(sdata),
+           cvar     = ds_cvar(sdata),
+           sem      = ds_std_error(sdata),
+           median   = stats::median(sdata),
+           mode     = ds_mode(sdata),
+           range    = ds_range(sdata),
+           min      = min(sdata),
+           Max      = max(sdata),
+           iqrange  = stats::IQR(sdata),
+           per99    = stats::quantile(sdata, 0.99),
+           per90    = stats::quantile(sdata, 0.90),
+           per95    = stats::quantile(sdata, 0.95),
+           per75    = stats::quantile(sdata, 0.75),
+           per25    = stats::quantile(sdata, 0.25),
+           per10    = stats::quantile(sdata, 0.10),
+           per5     = stats::quantile(sdata, 0.05),
+           per1     = stats::quantile(sdata, 0.01),
+           lowobs   = low,
+           highobs  = high,
+           lowobsi  = low_val,
+           highobsi = high_val)
 
   class(result) <- "ds_summary"
   return(result)
