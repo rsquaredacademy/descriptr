@@ -1,4 +1,8 @@
-# descriptr 0.5.1.9000
+# descriptr 0.5.2
+
+This is a patch release to fix CRAN notification about vdiffr package 
+and remove deprecated functions related to visualization of 
+statistical distributions.
 
 ## Defunct
 
