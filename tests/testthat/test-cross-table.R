@@ -55,15 +55,15 @@ test_that("ouput from plot.ds_cross_table matches expected output", {
 
   # bar plot
   p1 <- plot(k)
-  vdiffr::expect_doppelganger("cross_bar", p1$plot)
+  expect_doppelganger("cross_bar", p1$plot)
 
   # stacked bar plot
   p2 <- plot(k, stacked = TRUE)
-  vdiffr::expect_doppelganger("cross_bar_stacked", p2$plot)
+  expect_doppelganger("cross_bar_stacked", p2$plot)
 
   # proportional bar plot
   p3 <- plot(k, proportional = TRUE)
-  vdiffr::expect_doppelganger("cross_bar_proportional", p3$plot)
+  expect_doppelganger("cross_bar_proportional", p3$plot)
 })
 
 test_that("ds_cross_table throws appropriate error", {

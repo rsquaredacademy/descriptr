@@ -16,7 +16,7 @@ test_that("output from ds_freq_table plot is as expected", {
 
   k <- ds_freq_table(mtcarz, cyl)
   p <- plot(k)
-  vdiffr::expect_doppelganger("ds_freq_bar", p$plot)
+  expect_doppelganger("ds_freq_bar", p$plot)
 })
 
 test_that("output from ds_freq_cont matches expected result", {
@@ -36,5 +36,5 @@ test_that("output from ds_freq_table plot is as expected", {
 
   k <- ds_freq_table(mtcarz, mpg)
   p <- plot(k)
-  vdiffr::expect_doppelganger("ds_freq_cont", p$plot)
+  expect_doppelganger("ds_freq_cont", p$plot)
 })
