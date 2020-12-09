@@ -8,23 +8,29 @@
 
 <title>Frequency table — ds_freq_table • descriptr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,13 +38,13 @@
 
 
 
-<meta property="og:title" content="Frequency table — ds_freq_table" />
 
+<meta property="og:title" content="Frequency table — ds_freq_table" />
 <meta property="og:description" content="Frequency table for categorical and continuous data and returns the
 frequency, cumulative frequency, frequency percent and cumulative frequency
 percent. plot.ds_freq_table() creates bar plot for the categorical
 data and histogram for continuous data." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -55,7 +61,7 @@ data and histogram for continuous data." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -69,7 +75,7 @@ data and histogram for continuous data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -115,7 +121,6 @@ data and histogram for continuous data." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
@@ -142,19 +147,17 @@ data and histogram for continuous data." />
     </div>
 
     <div class="ref-description">
-    
     <p>Frequency table for categorical and continuous data and returns the
 frequency, cumulative frequency, frequency percent and cumulative frequency
 percent. <code>plot.ds_freq_table()</code> creates bar plot for the categorical
 data and histogram for continuous data.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>ds_freq_table</span>(<span class='no'>data</span>, <span class='no'>variable</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+    <pre class="usage"><span class='fu'>ds_freq_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>variable</span>, bins <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ds_freq_table</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>print_plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, print_plot <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -183,15 +186,15 @@ data and histogram for continuous data.</p>
       <td><p>Further arguments to be passed to or from methods.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ds_cross_table.html'>ds_cross_table</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># categorical data</span>
-<span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)</div><div class='output co'>#&gt;                              Variable: cyl                              
+<span class='fu'>ds_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                              Variable: cyl                              
 #&gt; -----------------------------------------------------------------------
 #&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
 #&gt; -----------------------------------------------------------------------
@@ -205,10 +208,12 @@ data and histogram for continuous data.</p>
 #&gt; -----------------------------------------------------------------------
 #&gt; </div><div class='input'>
 <span class='co'># barplot</span>
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>cyl</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_table-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'>ds_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span>
+</div><div class='img'><img src='ds_freq_table-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># continuous data</span>
-<span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)</div><div class='output co'>#&gt;                               Variable: mpg                               
+<span class='fu'>ds_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                               Variable: mpg                               
 #&gt; |-----------------------------------------------------------------------|
 #&gt; |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
 #&gt; |-----------------------------------------------------------------------|
@@ -225,20 +230,15 @@ data and histogram for continuous data.</p>
 #&gt; |    Total    |    32     |       -       |    100.00    |      -       |
 #&gt; |-----------------------------------------------------------------------|</div><div class='input'>
 <span class='co'># barplot</span>
-<span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'>ds_freq_table</span>(<span class='no'>mtcarz</span>, <span class='no'>mpg</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>k</span>)</div><div class='img'><img src='ds_freq_table-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'>ds_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span>
+</div><div class='img'><img src='ds_freq_table-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -249,7 +249,7 @@ data and histogram for continuous data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

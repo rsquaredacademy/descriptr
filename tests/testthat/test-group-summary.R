@@ -53,7 +53,7 @@ test_that("output from ds_group_summary plot is as expected", {
 
   k <- ds_group_summary(mtcarz, cyl, mpg)
   p <- plot(k)
-  vdiffr::expect_doppelganger("group_summary", p$plot)
+  expect_doppelganger("group_summary", p$plot)
 })
 
 

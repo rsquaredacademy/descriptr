@@ -1,11 +1,12 @@
-pandoc: 2.7.2
-pkgdown: 1.4.1
+pandoc: 2.7.3
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   categorical-data: categorical-data.html
   continuous-data: continuous-data.html
   tests_and_coverage: tests_and_coverage.html
   visualization: visualization.html
+last_built: 2020-12-09T08:47Z
 urls:
   reference: https://descriptr.rsquaredacademy.com/reference
   article: https://descriptr.rsquaredacademy.com/articles

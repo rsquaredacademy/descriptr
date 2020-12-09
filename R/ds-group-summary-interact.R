@@ -31,7 +31,7 @@ ds_group_summary_interact <- function(data, cvar, ...) {
                     paste("-", non_type, collapse = "\n"))
 
   if (length(non_type) > 0) {
-  	stop(error_message)
+        stop(error_message)
   }
 
   cats <- unlist(lapply(gdata, is.factor))
