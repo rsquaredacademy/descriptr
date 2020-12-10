@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">descriptr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9000</span>
       </span>
     </div>
 
@@ -96,9 +96,6 @@
     <li>
       <a href="../articles/visualization.html">Visualization</a>
     </li>
-    <li>
-      <a href="../articles/tests_and_coverage.html">Tests and Coverage</a>
-    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -116,11 +113,29 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="https://blog.rsquaredacademy.com">Blog</a>
+</li>
+<li>
+  <a href="https://rsquared-academy.thinkific.com/">Online Courses</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
     <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/rsquaredacademy/">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.youtube.com/user/rsquaredin">
+    <span class="fa fa-youtube"></span>
      
   </a>
 </li>
@@ -188,15 +203,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_summary_stats.html">ds_summary_stats()</a></code> </p>
+          <p><code><a href="ds_extreme_obs.html">ds_extreme_obs()</a></code> </p>
         </td>
-        <td><p>Descriptive statistics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_tidy_stats.html">ds_tidy_stats()</a></code> </p>
-        </td>
-        <td><p>Tidy descriptive statistics</p></td>
+        <td><p>Extreme observations</p></td>
       </tr><tr>
         
         <td>
@@ -212,15 +221,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_measures_variation.html">ds_measures_variation()</a></code> </p>
-        </td>
-        <td><p>Measures of variation</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="ds_measures_symmetry.html">ds_measures_symmetry()</a></code> </p>
         </td>
         <td><p>Measures of symmetry</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_measures_variation.html">ds_measures_variation()</a></code> </p>
+        </td>
+        <td><p>Measures of variation</p></td>
       </tr><tr>
         
         <td>
@@ -230,9 +239,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_extreme_obs.html">ds_extreme_obs()</a></code> </p>
+          <p><code><a href="ds_summary_stats.html">ds_summary_stats()</a></code> </p>
         </td>
-        <td><p>Extreme observations</p></td>
+        <td><p>Descriptive statistics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_tidy_stats.html">ds_tidy_stats()</a></code> </p>
+        </td>
+        <td><p>Tidy descriptive statistics</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -249,9 +264,9 @@
       <tr>
         
         <td>
-          <p><code><a href="ds_freq_table.html">ds_freq_table()</a></code> <code><a href="ds_freq_table.html">plot(<i>&lt;ds_freq_table&gt;</i>)</a></code> </p>
+          <p><code><a href="ds_auto_freq_table.html">ds_auto_freq_table()</a></code> <code><a href="ds_auto_freq_table.html">ds_auto_cross_table()</a></code> </p>
         </td>
-        <td><p>Frequency table</p></td>
+        <td><p>Multiple One &amp; Two Way Tables</p></td>
       </tr><tr>
         
         <td>
@@ -261,9 +276,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_auto_freq_table.html">ds_auto_freq_table()</a></code> <code><a href="ds_auto_freq_table.html">ds_auto_cross_table()</a></code> </p>
+          <p><code><a href="ds_freq_table.html">ds_freq_table()</a></code> <code><a href="ds_freq_table.html">plot(<i>&lt;ds_freq_table&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Multiple One &amp; Two Way Tables</p></td>
+        <td><p>Frequency table</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -280,6 +295,12 @@
       <tr>
         
         <td>
+          <p><code><a href="ds_auto_group_summary.html">ds_auto_group_summary()</a></code> </p>
+        </td>
+        <td><p>Tabulation</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="ds_group_summary.html">ds_group_summary()</a></code> <code><a href="ds_group_summary.html">plot(<i>&lt;ds_group_summary&gt;</i>)</a></code> </p>
         </td>
         <td><p>Groupwise descriptive statistics</p></td>
@@ -289,12 +310,6 @@
           <p><code><a href="ds_group_summary_interact.html">ds_group_summary_interact()</a></code> </p>
         </td>
         <td><p>Category wise descriptive statistics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_auto_group_summary.html">ds_auto_group_summary()</a></code> </p>
-        </td>
-        <td><p>Tabulation</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -311,39 +326,15 @@
       <tr>
         
         <td>
-          <p><code><a href="ds_plot_scatter.html">ds_plot_scatter()</a></code> </p>
-        </td>
-        <td><p>Generate scatter plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_plot_histogram.html">ds_plot_histogram()</a></code> </p>
-        </td>
-        <td><p>Generate histograms</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_plot_density.html">ds_plot_density()</a></code> </p>
-        </td>
-        <td><p>Generate density plots</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="ds_plot_bar.html">ds_plot_bar()</a></code> </p>
         </td>
         <td><p>Generate bar plots</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_plot_box_single.html">ds_plot_box_single()</a></code> </p>
+          <p><code><a href="ds_plot_bar_grouped.html">ds_plot_bar_grouped()</a></code> </p>
         </td>
-        <td><p>Generate box plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_plot_box_group.html">ds_plot_box_group()</a></code> </p>
-        </td>
-        <td><p>Compare distributions</p></td>
+        <td><p>Generate grouped bar plots</p></td>
       </tr><tr>
         
         <td>
@@ -353,9 +344,33 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_plot_bar_grouped.html">ds_plot_bar_grouped()</a></code> </p>
+          <p><code><a href="ds_plot_box_group.html">ds_plot_box_group()</a></code> </p>
         </td>
-        <td><p>Generate grouped bar plots</p></td>
+        <td><p>Compare distributions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_plot_box_single.html">ds_plot_box_single()</a></code> </p>
+        </td>
+        <td><p>Generate box plots</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_plot_density.html">ds_plot_density()</a></code> </p>
+        </td>
+        <td><p>Generate density plots</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_plot_histogram.html">ds_plot_histogram()</a></code> </p>
+        </td>
+        <td><p>Generate histograms</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_plot_scatter.html">ds_plot_scatter()</a></code> </p>
+        </td>
+        <td><p>Generate scatter plots</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -372,45 +387,15 @@
       <tr>
         
         <td>
-          <p><code><a href="ds_kurtosis.html">ds_kurtosis()</a></code> </p>
+          <p><code><a href="ds_css.html">ds_css()</a></code> </p>
         </td>
-        <td><p>Kurtosis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_skewness.html">ds_skewness()</a></code> </p>
-        </td>
-        <td><p>Skewness</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_mode.html">ds_mode()</a></code> </p>
-        </td>
-        <td><p>Mode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_range.html">ds_range()</a></code> </p>
-        </td>
-        <td><p>Range</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_mdev.html">ds_mdev()</a></code> </p>
-        </td>
-        <td><p>Mean Absolute Deviation</p></td>
+        <td><p>Corrected Sum of Squares</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="ds_cvar.html">ds_cvar()</a></code> </p>
         </td>
         <td><p>Coefficient of Variation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ds_css.html">ds_css()</a></code> </p>
-        </td>
-        <td><p>Corrected Sum of Squares</p></td>
       </tr><tr>
         
         <td>
@@ -426,15 +411,51 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ds_tailobs.html">ds_tailobs()</a></code> </p>
+          <p><code><a href="ds_kurtosis.html">ds_kurtosis()</a></code> </p>
         </td>
-        <td><p>Tail Observations</p></td>
+        <td><p>Kurtosis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_mdev.html">ds_mdev()</a></code> </p>
+        </td>
+        <td><p>Mean Absolute Deviation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_mode.html">ds_mode()</a></code> </p>
+        </td>
+        <td><p>Mode</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_range.html">ds_range()</a></code> </p>
+        </td>
+        <td><p>Range</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="ds_rindex.html">ds_rindex()</a></code> </p>
         </td>
         <td><p>Index Values</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_skewness.html">ds_skewness()</a></code> </p>
+        </td>
+        <td><p>Skewness</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_std_error.html">ds_std_error()</a></code> </p>
+        </td>
+        <td><p>Standard error of mean</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ds_tailobs.html">ds_tailobs()</a></code> </p>
+        </td>
+        <td><p>Tail Observations</p></td>
       </tr>
     </tbody><tbody>
       <tr>

@@ -7,6 +7,7 @@ authors:
 templates:
   params:
     bootswatch: cosmo
+    ganalytics: UA-57270671-33
     docsearch:
       api_key:
       index_name: descriptr
@@ -31,9 +32,17 @@ navbar:
           href: reference/index.html
         - text: "News"
           href: news/index.html
+    - text: "Blog"
+      href: https://blog.rsquaredacademy.com
+    - text: "Online Courses"
+      href: https://rsquared-academy.thinkific.com/
   right:
     - icon: fa-github
       href: https://github.com/rsquaredacademy/descriptr
+    - icon: fa-twitter
+      href: https://twitter.com/rsquaredacademy/
+    - icon: fa-youtube
+      href: https://www.youtube.com/user/rsquaredin
 
 
 home:
@@ -63,61 +72,62 @@ reference:
     descriptive statistics for continuous data.
   contents:
   - ds_auto_summary_stats
-  - ds_summary_stats
-  - ds_tidy_stats
+  - ds_extreme_obs
   - ds_freq_table
   - ds_measures_location
-  - ds_measures_variation
   - ds_measures_symmetry
+  - ds_measures_variation
   - ds_percentiles
-  - ds_extreme_obs
-
+  - ds_summary_stats
+  - ds_tidy_stats
+  
 - title: Categorical Data
   desc: >
     The following functions ease the process of generating and visualizing
     descriptive statistics for categorical data. 
   contents:
-  - ds_freq_table
-  - ds_cross_table
-  - ds_auto_freq_table
   - ds_auto_cross_table
+  - ds_auto_freq_table
+  - ds_cross_table
+  - ds_freq_table
 
 - title: Grouped Summary 
   desc: >
     The following functions generate grouped summary statistics.
   contents:
+  - ds_auto_group_summary
   - ds_group_summary
   - ds_group_summary_interact
-  - ds_auto_group_summary
 
 - title: Visualization
   desc: >
     The following functions generate plots for different data types.
   contents:
-  - ds_plot_scatter
-  - ds_plot_histogram
-  - ds_plot_density
   - ds_plot_bar
-  - ds_plot_box_single
-  - ds_plot_box_group
-  - ds_plot_bar_stacked
   - ds_plot_bar_grouped
+  - ds_plot_bar_stacked
+  - ds_plot_box_group
+  - ds_plot_box_single
+  - ds_plot_density
+  - ds_plot_histogram
+  - ds_plot_scatter
  
 - title: Other Functions
   desc: >
     A set of functions used to generate `summary_stats`.
-  contents:
-  - ds_kurtosis
-  - ds_skewness
-  - ds_mode
-  - ds_range
-  - ds_mdev
-  - ds_cvar
+  contents:  
   - ds_css
+  - ds_cvar
   - ds_gmean
   - ds_hmean
-  - ds_tailobs
+  - ds_kurtosis
+  - ds_mdev
+  - ds_mode
+  - ds_range
   - ds_rindex
+  - ds_skewness
+  - ds_std_error
+  - ds_tailobs
 
 - title: Data
   desc: >
