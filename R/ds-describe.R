@@ -80,9 +80,9 @@ ds_measures_variation <- function(data, ...) {
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(range     = ds_range,
-                              iqr       = IQR,
-                              variance  = var,
-                              sd        = sd,
+                              iqr       = stats::IQR,
+                              variance  = stats::var,
+                              sd        = stats::sd,
                               coeff_var = ds_cvar,
                               std_error = ds_std_error)) %>%
     tibble::as_tibble()

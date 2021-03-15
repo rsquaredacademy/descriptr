@@ -24,9 +24,9 @@ test_that("output from ds_rindex match expected result", {
 
 
 test_that("ds_rindex returns the appropriate error", {
-  expect_error(ds_rindex("mtcars", c(13.3)), "data must be numeric")
-  expect_error(ds_rindex(as.factor(mtcars$disp), c(13.3)), "data must be numeric")
-  expect_error(ds_rindex(mtcars$mpg, "13.3"), "values must be numeric")
+  expect_error(ds_rindex("mtcars", c(13.3)), "Data must be numeric.")
+  expect_error(ds_rindex(as.factor(mtcars$disp), c(13.3)), "Data must be numeric.")
+  expect_error(ds_rindex(mtcars$mpg, "13.3"), "Values must be numeric.")
 })
 
 
