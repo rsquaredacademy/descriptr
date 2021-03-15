@@ -23,7 +23,7 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
   if (length(var) < 1) {
     is_num <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     data <- data[, is_num]
   } else {
@@ -37,7 +37,7 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(mean      = mean,
                               trim_mean = ~ mean(., trim = trim),
-                              median    = stats::median,
+                              median    = median,
                               mode      = ds_mode)) %>%
     tibble::as_tibble()
 
@@ -67,7 +67,7 @@ ds_measures_variation <- function(data, ...) {
   if (length(var) < 1) {
     is_num <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     data <- data[, is_num]
   } else {
@@ -80,9 +80,9 @@ ds_measures_variation <- function(data, ...) {
     tidyr::gather(var, values) %>%
     dplyr::group_by(var) %>%
     dplyr::summarise_all(list(range     = ds_range,
-                              iqr       = stats::IQR,
-                              variance  = stats::var,
-                              sd        = stats::sd,
+                              iqr       = IQR,
+                              variance  = var,
+                              sd        = sd,
                               coeff_var = ds_cvar,
                               std_error = ds_std_error)) %>%
     tibble::as_tibble()
@@ -111,7 +111,7 @@ ds_measures_symmetry <- function(data, ...) {
   if (length(var) < 1) {
     is_num <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     data <- data[, is_num]
   } else {
@@ -155,7 +155,7 @@ ds_percentiles <- function(data, ...) {
   if (length(var) < 1) {
     is_num <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     data <- data[, is_num]
   } else {
@@ -169,15 +169,15 @@ ds_percentiles <- function(data, ...) {
     dplyr::group_by(var) %>%
     dplyr::summarise_all(
       list(min    = min,
-           per1   = ~ stats::quantile(., 0.01),
-           per5   = ~ stats::quantile(., 0.05),
-           per10  = ~ stats::quantile(., 0.10),
-           q1     = ~ stats::quantile(., 0.25),
-           median = stats::median,
-           q3     = ~ stats::quantile(., 0.75),
-           per95  = ~ stats::quantile(., 0.95),
-           per90  = ~ stats::quantile(., 0.90),
-           per99  = ~ stats::quantile(., 0.99),
+           per1   = ~ quantile(., 0.01),
+           per5   = ~ quantile(., 0.05),
+           per10  = ~ quantile(., 0.10),
+           q1     = ~ quantile(., 0.25),
+           median = median,
+           q3     = ~ quantile(., 0.75),
+           per95  = ~ quantile(., 0.95),
+           per90  = ~ quantile(., 0.90),
+           per99  = ~ quantile(., 0.99),
            max    = max)
       ) %>%
     tibble::as_tibble()
@@ -217,7 +217,7 @@ ds_extreme_obs <- function(data, column) {
 
 }
 
-#' @importFrom magrittr %>%
+#' @import magrittr 
 #' @title Tail Observations
 #' @description Returns the n highest/lowest observations from a numeric vector.
 #' @param data a numeric vector
@@ -236,15 +236,15 @@ ds_extreme_obs <- function(data, column) {
 ds_tailobs <- function(data, n, type = c("low", "high")) {
 
   if (!is.numeric(data)) {
-    stop("data must be numeric")
+    stop("data must be numeric", call. = FALSE)
   }
 
   if (!is.numeric(n)) {
-    stop("n must be numeric")
+    stop("n must be numeric", call. = FALSE)
   }
 
   if (n > length(data)) {
-    stop("n must be less than the length of data")
+    stop("n must be less than the length of data", call. = FALSE)
   }
 
   method <- match.arg(type)
@@ -252,13 +252,13 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
   if (method == "low") {
     result <-
       data %>%
-      stats::na.omit() %>%
+      na.omit() %>%
       sort() %>%
       `[`(1:n)
   } else {
     result <-
       data %>%
-      stats::na.omit() %>%
+      na.omit() %>%
       sort(decreasing = TRUE) %>%
       `[`(1:n)
   }
@@ -291,11 +291,11 @@ ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
   prod(z) ^ (1 / length(z))
@@ -325,11 +325,11 @@ ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
+    stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
   length(z) / sum(sapply(z, div_by))
@@ -352,11 +352,11 @@ ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 ds_mode <- function(x, na.rm = FALSE) {
 
   if (!is.numeric(x)) {
-    stop("x must be numeric")
+    stop("x must be numeric", call. = FALSE)
   }
 
   if (na.rm) {
-    x <- stats::na.omit(x)
+    x <- na.omit(x)
   }
 
   Freq <- NULL
@@ -397,11 +397,11 @@ ds_range <- function(x, data = NULL, na.rm = FALSE) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
+    stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
   max(z) - min(z)
 
@@ -432,11 +432,11 @@ ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
   n <- length(z)
@@ -470,11 +470,11 @@ ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Skewness is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Skewness is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
   n <- length(z)
@@ -510,11 +510,11 @@ ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
   m <- mean(z)
@@ -544,14 +544,14 @@ ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
-  (stats::sd(z) / mean(z)) * 100
+  (sd(z) / mean(z)) * 100
 
 }
 
@@ -576,11 +576,11 @@ ds_css <- function(x, data = NULL, na.rm = FALSE) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    z <- stats::na.omit(z)
+    z <- na.omit(z)
   }
 
   sum((z - mean(z)) ^ 2)
@@ -601,19 +601,19 @@ ds_css <- function(x, data = NULL, na.rm = FALSE) {
 ds_rindex <- function(data, values) {
 
   if (!is.numeric(data)) {
-    stop("data must be numeric")
+    stop("Data must be numeric.", call. = FALSE)
   }
 
   if (!is.numeric(values)) {
-    stop("values must be numeric")
+    stop("Values must be numeric.", call. = FALSE)
   }
 
-  data   <- stats::na.omit(data)
-  values <- stats::na.omit(values)
+  data   <- na.omit(data)
+  values <- na.omit(values)
   out    <- c()
 
   for (i in seq_along(values)) {
-    k <- return_pos(data, values[i])
+    k   <- return_pos(data, values[i])
     out <- c(out, k)
   }
 

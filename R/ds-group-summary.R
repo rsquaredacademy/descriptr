@@ -69,10 +69,10 @@ ds_group_summary.default <- function(data, gvar, cvar) {
   split_dat <- tapply(cvar, list(gvar), function(gvar) {
     c(
       length(gvar), min(gvar), max(gvar), mean(gvar),
-      stats::median(gvar), ds_mode(gvar), stats::sd(gvar), stats::var(gvar),
+      median(gvar), ds_mode(gvar), sd(gvar), var(gvar),
       ds_skewness(gvar), ds_kurtosis(gvar), stat_uss(gvar),
       ds_css(gvar), ds_cvar(gvar), ds_std_error(gvar),
-      ds_range(gvar), stats::IQR(gvar)
+      ds_range(gvar), IQR(gvar)
     )
   })
 
@@ -97,11 +97,11 @@ ds_group_summary.default <- function(data, gvar, cvar) {
     dplyr::group_by(!! g_var) %>%
     dplyr::summarise(length = length(!! c_var), min = min(!! c_var),
               max = max(!! c_var), mean  = mean(!! c_var),
-              median= stats::median(!! c_var), mode = ds_mode(!! c_var),
-              sd = stats::sd(!! c_var), variance = stats::var(!! c_var),
+              median= median(!! c_var), mode = ds_mode(!! c_var),
+              sd = sd(!! c_var), variance = var(!! c_var),
               skewness = ds_skewness(!! c_var), kurtosis = ds_kurtosis(!! c_var),
               coeff_var = ds_cvar(!! c_var), std_error = ds_std_error(!! c_var),
-              range = ds_range(!! c_var), iqr = stats::IQR(!! c_var))
+              range = ds_range(!! c_var), iqr = IQR(!! c_var))
 
   result <- list(stats      = out,
                  tidy_stats = tidystats,
@@ -125,27 +125,27 @@ print.ds_group_summary <- function(x, ...) {
 #'
 plot.ds_group_summary <- function(x, print_plot = TRUE, ...) {
 
-  x_lab <- magrittr::use_series(x, xvar)
-  y_lab <- magrittr::use_series(x, yvar)
+  x_lab <- use_series(x, xvar)
+  y_lab <- use_series(x, yvar)
 
   k <-
     x %>%
-    magrittr::use_series(xvar) %>%
+    use_series(xvar) %>%
     rlang::sym()
 
   j <-
     x %>%
-    magrittr::use_series(yvar) %>%
+    use_series(yvar) %>%
     rlang::sym()
 
   p <-
     x %>%
-    magrittr::use_series(data) %>%
+    use_series(data) %>%
     dplyr::select(x = !! k, y = !! j) %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_boxplot(ggplot2::aes(x = x, y = y), fill = "blue") +
-    ggplot2::xlab(x_lab) + ggplot2::ylab(y_lab) +
-    ggplot2::ggtitle(paste(y_lab, "by", x_lab))
+    ggplot() +
+    geom_boxplot(aes(x = x, y = y), fill = "blue") +
+    xlab(x_lab) + ylab(y_lab) +
+    ggtitle(paste(y_lab, "by", x_lab))
 
   if (print_plot) {
     print(p)

@@ -2,11 +2,11 @@
 #' @importFrom stats runif
 .onAttach <- function(...) {
 
-  if (!interactive() || stats::runif(1) > 0.1) return()
+  if (!interactive() || runif(1) > 0.1) return()
 
-  pkgs          <- utils::available.packages()
+  pkgs          <- available.packages()
   cran_version  <- package_version(pkgs["descriptr", "Version"])
-  local_version <- utils::packageVersion("descriptr")
+  local_version <- packageVersion("descriptr")
   behind_cran   <- cran_version > local_version
 
   tips <- c(
@@ -22,8 +22,8 @@
     if (behind_cran) {
       msg <- c("A new version of descriptr is available with bug fixes and new features.")
       packageStartupMessage(msg, "\nWould you like to install it?")
-      if (utils::menu(c("Yes", "No")) == 1) {
-        utils::update.packages("descriptr")
+      if (menu(c("Yes", "No")) == 1) {
+        update.packages("descriptr")
       }
     } else {
       packageStartupMessage(paste(strwrap(tip), collapse = "\n"))

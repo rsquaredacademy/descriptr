@@ -8,22 +8,14 @@ freq_table2.default <- function(data, name) {
     data %>%
     dplyr::select(name) %>%
     dplyr::pull(1) %>%
-    stats::na.omit()
+    na.omit()
 
   if (!is.factor(dat)) {
-    stop("data must be categorical/qualitative")
+    stop("Data must be categorical/qualitative.", call. = FALSE)
   }
 
-  cq <-
-    dat %>%
-    sort() %>%
-    unique()
-
-  result <-
-    dat %>%
-    table() %>%
-    as.vector()
-
+  cq          <- unique(sort(dat))
+  result      <- as.vector(table(dat))
   level_names <- levels(dat)
   data_len    <- length(dat)
   len         <- length(result)

@@ -32,7 +32,7 @@ ds_auto_freq_table <- function(data, ...) {
 
   if (length(var) < 1) {
     if (!any(is_factor == TRUE)) {
-      rlang::abort("Data has no categorical variables.")
+      stop("Data has no categorical variables.", call. = FALSE)
     }
     plot_data <- data[is_factor]
   } else {
@@ -40,13 +40,13 @@ ds_auto_freq_table <- function(data, ...) {
       dplyr::select(!!! var)
     is_factor <- sapply(data, is.factor)
     if (!any(is_factor == TRUE)) {
-      rlang::abort("Data has no categorical variables.")
+      stop("Data has no categorical variables.", call. = FALSE)
     }
     plot_data <- data[is_factor]
   }
 
   if (ncol(plot_data) < 1) {
-    rlang::abort("Data has no categorical variables.")
+    stop("Data has no categorical variables.", call. = FALSE)
   }
 
   factor_var <- names(plot_data)
@@ -72,7 +72,7 @@ ds_auto_cross_table <- function(data, ...) {
 
   if (length(var) < 1) {
     if (!any(is_factor == TRUE)) {
-      rlang::abort("Data has no categorical variables.")
+      stop("Data has no categorical variables.", call. = FALSE)
     }
     plot_data <- data[is_factor]
   } else {
@@ -80,17 +80,17 @@ ds_auto_cross_table <- function(data, ...) {
       dplyr::select(!!! var)
     is_factor <- sapply(data, is.factor)
     if (!any(is_factor == TRUE)) {
-      rlang::abort("Data has no categorical variables.")
+      stop("Data has no categorical variables.", call. = FALSE)
     }
     if (length(is_factor) < 2) {
-      rlang::abort("Two way table requires at least 2 categorical variables.")
+      stop("Two way table requires at least 2 categorical variables.", call. = FALSE)
     } else {
       plot_data <- data[is_factor]
     }
   }
 
   if (ncol(plot_data) < 1) {
-    rlang::abort("Data has no categorical variables.")
+    stop("Data has no categorical variables.", call. = FALSE)
   }
 
   factor_var    <- names(plot_data)
