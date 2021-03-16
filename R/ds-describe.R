@@ -2,8 +2,8 @@
 #'
 #' Returns the measures of location such as mean, median & mode.
 #'
-#' @param data A \code{data.frame} or \code{tibble}.
-#' @param ... Column(s) in \code{data}.
+#' @param data A \code{data.frame} or \code{tibble} or numeric vector.
+#' @param ... Column(s) in \code{data} or numeric vectors.
 #' @param trim The fraction of values to be trimmed before computing
 #'   the mean.
 #'
@@ -16,30 +16,55 @@
 #'
 ds_measures_location <- function(data, ..., trim = 0.05) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      stop("Data has no continuous variables.", call. = FALSE)
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
-  } else {
-    data %<>%
-      dplyr::select(!!! var)
-  }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(list(mean      = mean,
-                              trim_mean = ~ mean(., trim = trim),
-                              median    = median,
-                              mode      = ds_mode)) %>%
-    tibble::as_tibble()
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(list(n         = length,
+                                mean      = mean,
+                                trim_mean = ~ mean(., trim = trim),
+                                median    = median,
+                                mode      = ds_mode)) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(var       = vars,
+               n         = sapply(data, length),
+               mean      = sapply(data, mean),
+               trim_mean = sapply(data, mean, trim),
+               median    = sapply(data, median),
+               mode      = sapply(data, ds_mode))
+
+  } else {
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
+  }
 
 }
 
@@ -60,32 +85,60 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
 #'
 ds_measures_variation <- function(data, ...) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      stop("Data has no continuous variables.", call. = FALSE)
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
+
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(list(n         = length,
+                                range     = ds_range,
+                                iqr       = stats::IQR,
+                                variance  = stats::var,
+                                sd        = stats::sd,
+                                coeff_var = ds_cvar,
+                                std_error = ds_std_error)) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(var       = vars,
+               n         = sapply(data, length),
+               iqr       = sapply(data, stats::IQR),
+               variance  = sapply(data, stats::var),
+               sd        = sapply(data, stats::sd),
+               coeff_var = sapply(data, ds_cvar),
+               std_error = sapply(data, ds_std_error))
+
   } else {
-    data %<>%
-      dplyr::select(!!! var)
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
   }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(list(range     = ds_range,
-                              iqr       = stats::IQR,
-                              variance  = stats::var,
-                              sd        = stats::sd,
-                              coeff_var = ds_cvar,
-                              std_error = ds_std_error)) %>%
-    tibble::as_tibble()
+
 }
 
 #' Measures of symmetry
@@ -104,31 +157,56 @@ ds_measures_variation <- function(data, ...) {
 #'
 ds_measures_symmetry <- function(data, ...) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      stop("Data has no continuous variables.", call. = FALSE)
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
+
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(
+        list(
+          n        = length,
+          skewness = ds_skewness,
+          kurtosis = ds_kurtosis)
+      ) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(var      = vars,
+               n        = sapply(data, length),
+               skewness = sapply(data, ds_skewness),
+               kurtosis = sapply(data, ds_kurtosis))
+
   } else {
-    data %<>%
-      dplyr::select(!!! var)
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
   }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(
-      list(
-        skewness = ds_skewness,
-        kurtosis = ds_kurtosis)
-      ) %>%
-    tibble::as_tibble()
+
 }
 
 
@@ -148,39 +226,73 @@ ds_measures_symmetry <- function(data, ...) {
 #'
 ds_percentiles <- function(data, ...) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      stop("Data has no continuous variables.", call. = FALSE)
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
+
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(
+        list(n      = length,
+             min    = min,
+             per1   = ~ quantile(., 0.01),
+             per5   = ~ quantile(., 0.05),
+             per10  = ~ quantile(., 0.10),
+             q1     = ~ quantile(., 0.25),
+             median = median,
+             q3     = ~ quantile(., 0.75),
+             per90  = ~ quantile(., 0.90),
+             per95  = ~ quantile(., 0.95),
+             per99  = ~ quantile(., 0.99),
+             max    = max)
+      ) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(var               = vars,
+               n                 = sapply(data, length),
+               min               = sapply(data, min),
+               `1st_percentile`  = sapply(data, quantile, 0.01),
+               `5th_percentile`  = sapply(data, quantile, 0.05),
+               `10th_percentile` = sapply(data, quantile, 0.10),
+               q1                = sapply(data, quantile, 0.25),
+               median            = sapply(data, median),
+               q3                = sapply(data, quantile, 0.75),
+               `90th_percentile` = sapply(data, quantile, 0.90),
+               `95th_percentile` = sapply(data, quantile, 0.95),
+               `99th_percentile` = sapply(data, quantile, 0.99),
+               max               = sapply(data, max))
+
   } else {
-    data %<>%
-      dplyr::select(!!! var)
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
   }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(
-      list(min    = min,
-           per1   = ~ quantile(., 0.01),
-           per5   = ~ quantile(., 0.05),
-           per10  = ~ quantile(., 0.10),
-           q1     = ~ quantile(., 0.25),
-           median = median,
-           q3     = ~ quantile(., 0.75),
-           per95  = ~ quantile(., 0.95),
-           per90  = ~ quantile(., 0.90),
-           per99  = ~ quantile(., 0.99),
-           max    = max)
-      ) %>%
-    tibble::as_tibble()
+
 }
 
 #' Extreme observations
@@ -197,27 +309,41 @@ ds_percentiles <- function(data, ...) {
 #'
 ds_extreme_obs <- function(data, column) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::enquo(column)
-  var_name <- deparse(substitute(column))
-  check_numeric(data, !! var, var_name)
+    var <- rlang::enquo(column)
+    var_name <- deparse(substitute(column))
+    check_numeric(data, !! var, var_name)
 
-  na_data <-
-    data %>%
-    dplyr::select(!! var) %>%
-    na.omit() %>%
-    dplyr::pull(1)
+    na_data <-
+      data %>%
+      dplyr::select(!! var) %>%
+      na.omit() %>%
+      dplyr::pull(1)
 
-  tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
-         value = c(ds_tailobs(na_data, 5, "high"),
-                   ds_tailobs(na_data, 5, "low")),
-         index = ds_rindex(na_data, value))
+    tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
+                   value = c(ds_tailobs(na_data, 5, "high"),
+                             ds_tailobs(na_data, 5, "low")),
+                   index = ds_rindex(na_data, value))
 
+  } else if (is.numeric(data)) {
+
+    result <- data.frame(type  = c(rep("high", 5), rep("low", 5)),
+                         value = c(ds_tailobs(data, 5, "high"),
+                                   ds_tailobs(data, 5, "low")))
+
+    result$index <- ds_rindex(data, result$value)
+    return(result)
+
+  } else {
+
+    stop("data must be either a numeric vector or a `data.frame`.")
+
+  }
 
 }
 
-#' @import magrittr 
+#' @import magrittr
 #' @title Tail Observations
 #' @description Returns the n highest/lowest observations from a numeric vector.
 #' @param data a numeric vector

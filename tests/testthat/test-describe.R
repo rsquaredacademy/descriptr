@@ -177,7 +177,7 @@ test_that("ds_gmean throws the appropriate error", {
 
 test_that("output from ds_measures_location is as expected", {
 
-  actual <- round(sum(ds_measures_location(mtcarz)[[2]]), 2)
+  actual <- round(sum(ds_measures_location(mtcarz)[[3]]), 2)
   expected <- 422.16
   expect_equal(actual, expected)
 
@@ -185,7 +185,15 @@ test_that("output from ds_measures_location is as expected", {
 
 test_that("output from ds_measures_location is as expected", {
 
-  actual <- round(sum(ds_measures_location(mtcarz, mpg)[[2]]), 2)
+  actual <- round(sum(ds_measures_location(mtcarz, mpg)[[3]]), 2)
+  expected <- 20.09
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_measures_location is as expected", {
+
+  actual <- round(ds_measures_location(mtcarz$mpg)[[3]], 2)
   expected <- 20.09
   expect_equal(actual, expected)
 
@@ -193,8 +201,8 @@ test_that("output from ds_measures_location is as expected", {
 
 test_that("ds_measures_location throws appropriate errors", {
 
-  x <- 1:10
-  expect_error(ds_measures_location(x), 'data must be a `data.frame` or `tibble`.')
+  x <- "mpg"
+  expect_error(ds_measures_location(x), 'data must be either numeric or a `data.frame`.')
 
 })
 
