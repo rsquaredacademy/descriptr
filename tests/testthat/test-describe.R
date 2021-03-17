@@ -215,7 +215,7 @@ test_that("ds_measures_location throws appropriate errors", {
 
 test_that("output from ds_measures_variation is as expected", {
 
-  actual <- round(sum(ds_measures_variation(mtcarz)[[2]]), 2)
+  actual <- round(sum(ds_measures_variation(mtcarz)[[3]]), 2)
   expected <- 721.88
   expect_equal(actual, expected)
 
@@ -223,7 +223,15 @@ test_that("output from ds_measures_variation is as expected", {
 
 test_that("output from ds_measures_variation is as expected", {
 
-  actual <- round(sum(ds_measures_variation(mtcarz, mpg)[[2]]), 2)
+  actual <- round(ds_measures_variation(mtcarz, mpg)[[3]], 2)
+  expected <- 23.5
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_measures_variation is as expected", {
+
+  actual <- round(ds_measures_variation(mtcarz$mpg)[[3]], 2)
   expected <- 23.5
   expect_equal(actual, expected)
 
@@ -231,8 +239,8 @@ test_that("output from ds_measures_variation is as expected", {
 
 test_that("ds_measures_variation throws appropriate errors", {
 
-  x <- 1:10
-  expect_error(ds_measures_variation(x), 'data must be a `data.frame` or `tibble`.')
+  x <- "mpg"
+  expect_error(ds_measures_variation(x), 'data must be either numeric or a `data.frame`.')
 
 })
 

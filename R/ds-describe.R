@@ -4,43 +4,45 @@
 #'
 #' @param data A \code{data.frame} or \code{tibble} or numeric vector.
 #' @param ... Column(s) in \code{data} or numeric vectors.
-#' @param trim The fraction of values to be trimmed before computing
-#'   the mean.
+#' @param trim The fraction of values to be trimmed before computing the mean.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_measures_location(mtcarz)
+#'
+#' # single column
 #' ds_measures_location(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_measures_location(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_measures_location(mtcarz)
+#'
+#' # vector
+#' ds_measures_location(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_measures_location(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_measures_location(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
-ds_measures_location <- function(data, ..., trim = 0.05) {
+ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 
   if (is.data.frame(data)) {
 
-    var <- rlang::quos(...)
+    var <- vapply(substitute(...()), deparse, NA_character_)
 
     if (length(var) < 1) {
-      is_num <- sapply(data, is.numeric)
-      if (!any(is_num == TRUE)) {
-        stop("Data has no continuous variables.", call. = FALSE)
-      }
-      data <- data[, is_num]
+      data <- ds_num_cols(data)
     } else {
-      data %<>%
-        dplyr::select(!!! var)
+      data <- ds_num_cols(data[var])
     }
 
-    data %>%
-      na.omit() %>%
-      tidyr::gather(var, values) %>%
-      dplyr::group_by(var) %>%
-      dplyr::summarise_all(list(n         = length,
-                                mean      = mean,
-                                trim_mean = ~ mean(., trim = trim),
-                                median    = median,
-                                mode      = ds_mode)) %>%
-      tibble::as_tibble()
+    ds_loc_prep(data, trim = trim, decimals = decimals)
 
   } else if (is.numeric(data)) {
 
@@ -51,14 +53,14 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
       vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
     }
 
-    data <- list(data, ...)
+    data  <- list(data, ...)
+    dtype <- sapply(data, is.numeric)
 
-    data.frame(var       = vars,
-               n         = sapply(data, length),
-               mean      = sapply(data, mean),
-               trim_mean = sapply(data, mean, trim),
-               median    = sapply(data, median),
-               mode      = sapply(data, ds_mode))
+    if (!all(dtype)) {
+      stop("data must be of type numeric only.", call. = FALSE)
+    }
+
+    ds_loc_prep(data, vars, trim, decimals)
 
   } else {
 
@@ -75,6 +77,7 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
 #' ds_measures_variation(mtcarz)
@@ -83,7 +86,7 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
 #'
 #' @export
 #'
-ds_measures_variation <- function(data, ...) {
+ds_measures_variation <- function(data, ..., decimals = 2) {
 
   if (is.data.frame(data)) {
 
@@ -124,13 +127,14 @@ ds_measures_variation <- function(data, ...) {
 
     data <- list(data, ...)
 
-    data.frame(var       = vars,
+    data.frame(variable  = vars,
                n         = sapply(data, length),
-               iqr       = sapply(data, stats::IQR),
-               variance  = sapply(data, stats::var),
-               sd        = sapply(data, stats::sd),
-               coeff_var = sapply(data, ds_cvar),
-               std_error = sapply(data, ds_std_error))
+               range     = round(sapply(data, ds_range), decimals),
+               iqr       = round(sapply(data, stats::IQR), decimals),
+               variance  = round(sapply(data, stats::var), decimals),
+               sd        = round(sapply(data, stats::sd), decimals),
+               coeff_var = round(sapply(data, ds_cvar), decimals),
+               std_error = round(sapply(data, ds_std_error), decimals))
 
   } else {
 
@@ -147,6 +151,7 @@ ds_measures_variation <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
 #' ds_measures_symmetry(mtcarz)
@@ -155,7 +160,7 @@ ds_measures_variation <- function(data, ...) {
 #'
 #' @export
 #'
-ds_measures_symmetry <- function(data, ...) {
+ds_measures_symmetry <- function(data, ..., decimals = 2) {
 
   if (is.data.frame(data)) {
 
@@ -197,8 +202,8 @@ ds_measures_symmetry <- function(data, ...) {
 
     data.frame(var      = vars,
                n        = sapply(data, length),
-               skewness = sapply(data, ds_skewness),
-               kurtosis = sapply(data, ds_kurtosis))
+               skewness = round(sapply(data, ds_skewness), decimals),
+               kurtosis = round(sapply(data, ds_kurtosis), decimals))
 
   } else {
 
@@ -216,6 +221,7 @@ ds_measures_symmetry <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
 #' ds_percentiles(mtcarz)
@@ -224,7 +230,7 @@ ds_measures_symmetry <- function(data, ...) {
 #'
 #' @export
 #'
-ds_percentiles <- function(data, ...) {
+ds_percentiles <- function(data, ..., decimals = 2) {
 
   if (is.data.frame(data)) {
 
@@ -248,15 +254,15 @@ ds_percentiles <- function(data, ...) {
       dplyr::summarise_all(
         list(n      = length,
              min    = min,
-             per1   = ~ quantile(., 0.01),
-             per5   = ~ quantile(., 0.05),
-             per10  = ~ quantile(., 0.10),
+             per_1  = ~ quantile(., 0.01),
+             per_5  = ~ quantile(., 0.05),
+             per_10 = ~ quantile(., 0.10),
              q1     = ~ quantile(., 0.25),
              median = median,
              q3     = ~ quantile(., 0.75),
-             per90  = ~ quantile(., 0.90),
-             per95  = ~ quantile(., 0.95),
-             per99  = ~ quantile(., 0.99),
+             per_90 = ~ quantile(., 0.90),
+             per_95 = ~ quantile(., 0.95),
+             per_99 = ~ quantile(., 0.99),
              max    = max)
       ) %>%
       tibble::as_tibble()
@@ -272,19 +278,19 @@ ds_percentiles <- function(data, ...) {
 
     data <- list(data, ...)
 
-    data.frame(var               = vars,
-               n                 = sapply(data, length),
-               min               = sapply(data, min),
-               `1st_percentile`  = sapply(data, quantile, 0.01),
-               `5th_percentile`  = sapply(data, quantile, 0.05),
-               `10th_percentile` = sapply(data, quantile, 0.10),
-               q1                = sapply(data, quantile, 0.25),
-               median            = sapply(data, median),
-               q3                = sapply(data, quantile, 0.75),
-               `90th_percentile` = sapply(data, quantile, 0.90),
-               `95th_percentile` = sapply(data, quantile, 0.95),
-               `99th_percentile` = sapply(data, quantile, 0.99),
-               max               = sapply(data, max))
+    data.frame(var    = vars,
+               n      = sapply(data, length),
+               min    = round(sapply(data, min), decimals),
+               per_1  = round(sapply(data, quantile, 0.01), decimals),
+               per_5  = round(sapply(data, quantile, 0.05), decimals),
+               per_10 = round(sapply(data, quantile, 0.10), decimals),
+               q1     = round(sapply(data, quantile, 0.25), decimals),
+               median = round(sapply(data, median), decimals),
+               q3     = round(sapply(data, quantile, 0.75), decimals),
+               per_90 = round(sapply(data, quantile, 0.90), decimals),
+               per_95 = round(sapply(data, quantile, 0.95), decimals),
+               per_99 = round(sapply(data, quantile, 0.99), decimals),
+               max    = round(sapply(data, max), decimals))
 
   } else {
 
@@ -301,13 +307,14 @@ ds_percentiles <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param column Column in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
 #' ds_extreme_obs(mtcarz, mpg)
 #'
 #' @export
 #'
-ds_extreme_obs <- function(data, column) {
+ds_extreme_obs <- function(data, column, decimals = 2) {
 
   if (is.data.frame(data)) {
 
@@ -329,8 +336,8 @@ ds_extreme_obs <- function(data, column) {
   } else if (is.numeric(data)) {
 
     result <- data.frame(type  = c(rep("high", 5), rep("low", 5)),
-                         value = c(ds_tailobs(data, 5, "high"),
-                                   ds_tailobs(data, 5, "low")))
+                         value = c(round(ds_tailobs(data, 5, "high"), decimals),
+                                   round(ds_tailobs(data, 5, "low"), decimals)))
 
     result$index <- ds_rindex(data, result$value)
     return(result)
@@ -348,10 +355,9 @@ ds_extreme_obs <- function(data, column) {
 #' @description Returns the n highest/lowest observations from a numeric vector.
 #' @param data a numeric vector
 #' @param n number of observations to be returned
-#' @param type if \code{low}, the \code{n} lowest observations are returned, else the
-#' highest \code{n} obervations are returned
-#' @details Any NA values are stripped from \code{data} before computation
-#' takes place.
+#' @param type if \code{low}, the \code{n} lowest observations are returned, else the highest \code{n} observations are returned.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#' @details Any NA values are stripped from \code{data} before computation takes place.
 #' @return \code{n} highest/lowest observations from \code{data}
 #' @examples
 #' ds_tailobs(mtcarz$mpg, 5)
@@ -359,7 +365,7 @@ ds_extreme_obs <- function(data, column) {
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
-ds_tailobs <- function(data, n, type = c("low", "high")) {
+ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 
   if (!is.numeric(data)) {
     stop("data must be numeric", call. = FALSE)
@@ -380,13 +386,15 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
       data %>%
       na.omit() %>%
       sort() %>%
-      `[`(1:n)
+      `[`(1:n) %>%
+      round(decimals)
   } else {
     result <-
       data %>%
       na.omit() %>%
       sort(decreasing = TRUE) %>%
-      `[`(1:n)
+      `[`(1:n) %>%
+      round(decimals)
   }
 
   return(result)

@@ -265,13 +265,13 @@ string_to_name <- function(x, index = 1) {
 
 #' @importFrom utils packageVersion menu install.packages globalVariables
 check_suggests <- function(pkg) {
-  
+
   pkg_flag <- tryCatch(packageVersion(pkg), error = function(e) NA)
-  
+
   if (is.na(pkg_flag)) {
-    
+
     msg <- message(paste0('\n', pkg, ' must be installed for this functionality.'))
-    
+
     if (interactive()) {
       message(msg, "\nWould you like to install it?")
       if (menu(c("Yes", "No")) == 1) {
@@ -281,7 +281,7 @@ check_suggests <- function(pkg) {
       }
     } else {
       stop(msg, call. = FALSE)
-    } 
+    }
   }
 
 }
@@ -310,7 +310,7 @@ check_factor <- function(data, var, var_name) {
   vary      <- rlang::enquo(var)
   fdata     <- dplyr::pull(data, !! vary)
   var_class <- class(fdata)
-  
+
   msg <- paste0(var_name, ' is not a categorical variable. The function expects an object of type `factor` but ', var_name, ' is of type `', var_class, '`.')
   if (!is.factor(fdata)) {
     stop(msg, call. = FALSE)
@@ -321,6 +321,35 @@ ds_rule <- function(text = NULL) {
   con_wid  <- options()$width
   text_len <- nchar(text) + 2
   dash_len <- (con_wid - text_len) / 2
-  cat(paste(rep("-", dash_len)), ' ', text, ' ', 
+  cat(paste(rep("-", dash_len)), ' ', text, ' ',
       paste(rep("-", dash_len)), sep = "")
+}
+
+ds_num_cols <- function(data) {
+  is_num <- sapply(data, is.numeric)
+  if (!any(is_num)) {
+    stop("Data has no continuous variables.", call. = FALSE)
+  }
+  data[is_num]
+}
+
+ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
+
+  if (is.null(vars)) {
+    varyable <- names(data)
+  } else {
+    varyable <- vars
+  }
+
+  measure <- data.frame(variable  = varyable,
+                        n         = sapply(data, length),
+                        missing   = sapply(data, function(x) sum(is.na(x))),
+                        mean      = round(sapply(data, mean), decimals),
+                        trim_mean = round(sapply(data, mean, trim), decimals),
+                        median    = round(sapply(data, median), decimals),
+                        mode      = round(sapply(data, ds_mode), decimals))
+
+  result <- measure[order(measure$variable), ]
+  rownames(result) <- NULL
+  return(result)
 }
