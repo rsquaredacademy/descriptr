@@ -476,7 +476,7 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' ds_gmean(mtcars$mpg)
 #'
 #' # data.frame
-#' ds_gmean(mpg, mtcars)
+#' ds_gmean(mtcars, mpg)
 #'
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}

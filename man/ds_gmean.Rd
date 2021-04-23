@@ -20,7 +20,7 @@ Computes the geometric mean
 ds_gmean(mtcars$mpg)
 
 # data.frame
-ds_gmean(mpg, mtcars)
+ds_gmean(mtcars, mpg)
 
 }
 \seealso{
