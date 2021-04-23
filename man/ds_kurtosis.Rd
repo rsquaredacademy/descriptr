@@ -4,14 +4,12 @@
 \alias{ds_kurtosis}
 \title{Kurtosis}
 \usage{
-ds_kurtosis(data, x = NULL, na.rm = FALSE)
+ds_kurtosis(data, x = NULL)
 }
 \arguments{
 \item{data}{A numeric vector or \code{data.frame}.}
 
 \item{x}{Column in \code{data}.}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \description{
 Compute the kurtosis of a probability distribution.

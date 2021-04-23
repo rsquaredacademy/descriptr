@@ -4,14 +4,12 @@
 \alias{ds_range}
 \title{Range}
 \usage{
-ds_range(data, x = NULL, na.rm = FALSE)
+ds_range(data, x = NULL)
 }
 \arguments{
 \item{data}{A numeric vector or \code{data.frame}.}
 
 \item{x}{Column in \code{data}.}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \value{
 Range of \code{x}

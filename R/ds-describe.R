@@ -470,8 +470,6 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @description Computes the geometric mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @param ... further arguments passed to or from other methods
 #' @examples
 #'
 #' # vector
@@ -483,7 +481,7 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(data, x = NULL, na.rm = FALSE, ...) {
+ds_gmean <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -498,9 +496,7 @@ ds_gmean <- function(data, x = NULL, na.rm = FALSE, ...) {
     stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
+  z <- na.omit(z)
 
   prod(z) ^ (1 / length(z))
 
@@ -510,8 +506,6 @@ ds_gmean <- function(data, x = NULL, na.rm = FALSE, ...) {
 #' @description Computes the harmonic mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @param ... further arguments passed to or from other methods
 #' @examples
 #'
 #' # vector
@@ -523,7 +517,7 @@ ds_gmean <- function(data, x = NULL, na.rm = FALSE, ...) {
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(data, x = NULL, na.rm = FALSE, ...) {
+ds_hmean <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -538,9 +532,7 @@ ds_hmean <- function(data, x = NULL, na.rm = FALSE, ...) {
     stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
+  z <- na.omit(z)
 
   length(z) / sum(sapply(z, div_by))
 
@@ -550,7 +542,6 @@ ds_hmean <- function(data, x = NULL, na.rm = FALSE, ...) {
 #' @description Compute the sample mode
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Mode of \code{x}
@@ -565,7 +556,7 @@ ds_hmean <- function(data, x = NULL, na.rm = FALSE, ...) {
 #' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
 #'
-ds_mode <- function(data, x = NULL, na.rm = FALSE) {
+ds_mode <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -580,9 +571,7 @@ ds_mode <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Mode can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
+  z <- na.omit(z)
 
   Freq <- NULL
 
@@ -603,7 +592,6 @@ ds_mode <- function(data, x = NULL, na.rm = FALSE) {
 #' @description Compute the range of a numeric vector
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
 #' @examples
 #'
@@ -616,7 +604,7 @@ ds_mode <- function(data, x = NULL, na.rm = FALSE) {
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(data, x = NULL, na.rm = FALSE) {
+ds_range <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -631,9 +619,7 @@ ds_range <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
+  z <- na.omit(z)
   max(z) - min(z)
 
 }
@@ -644,7 +630,6 @@ ds_range <- function(data, x = NULL, na.rm = FALSE) {
 #' @description Compute the kurtosis of a probability distribution.
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
 #'
 #' # vector
@@ -657,7 +642,7 @@ ds_range <- function(data, x = NULL, na.rm = FALSE) {
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(data, x = NULL, na.rm = FALSE) {
+ds_kurtosis <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -672,10 +657,7 @@ ds_kurtosis <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
-
+  z <- na.omit(z)
   n <- length(z)
   summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
@@ -688,7 +670,6 @@ ds_kurtosis <- function(data, x = NULL, na.rm = FALSE) {
 #' @description Compute the skewness of a probability distribution.
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
 #'
 #' # vector
@@ -701,7 +682,7 @@ ds_kurtosis <- function(data, x = NULL, na.rm = FALSE) {
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_skewness <- function(data, x = NULL, na.rm = FALSE) {
+ds_skewness <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -716,10 +697,7 @@ ds_skewness <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Skewness is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
-
+  z <- na.omit(z)
   n <- length(z)
   summation <- sums(z, 3)
   (n / ((n - 1) * (n - 2))) * summation
@@ -730,7 +708,6 @@ ds_skewness <- function(data, x = NULL, na.rm = FALSE) {
 #' @description Compute the mean absolute deviation about the mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details The \code{ds_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
@@ -747,7 +724,7 @@ ds_skewness <- function(data, x = NULL, na.rm = FALSE) {
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(data, x = NULL, na.rm = FALSE) {
+ds_mdev <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -762,10 +739,7 @@ ds_mdev <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
-
+  z <- na.omit(z)
   m <- mean(z)
   sum(sapply(z, md_helper, m)) / length(z)
 
@@ -776,7 +750,6 @@ ds_mdev <- function(data, x = NULL, na.rm = FALSE) {
 #' @description Compute the coefficient of variation
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
 #'
 #' # vector
@@ -787,7 +760,7 @@ ds_mdev <- function(data, x = NULL, na.rm = FALSE) {
 #'
 #' @export
 #'
-ds_cvar <- function(data, x = NULL, na.rm = FALSE) {
+ds_cvar <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -802,9 +775,7 @@ ds_cvar <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
+  z <- na.omit(z)
 
   (sd(z) / mean(z)) * 100
 
@@ -814,7 +785,6 @@ ds_cvar <- function(data, x = NULL, na.rm = FALSE) {
 #' @description Compute the corrected sum of squares
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
 #'
 #' # vector
@@ -825,7 +795,7 @@ ds_cvar <- function(data, x = NULL, na.rm = FALSE) {
 #'
 #' @export
 #'
-ds_css <- function(data, x = NULL, na.rm = FALSE) {
+ds_css <- function(data, x = NULL) {
 
   y <- deparse(substitute(x))
 
@@ -840,9 +810,7 @@ ds_css <- function(data, x = NULL, na.rm = FALSE) {
     stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- na.omit(z)
-  }
+  z <- na.omit(z)
 
   sum((z - mean(z)) ^ 2)
 

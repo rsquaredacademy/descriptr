@@ -347,7 +347,7 @@ ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
                         mean      = round(sapply(data, mean, na.rm = TRUE), decimals),
                         trim_mean = round(sapply(data, mean, trim, na.rm = TRUE), decimals),
                         median    = round(sapply(data, median, na.rm = TRUE), decimals),
-                        mode      = round(sapply(data, ds_mode, na.rm = TRUE), decimals))
+                        mode      = round(sapply(data, ds_mode), decimals))
 
   result <- measure[order(measure$variable), ]
   rownames(result) <- NULL

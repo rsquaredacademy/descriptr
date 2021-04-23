@@ -50,7 +50,7 @@ ds_group_summary_interact <- function(data, cvar, ...) {
       median = median, mode = ds_mode, range = ds_range,
       variance = var, stdev = sd, skew = ds_skewness,
       kurtosis = ds_kurtosis, coeff_var = ds_cvar, q1 = quant1,
-      q3 = quant3, iqrange = IQR), na.rm = TRUE) %>%
+      q3 = quant3, iqrange = IQR)) %>%
     tidyr::separate(Levels, into = cnames)
 
 }

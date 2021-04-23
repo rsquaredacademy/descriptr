@@ -4,16 +4,12 @@
 \alias{ds_gmean}
 \title{Geometric Mean}
 \usage{
-ds_gmean(data, x = NULL, na.rm = FALSE, ...)
+ds_gmean(data, x = NULL)
 }
 \arguments{
 \item{data}{A numeric vector or \code{data.frame}.}
 
 \item{x}{Column in \code{data}.}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
-
-\item{...}{further arguments passed to or from other methods}
 }
 \description{
 Computes the geometric mean

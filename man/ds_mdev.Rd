@@ -4,14 +4,12 @@
 \alias{ds_mdev}
 \title{Mean Absolute Deviation}
 \usage{
-ds_mdev(data, x = NULL, na.rm = FALSE)
+ds_mdev(data, x = NULL)
 }
 \arguments{
 \item{data}{A numeric vector or \code{data.frame}.}
 
 \item{x}{Column in \code{data}.}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 \description{
 Compute the mean absolute deviation about the mean

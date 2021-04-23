@@ -54,8 +54,7 @@ ds_tidy_stats <- function(data, ...) {
         q1        = quant1,
         q3        = quant3,
         iqrange   = IQR
-      ),
-      na.rm = TRUE
+      )
     )
 }
 
