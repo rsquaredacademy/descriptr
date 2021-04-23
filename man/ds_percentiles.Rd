@@ -4,19 +4,37 @@
 \alias{ds_percentiles}
 \title{Percentiles}
 \usage{
-ds_percentiles(data, ...)
+ds_percentiles(data, ..., decimals = 2)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
 \item{...}{Column(s) in \code{data}.}
+
+\item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }
 \description{
 Returns the percentiles
 }
 \examples{
-ds_percentiles(mtcarz)
+
+# single column
 ds_percentiles(mtcarz, mpg)
+
+# multiple columns
 ds_percentiles(mtcarz, mpg, disp)
+
+# all columns
+ds_percentiles(mtcarz)
+
+# vector
+ds_percentiles(mtcarz$mpg)
+
+# vectors of different length
+disp <- mtcarz$disp[1:10]
+ds_percentiles(mtcarz$mpg, disp)
+
+# decimal places
+ds_percentiles(mtcarz, disp, hp, decimals = 3)
 
 }

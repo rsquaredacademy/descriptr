@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -162,7 +162,7 @@
     <p>Returns the percentiles</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, decimals <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,29 +175,63 @@
       <th>...</th>
       <td><p>Column(s) in <code>data</code>.</p></td>
     </tr>
+    <tr>
+      <th>decimals</th>
+      <td><p>An option to specify the exact number of decimal places to use. The default number of decimal places is 2.</p></td>
+    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 12</span><span>
-#&gt;   var     min  per1  per5 per10     q1 median     q3  per95  per90  per99    max
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp  71.1  72.5  77.4  80.6  121.   196.   326    449    396.   468.   472   
-#&gt; </span><span style='color: #555555;'>2</span><span> drat   2.76  2.76  2.85  3.01   3.08   3.70   3.92   4.31   4.21   4.78   4.93
-#&gt; </span><span style='color: #555555;'>3</span><span> hp    52    55.1  63.6  66     96.5  123    180    254.   244.   313.   335   
-#&gt; </span><span style='color: #555555;'>4</span><span> mpg   10.4  10.4  12.0  14.3   15.4   19.2   22.8   31.3   30.1   33.4   33.9 
-#&gt; </span><span style='color: #555555;'>5</span><span> qsec  14.5  14.5  15.0  15.5   16.9   17.7   18.9   20.1   20.0   22.1   22.9 
-#&gt; </span><span style='color: #555555;'>6</span><span> wt     1.51  1.54  1.74  1.96   2.58   3.32   3.61   5.29   4.05   5.40   5.42</div><div class='input'><span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 12</span><span>
-#&gt;   var     min  per1  per5 per10    q1 median    q3 per95 per90 per99   max
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> mpg    10.4  10.4  12.0  14.3  15.4   19.2  22.8  31.3  30.1  33.4  33.9</div><div class='input'><span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 12</span><span>
-#&gt;   var     min  per1  per5 per10    q1 median    q3 per95 per90 per99   max
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp   71.1  72.5  77.4  80.6 121.   196.  326   449   396.  468.  472  
-#&gt; </span><span style='color: #555555;'>2</span><span> mpg    10.4  10.4  12.0  14.3  15.4   19.2  22.8  31.3  30.1  33.4  33.9</div><div class='input'>
+    <pre class="examples"><div class='input'>
+<span class='co'># single column</span>
+<span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 13</span><span>
+#&gt;   var       n   min per_1 per_5 per_10    q1 median    q3 per_90 per_95 per_99
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> mpg      32  10.4  10.4  12.0   14.3  15.4   19.2  22.8   30.1   31.3   33.4
+#&gt; </span><span style='color: #949494;'># ... with 1 more variable: max </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='co'># multiple columns</span>
+<span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 13</span><span>
+#&gt;   var       n   min per_1 per_5 per_10    q1 median    q3 per_90 per_95 per_99
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> disp     32  71.1  72.5  77.4   80.6 121.   196.  326    396.   449    468. 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> mpg      32  10.4  10.4  12.0   14.3  15.4   19.2  22.8   30.1   31.3   33.4
+#&gt; </span><span style='color: #949494;'># ... with 1 more variable: max </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='co'># all columns</span>
+<span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 6 x 13</span><span>
+#&gt;   var       n   min per_1 per_5 per_10     q1 median     q3 per_90 per_95 per_99
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> disp     32 71.1  72.5  77.4   80.6  121.   196.   326    396.   449    468.  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> drat     32  2.76  2.76  2.85   3.01   3.08   3.70   3.92   4.21   4.31   4.78
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> hp       32 52    55.1  63.6   66     96.5  123    180    244.   254.   313.  
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> mpg      32 10.4  10.4  12.0   14.3   15.4   19.2   22.8   30.1   31.3   33.4 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> qsec     32 14.5  14.5  15.0   15.5   16.9   17.7   18.9   20.0   20.1   22.1 
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> wt       32  1.51  1.54  1.74   1.96   2.58   3.32   3.61   4.05   5.29   5.40
+#&gt; </span><span style='color: #949494;'># ... with 1 more variable: max </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='co'># vector</span>
+<span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    var  n  min per_1 per_5 per_10    q1 median   q3 per_90 per_95 per_99  max
+#&gt; 1% mpg 32 10.4  10.4    12  14.34 15.43   19.2 22.8  30.09   31.3  33.44 33.9</div><div class='input'>
+<span class='co'># vectors of different length</span>
+<span class='va'>disp</span> <span class='op'>&lt;-</span> <span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>disp</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span>
+<span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          var  n   min  per_1  per_5 per_10     q1 median     q3 per_90 per_95
+#&gt; 1 mtcarz$mpg 32  10.4  10.40  12.00  14.34  15.43   19.2  22.80  30.09   31.3
+#&gt; 2       disp 10 108.0 110.95 122.76 137.52 150.02  163.8 249.75 360.00  360.0
+#&gt;   per_99   max
+#&gt; 1  33.44  33.9
+#&gt; 2 360.00 360.0</div><div class='input'>
+<span class='co'># decimal places</span>
+<span class='fu'>ds_percentiles</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>disp</span>, <span class='va'>hp</span>, decimals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 13</span><span>
+#&gt;   var       n   min per_1 per_5 per_10    q1 median    q3 per_90 per_95 per_99
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> disp     32  71.1  72.5  77.4   80.6 121.    196.   326   396.   449    468.
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> hp       32  52    55.1  63.6   66    96.5   123    180   244.   254.   313.
+#&gt; </span><span style='color: #949494;'># ... with 1 more variable: max </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -4,22 +4,39 @@
 \alias{ds_measures_location}
 \title{Measures of location}
 \usage{
-ds_measures_location(data, ..., trim = 0.05)
+ds_measures_location(data, ..., trim = 0.05, decimals = 2)
 }
 \arguments{
-\item{data}{A \code{data.frame} or \code{tibble}.}
+\item{data}{A \code{data.frame} or \code{tibble} or numeric vector.}
 
-\item{...}{Column(s) in \code{data}.}
+\item{...}{Column(s) in \code{data} or numeric vectors.}
 
-\item{trim}{The fraction of values to be trimmed before computing
-the mean.}
+\item{trim}{The fraction of values to be trimmed before computing the mean.}
+
+\item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }
 \description{
 Returns the measures of location such as mean, median & mode.
 }
 \examples{
-ds_measures_location(mtcarz)
+
+# single column
 ds_measures_location(mtcarz, mpg)
+
+# multiple columns
 ds_measures_location(mtcarz, mpg, disp)
+
+# all columns
+ds_measures_location(mtcarz)
+
+# vector
+ds_measures_location(mtcarz$mpg)
+
+# vectors of different length
+disp <- mtcarz$disp[1:10]
+ds_measures_location(mtcarz$mpg, disp)
+
+# decimal places
+ds_measures_location(mtcarz, disp, hp, decimals = 3)
 
 }

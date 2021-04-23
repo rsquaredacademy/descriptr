@@ -4,15 +4,16 @@
 \alias{ds_tailobs}
 \title{Tail Observations}
 \usage{
-ds_tailobs(data, n, type = c("low", "high"))
+ds_tailobs(data, n, type = c("low", "high"), decimals = 2)
 }
 \arguments{
 \item{data}{a numeric vector}
 
 \item{n}{number of observations to be returned}
 
-\item{type}{if \code{low}, the \code{n} lowest observations are returned, else the
-highest \code{n} obervations are returned}
+\item{type}{if \code{low}, the \code{n} lowest observations are returned, else the highest \code{n} observations are returned.}
+
+\item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }
 \value{
 \code{n} highest/lowest observations from \code{data}
@@ -21,12 +22,19 @@ highest \code{n} obervations are returned}
 Returns the n highest/lowest observations from a numeric vector.
 }
 \details{
-Any NA values are stripped from \code{data} before computation
-takes place.
+Any NA values are stripped from \code{data} before computation takes place.
 }
 \examples{
+
+# 5 lowest observations
 ds_tailobs(mtcarz$mpg, 5)
+
+# 5 highest observations
 ds_tailobs(mtcarz$mpg, 5, type = "high")
+
+# specify decimal places to display
+ds_tailobs(mtcarz$mpg, 5, decimals = 3)
+
 }
 \seealso{
 \code{\link[dplyr]{top_n}}

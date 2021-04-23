@@ -1,4 +1,4 @@
-#' @importFrom utils available.packages
+#' @importFrom utils available.packages update.packages
 #' @importFrom stats runif
 .onAttach <- function(...) {
 

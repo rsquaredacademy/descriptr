@@ -80,9 +80,25 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_measures_variation(mtcarz)
+#'
+#' # single column
 #' ds_measures_variation(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_measures_variation(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_measures_variation(mtcarz)
+#'
+#' # vector
+#' ds_measures_variation(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_measures_variation(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_measures_variation(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
@@ -154,9 +170,25 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_measures_symmetry(mtcarz)
+#'
+#' # single column
 #' ds_measures_symmetry(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_measures_symmetry(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_measures_symmetry(mtcarz)
+#'
+#' # vector
+#' ds_measures_symmetry(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_measures_symmetry(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_measures_symmetry(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
@@ -224,9 +256,25 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_percentiles(mtcarz)
+#'
+#' # single column
 #' ds_percentiles(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_percentiles(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_percentiles(mtcarz)
+#'
+#' # vector
+#' ds_percentiles(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_percentiles(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_percentiles(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
@@ -311,6 +359,8 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #'
 #' @examples
 #' ds_extreme_obs(mtcarz, mpg)
+#' ds_extreme_obs(mtcarz$mpg)
+#' ds_extreme_obs(mtcarz$mpg, decimals = 3)
 #'
 #' @export
 #'
@@ -360,8 +410,16 @@ ds_extreme_obs <- function(data, column, decimals = 2) {
 #' @details Any NA values are stripped from \code{data} before computation takes place.
 #' @return \code{n} highest/lowest observations from \code{data}
 #' @examples
+#'
+#' # 5 lowest observations
 #' ds_tailobs(mtcarz$mpg, 5)
+#'
+#' # 5 highest observations
 #' ds_tailobs(mtcarz$mpg, 5, type = "high")
+#'
+#' # specify decimal places to display
+#' ds_tailobs(mtcarz$mpg, 5, decimals = 3)
+#'
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
