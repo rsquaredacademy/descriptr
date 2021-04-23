@@ -512,7 +512,7 @@ ds_gmean <- function(data, x = NULL) {
 #' ds_hmean(mtcars$mpg)
 #'
 #' # data.frame
-#' ds_hmean(mpg, mtcars)
+#' ds_hmean(mtcars, mpg)
 #'
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
@@ -599,7 +599,7 @@ ds_mode <- function(data, x = NULL) {
 #' ds_range(mtcars$mpg)
 #'
 #' # data.frame
-#' ds_range(mpg, mtcars)
+#' ds_range(mtcars, mpg)
 #'
 #' @seealso \code{\link[base]{range}}
 #' @export
@@ -636,7 +636,7 @@ ds_range <- function(data, x = NULL) {
 #' ds_kurtosis(mtcars$mpg)
 #'
 #' # data.frame
-#' ds_kurtosis(mpg, mtcars)
+#' ds_kurtosis(mtcars, mpg)
 #'
 #' @seealso \code{ds_skewness}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
@@ -676,7 +676,7 @@ ds_kurtosis <- function(data, x = NULL) {
 #' ds_skewness(mtcars$mpg)
 #'
 #' # data.frame
-#' ds_skewness(mpg, mtcars)
+#' ds_skewness(mtcars, mpg)
 #'
 #' @seealso \code{kurtosis}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.

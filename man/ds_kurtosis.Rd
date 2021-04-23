@@ -20,7 +20,7 @@ Compute the kurtosis of a probability distribution.
 ds_kurtosis(mtcars$mpg)
 
 # data.frame
-ds_kurtosis(mpg, mtcars)
+ds_kurtosis(mtcars, mpg)
 
 }
 \references{

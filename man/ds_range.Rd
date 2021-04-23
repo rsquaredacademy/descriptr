@@ -23,7 +23,7 @@ Compute the range of a numeric vector
 ds_range(mtcars$mpg)
 
 # data.frame
-ds_range(mpg, mtcars)
+ds_range(mtcars, mpg)
 
 }
 \seealso{

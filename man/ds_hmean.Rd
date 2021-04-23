@@ -20,7 +20,7 @@ Computes the harmonic mean
 ds_hmean(mtcars$mpg)
 
 # data.frame
-ds_hmean(mpg, mtcars)
+ds_hmean(mtcars, mpg)
 
 }
 \seealso{

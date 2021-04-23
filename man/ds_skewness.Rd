@@ -20,7 +20,7 @@ Compute the skewness of a probability distribution.
 ds_skewness(mtcars$mpg)
 
 # data.frame
-ds_skewness(mpg, mtcars)
+ds_skewness(mtcars, mpg)
 
 }
 \references{
