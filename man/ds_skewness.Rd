@@ -4,21 +4,24 @@
 \alias{ds_skewness}
 \title{Skewness}
 \usage{
-ds_skewness(x, data = NULL, na.rm = FALSE)
+ds_skewness(data, x = NULL)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
+\item{x}{Column in \code{data}.}
 }
 \description{
 Compute the skewness of a probability distribution.
 }
 \examples{
+
+# vector
 ds_skewness(mtcars$mpg)
-ds_skewness(mpg, mtcars)
+
+# data.frame
+ds_skewness(mtcars, mpg)
+
 }
 \references{
 Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.

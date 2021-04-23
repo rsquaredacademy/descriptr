@@ -4,12 +4,12 @@
 \alias{ds_mode}
 \title{Mode}
 \usage{
-ds_mode(x, na.rm = FALSE)
+ds_mode(data, x = NULL)
 }
 \arguments{
-\item{x}{a numeric vector containing the values whose mode is to be computed}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
+\item{x}{Column in \code{data}.}
 }
 \value{
 Mode of \code{x}
@@ -22,8 +22,13 @@ Any NA values are stripped from \code{x} before computation
 takes place.
 }
 \examples{
+
+# vector
 ds_mode(mtcars$mpg)
-ds_mode(mtcars$cyl)
+
+# data.frame
+ds_mode(mtcars, mpg)
+
 }
 \seealso{
 \code{\link[base]{mean}} \code{\link[stats]{median}}

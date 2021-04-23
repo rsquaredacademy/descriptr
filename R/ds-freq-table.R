@@ -40,7 +40,7 @@ ds_freq_table.default <- function(data, variable, bins = 5) {
 	varyable <- rlang::enquo(variable)
 	data %<>%
       dplyr::select(!! varyable)
-  is_num <- sapply(data, is.numeric)
+  is_num    <- sapply(data, is.numeric)
   is_factor <- sapply(data, is.factor)
 
   if (is_num) {
@@ -49,7 +49,7 @@ ds_freq_table.default <- function(data, variable, bins = 5) {
   	result <- ds_freq_factor(data, !! rlang::enquo(variable))
   } else {
   	var_name <- deparse(substitute(variable))
-  	rlang::abort(paste0(var_name, "is neither continuous nor categorical."))
+  	stop(paste0(var_name, "is neither continuous nor categorical."), call. = FALSE)
   }
 
   class(result) <- "ds_freq_table"

@@ -8,10 +8,10 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
   fdata <-
     data %>%
     dplyr::pull(!! varyable) %>%
-    stats::na.omit()
+    na.omit()
 
   if (!is.numeric(bins)) {
-    stop("bins must be integer value")
+    stop("bins must be integer value", call. = FALSE)
   }
 
   if (is.numeric(bins)) {
@@ -76,31 +76,31 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
 
 plot_ds_freq_numeric <- function(x, ...) {
 
-  x_lab <- magrittr::use_series(x, varname)
+  x_lab <- use_series(x, varname)
 
   k <-
     x %>%
-    magrittr::use_series(varname) %>%
-    magrittr::extract(1) %>%
+    use_series(varname) %>%
+    extract(1) %>%
     rlang::sym()
 
   bins <-
     x %>%
-    magrittr::use_series(frequency) %>%
+    use_series(frequency) %>%
     length()
 
   p <-
     x %>%
-    magrittr::use_series(frequency) %>%
+    use_series(frequency) %>%
     tibble::enframe(name = NULL) %>%
     tibble::add_column(x = seq_len(bins), .before = 1) %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_col(
-      ggplot2::aes(x = x, y = value), width = 0.999,
+    ggplot() +
+    geom_col(
+      aes(x = x, y = value), width = 0.999,
       fill = "blue", color = "black"
     ) +
-    ggplot2::xlab(x_lab) + ggplot2::ylab("Count") +
-    ggplot2::ggtitle(paste("Histogram of", x_lab))
+    xlab(x_lab) + ylab("Count") +
+    ggtitle(paste("Histogram of", x_lab))
 
   return(p)
 

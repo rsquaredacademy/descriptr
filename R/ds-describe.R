@@ -2,44 +2,71 @@
 #'
 #' Returns the measures of location such as mean, median & mode.
 #'
-#' @param data A \code{data.frame} or \code{tibble}.
-#' @param ... Column(s) in \code{data}.
-#' @param trim The fraction of values to be trimmed before computing
-#'   the mean.
+#' @param data A \code{data.frame} or \code{tibble} or numeric vector.
+#' @param ... Column(s) in \code{data} or numeric vectors.
+#' @param trim The fraction of values to be trimmed before computing the mean.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_measures_location(mtcarz)
+#'
+#' # single column
 #' ds_measures_location(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_measures_location(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_measures_location(mtcarz)
+#'
+#' # vector
+#' ds_measures_location(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_measures_location(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_measures_location(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
-ds_measures_location <- function(data, ..., trim = 0.05) {
+ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- vapply(substitute(...()), deparse, NA_character_)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+    if (length(var) < 1) {
+      data <- ds_num_cols(data)
+    } else {
+      data <- ds_num_cols(data[var])
     }
-    data <- data[, is_num]
-  } else {
-    data %<>%
-      dplyr::select(!!! var)
-  }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(list(mean      = mean,
-                              trim_mean = ~ mean(., trim = trim),
-                              median    = stats::median,
-                              mode      = ds_mode)) %>%
-    tibble::as_tibble()
+    ds_loc_prep(data, trim = trim, decimals = decimals)
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data  <- list(data, ...)
+    dtype <- sapply(data, is.numeric)
+
+    if (!all(dtype)) {
+      stop("data must be of type numeric only.", call. = FALSE)
+    }
+
+    ds_loc_prep(data, vars, trim, decimals)
+
+  } else {
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
+  }
 
 }
 
@@ -50,42 +77,88 @@ ds_measures_location <- function(data, ..., trim = 0.05) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_measures_variation(mtcarz)
+#'
+#' # single column
 #' ds_measures_variation(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_measures_variation(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_measures_variation(mtcarz)
+#'
+#' # vector
+#' ds_measures_variation(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_measures_variation(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_measures_variation(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
-ds_measures_variation <- function(data, ...) {
+ds_measures_variation <- function(data, ..., decimals = 2) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
+
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(list(n         = length,
+                                range     = ds_range,
+                                iqr       = stats::IQR,
+                                variance  = stats::var,
+                                sd        = stats::sd,
+                                coeff_var = ds_cvar,
+                                std_error = ds_std_error)) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(variable  = vars,
+               n         = sapply(data, length),
+               range     = round(sapply(data, ds_range), decimals),
+               iqr       = round(sapply(data, stats::IQR), decimals),
+               variance  = round(sapply(data, stats::var), decimals),
+               sd        = round(sapply(data, stats::sd), decimals),
+               coeff_var = round(sapply(data, ds_cvar), decimals),
+               std_error = round(sapply(data, ds_std_error), decimals))
+
   } else {
-    data %<>%
-      dplyr::select(!!! var)
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
   }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(list(range     = ds_range,
-                              iqr       = stats::IQR,
-                              variance  = stats::var,
-                              sd        = stats::sd,
-                              coeff_var = ds_cvar,
-                              std_error = ds_std_error)) %>%
-    tibble::as_tibble()
+
 }
 
 #' Measures of symmetry
@@ -94,41 +167,83 @@ ds_measures_variation <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_measures_symmetry(mtcarz)
+#'
+#' # single column
 #' ds_measures_symmetry(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_measures_symmetry(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_measures_symmetry(mtcarz)
+#'
+#' # vector
+#' ds_measures_symmetry(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_measures_symmetry(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_measures_symmetry(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
-ds_measures_symmetry <- function(data, ...) {
+ds_measures_symmetry <- function(data, ..., decimals = 2) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
+
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(
+        list(
+          n        = length,
+          skewness = ds_skewness,
+          kurtosis = ds_kurtosis)
+      ) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(var      = vars,
+               n        = sapply(data, length),
+               skewness = round(sapply(data, ds_skewness), decimals),
+               kurtosis = round(sapply(data, ds_kurtosis), decimals))
+
   } else {
-    data %<>%
-      dplyr::select(!!! var)
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
   }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(
-      list(
-        skewness = ds_skewness,
-        kurtosis = ds_kurtosis)
-      ) %>%
-    tibble::as_tibble()
+
 }
 
 
@@ -138,113 +253,194 @@ ds_measures_symmetry <- function(data, ...) {
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#' ds_percentiles(mtcarz)
+#'
+#' # single column
 #' ds_percentiles(mtcarz, mpg)
+#'
+#' # multiple columns
 #' ds_percentiles(mtcarz, mpg, disp)
+#'
+#' # all columns
+#' ds_percentiles(mtcarz)
+#'
+#' # vector
+#' ds_percentiles(mtcarz$mpg)
+#'
+#' # vectors of different length
+#' disp <- mtcarz$disp[1:10]
+#' ds_percentiles(mtcarz$mpg, disp)
+#'
+#' # decimal places
+#' ds_percentiles(mtcarz, disp, hp, decimals = 3)
 #'
 #' @export
 #'
-ds_percentiles <- function(data, ...) {
+ds_percentiles <- function(data, ..., decimals = 2) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::quos(...)
+    var <- rlang::quos(...)
 
-  if (length(var) < 1) {
-    is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+    if (length(var) < 1) {
+      is_num <- sapply(data, is.numeric)
+      if (!any(is_num == TRUE)) {
+        stop("Data has no continuous variables.", call. = FALSE)
+      }
+      data <- data[, is_num]
+    } else {
+      data %<>%
+        dplyr::select(!!! var)
     }
-    data <- data[, is_num]
+
+    data %>%
+      na.omit() %>%
+      tidyr::gather(var, values) %>%
+      dplyr::group_by(var) %>%
+      dplyr::summarise_all(
+        list(n      = length,
+             min    = min,
+             per_1  = ~ quantile(., 0.01),
+             per_5  = ~ quantile(., 0.05),
+             per_10 = ~ quantile(., 0.10),
+             q1     = ~ quantile(., 0.25),
+             median = median,
+             q3     = ~ quantile(., 0.75),
+             per_90 = ~ quantile(., 0.90),
+             per_95 = ~ quantile(., 0.95),
+             per_99 = ~ quantile(., 0.99),
+             max    = max)
+      ) %>%
+      tibble::as_tibble()
+
+  } else if (is.numeric(data)) {
+
+    vars  <- c(deparse(substitute(data)),
+               vapply(substitute(...()), deparse, NA_character_))
+
+    if (all(grepl("\\$", vars))) {
+      vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
+    }
+
+    data <- list(data, ...)
+
+    data.frame(var    = vars,
+               n      = sapply(data, length),
+               min    = round(sapply(data, min), decimals),
+               per_1  = round(sapply(data, quantile, 0.01), decimals),
+               per_5  = round(sapply(data, quantile, 0.05), decimals),
+               per_10 = round(sapply(data, quantile, 0.10), decimals),
+               q1     = round(sapply(data, quantile, 0.25), decimals),
+               median = round(sapply(data, median), decimals),
+               q3     = round(sapply(data, quantile, 0.75), decimals),
+               per_90 = round(sapply(data, quantile, 0.90), decimals),
+               per_95 = round(sapply(data, quantile, 0.95), decimals),
+               per_99 = round(sapply(data, quantile, 0.99), decimals),
+               max    = round(sapply(data, max), decimals))
+
   } else {
-    data %<>%
-      dplyr::select(!!! var)
+
+    stop("data must be either numeric or a `data.frame`.", call. = FALSE)
+
   }
 
-  data %>%
-    na.omit() %>%
-    tidyr::gather(var, values) %>%
-    dplyr::group_by(var) %>%
-    dplyr::summarise_all(
-      list(min    = min,
-           per1   = ~ stats::quantile(., 0.01),
-           per5   = ~ stats::quantile(., 0.05),
-           per10  = ~ stats::quantile(., 0.10),
-           q1     = ~ stats::quantile(., 0.25),
-           median = stats::median,
-           q3     = ~ stats::quantile(., 0.75),
-           per95  = ~ stats::quantile(., 0.95),
-           per90  = ~ stats::quantile(., 0.90),
-           per99  = ~ stats::quantile(., 0.99),
-           max    = max)
-      ) %>%
-    tibble::as_tibble()
+
 }
 
 #' Extreme observations
 #'
 #' Returns the most extreme observations.
 #'
-#' @param data A \code{data.frame} or \code{tibble}.
+#' @param data A numeric vector or \code{data.frame} or \code{tibble}.
 #' @param column Column in \code{data}.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
+#'
+#' # data.frame
 #' ds_extreme_obs(mtcarz, mpg)
+#'
+#' # vector
+#' ds_extreme_obs(mtcarz$mpg)
+#'
+#' # decimal places
+#' ds_extreme_obs(mtcarz$mpg, decimals = 3)
 #'
 #' @export
 #'
-ds_extreme_obs <- function(data, column) {
+ds_extreme_obs <- function(data, column, decimals = 2) {
 
-  check_df(data)
+  if (is.data.frame(data)) {
 
-  var <- rlang::enquo(column)
-  var_name <- deparse(substitute(column))
-  check_numeric(data, !! var, var_name)
+    var <- rlang::enquo(column)
+    var_name <- deparse(substitute(column))
+    check_numeric(data, !! var, var_name)
 
-  na_data <-
-    data %>%
-    dplyr::select(!! var) %>%
-    na.omit() %>%
-    dplyr::pull(1)
+    na_data <-
+      data %>%
+      dplyr::select(!! var) %>%
+      na.omit() %>%
+      dplyr::pull(1)
 
-  tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
-         value = c(ds_tailobs(na_data, 5, "high"),
-                   ds_tailobs(na_data, 5, "low")),
-         index = ds_rindex(na_data, value))
+    tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
+                   value = c(ds_tailobs(na_data, 5, "high"),
+                             ds_tailobs(na_data, 5, "low")),
+                   index = ds_rindex(na_data, value))
 
+  } else if (is.numeric(data)) {
+
+    result <- data.frame(type  = c(rep("high", 5), rep("low", 5)),
+                         value = c(round(ds_tailobs(data, 5, "high"), decimals),
+                                   round(ds_tailobs(data, 5, "low"), decimals)))
+
+    result$index <- ds_rindex(data, result$value)
+    return(result)
+
+  } else {
+
+    stop("data must be either a numeric vector or a `data.frame`.")
+
+  }
 
 }
 
-#' @importFrom magrittr %>%
+#' @import magrittr
 #' @title Tail Observations
 #' @description Returns the n highest/lowest observations from a numeric vector.
 #' @param data a numeric vector
 #' @param n number of observations to be returned
-#' @param type if \code{low}, the \code{n} lowest observations are returned, else the
-#' highest \code{n} obervations are returned
-#' @details Any NA values are stripped from \code{data} before computation
-#' takes place.
+#' @param type if \code{low}, the \code{n} lowest observations are returned, else the highest \code{n} observations are returned.
+#' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#' @details Any NA values are stripped from \code{data} before computation takes place.
 #' @return \code{n} highest/lowest observations from \code{data}
 #' @examples
+#'
+#' # 5 lowest observations
 #' ds_tailobs(mtcarz$mpg, 5)
+#'
+#' # 5 highest observations
 #' ds_tailobs(mtcarz$mpg, 5, type = "high")
+#'
+#' # specify decimal places to display
+#' ds_tailobs(mtcarz$mpg, 5, decimals = 3)
+#'
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
-ds_tailobs <- function(data, n, type = c("low", "high")) {
+ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 
   if (!is.numeric(data)) {
-    stop("data must be numeric")
+    stop("data must be numeric", call. = FALSE)
   }
 
   if (!is.numeric(n)) {
-    stop("n must be numeric")
+    stop("n must be numeric", call. = FALSE)
   }
 
   if (n > length(data)) {
-    stop("n must be less than the length of data")
+    stop("n must be less than the length of data", call. = FALSE)
   }
 
   method <- match.arg(type)
@@ -252,15 +448,17 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
   if (method == "low") {
     result <-
       data %>%
-      stats::na.omit() %>%
+      na.omit() %>%
       sort() %>%
-      `[`(1:n)
+      `[`(1:n) %>%
+      round(decimals)
   } else {
     result <-
       data %>%
-      stats::na.omit() %>%
+      na.omit() %>%
       sort(decreasing = TRUE) %>%
-      `[`(1:n)
+      `[`(1:n) %>%
+      round(decimals)
   }
 
   return(result)
@@ -270,33 +468,35 @@ ds_tailobs <- function(data, n, type = c("low", "high")) {
 
 #' @title Geometric Mean
 #' @description Computes the geometric mean
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @param ... further arguments passed to or from other methods
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @examples
+#'
+#' # vector
 #' ds_gmean(mtcars$mpg)
-#' ds_gmean(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_gmean(mtcars, mpg)
+#'
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
+ds_gmean <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Geometric mean can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
+  z <- na.omit(z)
 
   prod(z) ^ (1 / length(z))
 
@@ -304,33 +504,35 @@ ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
 #' @title Harmonic Mean
 #' @description Computes the harmonic mean
-#' @param x a numeric vector.
-#' @param data a \code{data.frame} or \code{tibble}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
-#' @param ... further arguments passed to or from other methods
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @examples
+#'
+#' # vector
 #' ds_hmean(mtcars$mpg)
-#' ds_hmean(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_hmean(mtcars, mpg)
+#'
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
+ds_hmean <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
+    stop(paste0("Harmonic mean can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
+  z <- na.omit(z)
 
   length(z) / sum(sapply(z, div_by))
 
@@ -338,30 +540,42 @@ ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
 #' @title Mode
 #' @description Compute the sample mode
-#' @param x a numeric vector containing the values whose mode is to be computed
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Mode of \code{x}
 #' @examples
+#'
+#' # vector
 #' ds_mode(mtcars$mpg)
-#' ds_mode(mtcars$cyl)
+#'
+#' # data.frame
+#' ds_mode(mtcars, mpg)
+#'
 #' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
 #'
-ds_mode <- function(x, na.rm = FALSE) {
+ds_mode <- function(data, x = NULL) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric")
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
+  } else {
+    z <- data[[y]]
   }
 
-  if (na.rm) {
-    x <- stats::na.omit(x)
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Mode can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
+
+  z <- na.omit(z)
 
   Freq <- NULL
 
-  x %>%
+  z %>%
     table() %>%
     as.data.frame(stringsAsFactors = FALSE) %>%
     dplyr::arrange(dplyr::desc(Freq)) %>%
@@ -376,33 +590,36 @@ ds_mode <- function(x, na.rm = FALSE) {
 
 #' @title Range
 #' @description Compute the range of a numeric vector
-#' @param x a numeric vector or column name.
-#' @param data a \code{data.frame} or \code{tibble}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @return Range of \code{x}
 #' @examples
+#'
+#' # vector
 #' ds_range(mtcars$mpg)
-#' ds_range(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_range(mtcars, mpg)
+#'
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(x, data = NULL, na.rm = FALSE) {
+ds_range <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."))
+    stop(paste0("Range can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
+  z <- na.omit(z)
   max(z) - min(z)
 
 }
@@ -411,34 +628,36 @@ ds_range <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @examples
+#'
+#' # vector
 #' ds_kurtosis(mtcars$mpg)
-#' ds_kurtosis(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_kurtosis(mtcars, mpg)
+#'
 #' @seealso \code{ds_skewness}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
+ds_kurtosis <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Kurtosis is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
-
+  z <- na.omit(z)
   n <- length(z)
   summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
@@ -449,34 +668,36 @@ ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Skewness
 #' @description Compute the skewness of a probability distribution.
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @examples
+#'
+#' # vector
 #' ds_skewness(mtcars$mpg)
-#' ds_skewness(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_skewness(mtcars, mpg)
+#'
 #' @seealso \code{kurtosis}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
+ds_skewness <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Skewness is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Skewness is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
-
+  z <- na.omit(z)
   n <- length(z)
   summation <- sums(z, 3)
   (n / ((n - 1) * (n - 2))) * summation
@@ -485,38 +706,40 @@ ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @details The \code{ds_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
 #' the statistic used to compute the deviations is not \code{median} but
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
 #' @examples
+#'
+#' # vector
 #' ds_mdev(mtcars$mpg)
-#' ds_mdev(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_mdev(mtcars, mpg)
+#'
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
+ds_mdev <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Mean absolute deviation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
-
+  z <- na.omit(z)
   m <- mean(z)
   sum(sapply(z, md_helper, m)) / length(z)
 
@@ -525,63 +748,69 @@ ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @examples
+#'
+#' # vector
 #' ds_cvar(mtcars$mpg)
-#' ds_cvar(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_cvar(mtcars, mpg)
+#'
 #' @export
 #'
-ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
+ds_cvar <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Coefficient of variation is calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
+  z <- na.omit(z)
 
-  (stats::sd(z) / mean(z)) * 100
+  (sd(z) / mean(z)) * 100
 
 }
 
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
-#' @param x a numeric vector.
-#' @param data a \code{data.frame} or \code{tibble}.
-#' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @examples
+#'
+#' # vector
 #' ds_css(mtcars$mpg)
-#' ds_css(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_css(mtcars, mpg)
+#'
 #' @export
 #'
-ds_css <- function(x, data = NULL, na.rm = FALSE) {
+ds_css <- function(data, x = NULL) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."))
+    stop(paste0("Corrected sum of squares can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
-  if (na.rm) {
-    z <- stats::na.omit(z)
-  }
+  z <- na.omit(z)
 
   sum((z - mean(z)) ^ 2)
 
@@ -594,26 +823,31 @@ ds_css <- function(x, data = NULL, na.rm = FALSE) {
 #' @return Index of the \code{values} in \code{data}. In case, \code{data} does
 #' not contain \code{index}, \code{NULL} is returned.
 #' @examples
+#'
+#' # returns index of 21
 #' ds_rindex(mtcars$mpg, 21)
+#'
+#' # returns NULL
 #' ds_rindex(mtcars$mpg, 22)
+#'
 #' @export
 #'
 ds_rindex <- function(data, values) {
 
   if (!is.numeric(data)) {
-    stop("data must be numeric")
+    stop("Data must be numeric.", call. = FALSE)
   }
 
   if (!is.numeric(values)) {
-    stop("values must be numeric")
+    stop("Values must be numeric.", call. = FALSE)
   }
 
-  data   <- stats::na.omit(data)
-  values <- stats::na.omit(values)
+  data   <- na.omit(data)
+  values <- na.omit(values)
   out    <- c()
 
   for (i in seq_along(values)) {
-    k <- return_pos(data, values[i])
+    k   <- return_pos(data, values[i])
     out <- c(out, k)
   }
 

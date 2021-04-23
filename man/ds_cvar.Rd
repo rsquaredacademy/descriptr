@@ -4,19 +4,22 @@
 \alias{ds_cvar}
 \title{Coefficient of Variation}
 \usage{
-ds_cvar(x, data = NULL, na.rm = FALSE)
+ds_cvar(data, x = NULL)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
+\item{x}{Column in \code{data}.}
 }
 \description{
 Compute the coefficient of variation
 }
 \examples{
+
+# vector
 ds_cvar(mtcars$mpg)
-ds_cvar(mpg, mtcars)
+
+# data.frame
+ds_cvar(mtcars, mpg)
+
 }

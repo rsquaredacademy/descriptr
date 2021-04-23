@@ -25,7 +25,7 @@ ds_tidy_stats <- function(data, ...) {
   if (length(vars) < 1) {
     is_num <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     data <- data[, is_num]
   } else {
@@ -43,19 +43,18 @@ ds_tidy_stats <- function(data, ...) {
         max       = max,
         mean      = mean,
         t_mean    = trimmed_mean,
-        median    = stats::median,
+        median    = median,
         mode      = ds_mode,
         range     = ds_range,
-        variance  = stats::var,
-        stdev     = stats::sd,
+        variance  = var,
+        stdev     = sd,
         skew      = ds_skewness,
         kurtosis  = ds_kurtosis,
         coeff_var = ds_cvar,
         q1        = quant1,
         q3        = quant3,
-        iqrange   = stats::IQR
-      ),
-      na.rm = TRUE
+        iqrange   = IQR
+      )
     )
 }
 

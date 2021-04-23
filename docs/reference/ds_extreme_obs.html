@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -162,37 +162,69 @@
     <p>Returns the most extreme observations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ds_extreme_obs</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>column</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ds_extreme_obs</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>column</span>, decimals <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>A <code>data.frame</code> or <code>tibble</code>.</p></td>
+      <td><p>A numeric vector or <code>data.frame</code> or <code>tibble</code>.</p></td>
     </tr>
     <tr>
       <th>column</th>
       <td><p>Column in <code>data</code>.</p></td>
     </tr>
+    <tr>
+      <th>decimals</th>
+      <td><p>An option to specify the exact number of decimal places to use. The default number of decimal places is 2.</p></td>
+    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_extreme_obs</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 10 x 3</span><span>
+    <pre class="examples"><div class='input'>
+<span class='co'># data.frame</span>
+<span class='fu'>ds_extreme_obs</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 10 x 3</span><span>
 #&gt;    type  value index
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> high   33.9    20
-#&gt; </span><span style='color: #555555;'> 2</span><span> high   32.4    18
-#&gt; </span><span style='color: #555555;'> 3</span><span> high   30.4    19
-#&gt; </span><span style='color: #555555;'> 4</span><span> high   30.4    28
-#&gt; </span><span style='color: #555555;'> 5</span><span> high   27.3    26
-#&gt; </span><span style='color: #555555;'> 6</span><span> low    10.4    15
-#&gt; </span><span style='color: #555555;'> 7</span><span> low    10.4    16
-#&gt; </span><span style='color: #555555;'> 8</span><span> low    13.3    24
-#&gt; </span><span style='color: #555555;'> 9</span><span> low    14.3     7
-#&gt; </span><span style='color: #555555;'>10</span><span> low    14.7    17</div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> high   33.9    20
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> high   32.4    18
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> high   30.4    19
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> high   30.4    28
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> high   27.3    26
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> low    10.4    15
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> low    10.4    16
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> low    13.3    24
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> low    14.3     7
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> low    14.7    17</div><div class='input'>
+<span class='co'># vector</span>
+<span class='fu'>ds_extreme_obs</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    type value index
+#&gt; 1  high  33.9    20
+#&gt; 2  high  32.4    18
+#&gt; 3  high  30.4    19
+#&gt; 4  high  30.4    28
+#&gt; 5  high  27.3    26
+#&gt; 6   low  10.4    15
+#&gt; 7   low  10.4    16
+#&gt; 8   low  13.3    24
+#&gt; 9   low  14.3     7
+#&gt; 10  low  14.7    17</div><div class='input'>
+<span class='co'># decimal places</span>
+<span class='fu'>ds_extreme_obs</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>mpg</span>, decimals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    type value index
+#&gt; 1  high  33.9    20
+#&gt; 2  high  32.4    18
+#&gt; 3  high  30.4    19
+#&gt; 4  high  30.4    28
+#&gt; 5  high  27.3    26
+#&gt; 6   low  10.4    15
+#&gt; 7   low  10.4    16
+#&gt; 8   low  13.3    24
+#&gt; 9   low  14.3     7
+#&gt; 10  low  14.7    17</div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

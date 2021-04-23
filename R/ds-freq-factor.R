@@ -8,7 +8,7 @@ ds_freq_factor <- function(data, variable) {
   fdata <-
     data %>%
     dplyr::pull(!! varyable) %>%
-    stats::na.omit()
+    na.omit()
 
   var_name <-
     data %>%
@@ -81,23 +81,23 @@ plot_ds_freq_factor <- function(x, ...) {
 
   x_lab <-
     x %>%
-    magrittr::use_series(varname) %>%
-    magrittr::extract(1)
+    use_series(varname) %>%
+    extract(1)
 
   k <-
     x %>%
-    magrittr::use_series(varname) %>%
-    magrittr::extract(1) %>%
+    use_series(varname) %>%
+    extract(1) %>%
     rlang::sym()
 
   p <-
     x %>%
-    magrittr::use_series(data) %>%
+    use_series(data) %>%
     dplyr::select(x = !! k) %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(ggplot2::aes(x = x), fill = "blue") +
-    ggplot2::xlab(x_lab) + ggplot2::ylab("Count") +
-    ggplot2::ggtitle(paste("Bar plot of", x_lab))
+    ggplot() +
+    geom_bar(aes(x = x), fill = "blue") +
+    xlab(x_lab) + ylab("Count") +
+    ggtitle(paste("Bar plot of", x_lab))
 
   return(p)
 

@@ -19,7 +19,7 @@ ds_auto_summary_stats <- function(data, ...) {
 
   if (length(var) < 1) {
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     plot_data <- data[is_num]
   } else {
@@ -27,13 +27,13 @@ ds_auto_summary_stats <- function(data, ...) {
       dplyr::select(!!! var)
     is_num <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     plot_data <- data[is_num]
   }
 
   if (ncol(plot_data) < 1) {
-    rlang::abort("Data has no continuous variables.")
+    stop("Data has no continuous variables.", call. = FALSE)
   }
 
   num_var <- names(plot_data)
@@ -76,10 +76,10 @@ ds_auto_group_summary <- function(data, ...) {
 
   if (length(var) < 1) {
     if (!any(is_factor == TRUE)) {
-      rlang::abort("Data has no categorical variables.")
+      stop("Data has no categorical variables.", call. = FALSE)
     }
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     plot_data  <- cbind(data[is_factor] , data[is_num] )
   } else {
@@ -87,17 +87,17 @@ ds_auto_group_summary <- function(data, ...) {
       dplyr::select(!!! var)
     is_num    <- sapply(data, is.numeric)
     if (!any(is_num == TRUE)) {
-      rlang::abort("Data has no continuous variables.")
+      stop("Data has no continuous variables.", call. = FALSE)
     }
     is_factor <- sapply(data, is.factor)
     if (!any(is_factor == TRUE)) {
-      rlang::abort("Data has no categorical variables.")
+      stop("Data has no categorical variables.", call. = FALSE)
     }
     plot_data <- cbind(data[is_factor], data[is_num])
   }
 
   if (ncol(data) < 1) {
-    rlang::abort("Data should include at least one categorical and one continuous variable.")
+    stop("Data should include at least one categorical and one continuous variable.", call. = FALSE)
   }
 
   is_num    <- sapply(plot_data, is.numeric)

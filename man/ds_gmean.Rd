@@ -4,23 +4,24 @@
 \alias{ds_gmean}
 \title{Geometric Mean}
 \usage{
-ds_gmean(x, data = NULL, na.rm = FALSE, ...)
+ds_gmean(data, x = NULL)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}}
-
-\item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
-
-\item{...}{further arguments passed to or from other methods}
+\item{x}{Column in \code{data}.}
 }
 \description{
 Computes the geometric mean
 }
 \examples{
+
+# vector
 ds_gmean(mtcars$mpg)
-ds_gmean(mpg, mtcars)
+
+# data.frame
+ds_gmean(mtcars, mpg)
+
 }
 \seealso{
 \code{\link{ds_hmean}} \code{\link[base]{mean}}

@@ -53,13 +53,13 @@ ds_cross_table.default <- function(data, var1, var2) {
   x <-
     table(varone, vartwo) %>%
     as.matrix() %>%
-    magrittr::set_rownames(NULL)
+    set_rownames(NULL)
 
   n <- sum(x)
 
   per_mat <-
     x %>%
-    magrittr::divide_by(n) %>%
+    divide_by(n) %>%
     round(3)
 
   row_pct  <- apply(per_mat, 1, sum)
@@ -96,13 +96,13 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 
   x_lab <-
     x %>%
-    magrittr::use_series(varnames) %>%
-    magrittr::extract(1)
+    use_series(varnames) %>%
+    extract(1)
 
   y_lab <-
     x %>%
-    magrittr::use_series(varnames) %>%
-    magrittr::extract(2)
+    use_series(varnames) %>%
+    extract(2)
 
   k <- string_to_name(x)
   j <- string_to_name(x, 2)
@@ -110,34 +110,34 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
   if (proportional) {
     p <-
       x %>%
-      magrittr::use_series(data) %>%
+      use_series(data) %>%
       dplyr::select(x = !! k, y = !! j) %>%
       table() %>%
       tibble::as_tibble() %>%
-      ggplot2::ggplot(ggplot2::aes(x = x, y = n, fill = y)) +
-      ggplot2::geom_bar(stat = "identity", position = "fill") +
-      ggplot2::scale_y_continuous(labels = scales::percent_format()) +
-      ggplot2::xlab(x_lab) + ggplot2::ggtitle(paste(x_lab, "vs", y_lab)) +
-      ggplot2::labs(fill = y_lab)
+      ggplot(aes(x = x, y = n, fill = y)) +
+      geom_bar(stat = "identity", position = "fill") +
+      scale_y_continuous(labels = scales::percent_format()) +
+      xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
+      labs(fill = y_lab)
   } else {
     if (stacked) {
       p <-
         x %>%
-        magrittr::use_series(data) %>%
+        use_series(data) %>%
         dplyr::select(x = !! k, y = !! j) %>%
-        ggplot2::ggplot() +
-        ggplot2::geom_bar(ggplot2::aes(x, fill = y), position = "stack") +
-        ggplot2::xlab(x_lab) + ggplot2::ggtitle(paste(x_lab, "vs", y_lab)) +
-        ggplot2::labs(fill = y_lab)
+        ggplot() +
+        geom_bar(aes(x, fill = y), position = "stack") +
+        xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
+        labs(fill = y_lab)
     } else {
       p <-
         x %>%
-        magrittr::use_series(data) %>%
+        use_series(data) %>%
         dplyr::select(x = !! k, y = !! j) %>%
-        ggplot2::ggplot() +
-        ggplot2::geom_bar(ggplot2::aes(x, fill = y), position = "dodge") +
-        ggplot2::xlab(x_lab) + ggplot2::ggtitle(paste(x_lab, "vs", y_lab)) +
-        ggplot2::labs(fill = y_lab)
+        ggplot() +
+        geom_bar(aes(x, fill = y), position = "dodge") +
+        xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
+        labs(fill = y_lab)
     }
   }
 
@@ -149,7 +149,6 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 
 }
 
-#' @importFrom magrittr %<>%
 #' @rdname ds_cross_table
 #' @export
 #'
@@ -212,10 +211,7 @@ get_names <- function(x) {
   if (is.factor(x)) {
     varname <- levels(x)
   } else {
-    varname <-
-      x %>%
-      sort() %>%
-      unique()
+    varname <- unique(sort(x))
   }
 
   return(varname)

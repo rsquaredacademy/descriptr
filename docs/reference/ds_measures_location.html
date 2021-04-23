@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -162,48 +162,66 @@
     <p>Returns the measures of location such as mean, median &amp; mode.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, trim <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, trim <span class='op'>=</span> <span class='fl'>0.05</span>, decimals <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>A <code>data.frame</code> or <code>tibble</code>.</p></td>
+      <td><p>A <code>data.frame</code> or <code>tibble</code> or numeric vector.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Column(s) in <code>data</code>.</p></td>
+      <td><p>Column(s) in <code>data</code> or numeric vectors.</p></td>
     </tr>
     <tr>
       <th>trim</th>
-      <td><p>The fraction of values to be trimmed before computing
-the mean.</p></td>
+      <td><p>The fraction of values to be trimmed before computing the mean.</p></td>
+    </tr>
+    <tr>
+      <th>decimals</th>
+      <td><p>An option to specify the exact number of decimal places to use. The default number of decimal places is 2.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
-#&gt;   var     mean trim_mean median   mode
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp  231.      228    196.   276.  
-#&gt; </span><span style='color: #555555;'>2</span><span> drat    3.60      3.58   3.70   3.07
-#&gt; </span><span style='color: #555555;'>3</span><span> hp    147.      144.   123    110   
-#&gt; </span><span style='color: #555555;'>4</span><span> mpg    20.1      20.0   19.2   10.4 
-#&gt; </span><span style='color: #555555;'>5</span><span> qsec   17.8      17.8   17.7   17.0 
-#&gt; </span><span style='color: #555555;'>6</span><span> wt      3.22      3.20   3.32   3.44</div><div class='input'><span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
-#&gt;   var    mean trim_mean median  mode
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> mpg    20.1      20.0   19.2  10.4</div><div class='input'><span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 5</span><span>
-#&gt;   var    mean trim_mean median  mode
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp  231.      228    196.  276. 
-#&gt; </span><span style='color: #555555;'>2</span><span> mpg    20.1      20.0   19.2  10.4</div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><div class='input'>
+<span class='co'># single column</span>
+<span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   variable  n missing  mean trim_mean median mode
+#&gt; 1      mpg 32       0 20.09     19.95   19.2 10.4</div><div class='input'>
+<span class='co'># multiple columns</span>
+<span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   variable  n missing   mean trim_mean median  mode
+#&gt; 1     disp 32       0 230.72    228.00  196.3 275.8
+#&gt; 2      mpg 32       0  20.09     19.95   19.2  10.4</div><div class='input'>
+<span class='co'># all columns</span>
+<span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   variable  n missing   mean trim_mean median   mode
+#&gt; 1     disp 32       0 230.72    228.00 196.30 275.80
+#&gt; 2     drat 32       0   3.60      3.58   3.70   3.07
+#&gt; 3       hp 32       0 146.69    143.57 123.00 110.00
+#&gt; 4      mpg 32       0  20.09     19.95  19.20  10.40
+#&gt; 5     qsec 32       0  17.85     17.79  17.71  17.02
+#&gt; 6       wt 32       0   3.22      3.20   3.33   3.44</div><div class='input'>
+<span class='co'># vector</span>
+<span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>mpg</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   variable  n missing  mean trim_mean median mode
+#&gt; 1      mpg 32       0 20.09     19.95   19.2 10.4</div><div class='input'>
+<span class='co'># vectors of different length</span>
+<span class='va'>disp</span> <span class='op'>&lt;-</span> <span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>disp</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span>
+<span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>$</span><span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     variable  n missing   mean trim_mean median  mode
+#&gt; 1       disp 10       0 208.61    208.61  163.8 160.0
+#&gt; 2 mtcarz$mpg 32       0  20.09     19.95   19.2  10.4</div><div class='input'>
+<span class='co'># decimal places</span>
+<span class='fu'>ds_measures_location</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>disp</span>, <span class='va'>hp</span>, decimals <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   variable  n missing    mean trim_mean median  mode
+#&gt; 1     disp 32       0 230.722   228.000  196.3 275.8
+#&gt; 2       hp 32       0 146.688   143.567  123.0 110.0</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

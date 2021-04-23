@@ -31,10 +31,10 @@ ds_group_summary_interact <- function(data, cvar, ...) {
                     paste("-", non_type, collapse = "\n"))
 
   if (length(non_type) > 0) {
-        stop(error_message)
+        stop(error_message, call. = FALSE)
   }
 
-  cats <- unlist(lapply(gdata, is.factor))
+  cats   <- unlist(lapply(gdata, is.factor))
   cnames <- colnames(gdata[cats])
 
   data %>%
@@ -47,10 +47,10 @@ ds_group_summary_interact <- function(data, cvar, ...) {
     dplyr::group_by(Levels) %>%
     dplyr::summarise_all(list(
       min = min, max = max, mean = mean, t_mean = trimmed_mean,
-      median = stats::median, mode = ds_mode, range = ds_range,
-      variance = stats::var, stdev = stats::sd, skew = ds_skewness,
+      median = median, mode = ds_mode, range = ds_range,
+      variance = var, stdev = sd, skew = ds_skewness,
       kurtosis = ds_kurtosis, coeff_var = ds_cvar, q1 = quant1,
-      q3 = quant3, iqrange = stats::IQR), na.rm = TRUE) %>%
+      q3 = quant3, iqrange = IQR)) %>%
     tidyr::separate(Levels, into = cnames)
 
 }

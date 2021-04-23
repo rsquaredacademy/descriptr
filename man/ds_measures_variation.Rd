@@ -4,20 +4,38 @@
 \alias{ds_measures_variation}
 \title{Measures of variation}
 \usage{
-ds_measures_variation(data, ...)
+ds_measures_variation(data, ..., decimals = 2)
 }
 \arguments{
 \item{data}{A \code{data.frame} or \code{tibble}.}
 
 \item{...}{Column(s) in \code{data}.}
+
+\item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }
 \description{
 Returns the measures of location such as range, variance and standard
   deviation.
 }
 \examples{
-ds_measures_variation(mtcarz)
+
+# single column
 ds_measures_variation(mtcarz, mpg)
+
+# multiple columns
 ds_measures_variation(mtcarz, mpg, disp)
+
+# all columns
+ds_measures_variation(mtcarz)
+
+# vector
+ds_measures_variation(mtcarz$mpg)
+
+# vectors of different length
+disp <- mtcarz$disp[1:10]
+ds_measures_variation(mtcarz$mpg, disp)
+
+# decimal places
+ds_measures_variation(mtcarz, disp, hp, decimals = 3)
 
 }

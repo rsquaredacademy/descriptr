@@ -65,7 +65,7 @@ ds_screener.default <- function(data) {
   mvaluesper <- round((mvalues / counts) * 100, 2)
   mtotal     <- sum(is.na(data))
   mtotalper  <- round((mtotal / sum(counts)) * 100, 2)
-  mrows      <- sum(!stats::complete.cases(data))
+  mrows      <- sum(!complete.cases(data))
   mcols      <- sum(mvalues != 0)
 
   result <- list(Rows          = rows,
@@ -103,11 +103,11 @@ plot.ds_screener <- function(x, ...) {
   mydat$color  <- ifelse(mydat$y >= 0.1, ">= 10%", "< 10%")
   names(mydat) <- c("x", "y", "% Missing")
 
-  ggplot2::ggplot(mydat) +
-    ggplot2::geom_col(ggplot2::aes(x = stats::reorder(x, y), y = y, fill = `% Missing`)) +
-    ggplot2::scale_y_continuous(labels = scales::percent_format()) +
-    ggplot2::xlab("Column") + ggplot2::ylab("Percentage") +
-    ggplot2::ggtitle("Missing Values (%)") +
-    ggplot2::scale_fill_manual(values = c("green", "red"))
+  ggplot(mydat) +
+    geom_col(aes(x = reorder(x, y), y = y, fill = `% Missing`)) +
+    scale_y_continuous(labels = scales::percent_format()) +
+    xlab("Column") + ylab("Percentage") +
+    ggtitle("Missing Values (%)") +
+    scale_fill_manual(values = c("green", "red"))
 
 }

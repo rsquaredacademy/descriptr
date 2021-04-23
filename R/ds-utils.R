@@ -59,7 +59,7 @@ standardize <- function(x, avg, stdev, p) {
 
 sums <- function(x, q) {
   avg    <- mean(x)
-  stdev  <- stats::sd(x)
+  stdev  <- sd(x)
   result <- sum(sapply(x, standardize, avg, stdev, q))
   return(result)
 }
@@ -80,7 +80,7 @@ md_helper <- function(x, y) {
 #' @export
 #'
 ds_std_error <- function(x) {
-  stats::sd(x) / (length(x) ^ 0.5)
+  sd(x) / (length(x) ^ 0.5)
 }
 
 uss <- function(x, y) {
@@ -196,8 +196,7 @@ seqlp <- function(mean, sd, el) {
     lmax <- mean + (4 * sd)
   }
 
-  l <- seq(lmin, lmax, sd)
-  return(l)
+  seq(lmin, lmax, sd)
 }
 
 
@@ -210,84 +209,79 @@ xmmp <- function(mean, sd, el) {
     xmax <- mean + (4 * sd)
   }
 
-  out <- c(xmin, xmax)
-  return(out)
+  c(xmin, xmax)
 }
 
 seql <- function(mean, sd) {
   lmin <- mean - (5 * sd)
   lmax <- mean + (5 * sd)
-  l    <- seq(lmin, lmax, sd)
-  return(l)
+  seq(lmin, lmax, sd)
 }
 
 xmm <- function(mean, sd) {
   xmin <- mean - (5 * sd)
   xmax <- mean + (5 * sd)
-  out  <- c(xmin, xmax)
-  return(out)
+  c(xmin, xmax)
 }
 
 
 seqln <- function(mean, sd) {
   lmin <- mean - 3 * sd
   lmax <- mean + 3 * sd
-  l    <- seq(lmin, lmax, sd)
-  return(l)
+  seq(lmin, lmax, sd)
 }
 
 
 xmn <- function(mean, sd) {
   xmin <- mean - 3 * sd
   xmax <- mean + 3 * sd
-  out  <- c(xmin, xmax)
-  return(out)
+  c(xmin, xmax)
 }
 
 trimmed_mean <- function(x, na.rm = FALSE) {
   if (na.rm) {
-    x <- stats::na.omit(x)
+    x <- na.omit(x)
   }
   mean(x, trim = 0.05)
 }
 
 quant1 <- function(x, na.rm = FALSE) {
   if (na.rm) {
-    x <- stats::na.omit(x)
+    x <- na.omit(x)
   }
-  stats::quantile(x, probs = 0.25)
+  quantile(x, probs = 0.25)
 }
 
 quant3 <- function(x, na.rm = FALSE) {
   if (na.rm) {
-    x <- stats::na.omit(x)
+    x <- na.omit(x)
   }
-  stats::quantile(x, probs = 0.75)
+  quantile(x, probs = 0.75)
 }
 
 string_to_name <- function(x, index = 1) {
   rlang::sym(x$varnames[index])
 }
 
-#' @importFrom utils packageVersion menu install.packages
+#' @importFrom utils packageVersion menu install.packages globalVariables
 check_suggests <- function(pkg) {
-  
-  pkg_flag <- tryCatch(utils::packageVersion(pkg), error = function(e) NA)
-  
+
+  pkg_flag <- tryCatch(packageVersion(pkg), error = function(e) NA)
+
   if (is.na(pkg_flag)) {
-    
+
     msg <- message(paste0('\n', pkg, ' must be installed for this functionality.'))
-    
+
     if (interactive()) {
       message(msg, "\nWould you like to install it?")
-      if (utils::menu(c("Yes", "No")) == 1) {
-        utils::install.packages(pkg)
+      if (menu(c("Yes", "No")) == 1) {
+        install.packages(pkg)
       } else {
         stop(msg, call. = FALSE)
       }
     } else {
       stop(msg, call. = FALSE)
-    } 
+    }
   }
 
 }
@@ -295,7 +289,7 @@ check_suggests <- function(pkg) {
 check_df <- function(data) {
   data_name <- deparse(substitute(data))
   if (!is.data.frame(data)) {
-    rlang::abort(paste0(data_name, ' must be a `data.frame` or `tibble`.'))
+    stop(paste0(data_name, ' must be a `data.frame` or `tibble`.'), call. = FALSE)
   }
 }
 
@@ -307,7 +301,7 @@ check_numeric <- function(data, var, var_name) {
 
   msg <- paste0(var_name, ' is not a continuous variable. The function expects an object of type `numeric` or `integer` but ', var_name, ' is of type `', var_class, '`.')
   if (!is.numeric(ndata)) {
-    rlang::abort(msg)
+    stop(msg, call. = FALSE)
   }
 }
 
@@ -316,10 +310,10 @@ check_factor <- function(data, var, var_name) {
   vary      <- rlang::enquo(var)
   fdata     <- dplyr::pull(data, !! vary)
   var_class <- class(fdata)
-  
+
   msg <- paste0(var_name, ' is not a categorical variable. The function expects an object of type `factor` but ', var_name, ' is of type `', var_class, '`.')
   if (!is.factor(fdata)) {
-    rlang::abort(msg)
+    stop(msg, call. = FALSE)
   }
 }
 
@@ -327,6 +321,35 @@ ds_rule <- function(text = NULL) {
   con_wid  <- options()$width
   text_len <- nchar(text) + 2
   dash_len <- (con_wid - text_len) / 2
-  cat(paste(rep("-", dash_len)), ' ', text, ' ', 
+  cat(paste(rep("-", dash_len)), ' ', text, ' ',
       paste(rep("-", dash_len)), sep = "")
+}
+
+ds_num_cols <- function(data) {
+  is_num <- sapply(data, is.numeric)
+  if (!any(is_num)) {
+    stop("Data has no continuous variables.", call. = FALSE)
+  }
+  data[is_num]
+}
+
+ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
+
+  if (is.null(vars)) {
+    varyable <- names(data)
+  } else {
+    varyable <- vars
+  }
+
+  measure <- data.frame(variable  = varyable,
+                        n         = sapply(data, length),
+                        missing   = sapply(data, function(x) sum(is.na(x))),
+                        mean      = round(sapply(data, mean, na.rm = TRUE), decimals),
+                        trim_mean = round(sapply(data, mean, trim, na.rm = TRUE), decimals),
+                        median    = round(sapply(data, median, na.rm = TRUE), decimals),
+                        mode      = round(sapply(data, ds_mode), decimals))
+
+  result <- measure[order(measure$variable), ]
+  rownames(result) <- NULL
+  return(result)
 }
