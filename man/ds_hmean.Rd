@@ -4,12 +4,12 @@
 \alias{ds_hmean}
 \title{Harmonic Mean}
 \usage{
-ds_hmean(x, data = NULL, na.rm = FALSE, ...)
+ds_hmean(data, x = NULL, na.rm = FALSE, ...)
 }
 \arguments{
-\item{x}{a numeric vector.}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}.}
+\item{x}{Column in \code{data}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 
@@ -19,8 +19,13 @@ ds_hmean(x, data = NULL, na.rm = FALSE, ...)
 Computes the harmonic mean
 }
 \examples{
+
+# vector
 ds_hmean(mtcars$mpg)
+
+# data.frame
 ds_hmean(mpg, mtcars)
+
 }
 \seealso{
 \code{\link{ds_gmean}} \code{\link[base]{mean}}

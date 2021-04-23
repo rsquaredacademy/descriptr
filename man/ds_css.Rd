@@ -4,12 +4,12 @@
 \alias{ds_css}
 \title{Corrected Sum of Squares}
 \usage{
-ds_css(x, data = NULL, na.rm = FALSE)
+ds_css(data, x = NULL, na.rm = FALSE)
 }
 \arguments{
-\item{x}{a numeric vector.}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}.}
+\item{x}{Column in \code{data}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
@@ -17,6 +17,11 @@ ds_css(x, data = NULL, na.rm = FALSE)
 Compute the corrected sum of squares
 }
 \examples{
+
+# vector
 ds_css(mtcars$mpg)
-ds_css(mpg, mtcars)
+
+# data.frame
+ds_css(mtcars, mpg)
+
 }

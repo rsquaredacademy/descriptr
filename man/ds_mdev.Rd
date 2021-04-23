@@ -4,12 +4,12 @@
 \alias{ds_mdev}
 \title{Mean Absolute Deviation}
 \usage{
-ds_mdev(x, data = NULL, na.rm = FALSE)
+ds_mdev(data, x = NULL, na.rm = FALSE)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}}
+\item{x}{Column in \code{data}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
@@ -24,8 +24,13 @@ the statistic used to compute the deviations is not \code{median} but
 takes place
 }
 \examples{
+
+# vector
 ds_mdev(mtcars$mpg)
-ds_mdev(mpg, mtcars)
+
+# data.frame
+ds_mdev(mtcars, mpg)
+
 }
 \seealso{
 \code{\link[stats]{mad}}

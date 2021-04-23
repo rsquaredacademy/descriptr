@@ -353,13 +353,19 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #'
 #' Returns the most extreme observations.
 #'
-#' @param data A \code{data.frame} or \code{tibble}.
+#' @param data A numeric vector or \code{data.frame} or \code{tibble}.
 #' @param column Column in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
+#'
+#' # data.frame
 #' ds_extreme_obs(mtcarz, mpg)
+#'
+#' # vector
 #' ds_extreme_obs(mtcarz$mpg)
+#'
+#' # decimal places
 #' ds_extreme_obs(mtcarz$mpg, decimals = 3)
 #'
 #' @export
@@ -462,22 +468,28 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 
 #' @title Geometric Mean
 #' @description Computes the geometric mean
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' @examples
+#'
+#' # vector
 #' ds_gmean(mtcars$mpg)
+#'
+#' # data.frame
 #' ds_gmean(mpg, mtcars)
+#'
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
-ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
+ds_gmean <- function(data, x = NULL, na.rm = FALSE, ...) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -496,22 +508,28 @@ ds_gmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
 #' @title Harmonic Mean
 #' @description Computes the harmonic mean
-#' @param x a numeric vector.
-#' @param data a \code{data.frame} or \code{tibble}.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @param ... further arguments passed to or from other methods
 #' @examples
+#'
+#' # vector
 #' ds_hmean(mtcars$mpg)
+#'
+#' # data.frame
 #' ds_hmean(mpg, mtcars)
+#'
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
-ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
+ds_hmean <- function(data, x = NULL, na.rm = FALSE, ...) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -530,30 +548,45 @@ ds_hmean <- function(x, data = NULL, na.rm = FALSE, ...) {
 
 #' @title Mode
 #' @description Compute the sample mode
-#' @param x a numeric vector containing the values whose mode is to be computed
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details Any NA values are stripped from \code{x} before computation
 #' takes place.
 #' @return Mode of \code{x}
 #' @examples
+#'
+#' # vector
 #' ds_mode(mtcars$mpg)
-#' ds_mode(mtcars$cyl)
+#'
+#' # data.frame
+#' ds_mode(mtcars, mpg)
+#'
 #' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
 #'
-ds_mode <- function(x, na.rm = FALSE) {
+ds_mode <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (!is.numeric(x)) {
-    stop("x must be numeric", call. = FALSE)
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
+  } else {
+    z <- data[[y]]
+  }
+
+  if (!is.numeric(z)) {
+    z_class <- class(z)
+    stop(paste0("Mode can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
   }
 
   if (na.rm) {
-    x <- na.omit(x)
+    z <- na.omit(z)
   }
 
   Freq <- NULL
 
-  x %>%
+  z %>%
     table() %>%
     as.data.frame(stringsAsFactors = FALSE) %>%
     dplyr::arrange(dplyr::desc(Freq)) %>%
@@ -568,22 +601,28 @@ ds_mode <- function(x, na.rm = FALSE) {
 
 #' @title Range
 #' @description Compute the range of a numeric vector
-#' @param x a numeric vector or column name.
-#' @param data a \code{data.frame} or \code{tibble}.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @return Range of \code{x}
 #' @examples
+#'
+#' # vector
 #' ds_range(mtcars$mpg)
+#'
+#' # data.frame
 #' ds_range(mpg, mtcars)
+#'
 #' @seealso \code{\link[base]{range}}
 #' @export
 #'
-ds_range <- function(x, data = NULL, na.rm = FALSE) {
+ds_range <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -603,22 +642,28 @@ ds_range <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Kurtosis
 #' @description Compute the kurtosis of a probability distribution.
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
+#'
+#' # vector
 #' ds_kurtosis(mtcars$mpg)
+#'
+#' # data.frame
 #' ds_kurtosis(mpg, mtcars)
+#'
 #' @seealso \code{ds_skewness}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
+ds_kurtosis <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -641,22 +686,28 @@ ds_kurtosis <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Skewness
 #' @description Compute the skewness of a probability distribution.
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
+#'
+#' # vector
 #' ds_skewness(mtcars$mpg)
+#'
+#' # data.frame
 #' ds_skewness(mpg, mtcars)
+#'
 #' @seealso \code{kurtosis}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
 #' @export
 #'
-ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
+ds_skewness <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -677,8 +728,8 @@ ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Mean Absolute Deviation
 #' @description Compute the mean absolute deviation about the mean
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @details The \code{ds_mdev} function computes the mean absolute deviation
 #' about the mean. It is different from \code{mad} in \code{stats} package as
@@ -686,17 +737,23 @@ ds_skewness <- function(x, data = NULL, na.rm = FALSE) {
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
 #' @examples
+#'
+#' # vector
 #' ds_mdev(mtcars$mpg)
-#' ds_mdev(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_mdev(mtcars, mpg)
+#'
 #' @seealso \code{\link[stats]{mad}}
 #' @export
 #'
-ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
+ds_mdev <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -717,20 +774,26 @@ ds_mdev <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Coefficient of Variation
 #' @description Compute the coefficient of variation
-#' @param x a numeric vector
-#' @param data a \code{data.frame} or \code{tibble}
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
+#'
+#' # vector
 #' ds_cvar(mtcars$mpg)
-#' ds_cvar(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_cvar(mtcars, mpg)
+#'
 #' @export
 #'
-ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
+ds_cvar <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -749,20 +812,26 @@ ds_cvar <- function(x, data = NULL, na.rm = FALSE) {
 
 #' @title Corrected Sum of Squares
 #' @description Compute the corrected sum of squares
-#' @param x a numeric vector.
-#' @param data a \code{data.frame} or \code{tibble}.
+#' @param data A numeric vector or \code{data.frame}.
+#' @param x Column in \code{data}.
 #' @param na.rm a logical value indicating whether NA values should be stripped before the computation proceeds.
 #' @examples
+#'
+#' # vector
 #' ds_css(mtcars$mpg)
-#' ds_css(mpg, mtcars)
+#'
+#' # data.frame
+#' ds_css(mtcars, mpg)
+#'
 #' @export
 #'
-ds_css <- function(x, data = NULL, na.rm = FALSE) {
+ds_css <- function(data, x = NULL, na.rm = FALSE) {
 
-  if (is.null(data)) {
-    z <- x
+  y <- deparse(substitute(x))
+
+  if (y == "NULL") {
+    z <- data
   } else {
-    y <- deparse(substitute(x))
     z <- data[[y]]
   }
 
@@ -786,8 +855,13 @@ ds_css <- function(x, data = NULL, na.rm = FALSE) {
 #' @return Index of the \code{values} in \code{data}. In case, \code{data} does
 #' not contain \code{index}, \code{NULL} is returned.
 #' @examples
+#'
+#' # returns index of 21
 #' ds_rindex(mtcars$mpg, 21)
+#'
+#' # returns NULL
 #' ds_rindex(mtcars$mpg, 22)
+#'
 #' @export
 #'
 ds_rindex <- function(data, values) {

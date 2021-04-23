@@ -4,12 +4,12 @@
 \alias{ds_kurtosis}
 \title{Kurtosis}
 \usage{
-ds_kurtosis(x, data = NULL, na.rm = FALSE)
+ds_kurtosis(data, x = NULL, na.rm = FALSE)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{data}{A numeric vector or \code{data.frame}.}
 
-\item{data}{a \code{data.frame} or \code{tibble}}
+\item{x}{Column in \code{data}.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
@@ -17,8 +17,13 @@ ds_kurtosis(x, data = NULL, na.rm = FALSE)
 Compute the kurtosis of a probability distribution.
 }
 \examples{
+
+# vector
 ds_kurtosis(mtcars$mpg)
+
+# data.frame
 ds_kurtosis(mpg, mtcars)
+
 }
 \references{
 Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.

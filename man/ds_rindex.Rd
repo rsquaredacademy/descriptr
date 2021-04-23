@@ -19,6 +19,11 @@ not contain \code{index}, \code{NULL} is returned.
 Returns index of values.
 }
 \examples{
+
+# returns index of 21
 ds_rindex(mtcars$mpg, 21)
+
+# returns NULL
 ds_rindex(mtcars$mpg, 22)
+
 }
