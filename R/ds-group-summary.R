@@ -5,8 +5,8 @@
 #' the continuous variable for the different levels of the categorical variable.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
-#' @param gvar Column in \code{data}.
-#' @param cvar Column in \code{data}.
+#' @param group_by Column in \code{data}.
+#' @param cols Column in \code{data}.
 #' @param x An object of the class \code{ds_group_summary}.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
@@ -36,18 +36,18 @@
 #'
 #' @export
 #'
-ds_group_summary <- function(data, gvar, cvar) UseMethod("ds_group_summary")
+ds_group_summary <- function(data, group_by, cols) UseMethod("ds_group_summary")
 
 #' @export
 #'
-ds_group_summary.default <- function(data, gvar, cvar) {
+ds_group_summary.default <- function(data, group_by, cols) {
 
   check_df(data)
-  gvar_name <- deparse(substitute(gvar))
-  cvar_name <- deparse(substitute(cvar))
+  gvar_name <- deparse(substitute(group_by))
+  cvar_name <- deparse(substitute(cols))
 
-  g_var <- rlang::enquo(gvar)
-  c_var <- rlang::enquo(cvar)
+  g_var <- rlang::enquo(group_by)
+  c_var <- rlang::enquo(cols)
 
   check_numeric(data, !! c_var, cvar_name)
   check_factor(data, !! g_var, gvar_name)

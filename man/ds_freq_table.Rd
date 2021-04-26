@@ -6,14 +6,14 @@
 \alias{ds_freq_cont}
 \title{Frequency table}
 \usage{
-ds_freq_table(data, variable, bins = 5)
+ds_freq_table(data, col, bins = 5)
 
 \method{plot}{ds_freq_table}(x, print_plot = TRUE, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{variable}{Column in \code{data}.}
+\item{col}{Column in \code{data}.}
 
 \item{bins}{Number of intervals into which the data must be split.}
 

@@ -4,12 +4,12 @@
 \alias{ds_extreme_obs}
 \title{Extreme observations}
 \usage{
-ds_extreme_obs(data, column, decimals = 2)
+ds_extreme_obs(data, col, decimals = 2)
 }
 \arguments{
 \item{data}{A numeric vector or \code{data.frame} or \code{tibble}.}
 
-\item{column}{Column in \code{data}.}
+\item{col}{Column in \code{data}.}
 
 \item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }

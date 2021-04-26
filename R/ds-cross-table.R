@@ -4,8 +4,8 @@
 #' visualized as barplots and mosaicplots.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
-#' @param var1 First categorical variable.
-#' @param var2 Second categorical variable.
+#' @param var_1 First categorical variable.
+#' @param var_2 Second categorical variable.
 #' @param x An object of class \code{cross_table}.
 #' @param stacked If \code{FALSE}, the columns of height are portrayed
 #' as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.
@@ -27,16 +27,16 @@
 #'
 #' @export
 #'
-ds_cross_table <- function(data, var1, var2) UseMethod("ds_cross_table")
+ds_cross_table <- function(data, var_1, var_2) UseMethod("ds_cross_table")
 
 #' @export
-ds_cross_table.default <- function(data, var1, var2) {
+ds_cross_table.default <- function(data, var_1, var_2) {
 
   check_df(data)
-  var1_name <- deparse(substitute(var1))
-  var2_name <- deparse(substitute(var2))
-  var_1 <- rlang::enquo(var1)
-  var_2 <- rlang::enquo(var2)
+  var1_name <- deparse(substitute(var_1))
+  var2_name <- deparse(substitute(var_2))
+  var_1 <- rlang::enquo(var_1)
+  var_2 <- rlang::enquo(var_2)
   check_factor(data, !! var_1, var1_name)
   check_factor(data, !! var_2, var2_name)
 
@@ -50,18 +50,11 @@ ds_cross_table.default <- function(data, var1, var2) {
   row_name <- get_names(varone)
   col_name <- get_names(vartwo)
 
-  x <-
-    table(varone, vartwo) %>%
-    as.matrix() %>%
-    set_rownames(NULL)
+  x <- as.matrix(table(varone, vartwo))
+  rownames(x) <- NULL
 
-  n <- sum(x)
-
-  per_mat <-
-    x %>%
-    divide_by(n) %>%
-    round(3)
-
+  n        <- sum(x)
+  per_mat  <- round(x / n, 3)
   row_pct  <- apply(per_mat, 1, sum)
   col_pct  <- apply(per_mat, 2, sum)
   rowtotal <- apply(x, 1, sum)
@@ -152,14 +145,14 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 #' @rdname ds_cross_table
 #' @export
 #'
-ds_twoway_table <- function(data, var1, var2) {
+ds_twoway_table <- function(data, var_1, var_2) {
 
   check_df(data)
-  var1_name <- deparse(substitute(var1))
-  var2_name <- deparse(substitute(var2))
+  var1_name <- deparse(substitute(var_1))
+  var2_name <- deparse(substitute(var_2))
 
-  var_1 <- rlang::enquo(var1)
-  var_2 <- rlang::enquo(var2)
+  var_1 <- rlang::enquo(var_1)
+  var_2 <- rlang::enquo(var_2)
   check_factor(data, !! var_1, var1_name)
   check_factor(data, !! var_2, var2_name)
 

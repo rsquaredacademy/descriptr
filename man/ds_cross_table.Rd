@@ -6,18 +6,18 @@
 \alias{ds_twoway_table}
 \title{Two way table}
 \usage{
-ds_cross_table(data, var1, var2)
+ds_cross_table(data, var_1, var_2)
 
 \method{plot}{ds_cross_table}(x, stacked = FALSE, proportional = FALSE, print_plot = TRUE, ...)
 
-ds_twoway_table(data, var1, var2)
+ds_twoway_table(data, var_1, var_2)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{var1}{First categorical variable.}
+\item{var_1}{First categorical variable.}
 
-\item{var2}{Second categorical variable.}
+\item{var_2}{Second categorical variable.}
 
 \item{x}{An object of class \code{cross_table}.}
 

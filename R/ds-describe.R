@@ -46,8 +46,7 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 
   } else if (is.numeric(data)) {
 
-    vars  <- c(deparse(substitute(data)),
-               vapply(substitute(...()), deparse, NA_character_))
+    vars  <- c(deparse(substitute(data)), vapply(substitute(...()), deparse, NA_character_))
 
     if (all(grepl("\\$", vars))) {
       vars <- unlist(lapply(strsplit(vars, "\\$"), `[[`, 2))
@@ -354,7 +353,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #' Returns the most extreme observations.
 #'
 #' @param data A numeric vector or \code{data.frame} or \code{tibble}.
-#' @param column Column in \code{data}.
+#' @param col Column in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
@@ -370,12 +369,12 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #'
 #' @export
 #'
-ds_extreme_obs <- function(data, column, decimals = 2) {
+ds_extreme_obs <- function(data, col, decimals = 2) {
 
   if (is.data.frame(data)) {
 
-    var <- rlang::enquo(column)
-    var_name <- deparse(substitute(column))
+    var <- rlang::enquo(col)
+    var_name <- deparse(substitute(col))
     check_numeric(data, !! var, var_name)
 
     na_data <-
