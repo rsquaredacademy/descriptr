@@ -61,10 +61,10 @@ ds_freq_table.default <- function(data, col, bins = 5) {
 #'
 print.ds_freq_table <- function(x, ...) {
 
-	nx <- length(x)
-	if (nx == 5) {
+	nx <- length(x$utility)
+	if (nx == 4) {
 		print_ftable(x)
-	} else if (nx == 11) {
+	} else if (nx == 10) {
 		print_fcont(x)
 	} else {
 		NULL
