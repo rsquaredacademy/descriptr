@@ -76,7 +76,10 @@ ds_cross_table.default <- function(data, var_1, var_2) {
                   percent_column = col_pct,
                   data           = data)
 
-  result <- list(ftable  = x,
+  ftab <- table(varone, vartwo)
+  names(dimnames(ftab)) <- c(var_names[1], var_names[2])
+
+  result <- list(ftable  = ftab,
                  utility = utility)
 
   class(result) <- "ds_cross_table"
