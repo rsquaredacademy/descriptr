@@ -100,7 +100,7 @@ plot_ds_freq_numeric <- function(x, ...) {
     use_series(utility) %>%
     use_series(frequency) %>%
     tibble::enframe(name = NULL) %>%
-    tibble::add_column(x = seq_len(x$bins), .before = 1) %>%
+    tibble::add_column(x = seq_len(x$utility$bins), .before = 1) %>%
     ggplot() +
     geom_col(
       aes(x = x, y = value), width = 0.999,
