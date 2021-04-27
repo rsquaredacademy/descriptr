@@ -24,7 +24,10 @@ Descriptive statistics for multiple variables.
 }
 
 \examples{
+# all columns
 ds_tidy_stats(mtcarz)
+
+# multiple columns
 ds_tidy_stats(mtcarz, mpg, disp, hp)
 
 }

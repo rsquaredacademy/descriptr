@@ -18,7 +18,6 @@ Range of \code{x}
 Compute the range of a numeric vector
 }
 \examples{
-
 # vector
 ds_range(mtcars$mpg)
 

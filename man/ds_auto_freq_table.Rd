@@ -31,18 +31,23 @@ variables in the dataframe.
 }
 \section{Deprecated Functions}{
 
-\code{ds_oway_tables()} and \code{ds_tway_tables()} have been deprecated. 
+\code{ds_oway_tables()} and \code{ds_tway_tables()} have been deprecated.
 Instead use \code{ds_auto_freq_table()} and \code{ds_auto_cross_table()}.
 }
 
 \examples{
-# multiple one way tables
+# frequency table for all columns
 ds_auto_freq_table(mtcarz)
+
+# frequency table for multiple columns
 ds_auto_freq_table(mtcarz, cyl, gear)
 
-# multiple two way tables
+# cross table for all columns
 ds_auto_cross_table(mtcarz)
+
+# cross table for multiple columns
 ds_auto_cross_table(mtcarz, cyl, gear, am)
+
 }
 \seealso{
 \code{link{ds_freq_table}} \code{link{ds_cross_table}}

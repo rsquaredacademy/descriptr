@@ -6,7 +6,10 @@
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
+#' # all columns
 #' ds_auto_summary_stats(mtcarz)
+#'
+#' # multiple columns
 #' ds_auto_summary_stats(mtcarz, disp, hp)
 #'
 #' @export
@@ -62,6 +65,7 @@ ds_auto_summary_stats <- function(data, ...) {
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
+#' # summary statistics of mpg & disp for each level of cyl & gear
 #' ds_auto_group_summary(mtcarz, cyl, gear, mpg, disp)
 #'
 #' @export

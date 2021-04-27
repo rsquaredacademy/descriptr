@@ -15,7 +15,14 @@ ds_summary_stats(data, ...)
 Range of descriptive statistics for continuous data.
 }
 \examples{
+# single variable
 ds_summary_stats(mtcarz, mpg)
+
+# multiple variables
+ds_summary_stats(mtcarz, mpg, disp, hp)
+
+# all variables
+ds_summary_stats(mtcarz)
 
 }
 \seealso{

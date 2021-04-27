@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -183,7 +183,8 @@
 <code><a href='ds_freq_table.html'>ds_freq_table</a></code> <code><a href='ds_cross_table.html'>ds_cross_table</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># single variable</span>
+<span class='fu'>ds_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; -------------------------------- Variable: mpg --------------------------------
 #&gt; 
 #&gt;                         Univariate Analysis                          
@@ -223,6 +224,388 @@
 #&gt;   24                         13.3        19                         30.4  
 #&gt;    7                         14.3        28                         30.4  
 #&gt;   17                         14.7        26                         27.3  
+#&gt; 
+#&gt; 
+#&gt; </div><div class='input'>
+<span class='co'># multiple variables</span>
+<span class='fu'>ds_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; -------------------------------- Variable: mpg --------------------------------
+#&gt; 
+#&gt;                         Univariate Analysis                          
+#&gt; 
+#&gt;  N                       32.00      Variance                36.32 
+#&gt;  Missing                  0.00      Std Deviation            6.03 
+#&gt;  Mean                    20.09      Range                   23.50 
+#&gt;  Median                  19.20      Interquartile Range      7.38 
+#&gt;  Mode                    10.40      Uncorrected SS       14042.31 
+#&gt;  Trimmed Mean            19.95      Corrected SS          1126.05 
+#&gt;  Skewness                 0.67      Coeff Variation         30.00 
+#&gt;  Kurtosis                -0.02      Std Error Mean           1.07 
+#&gt; 
+#&gt;                               Quantiles                               
+#&gt; 
+#&gt;               Quantile                            Value                
+#&gt; 
+#&gt;              Max                                  33.90                
+#&gt;              99%                                  33.44                
+#&gt;              95%                                  31.30                
+#&gt;              90%                                  30.09                
+#&gt;              Q3                                   22.80                
+#&gt;              Median                               19.20                
+#&gt;              Q1                                   15.43                
+#&gt;              10%                                  14.34                
+#&gt;              5%                                   12.00                
+#&gt;              1%                                   10.40                
+#&gt;              Min                                  10.40                
+#&gt; 
+#&gt;                             Extreme Values                            
+#&gt; 
+#&gt;                 Low                                High                
+#&gt; 
+#&gt;   Obs                        Value       Obs                        Value 
+#&gt;   15                         10.4        20                         33.9  
+#&gt;   16                         10.4        18                         32.4  
+#&gt;   24                         13.3        19                         30.4  
+#&gt;    7                         14.3        28                         30.4  
+#&gt;   17                         14.7        26                         27.3  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; -------------------------------- Variable: disp --------------------------------
+#&gt; 
+#&gt;                           Univariate Analysis                            
+#&gt; 
+#&gt;  N                         32.00      Variance               15360.80 
+#&gt;  Missing                    0.00      Std Deviation            123.94 
+#&gt;  Mean                     230.72      Range                    400.90 
+#&gt;  Median                   196.30      Interquartile Range      205.18 
+#&gt;  Mode                     275.80      Uncorrected SS       2179627.47 
+#&gt;  Trimmed Mean             228.00      Corrected SS          476184.79 
+#&gt;  Skewness                   0.42      Coeff Variation           53.72 
+#&gt;  Kurtosis                  -1.07      Std Error Mean            21.91 
+#&gt; 
+#&gt;                                 Quantiles                                 
+#&gt; 
+#&gt;                Quantile                              Value                 
+#&gt; 
+#&gt;               Max                                    472.00                
+#&gt;               99%                                    468.28                
+#&gt;               95%                                    449.00                
+#&gt;               90%                                    396.00                
+#&gt;               Q3                                     326.00                
+#&gt;               Median                                 196.30                
+#&gt;               Q1                                     120.83                
+#&gt;               10%                                    80.61                 
+#&gt;               5%                                     77.35                 
+#&gt;               1%                                     72.53                 
+#&gt;               Min                                    71.10                 
+#&gt; 
+#&gt;                               Extreme Values                              
+#&gt; 
+#&gt;                  Low                                  High                 
+#&gt; 
+#&gt;   Obs                          Value       Obs                          Value 
+#&gt;   20                           71.1        15                            472  
+#&gt;   19                           75.7        16                            460  
+#&gt;   18                           78.7        17                            440  
+#&gt;   26                            79         25                            400  
+#&gt;   28                           95.1         5                            360  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; --------------------------------- Variable: hp ---------------------------------
+#&gt; 
+#&gt;                          Univariate Analysis                           
+#&gt; 
+#&gt;  N                        32.00      Variance               4700.87 
+#&gt;  Missing                   0.00      Std Deviation            68.56 
+#&gt;  Mean                    146.69      Range                   283.00 
+#&gt;  Median                  123.00      Interquartile Range      83.50 
+#&gt;  Mode                    110.00      Uncorrected SS       834278.00 
+#&gt;  Trimmed Mean            143.57      Corrected SS         145726.88 
+#&gt;  Skewness                  0.80      Coeff Variation          46.74 
+#&gt;  Kurtosis                  0.28      Std Error Mean           12.12 
+#&gt; 
+#&gt;                                Quantiles                                
+#&gt; 
+#&gt;               Quantile                              Value                
+#&gt; 
+#&gt;              Max                                   335.00                
+#&gt;              99%                                   312.99                
+#&gt;              95%                                   253.55                
+#&gt;              90%                                   243.50                
+#&gt;              Q3                                    180.00                
+#&gt;              Median                                123.00                
+#&gt;              Q1                                     96.50                
+#&gt;              10%                                    66.00                
+#&gt;              5%                                     63.65                
+#&gt;              1%                                     55.10                
+#&gt;              Min                                    52.00                
+#&gt; 
+#&gt;                              Extreme Values                             
+#&gt; 
+#&gt;                  Low                                High                 
+#&gt; 
+#&gt;   Obs                         Value       Obs                         Value 
+#&gt;   19                           52         31                           335  
+#&gt;    8                           62         29                           264  
+#&gt;   20                           65          7                           245  
+#&gt;   18                           66         24                           245  
+#&gt;   26                           66         17                           230  
+#&gt; 
+#&gt; 
+#&gt; </div><div class='input'>
+<span class='co'># all variables</span>
+<span class='fu'>ds_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; -------------------------------- Variable: mpg --------------------------------
+#&gt; 
+#&gt;                         Univariate Analysis                          
+#&gt; 
+#&gt;  N                       32.00      Variance                36.32 
+#&gt;  Missing                  0.00      Std Deviation            6.03 
+#&gt;  Mean                    20.09      Range                   23.50 
+#&gt;  Median                  19.20      Interquartile Range      7.38 
+#&gt;  Mode                    10.40      Uncorrected SS       14042.31 
+#&gt;  Trimmed Mean            19.95      Corrected SS          1126.05 
+#&gt;  Skewness                 0.67      Coeff Variation         30.00 
+#&gt;  Kurtosis                -0.02      Std Error Mean           1.07 
+#&gt; 
+#&gt;                               Quantiles                               
+#&gt; 
+#&gt;               Quantile                            Value                
+#&gt; 
+#&gt;              Max                                  33.90                
+#&gt;              99%                                  33.44                
+#&gt;              95%                                  31.30                
+#&gt;              90%                                  30.09                
+#&gt;              Q3                                   22.80                
+#&gt;              Median                               19.20                
+#&gt;              Q1                                   15.43                
+#&gt;              10%                                  14.34                
+#&gt;              5%                                   12.00                
+#&gt;              1%                                   10.40                
+#&gt;              Min                                  10.40                
+#&gt; 
+#&gt;                             Extreme Values                            
+#&gt; 
+#&gt;                 Low                                High                
+#&gt; 
+#&gt;   Obs                        Value       Obs                        Value 
+#&gt;   15                         10.4        20                         33.9  
+#&gt;   16                         10.4        18                         32.4  
+#&gt;   24                         13.3        19                         30.4  
+#&gt;    7                         14.3        28                         30.4  
+#&gt;   17                         14.7        26                         27.3  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; -------------------------------- Variable: disp --------------------------------
+#&gt; 
+#&gt;                           Univariate Analysis                            
+#&gt; 
+#&gt;  N                         32.00      Variance               15360.80 
+#&gt;  Missing                    0.00      Std Deviation            123.94 
+#&gt;  Mean                     230.72      Range                    400.90 
+#&gt;  Median                   196.30      Interquartile Range      205.18 
+#&gt;  Mode                     275.80      Uncorrected SS       2179627.47 
+#&gt;  Trimmed Mean             228.00      Corrected SS          476184.79 
+#&gt;  Skewness                   0.42      Coeff Variation           53.72 
+#&gt;  Kurtosis                  -1.07      Std Error Mean            21.91 
+#&gt; 
+#&gt;                                 Quantiles                                 
+#&gt; 
+#&gt;                Quantile                              Value                 
+#&gt; 
+#&gt;               Max                                    472.00                
+#&gt;               99%                                    468.28                
+#&gt;               95%                                    449.00                
+#&gt;               90%                                    396.00                
+#&gt;               Q3                                     326.00                
+#&gt;               Median                                 196.30                
+#&gt;               Q1                                     120.83                
+#&gt;               10%                                    80.61                 
+#&gt;               5%                                     77.35                 
+#&gt;               1%                                     72.53                 
+#&gt;               Min                                    71.10                 
+#&gt; 
+#&gt;                               Extreme Values                              
+#&gt; 
+#&gt;                  Low                                  High                 
+#&gt; 
+#&gt;   Obs                          Value       Obs                          Value 
+#&gt;   20                           71.1        15                            472  
+#&gt;   19                           75.7        16                            460  
+#&gt;   18                           78.7        17                            440  
+#&gt;   26                            79         25                            400  
+#&gt;   28                           95.1         5                            360  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; --------------------------------- Variable: hp ---------------------------------
+#&gt; 
+#&gt;                          Univariate Analysis                           
+#&gt; 
+#&gt;  N                        32.00      Variance               4700.87 
+#&gt;  Missing                   0.00      Std Deviation            68.56 
+#&gt;  Mean                    146.69      Range                   283.00 
+#&gt;  Median                  123.00      Interquartile Range      83.50 
+#&gt;  Mode                    110.00      Uncorrected SS       834278.00 
+#&gt;  Trimmed Mean            143.57      Corrected SS         145726.88 
+#&gt;  Skewness                  0.80      Coeff Variation          46.74 
+#&gt;  Kurtosis                  0.28      Std Error Mean           12.12 
+#&gt; 
+#&gt;                                Quantiles                                
+#&gt; 
+#&gt;               Quantile                              Value                
+#&gt; 
+#&gt;              Max                                   335.00                
+#&gt;              99%                                   312.99                
+#&gt;              95%                                   253.55                
+#&gt;              90%                                   243.50                
+#&gt;              Q3                                    180.00                
+#&gt;              Median                                123.00                
+#&gt;              Q1                                     96.50                
+#&gt;              10%                                    66.00                
+#&gt;              5%                                     63.65                
+#&gt;              1%                                     55.10                
+#&gt;              Min                                    52.00                
+#&gt; 
+#&gt;                              Extreme Values                             
+#&gt; 
+#&gt;                  Low                                High                 
+#&gt; 
+#&gt;   Obs                         Value       Obs                         Value 
+#&gt;   19                           52         31                           335  
+#&gt;    8                           62         29                           264  
+#&gt;   20                           65          7                           245  
+#&gt;   18                           66         24                           245  
+#&gt;   26                           66         17                           230  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; -------------------------------- Variable: drat --------------------------------
+#&gt; 
+#&gt;                         Univariate Analysis                          
+#&gt; 
+#&gt;  N                       32.00      Variance                 0.29 
+#&gt;  Missing                  0.00      Std Deviation            0.53 
+#&gt;  Mean                     3.60      Range                    2.17 
+#&gt;  Median                   3.70      Interquartile Range      0.84 
+#&gt;  Mode                     3.07      Uncorrected SS         422.79 
+#&gt;  Trimmed Mean             3.58      Corrected SS             8.86 
+#&gt;  Skewness                 0.29      Coeff Variation         14.87 
+#&gt;  Kurtosis                -0.45      Std Error Mean           0.09 
+#&gt; 
+#&gt;                               Quantiles                               
+#&gt; 
+#&gt;               Quantile                            Value                
+#&gt; 
+#&gt;              Max                                   4.93                
+#&gt;              99%                                   4.78                
+#&gt;              95%                                   4.31                
+#&gt;              90%                                   4.21                
+#&gt;              Q3                                    3.92                
+#&gt;              Median                                3.70                
+#&gt;              Q1                                    3.08                
+#&gt;              10%                                   3.01                
+#&gt;              5%                                    2.85                
+#&gt;              1%                                    2.76                
+#&gt;              Min                                   2.76                
+#&gt; 
+#&gt;                             Extreme Values                            
+#&gt; 
+#&gt;                 Low                                High                
+#&gt; 
+#&gt;   Obs                        Value       Obs                        Value 
+#&gt;    6                         2.76        19                         4.93  
+#&gt;   22                         2.76        27                         4.43  
+#&gt;   15                         2.93        20                         4.22  
+#&gt;   16                           3         29                         4.22  
+#&gt;   12                         3.07        32                         4.11  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; --------------------------------- Variable: wt ---------------------------------
+#&gt; 
+#&gt;                         Univariate Analysis                          
+#&gt; 
+#&gt;  N                       32.00      Variance                 0.96 
+#&gt;  Missing                  0.00      Std Deviation            0.98 
+#&gt;  Mean                     3.22      Range                    3.91 
+#&gt;  Median                   3.33      Interquartile Range      1.03 
+#&gt;  Mode                     3.44      Uncorrected SS         360.90 
+#&gt;  Trimmed Mean             3.20      Corrected SS            29.68 
+#&gt;  Skewness                 0.47      Coeff Variation         30.41 
+#&gt;  Kurtosis                 0.42      Std Error Mean           0.17 
+#&gt; 
+#&gt;                               Quantiles                               
+#&gt; 
+#&gt;               Quantile                            Value                
+#&gt; 
+#&gt;              Max                                   5.42                
+#&gt;              99%                                   5.40                
+#&gt;              95%                                   5.29                
+#&gt;              90%                                   4.05                
+#&gt;              Q3                                    3.61                
+#&gt;              Median                                3.33                
+#&gt;              Q1                                    2.58                
+#&gt;              10%                                   1.96                
+#&gt;              5%                                    1.74                
+#&gt;              1%                                    1.54                
+#&gt;              Min                                   1.51                
+#&gt; 
+#&gt;                             Extreme Values                            
+#&gt; 
+#&gt;                 Low                                High                
+#&gt; 
+#&gt;   Obs                        Value       Obs                        Value 
+#&gt;   27                         1.51        15                         5.42  
+#&gt;   NA                         1.61        12                         5.34  
+#&gt;   NA                         1.83        NA                         5.25  
+#&gt;   NA                         1.94        NA                         4.07  
+#&gt;   NA                         2.14        NA                         3.85  
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; -------------------------------- Variable: qsec --------------------------------
+#&gt; 
+#&gt;                         Univariate Analysis                          
+#&gt; 
+#&gt;  N                       32.00      Variance                 3.19 
+#&gt;  Missing                  0.00      Std Deviation            1.79 
+#&gt;  Mean                    17.85      Range                    8.40 
+#&gt;  Median                  17.71      Interquartile Range      2.01 
+#&gt;  Mode                    17.02      Uncorrected SS       10293.48 
+#&gt;  Trimmed Mean            17.79      Corrected SS            98.99 
+#&gt;  Skewness                 0.41      Coeff Variation         10.01 
+#&gt;  Kurtosis                 0.86      Std Error Mean           0.32 
+#&gt; 
+#&gt;                               Quantiles                               
+#&gt; 
+#&gt;               Quantile                            Value                
+#&gt; 
+#&gt;              Max                                  22.90                
+#&gt;              99%                                  22.07                
+#&gt;              95%                                  20.10                
+#&gt;              90%                                  19.99                
+#&gt;              Q3                                   18.90                
+#&gt;              Median                               17.71                
+#&gt;              Q1                                   16.89                
+#&gt;              10%                                  15.53                
+#&gt;              5%                                   15.05                
+#&gt;              1%                                   14.53                
+#&gt;              Min                                  14.50                
+#&gt; 
+#&gt;                             Extreme Values                            
+#&gt; 
+#&gt;                 Low                                High                
+#&gt; 
+#&gt;   Obs                        Value       Obs                        Value 
+#&gt;   29                         14.5         9                         22.9  
+#&gt;   31                         14.6         6                         20.22 
+#&gt;   24                         15.41       21                         20.01 
+#&gt;   30                         15.5         8                          20   
+#&gt;    7                         15.84       20                         19.9  
 #&gt; 
 #&gt; 
 #&gt; </div><div class='input'>

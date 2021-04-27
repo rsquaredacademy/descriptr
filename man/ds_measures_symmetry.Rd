@@ -17,7 +17,6 @@ ds_measures_symmetry(data, ..., decimals = 2)
 Returns the measures of symmetry such as skewness and kurtosis.
 }
 \examples{
-
 # single column
 ds_measures_symmetry(mtcarz, mpg)
 

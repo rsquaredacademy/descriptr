@@ -15,7 +15,6 @@ ds_kurtosis(data, x = NULL)
 Compute the kurtosis of a probability distribution.
 }
 \examples{
-
 # vector
 ds_kurtosis(mtcars$mpg)
 

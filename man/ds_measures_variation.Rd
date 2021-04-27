@@ -18,7 +18,6 @@ Returns the measures of location such as range, variance and standard
   deviation.
 }
 \examples{
-
 # single column
 ds_measures_variation(mtcarz, mpg)
 

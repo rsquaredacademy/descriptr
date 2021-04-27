@@ -8,7 +8,6 @@
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#'
 #' # single column
 #' ds_measures_location(mtcarz, mpg)
 #'
@@ -79,7 +78,6 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#'
 #' # single column
 #' ds_measures_variation(mtcarz, mpg)
 #'
@@ -169,7 +167,6 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#'
 #' # single column
 #' ds_measures_symmetry(mtcarz, mpg)
 #'
@@ -255,7 +252,6 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#'
 #' # single column
 #' ds_percentiles(mtcarz, mpg)
 #'
@@ -357,7 +353,6 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
 #' @examples
-#'
 #' # data.frame
 #' ds_extreme_obs(mtcarz, mpg)
 #'
@@ -415,7 +410,6 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
 #' @details Any NA values are stripped from \code{data} before computation takes place.
 #' @return \code{n} highest/lowest observations from \code{data}
 #' @examples
-#'
 #' # 5 lowest observations
 #' ds_tailobs(mtcarz$mpg, 5)
 #'
@@ -470,7 +464,6 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @examples
-#'
 #' # vector
 #' ds_gmean(mtcars$mpg)
 #'
@@ -506,7 +499,6 @@ ds_gmean <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @examples
-#'
 #' # vector
 #' ds_hmean(mtcars$mpg)
 #'
@@ -545,7 +537,6 @@ ds_hmean <- function(data, x = NULL) {
 #' takes place.
 #' @return Mode of \code{x}
 #' @examples
-#'
 #' # vector
 #' ds_mode(mtcars$mpg)
 #'
@@ -593,7 +584,6 @@ ds_mode <- function(data, x = NULL) {
 #' @param x Column in \code{data}.
 #' @return Range of \code{x}
 #' @examples
-#'
 #' # vector
 #' ds_range(mtcars$mpg)
 #'
@@ -630,7 +620,6 @@ ds_range <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @examples
-#'
 #' # vector
 #' ds_kurtosis(mtcars$mpg)
 #'
@@ -670,7 +659,6 @@ ds_kurtosis <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @examples
-#'
 #' # vector
 #' ds_skewness(mtcars$mpg)
 #'
@@ -713,7 +701,6 @@ ds_skewness <- function(data, x = NULL) {
 #' \code{mean}. Any NA values are stripped from \code{x} before computation
 #' takes place
 #' @examples
-#'
 #' # vector
 #' ds_mdev(mtcars$mpg)
 #'
@@ -750,7 +737,6 @@ ds_mdev <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @examples
-#'
 #' # vector
 #' ds_cvar(mtcars$mpg)
 #'
@@ -785,7 +771,6 @@ ds_cvar <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @examples
-#'
 #' # vector
 #' ds_css(mtcars$mpg)
 #'
@@ -822,7 +807,6 @@ ds_css <- function(data, x = NULL) {
 #' @return Index of the \code{values} in \code{data}. In case, \code{data} does
 #' not contain \code{index}, \code{NULL} is returned.
 #' @examples
-#'
 #' # returns index of 21
 #' ds_rindex(mtcars$mpg, 21)
 #'

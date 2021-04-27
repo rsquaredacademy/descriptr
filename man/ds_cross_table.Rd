@@ -32,18 +32,23 @@ as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars
 }
 \description{
 Creates two way tables of categorical variables. The tables created can be
-visualized as barplots and mosaicplots.
+visualized as bar plots and mosaic plots.
 }
 \examples{
+# cross table
 k <- ds_cross_table(mtcarz, cyl, gear)
 k
 
-# bar plots
+# bar plot
 plot(k)
+
+# stacked bar plot
 plot(k, stacked = TRUE)
+
+# proportional bar plot
 plot(k, proportional = TRUE)
 
-# alternate
+# returns tibble
 ds_twoway_table(mtcarz, cyl, gear)
 
 }

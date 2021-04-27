@@ -15,7 +15,6 @@ ds_gmean(data, x = NULL)
 Computes the geometric mean
 }
 \examples{
-
 # vector
 ds_gmean(mtcars$mpg)
 

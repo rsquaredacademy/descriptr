@@ -127,19 +127,19 @@ table for each unique pair of categorical variables in a data frame." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -196,14 +196,14 @@ variables in the dataframe.</p>
 
     
 
-<p><code>ds_oway_tables()</code> and <code>ds_tway_tables()</code> have been deprecated. 
+<p><code>ds_oway_tables()</code> and <code>ds_tway_tables()</code> have been deprecated.
 Instead use <code>ds_auto_freq_table()</code> and <code>ds_auto_cross_table()</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>link{ds_freq_table}</code> <code>link{ds_cross_table}</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># multiple one way tables</span>
+    <pre class="examples"><div class='input'><span class='co'># frequency table for all columns</span>
 <span class='fu'>ds_auto_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                              Variable: cyl                              
 #&gt; -----------------------------------------------------------------------
@@ -271,7 +271,9 @@ Instead use <code>ds_auto_freq_table()</code> and <code>ds_auto_cross_table()</c
 #&gt; -----------------------------------------------------------------------
 #&gt;  Total        32              -             100.00              -      
 #&gt; -----------------------------------------------------------------------
-#&gt; </div><div class='input'><span class='fu'>ds_auto_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># frequency table for multiple columns</span>
+<span class='fu'>ds_auto_freq_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                              Variable: cyl                              
 #&gt; -----------------------------------------------------------------------
 #&gt; Levels     Frequency    Cum Frequency       Percent        Cum Percent  
@@ -298,7 +300,7 @@ Instead use <code>ds_auto_freq_table()</code> and <code>ds_auto_cross_table()</c
 #&gt;  Total        32              -             100.00              -      
 #&gt; -----------------------------------------------------------------------
 #&gt; </div><div class='input'>
-<span class='co'># multiple two way tables</span>
+<span class='co'># cross table for all columns</span>
 <span class='fu'>ds_auto_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;     Cell Contents
 #&gt;  |---------------|
@@ -544,7 +546,9 @@ Instead use <code>ds_auto_freq_table()</code> and <code>ds_auto_cross_table()</c
 #&gt; |              |        0.219 |        0.312 |        0.094 |        0.312 |        0.031 |        0.031 |              |
 #&gt; -------------------------------------------------------------------------------------------------------------------------
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'>ds_auto_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span>, <span class='va'>am</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># cross table for multiple columns</span>
+<span class='fu'>ds_auto_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span>, <span class='va'>am</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;     Cell Contents
 #&gt;  |---------------|
 #&gt;  |     Frequency |
@@ -632,7 +636,8 @@ Instead use <code>ds_auto_freq_table()</code> and <code>ds_auto_cross_table()</c
 #&gt; |              |        0.594 |        0.406 |              |
 #&gt; -------------------------------------------------------------
 #&gt; 
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

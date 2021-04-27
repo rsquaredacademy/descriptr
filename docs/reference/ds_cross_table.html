@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Two way table — ds_cross_table" />
 <meta property="og:description" content="Creates two way tables of categorical variables. The tables created can be
-visualized as barplots and mosaicplots." />
+visualized as bar plots and mosaic plots." />
 
 
 
@@ -161,7 +161,7 @@ visualized as barplots and mosaicplots." />
 
     <div class="ref-description">
     <p>Creates two way tables of categorical variables. The tables created can be
-visualized as barplots and mosaicplots.</p>
+visualized as bar plots and mosaic plots.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var_1</span>, <span class='va'>var_2</span><span class='op'>)</span>
@@ -211,7 +211,8 @@ as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtapose
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># cross table</span>
+<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
 <span class='va'>k</span>
 </div><div class='output co'>#&gt;     Cell Contents
 #&gt;  |---------------|
@@ -246,12 +247,16 @@ as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtapose
 #&gt; | Column Total |           15 |           12 |            5 |           32 |
 #&gt; |              |        0.468 |        0.375 |        0.155 |              |
 #&gt; ----------------------------------------------------------------------------</div><div class='input'>
-<span class='co'># bar plots</span>
+<span class='co'># bar plot</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span>
-</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, stacked <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, proportional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># stacked bar plot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, stacked <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># proportional bar plot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, proportional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># alternate</span>
+<span class='co'># returns tibble</span>
 <span class='fu'>ds_twoway_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Joining, by = c("cyl", "gear", "count")</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 6</span><span>
 #&gt;   cyl   gear  count percent row_percent col_percent

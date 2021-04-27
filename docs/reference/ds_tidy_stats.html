@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -187,26 +187,29 @@
 <p><code>ds_multi_stats()</code> have been deprecated. Instead use <code>ds_tidy_stats()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_tidy_stats</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 16</span><span>
+    <pre class="examples"><div class='input'><span class='co'># all columns</span>
+<span class='fu'>ds_tidy_stats</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 16</span><span>
 #&gt;   vars    min    max   mean t_mean median   mode  range variance   stdev  skew
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp  71.1  472    231.   228    196.   276.   401.    1.54</span><span style='color: #555555;'>e</span><span>+4 124.    0.420
-#&gt; </span><span style='color: #555555;'>2</span><span> drat   2.76   4.93   3.60   3.58   3.70   3.07   2.17  2.86</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>   0.535 0.293
-#&gt; </span><span style='color: #555555;'>3</span><span> hp    52    335    147.   144.   123    110    283     4.70</span><span style='color: #555555;'>e</span><span>+3  68.6   0.799
-#&gt; </span><span style='color: #555555;'>4</span><span> mpg   10.4   33.9   20.1   20.0   19.2   10.4   23.5   3.63</span><span style='color: #555555;'>e</span><span>+1   6.03  0.672
-#&gt; </span><span style='color: #555555;'>5</span><span> qsec  14.5   22.9   17.8   17.8   17.7   17.0    8.40  3.19</span><span style='color: #555555;'>e</span><span>+0   1.79  0.406
-#&gt; </span><span style='color: #555555;'>6</span><span> wt     1.51   5.42   3.22   3.20   3.32   3.44   3.91  9.57</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-1</span><span>   0.978 0.466
-#&gt; </span><span style='color: #555555;'># ... with 5 more variables: kurtosis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, coeff_var </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, q1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   q3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, iqrange </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'>ds_tidy_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 16</span><span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> disp  71.1  472    231.   228    196.   276.   401.    1.54</span><span style='color: #949494;'>e</span><span>+4 124.    0.420
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> drat   2.76   4.93   3.60   3.58   3.70   3.07   2.17  2.86</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span>   0.535 0.293
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> hp    52    335    147.   144.   123    110    283     4.70</span><span style='color: #949494;'>e</span><span>+3  68.6   0.799
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> mpg   10.4   33.9   20.1   20.0   19.2   10.4   23.5   3.63</span><span style='color: #949494;'>e</span><span>+1   6.03  0.672
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> qsec  14.5   22.9   17.8   17.8   17.7   17.0    8.40  3.19</span><span style='color: #949494;'>e</span><span>+0   1.79  0.406
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> wt     1.51   5.42   3.22   3.20   3.32   3.44   3.91  9.57</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-1</span><span>   0.978 0.466
+#&gt; </span><span style='color: #949494;'># ... with 5 more variables: kurtosis </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, coeff_var </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, q1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
+#&gt; </span><span style='color: #949494;'>#   q3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, iqrange </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='co'># multiple columns</span>
+<span class='fu'>ds_tidy_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 16</span><span>
 #&gt;   vars    min   max  mean t_mean median  mode range variance  stdev  skew
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> disp   71.1 472   231.   228    196.  276.  401.   </span><span style='text-decoration: underline;'>15</span><span>361.  124.   0.420
-#&gt; </span><span style='color: #555555;'>2</span><span> hp     52   335   147.   144.   123   110   283     </span><span style='text-decoration: underline;'>4</span><span>701.   68.6  0.799
-#&gt; </span><span style='color: #555555;'>3</span><span> mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672
-#&gt; </span><span style='color: #555555;'># ... with 5 more variables: kurtosis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, coeff_var </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, q1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   q3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, iqrange </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> disp   71.1 472   231.   228    196.  276.  401.   </span><span style='text-decoration: underline;'>15</span><span>361.  124.   0.420
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> hp     52   335   147.   144.   123   110   283     </span><span style='text-decoration: underline;'>4</span><span>701.   68.6  0.799
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672
+#&gt; </span><span style='color: #949494;'># ... with 5 more variables: kurtosis </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, coeff_var </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, q1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
+#&gt; </span><span style='color: #949494;'>#   q3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, iqrange </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

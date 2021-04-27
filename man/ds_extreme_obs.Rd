@@ -17,7 +17,6 @@ ds_extreme_obs(data, col, decimals = 2)
 Returns the most extreme observations.
 }
 \examples{
-
 # data.frame
 ds_extreme_obs(mtcarz, mpg)
 

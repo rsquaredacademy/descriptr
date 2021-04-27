@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -179,7 +179,8 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_auto_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># all columns</span>
+<span class='fu'>ds_auto_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; -------------------------------- Variable: mpg --------------------------------
 #&gt; 
 #&gt; ------------------------------ Summary Statistics ------------------------------
@@ -494,11 +495,11 @@
 #&gt;                 Low                                High                
 #&gt; 
 #&gt;   Obs                        Value       Obs                        Value 
-#&gt;   28                         1.513       16                         5.424 
-#&gt;   19                         1.615       17                         5.345 
-#&gt;   20                         1.835       15                         5.25  
-#&gt;   26                         1.935       12                         4.07  
-#&gt;   27                         2.14        25                         3.845 
+#&gt;   27                         1.51        15                         5.42  
+#&gt;   NA                         1.61        12                         5.34  
+#&gt;   NA                         1.83        NA                         5.25  
+#&gt;   NA                         1.94        NA                         4.07  
+#&gt;   NA                         2.14        NA                         3.85  
 #&gt; 
 #&gt; 
 #&gt; 
@@ -593,7 +594,9 @@
 #&gt; |     Total     |    32     |       -       |    100.00    |      -       |
 #&gt; |-------------------------------------------------------------------------|
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'>ds_auto_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># multiple columns</span>
+<span class='fu'>ds_auto_summary_stats</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>disp</span>, <span class='va'>hp</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; -------------------------------- Variable: disp --------------------------------
 #&gt; 
 #&gt; ------------------------------ Summary Statistics ------------------------------

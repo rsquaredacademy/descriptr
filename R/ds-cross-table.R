@@ -14,15 +14,20 @@
 #' @param ... Further arguments to be passed to or from methods.
 #'
 #' @examples
+#' # cross table
 #' k <- ds_cross_table(mtcarz, cyl, gear)
 #' k
 #'
-#' # bar plots
+#' # bar plot
 #' plot(k)
+#'
+#' # stacked bar plot
 #' plot(k, stacked = TRUE)
+#'
+#' # proportional bar plot
 #' plot(k, proportional = TRUE)
 #'
-#' # alternate
+#' # returns tibble
 #' ds_twoway_table(mtcarz, cyl, gear)
 #'
 #' @export

@@ -77,15 +77,15 @@ print.ds_freq_table <- function(x, ...) {
 #'
 plot.ds_freq_table <- function(x, print_plot = TRUE, ...) {
 
-	nx <- length(x)
-	if (nx == 5) {
+	nx <- length(x$utility)
+	if (nx == 4) {
 		p <- plot_ds_freq_factor(x)
 		if (print_plot) {
 		  print(p)
 		} else {
 		  return(p)
 		}
-	} else if (nx == 11) {
+	} else if (nx == 10) {
 		p <- plot_ds_freq_numeric(x)
 		if (print_plot) {
 		  print(p)
