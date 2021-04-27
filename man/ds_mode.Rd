@@ -22,7 +22,6 @@ Any NA values are stripped from \code{x} before computation
 takes place.
 }
 \examples{
-
 # vector
 ds_mode(mtcars$mpg)
 

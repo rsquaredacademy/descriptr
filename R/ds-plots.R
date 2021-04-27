@@ -7,8 +7,11 @@
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
-#' ds_plot_scatter(mtcarz)
+#' # plot select variables
 #' ds_plot_scatter(mtcarz, mpg, disp)
+#'
+#' # plot all variables
+#' ds_plot_scatter(mtcarz)
 #'
 #' @importFrom rlang sym
 #' @importFrom utils combn
@@ -80,9 +83,14 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' ds_plot_histogram(mtcarz)
+#' # plot single variable
 #' ds_plot_histogram(mtcarz, mpg)
+#'
+#' # plot multiple variables
 #' ds_plot_histogram(mtcarz, mpg, disp, hp)
+#'
+#' # plot all variables
+#' ds_plot_histogram(mtcarz)
 #'
 #' @export
 #'
@@ -146,9 +154,14 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' ds_plot_density(mtcarz)
+#' # plot single variable
 #' ds_plot_density(mtcarz, mpg)
+#'
+#' # plot multiple variables
 #' ds_plot_density(mtcarz, mpg, disp, hp)
+#'
+#' # plot all variables
+#' ds_plot_density(mtcarz)
 #'
 #' @export
 #'
@@ -209,9 +222,14 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' ds_plot_bar(mtcarz)
+#' # plot single variable
 #' ds_plot_bar(mtcarz, cyl)
+#'
+#' # plot multiple variables
 #' ds_plot_bar(mtcarz, cyl, gear)
+#'
+#' # plot all variables
+#' ds_plot_bar(mtcarz)
 #'
 #' @export
 #'
@@ -272,9 +290,14 @@ ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' ds_plot_box_single(mtcarz)
+#' # plot single variable
 #' ds_plot_box_single(mtcarz, mpg)
+#'
+#' # plot multiple variables
 #' ds_plot_box_single(mtcarz, mpg, disp, hp)
+#'
+#' # plot all variables
+#' ds_plot_box_single(mtcarz)
 #'
 #' @export
 #'
@@ -336,9 +359,14 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
+#' # subset data
 #' mt <- dplyr::select(mtcarz, cyl, gear, am)
-#' ds_plot_bar_stacked(mt)
+#'
+#' # stacked bar plot
 #' ds_plot_bar_stacked(mtcarz, cyl, gear)
+#'
+#' # plot all variables
+#' ds_plot_bar_stacked(mt)
 #'
 #' @export
 #'
@@ -405,9 +433,14 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
+#' # subset data
 #' mt <- dplyr::select(mtcarz, cyl, gear, am)
-#' ds_plot_bar_grouped(mt)
+#'
+#' # grouped bar plot
 #' ds_plot_bar_grouped(mtcarz, cyl, gear)
+#'
+#' # plot all variables
+#' ds_plot_bar_grouped(mt)
 #'
 #' @export
 #'
@@ -476,9 +509,14 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
+#' # subset data
 #' mt <- dplyr::select(mtcarz, cyl, disp, mpg)
-#' ds_plot_box_group(mt)
+#'
+#' # plot select variables
 #' ds_plot_box_group(mtcarz, cyl, gear, mpg)
+#'
+#' # plot all variables
+#' ds_plot_box_group(mt)
 #'
 #' @export
 #'

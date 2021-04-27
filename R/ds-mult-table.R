@@ -11,16 +11,21 @@
 #' function. It creates a two way table for each unique pair of categorical
 #' variables in the dataframe.
 #' @section Deprecated Functions:
-#' \code{ds_oway_tables()} and \code{ds_tway_tables()} have been deprecated. 
+#' \code{ds_oway_tables()} and \code{ds_tway_tables()} have been deprecated.
 #' Instead use \code{ds_auto_freq_table()} and \code{ds_auto_cross_table()}.
 #' @examples
-#' # multiple one way tables
+#' # frequency table for all columns
 #' ds_auto_freq_table(mtcarz)
+#'
+#' # frequency table for multiple columns
 #' ds_auto_freq_table(mtcarz, cyl, gear)
 #'
-#' # multiple two way tables
+#' # cross table for all columns
 #' ds_auto_cross_table(mtcarz)
+#'
+#' # cross table for multiple columns
 #' ds_auto_cross_table(mtcarz, cyl, gear, am)
+#'
 #' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
 #' @export
 #'
@@ -109,7 +114,7 @@ ds_auto_cross_table <- function(data, ...) {
   )
 
   for (i in seq_len(n)) {
-    k <- cross_table2(plot_data[[factor_start[, i][1]]], plot_data[[factor_start[, i][2]]], 
+    k <- cross_table2(plot_data[[factor_start[, i][1]]], plot_data[[factor_start[, i][2]]],
       factor_start[, i][1], factor_start[, i][2])
     print(k)
   }

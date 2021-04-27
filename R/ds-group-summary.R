@@ -5,8 +5,8 @@
 #' the continuous variable for the different levels of the categorical variable.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
-#' @param gvar Column in \code{data}.
-#' @param cvar Column in \code{data}.
+#' @param group_by Column in \code{data}.
+#' @param cols Column in \code{data}.
 #' @param x An object of the class \code{ds_group_summary}.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
@@ -36,18 +36,18 @@
 #'
 #' @export
 #'
-ds_group_summary <- function(data, gvar, cvar) UseMethod("ds_group_summary")
+ds_group_summary <- function(data, group_by, cols) UseMethod("ds_group_summary")
 
 #' @export
 #'
-ds_group_summary.default <- function(data, gvar, cvar) {
+ds_group_summary.default <- function(data, group_by, cols) {
 
   check_df(data)
-  gvar_name <- deparse(substitute(gvar))
-  cvar_name <- deparse(substitute(cvar))
+  gvar_name <- deparse(substitute(group_by))
+  cvar_name <- deparse(substitute(cols))
 
-  g_var <- rlang::enquo(gvar)
-  c_var <- rlang::enquo(cvar)
+  g_var <- rlang::enquo(group_by)
+  c_var <- rlang::enquo(cols)
 
   check_numeric(data, !! c_var, cvar_name)
   check_factor(data, !! g_var, gvar_name)
@@ -105,11 +105,7 @@ ds_group_summary.default <- function(data, gvar, cvar) {
 
   result <- list(stats      = out,
                  tidy_stats = tidystats,
-                 plotdata   = plot_data,
-                 xvar       = xname,
-                 yvar       = yname,
-                 data       = data
-  )
+                 plot_data  = plot_data)
 
   class(result) <- "ds_group_summary"
   return(result)
@@ -125,25 +121,15 @@ print.ds_group_summary <- function(x, ...) {
 #'
 plot.ds_group_summary <- function(x, print_plot = TRUE, ...) {
 
-  x_lab <- use_series(x, xvar)
-  y_lab <- use_series(x, yvar)
-
-  k <-
-    x %>%
-    use_series(xvar) %>%
-    rlang::sym()
-
-  j <-
-    x %>%
-    use_series(yvar) %>%
-    rlang::sym()
+  xy    <- names(x$plot_data)
+  x_lab <- xy[1]
+  y_lab <- xy[2]
 
   p <-
     x %>%
-    use_series(data) %>%
-    dplyr::select(x = !! k, y = !! j) %>%
+    use_series(plot_data) %>%
     ggplot() +
-    geom_boxplot(aes(x = x, y = y), fill = "blue") +
+    geom_boxplot(aes_string(x = x_lab, y = y_lab), fill = "blue") +
     xlab(x_lab) + ylab(y_lab) +
     ggtitle(paste(y_lab, "by", x_lab))
 

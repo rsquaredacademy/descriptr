@@ -6,7 +6,14 @@
 #' @param ... Column(s) in \code{data}.
 #'
 #' @examples
+#' # single variable
 #' ds_summary_stats(mtcarz, mpg)
+#'
+#' # multiple variables
+#' ds_summary_stats(mtcarz, mpg, disp, hp)
+#'
+#' # all variables
+#' ds_summary_stats(mtcarz)
 #'
 #' @importFrom rlang !!
 #' @importFrom stats na.omit
@@ -68,7 +75,7 @@ ds_summary.default <- function(data, variable) {
   low_val  <- ds_rindex(sdata, low)
   high_val <- ds_rindex(sdata, high)
 
-  result <- 
+  result <-
       list(obs      = length(odata),
            missing  = sum(is.na(odata)),
            avg      = mean(sdata),

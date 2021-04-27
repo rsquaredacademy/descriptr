@@ -25,7 +25,6 @@ Returns the n highest/lowest observations from a numeric vector.
 Any NA values are stripped from \code{data} before computation takes place.
 }
 \examples{
-
 # 5 lowest observations
 ds_tailobs(mtcarz$mpg, 5)
 

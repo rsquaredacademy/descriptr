@@ -124,19 +124,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -179,8 +179,9 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ds_auto_group_summary</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span>, <span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                                        mpg by cyl                                         
+    <pre class="examples"><div class='input'><span class='co'># summary statistics of mpg &amp; disp for each level of cyl &amp; gear</span>
+<span class='fu'>ds_auto_group_summary</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span>, <span class='va'>mpg</span>, <span class='va'>disp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                            by                                             
 #&gt; -----------------------------------------------------------------------------------------
 #&gt; |     Statistic/Levels|                    4|                    6|                    8|
 #&gt; -----------------------------------------------------------------------------------------
@@ -204,7 +205,7 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt;                                        mpg by gear                                        
+#&gt;                                            by                                             
 #&gt; -----------------------------------------------------------------------------------------
 #&gt; |     Statistic/Levels|                    3|                    4|                    5|
 #&gt; -----------------------------------------------------------------------------------------
@@ -228,7 +229,7 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt;                                        disp by cyl                                        
+#&gt;                                            by                                             
 #&gt; -----------------------------------------------------------------------------------------
 #&gt; |     Statistic/Levels|                    4|                    6|                    8|
 #&gt; -----------------------------------------------------------------------------------------
@@ -252,7 +253,7 @@
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt;                                       disp by gear                                        
+#&gt;                                            by                                             
 #&gt; -----------------------------------------------------------------------------------------
 #&gt; |     Statistic/Levels|                    3|                    4|                    5|
 #&gt; -----------------------------------------------------------------------------------------

@@ -5,16 +5,16 @@
 \alias{plot.ds_group_summary}
 \title{Groupwise descriptive statistics}
 \usage{
-ds_group_summary(data, gvar, cvar)
+ds_group_summary(data, group_by, cols)
 
 \method{plot}{ds_group_summary}(x, print_plot = TRUE, ...)
 }
 \arguments{
 \item{data}{A \code{data.frame} or a \code{tibble}.}
 
-\item{gvar}{Column in \code{data}.}
+\item{group_by}{Column in \code{data}.}
 
-\item{cvar}{Column in \code{data}.}
+\item{cols}{Column in \code{data}.}
 
 \item{x}{An object of the class \code{ds_group_summary}.}
 

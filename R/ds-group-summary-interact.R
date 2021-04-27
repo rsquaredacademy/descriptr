@@ -4,7 +4,7 @@
 #' of two or more categorical variables.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
-#' @param cvar Column in \code{data}; continuous variable.
+#' @param col Column in \code{data}; continuous variable.
 #' @param ... Columns in \code{data}; categorical variables.
 #'
 #' @examples
@@ -14,12 +14,12 @@
 #'
 #' @export
 #'
-ds_group_summary_interact <- function(data, cvar, ...) {
+ds_group_summary_interact <- function(data, col, ...) {
 
   check_df(data)
 
-  cvar_name <- deparse(substitute(cvar))
-  c_var <- rlang::enquo(cvar)
+  cvar_name <- deparse(substitute(col))
+  c_var <- rlang::enquo(col)
   check_numeric(data, !! c_var, cvar_name)
 
   g_var <- rlang::quos(...)

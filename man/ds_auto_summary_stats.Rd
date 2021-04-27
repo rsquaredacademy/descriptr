@@ -15,7 +15,10 @@ ds_auto_summary_stats(data, ...)
 Generate summary statistics & frequency table for all continuous variables in data.
 }
 \examples{
+# all columns
 ds_auto_summary_stats(mtcarz)
+
+# multiple columns
 ds_auto_summary_stats(mtcarz, disp, hp)
 
 }

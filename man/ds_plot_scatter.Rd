@@ -17,7 +17,10 @@ ds_plot_scatter(data, ..., print_plot = TRUE)
 Creates scatter plots if the data has continuous variables.
 }
 \examples{
-ds_plot_scatter(mtcarz)
+# plot select variables
 ds_plot_scatter(mtcarz, mpg, disp)
+
+# plot all variables
+ds_plot_scatter(mtcarz)
 
 }

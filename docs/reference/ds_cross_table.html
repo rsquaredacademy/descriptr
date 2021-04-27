@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Two way table — ds_cross_table" />
 <meta property="og:description" content="Creates two way tables of categorical variables. The tables created can be
-visualized as barplots and mosaicplots." />
+visualized as bar plots and mosaic plots." />
 
 
 
@@ -125,19 +125,19 @@ visualized as barplots and mosaicplots." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -161,15 +161,15 @@ visualized as barplots and mosaicplots." />
 
     <div class="ref-description">
     <p>Creates two way tables of categorical variables. The tables created can be
-visualized as barplots and mosaicplots.</p>
+visualized as bar plots and mosaic plots.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var1</span>, <span class='va'>var2</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var_1</span>, <span class='va'>var_2</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ds_cross_table</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, stacked <span class='op'>=</span> <span class='cn'>FALSE</span>, proportional <span class='op'>=</span> <span class='cn'>FALSE</span>, print_plot <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>ds_twoway_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var1</span>, <span class='va'>var2</span><span class='op'>)</span></pre>
+<span class='fu'>ds_twoway_table</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>var_1</span>, <span class='va'>var_2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,11 +179,11 @@ visualized as barplots and mosaicplots.</p>
       <td><p>A <code>data.frame</code> or a <code>tibble</code>.</p></td>
     </tr>
     <tr>
-      <th>var1</th>
+      <th>var_1</th>
       <td><p>First categorical variable.</p></td>
     </tr>
     <tr>
-      <th>var2</th>
+      <th>var_2</th>
       <td><p>Second categorical variable.</p></td>
     </tr>
     <tr>
@@ -211,7 +211,8 @@ as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtapose
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># cross table</span>
+<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'>ds_cross_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
 <span class='va'>k</span>
 </div><div class='output co'>#&gt;     Cell Contents
 #&gt;  |---------------|
@@ -246,24 +247,28 @@ as stacked bars, and if <code>TRUE</code> the columns are portrayed as juxtapose
 #&gt; | Column Total |           15 |           12 |            5 |           32 |
 #&gt; |              |        0.468 |        0.375 |        0.155 |              |
 #&gt; ----------------------------------------------------------------------------</div><div class='input'>
-<span class='co'># bar plots</span>
+<span class='co'># bar plot</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span>
-</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, stacked <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, proportional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='ds_cross_table-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># stacked bar plot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, stacked <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='ds_cross_table-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># proportional bar plot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>k</span>, proportional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='img'><img src='ds_cross_table-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># alternate</span>
+<span class='co'># returns tibble</span>
 <span class='fu'>ds_twoway_table</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("cyl", "gear", "count")</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 6</span><span>
+</div><div class='output co'>#&gt; <span class='message'>Joining, by = c("cyl", "gear", "count")</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 6</span><span>
 #&gt;   cyl   gear  count percent row_percent col_percent
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 4     3         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.090</span><span style='text-decoration: underline;'>9</span><span>      0.066</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> 4     4         8  0.25        0.727       0.667 
-#&gt; </span><span style='color: #555555;'>3</span><span> 4     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.182       0.4   
-#&gt; </span><span style='color: #555555;'>4</span><span> 6     3         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.286       0.133 
-#&gt; </span><span style='color: #555555;'>5</span><span> 6     4         4  0.125       0.571       0.333 
-#&gt; </span><span style='color: #555555;'>6</span><span> 6     5         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.143       0.2   
-#&gt; </span><span style='color: #555555;'>7</span><span> 8     3        12  0.375       0.857       0.8   
-#&gt; </span><span style='color: #555555;'>8</span><span> 8     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.143       0.4   </div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 4     3         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.090</span><span style='text-decoration: underline;'>9</span><span>      0.066</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 4     4         8  0.25        0.727       0.667 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 4     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.182       0.4   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 6     3         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.286       0.133 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 6     4         4  0.125       0.571       0.333 
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 6     5         1  0.031</span><span style='text-decoration: underline;'>2</span><span>      0.143       0.2   
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> 8     3        12  0.375       0.857       0.8   
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span> 8     5         2  0.062</span><span style='text-decoration: underline;'>5</span><span>      0.143       0.4   </div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -58,27 +58,27 @@ print_stats <- function(data) {
 }
 
 print_cross <- function(data) {
-  p <- length(data$var2_levels)
+  p <- length(data$utility$var2_levels)
   q <- p + 2
   h <- p + 1
   r <- (h * 15) - 3
-  f <- length(data$var1_levels)
+  f <- length(data$utility$var1_levels)
   g <- f + 2
   h <- p + 1
 
-  col_names <- c(data$varnames[1], data$var2_levels, "Row Total")
-  col_totals <- c("Column Total", data$column_totals, data$obs)
+  col_names <- c(data$utility$varnames[1], data$utility$var2_levels, "Row Total")
+  col_totals <- c("Column Total", data$utility$column_totals, data$utility$obs)
 
   cat(
     formatter("    Cell Contents\n"), "|---------------|\n", "|", formatter("Frequency"),
     "|\n", "|", formatter("Percent"), "|\n", "|", formatter("Row Pct"), "|\n",
     "|", formatter("Col Pct"), "|\n", "|---------------|\n\n", "Total Observations: ",
-    data$obs, "\n\n"
+    data$utility$obs, "\n\n"
   )
   cat("-", rep("---------------", q), sep = "")
   cat("\n")
   cat(
-    "|              |", format(data$varnames[2], width = r, justify = "centre"),
+    "|              |", format(data$utility$varnames[2], width = r, justify = "centre"),
     "|"
   )
   cat("\n")
@@ -93,23 +93,23 @@ print_cross <- function(data) {
   for (i in seq_len(f)) {
     cat("|")
     for (j in seq_len(q)) {
-      cat(formatter(data$twowaytable[i, j]), "|")
+      cat(formatter(data$utility$twowaytable[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$percent_table[i, j]), "|")
+      cat(formatter(data$utility$percent_table[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter(data$row_percent[i, j]), "|")
+      cat(formatter(data$utility$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$column_percent[i, j]), "|")
+      cat(formatter(data$utility$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -121,8 +121,8 @@ print_cross <- function(data) {
   }
   cat("\n")
   cat("|              |")
-  for (i in seq_along(data$percent_column)) {
-    cat(formatter(data$percent_column[i]), "|")
+  for (i in seq_along(data$utility$percent_column)) {
+    cat(formatter(data$utility$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")
@@ -242,6 +242,7 @@ print_fcont <- function(data) {
 
   blen <-
     data %>%
+    use_series(utility) %>%
     use_series(breaks) %>%
     nchar() %>%
     max()
@@ -253,6 +254,7 @@ print_fcont <- function(data) {
 
   flen <-
     data %>%
+    use_series(utility) %>%
     use_series(frequency) %>%
     nchar() %>%
     max() %>%
@@ -260,6 +262,7 @@ print_fcont <- function(data) {
 
   clen <-
     data %>%
+    use_series(utility) %>%
     use_series(cumulative) %>%
     nchar() %>%
     max() %>%
@@ -272,7 +275,7 @@ print_fcont <- function(data) {
   col_widths <- c(blen2, flen, clen, 13, 13)
   len_names <- 5
 
-  cat(format(paste("Variable:", data$varname), width = total, justify = "centre"), "\n")
+  cat(format(paste("Variable:", data$utility$varname), width = total, justify = "centre"), "\n")
   cat("|")
   cat(rep("-", dash), sep = "")
   cat("|\n")
@@ -283,12 +286,12 @@ print_fcont <- function(data) {
   cat("\n|")
   cat(rep("-", dash), sep = "")
   cat("|")
-  for (i in seq_len(data$bins)) {
+  for (i in seq_len(data$utility$bins)) {
     k <- i + 1
     cat(
-      "\n|", formata(data$breaks[i], 1, blen), "-", formata(data$breaks[k], 1, blen), "|",
-      formata(data$frequency[i], 2, flen), "|", formata(data$cumulative[i], 2, clen), "|",
-      formata(data$percent[i], 2, 12), "|", formata(data$cum_percent[i], 2, 12), "|"
+      "\n|", formata(data$utility$breaks[i], 1, blen), "-", formata(data$utility$breaks[k], 1, blen), "|",
+      formata(data$utility$frequency[i], 2, flen), "|", formata(data$utility$cumulative[i], 2, clen), "|",
+      formata(data$utility$percent[i], 2, 12), "|", formata(data$utility$cum_percent[i], 2, 12), "|"
     )
     cat("\n|")
     cat(rep("-", dash), sep = "")
@@ -296,10 +299,10 @@ print_fcont <- function(data) {
   }
   cat("\n")
   nlen <- blen * 2 + 4
-  if (data$na_count > 0) {
-    na_percent <- format((data$na_count / data$n) * 100, nsmall = 2)
+  if (data$utility$na_count > 0) {
+    na_percent <- format((data$utility$na_count / data$utility$n) * 100, nsmall = 2)
     cat("|", format("Missing", width = nlen, justify = "centre"))
-    cat("|", format(as.character(round(data$na_count, 2)), width = flen, justify = "centre"))
+    cat("|", format(as.character(round(data$utility$na_count, 2)), width = flen, justify = "centre"))
     cat(" |",  format("-", width = clen, justify = "centre"))
     cat(" |", format(as.character(na_percent), width = 12, justify = "centre"))
     cat(" |", format("-", width = 12, justify = "centre"))
@@ -309,7 +312,7 @@ print_fcont <- function(data) {
     cat("|\n")
   }
   cat("|", format("Total", width = nlen, justify = "centre"))
-  cat("|", format(as.character(data$n), width = flen, justify = "centre"))
+  cat("|", format(as.character(data$utility$n), width = flen, justify = "centre"))
   cat(" |",  format("-", width = clen, justify = "centre"))
   cat(" |", format("100.00", width = 12, justify = "centre"))
   cat(" |", format("-", width = 12, justify = "centre"))
@@ -324,10 +327,10 @@ print_ftable <- function(x) {
   nr <- nrow(x$ftable)
   nc <- ncol(x$ftable)
   w1 <- max(nchar("Levels"), nchar(x$ftable$Levels), nchar("Missing"))
-  w2 <- max(nchar("Frequency"), nchar(x$ftable$Frequency), nchar(x$na_count))
+  w2 <- max(nchar("Frequency"), nchar(x$ftable$Frequency), nchar(x$utility$na_count))
   w3 <- max(nchar("Cum Frequency"), nchar(x$ftable$`Cum Frequency`))
   w <- sum(w1, w2, w3, 26, 16)
-  cat(format(paste("Variable:", x$varname), width = w, justify = "centre"), "\n")
+  cat(format(paste("Variable:", x$utility$varname), width = w, justify = "centre"), "\n")
   cat(rep("-", w), sep = "")
   cat("\n")
   cat(format("Levels", width = w1, justify = "centre"), fs(),
@@ -348,10 +351,10 @@ print_ftable <- function(x) {
     cat(rep("-", w), sep = "")
   }
   cat("\n")
-  if (x$na_count > 0) {
-    na_percent <- format((x$na_count / x$n) * 100, nsmall = 2)
+  if (x$utility$na_count > 0) {
+    na_percent <- format((x$utility$na_count / x$n) * 100, nsmall = 2)
     cat(format("Missing", width = w1, justify = "centre"), fs(),
-        format(as.character(x$na_count), width = w2, justify = "centre"), fs(),
+        format(as.character(x$utility$na_count), width = w2, justify = "centre"), fs(),
         format("-", width = w3, justify = "centre"), fs(),
         format(as.character(na_percent), width = 13, justify = "centre"), fs(),
         format("-", width = 13, justify = "centre"))
@@ -360,7 +363,7 @@ print_ftable <- function(x) {
     cat("\n")
   }
   cat(format("Total", width = w1, justify = "centre"), fs(),
-      format(as.character(x$n), width = w2, justify = "centre"), fs(),
+      format(as.character(x$utility$n), width = w2, justify = "centre"), fs(),
       format("-", width = w3, justify = "centre"), fs(),
       format("100.00", width = 13, justify = "centre"), fs(),
       format("-", width = 13, justify = "centre"))

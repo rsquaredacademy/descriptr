@@ -125,19 +125,19 @@ of two or more categorical variables." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/rsquaredacademy/descriptr">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/rsquaredacademy/">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.youtube.com/user/rsquaredin">
-    <span class="fa fa-youtube"></span>
+    <span class="fas fa-youtube"></span>
      
   </a>
 </li>
@@ -164,7 +164,7 @@ of two or more categorical variables." />
 of two or more categorical variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ds_group_summary_interact</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>cvar</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ds_group_summary_interact</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>col</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,7 +174,7 @@ of two or more categorical variables.</p>
       <td><p>A <code>data.frame</code> or a <code>tibble</code>.</p></td>
     </tr>
     <tr>
-      <th>cvar</th>
+      <th>col</th>
       <td><p>Column in <code>data</code>; continuous variable.</p></td>
     </tr>
     <tr>
@@ -189,19 +189,19 @@ of two or more categorical variables.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ds_group_summary_interact</span><span class='op'>(</span><span class='va'>mtcarz</span>, <span class='va'>mpg</span>, <span class='va'>cyl</span>, <span class='va'>gear</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 17</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 17</span><span>
 #&gt;   cyl   gear    min   max  mean t_mean median  mode range variance  stdev
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 4     3      21.5  21.5  21.5   21.5   21.5  21.5  0       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'>2</span><span> 6     3      18.1  21.4  19.8   19.8   19.8  18.1  3.30     5.44  2.33 
-#&gt; </span><span style='color: #555555;'>3</span><span> 8     3      10.4  19.2  15.0   15.0   15.2  10.4  8.80     7.70  2.77 
-#&gt; </span><span style='color: #555555;'>4</span><span> 4     4      21.4  33.9  26.9   26.9   25.8  22.8 12.5     23.1   4.81 
-#&gt; </span><span style='color: #555555;'>5</span><span> 6     4      17.8  21    19.8   19.8   20.1  21    3.20     2.41  1.55 
-#&gt; </span><span style='color: #555555;'>6</span><span> 4     5      26    30.4  28.2   28.2   28.2  26    4.40     9.68  3.11 
-#&gt; </span><span style='color: #555555;'>7</span><span> 6     5      19.7  19.7  19.7   19.7   19.7  19.7  0       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
-#&gt; </span><span style='color: #555555;'>8</span><span> 8     5      15    15.8  15.4   15.4   15.4  15    0.8      0.32  0.566
-#&gt; </span><span style='color: #555555;'># ... with 6 more variables: skew </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, kurtosis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, coeff_var </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   q1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, q3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, iqrange </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 4     3      21.5  21.5  21.5   21.5   21.5  21.5  0       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 6     3      18.1  21.4  19.8   19.8   19.8  18.1  3.30     5.44  2.33 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 8     3      10.4  19.2  15.0   15.0   15.2  10.4  8.80     7.70  2.77 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 4     4      21.4  33.9  26.9   26.9   25.8  22.8 12.5     23.1   4.81 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 6     4      17.8  21    19.8   19.8   20.1  21    3.20     2.41  1.55 
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> 4     5      26    30.4  28.2   28.2   28.2  26    4.40     9.68  3.11 
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> 6     5      19.7  19.7  19.7   19.7   19.7  19.7  0       </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>8</span><span> 8     5      15    15.8  15.4   15.4   15.4  15    0.8      0.32  0.566
+#&gt; </span><span style='color: #949494;'># ... with 6 more variables: skew </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, kurtosis </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, coeff_var </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
+#&gt; </span><span style='color: #949494;'>#   q1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, q3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, iqrange </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

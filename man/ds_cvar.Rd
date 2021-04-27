@@ -15,7 +15,6 @@ ds_cvar(data, x = NULL)
 Compute the coefficient of variation
 }
 \examples{
-
 # vector
 ds_cvar(mtcars$mpg)
 

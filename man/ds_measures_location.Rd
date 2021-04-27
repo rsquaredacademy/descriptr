@@ -19,7 +19,6 @@ ds_measures_location(data, ..., trim = 0.05, decimals = 2)
 Returns the measures of location such as mean, median & mode.
 }
 \examples{
-
 # single column
 ds_measures_location(mtcarz, mpg)
 

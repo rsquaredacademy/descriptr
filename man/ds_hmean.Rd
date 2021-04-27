@@ -15,7 +15,6 @@ ds_hmean(data, x = NULL)
 Computes the harmonic mean
 }
 \examples{
-
 # vector
 ds_hmean(mtcars$mpg)
 

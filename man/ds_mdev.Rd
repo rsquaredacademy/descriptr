@@ -22,7 +22,6 @@ the statistic used to compute the deviations is not \code{median} but
 takes place
 }
 \examples{
-
 # vector
 ds_mdev(mtcars$mpg)
 

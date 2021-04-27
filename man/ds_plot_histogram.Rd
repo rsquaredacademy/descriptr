@@ -21,8 +21,13 @@ ds_plot_histogram(data, ..., bins = 5, fill = "blue", print_plot = TRUE)
 Creates histograms if the data has continuous variables.
 }
 \examples{
-ds_plot_histogram(mtcarz)
+# plot single variable
 ds_plot_histogram(mtcarz, mpg)
+
+# plot multiple variables
 ds_plot_histogram(mtcarz, mpg, disp, hp)
+
+# plot all variables
+ds_plot_histogram(mtcarz)
 
 }

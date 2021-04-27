@@ -65,12 +65,14 @@ ds_freq_factor <- function(data, variable) {
     na_freq <- 0
   }
 
+  utility <- list(varname  = var_name,
+                  data     = data,
+                  na_count = na_freq,
+                  n        = n_obs)
+
   result <- list(
-    ftable   = ftable,
-    varname  = var_name,
-    data     = data,
-    na_count = na_freq,
-    n        = n_obs
+    ftable  = ftable,
+    utility = utility
   )
 
   return(result)
@@ -81,17 +83,20 @@ plot_ds_freq_factor <- function(x, ...) {
 
   x_lab <-
     x %>%
+    use_series(utility) %>%
     use_series(varname) %>%
     extract(1)
 
   k <-
     x %>%
+    use_series(utility) %>%
     use_series(varname) %>%
     extract(1) %>%
     rlang::sym()
 
   p <-
     x %>%
+    use_series(utility) %>%
     use_series(data) %>%
     dplyr::select(x = !! k) %>%
     ggplot() +

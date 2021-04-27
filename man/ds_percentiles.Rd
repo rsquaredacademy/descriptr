@@ -17,7 +17,6 @@ ds_percentiles(data, ..., decimals = 2)
 Returns the percentiles
 }
 \examples{
-
 # single column
 ds_percentiles(mtcarz, mpg)
 

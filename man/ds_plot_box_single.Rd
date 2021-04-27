@@ -17,8 +17,13 @@ ds_plot_box_single(data, ..., print_plot = TRUE)
 Creates box plots if the data has continuous variables.
 }
 \examples{
-ds_plot_box_single(mtcarz)
+# plot single variable
 ds_plot_box_single(mtcarz, mpg)
+
+# plot multiple variables
 ds_plot_box_single(mtcarz, mpg, disp, hp)
+
+# plot all variables
+ds_plot_box_single(mtcarz)
 
 }

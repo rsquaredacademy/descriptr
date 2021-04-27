@@ -15,7 +15,6 @@ ds_css(data, x = NULL)
 Compute the corrected sum of squares
 }
 \examples{
-
 # vector
 ds_css(mtcars$mpg)
 

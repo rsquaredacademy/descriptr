@@ -52,48 +52,55 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
 
   freq_data <-
     tibble::tibble(lower        = inta[-lower_n],
-           upper        = inta[-1],
-           frequency    = result,
-           cumulative   = cum,
-           freq_percent = per,
-           cum_percent  = cum_per)
+                   upper        = inta[-1],
+                   frequency    = result,
+                   cumulative   = cum,
+                   freq_percent = per,
+                   cum_percent  = cum_per)
 
-  out <- list(freq_data   = freq_data,
-              breaks      = inta,
-              frequency   = result,
-              cumulative  = cum,
-              percent     = per,
-              cum_percent = cum_per,
-              bins        = n_bins,
-              data        = fdata,
-              na_count    = na_freq,
-              n           = n_obs,
-              varname     = var_name
-  )
+  utility <- list(breaks      = inta,
+                  frequency   = result,
+                  cumulative  = cum,
+                  percent     = per,
+                  cum_percent = cum_per,
+                  bins        = n_bins,
+                  data        = fdata,
+                  na_count    = na_freq,
+                  n           = n_obs,
+                  varname     = var_name)
+
+  out <- list(ftable  = freq_data,
+              utility = utility)
 
   return(out)
 }
 
 plot_ds_freq_numeric <- function(x, ...) {
 
-  x_lab <- use_series(x, varname)
+  x_lab <-
+    x %>%
+    use_series(utility) %>%
+    use_series(varname)
 
   k <-
     x %>%
+    use_series(utility) %>%
     use_series(varname) %>%
     extract(1) %>%
     rlang::sym()
 
   bins <-
     x %>%
+    use_series(utility) %>%
     use_series(frequency) %>%
     length()
 
   p <-
     x %>%
+    use_series(utility) %>%
     use_series(frequency) %>%
     tibble::enframe(name = NULL) %>%
-    tibble::add_column(x = seq_len(bins), .before = 1) %>%
+    tibble::add_column(x = seq_len(x$utility$bins), .before = 1) %>%
     ggplot() +
     geom_col(
       aes(x = x, y = value), width = 0.999,

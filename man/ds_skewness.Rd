@@ -15,7 +15,6 @@ ds_skewness(data, x = NULL)
 Compute the skewness of a probability distribution.
 }
 \examples{
-
 # vector
 ds_skewness(mtcars$mpg)
 
