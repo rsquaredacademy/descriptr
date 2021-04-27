@@ -1,7 +1,7 @@
 #' Two way table
 #'
 #' Creates two way tables of categorical variables. The tables created can be
-#' visualized as barplots and mosaicplots.
+#' visualized as bar plots and mosaic plots.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
 #' @param var_1 First categorical variable.
@@ -64,13 +64,20 @@ ds_cross_table.default <- function(data, var_1, var_2) {
   ccent    <- prep_ccent(x, coltotal)
   finaltab <- prep_table(x, rowtotal, row_name)
 
+  utility <- list(obs            = n,
+                  var2_levels    = col_name,
+                  var1_levels    = row_name,
+                  varnames       = var_names,
+                  twowaytable    = finaltab,
+                  percent_table  = finalmat,
+                  row_percent    = rcent,
+                  column_percent = ccent,
+                  column_totals  = coltotal,
+                  percent_column = col_pct,
+                  data           = data)
 
-  result <- list(
-    obs = n, var2_levels = col_name, var1_levels = row_name, varnames = var_names,
-    twowaytable = finaltab, percent_table = finalmat, row_percent = rcent, column_percent = ccent,
-    column_totals = coltotal, percent_column = col_pct, data = data
-  )
-
+  result <- list(ftable  = x,
+                 utility = utility)
 
   class(result) <- "ds_cross_table"
   return(result)
@@ -89,11 +96,13 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 
   x_lab <-
     x %>%
+    use_series(utility) %>%
     use_series(varnames) %>%
     extract(1)
 
   y_lab <-
     x %>%
+    use_series(utility) %>%
     use_series(varnames) %>%
     extract(2)
 
@@ -103,6 +112,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
   if (proportional) {
     p <-
       x %>%
+      use_series(utility) %>%
       use_series(data) %>%
       dplyr::select(x = !! k, y = !! j) %>%
       table() %>%
@@ -116,6 +126,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
     if (stacked) {
       p <-
         x %>%
+        use_series(utility) %>%
         use_series(data) %>%
         dplyr::select(x = !! k, y = !! j) %>%
         ggplot() +
@@ -125,6 +136,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
     } else {
       p <-
         x %>%
+        use_series(utility) %>%
         use_series(data) %>%
         dplyr::select(x = !! k, y = !! j) %>%
         ggplot() +

@@ -260,7 +260,7 @@ quant3 <- function(x, na.rm = FALSE) {
 }
 
 string_to_name <- function(x, index = 1) {
-  rlang::sym(x$varnames[index])
+  rlang::sym(x$utility$varnames[index])
 }
 
 #' @importFrom utils packageVersion menu install.packages globalVariables

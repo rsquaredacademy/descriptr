@@ -105,11 +105,7 @@ ds_group_summary.default <- function(data, group_by, cols) {
 
   result <- list(stats      = out,
                  tidy_stats = tidystats,
-                 plotdata   = plot_data,
-                 xvar       = xname,
-                 yvar       = yname,
-                 data       = data
-  )
+                 plot_data  = plot_data)
 
   class(result) <- "ds_group_summary"
   return(result)
@@ -125,25 +121,15 @@ print.ds_group_summary <- function(x, ...) {
 #'
 plot.ds_group_summary <- function(x, print_plot = TRUE, ...) {
 
-  x_lab <- use_series(x, xvar)
-  y_lab <- use_series(x, yvar)
-
-  k <-
-    x %>%
-    use_series(xvar) %>%
-    rlang::sym()
-
-  j <-
-    x %>%
-    use_series(yvar) %>%
-    rlang::sym()
+  xy    <- names(x$plot_data)
+  x_lab <- xy[1]
+  y_lab <- xy[2]
 
   p <-
     x %>%
-    use_series(data) %>%
-    dplyr::select(x = !! k, y = !! j) %>%
+    use_series(plot_data) %>%
     ggplot() +
-    geom_boxplot(aes(x = x, y = y), fill = "blue") +
+    geom_boxplot(aes_string(x = x_lab, y = y_lab), fill = "blue") +
     xlab(x_lab) + ylab(y_lab) +
     ggtitle(paste(y_lab, "by", x_lab))
 

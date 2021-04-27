@@ -11,8 +11,6 @@ test_that("output from ds_group_summary matches the expected result", {
     "Std. Error Mean", "Range", "Interquartile Range"
   )
 
-  expect_equal(k$xvar, "cyl")
-  expect_equal(k$yvar, "mpg")
   expect_equivalent(as.character(k$stats[, 1]), metrics)
   expect_equivalent(k$stats[, 2], c(
     11.00, 21.40, 33.90, 26.66, 26.00, 22.80,
