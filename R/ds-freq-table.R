@@ -49,7 +49,7 @@ ds_freq_table.default <- function(data, col, bins = 5) {
   	result <- ds_freq_factor(data, !! rlang::enquo(col))
   } else {
   	var_name <- deparse(substitute(col))
-  	stop(paste0(var_name, "is neither continuous nor categorical."), call. = FALSE)
+  	stop(paste0(var_name, " is neither continuous nor categorical."), call. = FALSE)
   }
 
   class(result) <- "ds_freq_table"

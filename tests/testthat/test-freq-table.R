@@ -38,3 +38,31 @@ test_that("output from ds_freq_table plot is as expected", {
   p <- plot(k)
   expect_doppelganger("ds_freq_cont", p$plot)
 })
+
+test_that("output from ds_freq_table is as expected in the presence of missing data", {
+
+  mt <- mtcarz
+  mt$cyl[c(3, 8, 15, 20)] <- NA 
+  k <- ds_freq_table(mt, cyl)
+  actual <- k$utility$na_count
+  expected <- 4
+
+  expect_equal(actual, expected)
+
+  mt$mpg[c(3, 8, 15, 20)] <- NA
+  k <- ds_freq_table(mt, mpg)
+  actual <- k$utility$na_count
+  expected <- 4  
+
+  expect_equal(actual, expected)
+
+})
+
+test_that("ds_freq_table throws appropriate error", {
+
+  mt <- mtcarz
+  mt$gear <- as.character(mt$gear)
+
+  expect_error(ds_freq_table(data = mtcarz, col = mpg, bins = "5"), "bins must be integer value")
+  expect_error(ds_freq_table(data = mt, col = gear), "gear is neither continuous nor categorical.")
+})
