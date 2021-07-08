@@ -54,10 +54,6 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
     data  <- list(data, ...)
     dtype <- sapply(data, is.numeric)
 
-    if (!all(dtype)) {
-      stop("data must be of type numeric only.", call. = FALSE)
-    }
-
     ds_loc_prep(data, vars, trim, decimals)
 
   } else {
@@ -558,7 +554,7 @@ ds_mode <- function(data, x = NULL) {
 
   if (!is.numeric(z)) {
     z_class <- class(z)
-    stop(paste0("Mode can be calculated only for numeric data. The variable you have selected is ", z_class, "."), call. = FALSE)
+    stop(paste0("Mode can be calculated only for numeric data. The variable you have selected is of type ", z_class, "."), call. = FALSE)
   }
 
   z <- na.omit(z)

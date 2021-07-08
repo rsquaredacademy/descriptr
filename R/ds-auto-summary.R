@@ -100,10 +100,6 @@ ds_auto_group_summary <- function(data, ...) {
     plot_data <- cbind(data[is_factor], data[is_num])
   }
 
-  if (ncol(data) < 1) {
-    stop("Data should include at least one categorical and one continuous variable.", call. = FALSE)
-  }
-
   is_num    <- sapply(plot_data, is.numeric)
   is_factor <- sapply(plot_data, is.factor)
   num_data  <- plot_data[is_num]
