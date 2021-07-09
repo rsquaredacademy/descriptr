@@ -43,7 +43,7 @@ freq_table2.default <- function(data, name) {
     length()
 
   if (na_count > 0) {
-    na_data <- dplyr::pull(data, !! varyable)
+    na_data <- dplyr::pull(data, var_name)
 
     var_count <-
       na_data %>%
