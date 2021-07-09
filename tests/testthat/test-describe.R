@@ -1,5 +1,7 @@
 context("describe")
 
+fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
+
 test_that("output from ds_tailobs match expected result", {
   expect_equivalent(ds_tailobs(mtcars$mpg, 5, "low"), c(10.4, 10.4, 13.3, 14.3, 14.7))
   expect_equivalent(ds_tailobs(mtcars$mpg, 5, "high"), c(33.9, 32.4, 30.4, 30.4, 27.3))
@@ -12,6 +14,12 @@ test_that("ds_tailobs returns the appropriate error", {
   expect_error(ds_tailobs("mtcars", 40, "high"), "data must be numeric")
   expect_error(ds_tailobs(as.factor(mtcars$disp), 40, "high"), "data must be numeric")
   expect_error(ds_tailobs(mtcars$mpg, "40", "high"), "n must be numeric")
+  expect_error(ds_measures_location(mtcarz$carb), "data must be either numeric or a `data.frame`.")
+  expect_error(ds_measures_variation(mtcarz$carb), "data must be either numeric or a `data.frame`.")
+  expect_error(ds_measures_symmetry(mtcarz$carb), "data must be either numeric or a `data.frame`.")
+  expect_error(ds_percentiles(mtcarz$carb), "data must be either numeric or a `data.frame`.")
+  expect_error(ds_extreme_obs(mtcarz$carb), "data must be either a numeric vector or a `data.frame`.")
+  expect_error(ds_mode(mtcarz$carb), "Mode can be calculated only for numeric data. The variable you have selected is of type factor.")
 })
 
 
@@ -186,10 +194,10 @@ test_that("output from ds_measures_location is as expected", {
 
 })
 
-test_that("output from ds_measures_location is as expected", {
+test_that("output from ds_measures_symmetry is as expected", {
 
-  actual <- round(ds_measures_location(mtcarz$mpg)[[4]], 2)
-  expected <- 20.09
+  actual <- round(ds_measures_symmetry(mtcarz$mpg)[[3]], 2)
+  expected <- 0.67
   expect_equal(actual, expected)
 
 })
@@ -275,6 +283,10 @@ test_that("output from ds_percentiles is as expected", {
   expected <- 152.27
   expect_equal(actual, expected)
 
+  actual <- round(sum(ds_percentiles(mtcarz$mpg)[[6]]), 2)
+  expected <- 14.34
+  expect_equal(actual, expected)
+
 })
 
 test_that("output from ds_percentiles is as expected", {
@@ -298,10 +310,16 @@ test_that("output from ds_extreme_obs is as expected", {
   expected <- 217.5
   expect_equal(actual, expected)
 
+  actual <- round(sum(ds_extreme_obs(mtcarz$mpg)[[2]]), 2)
+  expected <- 217.5
+  expect_equal(actual, expected)
+
 })
+
 
 test_that("ds_extreme_obs throws appropriate errors", {
 
   expect_error(ds_extreme_obs(mtcarz, cyl), 'cyl is not a continuous variable. The function expects an object of type `numeric` or `integer` but cyl is of type `factor`.')
 
 })
+

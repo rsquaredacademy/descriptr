@@ -10,12 +10,14 @@
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
 [![cran
 checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html)
+![r-universe](https://rsquaredacademy.r-universe.dev/badges/descriptr)
 [![R build
 status](https://github.com/rsquaredacademy/descriptr/workflows/R-CMD-check/badge.svg)](https://github.com/rsquaredacademy/descriptr/actions)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Coverage
 status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
 [![status](https://tinyverse.netlify.com/badge/descriptr)](https://CRAN.R-project.org/package=descriptr)
-![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)  
 <!-- badges: end -->
 
@@ -28,15 +30,18 @@ install.packages("descriptr")
 # Install development version from GitHub
 # install.packages("devtools")
 devtools::install_github("rsquaredacademy/descriptr")
+
+# Install the development version from `rsquaredacademy` universe
+install.packages("descriptr", repos = "https://rsquaredacademy.r-universe.dev")
 ```
 
 ## Articles
 
-  - [Continuous
+-   [Continuous
     Data](https://descriptr.rsquaredacademy.com/articles/continuous-data.html)
-  - [Categorical
+-   [Categorical
     Data](https://descriptr.rsquaredacademy.com/articles/categorical-data.html)
-  - [Visualization](https://descriptr.rsquaredacademy.com/articles/visualization.html)
+-   [Visualization](https://descriptr.rsquaredacademy.com/articles/visualization.html)
 
 ## Usage
 
@@ -192,7 +197,7 @@ ds_cross_table(mtcarz, cyl, gear)
 
 ``` r
 ds_group_summary(mtcarz, cyl, mpg)
-#>                                        mpg by cyl                                         
+#>                                            by                                             
 #> -----------------------------------------------------------------------------------------
 #> |     Statistic/Levels|                    4|                    6|                    8|
 #> -----------------------------------------------------------------------------------------
@@ -231,13 +236,13 @@ ds_tidy_stats(mtcarz, mpg, disp, hp)
 
 ## Features
 
-  - Summary statistics
-  - Two way tables
-  - One way table
-  - Group wise summary
-  - Multiple variable statistics
-  - Multiple one way tables
-  - Multiple two way tables
+-   Summary statistics
+-   Two way tables
+-   One way table
+-   Group wise summary
+-   Multiple variable statistics
+-   Multiple one way tables
+-   Multiple two way tables
 
 ## Getting Help
 

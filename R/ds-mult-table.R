@@ -50,10 +50,6 @@ ds_auto_freq_table <- function(data, ...) {
     plot_data <- data[is_factor]
   }
 
-  if (ncol(plot_data) < 1) {
-    stop("Data has no categorical variables.", call. = FALSE)
-  }
-
   factor_var <- names(plot_data)
   n          <- length(factor_var)
 
@@ -92,10 +88,6 @@ ds_auto_cross_table <- function(data, ...) {
     } else {
       plot_data <- data[is_factor]
     }
-  }
-
-  if (ncol(plot_data) < 1) {
-    stop("Data has no categorical variables.", call. = FALSE)
   }
 
   factor_var    <- names(plot_data)

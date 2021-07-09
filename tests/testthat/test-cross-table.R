@@ -89,3 +89,54 @@ test_that("ds_twoway_table throws appropriate error", {
   expect_error(ds_twoway_table(mtcarz, cyl, disp), 'disp is not a categorical variable. The function expects an object of type `factor` but disp is of type `numeric`.')
 
 })
+
+
+test_that("output from ds_cross_table is as expected", {
+
+  pim <- "    Cell Contents
+ |---------------|
+ |     Frequency |
+ |       Percent |
+ |       Row Pct |
+ |       Col Pct |
+ |---------------|
+
+ Total Observations:  32 
+
+----------------------------------------------------------------------------
+|              |                           gear                            |
+----------------------------------------------------------------------------
+|          cyl |            3 |            4 |            5 |    Row Total |
+----------------------------------------------------------------------------
+|            4 |            1 |            8 |            2 |           11 |
+|              |        0.031 |         0.25 |        0.062 |              |
+|              |         0.09 |         0.73 |         0.18 |         0.34 |
+|              |         0.07 |         0.67 |          0.4 |              |
+----------------------------------------------------------------------------
+|            6 |            2 |            4 |            1 |            7 |
+|              |        0.062 |        0.125 |        0.031 |              |
+|              |         0.29 |         0.57 |         0.14 |         0.22 |
+|              |         0.13 |         0.33 |          0.2 |              |
+----------------------------------------------------------------------------
+|            8 |           12 |            0 |            2 |           14 |
+|              |        0.375 |            0 |        0.062 |              |
+|              |         0.86 |            0 |         0.14 |         0.44 |
+|              |          0.8 |            0 |          0.4 |              |
+----------------------------------------------------------------------------
+| Column Total |           15 |           12 |            5 |           32 |
+|              |        0.468 |        0.375 |        0.155 |              |
+----------------------------------------------------------------------------"
+
+expect_output(print(ds_cross_table(mtcarz, cyl, gear)), pim)
+
+})
+
+test_that("get_names works as expected", {
+
+  mt       <- mtcarz["gear"]
+  mt$gear  <- as.character(mt$gear)
+  actual   <- get_names(mt$gear)
+  expected <- c("3", "4", "5")
+  expect_equal(actual, expected)
+
+})

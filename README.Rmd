@@ -17,12 +17,9 @@ knitr::opts_chunk$set(
 > Generate descriptive statistics
 
 <!-- badges: start -->
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![cran checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html)
-[![R build status](https://github.com/rsquaredacademy/descriptr/workflows/R-CMD-check/badge.svg)](https://github.com/rsquaredacademy/descriptr/actions)
-[![Coverage status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
-[![status](https://tinyverse.netlify.com/badge/descriptr)](https://CRAN.R-project.org/package=descriptr)
-![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)  
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr) [![cran checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html) ![r-universe](https://rsquaredacademy.r-universe.dev/badges/descriptr)
+[![R build status](https://github.com/rsquaredacademy/descriptr/workflows/R-CMD-check/badge.svg)](https://github.com/rsquaredacademy/descriptr/actions) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![Coverage status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master) [![status](https://tinyverse.netlify.com/badge/descriptr)](https://CRAN.R-project.org/package=descriptr) [![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)  
 <!-- badges: end -->
 
 
@@ -35,6 +32,9 @@ install.packages("descriptr")
 # Install development version from GitHub
 # install.packages("devtools")
 devtools::install_github("rsquaredacademy/descriptr")
+
+# Install the development version from `rsquaredacademy` universe
+install.packages("descriptr", repos = "https://rsquaredacademy.r-universe.dev")
 ```
 
 ## Articles

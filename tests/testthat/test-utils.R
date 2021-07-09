@@ -143,3 +143,13 @@ test_that("output from div_by matches the expected result", {
 test_that("output from uss is as expected", {
   expect_equal(uss(4, 2), 4)
 })
+
+test_that("output from trimmed_mean is as expected", {
+  mt <- mtcarz
+  mt$mpg[c(3, 10, 14, 19)] <- NA
+
+  expect_equal(round(trimmed_mean(mt$mpg, TRUE), 2), 19.65)
+  expect_equal(unname(round(quant1(mt$mpg, TRUE), 2)), 15.43)
+  expect_equal(unname(round(quant3(mt$mpg, TRUE), 2)), 21.82)
+
+})

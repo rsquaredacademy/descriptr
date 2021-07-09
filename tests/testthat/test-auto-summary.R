@@ -2,10 +2,13 @@ context("test-auto-summary")
 
 ndata <- dplyr::select(mtcarz, mpg, disp, hp, wt, qsec, drat)
 fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
+sdata <- dplyr::select(mtcarz, mpg)
+gdata <- dplyr::select(mtcarz, cyl, mpg)
 
 test_that("ds_auto_summary throws errors as expected", {
   expect_error(ds_auto_summary_stats(fdata), 'Data has no continuous variables.')
   expect_error(ds_auto_summary_stats(mtcarz, cyl, gear), 'Data has no continuous variables.')
+  expect_error(ds_auto_summary_stats(mtcarz, cyl), 'Data has no continuous variables.')
 })
 
 test_that("ds_auto_group_summary throws errors as expected", {
@@ -92,6 +95,7 @@ test_that("output from ds_auto_summary is as expected", {
 
 "
 expect_output(ds_auto_summary_stats(mtcarz, mpg), pim)
+expect_output(ds_auto_summary_stats(sdata), pim)
 })
 
 test_that("output from ds_auto_group_summary is as expected", {
@@ -122,6 +126,7 @@ test_that("output from ds_auto_group_summary is as expected", {
 "
 
 expect_output(ds_auto_group_summary(mtcarz, cyl, mpg), pim)
+expect_output(ds_auto_group_summary(gdata), pim)
 })
 
 
@@ -166,5 +171,37 @@ test_that("output from ds_auto_cross_table is as expected", {
 "
 
 expect_output(ds_auto_cross_table(mtcarz, cyl, gear), pim)
+
+})
+
+test_that("output from ds_auto_freq_table is as expected", {
+
+  pim <- "                             Variable: cyl                              
+-----------------------------------------------------------------------
+Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+-----------------------------------------------------------------------
+   4          11             11              34.38            34.38    
+-----------------------------------------------------------------------
+   6           7             18              21.88            56.25    
+-----------------------------------------------------------------------
+   8          14             32              43.75             100     
+-----------------------------------------------------------------------
+ Total        32              -             100.00              -      
+-----------------------------------------------------------------------
+
+                            Variable: gear                              
+-----------------------------------------------------------------------
+Levels     Frequency    Cum Frequency       Percent        Cum Percent  
+-----------------------------------------------------------------------
+   3          15             15              46.88            46.88    
+-----------------------------------------------------------------------
+   4          12             27              37.5             84.38    
+-----------------------------------------------------------------------
+   5           5             32              15.62             100     
+-----------------------------------------------------------------------
+ Total        32              -             100.00              -      
+-----------------------------------------------------------------------"
+
+expect_output(ds_auto_freq_table(mtcarz, cyl, gear), pim)
 
 })
