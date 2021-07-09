@@ -43,10 +43,6 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
     }
   }
 
-  if (ncol(plot_data) < 1) {
-    stop("Data has no continuous variables.", call. = FALSE)
-  }
-
   num_var   <- names(plot_data)
   num_start <- combn(num_var, 2)
   num_num   <- cbind(num_start, rbind(num_start[2, ], num_start[1, ]))
@@ -116,10 +112,6 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
     plot_data <- data[is_num]
   }
 
-  if (ncol(plot_data) < 1) {
-    stop("Data has no continuous variables.", call. = FALSE)
-  }
-
   num_var   <- names(plot_data)
   myplots   <- list()
   n         <- length(num_var)
@@ -186,10 +178,6 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
     plot_data <- data[is_num]
   }
 
-  if (ncol(plot_data) < 1) {
-    stop("Data has no continuous variables.", call. = FALSE)
-  }
-
   num_var   <- names(plot_data)
   myplots   <- list()
   n         <- length(num_var)
@@ -254,10 +242,6 @@ ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
     plot_data <- data[is_factor]
   }
 
-  if (ncol(plot_data) < 1) {
-    stop("Data has no categorical variables.", call. = FALSE)
-  }
-
   factor_var <- names(plot_data)
   myplots    <- list()
   n          <- length(factor_var)
@@ -320,10 +304,6 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
       stop("Data has no continuous variables.", call. = FALSE)
     }
     plot_data <- data[is_num]
-  }
-
-  if (ncol(plot_data) < 1) {
-    stop("Data has no continuous variables.", call. = FALSE)
   }
 
   num_var   <- names(plot_data)
@@ -393,10 +373,6 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
     } else {
       plot_data <- data[is_factor]
     }
-  }
-
-  if (ncol(plot_data) < 1) {
-    stop("Data has no categorical variables.", call. = FALSE)
   }
 
   factor_var    <- names(plot_data)
@@ -469,9 +445,6 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
     }
   }
 
-  if (ncol(plot_data) < 1) {
-    stop("Data has no categorical variables.", call. = FALSE)
-  }
 
   factor_var    <- names(plot_data)
   factor_start  <- combn(factor_var, 2)
@@ -548,10 +521,6 @@ ds_plot_box_group <- function(data, ..., print_plot = TRUE) {
       stop("Data has no categorical variables.", call. = FALSE)
     }
     plot_data <- cbind(data[is_factor], data[is_num])
-  }
-
-  if (ncol(data) < 1) {
-    stop("Data should include at least one categorical and one continuous variable.", call. = FALSE)
   }
 
   is_num    <- sapply(plot_data, is.numeric)
