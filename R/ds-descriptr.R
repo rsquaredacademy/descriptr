@@ -15,7 +15,7 @@ if (getRversion() >= "2.15.1") {
   globalVariables(c(
     ".", "breaks", "Levels", "varyable", "count",
     "cumulative", "frequency", "values", "s", "tp", "type", "xvar", "yvar",
-    "data", "varnames", "frequency", "varname", "bins", "n", "value", "y", "
-    count"
+    "data", "varnames", "frequency", "varname", "bins", "n", "value", "y", 
+    "count", "plot_data", "utility"
   ))
 }
