@@ -51,7 +51,7 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
   lower_n <- n_bins + 1
 
   freq_data <-
-    tibble::tibble(lower        = inta[-lower_n],
+    data.frame(lower        = inta[-lower_n],
                    upper        = inta[-1],
                    frequency    = result,
                    cumulative   = cum,
@@ -96,11 +96,7 @@ plot_ds_freq_numeric <- function(x, ...) {
     length()
 
   p <-
-    x %>%
-    use_series(utility) %>%
-    use_series(frequency) %>%
-    tibble::enframe(name = NULL) %>%
-    tibble::add_column(x = seq_len(x$utility$bins), .before = 1) %>%
+    data.frame(x = seq_len(x$utility$bins), value = x$utility$frequency) %>%
     ggplot() +
     geom_col(
       aes(x = x, y = value), width = 0.999,

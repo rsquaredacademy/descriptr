@@ -16,7 +16,6 @@ Imports:
     rlang,
     scales,
     stats,
-    tibble,
     tidyr,
     utils
 Suggests:

@@ -59,7 +59,7 @@ ds_summary <- function(data, variable) UseMethod("ds_summary")
 ds_summary.default <- function(data, variable) {
 
   check_df(data)
-  vary  <- rlang::enquo(variable)
+  vary     <- rlang::enquo(variable)
   var_name <- deparse(substitute(variable))
   check_numeric(data, !! vary, var_name)
 
