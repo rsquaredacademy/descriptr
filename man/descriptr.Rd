@@ -3,7 +3,23 @@
 \docType{package}
 \name{descriptr}
 \alias{descriptr}
+\alias{_PACKAGE}
+\alias{descriptr-package}
 \title{\code{descriptr} package}
 \description{
 Generate descriptive statistics and explore statistical distributions
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://descriptr.rsquaredacademy.com/}
+  \item \url{https://github.com/rsquaredacademy/descriptr}
+  \item Report bugs at \url{https://github.com/rsquaredacademy/descriptr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Aravind Hebbali \email{hebbali.aravind@gmail.com} (\href{https://orcid.org/0000-0001-9220-9669}{ORCID})
+
+}
+\keyword{internal}
