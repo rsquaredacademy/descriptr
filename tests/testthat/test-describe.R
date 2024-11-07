@@ -1,10 +1,8 @@
-context("describe")
-
 fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
 
 test_that("output from ds_tailobs match expected result", {
-  expect_equivalent(ds_tailobs(mtcars$mpg, 5, "low"), c(10.4, 10.4, 13.3, 14.3, 14.7))
-  expect_equivalent(ds_tailobs(mtcars$mpg, 5, "high"), c(33.9, 32.4, 30.4, 30.4, 27.3))
+  expect_equal(ds_tailobs(mtcars$mpg, 5, "low"), c(10.4, 10.4, 13.3, 14.3, 14.7), ignore_attr = TRUE)
+  expect_equal(ds_tailobs(mtcars$mpg, 5, "high"), c(33.9, 32.4, 30.4, 30.4, 27.3), ignore_attr = TRUE)
 })
 
 
@@ -24,9 +22,9 @@ test_that("ds_tailobs returns the appropriate error", {
 
 
 test_that("output from ds_rindex match expected result", {
-  expect_equivalent(ds_rindex(mtcars$mpg, c(13.3)), 24)
-  expect_equivalent(ds_rindex(mtcars$mpg, c(33.9)), 20)
-  expect_equivalent(ds_rindex(mtcars$mpg, c(13.3, 10.4)), c(24, 15, 16))
+  expect_equal(ds_rindex(mtcars$mpg, c(13.3)), 24, ignore_attr = TRUE)
+  expect_equal(ds_rindex(mtcars$mpg, c(33.9)), 20, ignore_attr = TRUE)
+  expect_equal(ds_rindex(mtcars$mpg, c(13.3, 10.4)), c(24, 15, 16), ignore_attr = TRUE)
   expect_null(ds_rindex(mtcars$mpg, c(34)))
 })
 

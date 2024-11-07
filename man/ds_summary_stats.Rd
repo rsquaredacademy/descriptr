@@ -7,7 +7,7 @@
 ds_summary_stats(data, ...)
 }
 \arguments{
-\item{data}{A \code{data.frame} or \code{tibble}.}
+\item{data}{An object of type \code{numeric} or \code{data.frame}.}
 
 \item{...}{Column(s) in \code{data}.}
 }
@@ -15,6 +15,9 @@ ds_summary_stats(data, ...)
 Range of descriptive statistics for continuous data.
 }
 \examples{
+# numeric data
+ds_summary_stats(mtcarz$mpg)
+
 # single variable
 ds_summary_stats(mtcarz, mpg)
 

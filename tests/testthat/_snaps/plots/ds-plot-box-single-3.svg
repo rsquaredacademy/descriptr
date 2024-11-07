@@ -30,8 +30,8 @@
 <circle cx='373.66' cy='46.53' r='1.95' style='stroke-width: 0.71; stroke: #333333; fill: #333333;' />
 <line x1='373.66' y1='270.81' x2='373.66' y2='76.83' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <line x1='373.66' y1='419.83' x2='373.66' y2='521.37' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polygon points='160.62,270.81 160.62,419.83 586.70,419.83 586.70,270.81 160.62,270.81 ' style='stroke-width: 1.07; stroke: #333333; fill: #FFFFFF;' />
-<line x1='160.62' y1='343.56' x2='586.70' y2='343.56' style='stroke-width: 2.13; stroke: #333333; stroke-linecap: butt;' />
+<polygon points='160.62,270.81 160.62,419.83 586.70,419.83 586.70,270.81 160.62,270.81 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<line x1='160.62' y1='343.56' x2='586.70' y2='343.56' style='stroke-width: 2.13; stroke: #333333; stroke-linecap: butt; stroke-linejoin: miter;' />
 <rect x='32.79' y='22.78' width='681.73' height='522.33' style='stroke-width: 1.07; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>

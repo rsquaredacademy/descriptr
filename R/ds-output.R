@@ -328,7 +328,7 @@ print_ftable <- function(x) {
   nc <- ncol(x$ftable)
   w1 <- max(nchar("Levels"), nchar(x$ftable$Levels), nchar("Missing"))
   w2 <- max(nchar("Frequency"), nchar(x$ftable$Frequency), nchar(x$utility$na_count))
-  w3 <- max(nchar("Cum Frequency"), nchar(x$ftable$`Cum Frequency`))
+  w3 <- max(nchar("Cum Frequency"), nchar(x$ftable$Cum.Frequency))
   w <- sum(w1, w2, w3, 26, 16)
   cat(format(paste("Variable:", x$utility$varname), width = w, justify = "centre"), "\n")
   cat(rep("-", w), sep = "")
@@ -343,9 +343,9 @@ print_ftable <- function(x) {
     cat("\n")
     cat(format(as.character(x$ftable$Levels[i]), width = w1, justify = "centre"), fs(),
       format(as.character(x$ftable$Frequency[i]), width = w2, justify = "centre"), fs(),
-      format(as.character(x$ftable$`Cum Frequency`[i]), width = w3, justify = "centre"), fs(),
+      format(as.character(x$ftable$Cum.Frequency[i]), width = w3, justify = "centre"), fs(),
       format(as.character(x$ftable$Percent[i]), width = 13, justify = "centre"), fs(),
-      format(as.character(x$ftable$`Cum Percent`[i]), width = 13, justify = "centre")
+      format(as.character(x$ftable$Cum.Percent[i]), width = 13, justify = "centre")
     )
     cat("\n")
     cat(rep("-", w), sep = "")
@@ -378,7 +378,7 @@ print_ftable2 <- function(x) {
   nc <- ncol(x$ftable)
   w1 <- max(nchar("Levels"), nchar(x$ftable$Levels), nchar("Missing"))
   w2 <- max(nchar("Frequency"), nchar(x$ftable$Frequency), nchar(x$na_count))
-  w3 <- max(nchar("Cum Frequency"), nchar(x$ftable$`Cum Frequency`))
+  w3 <- max(nchar("Cum Frequency"), nchar(x$ftable$Cum.Frequency))
   w <- sum(w1, w2, w3, 26, 16)
   cat(format(paste("Variable:", x$varname), width = w, justify = "centre"), "\n")
   cat(rep("-", w), sep = "")
@@ -393,9 +393,9 @@ print_ftable2 <- function(x) {
     cat("\n")
     cat(format(as.character(x$ftable$Levels[i]), width = w1, justify = "centre"), fs(),
         format(as.character(x$ftable$Frequency[i]), width = w2, justify = "centre"), fs(),
-        format(as.character(x$ftable$`Cum Frequency`[i]), width = w3, justify = "centre"), fs(),
+        format(as.character(x$ftable$Cum.Frequency[i]), width = w3, justify = "centre"), fs(),
         format(as.character(x$ftable$Percent[i]), width = 13, justify = "centre"), fs(),
-        format(as.character(x$ftable$`Cum Percent`[i]), width = 13, justify = "centre")
+        format(as.character(x$ftable$Cum.Percent[i]), width = 13, justify = "centre")
     )
     cat("\n")
     cat(rep("-", w), sep = "")

@@ -124,7 +124,8 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
       use_series(data) %>%
       dplyr::select(x = !! k, y = !! j) %>%
       table() %>%
-      tibble::as_tibble() %>%
+      as.data.frame() %>%
+      set_colnames(c("x", "y", "n")) %>%
       ggplot(aes(x = x, y = n, fill = y)) +
       geom_bar(stat = "identity", position = "fill") +
       scale_y_continuous(labels = scales::percent_format()) +

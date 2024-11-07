@@ -32,7 +32,7 @@ ds_freq_factor <- function(data, variable) {
   per         <- percent(result, data_len)
   cum_per     <- percent(cum, data_len)
 
-  ftable <- tibble::tibble(
+  ftable <- data.frame(
     Levels          = level_names,
     Frequency       = result,
     `Cum Frequency` = cum,

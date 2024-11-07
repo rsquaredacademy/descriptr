@@ -16,7 +16,6 @@ Imports:
     rlang,
     scales,
     stats,
-    tibble,
     tidyr,
     utils
 Suggests:
@@ -24,7 +23,7 @@ Suggests:
     gridExtra,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     vdiffr,
     xplorerr
 License: MIT + file LICENSE
@@ -33,4 +32,5 @@ BugReports: https://github.com/rsquaredacademy/descriptr/issues
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
+Config/testthat/edition: 3

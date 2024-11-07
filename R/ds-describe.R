@@ -123,7 +123,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
                                 sd        = stats::sd,
                                 coeff_var = ds_cvar,
                                 std_error = ds_std_error)) %>%
-      tibble::as_tibble()
+      as.data.frame()
 
   } else if (is.numeric(data)) {
 
@@ -211,7 +211,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
           skewness = ds_skewness,
           kurtosis = ds_kurtosis)
       ) %>%
-      tibble::as_tibble()
+      as.data.frame()
 
   } else if (is.numeric(data)) {
 
@@ -304,7 +304,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
              per_99 = ~ quantile(., 0.99),
              max    = max)
       ) %>%
-      tibble::as_tibble()
+      as.data.frame()
 
   } else if (is.numeric(data)) {
 
@@ -374,13 +374,16 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
       na.omit() %>%
       dplyr::pull(1)
 
-    tibble::tibble(type = c(rep("high", 5), rep("low", 5)),
+    result <- data.frame(type = c(rep("high", 5), rep("low", 5)),
                    value = c(ds_tailobs(na_data, 5, "high"),
-                             ds_tailobs(na_data, 5, "low")),
-                   index = ds_rindex(na_data, value))
+                             ds_tailobs(na_data, 5, "low")))
+    
+    result$index <- ds_rindex(na_data, result$value)
+    return(result)
 
   } else if (is.numeric(data)) {
 
+    data   <- na.omit(data)
     result <- data.frame(type  = c(rep("high", 5), rep("low", 5)),
                          value = c(round(ds_tailobs(data, 5, "high"), decimals),
                                    round(ds_tailobs(data, 5, "low"), decimals)))

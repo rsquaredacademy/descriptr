@@ -1,12 +1,18 @@
-context("test-summary-stats")
-
 ndata <- dplyr::select(mtcarz, mpg)
 
-test_that("output from ds_summary is as expected", {
+test_that("output from ds_summary is as expected when data is a data.frame", {
   
   actual <- round(ds_summary(mtcarz, mpg)$variance, 2)
-	expected <- 36.32
-	expect_equal(actual, expected)
+  expected <- 36.32
+  expect_equal(actual, expected)
+
+})
+
+test_that("output from ds_summary is as expected when data is numeric", {
+  
+  actual <- round(ds_summary(mtcarz$mpg)$variance, 2)
+  expected <- 36.32
+  expect_equal(actual, expected)
 
 })
 

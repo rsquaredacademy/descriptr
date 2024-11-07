@@ -129,7 +129,7 @@ plot.ds_group_summary <- function(x, print_plot = TRUE, ...) {
     x %>%
     use_series(plot_data) %>%
     ggplot() +
-    geom_boxplot(aes_string(x = x_lab, y = y_lab), fill = "blue") +
+    geom_boxplot(aes(x = .data[[x_lab]], y = .data[[y_lab]]), fill = "blue") +
     xlab(x_lab) + ylab(y_lab) +
     ggtitle(paste(y_lab, "by", x_lab))
 

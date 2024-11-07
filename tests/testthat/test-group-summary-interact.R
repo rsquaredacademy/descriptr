@@ -1,5 +1,3 @@
-context("test-group-summary-interact")
-
 test_that("output from ds_group_summary_interact is as expected", {
   actual <-
     ds_group_summary_interact(mtcarz, mpg, cyl, gear) %>%

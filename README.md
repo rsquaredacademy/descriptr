@@ -7,18 +7,10 @@
 
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
-[![cran
-checks](https://cranchecks.info/badges/summary/descriptr)](https://cran.r-project.org/web/checks/check_results_descriptr.html)
-![r-universe](https://rsquaredacademy.r-universe.dev/badges/descriptr)
-[![R build
-status](https://github.com/rsquaredacademy/descriptr/workflows/R-CMD-check/badge.svg)](https://github.com/rsquaredacademy/descriptr/actions)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![Coverage
-status](https://codecov.io/gh/rsquaredacademy/descriptr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/descriptr?branch=master)
-[![status](https://tinyverse.netlify.com/badge/descriptr)](https://CRAN.R-project.org/package=descriptr)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/descriptr)](https://cran.r-project.org/package=descriptr)  
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/descriptr)](https://cran.r-project.org/package=descriptr)
+[![R-CMD-check](https://github.com/rsquaredacademy/descriptr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rsquaredacademy/descriptr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/rsquaredacademy/descriptr/graph/badge.svg)](https://app.codecov.io/gh/rsquaredacademy/descriptr)
 <!-- badges: end -->
 
 ## Installation
@@ -37,11 +29,11 @@ install.packages("descriptr", repos = "https://rsquaredacademy.r-universe.dev")
 
 ## Articles
 
--   [Continuous
-    Data](https://descriptr.rsquaredacademy.com/articles/continuous-data.html)
--   [Categorical
-    Data](https://descriptr.rsquaredacademy.com/articles/categorical-data.html)
--   [Visualization](https://descriptr.rsquaredacademy.com/articles/visualization.html)
+- [Continuous
+  Data](https://descriptr.rsquaredacademy.com/articles/continuous-data.html)
+- [Categorical
+  Data](https://descriptr.rsquaredacademy.com/articles/categorical-data.html)
+- [Visualization](https://descriptr.rsquaredacademy.com/articles/visualization.html)
 
 ## Usage
 
@@ -224,25 +216,25 @@ ds_group_summary(mtcarz, cyl, mpg)
 
 ``` r
 ds_tidy_stats(mtcarz, mpg, disp, hp)
-#> # A tibble: 3 x 16
+#> # A tibble: 3 × 16
 #>   vars    min   max  mean t_mean median  mode range variance  stdev  skew
 #>   <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl> <dbl>    <dbl>  <dbl> <dbl>
 #> 1 disp   71.1 472   231.   228    196.  276.  401.   15361.  124.   0.420
 #> 2 hp     52   335   147.   144.   123   110   283     4701.   68.6  0.799
 #> 3 mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672
-#> # ... with 5 more variables: kurtosis <dbl>, coeff_var <dbl>, q1 <dbl>,
-#> #   q3 <dbl>, iqrange <dbl>
+#> # ℹ 5 more variables: kurtosis <dbl>, coeff_var <dbl>, q1 <dbl>, q3 <dbl>,
+#> #   iqrange <dbl>
 ```
 
 ## Features
 
--   Summary statistics
--   Two way tables
--   One way table
--   Group wise summary
--   Multiple variable statistics
--   Multiple one way tables
--   Multiple two way tables
+- Summary statistics
+- Two way tables
+- One way table
+- Group wise summary
+- Multiple variable statistics
+- Multiple one way tables
+- Multiple two way tables
 
 ## Getting Help
 
