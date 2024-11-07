@@ -23,7 +23,7 @@ Suggests:
     gridExtra,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     vdiffr,
     xplorerr
 License: MIT + file LICENSE
@@ -33,3 +33,4 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 7.2.3
+Config/testthat/edition: 3

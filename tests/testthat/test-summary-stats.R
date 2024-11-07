@@ -1,5 +1,3 @@
-context("test-summary-stats")
-
 ndata <- dplyr::select(mtcarz, mpg)
 
 test_that("output from ds_summary is as expected when data is a data.frame", {

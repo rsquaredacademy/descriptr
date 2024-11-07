@@ -1,5 +1,3 @@
-context("multistats")
-
 fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
 ndata <- dplyr::select(mtcarz, mpg, disp, hp, wt, qsec, drat)
 

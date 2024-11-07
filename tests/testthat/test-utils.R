@@ -1,5 +1,3 @@
-context("utils")
-
 test_that("output from formatc matches the expected result", {
   expect_equal(formatc(3, 11), "     3     ")
   expect_equal(formatc("hello", 7), " hello ")
@@ -69,14 +67,14 @@ test_that("output from formatter_freq matches the expected result", {
 test_that("output from row_pct matches the expected result", {
   m <- matrix(c(12, 23, 37, 21), nrow = 2)
   exptd <- matrix(c(0.245, 0.523, 0.755, 0.477), nrow = 2)
-  expect_equivalent(round(row_pct(m, c(49, 44)), 3), exptd)
+  expect_equal(round(row_pct(m, c(49, 44)), 3), exptd, ignore_attr = TRUE)
 })
 
 
 test_that("output from col_pct matches the expected result", {
   m <- matrix(c(12, 23, 37, 21), nrow = 2)
   exptd <- matrix(c(0.343, 0.657, 0.638, 0.362), nrow = 2)
-  expect_equivalent(round(col_pct(m, c(35, 58)), 3), exptd)
+  expect_equal(round(col_pct(m, c(35, 58)), 3), exptd, ignore_attr = TRUE)
 })
 
 
@@ -91,41 +89,41 @@ test_that("output from fround matches the expected result", {
 
 
 test_that("output form xmm matches the expected result", {
-  expect_equivalent(xmm(3, 2), c(-7, 13))
+  expect_equal(xmm(3, 2), c(-7, 13))
 })
 
 test_that("output from seql matches the expected result", {
-  expect_equivalent(seql(3, 2), c(-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13))
+  expect_equal(seql(3, 2), c(-7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13))
 })
 
 test_that("output form xmmp matches the expected result", {
-  expect_equivalent(xmmp(3, 2, 3.5), c(-5, 11))
-  expect_equivalent(xmmp(3, 2, 4.5), c(-6, 12))
+  expect_equal(xmmp(3, 2, 3.5), c(-5, 11))
+  expect_equal(xmmp(3, 2, 4.5), c(-6, 12))
 })
 
 test_that("output from seqlp matches the expected result", {
-  expect_equivalent(seqlp(3, 2, 2.5), c(-5, -3, -1, 1, 3, 5, 7, 9, 11))
-  expect_equivalent(seqlp(3, 2, 4.5), c(-6, -4, -2, 0, 2, 4, 6, 8, 10, 12))
+  expect_equal(seqlp(3, 2, 2.5), c(-5, -3, -1, 1, 3, 5, 7, 9, 11))
+  expect_equal(seqlp(3, 2, 4.5), c(-6, -4, -2, 0, 2, 4, 6, 8, 10, 12))
 })
 
 
 test_that("output form xmn matches the expected result", {
-  expect_equivalent(xmn(3, 2), c(-3, 9))
+  expect_equal(xmn(3, 2), c(-3, 9))
 })
 
 test_that("output from seqln matches the expected result", {
-  expect_equivalent(seqln(3, 2), c(-3, -1, 1, 3, 5, 7, 9))
+  expect_equal(seqln(3, 2), c(-3, -1, 1, 3, 5, 7, 9))
 })
 
 
 
 test_that("output from intervals matches expected result", {
-  expect_equivalent(intervals(0:10, 4), c(0.0, 2.5, 5.0, 7.5, 10.0))
+  expect_equal(intervals(0:10, 4), c(0.0, 2.5, 5.0, 7.5, 10.0))
 })
 
 
 test_that("output from freq matches the expected result", {
-  expect_equivalent(
+  expect_equal(
     freq(mtcars$mpg, 4, intervals(mtcars$mpg, 4)),
     c(10, 13, 5, 4)
   )
