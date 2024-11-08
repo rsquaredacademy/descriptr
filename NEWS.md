@@ -1,3 +1,20 @@
+# descriptr 0.6.0
+
+## New Features
+
+- `ds_summary_stats()` can handle both `data.frame` and numeric vector as input.
+
+## BUg Fixes
+
+- Incorrect column name generates missing output ([#123](https://github.com/rsquaredacademy/descriptr/issues/123))
+- Fix gglotp2 deprecated function warnings
+
+## Other Changes
+
+- Incorrect package alias ([#122](https://github.com/rsquaredacademy/descriptr/issues/122))
+- Migrate to testthat editioin 3 ([#124](https://github.com/rsquaredacademy/descriptr/issues/124))
+- Migrate to rhub v2 ([#125](https://github.com/rsquaredacademy/descriptr/issues/125))
+
 # descriptr 0.5.2
 
 This is a patch release to fix CRAN notification about vdiffr package 
@@ -104,7 +121,7 @@ New to descriptr are the following which generate summary statistics:
 
 ## Acknowledgements
 
-A big thanks to [@GegznaV](https://github.com/GegznaV) and [@adam_medcalf](https://twitter.com/adam_medcalf) who contributed code, opened issues and provided valuable feedback.
+A big thanks to [@GegznaV](https://github.com/GegznaV) and [@adam_medcalf](https://dabblingwithdata.amedcalf.com) who contributed code, opened issues and provided valuable feedback.
 
 
 # descriptr 0.4.0
