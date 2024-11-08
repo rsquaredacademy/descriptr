@@ -1,18 +1,20 @@
+# descriptr (development version)
+
 # descriptr 0.6.0
 
 ## New Features
 
 - `ds_summary_stats()` can handle both `data.frame` and numeric vector as input.
 
-## BUg Fixes
+## Bug Fixes
 
 - Incorrect column name generates missing output ([#123](https://github.com/rsquaredacademy/descriptr/issues/123))
-- Fix gglotp2 deprecated function warnings
+- Fix ggplot2 deprecated function warnings
 
 ## Other Changes
 
 - Incorrect package alias ([#122](https://github.com/rsquaredacademy/descriptr/issues/122))
-- Migrate to testthat editioin 3 ([#124](https://github.com/rsquaredacademy/descriptr/issues/124))
+- Migrate to testthat edition 3 ([#124](https://github.com/rsquaredacademy/descriptr/issues/124))
 - Migrate to rhub v2 ([#125](https://github.com/rsquaredacademy/descriptr/issues/125))
 
 # descriptr 0.5.2
