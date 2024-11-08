@@ -1,4 +1,6 @@
 url: https://descriptr.rsquaredacademy.com
+template:
+  bootstrap: 5
 
 authors:
   Aravind Hebbali:
@@ -6,12 +8,8 @@ authors:
 
 templates:
   params:
-    bootswatch: cosmo
-    ganalytics: UA-57270671-33
-    docsearch:
-      api_key:
-      index_name: descriptr
-
+    bootswatch: cerulean
+    
 navbar:
   title: "descriptr"
   type: inverse
@@ -32,31 +30,29 @@ navbar:
           href: reference/index.html
         - text: "News"
           href: news/index.html
-    - text: "Blog"
-      href: https://blog.rsquaredacademy.com
-    - text: "Online Courses"
-      href: https://rsquared-academy.thinkific.com/
   right:
     - icon: fa-github
       href: https://github.com/rsquaredacademy/descriptr
-    - icon: fa-twitter
-      href: https://twitter.com/rsquaredacademy/
-    - icon: fa-youtube
-      href: https://www.youtube.com/user/rsquaredin
-
+    
 
 home:
   links:
-  - text: Learn more
-    href: https://www.rsquaredacademy.com
-  - text: Read our blog
-    href: https://blog.rsquaredacademy.com
-  - text: Our other R packages
-    href: https://pkgs.rsquaredacademy.com
-
-
+    - text: Our R packages
+      href: https://pkgs.rsquaredacademy.com
+    - text: Read our blog
+      href: https://blog.rsquaredacademy.com
+    - text: Our ebooks
+      href: https://ebooks.rsquaredacademy.com
+    - text: Online courses
+      href: https://www.rsquaredacademy.com
 
 reference:
+- title: Shiny App
+  desc: >
+    Launches shiny app for interactive exploration of data sets.
+  contents:
+  - ds_launch_shiny_app
+      
 - title: Data Screening
   desc: >
     The `screener()` function will screen data frames and return details such
