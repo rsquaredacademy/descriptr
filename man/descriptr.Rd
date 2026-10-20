@@ -3,7 +3,6 @@
 \docType{package}
 \name{descriptr}
 \alias{descriptr}
-\alias{_PACKAGE}
 \alias{descriptr-package}
 \title{\code{descriptr} package}
 \description{
@@ -20,6 +19,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Aravind Hebbali \email{hebbali.aravind@gmail.com} (\href{https://orcid.org/0000-0001-9220-9669}{ORCID})
+
+Authors:
+\itemize{
+  \item Aravind Hebbali \email{hebbali.aravind@gmail.com} (\href{https://orcid.org/0000-0001-9220-9669}{ORCID})
+}
 
 }
 \keyword{internal}

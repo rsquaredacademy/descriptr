@@ -17,6 +17,10 @@ ds_group_summary_interact(data, col, ...)
 Descriptive statistics of a continuous variable for the combination of levels
 of two or more categorical variables.
 }
+\details{
+Character grouping columns are accepted and treated as factors.
+Factor levels may contain any character, including \code{.}.
+}
 \examples{
 ds_group_summary_interact(mtcarz, mpg, cyl, gear)
 
