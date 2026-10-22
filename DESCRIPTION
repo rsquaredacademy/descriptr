@@ -32,5 +32,5 @@ BugReports: https://github.com/rsquaredacademy/descriptr/issues
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
+RoxygenNote: 7.2.3
 Config/testthat/edition: 3
-Config/roxygen2/version: 8.1.0

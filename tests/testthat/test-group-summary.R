@@ -95,6 +95,24 @@ test_that("ds_group_summary drops unused levels of the grouping factor", {
 })
 
 
+test_that("ds_group_summary drops rows with a missing grouping label", {
+  g <- mtcarz
+  g$cyl[2] <- NA
+
+  k <- ds_group_summary(g, cyl, mpg)
+
+  expect_equal(nrow(k$tidy_stats), ncol(k$stats) - 1)
+  expect_false(anyNA(k$tidy_stats$cyl))
+  expect_equal(names(k$stats), c("Statistic/Levels", "4", "6", "8"))
+})
+
+test_that("ds_group_summary stats have default row names", {
+  k <- ds_group_summary(mtcarz, cyl, mpg)
+
+  # 17 rows now: Obs, Missing + 15 statistics
+  expect_equal(rownames(k$stats), as.character(seq_len(nrow(k$stats))))
+})
+
 test_that("ds_group_summary throws the appropriate error", {
   mt <- mtcars
   mt$cyl <- as.factor(mt$cyl)

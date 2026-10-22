@@ -103,6 +103,7 @@ ds_group_summary.default <- function(data, group_by, cols) {
 
   out              <- data.frame(rnames, splito, check.names = FALSE)
   names(out)       <- c("Statistic/Levels", names(split_dat))
+  row.names(out)   <- NULL
   plot_data        <- data.frame(gvar, cvar)
   names(plot_data) <- c(xname, yname)
 
@@ -114,6 +115,7 @@ ds_group_summary.default <- function(data, group_by, cols) {
   tidystats <-
     data %>%
     dplyr::select(!! g_var, !! c_var) %>%
+    dplyr::filter(!is.na(!! g_var)) %>%
     dplyr::group_by(!! g_var) %>%
     dplyr::summarise(length = sum(!is.na(!! c_var)),
               missing = sum(is.na(!! c_var)),
