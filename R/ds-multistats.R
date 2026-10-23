@@ -30,7 +30,7 @@ ds_tidy_stats <- function(data, ...) {
     if (!any(is_num == TRUE)) {
       stop("Data has no continuous variables.", call. = FALSE)
     }
-    data <- data[, is_num]
+    data <- data[is_num]
   } else {
     data %<>%
       dplyr::select(!!! vars)

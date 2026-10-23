@@ -27,3 +27,31 @@ test_that("ds_group_summary_interact throws the appropriate error", {
 - hp"
   )
 })
+
+test_that("ds_group_summary_interact keeps factor levels containing dots", {
+
+  g <- mtcarz
+  levels(g$cyl) <- c("a.b", "c", "d")
+
+  k <- ds_group_summary_interact(g, mpg, cyl)
+
+  expect_true("cyl" %in% names(k))
+  expect_setequal(k$cyl, levels(g$cyl))
+  expect_false(any(is.na(k$cyl)))
+
+  expect_equal(k$min, as.numeric(tapply(g$mpg, g$cyl, min))[match(k$cyl, levels(g$cyl))])
+})
+
+test_that("ds_group_summary_interact uses character grouping columns", {
+
+  g <- mtcarz
+  g$cyl <- as.character(g$cyl)
+
+  k <- ds_group_summary_interact(g, mpg, cyl)
+
+  expect_true("cyl" %in% names(k))
+  expect_setequal(k$cyl, unique(g$cyl))
+
+  group_min <- tapply(g$mpg, g$cyl, min)
+  expect_equal(k$min, as.numeric(group_min)[match(k$cyl, names(group_min))])
+})

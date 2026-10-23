@@ -81,8 +81,9 @@ ds_summary.default <- function(data, variable) {
       na.omit()
   }
 
-  low      <- ds_tailobs(sdata, 5, "low")
-  high     <- ds_tailobs(sdata, 5, "high")
+  k        <- min(5, length(sdata))
+  low      <- ds_tailobs(sdata, k, "low")
+  high     <- ds_tailobs(sdata, k, "high")
   low_val  <- ds_rindex(sdata, low)
   high_val <- ds_rindex(sdata, high)
 

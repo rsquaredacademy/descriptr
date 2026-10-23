@@ -38,6 +38,12 @@ Descriptive statistics of a continuous variable for the different levels of
 a categorical variable. \code{boxplot.group_summary()} creates boxplots of
 the continuous variable for the different levels of the categorical variable.
 }
+\details{
+Groups with missing values in the continuous variable are summarised
+using the non-missing observations (\code{na.rm = TRUE}), and the number of
+missing observations is reported in the \code{Missing} row of \code{stats}.
+Unused levels of the grouping factor are dropped.
+}
 \examples{
 # ds_group summary
 ds_group_summary(mtcarz, cyl, mpg)

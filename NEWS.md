@@ -1,5 +1,13 @@
 # descriptr (development version)
 
+## Bug Fixes
+
+- `ds_group_summary()` no longer errors when the continuous variable contains missing values; groups are summarised with `na.rm = TRUE` and the number of missing observations is reported.
+- `ds_group_summary()` no longer errors when the grouping factor has unused levels; unused levels are dropped.
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and `ds_tidy_stats()` now work on data frames with a single numeric column.
+- `ds_group_summary_interact()` no longer truncates factor levels containing `.`, and character grouping columns are now used instead of being silently dropped.
+- `ds_summary_stats()` and `ds_extreme_obs()` now work when a variable has fewer than five non-missing values.
+
 # descriptr 0.6.0
 
 ## New Features

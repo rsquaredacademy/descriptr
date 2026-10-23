@@ -49,7 +49,7 @@ print_stats <- function(data) {
     formatol("Obs", ol), format_gap(gap), formatol("Value", ol), formats(),
     formatol("Obs", ol), format_gap(gap), formatol("Value", ol), "\n"
   )
-  for (i in seq_len(5)) {
+  for (i in seq_along(data$lowobs)) {
     cat(
       "", formatol(data$lowobsi[i], ol), format_gap(gap), formatol(data$lowobs[i], ol), formats(),
       formatol(data$highobsi[i], ol), format_gap(gap), formatol(data$highobs[i], ol), "\n"

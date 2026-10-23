@@ -106,7 +106,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
       if (!any(is_num == TRUE)) {
         stop("Data has no continuous variables.", call. = FALSE)
       }
-      data <- data[, is_num]
+      data <- data[is_num]
     } else {
       data %<>%
         dplyr::select(!!! var)
@@ -195,7 +195,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
       if (!any(is_num == TRUE)) {
         stop("Data has no continuous variables.", call. = FALSE)
       }
-      data <- data[, is_num]
+      data <- data[is_num]
     } else {
       data %<>%
         dplyr::select(!!! var)
@@ -280,7 +280,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
       if (!any(is_num == TRUE)) {
         stop("Data has no continuous variables.", call. = FALSE)
       }
-      data <- data[, is_num]
+      data <- data[is_num]
     } else {
       data %<>%
         dplyr::select(!!! var)
@@ -374,9 +374,10 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
       na.omit() %>%
       dplyr::pull(1)
 
-    result <- data.frame(type = c(rep("high", 5), rep("low", 5)),
-                   value = c(ds_tailobs(na_data, 5, "high"),
-                             ds_tailobs(na_data, 5, "low")))
+    k      <- min(5, length(na_data))
+    result <- data.frame(type = c(rep("high", k), rep("low", k)),
+                   value = c(ds_tailobs(na_data, k, "high"),
+                             ds_tailobs(na_data, k, "low")))
     
     result$index <- ds_rindex(na_data, result$value)
     return(result)
@@ -384,9 +385,10 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
   } else if (is.numeric(data)) {
 
     data   <- na.omit(data)
-    result <- data.frame(type  = c(rep("high", 5), rep("low", 5)),
-                         value = c(round(ds_tailobs(data, 5, "high"), decimals),
-                                   round(ds_tailobs(data, 5, "low"), decimals)))
+    k      <- min(5, length(data))
+    result <- data.frame(type  = c(rep("high", k), rep("low", k)),
+                         value = c(round(ds_tailobs(data, k, "high"), decimals),
+                                   round(ds_tailobs(data, k, "low"), decimals)))
 
     result$index <- ds_rindex(data, result$value)
     return(result)

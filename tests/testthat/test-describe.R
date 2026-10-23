@@ -321,3 +321,63 @@ test_that("ds_extreme_obs throws appropriate errors", {
 
 })
 
+test_that("single numeric column data frames work", {
+
+  d <- data.frame(x = 1:10)
+  x <- d$x
+
+  v <- ds_measures_variation(d)
+  expect_equal(v$var, "x")
+  expect_equal(v$n, length(x))
+  expect_equal(v$range, max(x) - min(x))
+  expect_equal(v$iqr, IQR(x))
+  expect_equal(v$variance, var(x))
+  expect_equal(v$sd, sd(x))
+  expect_equal(v$coeff_var, sd(x) / mean(x) * 100)
+  expect_equal(v$std_error, sd(x) / sqrt(length(x)))
+
+  v1 <- ds_measures_variation(dplyr::select(mtcarz, mpg))
+  expect_equal(v1$var, "mpg")
+  expect_equal(v1$n, nrow(mtcarz))
+  expect_equal(v1$sd, sd(mtcarz$mpg))
+
+  s <- ds_measures_symmetry(d)
+  expect_equal(s$var, "x")
+  expect_equal(s$n, length(x))
+  n <- length(x)
+  expect_equal(s$skewness, ds_skewness(x))
+  expect_equal(s$kurtosis, ds_kurtosis(x))
+  expect_equal(
+    s$skewness,
+    round((n / ((n - 1) * (n - 2))) * sum(((x - mean(x)) / sd(x)) ^ 3), 2)
+  )
+
+  p <- ds_percentiles(d)
+  expect_equal(p$var, "x")
+  expect_equal(p$n, length(x))
+  expect_equal(
+    unname(unlist(p[c("min", "per_1", "per_5", "per_10", "q1", "median",
+                       "q3", "per_90", "per_95", "per_99", "max")])),
+    unname(quantile(x, c(0, 0.01, 0.05, 0.10, 0.25, 0.50, 0.75, 0.90, 0.95, 0.99, 1)))
+  )
+})
+
+test_that("ds_extreme_obs works with fewer than five non-missing values", {
+
+  x <- c(4, 1, 3, 2)
+  k <- ds_extreme_obs(x)
+
+  expect_equal(k$value[k$type == "high"], sort(x, decreasing = TRUE))
+  expect_equal(k$value[k$type == "low"], sort(x))
+
+  k_df <- ds_extreme_obs(data.frame(x = x), x)
+  expect_equal(k_df$value, k$value)
+
+  k_one <- ds_extreme_obs(5)
+  expect_equal(k_one$value, c(5, 5))
+
+  # missing values are removed before the count is taken
+  k_na <- ds_extreme_obs(c(1, 2, NA, 3))
+  expect_equal(k_na$value[k_na$type == "high"], c(3, 2, 1))
+})
+

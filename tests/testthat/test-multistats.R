@@ -23,3 +23,23 @@ test_that("output from multistats is as expected", {
   expect_equal(actual, expected)
 
 })
+
+test_that("ds_tidy_stats works with a single numeric column", {
+
+  x <- c(7, 2, 9, 4, 5)
+  k <- ds_tidy_stats(data.frame(x = x))
+
+  expect_equal(k$vars, "x")
+  expect_equal(k$min, min(x))
+  expect_equal(k$max, max(x))
+  expect_equal(k$mean, mean(x))
+  expect_equal(k$t_mean, mean(x, trim = 0.05))
+  expect_equal(k$median, median(x))
+  expect_equal(k$range, max(x) - min(x))
+  expect_equal(k$variance, var(x))
+  expect_equal(k$stdev, sd(x))
+  expect_equal(unname(k$q1), unname(quantile(x, 0.25)))
+  expect_equal(unname(k$q3), unname(quantile(x, 0.75)))
+  expect_equal(unname(k$iqrange), unname(IQR(x)))
+
+})
