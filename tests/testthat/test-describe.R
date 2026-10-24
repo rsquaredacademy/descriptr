@@ -447,6 +447,33 @@ test_that("measures isolate missing values in orthogonal columns (#132)", {
                               var(df_na$c, na.rm = TRUE)))
 })
 
+test_that("measures return NA for an all-missing numeric column (#132)", {
+
+  d <- data.frame(
+    a = c(1, 2, NA, 4),
+    b = c(NA_real_, NA_real_, NA_real_, NA_real_)
+  )
+
+  v <- ds_measures_variation(d)
+  expect_equal(nrow(v), 2)
+  expect_equal(v$n[v$var == "b"], 0)
+  expect_true(all(is.na(v[v$var == "b", -(1:2)])))
+
+  s <- ds_measures_symmetry(d)
+  expect_equal(nrow(s), 2)
+  expect_equal(s$n[s$var == "b"], 0)
+  expect_true(all(is.na(s[s$var == "b", -(1:2)])))
+
+  p <- ds_percentiles(d)
+  expect_equal(nrow(p), 2)
+  expect_equal(p$n[p$var == "b"], 0)
+  expect_true(all(is.na(p[p$var == "b", -(1:2)])))
+
+  t <- ds_tidy_stats(d)
+  expect_equal(nrow(t), 2)
+  expect_true(all(is.na(t[t$vars == "b", -1])))
+})
+
 test_that("extreme observations report original row indices (#133)", {
 
   d <- mtcarz

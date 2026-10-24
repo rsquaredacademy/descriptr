@@ -41,9 +41,9 @@ ds_tidy_stats <- function(data, ...) {
     dplyr::group_by(vars) %>%
     dplyr::summarise_all(
       list(
-        min       = ~ min(., na.rm = TRUE),
-        max       = ~ max(., na.rm = TRUE),
-        mean      = ~ mean(., na.rm = TRUE),
+        min       = ~ num_or_na(., min),
+        max       = ~ num_or_na(., max),
+        mean      = ~ num_or_na(., mean),
         t_mean    = ~ trimmed_mean(., na.rm = TRUE),
         median    = ~ median(., na.rm = TRUE),
         mode      = ds_mode,

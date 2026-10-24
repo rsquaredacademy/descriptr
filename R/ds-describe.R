@@ -289,7 +289,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
         list(n      = ~ sum(!is.na(.)),
-             min    = ~ min(., na.rm = TRUE),
+             min    = ~ num_or_na(., min),
              per_1  = ~ quantile(., 0.01, na.rm = TRUE),
              per_5  = ~ quantile(., 0.05, na.rm = TRUE),
              per_10 = ~ quantile(., 0.10, na.rm = TRUE),
@@ -299,7 +299,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
              per_90 = ~ quantile(., 0.90, na.rm = TRUE),
              per_95 = ~ quantile(., 0.95, na.rm = TRUE),
              per_99 = ~ quantile(., 0.99, na.rm = TRUE),
-             max    = ~ max(., na.rm = TRUE))
+             max    = ~ num_or_na(., max))
       ) %>%
       as.data.frame()
 
@@ -591,6 +591,10 @@ ds_mode <- function(data, x = NULL) {
 
   z <- na.omit(z)
 
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
+
   Freq <- NULL
 
   z %>%
@@ -637,6 +641,9 @@ ds_range <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   max(z) - min(z)
 
 }
@@ -674,6 +681,9 @@ ds_kurtosis <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   n <- length(z)
   summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
@@ -713,6 +723,9 @@ ds_skewness <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   n <- length(z)
   summation <- sums(z, 3)
   (n / ((n - 1) * (n - 2))) * summation
@@ -789,6 +802,10 @@ ds_cvar <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
 
   (sd(z) / mean(z)) * 100
 

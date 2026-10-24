@@ -76,6 +76,14 @@ sums <- function(x, q) {
   return(result)
 }
 
+num_or_na <- function(x, fun) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0L) {
+    return(NA_real_)
+  }
+  fun(x)
+}
+
 md_helper <- function(x, y) {
   abs(x - y)
 }
@@ -92,6 +100,9 @@ md_helper <- function(x, y) {
 #' @export
 #'
 ds_std_error <- function(x) {
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   sd(x) / (length(x) ^ 0.5)
 }
 
@@ -254,6 +265,9 @@ trimmed_mean <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
   }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   mean(x, trim = 0.05)
 }
 
@@ -261,12 +275,18 @@ quant1 <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
   }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   quantile(x, probs = 0.25)
 }
 
 quant3 <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
+  }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
   }
   quantile(x, probs = 0.75)
 }
