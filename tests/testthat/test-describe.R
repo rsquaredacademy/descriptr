@@ -381,3 +381,132 @@ test_that("ds_extreme_obs works with fewer than five non-missing values", {
   expect_equal(k_na$value[k_na$type == "high"], c(3, 2, 1))
 })
 
+test_that("measures handle missing values per column (#132)", {
+
+  d <- mtcarz
+  d$disp[3] <- NA
+
+  v <- ds_measures_variation(d)
+  expect_equal(v$n[v$var == "mpg"], nrow(mtcarz))
+  expect_equal(v$variance[v$var == "mpg"], var(mtcarz$mpg))
+  expect_equal(v$sd[v$var == "mpg"], sd(mtcarz$mpg))
+  expect_equal(v$iqr[v$var == "mpg"], IQR(mtcarz$mpg))
+  expect_equal(v$n[v$var == "disp"], nrow(mtcarz) - 1)
+  expect_equal(v$variance[v$var == "disp"], var(d$disp, na.rm = TRUE))
+  expect_equal(v$sd[v$var == "disp"], sd(d$disp, na.rm = TRUE))
+
+  s <- ds_measures_symmetry(d)
+  expect_equal(s$n[s$var == "mpg"], nrow(mtcarz))
+  expect_equal(s$skewness[s$var == "mpg"], ds_skewness(mtcarz$mpg))
+  expect_equal(s$kurtosis[s$var == "mpg"], ds_kurtosis(mtcarz$mpg))
+  expect_equal(s$n[s$var == "disp"], nrow(mtcarz) - 1)
+  expect_equal(s$skewness[s$var == "disp"], ds_skewness(d$disp))
+
+  p <- ds_percentiles(d)
+  expect_equal(p$n[p$var == "mpg"], nrow(mtcarz))
+  expect_equal(p$min[p$var == "mpg"], round(min(mtcarz$mpg), 2))
+  expect_equal(p$median[p$var == "mpg"], round(median(mtcarz$mpg), 2))
+  expect_equal(p$max[p$var == "mpg"], round(max(mtcarz$mpg), 2))
+  expect_equal(p$n[p$var == "disp"], nrow(mtcarz) - 1)
+
+  t <- ds_tidy_stats(d)
+  expect_equal(t$mean[t$vars == "mpg"], mean(mtcarz$mpg))
+  expect_equal(t$median[t$vars == "mpg"], median(mtcarz$mpg))
+  expect_equal(t$variance[t$vars == "mpg"], var(mtcarz$mpg))
+  expect_equal(t$stdev[t$vars == "mpg"], sd(mtcarz$mpg))
+  expect_equal(t$iqrange[t$vars == "mpg"], IQR(mtcarz$mpg))
+  expect_equal(t$mean[t$vars == "disp"], mean(d$disp, na.rm = TRUE))
+})
+
+test_that("measures isolate missing values in orthogonal columns (#132)", {
+
+  df_na <- data.frame(
+    a = c(10, 20, NA, 40, 50),
+    b = c(NA, 2, 3, 4, 5),
+    c = c(100, 200, 300, 400, NA)
+  )
+
+  v <- ds_measures_variation(df_na)
+  expect_equal(v$n, c(4L, 4L, 4L))
+  expect_equal(v$variance, c(var(df_na$a, na.rm = TRUE),
+                              var(df_na$b, na.rm = TRUE),
+                              var(df_na$c, na.rm = TRUE)))
+
+  s <- ds_measures_symmetry(df_na)
+  expect_equal(s$n, c(4L, 4L, 4L))
+
+  p <- ds_percentiles(df_na)
+  expect_equal(p$n, c(4L, 4L, 4L))
+
+  t <- ds_tidy_stats(df_na)
+  expect_equal(t$mean, c(mean(df_na$a, na.rm = TRUE),
+                         mean(df_na$b, na.rm = TRUE),
+                         mean(df_na$c, na.rm = TRUE)))
+  expect_equal(t$variance, c(var(df_na$a, na.rm = TRUE),
+                              var(df_na$b, na.rm = TRUE),
+                              var(df_na$c, na.rm = TRUE)))
+})
+
+test_that("extreme observations report original row indices (#133)", {
+
+  d <- mtcarz
+  d$mpg[1:2] <- NA
+
+  e <- ds_extreme_obs(d, mpg)
+  expect_equal(e$value[e$type == "high"][1], 33.9)
+  expect_equal(e$index[e$type == "high"][1], 20)
+  expect_equal(e$index[e$type == "high"], c(20, 18, 28, 19, 26))
+
+  # ties are reported on distinct rows
+  tied <- ds_extreme_obs(c(1, 1, 2, 2, 3, 3, 4, 4, 5, 5))
+  expect_equal(tied$index[tied$type == "high"], c(10, 9, 8, 7, 6))
+  expect_equal(tied$index[tied$type == "low"], c(1, 2, 3, 4, 5))
+  expect_equal(length(unique(tied$index)), 10)
+
+  # small samples use min(5, n) rows without recycling indices
+  small <- ds_extreme_obs(c(3, 1, 2))
+  expect_equal(small$value[small$type == "high"], c(3, 2, 1))
+  expect_equal(small$index[small$type == "high"], c(1, 3, 2))
+  expect_equal(small$value[small$type == "low"], c(1, 2, 3))
+  expect_equal(small$index[small$type == "low"], c(2, 3, 1))
+
+  # decimals applies to data.frame input as well
+  d2 <- data.frame(x = c(1.23456, 2.34567, 3.45678, 4.56789, 5.67891))
+  rounded <- ds_extreme_obs(d2, x, decimals = 3)
+  expect_equal(rounded$value,
+               round(c(sort(d2$x, decreasing = TRUE), sort(d2$x)), 3))
+})
+
+test_that("ds_rindex reports original positions and handles ties (#133)", {
+
+  x <- c(NA, NA, 3, 1, 2)
+  expect_equal(ds_rindex(x, 1), 4)
+  expect_equal(ds_rindex(x, c(1, 2)), c(4, 5))
+  expect_equal(ds_rindex(c(1, 1, 2), 1), c(1, 2))
+})
+
+test_that("geometric and harmonic means are numerically stable (#134)", {
+
+  expect_equal(ds_gmean(rep(1000, 500)), 1000)
+
+  large <- c(1e50, 2e50, 3e50, 4e50, 5e50)
+  expect_false(is.infinite(ds_gmean(large)))
+  expect_equal(ds_gmean(large), exp(mean(log(large))), tolerance = 1e-10)
+
+  expect_warning(g <- ds_gmean(c(-5, 10, 20)),
+                 "Geometric mean requires strictly positive")
+  expect_true(is.na(g))
+
+  expect_warning(g0 <- ds_gmean(c(0, 10, 20)),
+                 "Geometric mean requires strictly positive")
+  expect_true(is.na(g0))
+
+  expect_warning(h <- ds_hmean(c(-5, 10, 20)),
+                 "Harmonic mean requires strictly positive non-zero values")
+  expect_true(is.na(h))
+
+  expect_warning(h0 <- ds_hmean(c(0, 10, 20)),
+                 "Harmonic mean requires strictly positive non-zero values")
+  expect_true(is.na(h0))
+})
+

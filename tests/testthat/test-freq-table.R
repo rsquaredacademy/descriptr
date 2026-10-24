@@ -64,3 +64,50 @@ test_that("ds_freq_table throws appropriate error", {
   expect_error(ds_freq_table(data = mtcarz, col = mpg, bins = "5"), "bins must be integer value")
   expect_error(ds_freq_table(data = mt, col = gear), "gear is neither continuous nor categorical.")
 })
+
+test_that("continuous bins are half-open and never double-count (#131)", {
+
+  x <- seq(0, 10, 1)
+  k <- ds_freq_table(data.frame(x = x), x, bins = 5)
+
+  expect_equal(k$utility$frequency, c(2L, 2L, 2L, 2L, 3L))
+  expect_equal(sum(k$utility$frequency), length(x))
+  expect_equal(k$utility$cumulative, c(2L, 4L, 6L, 8L, 11L))
+  expect_equal(k$utility$cum_percent[length(k$utility$cum_percent)], 100)
+  expect_equal(
+    k$utility$frequency,
+    as.vector(table(cut(x, k$utility$breaks, include.lowest = TRUE, right = FALSE)))
+  )
+})
+
+test_that("boundary values belong to a single interval (#131)", {
+
+  x <- c(1, 2, 3, 4, 5)
+  k <- ds_freq_table(data.frame(x = x), x, bins = 4)
+
+  # cuts at 1, 2, 3, 4, 5: 2 belongs to [2, 3), not to [1, 2]
+  expect_equal(k$utility$frequency, c(1L, 1L, 1L, 2L))
+  expect_equal(k$ftable$frequency[k$ftable$lower == 2], 1L)
+  expect_equal(sum(k$utility$frequency), length(x))
+})
+
+test_that("closed argument controls interval boundaries (#131)", {
+
+  x <- seq(0, 10, 1)
+
+  right <- ds_freq_table(data.frame(x = x), x, bins = 5, closed = "right")
+  expect_equal(right$utility$frequency, c(3L, 2L, 2L, 2L, 2L))
+  expect_equal(sum(right$utility$frequency), length(x))
+
+  both <- ds_freq_table(data.frame(x = x), x, bins = 5, closed = "both")
+  expect_equal(both$utility$frequency, c(3L, 3L, 3L, 3L, 3L))
+  expect_equal(sum(both$utility$frequency), 15L)
+})
+
+test_that("zero variance data cannot be binned (#131)", {
+
+  expect_error(
+    ds_freq_table(data.frame(x = rep(5, 10)), x, bins = 5),
+    "Data has zero variance; cannot construct continuous bins."
+  )
+})

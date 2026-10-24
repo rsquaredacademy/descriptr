@@ -1,6 +1,8 @@
-ds_freq_numeric <- function(data, variable, bins = 5) {
+ds_freq_numeric <- function(data, variable, bins = 5,
+                            closed = c("left", "right", "both")) {
 
   check_df(data)
+  closed <- match.arg(closed)
   var_name <- deparse(substitute(variable))
   varyable <- rlang::enquo(variable)
   check_numeric(data, !! varyable, var_name)
@@ -9,6 +11,10 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
     data %>%
     dplyr::pull(!! varyable) %>%
     na.omit()
+
+  if (length(fdata) > 0 && max(fdata) == min(fdata)) {
+    stop("Data has zero variance; cannot construct continuous bins.", call. = FALSE)
+  }
 
   if (!is.numeric(bins)) {
     stop("bins must be integer value", call. = FALSE)
@@ -25,7 +31,7 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
 
   n_bins   <- bins
   inta     <- intervals(fdata, bins)
-  result   <- freq(fdata, bins, inta)
+  result   <- freq(fdata, bins, inta, closed)
   data_len <- length(fdata)
   cum      <- cumsum(result)
   per      <- percent(result, data_len)

@@ -81,11 +81,21 @@ ds_summary.default <- function(data, variable) {
       na.omit()
   }
 
-  k        <- min(5, length(sdata))
-  low      <- ds_tailobs(sdata, k, "low")
-  high     <- ds_tailobs(sdata, k, "high")
-  low_val  <- ds_rindex(sdata, low)
-  high_val <- ds_rindex(sdata, high)
+  pairs <- sort_pairs(odata)
+  n     <- length(pairs$value)
+  k     <- min(5, n)
+
+  if (n == 0) {
+    low <- high <- numeric(0)
+    low_val <- high_val <- integer(0)
+  } else {
+    low_k    <- seq_len(k)
+    high_k   <- rev(seq.int(n - k + 1L, n))
+    low      <- round(pairs$value[low_k], 2)
+    high     <- round(pairs$value[high_k], 2)
+    low_val  <- pairs$index[low_k]
+    high_val <- pairs$index[high_k]
+  }
 
   result <-
     list(obs      = length(odata),
