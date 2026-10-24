@@ -37,15 +37,27 @@ intervals <- function(data, bins, na.rm = TRUE) {
   return(interval)
 }
 
-freq <- function(data, bins, inta) {
-  result <- c()
+freq <- function(data, bins, inta, closed = c("left", "right", "both")) {
+  closed <- match.arg(closed)
+  result <- numeric(bins)
   for (i in seq_len(bins)) {
-    k <- i + 1
-    freq <- data >= inta[i] & data <= inta[k]
-    out <- length(data[freq])
-    result <- c(result, out)
+    lo <- inta[i]
+    hi <- inta[i + 1]
+    result[i] <- switch(
+      closed,
+      left  = if (i < bins) sum(data >= lo & data < hi, na.rm = TRUE) else sum(data >= lo & data <= hi, na.rm = TRUE),
+      right = if (i == 1) sum(data >= lo & data <= hi, na.rm = TRUE) else sum(data > lo & data <= hi, na.rm = TRUE),
+      both  = sum(data >= lo & data <= hi, na.rm = TRUE)
+    )
   }
-  return(result)
+  as.integer(result)
+}
+
+sort_pairs <- function(x) {
+  index <- seq_along(x)
+  keep  <- !is.na(x)
+  ord   <- order(x[keep], index[keep])
+  list(value = x[keep][ord], index = index[keep][ord])
 }
 
 div_by <- function(x) {
@@ -64,6 +76,14 @@ sums <- function(x, q) {
   return(result)
 }
 
+num_or_na <- function(x, fun) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0L) {
+    return(NA_real_)
+  }
+  fun(x)
+}
+
 md_helper <- function(x, y) {
   abs(x - y)
 }
@@ -80,6 +100,9 @@ md_helper <- function(x, y) {
 #' @export
 #'
 ds_std_error <- function(x) {
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   sd(x) / (length(x) ^ 0.5)
 }
 
@@ -242,6 +265,9 @@ trimmed_mean <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
   }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   mean(x, trim = 0.05)
 }
 
@@ -249,12 +275,18 @@ quant1 <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
   }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   quantile(x, probs = 0.25)
 }
 
 quant3 <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
+  }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
   }
   quantile(x, probs = 0.75)
 }

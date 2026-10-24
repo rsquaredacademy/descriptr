@@ -37,26 +37,25 @@ ds_tidy_stats <- function(data, ...) {
   }
 
   data %>%
-    na.omit() %>%
     tidyr::gather(vars, values) %>%
     dplyr::group_by(vars) %>%
     dplyr::summarise_all(
       list(
-        min       = min,
-        max       = max,
-        mean      = mean,
-        t_mean    = trimmed_mean,
-        median    = median,
+        min       = ~ num_or_na(., min),
+        max       = ~ num_or_na(., max),
+        mean      = ~ num_or_na(., mean),
+        t_mean    = ~ trimmed_mean(., na.rm = TRUE),
+        median    = ~ median(., na.rm = TRUE),
         mode      = ds_mode,
         range     = ds_range,
-        variance  = var,
-        stdev     = sd,
+        variance  = ~ var(., na.rm = TRUE),
+        stdev     = ~ sd(., na.rm = TRUE),
         skew      = ds_skewness,
         kurtosis  = ds_kurtosis,
         coeff_var = ds_cvar,
-        q1        = quant1,
-        q3        = quant3,
-        iqrange   = IQR
+        q1        = ~ quant1(., na.rm = TRUE),
+        q3        = ~ quant3(., na.rm = TRUE),
+        iqrange   = ~ IQR(., na.rm = TRUE)
       )
     )
 }

@@ -12,11 +12,16 @@ ds_rindex(data, values)
 \item{values}{a numeric vector containing the values whose index is returned}
 }
 \value{
-Index of the \code{values} in \code{data}. In case, \code{data} does
-not contain \code{index}, \code{NULL} is returned.
+Original positions of the \code{values} in \code{data}. Missing
+values are ignored, and all matching positions are returned. In case
+\code{data} does not contain a value, \code{NULL} is returned.
 }
 \description{
-Returns index of values.
+Returns the original positions of values in a vector.
+}
+\details{
+Positions refer to the vector passed in; missing values are not
+removed before the indices are computed.
 }
 \examples{
 # returns index of 21

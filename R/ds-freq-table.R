@@ -9,6 +9,11 @@
 #' @param col Column in \code{data}.
 #' @param x An object of class \code{ds_freq_table}.
 #' @param bins Number of intervals into which the data must be split.
+#' @param closed Interval closure for continuous data. \code{"left"} (the
+#' default) gives half-open intervals with the last interval closed;
+#' \code{"right"} gives right-closed intervals with the first interval closed;
+#' \code{"both"} reproduces the legacy behaviour in which boundary values are
+#' counted in both adjacent intervals.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
 #'
@@ -31,11 +36,13 @@
 #'
 #' @export
 #'
-ds_freq_table <- function(data, col, bins = 5) UseMethod("ds_freq_table")
+ds_freq_table <- function(data, col, bins = 5,
+                          closed = c("left", "right", "both")) UseMethod("ds_freq_table")
 
 #' @export
 #'
-ds_freq_table.default <- function(data, col, bins = 5) {
+ds_freq_table.default <- function(data, col, bins = 5,
+                                  closed = c("left", "right", "both")) {
 
 	varyable <- rlang::enquo(col)
 	data %<>%
@@ -44,7 +51,7 @@ ds_freq_table.default <- function(data, col, bins = 5) {
   is_factor <- sapply(data, is.factor)
 
   if (is_num) {
-  	result <- ds_freq_numeric(data, !! rlang::enquo(col), bins)
+  	result <- ds_freq_numeric(data, !! rlang::enquo(col), bins, closed)
   } else if (is_factor) {
   	result <- ds_freq_factor(data, !! rlang::enquo(col))
   } else {

@@ -46,3 +46,22 @@ test_that("ds_summary works with fewer than five non-missing values", {
   expect_equal(k_na$missing, 1)
   expect_equal(k_na$lowobs, c(1, 2, 3))
 })
+
+test_that("ds_summary reports original extreme observation indices (#133)", {
+
+  x <- c(NA, NA, 100, 2, 85, 4, 90, 6, 1, 95)
+  k <- ds_summary(x)
+
+  expect_equal(k$lowobs[1], 1)
+  expect_equal(k$lowobsi[1], 9)
+  expect_equal(k$highobs[1], 100)
+  expect_equal(k$highobsi[1], 3)
+  expect_equal(length(k$lowobs), 5)
+  expect_equal(length(k$lowobsi), 5)
+
+  small <- ds_summary(c(3, 1, 2))
+  expect_equal(small$lowobs, c(1, 2, 3))
+  expect_equal(small$lowobsi, c(2, 3, 1))
+  expect_equal(small$highobs, c(3, 2, 1))
+  expect_equal(small$highobsi, c(1, 3, 2))
+})

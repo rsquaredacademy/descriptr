@@ -6,7 +6,7 @@
 \alias{ds_freq_cont}
 \title{Frequency table}
 \usage{
-ds_freq_table(data, col, bins = 5)
+ds_freq_table(data, col, bins = 5, closed = c("left", "right", "both"))
 
 \method{plot}{ds_freq_table}(x, print_plot = TRUE, ...)
 }
@@ -16,6 +16,12 @@ ds_freq_table(data, col, bins = 5)
 \item{col}{Column in \code{data}.}
 
 \item{bins}{Number of intervals into which the data must be split.}
+
+\item{closed}{Interval closure for continuous data. \code{"left"} (the
+default) gives half-open intervals with the last interval closed;
+\code{"right"} gives right-closed intervals with the first interval closed;
+\code{"both"} reproduces the legacy behaviour in which boundary values are
+counted in both adjacent intervals.}
 
 \item{x}{An object of class \code{ds_freq_table}.}
 

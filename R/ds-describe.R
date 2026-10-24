@@ -113,16 +113,15 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
     }
 
     data %>%
-      na.omit() %>%
       tidyr::gather(var, values) %>%
       dplyr::group_by(var) %>%
-      dplyr::summarise_all(list(n         = length,
+      dplyr::summarise_all(list(n         = ~ sum(!is.na(.)),
                                 range     = ds_range,
-                                iqr       = stats::IQR,
-                                variance  = stats::var,
-                                sd        = stats::sd,
+                                iqr       = ~ stats::IQR(., na.rm = TRUE),
+                                variance  = ~ stats::var(., na.rm = TRUE),
+                                sd        = ~ stats::sd(., na.rm = TRUE),
                                 coeff_var = ds_cvar,
-                                std_error = ds_std_error)) %>%
+                                std_error = ~ ds_std_error(stats::na.omit(.)))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -202,12 +201,11 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
     }
 
     data %>%
-      na.omit() %>%
       tidyr::gather(var, values) %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
         list(
-          n        = length,
+          n        = ~ sum(!is.na(.)),
           skewness = ds_skewness,
           kurtosis = ds_kurtosis)
       ) %>%
@@ -287,22 +285,21 @@ ds_percentiles <- function(data, ..., decimals = 2) {
     }
 
     data %>%
-      na.omit() %>%
       tidyr::gather(var, values) %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
-        list(n      = length,
-             min    = min,
-             per_1  = ~ quantile(., 0.01),
-             per_5  = ~ quantile(., 0.05),
-             per_10 = ~ quantile(., 0.10),
-             q1     = ~ quantile(., 0.25),
-             median = median,
-             q3     = ~ quantile(., 0.75),
-             per_90 = ~ quantile(., 0.90),
-             per_95 = ~ quantile(., 0.95),
-             per_99 = ~ quantile(., 0.99),
-             max    = max)
+        list(n      = ~ sum(!is.na(.)),
+             min    = ~ num_or_na(., min),
+             per_1  = ~ quantile(., 0.01, na.rm = TRUE),
+             per_5  = ~ quantile(., 0.05, na.rm = TRUE),
+             per_10 = ~ quantile(., 0.10, na.rm = TRUE),
+             q1     = ~ quantile(., 0.25, na.rm = TRUE),
+             median = ~ median(., na.rm = TRUE),
+             q3     = ~ quantile(., 0.75, na.rm = TRUE),
+             per_90 = ~ quantile(., 0.90, na.rm = TRUE),
+             per_95 = ~ quantile(., 0.95, na.rm = TRUE),
+             per_99 = ~ quantile(., 0.99, na.rm = TRUE),
+             max    = ~ num_or_na(., max))
       ) %>%
       as.data.frame()
 
@@ -342,7 +339,12 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 
 #' Extreme observations
 #'
-#' Returns the most extreme observations.
+#' Returns the most extreme observations and their original row indices.
+#'
+#' Missing values are removed before the \code{k = min(5, n)} lowest and
+#' highest observations are selected. The row indices refer to the data passed
+#' in, and ties are reported on distinct rows. \code{decimals} applies to both
+#' vector and \code{data.frame} input.
 #'
 #' @param data A numeric vector or \code{data.frame} or \code{tibble}.
 #' @param col Column in \code{data}.
@@ -367,37 +369,37 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
     var <- rlang::enquo(col)
     var_name <- deparse(substitute(col))
     check_numeric(data, !! var, var_name)
-
-    na_data <-
-      data %>%
-      dplyr::select(!! var) %>%
-      na.omit() %>%
-      dplyr::pull(1)
-
-    k      <- min(5, length(na_data))
-    result <- data.frame(type = c(rep("high", k), rep("low", k)),
-                   value = c(ds_tailobs(na_data, k, "high"),
-                             ds_tailobs(na_data, k, "low")))
-    
-    result$index <- ds_rindex(na_data, result$value)
-    return(result)
+    x <- dplyr::pull(data, !! var)
 
   } else if (is.numeric(data)) {
 
-    data   <- na.omit(data)
-    k      <- min(5, length(data))
-    result <- data.frame(type  = c(rep("high", k), rep("low", k)),
-                         value = c(round(ds_tailobs(data, k, "high"), decimals),
-                                   round(ds_tailobs(data, k, "low"), decimals)))
-
-    result$index <- ds_rindex(data, result$value)
-    return(result)
+    x <- data
 
   } else {
 
     stop("data must be either a numeric vector or a `data.frame`.")
 
   }
+
+  pairs <- sort_pairs(x)
+  n     <- length(pairs$value)
+
+  if (n == 0) {
+    return(data.frame(type = character(0),
+                      value = numeric(0),
+                      index = integer(0)))
+  }
+
+  k       <- min(5, n)
+  low_k   <- seq_len(k)
+  high_k  <- rev(seq.int(n - k + 1L, n))
+  result  <- data.frame(type  = c(rep("high", k), rep("low", k)),
+                        value = round(c(pairs$value[high_k],
+                                        pairs$value[low_k]), decimals),
+                        index = c(pairs$index[high_k],
+                                  pairs$index[low_k]))
+
+  return(result)
 
 }
 
@@ -464,6 +466,10 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @description Computes the geometric mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped before computation. The mean is
+#' computed on the log scale, so large values or long vectors do not overflow.
+#' If any value is less than or equal to zero, a warning is issued and
+#' \code{NA} is returned.
 #' @examples
 #' # vector
 #' ds_gmean(mtcars$mpg)
@@ -491,7 +497,16 @@ ds_gmean <- function(data, x = NULL) {
 
   z <- na.omit(z)
 
-  prod(z) ^ (1 / length(z))
+  if (length(z) == 0) {
+    return(NA_real_)
+  }
+
+  if (min(z) <= 0) {
+    warning("Geometric mean requires strictly positive", call. = FALSE)
+    return(NA_real_)
+  }
+
+  exp(mean(log(z)))
 
 }
 
@@ -499,6 +514,9 @@ ds_gmean <- function(data, x = NULL) {
 #' @description Computes the harmonic mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped before computation. If any value
+#' is less than or equal to zero, a warning is issued and \code{NA} is
+#' returned.
 #' @examples
 #' # vector
 #' ds_hmean(mtcars$mpg)
@@ -526,7 +544,16 @@ ds_hmean <- function(data, x = NULL) {
 
   z <- na.omit(z)
 
-  length(z) / sum(sapply(z, div_by))
+  if (length(z) == 0) {
+    return(NA_real_)
+  }
+
+  if (min(z) <= 0) {
+    warning("Harmonic mean requires strictly positive non-zero values", call. = FALSE)
+    return(NA_real_)
+  }
+
+  length(z) / sum(1 / z)
 
 }
 
@@ -563,6 +590,10 @@ ds_mode <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
 
   Freq <- NULL
 
@@ -610,6 +641,9 @@ ds_range <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   max(z) - min(z)
 
 }
@@ -647,6 +681,9 @@ ds_kurtosis <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   n <- length(z)
   summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
@@ -686,6 +723,9 @@ ds_skewness <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   n <- length(z)
   summation <- sums(z, 3)
   (n / ((n - 1) * (n - 2))) * summation
@@ -763,6 +803,10 @@ ds_cvar <- function(data, x = NULL) {
 
   z <- na.omit(z)
 
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
+
   (sd(z) / mean(z)) * 100
 
 }
@@ -802,11 +846,14 @@ ds_css <- function(data, x = NULL) {
 }
 
 #' @title Index Values
-#' @description Returns index of values.
+#' @description Returns the original positions of values in a vector.
 #' @param data a numeric vector
 #' @param values a numeric vector containing the values whose index is returned
-#' @return Index of the \code{values} in \code{data}. In case, \code{data} does
-#' not contain \code{index}, \code{NULL} is returned.
+#' @return Original positions of the \code{values} in \code{data}. Missing
+#' values are ignored, and all matching positions are returned. In case
+#' \code{data} does not contain a value, \code{NULL} is returned.
+#' @details Positions refer to the vector passed in; missing values are not
+#' removed before the indices are computed.
 #' @examples
 #' # returns index of 21
 #' ds_rindex(mtcars$mpg, 21)
@@ -826,13 +873,11 @@ ds_rindex <- function(data, values) {
     stop("Values must be numeric.", call. = FALSE)
   }
 
-  data   <- na.omit(data)
   values <- na.omit(values)
-  out    <- c()
+  out    <- unlist(lapply(values, function(value) which(data == value)))
 
-  for (i in seq_along(values)) {
-    k   <- return_pos(data, values[i])
-    out <- c(out, k)
+  if (length(out) == 0) {
+    return(NULL)
   }
 
   unique(out)

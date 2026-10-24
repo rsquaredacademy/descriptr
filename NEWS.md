@@ -7,6 +7,10 @@
 - `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and `ds_tidy_stats()` now work on data frames with a single numeric column.
 - `ds_group_summary_interact()` no longer truncates factor levels containing `.`, and character grouping columns are now used instead of being silently dropped.
 - `ds_summary_stats()` and `ds_extreme_obs()` now work when a variable has fewer than five non-missing values.
+- `ds_freq_table()` no longer double-counts values that fall on a bin boundary: intervals are half-open with the last interval closed, so frequencies sum to the number of observations and the final cumulative percent is 100. It also gains a `closed` argument (`"left"` default, `"right"`, or `"both"` for the legacy double-counting behaviour) ([#131](https://github.com/rsquaredacademy/descriptr/issues/131)).
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and `ds_tidy_stats()` handle missing values per column instead of deleting rows listwise, so missing values in one variable no longer change results for another. A column with no non-missing values returns `NA` for every summary metric instead of `-Inf`/`Inf` or an error ([#132](https://github.com/rsquaredacademy/descriptr/issues/132)).
+- `ds_extreme_obs()` and `ds_rindex()` report the original row indices of the data supplied, report ties on distinct rows, and `ds_extreme_obs()` now applies `decimals` to data-frame input ([#133](https://github.com/rsquaredacademy/descriptr/issues/133)).
+- `ds_gmean()` computes on the log scale, avoiding overflow for large values and long vectors, and `ds_gmean()`/`ds_hmean()` return `NA` with a warning for non-positive values ([#134](https://github.com/rsquaredacademy/descriptr/issues/134)).
 
 # descriptr 0.6.0
 

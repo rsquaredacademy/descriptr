@@ -14,7 +14,13 @@ ds_extreme_obs(data, col, decimals = 2)
 \item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }
 \description{
-Returns the most extreme observations.
+Returns the most extreme observations and their original row indices.
+}
+\details{
+Missing values are removed before the \code{k = min(5, n)} lowest and
+highest observations are selected. The row indices refer to the data passed
+in, and ties are reported on distinct rows. \code{decimals} applies to both
+vector and \code{data.frame} input.
 }
 \examples{
 # data.frame
