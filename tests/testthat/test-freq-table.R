@@ -62,7 +62,9 @@ test_that("ds_freq_table throws appropriate error", {
   mt$gear <- as.character(mt$gear)
 
   expect_error(ds_freq_table(data = mtcarz, col = mpg, bins = "5"), "bins must be a positive whole number.")
-  expect_error(ds_freq_table(data = mt, col = gear), "gear is neither continuous nor categorical.")
+
+  # character columns are treated as categorical
+  expect_equal(ds_freq_table(data = mt, col = gear)$ftable$Levels, c("3", "4", "5"))
 })
 
 test_that("continuous bins are half-open and never double-count (#131)", {
@@ -134,4 +136,18 @@ test_that("bins must be a positive whole number", {
 
   k <- ds_freq_table(mtcarz, mpg, bins = 3)
   expect_equal(k$utility$bins, 3)
+})
+
+test_that("ds_freq_table treats character columns as categorical", {
+
+  char_data <- data.frame(x = c("b", "a", "b", "c", NA))
+  fact_data <- data.frame(x = factor(char_data$x))
+
+  k_char <- ds_freq_table(char_data, x)
+  k_fact <- ds_freq_table(fact_data, x)
+
+  expect_equal(k_char$ftable, k_fact$ftable)
+  expect_equal(k_char$utility$varname, "x")
+  expect_equal(k_char$utility$na_count, 1)
+  expect_equal(levels(k_char$utility$data$x), c("a", "b", "c"))
 })

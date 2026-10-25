@@ -30,6 +30,19 @@ as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars
 
 \item{...}{Further arguments to be passed to or from methods.}
 }
+\value{
+\code{ds_cross_table()} returns an object of class
+\code{"ds_cross_table"} containing the contingency table and the utility
+information used to print it. The cell percentages are stored as
+\strong{proportions} (values between 0 and 1) in \code{percent_table},
+\code{row_percent}, \code{column_percent} and \code{percent_column}. The
+printed cells show percentages computed from the counts and can differ from
+the rounded proportions stored in the object in the last decimal place. The
+number of rows dropped because either variable is
+missing is stored in \code{utility$missing}. \code{ds_twoway_table()}
+returns a tibble whose \code{percent}, \code{row_percent} and
+\code{col_percent} columns are also proportions.
+}
 \description{
 Creates two way tables of categorical variables. The tables created can be
 visualized as bar plots and mosaic plots.

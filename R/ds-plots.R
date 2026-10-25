@@ -25,22 +25,17 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
   is_num <- sapply(data, is.numeric)
 
   if (length(var) < 1) {
-    if (!any(is_num == TRUE)) {
-      stop("Data has no continuous variables.", call. = FALSE)
-    }
     plot_data <- data[is_num]
   } else {
     data %<>%
       dplyr::select(!!! var)
     is_num <- sapply(data, is.numeric)
-    if (!any(is_num == TRUE)) {
-      stop("Data has no continuous variables.", call. = FALSE)
-    }
-    if (length(is_num) < 2) {
-      stop("Scatter plot requires 2 continuous variables.", call. = FALSE)
-    } else {
-      plot_data <- data[is_num]
-    }
+    plot_data <- data[is_num]
+  }
+
+  n_num <- ncol(plot_data)
+  if (n_num < 2) {
+    stop(paste0("ds_plot_scatter() needs at least 2 continuous variables; found ", n_num, "."), call. = FALSE)
   }
 
   num_var   <- names(plot_data)
@@ -224,6 +219,7 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -353,26 +349,22 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
   if (length(var) < 1) {
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
     plot_data <- data[is_factor]
   } else {
     data %<>%
       dplyr::select(!!! var)
     is_factor <- sapply(data, is.factor)
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
-    if (length(is_factor) < 2) {
-      stop("Stacked bar plot requires 2 categorical variables.", call. = FALSE)
-    } else {
-      plot_data <- data[is_factor]
-    }
+    plot_data <- data[is_factor]
+  }
+
+  n_cat <- ncol(plot_data)
+  if (n_cat < 2) {
+    stop(paste0("ds_plot_bar_stacked() needs at least 2 categorical variables; found ", n_cat, "."), call. = FALSE)
   }
 
   factor_var    <- names(plot_data)
@@ -423,26 +415,22 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
   if (length(var) < 1) {
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
     plot_data <- data[is_factor]
   } else {
     data %<>%
       dplyr::select(!!! var)
     is_factor <- sapply(data, is.factor)
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
-    if (length(is_factor) < 2) {
-      stop("Grouped bar plot requires 2 categorical variables.", call. = FALSE)
-    } else {
-      plot_data <- data[is_factor]
-    }
+    plot_data <- data[is_factor]
+  }
+
+  n_cat <- ncol(plot_data)
+  if (n_cat < 2) {
+    stop(paste0("ds_plot_bar_grouped() needs at least 2 categorical variables; found ", n_cat, "."), call. = FALSE)
   }
 
 
@@ -496,6 +484,7 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 ds_plot_box_group <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
 
   is_num    <- sapply(data, is.numeric)

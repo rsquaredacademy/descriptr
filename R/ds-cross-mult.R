@@ -8,7 +8,8 @@ cross_table2.default <- function(var1, var2, name_1, name_2) {
   var_names   <- c(name_1, name_2)
   x           <- as.matrix(table(var1, var2))
   n           <- sum(x)
-  row_name    <- levels(var1)
+  missing     <- sum(is.na(var1) | is.na(var2))
+  row_name    <- get_names(var1)
   per_mat     <- round(x / n, 3)
   per_mat_row <- apply(per_mat, 1, sum)
   per_mat_col <- apply(per_mat, 2, sum)
@@ -28,6 +29,7 @@ cross_table2.default <- function(var1, var2, name_1, name_2) {
   last_line   <- c("Column Total", coltotal, n)
 
   result <- list(obs             = n,
+                 missing         = missing,
                  variable_levels = col_name,
                  row_name        = row_name,
                  variable_names  = var_names,

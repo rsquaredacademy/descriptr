@@ -38,7 +38,8 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
     if (length(var) < 1) {
       data <- ds_num_cols(data)
     } else {
-      data <- ds_num_cols(data[var])
+      check_numeric_cols(data, var)
+      data <- data[var]
     }
 
     ds_loc_prep(data, trim = trim, decimals = decimals)
@@ -110,6 +111,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
@@ -199,6 +201,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
@@ -284,6 +287,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
@@ -565,7 +569,8 @@ ds_hmean <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
+#' takes place. If several values are tied for the highest frequency, the
+#' smallest of them is returned.
 #' @return Mode of \code{x}
 #' @examples
 #' # vector
@@ -657,6 +662,13 @@ ds_range <- function(data, x = NULL) {
 #' @description Compute the kurtosis of a probability distribution.
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped from \code{x} before computation
+#' takes place. With \eqn{n} non-missing observations, sample standard
+#' deviation \eqn{s}, \eqn{m_k = \sum ((x_i - \bar{x}) / s)^k} and
+#' \deqn{G_2 = \frac{n (n + 1)}{(n - 1)(n - 2)(n - 3)} m_4 -
+#' \frac{3 (n - 1)^2}{(n - 2)(n - 3)},}
+#' this is the excess kurtosis. It matches
+#' \code{e1071::kurtosis(x, type = 2)} and the SAS/SPSS definition.
 #' @examples
 #' # vector
 #' ds_kurtosis(mtcars$mpg)
@@ -699,6 +711,13 @@ ds_kurtosis <- function(data, x = NULL) {
 #' @description Compute the skewness of a probability distribution.
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped from \code{x} before computation
+#' takes place. For \eqn{n} non-missing observations, sample standard
+#' deviation \eqn{s} and \eqn{m_k = \sum ((x_i - \bar{x}) / s)^k}, the
+#' skewness is
+#' \deqn{G_1 = \frac{n}{(n - 1)(n - 2)} m_3.}
+#' This is the adjusted Fisher-Pearson standardized moment coefficient; it
+#' matches \code{e1071::skewness(x, type = 2)} and the SAS/SPSS definition.
 #' @examples
 #' # vector
 #' ds_skewness(mtcars$mpg)

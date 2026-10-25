@@ -7,6 +7,30 @@ formatter <- function(x) {
   return(format(as.character(x), width = 13, justify = "right"))
 }
 
+formatter_pct <- function(x) {
+  return(format(round(x * 100, 2), nsmall = 2, width = 13, justify = "right"))
+}
+
+# Percentages displayed by the cross table print methods. They are computed
+# from the integer counts rather than from the stored (rounded) proportions so
+# that the printed values keep two decimal places of a percentage.
+cross_print_pct <- function(twowaytable, obs, column_totals) {
+
+  tab       <- as.matrix(twowaytable)
+  rows      <- nrow(tab)
+  cols      <- ncol(tab) - 2
+  counts    <- matrix(as.numeric(tab[, seq_len(cols) + 1]), nrow = rows, ncol = cols)
+  row_total <- as.numeric(tab[, cols + 2])
+  col_total <- as.numeric(column_totals[seq_len(cols)])
+
+  list(
+    percent        = counts / obs,
+    row_percent    = cbind(counts / row_total, row_total / obs),
+    column_percent = sweep(counts, 2, col_total, "/"),
+    percent_column = col_total / obs
+  )
+}
+
 percent <- function(x, y) {
   out <- round((x / y) * 100, 2)
   return(out)
@@ -349,6 +373,20 @@ check_factor <- function(data, var, var_name) {
   }
 }
 
+check_numeric_cols <- function(data, vars) {
+
+  for (nm in vars) {
+    check_numeric(data, !! rlang::sym(nm), nm)
+  }
+
+}
+
+as_categorical <- function(data) {
+
+  dplyr::mutate(data, dplyr::across(dplyr::where(is.character), factor))
+
+}
+
 check_bins <- function(bins) {
 
   if (!is.numeric(bins) || length(bins) != 1L || is.na(bins) ||
@@ -390,7 +428,7 @@ ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
                         median    = round(sapply(data, median, na.rm = TRUE), decimals),
                         mode      = round(sapply(data, ds_mode), decimals))
 
-  result <- measure[order(measure$variable), ]
+  result <- measure
   rownames(result) <- NULL
   return(result)
 }

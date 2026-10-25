@@ -14,6 +14,15 @@ ds_kurtosis(data, x = NULL)
 \description{
 Compute the kurtosis of a probability distribution.
 }
+\details{
+Any \code{NA} values are stripped from \code{x} before computation
+takes place. With \eqn{n} non-missing observations, sample standard
+deviation \eqn{s}, \eqn{m_k = \sum ((x_i - \bar{x}) / s)^k} and
+\deqn{G_2 = \frac{n (n + 1)}{(n - 1)(n - 2)(n - 3)} m_4 -
+\frac{3 (n - 1)^2}{(n - 2)(n - 3)},}
+this is the excess kurtosis. It matches
+\code{e1071::kurtosis(x, type = 2)} and the SAS/SPSS definition.
+}
 \examples{
 # vector
 ds_kurtosis(mtcars$mpg)

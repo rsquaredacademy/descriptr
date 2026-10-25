@@ -73,6 +73,7 @@ ds_auto_summary_stats <- function(data, ...) {
 ds_auto_group_summary <- function(data, ...) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
 
   is_num    <- sapply(data, is.numeric)

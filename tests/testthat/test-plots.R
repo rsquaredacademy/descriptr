@@ -101,9 +101,11 @@ ndata <- dplyr::select(mtcarz, mpg, disp, hp, wt, qsec, drat)
 fdata <- dplyr::select(mtcarz, cyl, gear, am, vs)
 
 test_that("ds_plot_scatter throws errors as expected", {
-  expect_error(ds_plot_scatter(fdata), 'Data has no continuous variables.')
-  expect_error(ds_plot_scatter(fdata, cyl, gear), 'Data has no continuous variables.')
-  expect_error(ds_plot_scatter(ndata, mpg), 'Scatter plot requires 2 continuous variables.')
+  expect_error(ds_plot_scatter(fdata), 'ds_plot_scatter() needs at least 2 continuous variables; found 0.', fixed = TRUE)
+  expect_error(ds_plot_scatter(fdata, cyl, gear), 'ds_plot_scatter() needs at least 2 continuous variables; found 0.', fixed = TRUE)
+  expect_error(ds_plot_scatter(ndata, mpg), 'ds_plot_scatter() needs at least 2 continuous variables; found 1.', fixed = TRUE)
+  expect_error(ds_plot_scatter(data.frame(x = 1:10), print_plot = FALSE),
+    'ds_plot_scatter() needs at least 2 continuous variables; found 1.', fixed = TRUE)
 })
 
 test_that("ds_plot_histogram throws errors as expected", {
@@ -127,15 +129,19 @@ test_that("ds_plot_box_single throws errors as expected", {
 })
 
 test_that("ds_plot_bar_stacked throws errors as expected", {
-  expect_error(ds_plot_bar_stacked(ndata), 'Data has no categorical variables.')
-  expect_error(ds_plot_bar_stacked(mtcarz, mpg, disp), 'Data has no categorical variables.')
-  expect_error(ds_plot_bar_stacked(mtcarz, cyl), 'Stacked bar plot requires 2 categorical variables.')
+  expect_error(ds_plot_bar_stacked(ndata), 'ds_plot_bar_stacked() needs at least 2 categorical variables; found 0.', fixed = TRUE)
+  expect_error(ds_plot_bar_stacked(mtcarz, mpg, disp), 'ds_plot_bar_stacked() needs at least 2 categorical variables; found 0.', fixed = TRUE)
+  expect_error(ds_plot_bar_stacked(mtcarz, cyl), 'ds_plot_bar_stacked() needs at least 2 categorical variables; found 1.', fixed = TRUE)
+  expect_error(ds_plot_bar_stacked(data.frame(a = factor("x")), print_plot = FALSE),
+    'ds_plot_bar_stacked() needs at least 2 categorical variables; found 1.', fixed = TRUE)
 })
 
 test_that("ds_plot_bar_grouped throws errors as expected", {
-  expect_error(ds_plot_bar_grouped(ndata), 'Data has no categorical variables.')
-  expect_error(ds_plot_bar_grouped(mtcarz, mpg, disp), 'Data has no categorical variables.')
-  expect_error(ds_plot_bar_grouped(mtcarz, cyl), 'Grouped bar plot requires 2 categorical variables.')
+  expect_error(ds_plot_bar_grouped(ndata), 'ds_plot_bar_grouped() needs at least 2 categorical variables; found 0.', fixed = TRUE)
+  expect_error(ds_plot_bar_grouped(mtcarz, mpg, disp), 'ds_plot_bar_grouped() needs at least 2 categorical variables; found 0.', fixed = TRUE)
+  expect_error(ds_plot_bar_grouped(mtcarz, cyl), 'ds_plot_bar_grouped() needs at least 2 categorical variables; found 1.', fixed = TRUE)
+  expect_error(ds_plot_bar_grouped(data.frame(a = factor("x")), print_plot = FALSE),
+    'ds_plot_bar_grouped() needs at least 2 categorical variables; found 1.', fixed = TRUE)
 })
 
 test_that("ds_plot_box_group throws errors as expected", {
@@ -143,4 +149,38 @@ test_that("ds_plot_box_group throws errors as expected", {
   expect_error(ds_plot_box_group(ndata), 'Data has no categorical variables.')
   expect_error(ds_plot_box_group(fdata, cyl, gear), 'Data has no continuous variables.')
   expect_error(ds_plot_box_group(mtcarz, mpg, disp), 'Data has no categorical variables.')
+})
+
+test_that("categorical plots treat character columns as categorical", {
+
+  char_data <- data.frame(
+    a = c("b", "a", "b", "c"),
+    b = c("y", "x", "y", "x"),
+    z = 1:4
+  )
+  fact_data <- data.frame(
+    a = factor(char_data$a),
+    b = factor(char_data$b),
+    z = char_data$z
+  )
+
+  p1 <- ds_plot_bar(char_data, print_plot = FALSE)
+  p2 <- ds_plot_bar(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+
+  p1 <- ds_plot_bar_stacked(char_data, print_plot = FALSE)
+  p2 <- ds_plot_bar_stacked(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+
+  p1 <- ds_plot_bar_grouped(char_data, print_plot = FALSE)
+  p2 <- ds_plot_bar_grouped(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+
+  p1 <- ds_plot_box_group(char_data, print_plot = FALSE)
+  p2 <- ds_plot_box_group(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
 })

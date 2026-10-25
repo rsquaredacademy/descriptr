@@ -55,3 +55,22 @@ test_that("ds_group_summary_interact uses character grouping columns", {
   group_min <- tapply(g$mpg, g$cyl, min)
   expect_equal(k$min, as.numeric(group_min)[match(k$cyl, names(group_min))])
 })
+
+test_that("ds_group_summary_interact gives the same result for character and factor groups (regression guard)", {
+
+  char_data <- data.frame(
+    g = c("b", "a", "b", "c"),
+    h = c("y", "x", "y", "x"),
+    x = c(1, 2, 3, 4)
+  )
+  fact_data <- data.frame(
+    g = factor(char_data$g),
+    h = factor(char_data$h),
+    x = char_data$x
+  )
+
+  expect_equal(
+    ds_group_summary_interact(char_data, x, g, h),
+    ds_group_summary_interact(fact_data, x, g, h)
+  )
+})

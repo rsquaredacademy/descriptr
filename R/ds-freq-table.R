@@ -44,6 +44,7 @@ ds_freq_table <- function(data, col, bins = 5,
 ds_freq_table.default <- function(data, col, bins = 5,
                                   closed = c("left", "right", "both")) {
 
+	data <- as_categorical(data)
 	varyable <- rlang::enquo(col)
 	data %<>%
       dplyr::select(!! varyable)
