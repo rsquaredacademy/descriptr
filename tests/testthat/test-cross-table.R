@@ -168,3 +168,11 @@ test_that("ds_cross_table reports missing observations", {
   expect_equal(k2$utility$missing, 0)
   expect_false(any(grepl("Missing Observations", capture.output(print(k2)), fixed = TRUE)))
 })
+
+test_that("printing a cross table with no rows does not warn", {
+
+  d <- data.frame(a = factor(c(NA, NA)), b = factor(c("u", "v")))
+  k <- ds_cross_table(d, a, b)
+
+  expect_silent(out <- capture.output(print(k)))
+})

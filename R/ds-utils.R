@@ -19,7 +19,7 @@ cross_print_pct <- function(twowaytable, obs, column_totals) {
   tab       <- as.matrix(twowaytable)
   rows      <- nrow(tab)
   cols      <- ncol(tab) - 2
-  counts    <- matrix(as.numeric(tab[, seq_len(cols) + 1]), nrow = rows)
+  counts    <- matrix(as.numeric(tab[, seq_len(cols) + 1]), nrow = rows, ncol = cols)
   row_total <- as.numeric(tab[, cols + 2])
   col_total <- as.numeric(column_totals[seq_len(cols)])
 

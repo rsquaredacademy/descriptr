@@ -17,9 +17,10 @@
 #' \code{"ds_cross_table"} containing the contingency table and the utility
 #' information used to print it. The cell percentages are stored as
 #' \strong{proportions} (values between 0 and 1) in \code{percent_table},
-#' \code{row_percent}, \code{column_percent} and \code{percent_column}; they
-#' are multiplied by 100 only when the table is printed, so the printed cells
-#' are percentages. The number of rows dropped because either variable is
+#' \code{row_percent}, \code{column_percent} and \code{percent_column}. The
+#' printed cells show percentages computed from the counts and can differ from
+#' the rounded proportions stored in the object in the last decimal place. The
+#' number of rows dropped because either variable is
 #' missing is stored in \code{utility$missing}. \code{ds_twoway_table()}
 #' returns a tibble whose \code{percent}, \code{row_percent} and
 #' \code{col_percent} columns are also proportions.
