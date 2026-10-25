@@ -61,7 +61,7 @@ test_that("ds_freq_table throws appropriate error", {
   mt <- mtcarz
   mt$gear <- as.character(mt$gear)
 
-  expect_error(ds_freq_table(data = mtcarz, col = mpg, bins = "5"), "bins must be integer value")
+  expect_error(ds_freq_table(data = mtcarz, col = mpg, bins = "5"), "bins must be a positive whole number.")
   expect_error(ds_freq_table(data = mt, col = gear), "gear is neither continuous nor categorical.")
 })
 
@@ -110,4 +110,28 @@ test_that("zero variance data cannot be binned (#131)", {
     ds_freq_table(data.frame(x = rep(5, 10)), x, bins = 5),
     "Data has zero variance; cannot construct continuous bins."
   )
+})
+
+test_that("the deprecated ds_freq_cont() forwards the variable", {
+
+  expect_warning(k <- ds_freq_cont(mtcarz, mpg), "deprecated")
+  expect_equal(k$utility$varname, "mpg")
+  expect_equal(k$utility$bins, 5)
+
+  expect_warning(k4 <- ds_freq_cont(mtcarz, mpg, bins = 4), "deprecated")
+  expect_equal(k4$utility$bins, 4)
+})
+
+test_that("bins must be a positive whole number", {
+
+  expect_error(ds_freq_table(mtcarz, mpg, bins = 0), "bins must be a positive whole number.")
+  expect_error(ds_freq_table(mtcarz, mpg, bins = -1), "bins must be a positive whole number.")
+  expect_error(ds_freq_table(mtcarz, mpg, bins = 2.7), "bins must be a positive whole number.")
+  expect_error(ds_freq_table(mtcarz, mpg, bins = NA), "bins must be a positive whole number.")
+  expect_error(ds_freq_table(mtcarz, mpg, bins = NA_real_), "bins must be a positive whole number.")
+  expect_error(ds_freq_table(mtcarz, mpg, bins = c(2, 3)), "bins must be a positive whole number.")
+  expect_error(ds_freq_table(mtcarz, mpg, bins = "5"), "bins must be a positive whole number.")
+
+  k <- ds_freq_table(mtcarz, mpg, bins = 3)
+  expect_equal(k$utility$bins, 3)
 })

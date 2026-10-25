@@ -102,3 +102,14 @@ test_that("get_names works as expected", {
   expect_equal(actual, expected)
 
 })
+
+test_that("ds_twoway_table joins without a message", {
+
+  expect_silent(k <- ds_twoway_table(mtcarz, cyl, gear))
+
+  expect_equal(
+    names(k),
+    c("cyl", "gear", "count", "percent", "row_percent", "col_percent")
+  )
+  expect_equal(sum(k$count), 32)
+})

@@ -16,13 +16,8 @@ ds_freq_numeric <- function(data, variable, bins = 5,
     stop("Data has zero variance; cannot construct continuous bins.", call. = FALSE)
   }
 
-  if (!is.numeric(bins)) {
-    stop("bins must be integer value", call. = FALSE)
-  }
-
-  if (is.numeric(bins)) {
-    bins <- as.integer(bins)
-  }
+  check_bins(bins)
+  bins <- as.integer(bins)
 
   var_name <-
     data %>%

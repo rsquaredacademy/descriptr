@@ -122,6 +122,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
                                 sd        = ~ stats::sd(., na.rm = TRUE),
                                 coeff_var = ds_cvar,
                                 std_error = ~ ds_std_error(stats::na.omit(.)))) %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(., decimals))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -209,6 +210,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
           skewness = ds_skewness,
           kurtosis = ds_kurtosis)
       ) %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(., decimals))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -301,6 +303,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
              per_99 = ~ quantile(., 0.99, na.rm = TRUE),
              max    = ~ num_or_na(., max))
       ) %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(., decimals))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -435,8 +438,8 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
     stop("n must be numeric", call. = FALSE)
   }
 
-  if (n > length(data)) {
-    stop("n must be less than the length of data", call. = FALSE)
+  if (n > sum(!is.na(data))) {
+    stop("n must be less than or equal to the number of non-missing observations", call. = FALSE)
   }
 
   method <- match.arg(type)

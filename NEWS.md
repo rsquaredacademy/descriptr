@@ -11,6 +11,15 @@
 - `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and `ds_tidy_stats()` handle missing values per column instead of deleting rows listwise, so missing values in one variable no longer change results for another. A column with no non-missing values returns `NA` for every summary metric instead of `-Inf`/`Inf` or an error ([#132](https://github.com/rsquaredacademy/descriptr/issues/132)).
 - `ds_extreme_obs()` and `ds_rindex()` report the original row indices of the data supplied, report ties on distinct rows, and `ds_extreme_obs()` now applies `decimals` to data-frame input ([#133](https://github.com/rsquaredacademy/descriptr/issues/133)).
 - `ds_gmean()` computes on the log scale, avoiding overflow for large values and long vectors, and `ds_gmean()`/`ds_hmean()` return `NA` with a warning for non-positive values ([#134](https://github.com/rsquaredacademy/descriptr/issues/134)).
+- `ds_measures_variation()`, `ds_measures_symmetry()` and `ds_percentiles()` now apply `decimals` to data-frame input, as they already did for numeric vectors.
+- `print.ds_group_summary()` now titles the table with the variables, e.g. `mpg by cyl`, instead of an empty `by`.
+- The missing row of a factor frequency table now reports its percent instead of a blank cell.
+- `ds_tailobs()` checks `n` against the number of non-missing observations, so it no longer returns `NA` values when `n` exceeds that number.
+- `ds_auto_summary_stats()` no longer prints a stray `NULL` after each summary.
+- The deprecated `ds_freq_cont()` forwards its variable correctly and no longer fails with `object 'mpg' not found`.
+- `bins` must be a positive whole number; values such as `0`, `2.7` and `NA` are rejected with a clear error instead of a base error or silent truncation.
+- `ds_summary_stats()` validates every selected column before printing, so a mixed selection fails up front and names the offending column.
+- `ds_twoway_table()` no longer prints a dplyr join message.
 
 # descriptr 0.6.0
 
@@ -64,7 +73,7 @@ This is a patch release to fix CRAN errors.
 
 ## New Features
 
-- `ds_tiy_stats()` will detect continuous variables in the data set and return
+- `ds_tidy_stats()` will detect continuous variables in the data set and return
 summary statistics for all of them. ([#68](https://github.com/rsquaredacademy/descriptr/issues/68))
 - `ds_auto_summary_stats()` will detect all continuous variables in the data 
 set and return summary statistics and frequency tables for all of them. 
