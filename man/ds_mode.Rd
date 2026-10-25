@@ -19,7 +19,8 @@ Compute the sample mode
 }
 \details{
 Any NA values are stripped from \code{x} before computation
-takes place.
+takes place. If several values are tied for the highest frequency, the
+smallest of them is returned.
 }
 \examples{
 # vector
