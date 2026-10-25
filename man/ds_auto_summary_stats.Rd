@@ -2,7 +2,7 @@
 % Please edit documentation in R/ds-auto-summary.R
 \name{ds_auto_summary_stats}
 \alias{ds_auto_summary_stats}
-\title{Descriptive statistics and frquency tables}
+\title{Descriptive statistics and frequency tables}
 \usage{
 ds_auto_summary_stats(data, ...)
 }

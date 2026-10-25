@@ -112,6 +112,16 @@ test_that("zero variance data cannot be binned (#131)", {
   )
 })
 
+test_that("the deprecated ds_freq_cont() forwards the variable", {
+
+  expect_warning(k <- ds_freq_cont(mtcarz, mpg), "deprecated")
+  expect_equal(k$utility$varname, "mpg")
+  expect_equal(k$utility$bins, 5)
+
+  expect_warning(k4 <- ds_freq_cont(mtcarz, mpg, bins = 4), "deprecated")
+  expect_equal(k4$utility$bins, 4)
+})
+
 test_that("bins must be a positive whole number", {
 
   expect_error(ds_freq_table(mtcarz, mpg, bins = 0), "bins must be a positive whole number.")

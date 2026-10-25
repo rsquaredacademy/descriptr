@@ -109,7 +109,7 @@ plot.ds_freq_table <- function(x, print_plot = TRUE, ...) {
 #' @rdname ds_freq_table
 #' @usage NULL
 #'
-ds_freq_cont <- function(data, variable, bins) {
+ds_freq_cont <- function(data, variable, bins = 5) {
   .Deprecated("ds_freq_table()")
-  ds_freq_table(data, variable, bins)
+  ds_freq_table(data, {{ variable }}, bins)
 }

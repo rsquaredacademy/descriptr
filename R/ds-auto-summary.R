@@ -1,4 +1,4 @@
-#' Descriptive statistics and frquency tables
+#' Descriptive statistics and frequency tables
 #'
 #' Generate summary statistics & frequency table for all continuous variables in data.
 #'
@@ -47,7 +47,7 @@ ds_auto_summary_stats <- function(data, ...) {
     cat('\n\n')
     ds_rule(paste0('Summary Statistics'))
     cat('\n\n')
-    print(ds_summary_stats(data, i))
+    ds_summary_stats(data, i)
     cat('\n\n')
     ds_rule(paste0('Frequency Distribution'))
     cat('\n\n')

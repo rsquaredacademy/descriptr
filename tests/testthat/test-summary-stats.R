@@ -65,3 +65,14 @@ test_that("ds_summary reports original extreme observation indices (#133)", {
   expect_equal(small$highobs, c(3, 2, 1))
   expect_equal(small$highobsi, c(1, 3, 2))
 })
+
+test_that("ds_summary_stats validates every selected column before printing", {
+
+  out <- capture.output(
+    err <- tryCatch(ds_summary_stats(mtcarz, mpg, cyl), error = identity)
+  )
+
+  expect_s3_class(err, "error")
+  expect_match(conditionMessage(err), "cyl is not a continuous variable", fixed = TRUE)
+  expect_length(out, 0)
+})

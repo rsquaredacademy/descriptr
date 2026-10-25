@@ -215,7 +215,11 @@ ds_twoway_table <- function(data, var_1, var_2) {
     ) %>%
     dplyr::ungroup()
 
-  result <- dplyr::inner_join(group, group2)
+  result <- dplyr::inner_join(
+    group,
+    dplyr::select(group2, -count),
+    by = c(var1_name, var2_name)
+  )
   return(result)
 
 }

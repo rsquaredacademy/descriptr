@@ -45,3 +45,9 @@ test_that("output from ds_auto_cross_table is as expected", {
 test_that("output from ds_auto_freq_table is as expected", {
   expect_snapshot(ds_auto_freq_table(mtcarz, cyl, gear))
 })
+
+test_that("ds_auto_summary_stats does not print a stray NULL", {
+
+  out <- capture.output(suppressWarnings(ds_auto_summary_stats(mtcarz, mpg)))
+  expect_false(any(trimws(out) == "NULL"))
+})

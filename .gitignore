@@ -4,3 +4,4 @@
 .Ruserdata
 inst/doc
 roadmap/
+tests/testthat/Rplots.pdf

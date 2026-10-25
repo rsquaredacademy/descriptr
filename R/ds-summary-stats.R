@@ -51,6 +51,11 @@ ds_summary_stats <- function(data, ...) {
     }
 
     col_names <- names(data)
+
+    for (i in col_names) {
+      check_numeric(data, !! rlang::sym(i), i)
+    }
+
     for (i in col_names) {
       ds_rule(paste0('Variable: ', i))
       cat('\n\n')
