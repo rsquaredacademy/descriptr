@@ -98,18 +98,18 @@ print_cross <- function(data) {
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$utility$percent_table[i, j]), "|")
+      cat(formatter_pct(data$utility$percent_table[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter(data$utility$row_percent[i, j]), "|")
+      cat(formatter_pct(data$utility$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$utility$column_percent[i, j]), "|")
+      cat(formatter_pct(data$utility$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -122,7 +122,7 @@ print_cross <- function(data) {
   cat("\n")
   cat("|              |")
   for (i in seq_along(data$utility$percent_column)) {
-    cat(formatter(data$utility$percent_column[i]), "|")
+    cat(formatter_pct(data$utility$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")
@@ -163,18 +163,18 @@ print_cross2 <- function(data) {
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$percent_table[i, j]), "|")
+      cat(formatter_pct(data$percent_table[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter(data$row_percent[i, j]), "|")
+      cat(formatter_pct(data$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$column_percent[i, j]), "|")
+      cat(formatter_pct(data$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -187,7 +187,7 @@ print_cross2 <- function(data) {
   cat("\n")
   cat("|              |")
   for (i in seq_along(data$percent_column)) {
-    cat(formatter(data$percent_column[i]), "|")
+    cat(formatter_pct(data$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")

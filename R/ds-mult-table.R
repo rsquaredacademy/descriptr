@@ -72,22 +72,17 @@ ds_auto_cross_table <- function(data, ...) {
   is_factor <- sapply(data, is.factor)
 
   if (length(var) < 1) {
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
     plot_data <- data[is_factor]
   } else {
     data %<>%
       dplyr::select(!!! var)
     is_factor <- sapply(data, is.factor)
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
-    if (length(is_factor) < 2) {
-      stop("Two way table requires at least 2 categorical variables.", call. = FALSE)
-    } else {
-      plot_data <- data[is_factor]
-    }
+    plot_data <- data[is_factor]
+  }
+
+  n_cat <- ncol(plot_data)
+  if (n_cat < 2) {
+    stop(paste0("ds_auto_cross_table() needs at least 2 categorical variables; found ", n_cat, "."), call. = FALSE)
   }
 
   factor_var    <- names(plot_data)

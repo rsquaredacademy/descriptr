@@ -20,6 +20,9 @@
 - `bins` must be a positive whole number; values such as `0`, `2.7` and `NA` are rejected with a clear error instead of a base error or silent truncation.
 - `ds_summary_stats()` validates every selected column before printing, so a mixed selection fails up front and names the offending column.
 - `ds_twoway_table()` no longer prints a dplyr join message.
+- Cross tables print the Percent, Row Pct and Col Pct cells as percentages; the values stored in the returned object remain proportions ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_measures_location()` keeps the column order selected by the user, and the data's column order when no columns are selected, instead of sorting the rows alphabetically ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_auto_cross_table()`, `ds_plot_scatter()`, `ds_plot_bar_stacked()` and `ds_plot_bar_grouped()` count usable variables, also when no columns are selected, and stop with a clear message when fewer than two are available instead of failing with a raw `combn()` error ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
 
 # descriptr 0.6.0
 

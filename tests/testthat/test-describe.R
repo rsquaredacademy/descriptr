@@ -214,6 +214,20 @@ test_that("ds_measures_location throws appropriate errors", {
 
 })
 
+test_that("ds_measures_location keeps the selected column order", {
+
+  expect_equal(ds_measures_location(mtcarz, mpg, disp)$variable, c("mpg", "disp"))
+  expect_equal(ds_measures_location(mtcarz, disp, mpg)$variable, c("disp", "mpg"))
+
+  df <- data.frame(z = 1:5, a = 6:10)
+  expect_equal(ds_measures_location(df)$variable, c("z", "a"))
+
+  d <- mtcarz$disp[1:10]
+  k <- ds_measures_location(mtcarz$mpg, d)
+  expect_equal(k$variable, c("mtcarz$mpg", "d"))
+  expect_equal(k$variable, ds_measures_variation(mtcarz$mpg, d)$variable)
+})
+
 test_that("output from ds_measures_variation is as expected", {
 
   actual <- round(sum(ds_measures_variation(mtcarz)[[3]]), 2)

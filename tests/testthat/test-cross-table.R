@@ -113,3 +113,18 @@ test_that("ds_twoway_table joins without a message", {
   )
   expect_equal(sum(k$count), 32)
 })
+
+test_that("ds_cross_table prints percentages but stores proportions", {
+
+  k   <- ds_cross_table(mtcarz, cyl, gear)
+  out <- capture.output(print(k))
+
+  expect_true(any(grepl("3.10", out, fixed = TRUE)))
+  expect_true(any(grepl("25.00", out, fixed = TRUE)))
+  expect_false(any(grepl("0.031", out, fixed = TRUE)))
+
+  expect_equal(unname(k$utility$percent_table[1, 1]), 0.031, ignore_attr = TRUE)
+  expect_equal(unname(k$utility$row_percent[1, 1]), 0.09, ignore_attr = TRUE)
+  expect_equal(unname(k$utility$column_percent[1, 1]), 0.07, ignore_attr = TRUE)
+  expect_equal(unname(k$utility$percent_column[1]), 0.468, ignore_attr = TRUE)
+})

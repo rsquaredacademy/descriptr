@@ -7,6 +7,10 @@ formatter <- function(x) {
   return(format(as.character(x), width = 13, justify = "right"))
 }
 
+formatter_pct <- function(x) {
+  return(format(round(x * 100, 2), nsmall = 2, width = 13, justify = "right"))
+}
+
 percent <- function(x, y) {
   out <- round((x / y) * 100, 2)
   return(out)
@@ -390,7 +394,7 @@ ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
                         median    = round(sapply(data, median, na.rm = TRUE), decimals),
                         mode      = round(sapply(data, ds_mode), decimals))
 
-  result <- measure[order(measure$variable), ]
+  result <- measure
   rownames(result) <- NULL
   return(result)
 }

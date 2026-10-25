@@ -22,9 +22,11 @@ test_that("ds_auto_freq_table throws errors as expected", {
 })
 
 test_that("ds_auto_cross_table throws errors as expected", {
-  expect_error(ds_auto_cross_table(ndata), 'Data has no categorical variables.')
-  expect_error(ds_auto_cross_table(mtcarz, mpg, disp), 'Data has no categorical variables.')
-  expect_error(ds_auto_cross_table(mtcarz, cyl), 'Two way table requires at least 2 categorical variables.')
+  expect_error(ds_auto_cross_table(ndata), 'ds_auto_cross_table() needs at least 2 categorical variables; found 0.', fixed = TRUE)
+  expect_error(ds_auto_cross_table(mtcarz, mpg, disp), 'ds_auto_cross_table() needs at least 2 categorical variables; found 0.', fixed = TRUE)
+  expect_error(ds_auto_cross_table(mtcarz, cyl), 'ds_auto_cross_table() needs at least 2 categorical variables; found 1.', fixed = TRUE)
+  expect_error(ds_auto_cross_table(data.frame(a = factor("x"))),
+    'ds_auto_cross_table() needs at least 2 categorical variables; found 1.', fixed = TRUE)
 })
 
 test_that("output from ds_auto_summary is as expected", {
