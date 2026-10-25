@@ -20,4 +20,8 @@ available on CRAN's check machines, so no note is expected there.
 
 ## Reverse dependencies
 
-TODO: revdepcheck
+We checked 3 reverse dependencies (olsrr, StatisticTeach1, xplorerr), comparing
+R CMD check results across CRAN and dev versions of this package.
+
+* We saw 0 new problems
+* We failed to check 0 packages
