@@ -219,6 +219,7 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -348,6 +349,7 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -413,6 +415,7 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -481,6 +484,7 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 ds_plot_box_group <- function(data, ..., print_plot = TRUE) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
 
   is_num    <- sapply(data, is.numeric)

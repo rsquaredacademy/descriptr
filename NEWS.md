@@ -23,6 +23,9 @@
 - Cross tables print the Percent, Row Pct and Col Pct cells as percentages; the values stored in the returned object remain proportions ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
 - `ds_measures_location()` keeps the column order selected by the user, and the data's column order when no columns are selected, instead of sorting the rows alphabetically ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
 - `ds_auto_cross_table()`, `ds_plot_scatter()`, `ds_plot_bar_stacked()` and `ds_plot_bar_grouped()` count usable variables, also when no columns are selected, and stop with a clear message when fewer than two are available instead of failing with a raw `combn()` error ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- Character columns are treated as categorical (converted with `factor()`) by the frequency tables, cross tables, group summaries, automatic tables and categorical plots, so results match the same data stored as factors ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_measures_location()`, `ds_measures_variation()`, `ds_measures_symmetry()` and `ds_percentiles()` stop with the `check_numeric()` message when a non-numeric column is selected explicitly; with no selection they use the numeric columns ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- Cross tables store the number of rows dropped for missing values in `utility$missing` and print `Missing Observations` when there are any; `ds_auto_cross_table()` prints each table's own observation count instead of the number of rows in the data ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
 
 # descriptr 0.6.0
 

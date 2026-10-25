@@ -32,6 +32,7 @@
 ds_auto_freq_table <- function(data, ...) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -68,6 +69,7 @@ ds_auto_freq_table <- function(data, ...) {
 ds_auto_cross_table <- function(data, ...) {
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -96,8 +98,7 @@ ds_auto_cross_table <- function(data, ...) {
     "|", formatter("Percent"), "|\n",
     "|", formatter("Row Pct"), "|\n",
     "|", formatter("Col Pct"), "|\n",
-    "|---------------|\n\n",
-    "Total Observations: ", nrow(data), "\n\n"
+    "|---------------|\n\n"
   )
 
   for (i in seq_len(n)) {

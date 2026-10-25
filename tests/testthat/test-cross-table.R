@@ -128,3 +128,39 @@ test_that("ds_cross_table prints percentages but stores proportions", {
   expect_equal(unname(k$utility$column_percent[1, 1]), 0.07, ignore_attr = TRUE)
   expect_equal(unname(k$utility$percent_column[1]), 0.468, ignore_attr = TRUE)
 })
+
+test_that("ds_cross_table and ds_twoway_table treat character columns as categorical", {
+
+  char_data <- data.frame(a = c("b", "a", "b", "c"), b = c("y", "x", "y", "x"))
+  fact_data <- data.frame(a = factor(char_data$a), b = factor(char_data$b))
+
+  k_char <- ds_cross_table(char_data, a, b)
+  k_fact <- ds_cross_table(fact_data, a, b)
+
+  expect_equal(k_char$ftable, k_fact$ftable)
+  expect_equal(k_char$utility$twowaytable, k_fact$utility$twowaytable)
+  expect_equal(k_char$utility$var1_levels, c("a", "b", "c"))
+  expect_equal(k_char$utility$var2_levels, c("x", "y"))
+
+  expect_equal(
+    ds_twoway_table(char_data, a, b),
+    ds_twoway_table(fact_data, a, b)
+  )
+})
+
+test_that("ds_cross_table reports missing observations", {
+
+  g <- mtcarz
+  g$cyl[1] <- NA
+
+  k <- ds_cross_table(g, cyl, gear)
+  expect_equal(k$utility$missing, 1)
+  expect_equal(k$utility$obs, 31)
+
+  out <- capture.output(print(k))
+  expect_true(any(grepl("Missing Observations:  1", out, fixed = TRUE)))
+
+  k2 <- ds_cross_table(mtcarz, cyl, gear)
+  expect_equal(k2$utility$missing, 0)
+  expect_false(any(grepl("Missing Observations", capture.output(print(k2)), fixed = TRUE)))
+})

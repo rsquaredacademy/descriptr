@@ -73,8 +73,12 @@ print_cross <- function(data) {
     formatter("    Cell Contents\n"), "|---------------|\n", "|", formatter("Frequency"),
     "|\n", "|", formatter("Percent"), "|\n", "|", formatter("Row Pct"), "|\n",
     "|", formatter("Col Pct"), "|\n", "|---------------|\n\n", "Total Observations: ",
-    data$utility$obs, "\n\n"
+    data$utility$obs, "\n"
   )
+  if (data$utility$missing > 0) {
+    cat("Missing Observations: ", data$utility$missing, "\n")
+  }
+  cat("\n")
   cat("-", rep("---------------", q), sep = "")
   cat("\n")
   cat(
@@ -143,6 +147,11 @@ print_cross2 <- function(data) {
   tu <- q * 15
 
   cat(format(paste(data$variable_names[1], "vs", data$variable_names[2]), width = tu, justify = "centre"), "\n")
+  cat("Total Observations: ", data$obs, "\n")
+  if (data$missing > 0) {
+    cat("Missing Observations: ", data$missing, "\n")
+  }
+  cat("\n")
   cat("-", rep("---------------", q), sep = "")
   cat("\n")
   cat("|              |", format(data$variable_names[2], width = r, justify = "centre"), "|")

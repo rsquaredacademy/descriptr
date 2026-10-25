@@ -38,7 +38,8 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
     if (length(var) < 1) {
       data <- ds_num_cols(data)
     } else {
-      data <- ds_num_cols(data[var])
+      check_numeric_cols(data, var)
+      data <- data[var]
     }
 
     ds_loc_prep(data, trim = trim, decimals = decimals)
@@ -110,6 +111,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
@@ -199,6 +201,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
@@ -284,6 +287,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%

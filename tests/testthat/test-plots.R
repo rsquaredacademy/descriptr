@@ -150,3 +150,37 @@ test_that("ds_plot_box_group throws errors as expected", {
   expect_error(ds_plot_box_group(fdata, cyl, gear), 'Data has no continuous variables.')
   expect_error(ds_plot_box_group(mtcarz, mpg, disp), 'Data has no categorical variables.')
 })
+
+test_that("categorical plots treat character columns as categorical", {
+
+  char_data <- data.frame(
+    a = c("b", "a", "b", "c"),
+    b = c("y", "x", "y", "x"),
+    z = 1:4
+  )
+  fact_data <- data.frame(
+    a = factor(char_data$a),
+    b = factor(char_data$b),
+    z = char_data$z
+  )
+
+  p1 <- ds_plot_bar(char_data, print_plot = FALSE)
+  p2 <- ds_plot_bar(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+
+  p1 <- ds_plot_bar_stacked(char_data, print_plot = FALSE)
+  p2 <- ds_plot_bar_stacked(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+
+  p1 <- ds_plot_bar_grouped(char_data, print_plot = FALSE)
+  p2 <- ds_plot_bar_grouped(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+
+  p1 <- ds_plot_box_group(char_data, print_plot = FALSE)
+  p2 <- ds_plot_box_group(fact_data, print_plot = FALSE)
+  expect_equal(names(p1), names(p2))
+  expect_equal(p1[[1]]$data, p2[[1]]$data)
+})

@@ -21,6 +21,8 @@ ds_group_summary_interact <- function(data, col, ...) {
 
   check_df(data)
 
+  data <- as_categorical(data)
+
   cvar_name <- deparse(substitute(col))
   c_var <- rlang::enquo(col)
   check_numeric(data, !! c_var, cvar_name)

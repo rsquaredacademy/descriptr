@@ -37,9 +37,10 @@ information used to print it. The cell percentages are stored as
 \strong{proportions} (values between 0 and 1) in \code{percent_table},
 \code{row_percent}, \code{column_percent} and \code{percent_column}; they
 are multiplied by 100 only when the table is printed, so the printed cells
-are percentages. \code{ds_twoway_table()} returns a tibble whose
-\code{percent}, \code{row_percent} and \code{col_percent} columns are also
-proportions.
+are percentages. The number of rows dropped because either variable is
+missing is stored in \code{utility$missing}. \code{ds_twoway_table()}
+returns a tibble whose \code{percent}, \code{row_percent} and
+\code{col_percent} columns are also proportions.
 }
 \description{
 Creates two way tables of categorical variables. The tables created can be

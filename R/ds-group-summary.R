@@ -48,6 +48,7 @@ ds_group_summary <- function(data, group_by, cols) UseMethod("ds_group_summary")
 ds_group_summary.default <- function(data, group_by, cols) {
 
   check_df(data)
+  data <- as_categorical(data)
   gvar_name <- deparse(substitute(group_by))
   cvar_name <- deparse(substitute(cols))
 

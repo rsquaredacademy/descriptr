@@ -19,9 +19,10 @@
 #' \strong{proportions} (values between 0 and 1) in \code{percent_table},
 #' \code{row_percent}, \code{column_percent} and \code{percent_column}; they
 #' are multiplied by 100 only when the table is printed, so the printed cells
-#' are percentages. \code{ds_twoway_table()} returns a tibble whose
-#' \code{percent}, \code{row_percent} and \code{col_percent} columns are also
-#' proportions.
+#' are percentages. The number of rows dropped because either variable is
+#' missing is stored in \code{utility$missing}. \code{ds_twoway_table()}
+#' returns a tibble whose \code{percent}, \code{row_percent} and
+#' \code{col_percent} columns are also proportions.
 #'
 #' @examples
 #' # cross table
@@ -48,6 +49,7 @@ ds_cross_table <- function(data, var_1, var_2) UseMethod("ds_cross_table")
 ds_cross_table.default <- function(data, var_1, var_2) {
 
   check_df(data)
+  data <- as_categorical(data)
   var1_name <- deparse(substitute(var_1))
   var2_name <- deparse(substitute(var_2))
   var_1 <- rlang::enquo(var_1)
@@ -69,6 +71,7 @@ ds_cross_table.default <- function(data, var_1, var_2) {
   rownames(x) <- NULL
 
   n        <- sum(x)
+  missing  <- sum(is.na(varone) | is.na(vartwo))
   per_mat  <- round(x / n, 3)
   row_pct  <- apply(per_mat, 1, sum)
   col_pct  <- apply(per_mat, 2, sum)
@@ -80,6 +83,7 @@ ds_cross_table.default <- function(data, var_1, var_2) {
   finaltab <- prep_table(x, rowtotal, row_name)
 
   utility <- list(obs            = n,
+                  missing        = missing,
                   var2_levels    = col_name,
                   var1_levels    = row_name,
                   varnames       = var_names,
@@ -179,6 +183,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 ds_twoway_table <- function(data, var_1, var_2) {
 
   check_df(data)
+  data <- as_categorical(data)
   var1_name <- deparse(substitute(var_1))
   var2_name <- deparse(substitute(var_2))
 

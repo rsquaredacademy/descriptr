@@ -106,6 +106,19 @@ test_that("ds_group_summary drops rows with a missing grouping label", {
   expect_equal(names(k$stats), c("Statistic/Levels", "4", "6", "8"))
 })
 
+test_that("ds_group_summary treats a character grouping column as categorical", {
+
+  char_data <- data.frame(g = c("b", "a", "b", "c"), x = c(1, 2, 3, 4))
+  fact_data <- data.frame(g = factor(char_data$g), x = char_data$x)
+
+  k_char <- ds_group_summary(char_data, g, x)
+  k_fact <- ds_group_summary(fact_data, g, x)
+
+  expect_equal(k_char$stats, k_fact$stats)
+  expect_equal(k_char$tidy_stats, k_fact$tidy_stats)
+  expect_equal(names(k_char$stats), c("Statistic/Levels", "a", "b", "c"))
+})
+
 test_that("ds_group_summary stats have default row names", {
   k <- ds_group_summary(mtcarz, cyl, mpg)
 

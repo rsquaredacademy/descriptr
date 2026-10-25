@@ -353,6 +353,20 @@ check_factor <- function(data, var, var_name) {
   }
 }
 
+check_numeric_cols <- function(data, vars) {
+
+  for (nm in vars) {
+    check_numeric(data, !! rlang::sym(nm), nm)
+  }
+
+}
+
+as_categorical <- function(data) {
+
+  dplyr::mutate(data, dplyr::across(dplyr::where(is.character), factor))
+
+}
+
 check_bins <- function(bins) {
 
   if (!is.numeric(bins) || length(bins) != 1L || is.na(bins) ||

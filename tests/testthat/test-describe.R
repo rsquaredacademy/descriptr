@@ -228,6 +228,21 @@ test_that("ds_measures_location keeps the selected column order", {
   expect_equal(k$variable, ds_measures_variation(mtcarz$mpg, d)$variable)
 })
 
+test_that("mixed-type selections use the check_numeric() message", {
+
+  msg_cyl <- "cyl is not a continuous variable. The function expects an object of type `numeric` or `integer` but cyl is of type `factor`."
+
+  expect_error(ds_measures_location(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+  expect_error(ds_measures_variation(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+  expect_error(ds_measures_symmetry(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+  expect_error(ds_percentiles(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+
+  # with no selection the numeric columns are used
+  k <- ds_measures_variation(mtcarz)
+  expect_setequal(k$var, names(mtcarz)[sapply(mtcarz, is.numeric)])
+  expect_false(any(k$var %in% c("cyl", "vs", "am", "gear", "carb")))
+})
+
 test_that("output from ds_measures_variation is as expected", {
 
   actual <- round(sum(ds_measures_variation(mtcarz)[[3]]), 2)
