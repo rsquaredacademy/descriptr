@@ -352,7 +352,7 @@ print_ftable <- function(x) {
   }
   cat("\n")
   if (x$utility$na_count > 0) {
-    na_percent <- format((x$utility$na_count / x$n) * 100, nsmall = 2)
+    na_percent <- format(round((x$utility$na_count / x$utility$n) * 100, 2), nsmall = 2)
     cat(format("Missing", width = w1, justify = "centre"), fs(),
         format(as.character(x$utility$na_count), width = w2, justify = "centre"), fs(),
         format("-", width = w3, justify = "centre"), fs(),
@@ -434,7 +434,7 @@ print_group <- function(data) {
   ow <- 23 * cola - col
   row <- nrow(data$stats)
 
-  cat(format(paste(data$yvar, "by", data$xvar), width = ow, justify = "centre"), "\n")
+  cat(format(paste(names(data$plot_data)[2], "by", names(data$plot_data)[1]), width = ow, justify = "centre"), "\n")
   cat(rep("-", ow), sep = "", "\n")
   cat("|")
   for (i in seq_len(cola)) {

@@ -349,6 +349,15 @@ check_factor <- function(data, var, var_name) {
   }
 }
 
+check_bins <- function(bins) {
+
+  if (!is.numeric(bins) || length(bins) != 1L || is.na(bins) ||
+      !is.finite(bins) || bins < 1 || bins != floor(bins)) {
+    stop("bins must be a positive whole number.", call. = FALSE)
+  }
+
+}
+
 ds_rule <- function(text = NULL) {
   con_wid  <- options()$width
   text_len <- nchar(text) + 2
