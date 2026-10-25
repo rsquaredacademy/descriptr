@@ -68,6 +68,8 @@ print_cross <- function(data) {
 
   col_names <- c(data$utility$varnames[1], data$utility$var2_levels, "Row Total")
   col_totals <- c("Column Total", data$utility$column_totals, data$utility$obs)
+  pct <- cross_print_pct(data$utility$twowaytable, data$utility$obs,
+                         data$utility$column_totals)
 
   cat(
     formatter("    Cell Contents\n"), "|---------------|\n", "|", formatter("Frequency"),
@@ -102,18 +104,18 @@ print_cross <- function(data) {
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter_pct(data$utility$percent_table[i, j]), "|")
+      cat(formatter_pct(pct$percent[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter_pct(data$utility$row_percent[i, j]), "|")
+      cat(formatter_pct(pct$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter_pct(data$utility$column_percent[i, j]), "|")
+      cat(formatter_pct(pct$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -125,8 +127,8 @@ print_cross <- function(data) {
   }
   cat("\n")
   cat("|              |")
-  for (i in seq_along(data$utility$percent_column)) {
-    cat(formatter_pct(data$utility$percent_column[i]), "|")
+  for (i in seq_along(pct$percent_column)) {
+    cat(formatter_pct(pct$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")
@@ -145,6 +147,8 @@ print_cross2 <- function(data) {
   g <- f + 2
   h <- p + 1
   tu <- q * 15
+  pct <- cross_print_pct(data$twowaytable, data$obs,
+                         data$column_totals[seq_len(p) + 1])
 
   cat(format(paste(data$variable_names[1], "vs", data$variable_names[2]), width = tu, justify = "centre"), "\n")
   cat("Total Observations: ", data$obs, "\n")
@@ -172,18 +176,18 @@ print_cross2 <- function(data) {
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter_pct(data$percent_table[i, j]), "|")
+      cat(formatter_pct(pct$percent[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter_pct(data$row_percent[i, j]), "|")
+      cat(formatter_pct(pct$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter_pct(data$column_percent[i, j]), "|")
+      cat(formatter_pct(pct$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -195,8 +199,8 @@ print_cross2 <- function(data) {
   }
   cat("\n")
   cat("|              |")
-  for (i in seq_along(data$percent_column)) {
-    cat(formatter_pct(data$percent_column[i]), "|")
+  for (i in seq_along(pct$percent_column)) {
+    cat(formatter_pct(pct$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")

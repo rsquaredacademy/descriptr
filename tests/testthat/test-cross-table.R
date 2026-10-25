@@ -119,8 +119,12 @@ test_that("ds_cross_table prints percentages but stores proportions", {
   k   <- ds_cross_table(mtcarz, cyl, gear)
   out <- capture.output(print(k))
 
-  expect_true(any(grepl("3.10", out, fixed = TRUE)))
+  expect_true(any(grepl("3.12", out, fixed = TRUE)))
   expect_true(any(grepl("25.00", out, fixed = TRUE)))
+  expect_true(any(grepl("9.09", out, fixed = TRUE)))
+  expect_true(any(grepl("6.67", out, fixed = TRUE)))
+  expect_true(any(grepl("46.88", out, fixed = TRUE)))
+  expect_true(any(grepl("34.38", out, fixed = TRUE)))
   expect_false(any(grepl("0.031", out, fixed = TRUE)))
 
   expect_equal(unname(k$utility$percent_table[1, 1]), 0.031, ignore_attr = TRUE)
