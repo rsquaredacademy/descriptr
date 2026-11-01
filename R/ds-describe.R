@@ -442,25 +442,30 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
     stop("n must be numeric", call. = FALSE)
   }
 
+  if (length(n) != 1L || is.na(n) || !is.finite(n) || n != floor(n) || n < 0) {
+    stop("n must be a single finite whole number.", call. = FALSE)
+  }
+
   if (n > sum(!is.na(data))) {
     stop("n must be less than or equal to the number of non-missing observations", call. = FALSE)
   }
 
   method <- match.arg(type)
+  n      <- as.integer(n)
 
   if (method == "low") {
     result <-
       data %>%
       na.omit() %>%
       sort() %>%
-      `[`(1:n) %>%
+      `[`(seq_len(n)) %>%
       round(decimals)
   } else {
     result <-
       data %>%
       na.omit() %>%
       sort(decreasing = TRUE) %>%
-      `[`(1:n) %>%
+      `[`(seq_len(n)) %>%
       round(decimals)
   }
 
@@ -555,12 +560,20 @@ ds_hmean <- function(data, x = NULL) {
     return(NA_real_)
   }
 
+  if (any(!is.finite(z))) {
+    warning("Harmonic mean requires finite values", call. = FALSE)
+    return(NA_real_)
+  }
+
   if (min(z) <= 0) {
     warning("Harmonic mean requires strictly positive non-zero values", call. = FALSE)
     return(NA_real_)
   }
 
-  length(z) / sum(1 / z)
+  # scale the reciprocals by the smallest value; 1 / z overflows when z is
+  # very small even though the harmonic mean itself is representable
+  scale <- min(z)
+  scale / mean(scale / z)
 
 }
 

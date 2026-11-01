@@ -567,6 +567,36 @@ test_that("geometric and harmonic means are numerically stable (#134)", {
 })
 
 
+test_that("harmonic mean is stable for extreme magnitudes (H5)", {
+
+  expect_equal(ds_hmean(rep(1e-308, 10)), 1e-308)
+  expect_equal(ds_hmean(c(1e-310, 1e-310)), 1e-310)
+  expect_equal(ds_hmean(c(1e-300, 1e300)), 2e-300, tolerance = 1e-10)
+  expect_equal(ds_hmean(c(2, 4)), 2 / (1 / 2 + 1 / 4))
+  expect_equal(ds_hmean(rep(1000, 500)), 1000)
+
+  # non-finite input is rejected explicitly
+  expect_warning(h <- ds_hmean(c(1, Inf)), "Harmonic mean requires finite")
+  expect_true(is.na(h))
+})
+
+test_that("ds_tailobs validates n (M6)", {
+
+  expect_equal(ds_tailobs(1:3, 0), numeric(0))
+  expect_equal(ds_tailobs(1:3, 2), c(1, 2))
+  expect_equal(ds_tailobs(1:3, 2, type = "high"), c(3, 2))
+
+  msg <- "n must be a single finite whole number"
+  expect_error(ds_tailobs(1:3, 1.5), msg)
+  expect_error(ds_tailobs(1:3, -1), msg)
+  expect_error(ds_tailobs(1:3, NA_real_), msg)
+  expect_error(ds_tailobs(1:3, NA), "n must be numeric")
+  expect_error(ds_tailobs(1:3, Inf), msg)
+  expect_error(ds_tailobs(1:3, c(1, 2)), msg)
+  expect_error(ds_tailobs(1:3, 4),
+               "n must be less than or equal to the number of non-missing observations")
+})
+
 test_that("decimals is applied to data-frame input", {
 
   variation <- ds_measures_variation(mtcarz, mpg, decimals = 1)
