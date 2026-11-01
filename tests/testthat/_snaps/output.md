@@ -135,11 +135,11 @@
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
       -----------------------------------------------------------------------
-         4           9              9              32.14            32.14    
+         4           9              9              28.12            28.12    
       -----------------------------------------------------------------------
-         6           6             15              21.43            53.57    
+         6           6             15              18.75            46.88    
       -----------------------------------------------------------------------
-         8          13             28              46.43             100     
+         8          13             28              40.62            87.5     
       -----------------------------------------------------------------------
       Missing        4              -              12.50              -      
       -----------------------------------------------------------------------
@@ -179,17 +179,6 @@
 
     Code
       ds_auto_freq_table(mt)
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
     Output
                                    Variable: cyl                              
       -----------------------------------------------------------------------
@@ -204,18 +193,6 @@
        Total        32              -             100.00              -      
       -----------------------------------------------------------------------
       
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
-    Output
                                    Variable: vs                               
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
@@ -227,18 +204,6 @@
        Total        32              -             100.00              -      
       -----------------------------------------------------------------------
       
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
-    Output
                                    Variable: am                               
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
@@ -250,18 +215,6 @@
        Total        32              -             100.00              -      
       -----------------------------------------------------------------------
       
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
-    Output
                                   Variable: gear                              
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
@@ -275,18 +228,6 @@
        Total        32              -             100.00              -      
       -----------------------------------------------------------------------
       
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
-    Output
                                   Variable: carb                              
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
@@ -311,54 +252,31 @@
 
     Code
       ds_auto_freq_table(fdata)
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
     Output
                                    Variable: cyl                              
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
       -----------------------------------------------------------------------
-         4           9              9              32.14            32.14    
+         4           9              9              28.12            28.12    
       -----------------------------------------------------------------------
-         6           6             15              21.43            53.57    
+         6           6             15              18.75            46.88    
       -----------------------------------------------------------------------
-         8          13             28              46.43             100     
+         8          13             28              40.62            87.5     
       -----------------------------------------------------------------------
       Missing        4              -              12.50              -      
       -----------------------------------------------------------------------
        Total        32              -             100.00              -      
       -----------------------------------------------------------------------
       
-    Condition
-      Warning:
-      Using an external vector in selections was deprecated in tidyselect 1.1.0.
-      i Please use `all_of()` or `any_of()` instead.
-        # Was:
-        data %>% select(name)
-      
-        # Now:
-        data %>% select(all_of(name))
-      
-      See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
-    Output
                                   Variable: gear                              
       -----------------------------------------------------------------------
       Levels     Frequency    Cum Frequency       Percent        Cum Percent  
       -----------------------------------------------------------------------
-         3          13             13              46.43            46.43    
+         3          13             13              40.62            40.62    
       -----------------------------------------------------------------------
-         4          10             23              35.71            82.14    
+         4          10             23              31.25            71.88    
       -----------------------------------------------------------------------
-         5           5             28              17.86             100     
+         5           5             28              15.62            87.5     
       -----------------------------------------------------------------------
       Missing        4              -              12.50              -      
       -----------------------------------------------------------------------

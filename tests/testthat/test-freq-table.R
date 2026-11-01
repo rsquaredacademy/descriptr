@@ -181,3 +181,41 @@ test_that("ds_freq_table treats character columns as categorical", {
   expect_equal(k_char$utility$na_count, 1)
   expect_equal(levels(k_char$utility$data$x), c("a", "b", "c"))
 })
+
+test_that("frequency table percentages use a single denominator (M5)", {
+
+  # categorical data: level and Missing percentages must add up to 100
+  d <- data.frame(a = factor(c("a", "a", NA)))
+  k <- ds_freq_table(d, a)
+
+  expect_equal(k$ftable$Frequency, 2)
+  expect_equal(k$ftable$Percent, 66.67)
+  expect_equal(k$ftable$Cum.Percent, 66.67)
+  expect_equal(k$ftable$Percent + (k$utility$na_count / k$utility$n) * 100, 100,
+               tolerance = 1e-3)
+
+  out <- capture.output(print(k))
+  expect_true(any(grepl("66.67", out, fixed = TRUE)))
+  expect_true(any(grepl("33.33", out, fixed = TRUE)))
+  expect_true(any(grepl("100.00", out, fixed = TRUE)))
+
+  # continuous data: bin and Missing percentages share the same denominator
+  d2 <- data.frame(x = c(1, 2, 3, NA))
+  k2 <- ds_freq_table(d2, x, bins = 2)
+
+  expect_equal(k2$utility$frequency, c(1L, 2L))
+  expect_equal(k2$utility$percent, c(25, 50))
+  expect_equal(k2$utility$cum_percent, c(25, 75))
+  expect_equal(sum(k2$utility$percent) + (k2$utility$na_count / k2$utility$n) * 100, 100)
+
+  out2 <- capture.output(print(k2))
+  miss_line <- out2[grepl("Missing", out2, fixed = TRUE)]
+  expect_equal(length(miss_line), 1)
+  expect_true(grepl("25.00", miss_line, fixed = TRUE))
+  expect_true(any(grepl("75", out2, fixed = TRUE)))
+  expect_false(any(grepl("66.7", out2, fixed = TRUE)))
+
+  # the automatic one-way table uses the same rule
+  k3 <- freq_table2(d, "a")
+  expect_equal(k3$ftable$Percent, 66.67)
+})
