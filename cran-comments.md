@@ -5,23 +5,29 @@ summaries, frequency and cross tables, and summary statistics.
 
 ## Test environments
 
-* local Windows 11, R 4.6.1
-* TODO: win-builder (devel, release)
-* TODO: R-hub
-* TODO: macOS
+* local Windows 11, R 4.6.1 (ucrt)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
-The note is local: checking the math rendering of the HTML manual was skipped
-because the optional `V8` package is not installed on this machine. `V8` is
-available on CRAN's check machines, so no note is expected there.
+The note is CRAN's incoming feasibility check reporting the new maintainer
+address:
+
+```
+New maintainer:
+  Aravind Hebbali <aravindhebbali@rsquaredacademy.com>
+Old maintainer(s):
+  Aravind Hebbali <hebbali.aravind@gmail.com>
+```
+
+The address was updated in `DESCRIPTION` in this release and is the address
+CRAN should use from now on. The note disappears once CRAN records it.
 
 ## Reverse dependencies
 
-We checked 3 reverse dependencies (olsrr, StatisticTeach1, xplorerr), comparing
-R CMD check results across CRAN and dev versions of this package.
-
-* We saw 0 new problems
-* We failed to check 0 packages
+Reverse dependency checks were run for 0.6.1 (against 0.6.0) on Windows 11,
+R 4.6.1; see `revdep/`. They reported no new problems. The reverse dependency
+check was not repeated after the fixes added on top of the 0.6.1 release
+preparation; those fixes do not change any exported function signature or
+argument.

@@ -107,6 +107,26 @@ summaries, frequency and cross tables, and summary statistics.
   infinite values instead of returning a wrong number of observations.
 - `ds_twoway_table()` derives its join keys from the selected columns, so
   programmatic calls with `!!rlang::sym()` or `{{ }}` work again.
+- `ds_group_summary_interact()` groups by the values of the selected columns
+  rather than a joined label, so label combinations containing `.` (and any
+  other separator) are no longer merged.
+- `ds_group_summary()` and `ds_group_summary_interact()` return unique column
+  names. A grouping column named like a statistic, such as `length` or `mean`,
+  is suffixed with `_group`, so every column keeps its values and the result
+  can be used with `dplyr` verbs.
+- `ds_group_summary()$tidy_stats` keeps the class of the grouping variable,
+  including ordered factors, and the order of the observed levels.
+- Group-summary boxplots no longer show a group for observations with a
+  missing grouping label; the plot uses the same observations as the summary.
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and
+  `ds_std_error()` handle missing values consistently for numeric vectors:
+  `n` counts the non-missing observations, measures ignore missing values, and
+  a vector with no usable values returns `NA` instead of raising a base error.
+- Frequency tables compute every percentage over all observations, so the
+  `Missing` row and the level/bin percentages share one denominator and add up
+  to 100.
+- `ds_auto_freq_table()` no longer triggers the tidyselect deprecation warning
+  about external vectors.
 
 # descriptr 0.6.0
 
