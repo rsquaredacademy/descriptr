@@ -42,21 +42,48 @@ ds_group_summary_interact <- function(data, col, ...) {
 
   cnames <- names(gdata)
 
-  data %>%
-    dplyr::select(!!c_var, !!! g_var) %>%
-    na.omit() %>%
-    dplyr::mutate(
-      Levels = interaction(!!! g_var, sep = "\r", drop = TRUE)
-    ) %>%
-    dplyr::select(Levels, !! c_var) %>%
-    dplyr::group_by(Levels) %>%
-    dplyr::summarise_all(list(
-      min = min, max = max, mean = mean, t_mean = trimmed_mean,
-      median = median, mode = ds_mode, range = ds_range,
-      variance = var, stdev = sd, skew = ds_skewness,
-      kurtosis = ds_kurtosis, coeff_var = ds_cvar, q1 = quant1,
-      q3 = quant3, iqrange = IQR)) %>%
-    tidyr::separate(Levels, into = cnames, sep = "\r")
+  # group by the selected columns themselves; the labels are never joined
+  # into (and split out of) a string, so distinct tuples whose labels would
+  # serialize to the same text cannot be merged
+  cname <- names(dplyr::select(data, !! c_var))
 
+  gdata_num <-
+    data %>%
+    dplyr::select(!!! g_var, !! c_var) %>%
+    na.omit()
+
+  cvec <- gdata_num[[cname]]
+  gid  <- interaction(gdata_num[cnames], drop = TRUE)
+
+  stat_names <- c(
+    "min", "max", "mean", "t_mean", "median", "mode", "range", "variance",
+    "stdev", "skew", "kurtosis", "coeff_var", "q1", "q3", "iqrange"
+  )
+
+  group_stats <- function(x) {
+    stats::setNames(
+      c(
+        min(x), max(x), mean(x), trimmed_mean(x), median(x), ds_mode(x),
+        ds_range(x), var(x), sd(x), ds_skewness(x), ds_kurtosis(x),
+        ds_cvar(x), quant1(x), quant3(x), IQR(x)
+      ),
+      stat_names
+    )
+  }
+
+  indexes <- split(seq_len(nrow(gdata_num)), gid)
+
+  stat_mat <- t(vapply(indexes, function(i) group_stats(cvec[i]),
+                       numeric(length(stat_names))))
+  colnames(stat_mat) <- stat_names
+
+  # keep the first row of each group as its label
+  keys <- gdata_num[vapply(indexes, `[`, integer(1), 1L), cnames, drop = FALSE]
+  keys[] <- lapply(keys, as.character)
+
+  out <- cbind(keys, as.data.frame(stat_mat))
+  row.names(out) <- NULL
+
+  dplyr::as_tibble(out, .name_repair = "minimal")
 }
 
