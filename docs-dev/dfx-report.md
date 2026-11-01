@@ -11,7 +11,7 @@ user-visible fix, clean `git archive` build + `R CMD check --as-cran`).
 | Finding | Test added (fails before the fix) | Fix (file:line) | Verified how | Status |
 | --- | --- | --- | --- | --- |
 | **H1** summary names overwrite source columns | `test-group-summary.R` "does not overwrite source columns named like statistics (H1)": `missing`, `min`, `mean` source columns and a grouping column named `length`; also `test-group-summary-interact.R` "does not overwrite source columns (H1)" for `min`/`Levels`/group named `min` | `R/ds-group-summary.R:101-170` — one grouped helper computes all statistics from the original vector; `stats` and `tidy_stats` are built from the same matrix; grouping keys kept separately. `R/ds-group-summary-interact.R:63-87` — same for interaction summaries | Audit's exact probes return min/max/mean `1/3/2` and `5/5/5`, variance `2/NA`; `tidy_stats` matches the printed table; grouping labels preserved for a `length` grouping column | Fixed |
-| **H2** delimiter grouping merges distinct groups | `test-group-summary-interact.R` "keeps colliding group labels separate (H2)": `a\rb`/`a` × `c`/`b\rc`, plus a three-row nearby case | `R/ds-group-summary-interact.R:48-87` — group by the selected columns with `interaction(..., drop = TRUE)`; no label join/split | Two rows with means `1` and `100` (and `1`/`60`); labels preserved; `aggregate()` agrees. Dot labels and character/factor results still pass the existing tests | Fixed |
+| **H2** delimiter grouping merges distinct groups | `test-group-summary-interact.R` "keeps colliding group labels separate (H2)": `a\rb`/`a` × `c`/`b\rc`, plus a three-row nearby case | `R/ds-group-summary-interact.R:48-87` — group by the selected columns with `interaction(..., drop = TRUE)`; no label join/split | Two rows with means `1` and `100` (and `1`/`60`); labels preserved; `aggregate()` agrees. Dot labels and character/factor results still pass the existing tests. **Corrected in dfx2:** this `interaction()` fix moved the collision to ordinary dotted labels (RH1); the current implementation groups with `dplyr` and has no separator. | Partly fixed |
 | **H3** cross-table plots count excluded observations | `test-cross-table.R` "cross table plots use only the observations in the table (H3)": audits' 3-row probe and asymmetric `mtcarz` missingness (obs 30) | `R/ds-cross-table.R:137-168` — complete cases of the two selected variables are selected once and used by all three plot branches | `ggplot_build()$data[[1]]$count` sums to `utility$obs` for default, stacked and proportional plots (1 and 30) | Fixed |
 | **H4** all-missing input yields `Inf`/`NaN` extrema/bins | `test-summary-stats.R` "an all-missing variable returns missing metrics (H4)" (`NA` vector and `numeric(0)`, printing incl. data frame); `test-freq-table.R` "continuous frequency tables reject data with no usable observations (H4)" | `R/ds-summary-stats.R:95,109-140` — metrics are `NA` when there are no usable values (lazy helper); `R/ds-output.R:8-11` — extreme-value widths no longer call `max()` on empty vectors; `R/ds-freq-numeric.R:15-17` — clear error instead of `Inf`/`NaN` bins | Summary prints `NA`, no warnings, no `Inf`/`NaN`; frequency table stops with `Data has no non-missing observations; cannot construct continuous bins.` | Fixed |
 | **H5** harmonic mean returns 0 for small positive data | `test-describe.R` "harmonic mean is stable for extreme magnitudes (H5)" | `R/ds-describe.R:563-576` — scaled reciprocals `s / mean(s / z)`, `s = min(z)`; non-finite input warns and returns `NA` | `ds_hmean(rep(1e-308, 10)) == 1e-308`, `ds_hmean(c(1e-310, 1e-310)) == 1e-310`, mixed `c(1e-300, 1e300) == 2e-300`, `c(2,4) == 4/3` | Fixed |
@@ -26,6 +26,10 @@ M6 is listed as "nice to have" in the audit but returns a wrong row (`n = 0` ret
 so it was fixed under the wrong-results rule.
 
 ## Deferred (not fixed in this round)
+
+> **dfx2 (2026-11-01):** every item in this section except the audit
+> leftovers has since been fixed; see `dfx2-report.md`. The notes below record
+> the state at the end of the `dfx` round.
 
 - **M4** vector vs data-frame NA policy: `ds_measures_*`/`ds_percentiles` still error or count NAs on
   bare vectors while data-frame input drops them. This needs a policy decision (`na.rm` argument or
@@ -58,6 +62,8 @@ so it was fixed under the wrong-results rule.
 - `ds_hmean()` warns and returns `NA` for non-finite input.
 - `ds_group_summary()$tidy_stats` `length` is now double and, when a grouping column is named like one
   of the statistics (e.g. `length`), the tibble keeps both columns with duplicate names (labels first).
+  **dfx2:** the duplicate names were a regression; colliding grouping columns are now suffixed with
+  `_group`.
 
 ## Build and check
 
