@@ -82,6 +82,31 @@ summaries, frequency and cross tables, and summary statistics.
 - `ds_auto_summary_stats()` no longer prints a stray `NULL` after each summary.
 - The deprecated `ds_freq_cont()` forwards its variable correctly and no longer
   fails with `object 'mpg' not found`.
+- `ds_group_summary()` and `ds_group_summary_interact()` no longer overwrite
+  data columns whose names match a statistic, such as `missing`, `min` or
+  `Levels`, so the printed table and `tidy_stats` report the same values.
+- `ds_group_summary_interact()` groups by the selected columns instead of a
+  joined label, so groups whose labels contain the separator (`\r`) are no
+  longer merged.
+- `ds_group_summary()` stops with a clear message when the grouping variable
+  has no non-missing values, instead of failing with
+  `non-numeric argument to mathematical function`.
+- Cross table plots now use only the observations counted in the table, so a
+  missing value in either variable is no longer plotted as a category.
+- `ds_summary_stats()` and `ds_summary()` report missing metrics, instead of
+  `Inf`/`-Inf`/`NaN`, for a variable with no non-missing observations, and
+  `ds_freq_table()` stops with a clear message for continuous data with no
+  non-missing observations instead of printing `Inf`/`NaN` bins.
+- `ds_hmean()` scales the reciprocals before summing, so it returns the value
+  itself for identical very small positive numbers instead of `0`.
+- Continuous bin boundaries are constructed without computing
+  `max(x) - min(x)` directly, so a finite range such as `-1e308` to `1e308`
+  produces finite, increasing boundaries instead of `Inf`.
+- `ds_tailobs()` requires `n` to be a single whole number, returns
+  `numeric(0)` for `n = 0` and rejects negative, fractional, missing or
+  infinite values instead of returning a wrong number of observations.
+- `ds_twoway_table()` derives its join keys from the selected columns, so
+  programmatic calls with `!!rlang::sym()` or `{{ }}` work again.
 
 # descriptr 0.6.0
 
