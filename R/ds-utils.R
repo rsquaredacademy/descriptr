@@ -45,20 +45,38 @@ formatas <- function(x, round, width, justify = "centre") {
   return(format(x, width = width, justify = justify))
 }
 
-bin_size <- function(data, bins) {
-  return((max(data, na.rm = TRUE) - min(data, na.rm = TRUE)) / bins)
-}
-
 intervals <- function(data, bins, na.rm = TRUE) {
-  binsize <- bin_size(data, bins)
-  bin <- bins - 1
-  interval <- min(data)
-  for (i in seq_len(bin)) {
-    out <- interval[i] + binsize
-    interval <- c(interval, out)
+
+  if (length(data) == 0L) {
+    stop("Cannot construct bin boundaries for empty data.", call. = FALSE)
   }
-  interval <- c(interval, max(data))
-  return(interval)
+
+  lo <- min(data, na.rm = na.rm)
+  hi <- max(data, na.rm = na.rm)
+
+  if (!is.finite(lo) || !is.finite(hi)) {
+    stop("Cannot construct bin boundaries for non-finite data.", call. = FALSE)
+  }
+
+  t <- (0:bins) / bins
+
+  # `hi - lo` overflows for some finite ranges; the convex combination
+  # `lo * (1 - t) + hi * t` stays representable for every finite lo and hi
+  if (is.finite(hi - lo)) {
+    boundary <- lo + (hi - lo) * t
+  } else {
+    boundary <- lo * (1 - t) + hi * t
+  }
+
+  boundary[1]                <- lo
+  boundary[length(boundary)] <- hi
+
+  if (any(!is.finite(boundary)) || any(diff(boundary) <= 0)) {
+    stop("Cannot construct strictly increasing bin boundaries for the data range.",
+         call. = FALSE)
+  }
+
+  boundary
 }
 
 freq <- function(data, bins, inta, closed = c("left", "right", "both")) {

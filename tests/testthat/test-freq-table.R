@@ -69,6 +69,23 @@ test_that("continuous frequency tables reject data with no usable observations (
   )
 })
 
+test_that("bin boundaries stay finite and increasing for extreme ranges (H6)", {
+
+  d <- data.frame(x = c(-1e308, 0, 1e308))
+  k <- ds_freq_table(d, x)
+
+  expect_true(all(is.finite(k$utility$breaks)))
+  expect_true(all(diff(k$utility$breaks) > 0))
+  expect_equal(k$utility$frequency, c(1L, 0L, 1L, 0L, 1L))
+  expect_equal(sum(k$utility$frequency), 3L)
+
+  expect_equal(intervals(c(-1e308, 1e308), 2), c(-1e308, 0, 1e308))
+
+  k2 <- ds_freq_table(data.frame(x = c(-1e308, 1e308)), x, bins = 2)
+  expect_true(all(is.finite(k2$utility$breaks)))
+  expect_equal(k2$utility$frequency, c(1L, 1L))
+})
+
 test_that("ds_freq_table throws appropriate error", {
 
   mt <- mtcarz
