@@ -126,6 +126,70 @@ test_that("ds_group_summary stats have default row names", {
   expect_equal(rownames(k$stats), as.character(seq_len(nrow(k$stats))))
 })
 
+test_that("ds_group_summary does not overwrite source columns named like statistics (H1)", {
+
+  stat <- function(x, level, name) {
+    col <- x$stats[[level]]
+    names(col) <- x$stats[[1]]
+    unname(col[[name]])
+  }
+
+  # continuous variable named `missing`
+  d <- data.frame(g = factor(c("a", "a", "b")), missing = c(1, 3, 5))
+  k <- ds_group_summary(d, g, missing)
+
+  expect_equal(stat(k, "a", "Minimum"), 1)
+  expect_equal(stat(k, "a", "Maximum"), 3)
+  expect_equal(stat(k, "a", "Mean"), 2)
+  expect_equal(stat(k, "a", "Variance"), 2)
+  expect_equal(stat(k, "b", "Minimum"), 5)
+  expect_equal(stat(k, "b", "Maximum"), 5)
+  expect_equal(stat(k, "b", "Mean"), 5)
+  expect_true(is.na(stat(k, "b", "Variance")))
+
+  tidy <- as.data.frame(k$tidy_stats)
+  expect_equal(tidy$min, c(1, 5))
+  expect_equal(tidy$max, c(3, 5))
+  expect_equal(tidy$mean, c(2, 5))
+  expect_equal(tidy$variance, c(2, NA))
+
+  # continuous variable named `min`
+  d2 <- data.frame(g = factor(c("a", "a", "b")), min = c(4, 8, 2))
+  k2 <- ds_group_summary(d2, g, min)
+
+  expect_equal(stat(k2, "a", "Minimum"), 4)
+  expect_equal(stat(k2, "a", "Maximum"), 8)
+  expect_equal(stat(k2, "a", "Mean"), 6)
+  expect_equal(stat(k2, "b", "Mean"), 2)
+  expect_equal(as.data.frame(k2$tidy_stats)$max, c(8, 2))
+  expect_equal(as.data.frame(k2$tidy_stats)$mean, c(6, 2))
+
+  # continuous variable named `mean`
+  d3 <- data.frame(g = factor(c("a", "a", "b")), mean = c(1, 2, 9))
+  k3 <- ds_group_summary(d3, g, mean)
+
+  expect_equal(stat(k3, "a", "Mean"), 1.5)
+  expect_equal(stat(k3, "a", "Median"), 1.5)
+  expect_equal(as.data.frame(k3$tidy_stats)$median, c(1.5, 9))
+
+  # grouping column named `length`
+  d4 <- data.frame(length = factor(c("a", "b", "a")), x = c(1, 2, 3))
+  k4 <- ds_group_summary(d4, length, x)
+
+  expect_equal(names(k4$stats), c("Statistic/Levels", "a", "b"))
+  expect_equal(as.character(k4$tidy_stats[[1]]), c("a", "b"))
+  expect_equal(k4$tidy_stats[[2]], c(2L, 1L))
+})
+
+test_that("ds_group_summary reports when there are no usable groups (M2)", {
+
+  d <- data.frame(g = factor(c(NA, NA), levels = "a"), x = 1:2)
+  expect_error(ds_group_summary(d, g, x), "No data to summarise")
+
+  d0 <- data.frame(g = factor(character()), x = numeric())
+  expect_error(ds_group_summary(d0, g, x), "No data to summarise")
+})
+
 test_that("ds_group_summary throws the appropriate error", {
   mt <- mtcars
   mt$cyl <- as.factor(mt$cyl)
