@@ -12,6 +12,10 @@ ds_freq_numeric <- function(data, variable, bins = 5,
     dplyr::pull(!! varyable) %>%
     na.omit()
 
+  if (length(fdata) == 0) {
+    stop("Data has no non-missing observations; cannot construct continuous bins.", call. = FALSE)
+  }
+
   if (length(fdata) > 0 && max(fdata) == min(fdata)) {
     stop("Data has zero variance; cannot construct continuous bins.", call. = FALSE)
   }

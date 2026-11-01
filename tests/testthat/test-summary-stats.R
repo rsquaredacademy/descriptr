@@ -66,6 +66,48 @@ test_that("ds_summary reports original extreme observation indices (#133)", {
   expect_equal(small$highobsi, c(1, 3, 2))
 })
 
+test_that("an all-missing variable returns missing metrics (H4)", {
+
+  summary_metrics <- c(
+    "avg", "tavg", "stdev", "variance", "skew", "kurtosis", "uss", "css",
+    "cvar", "sem", "median", "mode", "range", "min", "Max", "iqrange",
+    "per99", "per90", "per95", "per75", "per25", "per10", "per5", "per1"
+  )
+
+  x <- c(NA_real_, NA_real_)
+  k <- NULL
+  expect_silent(k <- ds_summary(x))
+
+  expect_equal(k$obs, 2)
+  expect_equal(k$missing, 2)
+  expect_true(all(vapply(k[summary_metrics], function(z) isTRUE(is.na(z)),
+                         logical(1))))
+  expect_equal(k$lowobs, numeric(0))
+  expect_equal(k$highobs, numeric(0))
+
+  # printing an all-missing summary must not show Inf/NaN values or warn
+  out <- NULL
+  expect_silent(out <- capture.output(ds_summary_stats(x)))
+  expect_true(any(grepl("Mean", out)))
+  expect_false(any(grepl("Inf", out, fixed = TRUE)))
+  expect_false(any(grepl("NaN", out, fixed = TRUE)))
+
+  empty <- NULL
+  expect_silent(empty <- ds_summary(numeric(0)))
+  expect_equal(empty$obs, 0)
+  expect_true(all(vapply(empty[summary_metrics],
+                         function(z) isTRUE(is.na(z)), logical(1))))
+
+  # a data frame whose only column is all missing
+  out_df <- NULL
+  expect_silent(out_df <- capture.output(
+    ds_summary_stats(data.frame(x = rep(NA_real_, 2)))
+  ))
+  expect_true(any(grepl("Variable: x", out_df, fixed = TRUE)))
+  expect_false(any(grepl("Inf", out_df, fixed = TRUE)))
+  expect_false(any(grepl("NaN", out_df, fixed = TRUE)))
+})
+
 test_that("ds_summary_stats validates every selected column before printing", {
 
   out <- capture.output(

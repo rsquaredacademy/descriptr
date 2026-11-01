@@ -56,6 +56,19 @@ test_that("output from ds_freq_table is as expected in the presence of missing d
 
 })
 
+test_that("continuous frequency tables reject data with no usable observations (H4)", {
+
+  expect_error(
+    ds_freq_table(data.frame(x = rep(NA_real_, 3)), x),
+    "Data has no non-missing observations; cannot construct continuous bins."
+  )
+
+  expect_error(
+    ds_freq_table(data.frame(x = numeric(0)), x),
+    "Data has no non-missing observations; cannot construct continuous bins."
+  )
+})
+
 test_that("ds_freq_table throws appropriate error", {
 
   mt <- mtcarz
