@@ -3,7 +3,7 @@
 #' Descriptive statistics for multiple variables.
 #'
 #' @param data A \code{tibble} or a \code{data.frame}.
-#' @param ... Columns in \code{x}.
+#' @param ... Columns in \code{data}.
 #'
 #' @return A tibble.
 #'

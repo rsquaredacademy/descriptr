@@ -8,7 +8,8 @@
 #' @param data A \code{data.frame} or a \code{tibble}.
 #' @param col Column in \code{data}.
 #' @param x An object of class \code{ds_freq_table}.
-#' @param bins Number of intervals into which the data must be split.
+#' @param bins Number of intervals into which the data must be split; a
+#' positive whole number.
 #' @param closed Interval closure for continuous data. \code{"left"} (the
 #' default) gives half-open intervals with the last interval closed;
 #' \code{"right"} gives right-closed intervals with the first interval closed;
@@ -16,6 +17,11 @@
 #' counted in both adjacent intervals.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
+#'
+#' @details Percentages are computed over all observations, including missing
+#'   values, so the \code{Percent} column and the \code{Missing} row share the
+#'   same denominator and add up to 100. Continuous data with no non-missing
+#'   observations, or with no variation, cannot be binned and raise an error.
 #'
 #' @examples
 #' # categorical data

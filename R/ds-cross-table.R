@@ -7,8 +7,8 @@
 #' @param var_1 First categorical variable.
 #' @param var_2 Second categorical variable.
 #' @param x An object of class \code{cross_table}.
-#' @param stacked If \code{FALSE}, the columns of height are portrayed
-#' as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.
+#' @param stacked If \code{TRUE}, the columns of height are portrayed as
+#' stacked bars, and if \code{FALSE} the columns are portrayed as juxtaposed bars.
 #' @param proportional If \code{TRUE}, the height of the bars is proportional.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.

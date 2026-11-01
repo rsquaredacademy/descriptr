@@ -26,7 +26,7 @@
 #' # cross table for multiple columns
 #' ds_auto_cross_table(mtcarz, cyl, gear, am)
 #'
-#' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
+#' @seealso \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #' @export
 #'
 ds_auto_freq_table <- function(data, ...) {
