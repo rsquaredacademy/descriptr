@@ -569,9 +569,20 @@ test_that("geometric and harmonic means are numerically stable (#134)", {
 
 test_that("harmonic mean is stable for extreme magnitudes (H5)", {
 
-  expect_equal(ds_hmean(rep(1e-308, 10)), 1e-308)
-  expect_equal(ds_hmean(c(1e-310, 1e-310)), 1e-310)
-  expect_equal(ds_hmean(c(1e-300, 1e300)), 2e-300, tolerance = 1e-10)
+  # compare scaled ratios: the original implementation returned exactly 0 for
+  # these inputs, which an absolute comparison against 1e-308 accepted
+  h1 <- ds_hmean(rep(1e-308, 10))
+  expect_gt(h1, 0)
+  expect_equal(h1 / 1e-308, 1)
+
+  h2 <- ds_hmean(c(1e-310, 1e-310))
+  expect_gt(h2, 0)
+  expect_equal(h2 / 1e-310, 1)
+
+  h3 <- ds_hmean(c(1e-300, 1e300))
+  expect_gt(h3, 0)
+  expect_equal(h3 / 2e-300, 1, tolerance = 1e-10)
+
   expect_equal(ds_hmean(c(2, 4)), 2 / (1 / 2 + 1 / 4))
   expect_equal(ds_hmean(rep(1000, 500)), 1000)
 
@@ -627,4 +638,57 @@ test_that("ds_tailobs counts non-missing observations", {
   )
   expect_equal(ds_tailobs(x, 3), c(1, 2, 6))
   expect_equal(ds_tailobs(x, 3, type = "high"), c(6, 2, 1))
+})
+
+test_that("vector and data-frame NA handling is consistent (M4)", {
+
+  x <- c(1, 2, NA)
+
+  # variation: n counts non-missing observations and every metric ignores NAs
+  v <- ds_measures_variation(x)
+  vf <- ds_measures_variation(data.frame(x = x), x)
+
+  expect_equal(v$n, 2)
+  expect_equal(v$range, 1)
+  expect_equal(v$iqr, 0.5)
+  expect_equal(v$variance, 0.5)
+  expect_equal(v$sd, 0.71)
+  expect_equal(v$coeff_var, 47.14)
+  expect_equal(v$std_error, 0.5)
+  expect_equal(unname(unlist(v[-1])), unname(unlist(vf[-1])))
+
+  # symmetry: n counts usable observations, skewness/kurtosis ignore NAs
+  s <- ds_measures_symmetry(c(1, 2, NA, 5))
+  sf <- ds_measures_symmetry(data.frame(x = c(1, 2, NA, 5)), x)
+
+  expect_equal(s$n, 3)
+  expect_equal(s$skewness, round(ds_skewness(c(1, 2, 5)), 2))
+  expect_equal(s$kurtosis, round(ds_kurtosis(c(1, 2, 5)), 2))
+  expect_equal(unname(unlist(s[-1])), unname(unlist(sf[-1])))
+
+  # percentiles: NAs are dropped instead of raising a base error
+  p <- ds_percentiles(c(1, 2, NA))
+  pf <- ds_percentiles(data.frame(x = c(1, 2, NA)), x)
+
+  expect_equal(p$n, 2)
+  expect_equal(p$min, 1)
+  expect_equal(p$median, 1.5)
+  expect_equal(p$max, 2)
+  expect_equal(p$per_1, unname(round(quantile(c(1, 2), 0.01), 2)))
+  expect_equal(p$q3, unname(round(quantile(c(1, 2), 0.75), 2)))
+  expect_equal(unname(unlist(p[-1])), unname(unlist(pf[-1])))
+
+  # all-missing and empty vectors return NA like the data-frame path
+  for (fun in list(ds_measures_variation, ds_measures_symmetry, ds_percentiles)) {
+    res <- fun(c(NA_real_, NA_real_))
+    expect_equal(res$n, 0)
+    expect_true(all(is.na(unlist(res[-c(1, 2)]))))
+  }
+
+  # standard error ignores missing values and uses their count
+  expect_equal(ds_std_error(c(1, 2, NA)), 0.5)
+  expect_equal(ds_std_error(c(1, 2, 5)), sd(c(1, 2, 5)) / sqrt(3))
+  expect_equal(ds_std_error(mtcarz$mpg), sd(mtcarz$mpg) / sqrt(length(mtcarz$mpg)))
+  expect_true(is.na(ds_std_error(c(NA_real_, NA_real_))))
+  expect_true(is.na(ds_std_error(numeric(0))))
 })

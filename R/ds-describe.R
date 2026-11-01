@@ -7,6 +7,10 @@
 #' @param trim The fraction of values to be trimmed before computing the mean.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
+#' @details \code{n} reports the total number of observations and
+#'   \code{missing} the number of missing values; the measures themselves are
+#'   computed from the non-missing values.
+#'
 #' @examples
 #' # single column
 #' ds_measures_location(mtcarz, mpg)
@@ -67,12 +71,17 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 
 #' Measures of variation
 #'
-#' Returns the measures of location such as range, variance and standard
+#' Returns the measures of variation such as range, variance and standard
 #'   deviation.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#'
+#' @details \code{n} reports the number of non-missing observations and every
+#'   measure is computed from the non-missing values, for both vector and
+#'   data-frame input. A variable with no non-missing observations returns
+#'   \code{n = 0} and \code{NA} for every measure.
 #'
 #' @examples
 #' # single column
@@ -139,11 +148,11 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
     data <- list(data, ...)
 
     data.frame(variable  = vars,
-               n         = sapply(data, length),
+               n         = sapply(data, function(x) sum(!is.na(x))),
                range     = round(sapply(data, ds_range), decimals),
-               iqr       = round(sapply(data, stats::IQR), decimals),
-               variance  = round(sapply(data, stats::var), decimals),
-               sd        = round(sapply(data, stats::sd), decimals),
+               iqr       = round(sapply(data, function(x) stats::IQR(x, na.rm = TRUE)), decimals),
+               variance  = round(sapply(data, function(x) stats::var(x, na.rm = TRUE)), decimals),
+               sd        = round(sapply(data, function(x) stats::sd(x, na.rm = TRUE)), decimals),
                coeff_var = round(sapply(data, ds_cvar), decimals),
                std_error = round(sapply(data, ds_std_error), decimals))
 
@@ -163,6 +172,11 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#'
+#' @details \code{n} reports the number of non-missing observations and the
+#'   measures are computed from the non-missing values, for both vector and
+#'   data-frame input. A variable with no non-missing observations returns
+#'   \code{n = 0} and \code{NA} for every measure.
 #'
 #' @examples
 #' # single column
@@ -228,7 +242,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
     data <- list(data, ...)
 
     data.frame(var      = vars,
-               n        = sapply(data, length),
+               n        = sapply(data, function(x) sum(!is.na(x))),
                skewness = round(sapply(data, ds_skewness), decimals),
                kurtosis = round(sapply(data, ds_kurtosis), decimals))
 
@@ -249,6 +263,11 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#'
+#' @details \code{n} reports the number of non-missing observations and the
+#'   percentiles are computed from the non-missing values, for both vector and
+#'   data-frame input. A variable with no non-missing observations returns
+#'   \code{n = 0} and \code{NA} for every percentile.
 #'
 #' @examples
 #' # single column
@@ -322,18 +341,18 @@ ds_percentiles <- function(data, ..., decimals = 2) {
     data <- list(data, ...)
 
     data.frame(var    = vars,
-               n      = sapply(data, length),
-               min    = round(sapply(data, min), decimals),
-               per_1  = round(sapply(data, quantile, 0.01), decimals),
-               per_5  = round(sapply(data, quantile, 0.05), decimals),
-               per_10 = round(sapply(data, quantile, 0.10), decimals),
-               q1     = round(sapply(data, quantile, 0.25), decimals),
-               median = round(sapply(data, median), decimals),
-               q3     = round(sapply(data, quantile, 0.75), decimals),
-               per_90 = round(sapply(data, quantile, 0.90), decimals),
-               per_95 = round(sapply(data, quantile, 0.95), decimals),
-               per_99 = round(sapply(data, quantile, 0.99), decimals),
-               max    = round(sapply(data, max), decimals))
+               n      = sapply(data, function(x) sum(!is.na(x))),
+               min    = round(sapply(data, num_or_na, min), decimals),
+               per_1  = round(sapply(data, quantile, 0.01, na.rm = TRUE), decimals),
+               per_5  = round(sapply(data, quantile, 0.05, na.rm = TRUE), decimals),
+               per_10 = round(sapply(data, quantile, 0.10, na.rm = TRUE), decimals),
+               q1     = round(sapply(data, quantile, 0.25, na.rm = TRUE), decimals),
+               median = round(sapply(data, median, na.rm = TRUE), decimals),
+               q3     = round(sapply(data, quantile, 0.75, na.rm = TRUE), decimals),
+               per_90 = round(sapply(data, quantile, 0.90, na.rm = TRUE), decimals),
+               per_95 = round(sapply(data, quantile, 0.95, na.rm = TRUE), decimals),
+               per_99 = round(sapply(data, quantile, 0.99, na.rm = TRUE), decimals),
+               max    = round(sapply(data, num_or_na, max), decimals))
 
   } else {
 
