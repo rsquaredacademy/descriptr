@@ -132,12 +132,18 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
   k <- string_to_name(x)
   j <- string_to_name(x, 2)
 
+  # bar heights must reflect the contingency table, which excludes rows with a
+  # missing value in either variable
+  plot_data <-
+    x %>%
+    use_series(utility) %>%
+    use_series(data) %>%
+    dplyr::select(x = !! k, y = !! j) %>%
+    dplyr::filter(!is.na(x), !is.na(y))
+
   if (proportional) {
     p <-
-      x %>%
-      use_series(utility) %>%
-      use_series(data) %>%
-      dplyr::select(x = !! k, y = !! j) %>%
+      plot_data %>%
       table() %>%
       as.data.frame() %>%
       set_colnames(c("x", "y", "n")) %>%
@@ -149,21 +155,13 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
   } else {
     if (stacked) {
       p <-
-        x %>%
-        use_series(utility) %>%
-        use_series(data) %>%
-        dplyr::select(x = !! k, y = !! j) %>%
-        ggplot() +
+        ggplot(plot_data) +
         geom_bar(aes(x, fill = y), position = "stack") +
         xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
         labs(fill = y_lab)
     } else {
       p <-
-        x %>%
-        use_series(utility) %>%
-        use_series(data) %>%
-        dplyr::select(x = !! k, y = !! j) %>%
-        ggplot() +
+        ggplot(plot_data) +
         geom_bar(aes(x, fill = y), position = "dodge") +
         xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
         labs(fill = y_lab)
@@ -192,6 +190,13 @@ ds_twoway_table <- function(data, var_1, var_2) {
   var_2 <- rlang::enquo(var_2)
   check_factor(data, !! var_1, var1_name)
   check_factor(data, !! var_2, var2_name)
+
+  # use the resolved column names, not the expressions captured by
+  # deparse(substitute()), so that `!!sym()` and embracing work as join keys
+  var_names <-
+    data %>%
+    dplyr::select(!! var_1, !! var_2) %>%
+    names()
 
   group <-
     data %>%
@@ -234,7 +239,7 @@ ds_twoway_table <- function(data, var_1, var_2) {
   result <- dplyr::inner_join(
     group,
     dplyr::select(group2, -count),
-    by = c(var1_name, var2_name)
+    by = var_names
   )
   return(result)
 

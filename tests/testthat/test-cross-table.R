@@ -64,6 +64,54 @@ test_that("ouput from plot.ds_cross_table matches expected output", {
   vdiffr::expect_doppelganger("cross_bar_proportional", p3$plot)
 })
 
+test_that("cross table plots use only the observations in the table (H3)", {
+
+  plotted_obs <- function(p) {
+    built <- ggplot2::ggplot_build(p)$data[[1]]
+    if ("count" %in% names(built)) {
+      sum(built$count)
+    } else {
+      sum(p$data$n)
+    }
+  }
+
+  d <- data.frame(a = factor(c("x", "x", NA)), b = factor(c("y", NA, "y")))
+  k <- ds_cross_table(d, a, b)
+
+  expect_equal(k$utility$obs, 1)
+  expect_equal(k$utility$missing, 2)
+  expect_equal(plotted_obs(plot(k, print_plot = FALSE)), k$utility$obs)
+  expect_equal(plotted_obs(plot(k, stacked = TRUE, print_plot = FALSE)),
+               k$utility$obs)
+  expect_equal(plotted_obs(plot(k, proportional = TRUE, print_plot = FALSE)),
+               k$utility$obs)
+
+  # asymmetric missingness in the two variables
+  g <- mtcarz
+  g$cyl[1]  <- NA
+  g$gear[2] <- NA
+  k2 <- ds_cross_table(g, cyl, gear)
+
+  expect_equal(k2$utility$obs, 30)
+  expect_equal(k2$utility$missing, 2)
+  expect_equal(plotted_obs(plot(k2, print_plot = FALSE)), 30)
+  expect_equal(plotted_obs(plot(k2, stacked = TRUE, print_plot = FALSE)), 30)
+  expect_equal(plotted_obs(plot(k2, proportional = TRUE, print_plot = FALSE)), 30)
+})
+
+test_that("ds_twoway_table supports programmatic column selection (M1)", {
+
+  direct <- ds_twoway_table(mtcarz, cyl, gear)
+
+  k <- ds_twoway_table(mtcarz, !!rlang::sym("cyl"), !!rlang::sym("gear"))
+  expect_equal(k, direct)
+  expect_equal(nrow(k), 8)
+  expect_equal(sum(k$count), 32)
+
+  f <- function(data, a, b) ds_twoway_table(data, {{ a }}, {{ b }})
+  expect_equal(f(mtcarz, cyl, gear), direct)
+})
+
 test_that("ds_cross_table throws appropriate error", {
 
   x <- 1:10
