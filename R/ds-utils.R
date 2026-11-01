@@ -126,6 +126,23 @@ num_or_na <- function(x, fun) {
   fun(x)
 }
 
+# Representative grouping keys, in the order used by split(), are selected
+# from the original grouping vector so that factor classes (including ordered
+# factors) and the observed level order are retained.
+group_key_vector <- function(gvar, key_labels) {
+  gvar[match(key_labels, as.character(gvar))]
+}
+
+# A grouping column keeps its source name in tidy output unless that name is
+# also a statistic column name, in which case `_group` is appended.
+unique_group_name <- function(name, stat_names) {
+  if (name %in% stat_names) {
+    paste0(name, "_group")
+  } else {
+    name
+  }
+}
+
 md_helper <- function(x, y) {
   abs(x - y)
 }
@@ -136,13 +153,18 @@ md_helper <- function(x, y) {
 #'
 #' @param x A numeric vector.
 #'
+#' @details Missing values are removed before computation and the number of
+#'   non-missing observations is used. A vector with no non-missing
+#'   observations returns \code{NA}.
+#'
 #' @examples
 #' ds_std_error(mtcars$mpg)
 #'
 #' @export
 #'
 ds_std_error <- function(x) {
-  if (length(stats::na.omit(x)) == 0L) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0L) {
     return(NA_real_)
   }
   sd(x) / (length(x) ^ 0.5)

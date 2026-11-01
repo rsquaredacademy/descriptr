@@ -8,7 +8,16 @@
 #' @param ... Columns in \code{data}; categorical variables.
 #'
 #' @details Character grouping columns are accepted and treated as factors.
-#' Factor levels may contain any character, including \code{.}.
+#' Factor levels may contain any character, including \code{.} and \code{\\r}.
+#' Groups are formed from the values of the grouping columns themselves, so
+#' distinct combinations that would serialize to the same character string are
+#' never merged. Rows with a missing value in any of the selected columns are
+#' excluded.
+#'
+#' The grouping columns keep their names in the returned tibble. If a grouping
+#' column is named like one of the statistic columns, such as \code{mean}, its
+#' column is suffixed with \code{_group} so that every column name is unique
+#' and the statistic keeps its documented name.
 #'
 #' @examples
 #' ds_group_summary_interact(mtcarz, mpg, cyl, gear)
@@ -40,8 +49,6 @@ ds_group_summary_interact <- function(data, col, ...) {
         stop(error_message, call. = FALSE)
   }
 
-  cnames <- names(gdata)
-
   # group by the selected columns themselves; the labels are never joined
   # into (and split out of) a string, so distinct tuples whose labels would
   # serialize to the same text cannot be merged
@@ -53,7 +60,10 @@ ds_group_summary_interact <- function(data, col, ...) {
     na.omit()
 
   cvec <- gdata_num[[cname]]
-  gid  <- interaction(gdata_num[cnames], drop = TRUE)
+
+  grouped <- dplyr::group_by(gdata_num, !!! g_var)
+  indexes <- dplyr::group_rows(grouped)
+  keys    <- dplyr::group_keys(grouped)
 
   stat_names <- c(
     "min", "max", "mean", "t_mean", "median", "mode", "range", "variance",
@@ -71,15 +81,20 @@ ds_group_summary_interact <- function(data, col, ...) {
     )
   }
 
-  indexes <- split(seq_len(nrow(gdata_num)), gid)
-
   stat_mat <- t(vapply(indexes, function(i) group_stats(cvec[i]),
                        numeric(length(stat_names))))
   colnames(stat_mat) <- stat_names
 
-  # keep the first row of each group as its label
-  keys <- gdata_num[vapply(indexes, `[`, integer(1), 1L), cnames, drop = FALSE]
-  keys[] <- lapply(keys, as.character)
+  # group keys keep their character representation, as in earlier releases
+  keys <- as.data.frame(lapply(keys, as.character), stringsAsFactors = FALSE)
+
+  # a grouping column named like a statistic would duplicate a returned
+  # column name; suffix it so that every name is unique and the statistic
+  # keeps its documented name
+  key_names   <- names(keys)
+  clash       <- key_names %in% stat_names
+  key_names[clash] <- paste0(key_names[clash], "_group")
+  names(keys) <- make.unique(key_names, sep = "_")
 
   out <- cbind(keys, as.data.frame(stat_mat))
   row.names(out) <- NULL

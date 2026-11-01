@@ -1,7 +1,7 @@
 #' Groupwise descriptive statistics
 #'
 #' Descriptive statistics of a continuous variable for the different levels of
-#' a categorical variable. \code{boxplot.group_summary()} creates boxplots of
+#' a categorical variable. \code{plot.ds_group_summary()} creates boxplots of
 #' the continuous variable for the different levels of the categorical variable.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
@@ -14,7 +14,14 @@
 #' @details Groups with missing values in the continuous variable are summarised
 #' using the non-missing observations (\code{na.rm = TRUE}), and the number of
 #' missing observations is reported in the \code{Missing} row of \code{stats}.
-#' Unused levels of the grouping factor are dropped.
+#' Observations with a missing grouping label are excluded from the summary and
+#' from the boxplot. Unused levels of the grouping factor are dropped.
+#'
+#' The grouping key in \code{tidy_stats} keeps the class of the grouping
+#' variable (including ordered factors) and the order of the observed levels.
+#' If the grouping column is named like one of the statistic columns, such as
+#' \code{length}, its column in \code{tidy_stats} is suffixed with
+#' \code{_group} so that every column name is unique.
 #'
 #' @return \code{ds_group_summary()} returns an object of class \code{"ds_group_summary"}.
 #' An object of class \code{"ds_group_summary"} is a list containing the
@@ -75,9 +82,6 @@ ds_group_summary.default <- function(data, group_by, cols) {
   # drop unused levels so that empty groups do not produce NULL statistics
   gvar <- droplevels(gvar)
 
-  plot_data        <- data.frame(gvar, cvar)
-  names(plot_data) <- c(xname, yname)
-
   # summarise the observed groups only
   keep <- !is.na(gvar)
   gvar <- gvar[keep]
@@ -86,6 +90,11 @@ ds_group_summary.default <- function(data, group_by, cols) {
   if (length(gvar) == 0) {
     stop("No data to summarise. The data has no observations with a non-missing grouping value.", call. = FALSE)
   }
+
+  # plot and summary must use the same observations: a missing grouping label
+  # is not a group
+  plot_data        <- data.frame(gvar, cvar)
+  names(plot_data) <- c(xname, yname)
 
   split_dat <- split(cvar, gvar, drop = TRUE)
 
@@ -152,10 +161,10 @@ ds_group_summary.default <- function(data, group_by, cols) {
   )
 
   tidy_list <- c(
-    list(factor(names(split_dat), levels = names(split_dat))),
+    list(group_key_vector(gvar, names(split_dat))),
     tidy_cols
   )
-  names(tidy_list) <- c(xname, tidy_names)
+  names(tidy_list) <- c(unique_group_name(xname, tidy_names), tidy_names)
 
   tidystats <- dplyr::as_tibble(
     data.frame(tidy_list, check.names = FALSE),

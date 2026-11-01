@@ -106,6 +106,24 @@ test_that("ds_group_summary drops rows with a missing grouping label", {
   expect_equal(names(k$stats), c("Statistic/Levels", "4", "6", "8"))
 })
 
+test_that("group summary boxplots exclude missing grouping labels (RH2)", {
+
+  d <- data.frame(g = factor(c("a", "a", NA)), x = c(1, 3, 100))
+  k <- ds_group_summary(d, g, x)
+
+  expect_equal(names(k$stats), c("Statistic/Levels", "a"))
+  expect_equal(k$stats[["a"]][k$stats[[1]] == "Mean"], 2)
+
+  p <- plot(k, print_plot = FALSE)
+  boxes <- ggplot2::ggplot_build(p)$data[[1]]
+
+  expect_equal(nrow(boxes), 1)
+  expect_equal(boxes$middle, 2)
+  expect_equal(boxes$ymin, 1)
+  expect_equal(boxes$ymax, 3)
+  expect_false(anyNA(boxes$x))
+})
+
 test_that("ds_group_summary treats a character grouping column as categorical", {
 
   char_data <- data.frame(g = c("b", "a", "b", "c"), x = c(1, 2, 3, 4))
@@ -179,6 +197,52 @@ test_that("ds_group_summary does not overwrite source columns named like statist
   expect_equal(names(k4$stats), c("Statistic/Levels", "a", "b"))
   expect_equal(as.character(k4$tidy_stats[[1]]), c("a", "b"))
   expect_equal(k4$tidy_stats[[2]], c(2L, 1L))
+})
+
+test_that("ds_group_summary returns unique column names (RM1)", {
+
+  d <- data.frame(length = factor(c("a", "b", "a")), x = c(1, 2, 3))
+  k <- ds_group_summary(d, length, x)
+
+  expect_false(anyDuplicated(names(k$tidy_stats)) > 0L)
+  expect_equal(names(k$tidy_stats)[1], "length_group")
+  expect_equal(as.character(k$tidy_stats$length_group), c("a", "b"))
+  # the statistic keeps its name and both values survive
+  expect_equal(k$tidy_stats$length, c(2L, 1L))
+
+  # ordinary dplyr transformations work on the result
+  expect_silent(mutated <- dplyr::mutate(k$tidy_stats, z = length * 2))
+  expect_equal(mutated$z, c(4L, 2L))
+  expect_silent(filtered <- dplyr::filter(k$tidy_stats, .data[["mean"]] > 0))
+  expect_equal(nrow(filtered), 2)
+
+  # the printed table is unaffected by the rename
+  expect_equal(names(k$stats), c("Statistic/Levels", "a", "b"))
+  expect_equal(k$stats[["a"]][k$stats[[1]] == "Obs"], 2)
+})
+
+test_that("ds_group_summary keeps ordered grouping keys ordered (RM2)", {
+
+  d <- data.frame(
+    g = ordered(c("a", "a", "b", "b", "c", "c"),
+                levels = c("c", "b", "a", "unused")),
+    x = c(1, 3, 5, 7, 9, 11)
+  )
+
+  k <- ds_group_summary(d, g, x)
+
+  expect_true(is.ordered(k$tidy_stats$g))
+  expect_equal(class(k$tidy_stats$g), c("ordered", "factor"))
+  # observed levels keep their original order; the unused level is dropped
+  expect_equal(as.character(k$tidy_stats$g), c("c", "b", "a"))
+  expect_equal(levels(k$tidy_stats$g), c("c", "b", "a"))
+  expect_equal(k$tidy_stats$mean, c(10, 6, 2))
+  expect_true(k$tidy_stats$g[1] < k$tidy_stats$g[2])
+  expect_true(k$tidy_stats$g[2] < k$tidy_stats$g[3])
+
+  # unordered factors are still returned as factors
+  d2 <- data.frame(g = factor(c("a", "a", "b")), x = c(1, 2, 3))
+  expect_equal(class(ds_group_summary(d2, g, x)$tidy_stats$g), "factor")
 })
 
 test_that("ds_group_summary reports when there are no usable groups (M2)", {
