@@ -26,8 +26,12 @@ CRAN should use from now on. The note disappears once CRAN records it.
 
 ## Reverse dependencies
 
-Reverse dependency checks were run for 0.6.1 (against 0.6.0) on Windows 11,
-R 4.6.1; see `revdep/`. They reported no new problems. The reverse dependency
-check was not repeated after the fixes added on top of the 0.6.1 release
-preparation; those fixes do not change any exported function signature or
-argument.
+We checked 3 reverse dependencies (olsrr, StatisticTeach1, xplorerr), comparing
+R CMD check results across CRAN and dev versions of this package.
+
+* We saw 0 new problems
+* We failed to check 0 packages
+
+These checks ran on the 0.6.1 release preparation; the fixes added on top of it
+do not change any exported function signature or argument. (To be re-run on the
+final code before submission.)
