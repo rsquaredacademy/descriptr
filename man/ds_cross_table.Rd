@@ -21,8 +21,8 @@ ds_twoway_table(data, var_1, var_2)
 
 \item{x}{An object of class \code{cross_table}.}
 
-\item{stacked}{If \code{FALSE}, the columns of height are portrayed
-as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.}
+\item{stacked}{If \code{TRUE}, the columns of height are portrayed as
+stacked bars, and if \code{FALSE} the columns are portrayed as juxtaposed bars.}
 
 \item{proportional}{If \code{TRUE}, the height of the bars is proportional.}
 

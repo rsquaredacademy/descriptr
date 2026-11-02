@@ -14,8 +14,14 @@ ds_measures_variation(data, ..., decimals = 2)
 \item{decimals}{An option to specify the exact number of decimal places to use. The default number of decimal places is 2.}
 }
 \description{
-Returns the measures of location such as range, variance and standard
+Returns the measures of variation such as range, variance and standard
   deviation.
+}
+\details{
+\code{n} reports the number of non-missing observations and every
+  measure is computed from the non-missing values, for both vector and
+  data-frame input. A variable with no non-missing observations returns
+  \code{n = 0} and \code{NA} for every measure.
 }
 \examples{
 # single column

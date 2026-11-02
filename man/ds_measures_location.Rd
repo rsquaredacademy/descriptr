@@ -18,6 +18,11 @@ ds_measures_location(data, ..., trim = 0.05, decimals = 2)
 \description{
 Returns the measures of location such as mean, median & mode.
 }
+\details{
+\code{n} reports the total number of observations and
+  \code{missing} the number of missing values; the measures themselves are
+  computed from the non-missing values.
+}
 \examples{
 # single column
 ds_measures_location(mtcarz, mpg)

@@ -45,20 +45,38 @@ formatas <- function(x, round, width, justify = "centre") {
   return(format(x, width = width, justify = justify))
 }
 
-bin_size <- function(data, bins) {
-  return((max(data, na.rm = TRUE) - min(data, na.rm = TRUE)) / bins)
-}
-
 intervals <- function(data, bins, na.rm = TRUE) {
-  binsize <- bin_size(data, bins)
-  bin <- bins - 1
-  interval <- min(data)
-  for (i in seq_len(bin)) {
-    out <- interval[i] + binsize
-    interval <- c(interval, out)
+
+  if (length(data) == 0L) {
+    stop("Cannot construct bin boundaries for empty data.", call. = FALSE)
   }
-  interval <- c(interval, max(data))
-  return(interval)
+
+  lo <- min(data, na.rm = na.rm)
+  hi <- max(data, na.rm = na.rm)
+
+  if (!is.finite(lo) || !is.finite(hi)) {
+    stop("Cannot construct bin boundaries for non-finite data.", call. = FALSE)
+  }
+
+  t <- (0:bins) / bins
+
+  # `hi - lo` overflows for some finite ranges; the convex combination
+  # `lo * (1 - t) + hi * t` stays representable for every finite lo and hi
+  if (is.finite(hi - lo)) {
+    boundary <- lo + (hi - lo) * t
+  } else {
+    boundary <- lo * (1 - t) + hi * t
+  }
+
+  boundary[1]                <- lo
+  boundary[length(boundary)] <- hi
+
+  if (any(!is.finite(boundary)) || any(diff(boundary) <= 0)) {
+    stop("Cannot construct strictly increasing bin boundaries for the data range.",
+         call. = FALSE)
+  }
+
+  boundary
 }
 
 freq <- function(data, bins, inta, closed = c("left", "right", "both")) {
@@ -108,6 +126,23 @@ num_or_na <- function(x, fun) {
   fun(x)
 }
 
+# Representative grouping keys, in the order used by split(), are selected
+# from the original grouping vector so that factor classes (including ordered
+# factors) and the observed level order are retained.
+group_key_vector <- function(gvar, key_labels) {
+  gvar[match(key_labels, as.character(gvar))]
+}
+
+# A grouping column keeps its source name in tidy output unless that name is
+# also a statistic column name, in which case `_group` is appended.
+unique_group_name <- function(name, stat_names) {
+  if (name %in% stat_names) {
+    paste0(name, "_group")
+  } else {
+    name
+  }
+}
+
 md_helper <- function(x, y) {
   abs(x - y)
 }
@@ -118,13 +153,18 @@ md_helper <- function(x, y) {
 #'
 #' @param x A numeric vector.
 #'
+#' @details Missing values are removed before computation and the number of
+#'   non-missing observations is used. A vector with no non-missing
+#'   observations returns \code{NA}.
+#'
 #' @examples
 #' ds_std_error(mtcars$mpg)
 #'
 #' @export
 #'
 ds_std_error <- function(x) {
-  if (length(stats::na.omit(x)) == 0L) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0L) {
     return(NA_real_)
   }
   sd(x) / (length(x) ^ 0.5)

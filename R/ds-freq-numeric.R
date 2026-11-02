@@ -12,6 +12,10 @@ ds_freq_numeric <- function(data, variable, bins = 5,
     dplyr::pull(!! varyable) %>%
     na.omit()
 
+  if (length(fdata) == 0) {
+    stop("Data has no non-missing observations; cannot construct continuous bins.", call. = FALSE)
+  }
+
   if (length(fdata) > 0 && max(fdata) == min(fdata)) {
     stop("Data has zero variance; cannot construct continuous bins.", call. = FALSE)
   }
@@ -27,10 +31,10 @@ ds_freq_numeric <- function(data, variable, bins = 5,
   n_bins   <- bins
   inta     <- intervals(fdata, bins)
   result   <- freq(fdata, bins, inta, closed)
-  data_len <- length(fdata)
+  n_obs    <- length(dplyr::pull(data, !! varyable))
   cum      <- cumsum(result)
-  per      <- percent(result, data_len)
-  cum_per  <- percent(cum, data_len)
+  per      <- percent(result, n_obs)
+  cum_per  <- percent(cum, n_obs)
 
   na_count <-
     data %>%
@@ -43,11 +47,6 @@ ds_freq_numeric <- function(data, variable, bins = 5,
   } else {
     na_freq <- 0
   }
-
-  n_obs <-
-    data %>%
-    dplyr::pull(!! varyable) %>%
-    length()
 
   lower_n <- n_bins + 1
 

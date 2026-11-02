@@ -82,6 +82,53 @@ summaries, frequency and cross tables, and summary statistics.
 - `ds_auto_summary_stats()` no longer prints a stray `NULL` after each summary.
 - The deprecated `ds_freq_cont()` forwards its variable correctly and no longer
   fails with `object 'mpg' not found`.
+- `ds_group_summary()` and `ds_group_summary_interact()` no longer overwrite
+  data columns whose names match a statistic, such as `missing`, `min` or
+  `Levels`, so the printed table and `tidy_stats` report the same values.
+- `ds_group_summary()` stops with a clear message when the grouping variable
+  has no non-missing values, instead of failing with
+  `non-numeric argument to mathematical function`.
+- Cross table plots now use only the observations counted in the table, so a
+  missing value in either variable is no longer plotted as a category.
+- `ds_summary_stats()` and `ds_summary()` report missing metrics, instead of
+  `Inf`/`-Inf`/`NaN`, for a variable with no non-missing observations, and
+  `ds_freq_table()` stops with a clear message for continuous data with no
+  non-missing observations instead of printing `Inf`/`NaN` bins.
+- `ds_hmean()` scales the reciprocals before summing, so it returns the value
+  itself for identical very small positive numbers instead of `0`. It also
+  warns and returns `NA` for non-finite (`Inf`/`NaN`) input.
+- Continuous bin boundaries fall back to a convex combination of the minimum
+  and maximum when `max(x) - min(x)` overflows, so a finite range such as
+  `-1e308` to `1e308` produces finite, increasing boundaries instead of
+  `Inf`.
+- `ds_tailobs()` requires `n` to be a single whole number, returns
+  `numeric(0)` for `n = 0` and rejects negative, fractional, missing or
+  infinite values instead of returning a wrong number of observations.
+- `ds_twoway_table()` derives its join keys from the selected columns, so
+  programmatic calls with `!!rlang::sym()` or `{{ }}` work again.
+- `ds_group_summary_interact()` groups by the values of the selected columns
+  rather than a joined label, so label combinations containing `.` (and any
+  other separator) are no longer merged.
+- `ds_group_summary()` and `ds_group_summary_interact()` return unique column
+  names. A grouping column named like a statistic, such as `length` or `mean`,
+  is suffixed with `_group`, so every column keeps its values and the result
+  can be used with `dplyr` verbs.
+- `ds_group_summary()$tidy_stats` keeps the class of the grouping variable,
+  including ordered factors, and the order of the observed levels.
+- `ds_group_summary()$tidy_stats` stores `length` as a double, and quartiles
+  returned by `ds_group_summary_interact()` no longer carry the `25%`/`75%`
+  names inherited from `quantile()`.
+- Group-summary boxplots no longer show a group for observations with a
+  missing grouping label; the plot uses the same observations as the summary.
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and
+  `ds_std_error()` handle missing values consistently for numeric vectors:
+  `n` counts the non-missing observations, measures ignore missing values, and
+  a vector with no usable values returns `NA` instead of raising a base error.
+- Frequency tables compute every percentage over all observations, so the
+  `Missing` row and the level/bin percentages share one denominator and add up
+  to 100.
+- `ds_auto_freq_table()` no longer triggers the tidyselect deprecation warning
+  about external vectors.
 
 # descriptr 0.6.0
 

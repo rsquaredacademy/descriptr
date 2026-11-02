@@ -15,7 +15,8 @@ ds_freq_table(data, col, bins = 5, closed = c("left", "right", "both"))
 
 \item{col}{Column in \code{data}.}
 
-\item{bins}{Number of intervals into which the data must be split.}
+\item{bins}{Number of intervals into which the data must be split; a
+positive whole number.}
 
 \item{closed}{Interval closure for continuous data. \code{"left"} (the
 default) gives half-open intervals with the last interval closed;
@@ -34,6 +35,12 @@ Frequency table for categorical and continuous data and returns the
 frequency, cumulative frequency, frequency percent and cumulative frequency
 percent. \code{plot.ds_freq_table()} creates bar plot for the categorical
 data and histogram for continuous data.
+}
+\details{
+Percentages are computed over all observations, including missing
+  values, so the \code{Percent} column and the \code{Missing} row share the
+  same denominator and add up to 100. Continuous data with no non-missing
+  observations, or with no variation, cannot be binned and raise an error.
 }
 \examples{
 # categorical data

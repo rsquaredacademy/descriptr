@@ -5,10 +5,10 @@ print_stats <- function(data) {
   width3 <- width2 - 5
   width4 <- width2 - 2
 
-  col1 <- max(nchar(as.character(data$lowobs)))
-  col2 <- max(nchar(as.character(data$highobs)))
-  col3 <- max(nchar(as.character(data$lowobsi)))
-  col4 <- max(nchar(as.character(data$highobsi)))
+  col1 <- max(c(0, nchar(as.character(data$lowobs))))
+  col2 <- max(c(0, nchar(as.character(data$highobs))))
+  col3 <- max(c(0, nchar(as.character(data$lowobsi))))
+  col4 <- max(c(0, nchar(as.character(data$highobsi))))
   v <- nchar("Value")
   ol <- max(col1, col2, col3, col4, v)
   gap <- width4 - (2 * ol)

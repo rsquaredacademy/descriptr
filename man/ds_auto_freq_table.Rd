@@ -50,5 +50,5 @@ ds_auto_cross_table(mtcarz, cyl, gear, am)
 
 }
 \seealso{
-\code{link{ds_freq_table}} \code{link{ds_cross_table}}
+\code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 }
