@@ -5,11 +5,11 @@ summaries, frequency and cross tables, and summary statistics.
 
 ## Bug Fixes
 
-- Every function now accepts grouped or rowwise tibbles and summarises the
-  whole columns, ignoring the grouping. Several functions, including
-  `ds_group_summary()`, `ds_group_summary_interact()`, `ds_summary_stats()`,
-  `ds_freq_table()`, `ds_measures_variation()` and `ds_tidy_stats()`, failed
-  with an error on grouped input.
+- Every function that accepts data frames now accepts grouped or rowwise
+  tibbles and summarises the whole columns, ignoring the grouping. Several
+  functions, including `ds_group_summary()`, `ds_group_summary_interact()`,
+  `ds_summary_stats()`, `ds_freq_table()`, `ds_measures_variation()` and
+  `ds_tidy_stats()`, failed with an error on grouped input.
 - `ds_group_summary()` no longer fails when the continuous variable contains
   missing values; groups are summarised with `na.rm = TRUE` and the number of
   missing observations is reported.

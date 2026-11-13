@@ -35,9 +35,18 @@ test_that("summary functions ignore grouping", {
 test_that("table functions ignore grouping", {
   same_output(function(x) ds_freq_table(x, cyl)$ftable)
   same_output(function(x) ds_freq_table(x, mpg, 4)$ftable)
-  same_output(function(x) ds_cross_table(x, cyl, gear)$twowaytable)
+  same_output(function(x) ds_cross_table(x, cyl, gear)$ftable)
+  same_output(function(x) ds_cross_table(x, cyl, gear)$utility[c("twowaytable", "obs", "missing")])
   same_output(function(x) capture.output(ds_summary_stats(x, mpg)))
   same_output(function(x) capture.output(ds_screener(x)))
+})
+
+test_that("grouped cross table keeps counts and missing", {
+  g <- dplyr::group_by(gd_data(), am)
+  k <- ds_cross_table(g, cyl, gear)
+  expect_false(is.null(k$utility$twowaytable))
+  expect_equal(k$utility$obs, sum(!is.na(gd_data()$cyl) & !is.na(gd_data()$gear)))
+  expect_equal(k$utility$missing, 1)
 })
 
 test_that("interaction summary of grouped input has the ungrouped means", {
