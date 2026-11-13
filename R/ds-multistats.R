@@ -20,6 +20,7 @@
 #' @export
 #'
 ds_tidy_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
 
@@ -65,6 +66,7 @@ ds_tidy_stats <- function(data, ...) {
 #' @usage NULL
 #'
 ds_multi_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_tidy_stats()")
   ds_tidy_stats(data, ...)
 }

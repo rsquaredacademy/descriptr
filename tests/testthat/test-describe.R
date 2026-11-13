@@ -550,11 +550,11 @@ test_that("geometric and harmonic means are numerically stable (#134)", {
   expect_equal(ds_gmean(large), exp(mean(log(large))), tolerance = 1e-10)
 
   expect_warning(g <- ds_gmean(c(-5, 10, 20)),
-                 "Geometric mean requires strictly positive")
+                 "Geometric mean requires strictly positive values")
   expect_true(is.na(g))
 
   expect_warning(g0 <- ds_gmean(c(0, 10, 20)),
-                 "Geometric mean requires strictly positive")
+                 "Geometric mean requires strictly positive values")
   expect_true(is.na(g0))
 
   expect_warning(h <- ds_hmean(c(-5, 10, 20)),

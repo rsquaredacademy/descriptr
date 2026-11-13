@@ -5,6 +5,11 @@ summaries, frequency and cross tables, and summary statistics.
 
 ## Bug Fixes
 
+- Every function that accepts data frames now accepts grouped or rowwise
+  tibbles and summarises the whole columns, ignoring the grouping. Several
+  functions, including `ds_group_summary()`, `ds_group_summary_interact()`,
+  `ds_summary_stats()`, `ds_freq_table()`, `ds_measures_variation()` and
+  `ds_tidy_stats()`, failed with an error on grouped input.
 - `ds_group_summary()` no longer fails when the continuous variable contains
   missing values; groups are summarised with `na.rm = TRUE` and the number of
   missing observations is reported.
@@ -53,7 +58,8 @@ summaries, frequency and cross tables, and summary statistics.
   ([#134](https://github.com/rsquaredacademy/descriptr/issues/134)).
 - `ds_freq_table()` no longer double-counts values that fall on a bin boundary:
   intervals are half-open with the last interval closed, so frequencies sum to
-  the number of observations and the final cumulative percent is 100. It also
+  the number of observations and, for complete data, the final cumulative
+  percent is 100 (missing values stay in the percentage denominator). It also
   gains a `closed` argument (`"left"` default, `"right"`, or `"both"` for the
   legacy double-counting behaviour)
   ([#131](https://github.com/rsquaredacademy/descriptr/issues/131)).
@@ -96,7 +102,8 @@ summaries, frequency and cross tables, and summary statistics.
   non-missing observations instead of printing `Inf`/`NaN` bins.
 - `ds_hmean()` scales the reciprocals before summing, so it returns the value
   itself for identical very small positive numbers instead of `0`. It also
-  warns and returns `NA` for non-finite (`Inf`/`NaN`) input.
+  warns and returns `NA` when infinite values remain after missing values
+  (including `NaN`) are removed.
 - Continuous bin boundaries fall back to a convex combination of the minimum
   and maximum when `max(x) - min(x)` overflows, so a finite range such as
   `-1e308` to `1e308` produces finite, increasing boundaries instead of

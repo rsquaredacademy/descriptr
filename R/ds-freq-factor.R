@@ -1,4 +1,5 @@
 ds_freq_factor <- function(data, variable) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var_name <- deparse(substitute(variable))

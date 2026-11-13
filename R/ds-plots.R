@@ -19,6 +19,7 @@
 #' @export
 #'
 ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var <- rlang::quos(...)
@@ -87,6 +88,7 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
 #'
 ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
                               print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var <- rlang::quos(...)
@@ -153,6 +155,7 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
 #' @export
 #'
 ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var <- rlang::quos(...)
@@ -217,6 +220,7 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 #' @export
 #'
 ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)
@@ -282,6 +286,7 @@ ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 #' @export
 #'
 ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var <- rlang::quos(...)
@@ -347,6 +352,7 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 #' @export
 #'
 ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)
@@ -413,6 +419,7 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 #' @export
 #'
 ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)
@@ -482,6 +489,7 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 #' @export
 #'
 ds_plot_box_group <- function(data, ..., print_plot = TRUE) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)

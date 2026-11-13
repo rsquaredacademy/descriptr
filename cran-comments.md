@@ -6,6 +6,9 @@ summaries, frequency and cross tables, and summary statistics.
 ## Test environments
 
 * local Windows 11, R 4.6.1 (ucrt)
+* win-builder (R-devel and R-release)
+* R-hub: Linux, Windows, macOS, macOS arm64 (R-devel)
+* GitHub Actions: Ubuntu (devel, release, oldrel-1), Windows, macOS (release)
 
 ## R CMD check results
 
@@ -31,7 +34,3 @@ R CMD check results across CRAN and dev versions of this package.
 
 * We saw 0 new problems
 * We failed to check 0 packages
-
-These checks ran on the 0.6.1 release preparation; the fixes added on top of it
-do not change any exported function signature or argument. (To be re-run on the
-final code before submission.)

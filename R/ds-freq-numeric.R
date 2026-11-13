@@ -1,5 +1,6 @@
 ds_freq_numeric <- function(data, variable, bins = 5,
                             closed = c("left", "right", "both")) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   closed <- match.arg(closed)

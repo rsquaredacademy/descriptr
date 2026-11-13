@@ -27,6 +27,7 @@
 #' @export
 #'
 ds_summary_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.numeric(data)) {
     print(ds_summary(data))
@@ -68,6 +69,7 @@ ds_summary_stats <- function(data, ...) {
 ds_summary <- function(data, variable) UseMethod("ds_summary")
 
 ds_summary.default <- function(data, variable) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.numeric(data)) {
     odata <- data
