@@ -21,14 +21,27 @@ ds_twoway_table(data, var_1, var_2)
 
 \item{x}{An object of class \code{cross_table}.}
 
-\item{stacked}{If \code{FALSE}, the columns of height are portrayed
-as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.}
+\item{stacked}{If \code{TRUE}, the columns of height are portrayed as
+stacked bars, and if \code{FALSE} the columns are portrayed as juxtaposed bars.}
 
 \item{proportional}{If \code{TRUE}, the height of the bars is proportional.}
 
 \item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 
 \item{...}{Further arguments to be passed to or from methods.}
+}
+\value{
+\code{ds_cross_table()} returns an object of class
+\code{"ds_cross_table"} containing the contingency table and the utility
+information used to print it. The cell percentages are stored as
+\strong{proportions} (values between 0 and 1) in \code{percent_table},
+\code{row_percent}, \code{column_percent} and \code{percent_column}. The
+printed cells show percentages computed from the counts and can differ from
+the rounded proportions stored in the object in the last decimal place. The
+number of rows dropped because either variable is
+missing is stored in \code{utility$missing}. \code{ds_twoway_table()}
+returns a tibble whose \code{percent}, \code{row_percent} and
+\code{col_percent} columns are also proportions.
 }
 \description{
 Creates two way tables of categorical variables. The tables created can be

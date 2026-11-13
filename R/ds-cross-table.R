@@ -7,11 +7,23 @@
 #' @param var_1 First categorical variable.
 #' @param var_2 Second categorical variable.
 #' @param x An object of class \code{cross_table}.
-#' @param stacked If \code{FALSE}, the columns of height are portrayed
-#' as stacked bars, and if \code{TRUE} the columns are portrayed as juxtaposed bars.
+#' @param stacked If \code{TRUE}, the columns of height are portrayed as
+#' stacked bars, and if \code{FALSE} the columns are portrayed as juxtaposed bars.
 #' @param proportional If \code{TRUE}, the height of the bars is proportional.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
+#'
+#' @return \code{ds_cross_table()} returns an object of class
+#' \code{"ds_cross_table"} containing the contingency table and the utility
+#' information used to print it. The cell percentages are stored as
+#' \strong{proportions} (values between 0 and 1) in \code{percent_table},
+#' \code{row_percent}, \code{column_percent} and \code{percent_column}. The
+#' printed cells show percentages computed from the counts and can differ from
+#' the rounded proportions stored in the object in the last decimal place. The
+#' number of rows dropped because either variable is
+#' missing is stored in \code{utility$missing}. \code{ds_twoway_table()}
+#' returns a tibble whose \code{percent}, \code{row_percent} and
+#' \code{col_percent} columns are also proportions.
 #'
 #' @examples
 #' # cross table
@@ -36,8 +48,10 @@ ds_cross_table <- function(data, var_1, var_2) UseMethod("ds_cross_table")
 
 #' @export
 ds_cross_table.default <- function(data, var_1, var_2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  data <- as_categorical(data)
   var1_name <- deparse(substitute(var_1))
   var2_name <- deparse(substitute(var_2))
   var_1 <- rlang::enquo(var_1)
@@ -59,6 +73,7 @@ ds_cross_table.default <- function(data, var_1, var_2) {
   rownames(x) <- NULL
 
   n        <- sum(x)
+  missing  <- sum(is.na(varone) | is.na(vartwo))
   per_mat  <- round(x / n, 3)
   row_pct  <- apply(per_mat, 1, sum)
   col_pct  <- apply(per_mat, 2, sum)
@@ -70,6 +85,7 @@ ds_cross_table.default <- function(data, var_1, var_2) {
   finaltab <- prep_table(x, rowtotal, row_name)
 
   utility <- list(obs            = n,
+                  missing        = missing,
                   var2_levels    = col_name,
                   var1_levels    = row_name,
                   varnames       = var_names,
@@ -117,12 +133,18 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
   k <- string_to_name(x)
   j <- string_to_name(x, 2)
 
+  # bar heights must reflect the contingency table, which excludes rows with a
+  # missing value in either variable
+  plot_data <-
+    x %>%
+    use_series(utility) %>%
+    use_series(data) %>%
+    dplyr::select(x = !! k, y = !! j) %>%
+    dplyr::filter(!is.na(x), !is.na(y))
+
   if (proportional) {
     p <-
-      x %>%
-      use_series(utility) %>%
-      use_series(data) %>%
-      dplyr::select(x = !! k, y = !! j) %>%
+      plot_data %>%
       table() %>%
       as.data.frame() %>%
       set_colnames(c("x", "y", "n")) %>%
@@ -134,21 +156,13 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
   } else {
     if (stacked) {
       p <-
-        x %>%
-        use_series(utility) %>%
-        use_series(data) %>%
-        dplyr::select(x = !! k, y = !! j) %>%
-        ggplot() +
+        ggplot(plot_data) +
         geom_bar(aes(x, fill = y), position = "stack") +
         xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
         labs(fill = y_lab)
     } else {
       p <-
-        x %>%
-        use_series(utility) %>%
-        use_series(data) %>%
-        dplyr::select(x = !! k, y = !! j) %>%
-        ggplot() +
+        ggplot(plot_data) +
         geom_bar(aes(x, fill = y), position = "dodge") +
         xlab(x_lab) + ggtitle(paste(x_lab, "vs", y_lab)) +
         labs(fill = y_lab)
@@ -167,8 +181,10 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 #' @export
 #'
 ds_twoway_table <- function(data, var_1, var_2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  data <- as_categorical(data)
   var1_name <- deparse(substitute(var_1))
   var2_name <- deparse(substitute(var_2))
 
@@ -176,6 +192,13 @@ ds_twoway_table <- function(data, var_1, var_2) {
   var_2 <- rlang::enquo(var_2)
   check_factor(data, !! var_1, var1_name)
   check_factor(data, !! var_2, var2_name)
+
+  # use the resolved column names, not the expressions captured by
+  # deparse(substitute()), so that `!!sym()` and embracing work as join keys
+  var_names <-
+    data %>%
+    dplyr::select(!! var_1, !! var_2) %>%
+    names()
 
   group <-
     data %>%
@@ -215,7 +238,11 @@ ds_twoway_table <- function(data, var_1, var_2) {
     ) %>%
     dplyr::ungroup()
 
-  result <- dplyr::inner_join(group, group2)
+  result <- dplyr::inner_join(
+    group,
+    dplyr::select(group2, -count),
+    by = var_names
+  )
   return(result)
 
 }

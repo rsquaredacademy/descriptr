@@ -5,10 +5,10 @@ print_stats <- function(data) {
   width3 <- width2 - 5
   width4 <- width2 - 2
 
-  col1 <- max(nchar(as.character(data$lowobs)))
-  col2 <- max(nchar(as.character(data$highobs)))
-  col3 <- max(nchar(as.character(data$lowobsi)))
-  col4 <- max(nchar(as.character(data$highobsi)))
+  col1 <- max(c(0, nchar(as.character(data$lowobs))))
+  col2 <- max(c(0, nchar(as.character(data$highobs))))
+  col3 <- max(c(0, nchar(as.character(data$lowobsi))))
+  col4 <- max(c(0, nchar(as.character(data$highobsi))))
   v <- nchar("Value")
   ol <- max(col1, col2, col3, col4, v)
   gap <- width4 - (2 * ol)
@@ -49,7 +49,7 @@ print_stats <- function(data) {
     formatol("Obs", ol), format_gap(gap), formatol("Value", ol), formats(),
     formatol("Obs", ol), format_gap(gap), formatol("Value", ol), "\n"
   )
-  for (i in seq_len(5)) {
+  for (i in seq_along(data$lowobs)) {
     cat(
       "", formatol(data$lowobsi[i], ol), format_gap(gap), formatol(data$lowobs[i], ol), formats(),
       formatol(data$highobsi[i], ol), format_gap(gap), formatol(data$highobs[i], ol), "\n"
@@ -68,13 +68,19 @@ print_cross <- function(data) {
 
   col_names <- c(data$utility$varnames[1], data$utility$var2_levels, "Row Total")
   col_totals <- c("Column Total", data$utility$column_totals, data$utility$obs)
+  pct <- cross_print_pct(data$utility$twowaytable, data$utility$obs,
+                         data$utility$column_totals)
 
   cat(
     formatter("    Cell Contents\n"), "|---------------|\n", "|", formatter("Frequency"),
     "|\n", "|", formatter("Percent"), "|\n", "|", formatter("Row Pct"), "|\n",
     "|", formatter("Col Pct"), "|\n", "|---------------|\n\n", "Total Observations: ",
-    data$utility$obs, "\n\n"
+    data$utility$obs, "\n"
   )
+  if (data$utility$missing > 0) {
+    cat("Missing Observations: ", data$utility$missing, "\n")
+  }
+  cat("\n")
   cat("-", rep("---------------", q), sep = "")
   cat("\n")
   cat(
@@ -98,18 +104,18 @@ print_cross <- function(data) {
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$utility$percent_table[i, j]), "|")
+      cat(formatter_pct(pct$percent[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter(data$utility$row_percent[i, j]), "|")
+      cat(formatter_pct(pct$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$utility$column_percent[i, j]), "|")
+      cat(formatter_pct(pct$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -121,8 +127,8 @@ print_cross <- function(data) {
   }
   cat("\n")
   cat("|              |")
-  for (i in seq_along(data$utility$percent_column)) {
-    cat(formatter(data$utility$percent_column[i]), "|")
+  for (i in seq_along(pct$percent_column)) {
+    cat(formatter_pct(pct$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")
@@ -141,8 +147,15 @@ print_cross2 <- function(data) {
   g <- f + 2
   h <- p + 1
   tu <- q * 15
+  pct <- cross_print_pct(data$twowaytable, data$obs,
+                         data$column_totals[seq_len(p) + 1])
 
   cat(format(paste(data$variable_names[1], "vs", data$variable_names[2]), width = tu, justify = "centre"), "\n")
+  cat("Total Observations: ", data$obs, "\n")
+  if (data$missing > 0) {
+    cat("Missing Observations: ", data$missing, "\n")
+  }
+  cat("\n")
   cat("-", rep("---------------", q), sep = "")
   cat("\n")
   cat("|              |", format(data$variable_names[2], width = r, justify = "centre"), "|")
@@ -163,18 +176,18 @@ print_cross2 <- function(data) {
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$percent_table[i, j]), "|")
+      cat(formatter_pct(pct$percent[i, j]), "|")
     }
     cat("              |")
     cat("\n")
     cat("|              |")
     for (j in seq_len(h)) {
-      cat(formatter(data$row_percent[i, j]), "|")
+      cat(formatter_pct(pct$row_percent[i, j]), "|")
     }
     cat("\n")
     cat("|              |")
     for (j in seq_len(p)) {
-      cat(formatter(data$column_percent[i, j]), "|")
+      cat(formatter_pct(pct$column_percent[i, j]), "|")
     }
     cat("              |")
     cat("\n-", rep("---------------", q), sep = "")
@@ -186,8 +199,8 @@ print_cross2 <- function(data) {
   }
   cat("\n")
   cat("|              |")
-  for (i in seq_along(data$percent_column)) {
-    cat(formatter(data$percent_column[i]), "|")
+  for (i in seq_along(pct$percent_column)) {
+    cat(formatter_pct(pct$percent_column[i]), "|")
   }
   cat("              |")
   cat("\n-", rep("---------------", q), sep = "")
@@ -352,7 +365,7 @@ print_ftable <- function(x) {
   }
   cat("\n")
   if (x$utility$na_count > 0) {
-    na_percent <- format((x$utility$na_count / x$n) * 100, nsmall = 2)
+    na_percent <- format(round((x$utility$na_count / x$utility$n) * 100, 2), nsmall = 2)
     cat(format("Missing", width = w1, justify = "centre"), fs(),
         format(as.character(x$utility$na_count), width = w2, justify = "centre"), fs(),
         format("-", width = w3, justify = "centre"), fs(),
@@ -434,7 +447,7 @@ print_group <- function(data) {
   ow <- 23 * cola - col
   row <- nrow(data$stats)
 
-  cat(format(paste(data$yvar, "by", data$xvar), width = ow, justify = "centre"), "\n")
+  cat(format(paste(names(data$plot_data)[2], "by", names(data$plot_data)[1]), width = ow, justify = "centre"), "\n")
   cat(rep("-", ow), sep = "", "\n")
   cat("|")
   for (i in seq_len(cola)) {

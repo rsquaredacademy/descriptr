@@ -1,6 +1,9 @@
-ds_freq_numeric <- function(data, variable, bins = 5) {
+ds_freq_numeric <- function(data, variable, bins = 5,
+                            closed = c("left", "right", "both")) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  closed <- match.arg(closed)
   var_name <- deparse(substitute(variable))
   varyable <- rlang::enquo(variable)
   check_numeric(data, !! varyable, var_name)
@@ -10,13 +13,16 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
     dplyr::pull(!! varyable) %>%
     na.omit()
 
-  if (!is.numeric(bins)) {
-    stop("bins must be integer value", call. = FALSE)
+  if (length(fdata) == 0) {
+    stop("Data has no non-missing observations; cannot construct continuous bins.", call. = FALSE)
   }
 
-  if (is.numeric(bins)) {
-    bins <- as.integer(bins)
+  if (length(fdata) > 0 && max(fdata) == min(fdata)) {
+    stop("Data has zero variance; cannot construct continuous bins.", call. = FALSE)
   }
+
+  check_bins(bins)
+  bins <- as.integer(bins)
 
   var_name <-
     data %>%
@@ -25,11 +31,11 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
 
   n_bins   <- bins
   inta     <- intervals(fdata, bins)
-  result   <- freq(fdata, bins, inta)
-  data_len <- length(fdata)
+  result   <- freq(fdata, bins, inta, closed)
+  n_obs    <- length(dplyr::pull(data, !! varyable))
   cum      <- cumsum(result)
-  per      <- percent(result, data_len)
-  cum_per  <- percent(cum, data_len)
+  per      <- percent(result, n_obs)
+  cum_per  <- percent(cum, n_obs)
 
   na_count <-
     data %>%
@@ -42,11 +48,6 @@ ds_freq_numeric <- function(data, variable, bins = 5) {
   } else {
     na_freq <- 0
   }
-
-  n_obs <-
-    data %>%
-    dplyr::pull(!! varyable) %>%
-    length()
 
   lower_n <- n_bins + 1
 

@@ -3,7 +3,7 @@
 #' Descriptive statistics for multiple variables.
 #'
 #' @param data A \code{tibble} or a \code{data.frame}.
-#' @param ... Columns in \code{x}.
+#' @param ... Columns in \code{data}.
 #'
 #' @return A tibble.
 #'
@@ -20,6 +20,7 @@
 #' @export
 #'
 ds_tidy_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
 
@@ -30,33 +31,32 @@ ds_tidy_stats <- function(data, ...) {
     if (!any(is_num == TRUE)) {
       stop("Data has no continuous variables.", call. = FALSE)
     }
-    data <- data[, is_num]
+    data <- data[is_num]
   } else {
     data %<>%
       dplyr::select(!!! vars)
   }
 
   data %>%
-    na.omit() %>%
     tidyr::gather(vars, values) %>%
     dplyr::group_by(vars) %>%
     dplyr::summarise_all(
       list(
-        min       = min,
-        max       = max,
-        mean      = mean,
-        t_mean    = trimmed_mean,
-        median    = median,
+        min       = ~ num_or_na(., min),
+        max       = ~ num_or_na(., max),
+        mean      = ~ num_or_na(., mean),
+        t_mean    = ~ trimmed_mean(., na.rm = TRUE),
+        median    = ~ median(., na.rm = TRUE),
         mode      = ds_mode,
         range     = ds_range,
-        variance  = var,
-        stdev     = sd,
+        variance  = ~ var(., na.rm = TRUE),
+        stdev     = ~ sd(., na.rm = TRUE),
         skew      = ds_skewness,
         kurtosis  = ds_kurtosis,
         coeff_var = ds_cvar,
-        q1        = quant1,
-        q3        = quant3,
-        iqrange   = IQR
+        q1        = ~ quant1(., na.rm = TRUE),
+        q3        = ~ quant3(., na.rm = TRUE),
+        iqrange   = ~ IQR(., na.rm = TRUE)
       )
     )
 }
@@ -66,6 +66,7 @@ ds_tidy_stats <- function(data, ...) {
 #' @usage NULL
 #'
 ds_multi_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_tidy_stats()")
   ds_tidy_stats(data, ...)
 }

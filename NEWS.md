@@ -1,4 +1,141 @@
-# descriptr (development version)
+# descriptr 0.6.1
+
+This is a patch release that fixes crashes and incorrect results in group
+summaries, frequency and cross tables, and summary statistics.
+
+## Bug Fixes
+
+- Every function that accepts data frames now accepts grouped or rowwise
+  tibbles and summarises the whole columns, ignoring the grouping. Several
+  functions, including `ds_group_summary()`, `ds_group_summary_interact()`,
+  `ds_summary_stats()`, `ds_freq_table()`, `ds_measures_variation()` and
+  `ds_tidy_stats()`, failed with an error on grouped input.
+- `ds_group_summary()` no longer fails when the continuous variable contains
+  missing values; groups are summarised with `na.rm = TRUE` and the number of
+  missing observations is reported.
+- `ds_group_summary()` no longer fails when the grouping factor has unused
+  levels; unused levels are dropped.
+- `ds_group_summary()` drops observations with a missing grouping label, so the
+  tidy statistics match the summary table.
+- `ds_group_summary_interact()` no longer truncates factor levels containing
+  `.`, and character grouping columns are now used instead of being silently
+  dropped.
+- `print.ds_group_summary()` titles the table with the variables, e.g.
+  `mpg by cyl`, instead of an empty `by`.
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and
+  `ds_tidy_stats()` now work on data frames with a single numeric column.
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and
+  `ds_tidy_stats()` handle missing values per column instead of deleting rows
+  listwise, so missing values in one variable no longer change results for
+  another. A column with no non-missing values returns `NA` for every summary
+  metric instead of `-Inf`/`Inf` or an error
+  ([#132](https://github.com/rsquaredacademy/descriptr/issues/132)).
+- `ds_measures_variation()`, `ds_measures_symmetry()` and `ds_percentiles()`
+  now apply `decimals` to data-frame input, as they already did for numeric
+  vectors.
+- `ds_measures_location()`, `ds_measures_variation()`,
+  `ds_measures_symmetry()` and `ds_percentiles()` stop with a clear error when
+  a non-numeric column is selected explicitly; with no selection they use the
+  numeric columns
+  ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_measures_location()` keeps the column order selected by the user, and the
+  data's column order when no columns are selected, instead of sorting the rows
+  alphabetically
+  ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_summary_stats()` and `ds_extreme_obs()` now work when a variable has fewer
+  than five non-missing values.
+- `ds_summary_stats()` validates every selected column before printing, so a
+  mixed selection fails up front and names the offending column.
+- `ds_extreme_obs()` and `ds_rindex()` report the original row indices of the
+  data supplied, report ties on distinct rows, and `ds_extreme_obs()` now
+  applies `decimals` to data-frame input
+  ([#133](https://github.com/rsquaredacademy/descriptr/issues/133)).
+- `ds_tailobs()` checks `n` against the number of non-missing observations, so
+  it no longer returns `NA` values when `n` exceeds that number.
+- `ds_gmean()` computes on the log scale, avoiding overflow for large values and
+  long vectors, and `ds_gmean()`/`ds_hmean()` return `NA` with a warning for
+  non-positive values
+  ([#134](https://github.com/rsquaredacademy/descriptr/issues/134)).
+- `ds_freq_table()` no longer double-counts values that fall on a bin boundary:
+  intervals are half-open with the last interval closed, so frequencies sum to
+  the number of observations and, for complete data, the final cumulative
+  percent is 100 (missing values stay in the percentage denominator). It also
+  gains a `closed` argument (`"left"` default, `"right"`, or `"both"` for the
+  legacy double-counting behaviour)
+  ([#131](https://github.com/rsquaredacademy/descriptr/issues/131)).
+- `bins` must be a positive whole number; values such as `0`, `2.7` and `NA` are
+  rejected with a clear error instead of a base error or silent truncation.
+- The missing row of a factor frequency table now reports its percent instead of
+  a blank cell.
+- Cross tables print the Percent, Row Pct and Col Pct cells as percentages; the
+  values stored in the returned object remain proportions
+  ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- Cross tables store the number of rows dropped for missing values in
+  `utility$missing` and print `Missing Observations` when there are any;
+  `ds_auto_cross_table()` prints each table's own observation count instead of
+  the number of rows in the data
+  ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_twoway_table()` no longer prints a dplyr join message.
+- `ds_auto_cross_table()`, `ds_plot_scatter()`, `ds_plot_bar_stacked()` and
+  `ds_plot_bar_grouped()` count usable variables, also when no columns are
+  selected, and stop with a clear message when fewer than two are available
+  instead of failing with a low-level error
+  ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- Character columns are treated as categorical (converted with `factor()`) by
+  the frequency tables, cross tables, group summaries, automatic tables and
+  categorical plots, so results match the same data stored as factors
+  ([#152](https://github.com/rsquaredacademy/descriptr/issues/152)).
+- `ds_auto_summary_stats()` no longer prints a stray `NULL` after each summary.
+- The deprecated `ds_freq_cont()` forwards its variable correctly and no longer
+  fails with `object 'mpg' not found`.
+- `ds_group_summary()` and `ds_group_summary_interact()` no longer overwrite
+  data columns whose names match a statistic, such as `missing`, `min` or
+  `Levels`, so the printed table and `tidy_stats` report the same values.
+- `ds_group_summary()` stops with a clear message when the grouping variable
+  has no non-missing values, instead of failing with
+  `non-numeric argument to mathematical function`.
+- Cross table plots now use only the observations counted in the table, so a
+  missing value in either variable is no longer plotted as a category.
+- `ds_summary_stats()` and `ds_summary()` report missing metrics, instead of
+  `Inf`/`-Inf`/`NaN`, for a variable with no non-missing observations, and
+  `ds_freq_table()` stops with a clear message for continuous data with no
+  non-missing observations instead of printing `Inf`/`NaN` bins.
+- `ds_hmean()` scales the reciprocals before summing, so it returns the value
+  itself for identical very small positive numbers instead of `0`. It also
+  warns and returns `NA` when infinite values remain after missing values
+  (including `NaN`) are removed.
+- Continuous bin boundaries fall back to a convex combination of the minimum
+  and maximum when `max(x) - min(x)` overflows, so a finite range such as
+  `-1e308` to `1e308` produces finite, increasing boundaries instead of
+  `Inf`.
+- `ds_tailobs()` requires `n` to be a single whole number, returns
+  `numeric(0)` for `n = 0` and rejects negative, fractional, missing or
+  infinite values instead of returning a wrong number of observations.
+- `ds_twoway_table()` derives its join keys from the selected columns, so
+  programmatic calls with `!!rlang::sym()` or `{{ }}` work again.
+- `ds_group_summary_interact()` groups by the values of the selected columns
+  rather than a joined label, so label combinations containing `.` (and any
+  other separator) are no longer merged.
+- `ds_group_summary()` and `ds_group_summary_interact()` return unique column
+  names. A grouping column named like a statistic, such as `length` or `mean`,
+  is suffixed with `_group`, so every column keeps its values and the result
+  can be used with `dplyr` verbs.
+- `ds_group_summary()$tidy_stats` keeps the class of the grouping variable,
+  including ordered factors, and the order of the observed levels.
+- `ds_group_summary()$tidy_stats` stores `length` as a double, and quartiles
+  returned by `ds_group_summary_interact()` no longer carry the `25%`/`75%`
+  names inherited from `quantile()`.
+- Group-summary boxplots no longer show a group for observations with a
+  missing grouping label; the plot uses the same observations as the summary.
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and
+  `ds_std_error()` handle missing values consistently for numeric vectors:
+  `n` counts the non-missing observations, measures ignore missing values, and
+  a vector with no usable values returns `NA` instead of raising a base error.
+- Frequency tables compute every percentage over all observations, so the
+  `Missing` row and the level/bin percentages share one denominator and add up
+  to 100.
+- `ds_auto_freq_table()` no longer triggers the tidyselect deprecation warning
+  about external vectors.
 
 # descriptr 0.6.0
 
@@ -52,7 +189,7 @@ This is a patch release to fix CRAN errors.
 
 ## New Features
 
-- `ds_tiy_stats()` will detect continuous variables in the data set and return
+- `ds_tidy_stats()` will detect continuous variables in the data set and return
 summary statistics for all of them. ([#68](https://github.com/rsquaredacademy/descriptr/issues/68))
 - `ds_auto_summary_stats()` will detect all continuous variables in the data 
 set and return summary statistics and frequency tables for all of them. 

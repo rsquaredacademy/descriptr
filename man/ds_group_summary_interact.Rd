@@ -17,6 +17,19 @@ ds_group_summary_interact(data, col, ...)
 Descriptive statistics of a continuous variable for the combination of levels
 of two or more categorical variables.
 }
+\details{
+Character grouping columns are accepted and treated as factors.
+Factor levels may contain any character, including \code{.} and \code{\\r}.
+Groups are formed from the values of the grouping columns themselves, so
+distinct combinations that would serialize to the same character string are
+never merged. Rows with a missing value in any of the selected columns are
+excluded.
+
+The grouping columns keep their names in the returned tibble. If a grouping
+column is named like one of the statistic columns, such as \code{mean}, its
+column is suffixed with \code{_group} so that every column name is unique
+and the statistic keeps its documented name.
+}
 \examples{
 ds_group_summary_interact(mtcarz, mpg, cyl, gear)
 

@@ -1,4 +1,5 @@
 ds_freq_factor <- function(data, variable) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var_name <- deparse(substitute(variable))
@@ -26,11 +27,11 @@ ds_freq_factor <- function(data, variable) {
     as.vector()
 
   level_names <- levels(fdata)
-  data_len    <- length(fdata)
+  n_obs       <- length(dplyr::pull(data, !! varyable))
   len         <- length(result)
   cum         <- cumsum(result)
-  per         <- percent(result, data_len)
-  cum_per     <- percent(cum, data_len)
+  per         <- percent(result, n_obs)
+  cum_per     <- percent(cum, n_obs)
 
   ftable <- data.frame(
     Levels          = level_names,
@@ -45,11 +46,6 @@ ds_freq_factor <- function(data, variable) {
     dplyr::pull(!! varyable) %>%
     is.na() %>%
     sum()
-
-  n_obs <-
-    data %>%
-    dplyr::pull(!! varyable) %>%
-    length()
 
   if (na_count > 0) {
     na_data <- dplyr::pull(data, !! varyable)

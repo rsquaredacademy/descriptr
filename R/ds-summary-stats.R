@@ -27,6 +27,7 @@
 #' @export
 #'
 ds_summary_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.numeric(data)) {
     print(ds_summary(data))
@@ -51,6 +52,11 @@ ds_summary_stats <- function(data, ...) {
     }
 
     col_names <- names(data)
+
+    for (i in col_names) {
+      check_numeric(data, !! rlang::sym(i), i)
+    }
+
     for (i in col_names) {
       ds_rule(paste0('Variable: ', i))
       cat('\n\n')
@@ -63,6 +69,7 @@ ds_summary_stats <- function(data, ...) {
 ds_summary <- function(data, variable) UseMethod("ds_summary")
 
 ds_summary.default <- function(data, variable) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.numeric(data)) {
     odata <- data
@@ -81,38 +88,53 @@ ds_summary.default <- function(data, variable) {
       na.omit()
   }
 
-  low      <- ds_tailobs(sdata, 5, "low")
-  high     <- ds_tailobs(sdata, 5, "high")
-  low_val  <- ds_rindex(sdata, low)
-  high_val <- ds_rindex(sdata, high)
+  pairs <- sort_pairs(odata)
+  n     <- length(pairs$value)
+  k     <- min(5, n)
+
+  # a variable with no non-missing observations has missing metrics rather
+  # than the infinities/NaN produced by min(), max() or mean() of zero values
+  metric <- function(value) if (n == 0L) NA_real_ else value
+
+  if (n == 0) {
+    low <- high <- numeric(0)
+    low_val <- high_val <- integer(0)
+  } else {
+    low_k    <- seq_len(k)
+    high_k   <- rev(seq.int(n - k + 1L, n))
+    low      <- round(pairs$value[low_k], 2)
+    high     <- round(pairs$value[high_k], 2)
+    low_val  <- pairs$index[low_k]
+    high_val <- pairs$index[high_k]
+  }
 
   result <-
     list(obs      = length(odata),
          missing  = sum(is.na(odata)),
-         avg      = mean(sdata),
-         tavg     = mean(sdata, trim = 0.05),
-         stdev    = sd(sdata),
-         variance = var(sdata),
-         skew     = ds_skewness(sdata),
-         kurtosis = ds_kurtosis(sdata),
-         uss      = stat_uss(sdata),
-         css      = ds_css(sdata),
-         cvar     = ds_cvar(sdata),
-         sem      = ds_std_error(sdata),
-         median   = median(sdata),
-         mode     = ds_mode(sdata),
-         range    = ds_range(sdata),
-         min      = min(sdata),
-         Max      = max(sdata),
-         iqrange  = IQR(sdata),
-         per99    = quantile(sdata, 0.99),
-         per90    = quantile(sdata, 0.90),
-         per95    = quantile(sdata, 0.95),
-         per75    = quantile(sdata, 0.75),
-         per25    = quantile(sdata, 0.25),
-         per10    = quantile(sdata, 0.10),
-         per5     = quantile(sdata, 0.05),
-         per1     = quantile(sdata, 0.01),
+         avg      = metric(mean(sdata)),
+         tavg     = metric(mean(sdata, trim = 0.05)),
+         stdev    = metric(sd(sdata)),
+         variance = metric(var(sdata)),
+         skew     = metric(ds_skewness(sdata)),
+         kurtosis = metric(ds_kurtosis(sdata)),
+         uss      = metric(stat_uss(sdata)),
+         css      = metric(ds_css(sdata)),
+         cvar     = metric(ds_cvar(sdata)),
+         sem      = metric(ds_std_error(sdata)),
+         median   = metric(median(sdata)),
+         mode     = metric(ds_mode(sdata)),
+         range    = metric(ds_range(sdata)),
+         min      = metric(min(sdata)),
+         Max      = metric(max(sdata)),
+         iqrange  = metric(IQR(sdata)),
+         per99    = metric(quantile(sdata, 0.99)),
+         per90    = metric(quantile(sdata, 0.90)),
+         per95    = metric(quantile(sdata, 0.95)),
+         per75    = metric(quantile(sdata, 0.75)),
+         per25    = metric(quantile(sdata, 0.25)),
+         per10    = metric(quantile(sdata, 0.10)),
+         per5     = metric(quantile(sdata, 0.05)),
+         per1     = metric(quantile(sdata, 0.01)),
          lowobs   = low,
          highobs  = high,
          lowobsi  = low_val,

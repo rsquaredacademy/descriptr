@@ -8,9 +8,20 @@
 #' @param data A \code{data.frame} or a \code{tibble}.
 #' @param col Column in \code{data}.
 #' @param x An object of class \code{ds_freq_table}.
-#' @param bins Number of intervals into which the data must be split.
+#' @param bins Number of intervals into which the data must be split; a
+#' positive whole number.
+#' @param closed Interval closure for continuous data. \code{"left"} (the
+#' default) gives half-open intervals with the last interval closed;
+#' \code{"right"} gives right-closed intervals with the first interval closed;
+#' \code{"both"} reproduces the legacy behaviour in which boundary values are
+#' counted in both adjacent intervals.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
+#'
+#' @details Percentages are computed over all observations, including missing
+#'   values, so the \code{Percent} column and the \code{Missing} row share the
+#'   same denominator and add up to 100. Continuous data with no non-missing
+#'   observations, or with no variation, cannot be binned and raise an error.
 #'
 #' @examples
 #' # categorical data
@@ -31,12 +42,16 @@
 #'
 #' @export
 #'
-ds_freq_table <- function(data, col, bins = 5) UseMethod("ds_freq_table")
+ds_freq_table <- function(data, col, bins = 5,
+                          closed = c("left", "right", "both")) UseMethod("ds_freq_table")
 
 #' @export
 #'
-ds_freq_table.default <- function(data, col, bins = 5) {
+ds_freq_table.default <- function(data, col, bins = 5,
+                                  closed = c("left", "right", "both")) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
+	data <- as_categorical(data)
 	varyable <- rlang::enquo(col)
 	data %<>%
       dplyr::select(!! varyable)
@@ -44,7 +59,7 @@ ds_freq_table.default <- function(data, col, bins = 5) {
   is_factor <- sapply(data, is.factor)
 
   if (is_num) {
-  	result <- ds_freq_numeric(data, !! rlang::enquo(col), bins)
+  	result <- ds_freq_numeric(data, !! rlang::enquo(col), bins, closed)
   } else if (is_factor) {
   	result <- ds_freq_factor(data, !! rlang::enquo(col))
   } else {
@@ -102,7 +117,8 @@ plot.ds_freq_table <- function(x, print_plot = TRUE, ...) {
 #' @rdname ds_freq_table
 #' @usage NULL
 #'
-ds_freq_cont <- function(data, variable, bins) {
+ds_freq_cont <- function(data, variable, bins = 5) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_freq_table()")
-  ds_freq_table(data, variable, bins)
+  ds_freq_table(data, {{ variable }}, bins)
 }

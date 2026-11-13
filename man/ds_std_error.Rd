@@ -12,6 +12,11 @@ ds_std_error(x)
 \description{
 Returns the standard error of mean.
 }
+\details{
+Missing values are removed before computation and the number of
+  non-missing observations is used. A vector with no non-missing
+  observations returns \code{NA}.
+}
 \examples{
 ds_std_error(mtcars$mpg)
 

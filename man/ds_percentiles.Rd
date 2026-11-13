@@ -16,6 +16,12 @@ ds_percentiles(data, ..., decimals = 2)
 \description{
 Returns the percentiles
 }
+\details{
+\code{n} reports the number of non-missing observations and the
+  percentiles are computed from the non-missing values, for both vector and
+  data-frame input. A variable with no non-missing observations returns
+  \code{n = 0} and \code{NA} for every percentile.
+}
 \examples{
 # single column
 ds_percentiles(mtcarz, mpg)

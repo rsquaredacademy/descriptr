@@ -7,8 +7,8 @@ test_that("output from ds_tailobs match expected result", {
 
 
 test_that("ds_tailobs returns the appropriate error", {
-  expect_error(ds_tailobs(mtcars$mpg, 40, "low"), "n must be less than the length of data")
-  expect_error(ds_tailobs(mtcars$mpg, 40, "high"), "n must be less than the length of data")
+  expect_error(ds_tailobs(mtcars$mpg, 40, "low"), "n must be less than or equal to the number of non-missing observations")
+  expect_error(ds_tailobs(mtcars$mpg, 40, "high"), "n must be less than or equal to the number of non-missing observations")
   expect_error(ds_tailobs("mtcars", 40, "high"), "data must be numeric")
   expect_error(ds_tailobs(as.factor(mtcars$disp), 40, "high"), "data must be numeric")
   expect_error(ds_tailobs(mtcars$mpg, "40", "high"), "n must be numeric")
@@ -214,6 +214,35 @@ test_that("ds_measures_location throws appropriate errors", {
 
 })
 
+test_that("ds_measures_location keeps the selected column order", {
+
+  expect_equal(ds_measures_location(mtcarz, mpg, disp)$variable, c("mpg", "disp"))
+  expect_equal(ds_measures_location(mtcarz, disp, mpg)$variable, c("disp", "mpg"))
+
+  df <- data.frame(z = 1:5, a = 6:10)
+  expect_equal(ds_measures_location(df)$variable, c("z", "a"))
+
+  d <- mtcarz$disp[1:10]
+  k <- ds_measures_location(mtcarz$mpg, d)
+  expect_equal(k$variable, c("mtcarz$mpg", "d"))
+  expect_equal(k$variable, ds_measures_variation(mtcarz$mpg, d)$variable)
+})
+
+test_that("mixed-type selections use the check_numeric() message", {
+
+  msg_cyl <- "cyl is not a continuous variable. The function expects an object of type `numeric` or `integer` but cyl is of type `factor`."
+
+  expect_error(ds_measures_location(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+  expect_error(ds_measures_variation(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+  expect_error(ds_measures_symmetry(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+  expect_error(ds_percentiles(mtcarz, mpg, cyl), msg_cyl, fixed = TRUE)
+
+  # with no selection the numeric columns are used
+  k <- ds_measures_variation(mtcarz)
+  expect_setequal(k$var, names(mtcarz)[sapply(mtcarz, is.numeric)])
+  expect_false(any(k$var %in% c("cyl", "vs", "am", "gear", "carb")))
+})
+
 test_that("output from ds_measures_variation is as expected", {
 
   actual <- round(sum(ds_measures_variation(mtcarz)[[3]]), 2)
@@ -321,3 +350,345 @@ test_that("ds_extreme_obs throws appropriate errors", {
 
 })
 
+test_that("single numeric column data frames work", {
+
+  d <- data.frame(x = 1:10)
+  x <- d$x
+
+  v <- ds_measures_variation(d)
+  expect_equal(v$var, "x")
+  expect_equal(v$n, length(x))
+  expect_equal(v$range, max(x) - min(x))
+  expect_equal(v$iqr, IQR(x))
+  expect_equal(v$variance, round(var(x), 2))
+  expect_equal(v$sd, round(sd(x), 2))
+  expect_equal(v$coeff_var, round(sd(x) / mean(x) * 100, 2))
+  expect_equal(v$std_error, round(sd(x) / sqrt(length(x)), 2))
+
+  v1 <- ds_measures_variation(dplyr::select(mtcarz, mpg))
+  expect_equal(v1$var, "mpg")
+  expect_equal(v1$n, nrow(mtcarz))
+  expect_equal(v1$sd, round(sd(mtcarz$mpg), 2))
+
+  s <- ds_measures_symmetry(d)
+  expect_equal(s$var, "x")
+  expect_equal(s$n, length(x))
+  n <- length(x)
+  expect_equal(s$skewness, round(ds_skewness(x), 2))
+  expect_equal(s$kurtosis, round(ds_kurtosis(x), 2))
+  expect_equal(
+    s$skewness,
+    round((n / ((n - 1) * (n - 2))) * sum(((x - mean(x)) / sd(x)) ^ 3), 2)
+  )
+
+  p <- ds_percentiles(d)
+  expect_equal(p$var, "x")
+  expect_equal(p$n, length(x))
+  expect_equal(
+    unname(unlist(p[c("min", "per_1", "per_5", "per_10", "q1", "median",
+                       "q3", "per_90", "per_95", "per_99", "max")])),
+    unname(quantile(x, c(0, 0.01, 0.05, 0.10, 0.25, 0.50, 0.75, 0.90, 0.95, 0.99, 1)))
+  )
+})
+
+test_that("ds_extreme_obs works with fewer than five non-missing values", {
+
+  x <- c(4, 1, 3, 2)
+  k <- ds_extreme_obs(x)
+
+  expect_equal(k$value[k$type == "high"], sort(x, decreasing = TRUE))
+  expect_equal(k$value[k$type == "low"], sort(x))
+
+  k_df <- ds_extreme_obs(data.frame(x = x), x)
+  expect_equal(k_df$value, k$value)
+
+  k_one <- ds_extreme_obs(5)
+  expect_equal(k_one$value, c(5, 5))
+
+  # missing values are removed before the count is taken
+  k_na <- ds_extreme_obs(c(1, 2, NA, 3))
+  expect_equal(k_na$value[k_na$type == "high"], c(3, 2, 1))
+})
+
+test_that("measures handle missing values per column (#132)", {
+
+  d <- mtcarz
+  d$disp[3] <- NA
+
+  v <- ds_measures_variation(d)
+  expect_equal(v$n[v$var == "mpg"], nrow(mtcarz))
+  expect_equal(v$variance[v$var == "mpg"], round(var(mtcarz$mpg), 2))
+  expect_equal(v$sd[v$var == "mpg"], round(sd(mtcarz$mpg), 2))
+  expect_equal(v$iqr[v$var == "mpg"], round(IQR(mtcarz$mpg), 2))
+  expect_equal(v$n[v$var == "disp"], nrow(mtcarz) - 1)
+  expect_equal(v$variance[v$var == "disp"], round(var(d$disp, na.rm = TRUE), 2))
+  expect_equal(v$sd[v$var == "disp"], round(sd(d$disp, na.rm = TRUE), 2))
+
+  s <- ds_measures_symmetry(d)
+  expect_equal(s$n[s$var == "mpg"], nrow(mtcarz))
+  expect_equal(s$skewness[s$var == "mpg"], round(ds_skewness(mtcarz$mpg), 2))
+  expect_equal(s$kurtosis[s$var == "mpg"], round(ds_kurtosis(mtcarz$mpg), 2))
+  expect_equal(s$n[s$var == "disp"], nrow(mtcarz) - 1)
+  expect_equal(s$skewness[s$var == "disp"], round(ds_skewness(d$disp), 2))
+
+  p <- ds_percentiles(d)
+  expect_equal(p$n[p$var == "mpg"], nrow(mtcarz))
+  expect_equal(p$min[p$var == "mpg"], round(min(mtcarz$mpg), 2))
+  expect_equal(p$median[p$var == "mpg"], round(median(mtcarz$mpg), 2))
+  expect_equal(p$max[p$var == "mpg"], round(max(mtcarz$mpg), 2))
+  expect_equal(p$n[p$var == "disp"], nrow(mtcarz) - 1)
+
+  t <- ds_tidy_stats(d)
+  expect_equal(t$mean[t$vars == "mpg"], mean(mtcarz$mpg))
+  expect_equal(t$median[t$vars == "mpg"], median(mtcarz$mpg))
+  expect_equal(t$variance[t$vars == "mpg"], var(mtcarz$mpg))
+  expect_equal(t$stdev[t$vars == "mpg"], sd(mtcarz$mpg))
+  expect_equal(t$iqrange[t$vars == "mpg"], IQR(mtcarz$mpg))
+  expect_equal(t$mean[t$vars == "disp"], mean(d$disp, na.rm = TRUE))
+})
+
+test_that("measures isolate missing values in orthogonal columns (#132)", {
+
+  df_na <- data.frame(
+    a = c(10, 20, NA, 40, 50),
+    b = c(NA, 2, 3, 4, 5),
+    c = c(100, 200, 300, 400, NA)
+  )
+
+  v <- ds_measures_variation(df_na)
+  expect_equal(v$n, c(4L, 4L, 4L))
+  expect_equal(v$variance, c(round(var(df_na$a, na.rm = TRUE), 2),
+                              round(var(df_na$b, na.rm = TRUE), 2),
+                              round(var(df_na$c, na.rm = TRUE), 2)))
+
+  s <- ds_measures_symmetry(df_na)
+  expect_equal(s$n, c(4L, 4L, 4L))
+
+  p <- ds_percentiles(df_na)
+  expect_equal(p$n, c(4L, 4L, 4L))
+
+  t <- ds_tidy_stats(df_na)
+  expect_equal(t$mean, c(mean(df_na$a, na.rm = TRUE),
+                         mean(df_na$b, na.rm = TRUE),
+                         mean(df_na$c, na.rm = TRUE)))
+  expect_equal(t$variance, c(var(df_na$a, na.rm = TRUE),
+                              var(df_na$b, na.rm = TRUE),
+                              var(df_na$c, na.rm = TRUE)))
+})
+
+test_that("measures return NA for an all-missing numeric column (#132)", {
+
+  d <- data.frame(
+    a = c(1, 2, NA, 4),
+    b = c(NA_real_, NA_real_, NA_real_, NA_real_)
+  )
+
+  v <- ds_measures_variation(d)
+  expect_equal(nrow(v), 2)
+  expect_equal(v$n[v$var == "b"], 0)
+  expect_true(all(is.na(v[v$var == "b", -(1:2)])))
+
+  s <- ds_measures_symmetry(d)
+  expect_equal(nrow(s), 2)
+  expect_equal(s$n[s$var == "b"], 0)
+  expect_true(all(is.na(s[s$var == "b", -(1:2)])))
+
+  p <- ds_percentiles(d)
+  expect_equal(nrow(p), 2)
+  expect_equal(p$n[p$var == "b"], 0)
+  expect_true(all(is.na(p[p$var == "b", -(1:2)])))
+
+  t <- ds_tidy_stats(d)
+  expect_equal(nrow(t), 2)
+  expect_true(all(is.na(t[t$vars == "b", -1])))
+})
+
+test_that("extreme observations report original row indices (#133)", {
+
+  d <- mtcarz
+  d$mpg[1:2] <- NA
+
+  e <- ds_extreme_obs(d, mpg)
+  expect_equal(e$value[e$type == "high"][1], 33.9)
+  expect_equal(e$index[e$type == "high"][1], 20)
+  expect_equal(e$index[e$type == "high"], c(20, 18, 28, 19, 26))
+
+  # ties are reported on distinct rows
+  tied <- ds_extreme_obs(c(1, 1, 2, 2, 3, 3, 4, 4, 5, 5))
+  expect_equal(tied$index[tied$type == "high"], c(10, 9, 8, 7, 6))
+  expect_equal(tied$index[tied$type == "low"], c(1, 2, 3, 4, 5))
+  expect_equal(length(unique(tied$index)), 10)
+
+  # small samples use min(5, n) rows without recycling indices
+  small <- ds_extreme_obs(c(3, 1, 2))
+  expect_equal(small$value[small$type == "high"], c(3, 2, 1))
+  expect_equal(small$index[small$type == "high"], c(1, 3, 2))
+  expect_equal(small$value[small$type == "low"], c(1, 2, 3))
+  expect_equal(small$index[small$type == "low"], c(2, 3, 1))
+
+  # decimals applies to data.frame input as well
+  d2 <- data.frame(x = c(1.23456, 2.34567, 3.45678, 4.56789, 5.67891))
+  rounded <- ds_extreme_obs(d2, x, decimals = 3)
+  expect_equal(rounded$value,
+               round(c(sort(d2$x, decreasing = TRUE), sort(d2$x)), 3))
+})
+
+test_that("ds_rindex reports original positions and handles ties (#133)", {
+
+  x <- c(NA, NA, 3, 1, 2)
+  expect_equal(ds_rindex(x, 1), 4)
+  expect_equal(ds_rindex(x, c(1, 2)), c(4, 5))
+  expect_equal(ds_rindex(c(1, 1, 2), 1), c(1, 2))
+})
+
+test_that("geometric and harmonic means are numerically stable (#134)", {
+
+  expect_equal(ds_gmean(rep(1000, 500)), 1000)
+
+  large <- c(1e50, 2e50, 3e50, 4e50, 5e50)
+  expect_false(is.infinite(ds_gmean(large)))
+  expect_equal(ds_gmean(large), exp(mean(log(large))), tolerance = 1e-10)
+
+  expect_warning(g <- ds_gmean(c(-5, 10, 20)),
+                 "Geometric mean requires strictly positive values")
+  expect_true(is.na(g))
+
+  expect_warning(g0 <- ds_gmean(c(0, 10, 20)),
+                 "Geometric mean requires strictly positive values")
+  expect_true(is.na(g0))
+
+  expect_warning(h <- ds_hmean(c(-5, 10, 20)),
+                 "Harmonic mean requires strictly positive non-zero values")
+  expect_true(is.na(h))
+
+  expect_warning(h0 <- ds_hmean(c(0, 10, 20)),
+                 "Harmonic mean requires strictly positive non-zero values")
+  expect_true(is.na(h0))
+})
+
+
+test_that("harmonic mean is stable for extreme magnitudes (H5)", {
+
+  # compare scaled ratios: the original implementation returned exactly 0 for
+  # these inputs, which an absolute comparison against 1e-308 accepted
+  h1 <- ds_hmean(rep(1e-308, 10))
+  expect_gt(h1, 0)
+  expect_equal(h1 / 1e-308, 1)
+
+  h2 <- ds_hmean(c(1e-310, 1e-310))
+  expect_gt(h2, 0)
+  expect_equal(h2 / 1e-310, 1)
+
+  h3 <- ds_hmean(c(1e-300, 1e300))
+  expect_gt(h3, 0)
+  expect_equal(h3 / 2e-300, 1, tolerance = 1e-10)
+
+  expect_equal(ds_hmean(c(2, 4)), 2 / (1 / 2 + 1 / 4))
+  expect_equal(ds_hmean(rep(1000, 500)), 1000)
+
+  # non-finite input is rejected explicitly
+  expect_warning(h <- ds_hmean(c(1, Inf)), "Harmonic mean requires finite")
+  expect_true(is.na(h))
+})
+
+test_that("ds_tailobs validates n (M6)", {
+
+  expect_equal(ds_tailobs(1:3, 0), numeric(0))
+  expect_equal(ds_tailobs(1:3, 2), c(1, 2))
+  expect_equal(ds_tailobs(1:3, 2, type = "high"), c(3, 2))
+
+  msg <- "n must be a single finite whole number"
+  expect_error(ds_tailobs(1:3, 1.5), msg)
+  expect_error(ds_tailobs(1:3, -1), msg)
+  expect_error(ds_tailobs(1:3, NA_real_), msg)
+  expect_error(ds_tailobs(1:3, NA), "n must be numeric")
+  expect_error(ds_tailobs(1:3, Inf), msg)
+  expect_error(ds_tailobs(1:3, c(1, 2)), msg)
+  expect_error(ds_tailobs(1:3, 4),
+               "n must be less than or equal to the number of non-missing observations")
+})
+
+test_that("decimals is applied to data-frame input", {
+
+  variation <- ds_measures_variation(mtcarz, mpg, decimals = 1)
+  expect_equal(variation$range, 23.5)
+  expect_equal(variation$iqr, 7.4)
+  expect_equal(variation$sd, 6)
+
+  symmetry <- ds_measures_symmetry(mtcarz, mpg, decimals = 4)
+  expect_equal(symmetry$skewness, round(ds_skewness(mtcarz$mpg), 4))
+
+  percentiles <- ds_percentiles(mtcarz, mpg, decimals = 1)
+  expect_equal(percentiles$median, 19.2)
+  expect_equal(percentiles$q1, 15.4)
+
+  # the defaults are unchanged
+  expect_equal(ds_measures_variation(mtcarz, mpg)$sd, 6.03)
+  expect_equal(ds_measures_symmetry(mtcarz, mpg)$skewness, 0.67)
+  expect_equal(ds_percentiles(mtcarz, mpg)$median, 19.2)
+})
+
+test_that("ds_tailobs counts non-missing observations", {
+
+  x <- c(1, 2, NA, NA, NA, 6)
+
+  expect_error(
+    ds_tailobs(x, 4),
+    "n must be less than or equal to the number of non-missing observations"
+  )
+  expect_equal(ds_tailobs(x, 3), c(1, 2, 6))
+  expect_equal(ds_tailobs(x, 3, type = "high"), c(6, 2, 1))
+})
+
+test_that("vector and data-frame NA handling is consistent (M4)", {
+
+  x <- c(1, 2, NA)
+
+  # variation: n counts non-missing observations and every metric ignores NAs
+  v <- ds_measures_variation(x)
+  vf <- ds_measures_variation(data.frame(x = x), x)
+
+  expect_equal(v$n, 2)
+  expect_equal(v$range, 1)
+  expect_equal(v$iqr, 0.5)
+  expect_equal(v$variance, 0.5)
+  expect_equal(v$sd, 0.71)
+  expect_equal(v$coeff_var, 47.14)
+  expect_equal(v$std_error, 0.5)
+  expect_equal(unname(unlist(v[-1])), unname(unlist(vf[-1])))
+
+  # symmetry: n counts usable observations, skewness/kurtosis ignore NAs
+  s <- ds_measures_symmetry(c(1, 2, NA, 5))
+  sf <- ds_measures_symmetry(data.frame(x = c(1, 2, NA, 5)), x)
+
+  expect_equal(s$n, 3)
+  expect_equal(s$skewness, round(ds_skewness(c(1, 2, 5)), 2))
+  expect_equal(s$kurtosis, round(ds_kurtosis(c(1, 2, 5)), 2))
+  expect_equal(unname(unlist(s[-1])), unname(unlist(sf[-1])))
+
+  # percentiles: NAs are dropped instead of raising a base error
+  p <- ds_percentiles(c(1, 2, NA))
+  pf <- ds_percentiles(data.frame(x = c(1, 2, NA)), x)
+
+  expect_equal(p$n, 2)
+  expect_equal(p$min, 1)
+  expect_equal(p$median, 1.5)
+  expect_equal(p$max, 2)
+  expect_equal(p$per_1, unname(round(quantile(c(1, 2), 0.01), 2)))
+  expect_equal(p$q3, unname(round(quantile(c(1, 2), 0.75), 2)))
+  expect_equal(unname(unlist(p[-1])), unname(unlist(pf[-1])))
+
+  # all-missing and empty vectors return NA like the data-frame path
+  for (fun in list(ds_measures_variation, ds_measures_symmetry, ds_percentiles)) {
+    res <- fun(c(NA_real_, NA_real_))
+    expect_equal(res$n, 0)
+    expect_true(all(is.na(unlist(res[-c(1, 2)]))))
+  }
+
+  # standard error ignores missing values and uses their count
+  expect_equal(ds_std_error(c(1, 2, NA)), 0.5)
+  expect_equal(ds_std_error(c(1, 2, 5)), sd(c(1, 2, 5)) / sqrt(3))
+  expect_equal(ds_std_error(mtcarz$mpg), sd(mtcarz$mpg) / sqrt(length(mtcarz$mpg)))
+  expect_true(is.na(ds_std_error(c(NA_real_, NA_real_))))
+  expect_true(is.na(ds_std_error(numeric(0))))
+})

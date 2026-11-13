@@ -35,8 +35,21 @@ levels of the factor variable.}
 }
 \description{
 Descriptive statistics of a continuous variable for the different levels of
-a categorical variable. \code{boxplot.group_summary()} creates boxplots of
+a categorical variable. \code{plot.ds_group_summary()} creates boxplots of
 the continuous variable for the different levels of the categorical variable.
+}
+\details{
+Groups with missing values in the continuous variable are summarised
+using the non-missing observations (\code{na.rm = TRUE}), and the number of
+missing observations is reported in the \code{Missing} row of \code{stats}.
+Observations with a missing grouping label are excluded from the summary and
+from the boxplot. Unused levels of the grouping factor are dropped.
+
+The grouping key in \code{tidy_stats} keeps the class of the grouping
+variable (including ordered factors) and the order of the observed levels.
+If the grouping column is named like one of the statistic columns, such as
+\code{length}, its column in \code{tidy_stats} is suffixed with
+\code{_group} so that every column name is unique.
 }
 \examples{
 # ds_group summary

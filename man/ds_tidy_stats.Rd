@@ -10,7 +10,7 @@ ds_tidy_stats(data, ...)
 \arguments{
 \item{data}{A \code{tibble} or a \code{data.frame}.}
 
-\item{...}{Columns in \code{x}.}
+\item{...}{Columns in \code{data}.}
 }
 \value{
 A tibble.

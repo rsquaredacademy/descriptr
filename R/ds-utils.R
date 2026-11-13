@@ -7,6 +7,30 @@ formatter <- function(x) {
   return(format(as.character(x), width = 13, justify = "right"))
 }
 
+formatter_pct <- function(x) {
+  return(format(round(x * 100, 2), nsmall = 2, width = 13, justify = "right"))
+}
+
+# Percentages displayed by the cross table print methods. They are computed
+# from the integer counts rather than from the stored (rounded) proportions so
+# that the printed values keep two decimal places of a percentage.
+cross_print_pct <- function(twowaytable, obs, column_totals) {
+
+  tab       <- as.matrix(twowaytable)
+  rows      <- nrow(tab)
+  cols      <- ncol(tab) - 2
+  counts    <- matrix(as.numeric(tab[, seq_len(cols) + 1]), nrow = rows, ncol = cols)
+  row_total <- as.numeric(tab[, cols + 2])
+  col_total <- as.numeric(column_totals[seq_len(cols)])
+
+  list(
+    percent        = counts / obs,
+    row_percent    = cbind(counts / row_total, row_total / obs),
+    column_percent = sweep(counts, 2, col_total, "/"),
+    percent_column = col_total / obs
+  )
+}
+
 percent <- function(x, y) {
   out <- round((x / y) * 100, 2)
   return(out)
@@ -21,31 +45,61 @@ formatas <- function(x, round, width, justify = "centre") {
   return(format(x, width = width, justify = justify))
 }
 
-bin_size <- function(data, bins) {
-  return((max(data, na.rm = TRUE) - min(data, na.rm = TRUE)) / bins)
-}
-
 intervals <- function(data, bins, na.rm = TRUE) {
-  binsize <- bin_size(data, bins)
-  bin <- bins - 1
-  interval <- min(data)
-  for (i in seq_len(bin)) {
-    out <- interval[i] + binsize
-    interval <- c(interval, out)
+
+  if (length(data) == 0L) {
+    stop("Cannot construct bin boundaries for empty data.", call. = FALSE)
   }
-  interval <- c(interval, max(data))
-  return(interval)
+
+  lo <- min(data, na.rm = na.rm)
+  hi <- max(data, na.rm = na.rm)
+
+  if (!is.finite(lo) || !is.finite(hi)) {
+    stop("Cannot construct bin boundaries for non-finite data.", call. = FALSE)
+  }
+
+  t <- (0:bins) / bins
+
+  # `hi - lo` overflows for some finite ranges; the convex combination
+  # `lo * (1 - t) + hi * t` stays representable for every finite lo and hi
+  if (is.finite(hi - lo)) {
+    boundary <- lo + (hi - lo) * t
+  } else {
+    boundary <- lo * (1 - t) + hi * t
+  }
+
+  boundary[1]                <- lo
+  boundary[length(boundary)] <- hi
+
+  if (any(!is.finite(boundary)) || any(diff(boundary) <= 0)) {
+    stop("Cannot construct strictly increasing bin boundaries for the data range.",
+         call. = FALSE)
+  }
+
+  boundary
 }
 
-freq <- function(data, bins, inta) {
-  result <- c()
+freq <- function(data, bins, inta, closed = c("left", "right", "both")) {
+  closed <- match.arg(closed)
+  result <- numeric(bins)
   for (i in seq_len(bins)) {
-    k <- i + 1
-    freq <- data >= inta[i] & data <= inta[k]
-    out <- length(data[freq])
-    result <- c(result, out)
+    lo <- inta[i]
+    hi <- inta[i + 1]
+    result[i] <- switch(
+      closed,
+      left  = if (i < bins) sum(data >= lo & data < hi, na.rm = TRUE) else sum(data >= lo & data <= hi, na.rm = TRUE),
+      right = if (i == 1) sum(data >= lo & data <= hi, na.rm = TRUE) else sum(data > lo & data <= hi, na.rm = TRUE),
+      both  = sum(data >= lo & data <= hi, na.rm = TRUE)
+    )
   }
-  return(result)
+  as.integer(result)
+}
+
+sort_pairs <- function(x) {
+  index <- seq_along(x)
+  keep  <- !is.na(x)
+  ord   <- order(x[keep], index[keep])
+  list(value = x[keep][ord], index = index[keep][ord])
 }
 
 div_by <- function(x) {
@@ -64,6 +118,31 @@ sums <- function(x, q) {
   return(result)
 }
 
+num_or_na <- function(x, fun) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0L) {
+    return(NA_real_)
+  }
+  fun(x)
+}
+
+# Representative grouping keys, in the order used by split(), are selected
+# from the original grouping vector so that factor classes (including ordered
+# factors) and the observed level order are retained.
+group_key_vector <- function(gvar, key_labels) {
+  gvar[match(key_labels, as.character(gvar))]
+}
+
+# A grouping column keeps its source name in tidy output unless that name is
+# also a statistic column name, in which case `_group` is appended.
+unique_group_name <- function(name, stat_names) {
+  if (name %in% stat_names) {
+    paste0(name, "_group")
+  } else {
+    name
+  }
+}
+
 md_helper <- function(x, y) {
   abs(x - y)
 }
@@ -74,12 +153,20 @@ md_helper <- function(x, y) {
 #'
 #' @param x A numeric vector.
 #'
+#' @details Missing values are removed before computation and the number of
+#'   non-missing observations is used. A vector with no non-missing
+#'   observations returns \code{NA}.
+#'
 #' @examples
 #' ds_std_error(mtcars$mpg)
 #'
 #' @export
 #'
 ds_std_error <- function(x) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0L) {
+    return(NA_real_)
+  }
   sd(x) / (length(x) ^ 0.5)
 }
 
@@ -242,6 +329,9 @@ trimmed_mean <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
   }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   mean(x, trim = 0.05)
 }
 
@@ -249,12 +339,18 @@ quant1 <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
   }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
+  }
   quantile(x, probs = 0.25)
 }
 
 quant3 <- function(x, na.rm = FALSE) {
   if (na.rm) {
     x <- na.omit(x)
+  }
+  if (length(stats::na.omit(x)) == 0L) {
+    return(NA_real_)
   }
   quantile(x, probs = 0.75)
 }
@@ -317,6 +413,29 @@ check_factor <- function(data, var, var_name) {
   }
 }
 
+check_numeric_cols <- function(data, vars) {
+
+  for (nm in vars) {
+    check_numeric(data, !! rlang::sym(nm), nm)
+  }
+
+}
+
+as_categorical <- function(data) {
+
+  dplyr::mutate(data, dplyr::across(dplyr::where(is.character), factor))
+
+}
+
+check_bins <- function(bins) {
+
+  if (!is.numeric(bins) || length(bins) != 1L || is.na(bins) ||
+      !is.finite(bins) || bins < 1 || bins != floor(bins)) {
+    stop("bins must be a positive whole number.", call. = FALSE)
+  }
+
+}
+
 ds_rule <- function(text = NULL) {
   con_wid  <- options()$width
   text_len <- nchar(text) + 2
@@ -326,6 +445,7 @@ ds_rule <- function(text = NULL) {
 }
 
 ds_num_cols <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   is_num <- sapply(data, is.numeric)
   if (!any(is_num)) {
     stop("Data has no continuous variables.", call. = FALSE)
@@ -334,6 +454,7 @@ ds_num_cols <- function(data) {
 }
 
 ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.null(vars)) {
     varyable <- names(data)
@@ -349,7 +470,14 @@ ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
                         median    = round(sapply(data, median, na.rm = TRUE), decimals),
                         mode      = round(sapply(data, ds_mode), decimals))
 
-  result <- measure[order(measure$variable), ]
+  result <- measure
   rownames(result) <- NULL
   return(result)
+}
+
+# grouped or rowwise tibbles keep their grouping columns in every select()
+# and summarise per group; descriptr summarises whole columns, so drop the
+# grouping before any computation
+is_grouped <- function(data) {
+  inherits(data, "grouped_df") || inherits(data, "rowwise_df")
 }

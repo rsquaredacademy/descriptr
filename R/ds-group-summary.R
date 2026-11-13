@@ -1,7 +1,7 @@
 #' Groupwise descriptive statistics
 #'
 #' Descriptive statistics of a continuous variable for the different levels of
-#' a categorical variable. \code{boxplot.group_summary()} creates boxplots of
+#' a categorical variable. \code{plot.ds_group_summary()} creates boxplots of
 #' the continuous variable for the different levels of the categorical variable.
 #'
 #' @param data A \code{data.frame} or a \code{tibble}.
@@ -10,6 +10,18 @@
 #' @param x An object of the class \code{ds_group_summary}.
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Further arguments to be passed to or from methods.
+#'
+#' @details Groups with missing values in the continuous variable are summarised
+#' using the non-missing observations (\code{na.rm = TRUE}), and the number of
+#' missing observations is reported in the \code{Missing} row of \code{stats}.
+#' Observations with a missing grouping label are excluded from the summary and
+#' from the boxplot. Unused levels of the grouping factor are dropped.
+#'
+#' The grouping key in \code{tidy_stats} keeps the class of the grouping
+#' variable (including ordered factors) and the order of the observed levels.
+#' If the grouping column is named like one of the statistic columns, such as
+#' \code{length}, its column in \code{tidy_stats} is suffixed with
+#' \code{_group} so that every column name is unique.
 #'
 #' @return \code{ds_group_summary()} returns an object of class \code{"ds_group_summary"}.
 #' An object of class \code{"ds_group_summary"} is a list containing the
@@ -41,8 +53,10 @@ ds_group_summary <- function(data, group_by, cols) UseMethod("ds_group_summary")
 #' @export
 #'
 ds_group_summary.default <- function(data, group_by, cols) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  data <- as_categorical(data)
   gvar_name <- deparse(substitute(group_by))
   cvar_name <- deparse(substitute(cols))
 
@@ -66,42 +80,97 @@ ds_group_summary.default <- function(data, group_by, cols) {
     names()
 
 
-  split_dat <- tapply(cvar, list(gvar), function(gvar) {
-    c(
-      length(gvar), min(gvar), max(gvar), mean(gvar),
-      median(gvar), ds_mode(gvar), sd(gvar), var(gvar),
-      ds_skewness(gvar), ds_kurtosis(gvar), stat_uss(gvar),
-      ds_css(gvar), ds_cvar(gvar), ds_std_error(gvar),
-      ds_range(gvar), IQR(gvar)
-    )
-  })
+  # drop unused levels so that empty groups do not produce NULL statistics
+  gvar <- droplevels(gvar)
 
-  splito <- sapply(split_dat, round, 2)
+  # summarise the observed groups only
+  keep <- !is.na(gvar)
+  gvar <- gvar[keep]
+  cvar <- cvar[keep]
+
+  if (length(gvar) == 0) {
+    stop("No data to summarise. The data has no observations with a non-missing grouping value.", call. = FALSE)
+  }
+
+  # plot and summary must use the same observations: a missing grouping label
+  # is not a group
+  plot_data        <- data.frame(gvar, cvar)
+  names(plot_data) <- c(xname, yname)
+
+  split_dat <- split(cvar, gvar, drop = TRUE)
+
+  stat_names <- c(
+    "obs", "missing", "min", "max", "mean", "median", "mode", "sd",
+    "variance", "skewness", "kurtosis", "uss", "css", "coeff_var",
+    "std_error", "range", "iqr"
+  )
+
+  # each group is summarised from the original vector, in a helper, so that a
+  # variable named like one of the statistics (missing, min, mean, ...) cannot
+  # overwrite the values used by the summaries that follow
+  group_stats <- function(x) {
+
+    n       <- sum(!is.na(x))
+    missing <- sum(is.na(x))
+    x       <- x[!is.na(x)]
+
+    if (n == 0) {
+      values    <- rep(NA_real_, length(stat_names))
+      values[1] <- n
+      values[2] <- missing
+      return(stats::setNames(values, stat_names))
+    }
+
+    stats::setNames(
+      c(
+        n, missing,
+        min(x), max(x), mean(x), median(x), ds_mode(x), sd(x), var(x),
+        ds_skewness(x), ds_kurtosis(x), stat_uss(x), ds_css(x), ds_cvar(x),
+        ds_std_error(x), ds_range(x), IQR(x)
+      ),
+      stat_names
+    )
+  }
+
+  stat_mat <- vapply(split_dat, group_stats, numeric(length(stat_names)))
+  rownames(stat_mat) <- stat_names
 
   rnames <- c(
-    "Obs", "Minimum", "Maximum", "Mean", "Median", "Mode",
+    "Obs", "Missing", "Minimum", "Maximum", "Mean", "Median", "Mode",
     "Std. Deviation", "Variance", "Skewness", "Kurtosis",
     "Uncorrected SS", "Corrected SS", "Coeff Variation",
     "Std. Error Mean", "Range", "Interquartile Range"
   )
 
-  out              <- data.frame(rnames, splito)
-  names(out)       <- c("Statistic/Levels", levels(gvar))
-  plot_data        <- data.frame(gvar, cvar)
-  names(plot_data) <- c(xname, yname)
+  out              <- data.frame(rnames, round(stat_mat, 2), check.names = FALSE)
+  names(out)       <- c("Statistic/Levels", names(split_dat))
+  row.names(out)   <- NULL
 
-  tidystats <-
-    data %>%
-    dplyr::select(!! g_var, !! c_var) %>%
-    na.omit() %>%
-    dplyr::group_by(!! g_var) %>%
-    dplyr::summarise(length = length(!! c_var), min = min(!! c_var),
-              max = max(!! c_var), mean  = mean(!! c_var),
-              median= median(!! c_var), mode = ds_mode(!! c_var),
-              sd = sd(!! c_var), variance = var(!! c_var),
-              skewness = ds_skewness(!! c_var), kurtosis = ds_kurtosis(!! c_var),
-              coeff_var = ds_cvar(!! c_var), std_error = ds_std_error(!! c_var),
-              range = ds_range(!! c_var), iqr = IQR(!! c_var))
+  tidy_names <- c(
+    "length", "missing", "min", "max", "mean", "median", "mode", "sd",
+    "variance", "skewness", "kurtosis", "coeff_var", "std_error", "range",
+    "iqr"
+  )
+
+  tidy_cols <- stats::setNames(
+    lapply(c(
+      "obs", "missing", "min", "max", "mean", "median", "mode", "sd",
+      "variance", "skewness", "kurtosis", "coeff_var", "std_error", "range",
+      "iqr"
+    ), function(nm) as.numeric(stat_mat[nm, ])),
+    tidy_names
+  )
+
+  tidy_list <- c(
+    list(group_key_vector(gvar, names(split_dat))),
+    tidy_cols
+  )
+  names(tidy_list) <- c(unique_group_name(xname, tidy_names), tidy_names)
+
+  tidystats <- dplyr::as_tibble(
+    data.frame(tidy_list, check.names = FALSE),
+    .name_repair = "minimal"
+  )
 
   result <- list(stats      = out,
                  tidy_stats = tidystats,

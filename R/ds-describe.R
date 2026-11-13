@@ -7,6 +7,10 @@
 #' @param trim The fraction of values to be trimmed before computing the mean.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
 #'
+#' @details \code{n} reports the total number of observations and
+#'   \code{missing} the number of missing values; the measures themselves are
+#'   computed from the non-missing values.
+#'
 #' @examples
 #' # single column
 #' ds_measures_location(mtcarz, mpg)
@@ -30,6 +34,7 @@
 #' @export
 #'
 ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -38,7 +43,8 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
     if (length(var) < 1) {
       data <- ds_num_cols(data)
     } else {
-      data <- ds_num_cols(data[var])
+      check_numeric_cols(data, var)
+      data <- data[var]
     }
 
     ds_loc_prep(data, trim = trim, decimals = decimals)
@@ -66,12 +72,17 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 
 #' Measures of variation
 #'
-#' Returns the measures of location such as range, variance and standard
+#' Returns the measures of variation such as range, variance and standard
 #'   deviation.
 #'
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#'
+#' @details \code{n} reports the number of non-missing observations and every
+#'   measure is computed from the non-missing values, for both vector and
+#'   data-frame input. A variable with no non-missing observations returns
+#'   \code{n = 0} and \code{NA} for every measure.
 #'
 #' @examples
 #' # single column
@@ -96,6 +107,7 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 #' @export
 #'
 ds_measures_variation <- function(data, ..., decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -106,23 +118,24 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
       if (!any(is_num == TRUE)) {
         stop("Data has no continuous variables.", call. = FALSE)
       }
-      data <- data[, is_num]
+      data <- data[is_num]
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
-      na.omit() %>%
       tidyr::gather(var, values) %>%
       dplyr::group_by(var) %>%
-      dplyr::summarise_all(list(n         = length,
+      dplyr::summarise_all(list(n         = ~ sum(!is.na(.)),
                                 range     = ds_range,
-                                iqr       = stats::IQR,
-                                variance  = stats::var,
-                                sd        = stats::sd,
+                                iqr       = ~ stats::IQR(., na.rm = TRUE),
+                                variance  = ~ stats::var(., na.rm = TRUE),
+                                sd        = ~ stats::sd(., na.rm = TRUE),
                                 coeff_var = ds_cvar,
-                                std_error = ds_std_error)) %>%
+                                std_error = ~ ds_std_error(stats::na.omit(.)))) %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(., decimals))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -137,11 +150,11 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
     data <- list(data, ...)
 
     data.frame(variable  = vars,
-               n         = sapply(data, length),
+               n         = sapply(data, function(x) sum(!is.na(x))),
                range     = round(sapply(data, ds_range), decimals),
-               iqr       = round(sapply(data, stats::IQR), decimals),
-               variance  = round(sapply(data, stats::var), decimals),
-               sd        = round(sapply(data, stats::sd), decimals),
+               iqr       = round(sapply(data, function(x) stats::IQR(x, na.rm = TRUE)), decimals),
+               variance  = round(sapply(data, function(x) stats::var(x, na.rm = TRUE)), decimals),
+               sd        = round(sapply(data, function(x) stats::sd(x, na.rm = TRUE)), decimals),
                coeff_var = round(sapply(data, ds_cvar), decimals),
                std_error = round(sapply(data, ds_std_error), decimals))
 
@@ -161,6 +174,11 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#'
+#' @details \code{n} reports the number of non-missing observations and the
+#'   measures are computed from the non-missing values, for both vector and
+#'   data-frame input. A variable with no non-missing observations returns
+#'   \code{n = 0} and \code{NA} for every measure.
 #'
 #' @examples
 #' # single column
@@ -185,6 +203,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #' @export
 #'
 ds_measures_symmetry <- function(data, ..., decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -195,22 +214,23 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
       if (!any(is_num == TRUE)) {
         stop("Data has no continuous variables.", call. = FALSE)
       }
-      data <- data[, is_num]
+      data <- data[is_num]
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
-      na.omit() %>%
       tidyr::gather(var, values) %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
         list(
-          n        = length,
+          n        = ~ sum(!is.na(.)),
           skewness = ds_skewness,
           kurtosis = ds_kurtosis)
       ) %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(., decimals))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -225,7 +245,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
     data <- list(data, ...)
 
     data.frame(var      = vars,
-               n        = sapply(data, length),
+               n        = sapply(data, function(x) sum(!is.na(x))),
                skewness = round(sapply(data, ds_skewness), decimals),
                kurtosis = round(sapply(data, ds_kurtosis), decimals))
 
@@ -246,6 +266,11 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #' @param data A \code{data.frame} or \code{tibble}.
 #' @param ... Column(s) in \code{data}.
 #' @param decimals An option to specify the exact number of decimal places to use. The default number of decimal places is 2.
+#'
+#' @details \code{n} reports the number of non-missing observations and the
+#'   percentiles are computed from the non-missing values, for both vector and
+#'   data-frame input. A variable with no non-missing observations returns
+#'   \code{n = 0} and \code{NA} for every percentile.
 #'
 #' @examples
 #' # single column
@@ -270,6 +295,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #' @export
 #'
 ds_percentiles <- function(data, ..., decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -280,30 +306,31 @@ ds_percentiles <- function(data, ..., decimals = 2) {
       if (!any(is_num == TRUE)) {
         stop("Data has no continuous variables.", call. = FALSE)
       }
-      data <- data[, is_num]
+      data <- data[is_num]
     } else {
       data %<>%
         dplyr::select(!!! var)
+      check_numeric_cols(data, names(data))
     }
 
     data %>%
-      na.omit() %>%
       tidyr::gather(var, values) %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
-        list(n      = length,
-             min    = min,
-             per_1  = ~ quantile(., 0.01),
-             per_5  = ~ quantile(., 0.05),
-             per_10 = ~ quantile(., 0.10),
-             q1     = ~ quantile(., 0.25),
-             median = median,
-             q3     = ~ quantile(., 0.75),
-             per_90 = ~ quantile(., 0.90),
-             per_95 = ~ quantile(., 0.95),
-             per_99 = ~ quantile(., 0.99),
-             max    = max)
+        list(n      = ~ sum(!is.na(.)),
+             min    = ~ num_or_na(., min),
+             per_1  = ~ quantile(., 0.01, na.rm = TRUE),
+             per_5  = ~ quantile(., 0.05, na.rm = TRUE),
+             per_10 = ~ quantile(., 0.10, na.rm = TRUE),
+             q1     = ~ quantile(., 0.25, na.rm = TRUE),
+             median = ~ median(., na.rm = TRUE),
+             q3     = ~ quantile(., 0.75, na.rm = TRUE),
+             per_90 = ~ quantile(., 0.90, na.rm = TRUE),
+             per_95 = ~ quantile(., 0.95, na.rm = TRUE),
+             per_99 = ~ quantile(., 0.99, na.rm = TRUE),
+             max    = ~ num_or_na(., max))
       ) %>%
+      dplyr::mutate(dplyr::across(dplyr::where(is.double), ~ round(., decimals))) %>%
       as.data.frame()
 
   } else if (is.numeric(data)) {
@@ -318,18 +345,18 @@ ds_percentiles <- function(data, ..., decimals = 2) {
     data <- list(data, ...)
 
     data.frame(var    = vars,
-               n      = sapply(data, length),
-               min    = round(sapply(data, min), decimals),
-               per_1  = round(sapply(data, quantile, 0.01), decimals),
-               per_5  = round(sapply(data, quantile, 0.05), decimals),
-               per_10 = round(sapply(data, quantile, 0.10), decimals),
-               q1     = round(sapply(data, quantile, 0.25), decimals),
-               median = round(sapply(data, median), decimals),
-               q3     = round(sapply(data, quantile, 0.75), decimals),
-               per_90 = round(sapply(data, quantile, 0.90), decimals),
-               per_95 = round(sapply(data, quantile, 0.95), decimals),
-               per_99 = round(sapply(data, quantile, 0.99), decimals),
-               max    = round(sapply(data, max), decimals))
+               n      = sapply(data, function(x) sum(!is.na(x))),
+               min    = round(sapply(data, num_or_na, min), decimals),
+               per_1  = round(sapply(data, quantile, 0.01, na.rm = TRUE), decimals),
+               per_5  = round(sapply(data, quantile, 0.05, na.rm = TRUE), decimals),
+               per_10 = round(sapply(data, quantile, 0.10, na.rm = TRUE), decimals),
+               q1     = round(sapply(data, quantile, 0.25, na.rm = TRUE), decimals),
+               median = round(sapply(data, median, na.rm = TRUE), decimals),
+               q3     = round(sapply(data, quantile, 0.75, na.rm = TRUE), decimals),
+               per_90 = round(sapply(data, quantile, 0.90, na.rm = TRUE), decimals),
+               per_95 = round(sapply(data, quantile, 0.95, na.rm = TRUE), decimals),
+               per_99 = round(sapply(data, quantile, 0.99, na.rm = TRUE), decimals),
+               max    = round(sapply(data, num_or_na, max), decimals))
 
   } else {
 
@@ -342,7 +369,12 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 
 #' Extreme observations
 #'
-#' Returns the most extreme observations.
+#' Returns the most extreme observations and their original row indices.
+#'
+#' Missing values are removed before the \code{k = min(5, n)} lowest and
+#' highest observations are selected. The row indices refer to the data passed
+#' in, and ties are reported on distinct rows. \code{decimals} applies to both
+#' vector and \code{data.frame} input.
 #'
 #' @param data A numeric vector or \code{data.frame} or \code{tibble}.
 #' @param col Column in \code{data}.
@@ -361,41 +393,44 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #' @export
 #'
 ds_extreme_obs <- function(data, col, decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
     var <- rlang::enquo(col)
     var_name <- deparse(substitute(col))
     check_numeric(data, !! var, var_name)
-
-    na_data <-
-      data %>%
-      dplyr::select(!! var) %>%
-      na.omit() %>%
-      dplyr::pull(1)
-
-    result <- data.frame(type = c(rep("high", 5), rep("low", 5)),
-                   value = c(ds_tailobs(na_data, 5, "high"),
-                             ds_tailobs(na_data, 5, "low")))
-    
-    result$index <- ds_rindex(na_data, result$value)
-    return(result)
+    x <- dplyr::pull(data, !! var)
 
   } else if (is.numeric(data)) {
 
-    data   <- na.omit(data)
-    result <- data.frame(type  = c(rep("high", 5), rep("low", 5)),
-                         value = c(round(ds_tailobs(data, 5, "high"), decimals),
-                                   round(ds_tailobs(data, 5, "low"), decimals)))
-
-    result$index <- ds_rindex(data, result$value)
-    return(result)
+    x <- data
 
   } else {
 
     stop("data must be either a numeric vector or a `data.frame`.")
 
   }
+
+  pairs <- sort_pairs(x)
+  n     <- length(pairs$value)
+
+  if (n == 0) {
+    return(data.frame(type = character(0),
+                      value = numeric(0),
+                      index = integer(0)))
+  }
+
+  k       <- min(5, n)
+  low_k   <- seq_len(k)
+  high_k  <- rev(seq.int(n - k + 1L, n))
+  result  <- data.frame(type  = c(rep("high", k), rep("low", k)),
+                        value = round(c(pairs$value[high_k],
+                                        pairs$value[low_k]), decimals),
+                        index = c(pairs$index[high_k],
+                                  pairs$index[low_k]))
+
+  return(result)
 
 }
 
@@ -422,6 +457,7 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
 ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (!is.numeric(data)) {
     stop("data must be numeric", call. = FALSE)
@@ -431,25 +467,30 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
     stop("n must be numeric", call. = FALSE)
   }
 
-  if (n > length(data)) {
-    stop("n must be less than the length of data", call. = FALSE)
+  if (length(n) != 1L || is.na(n) || !is.finite(n) || n != floor(n) || n < 0) {
+    stop("n must be a single finite whole number.", call. = FALSE)
+  }
+
+  if (n > sum(!is.na(data))) {
+    stop("n must be less than or equal to the number of non-missing observations", call. = FALSE)
   }
 
   method <- match.arg(type)
+  n      <- as.integer(n)
 
   if (method == "low") {
     result <-
       data %>%
       na.omit() %>%
       sort() %>%
-      `[`(1:n) %>%
+      `[`(seq_len(n)) %>%
       round(decimals)
   } else {
     result <-
       data %>%
       na.omit() %>%
       sort(decreasing = TRUE) %>%
-      `[`(1:n) %>%
+      `[`(seq_len(n)) %>%
       round(decimals)
   }
 
@@ -462,6 +503,10 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @description Computes the geometric mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped before computation. The mean is
+#' computed on the log scale, so large values or long vectors do not overflow.
+#' If any value is less than or equal to zero, a warning is issued and
+#' \code{NA} is returned.
 #' @examples
 #' # vector
 #' ds_gmean(mtcars$mpg)
@@ -473,6 +518,7 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
 ds_gmean <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -489,7 +535,16 @@ ds_gmean <- function(data, x = NULL) {
 
   z <- na.omit(z)
 
-  prod(z) ^ (1 / length(z))
+  if (length(z) == 0) {
+    return(NA_real_)
+  }
+
+  if (min(z) <= 0) {
+    warning("Geometric mean requires strictly positive values", call. = FALSE)
+    return(NA_real_)
+  }
+
+  exp(mean(log(z)))
 
 }
 
@@ -497,6 +552,9 @@ ds_gmean <- function(data, x = NULL) {
 #' @description Computes the harmonic mean
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped before computation. If any value
+#' is less than or equal to zero, a warning is issued and \code{NA} is
+#' returned.
 #' @examples
 #' # vector
 #' ds_hmean(mtcars$mpg)
@@ -508,6 +566,7 @@ ds_gmean <- function(data, x = NULL) {
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
 ds_hmean <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -524,7 +583,24 @@ ds_hmean <- function(data, x = NULL) {
 
   z <- na.omit(z)
 
-  length(z) / sum(sapply(z, div_by))
+  if (length(z) == 0) {
+    return(NA_real_)
+  }
+
+  if (any(!is.finite(z))) {
+    warning("Harmonic mean requires finite values", call. = FALSE)
+    return(NA_real_)
+  }
+
+  if (min(z) <= 0) {
+    warning("Harmonic mean requires strictly positive non-zero values", call. = FALSE)
+    return(NA_real_)
+  }
+
+  # scale the reciprocals by the smallest value; 1 / z overflows when z is
+  # very small even though the harmonic mean itself is representable
+  scale <- min(z)
+  scale / mean(scale / z)
 
 }
 
@@ -533,7 +609,8 @@ ds_hmean <- function(data, x = NULL) {
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
 #' @details Any NA values are stripped from \code{x} before computation
-#' takes place.
+#' takes place. If several values are tied for the highest frequency, the
+#' smallest of them is returned.
 #' @return Mode of \code{x}
 #' @examples
 #' # vector
@@ -546,6 +623,7 @@ ds_hmean <- function(data, x = NULL) {
 #' @export
 #'
 ds_mode <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -561,6 +639,10 @@ ds_mode <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
 
   Freq <- NULL
 
@@ -593,6 +675,7 @@ ds_mode <- function(data, x = NULL) {
 #' @export
 #'
 ds_range <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -608,6 +691,9 @@ ds_range <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   max(z) - min(z)
 
 }
@@ -618,6 +704,13 @@ ds_range <- function(data, x = NULL) {
 #' @description Compute the kurtosis of a probability distribution.
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped from \code{x} before computation
+#' takes place. With \eqn{n} non-missing observations, sample standard
+#' deviation \eqn{s}, \eqn{m_k = \sum ((x_i - \bar{x}) / s)^k} and
+#' \deqn{G_2 = \frac{n (n + 1)}{(n - 1)(n - 2)(n - 3)} m_4 -
+#' \frac{3 (n - 1)^2}{(n - 2)(n - 3)},}
+#' this is the excess kurtosis. It matches
+#' \code{e1071::kurtosis(x, type = 2)} and the SAS/SPSS definition.
 #' @examples
 #' # vector
 #' ds_kurtosis(mtcars$mpg)
@@ -630,6 +723,7 @@ ds_range <- function(data, x = NULL) {
 #' @export
 #'
 ds_kurtosis <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -645,6 +739,9 @@ ds_kurtosis <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   n <- length(z)
   summation <- sums(z, 4)
   part1 <- (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
@@ -657,6 +754,13 @@ ds_kurtosis <- function(data, x = NULL) {
 #' @description Compute the skewness of a probability distribution.
 #' @param data A numeric vector or \code{data.frame}.
 #' @param x Column in \code{data}.
+#' @details Any \code{NA} values are stripped from \code{x} before computation
+#' takes place. For \eqn{n} non-missing observations, sample standard
+#' deviation \eqn{s} and \eqn{m_k = \sum ((x_i - \bar{x}) / s)^k}, the
+#' skewness is
+#' \deqn{G_1 = \frac{n}{(n - 1)(n - 2)} m_3.}
+#' This is the adjusted Fisher-Pearson standardized moment coefficient; it
+#' matches \code{e1071::skewness(x, type = 2)} and the SAS/SPSS definition.
 #' @examples
 #' # vector
 #' ds_skewness(mtcars$mpg)
@@ -669,6 +773,7 @@ ds_kurtosis <- function(data, x = NULL) {
 #' @export
 #'
 ds_skewness <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -684,6 +789,9 @@ ds_skewness <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
   n <- length(z)
   summation <- sums(z, 3)
   (n / ((n - 1) * (n - 2))) * summation
@@ -710,6 +818,7 @@ ds_skewness <- function(data, x = NULL) {
 #' @export
 #'
 ds_mdev <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -745,6 +854,7 @@ ds_mdev <- function(data, x = NULL) {
 #' @export
 #'
 ds_cvar <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -760,6 +870,10 @@ ds_cvar <- function(data, x = NULL) {
   }
 
   z <- na.omit(z)
+
+  if (length(z) == 0L) {
+    return(NA_real_)
+  }
 
   (sd(z) / mean(z)) * 100
 
@@ -779,6 +893,7 @@ ds_cvar <- function(data, x = NULL) {
 #' @export
 #'
 ds_css <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -800,11 +915,14 @@ ds_css <- function(data, x = NULL) {
 }
 
 #' @title Index Values
-#' @description Returns index of values.
+#' @description Returns the original positions of values in a vector.
 #' @param data a numeric vector
 #' @param values a numeric vector containing the values whose index is returned
-#' @return Index of the \code{values} in \code{data}. In case, \code{data} does
-#' not contain \code{index}, \code{NULL} is returned.
+#' @return Original positions of the \code{values} in \code{data}. Missing
+#' values are ignored, and all matching positions are returned. In case
+#' \code{data} does not contain a value, \code{NULL} is returned.
+#' @details Positions refer to the vector passed in; missing values are not
+#' removed before the indices are computed.
 #' @examples
 #' # returns index of 21
 #' ds_rindex(mtcars$mpg, 21)
@@ -815,6 +933,7 @@ ds_css <- function(data, x = NULL) {
 #' @export
 #'
 ds_rindex <- function(data, values) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (!is.numeric(data)) {
     stop("Data must be numeric.", call. = FALSE)
@@ -824,13 +943,11 @@ ds_rindex <- function(data, values) {
     stop("Values must be numeric.", call. = FALSE)
   }
 
-  data   <- na.omit(data)
   values <- na.omit(values)
-  out    <- c()
+  out    <- unlist(lapply(values, function(value) which(data == value)))
 
-  for (i in seq_along(values)) {
-    k   <- return_pos(data, values[i])
-    out <- c(out, k)
+  if (length(out) == 0) {
+    return(NULL)
   }
 
   unique(out)

@@ -14,6 +14,12 @@ ds_gmean(data, x = NULL)
 \description{
 Computes the geometric mean
 }
+\details{
+Any \code{NA} values are stripped before computation. The mean is
+computed on the log scale, so large values or long vectors do not overflow.
+If any value is less than or equal to zero, a warning is issued and
+\code{NA} is returned.
+}
 \examples{
 # vector
 ds_gmean(mtcars$mpg)

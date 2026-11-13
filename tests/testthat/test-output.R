@@ -61,3 +61,20 @@ test_that("output from print_cross2 matches the expected result", {
 })
 
 
+
+test_that("group summary header reports the variables", {
+
+  out <- capture.output(print(ds_group_summary(mtcarz, cyl, mpg)))
+  expect_match(out[1], "mpg by cyl", fixed = TRUE)
+})
+
+test_that("factor frequency table reports the missing percent", {
+
+  g <- mtcarz
+  g$cyl[1] <- NA
+  out <- capture.output(print(ds_freq_table(g, cyl)))
+  missing_row <- out[grepl("Missing", out)]
+
+  expect_length(missing_row, 1)
+  expect_match(missing_row, "3.12", fixed = TRUE)
+})

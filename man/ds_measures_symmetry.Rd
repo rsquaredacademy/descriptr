@@ -16,6 +16,12 @@ ds_measures_symmetry(data, ..., decimals = 2)
 \description{
 Returns the measures of symmetry such as skewness and kurtosis.
 }
+\details{
+\code{n} reports the number of non-missing observations and the
+  measures are computed from the non-missing values, for both vector and
+  data-frame input. A variable with no non-missing observations returns
+  \code{n = 0} and \code{NA} for every measure.
+}
 \examples{
 # single column
 ds_measures_symmetry(mtcarz, mpg)

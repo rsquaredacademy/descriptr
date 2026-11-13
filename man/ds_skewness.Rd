@@ -14,6 +14,15 @@ ds_skewness(data, x = NULL)
 \description{
 Compute the skewness of a probability distribution.
 }
+\details{
+Any \code{NA} values are stripped from \code{x} before computation
+takes place. For \eqn{n} non-missing observations, sample standard
+deviation \eqn{s} and \eqn{m_k = \sum ((x_i - \bar{x}) / s)^k}, the
+skewness is
+\deqn{G_1 = \frac{n}{(n - 1)(n - 2)} m_3.}
+This is the adjusted Fisher-Pearson standardized moment coefficient; it
+matches \code{e1071::skewness(x, type = 2)} and the SAS/SPSS definition.
+}
 \examples{
 # vector
 ds_skewness(mtcars$mpg)

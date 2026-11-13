@@ -6,11 +6,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Categorical Data • descriptr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Categorical Data">
+<!-- Rsquared site-kit v1.0.1: GA4 + region-based consent. Kit files are vendored in pkgdown/assets/site-kit/. --><link rel="stylesheet" href="/site-kit/rsa-consent.css">
+<script src="/site-kit/rsa-analytics.js" data-ga-id="G-2QSPEL5WM6" async></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -30,7 +37,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
 <li><a class="dropdown-item" href="../articles/continuous-data.html">Continuous Data</a></li>
@@ -47,6 +54,7 @@
 </li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://www.rsquaredacademy.com">Rsquared Academy</a></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/rsquaredacademy/descriptr"><span class="fa fa-github"></span></a></li>
       </ul>
 </div>
@@ -65,7 +73,7 @@
                         <h4 data-toc-skip class="author">Aravind
 Hebbali</h4>
             
-            <h4 data-toc-skip class="date">2024-11-08</h4>
+            <h4 data-toc-skip class="date">2026-10-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rsquaredacademy/descriptr/blob/HEAD/vignettes/categorical-data.Rmd" class="external-link"><code>vignettes/categorical-data.Rmd</code></a></small>
       <div class="d-none name"><code>categorical-data.Rmd</code></div>
@@ -73,6 +81,7 @@ Hebbali</h4>
 
     
     
+<pre><code><span><span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.5.3</span></span></code></pre>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -85,7 +94,7 @@ and visualizing categorical data.</p>
 <p>We have modified the <code>mtcars</code> data to create a new data
 set <code>mtcarz</code>. The only difference between the two data sets
 is related to the variable types.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcarz</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    32 obs. of  11 variables:</span></span>
 <span><span class="co">#&gt;  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span>
@@ -105,7 +114,7 @@ is related to the variable types.</p>
 </h2>
 <p>The <code><a href="../reference/ds_cross_table.html">ds_cross_table()</a></code> function creates two way tables of
 categorical variables.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     Cell Contents</span></span>
 <span><span class="co">#&gt;  |---------------|</span></span>
@@ -142,7 +151,7 @@ categorical variables.</p>
 <span><span class="co">#&gt; ----------------------------------------------------------------------------</span></span></code></pre></div>
 <p>If you want the above result as a tibble, use
 <code><a href="../reference/ds_cross_table.html">ds_twoway_table()</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ds_cross_table.html">ds_twoway_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(cyl, gear, count)`</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span></span>
@@ -161,26 +170,26 @@ generate:</p>
 <div class="section level3">
 <h3 id="grouped-bar-plots">Grouped Bar Plots<a class="anchor" aria-label="anchor" href="#grouped-bar-plots"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span></code></pre></div>
-<p><img src="categorical-data_files/figure-html/cross_group-1.png" width="672"></p>
+<p><img src="categorical-data_files/figure-html/cross_group-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="stacked-bar-plots">Stacked Bar Plots<a class="anchor" aria-label="anchor" href="#stacked-bar-plots"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k</span>, stacked <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="categorical-data_files/figure-html/cross_stack-1.png" width="672"></p>
+<p><img src="categorical-data_files/figure-html/cross_stack-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="proportional-bar-plots">Proportional Bar Plots<a class="anchor" aria-label="anchor" href="#proportional-bar-plots"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ds_cross_table.html">ds_cross_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k</span>, proportional <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="categorical-data_files/figure-html/cross_prop-1.png" width="672"></p>
+<p><img src="categorical-data_files/figure-html/cross_prop-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -188,7 +197,7 @@ generate:</p>
 </h2>
 <p>The <code><a href="../reference/ds_freq_table.html">ds_freq_table()</a></code> function creates frequency
 tables.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                              Variable: cyl                              </span></span>
 <span><span class="co">#&gt; -----------------------------------------------------------------------</span></span>
@@ -204,10 +213,10 @@ tables.</p>
 <span><span class="co">#&gt; -----------------------------------------------------------------------</span></span></code></pre></div>
 <p>A <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method has been defined which will create a bar
 plot.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ds_freq_table.html">ds_freq_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span></code></pre></div>
-<p><img src="categorical-data_files/figure-html/ftable_bar-1.png" width="672"></p>
+<p><img src="categorical-data_files/figure-html/ftable_bar-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="multiple-one-way-tables">Multiple One Way Tables<a class="anchor" aria-label="anchor" href="#multiple-one-way-tables"></a>
@@ -216,7 +225,7 @@ plot.</p>
 way tables by creating a frequency table for each categorical variable
 in a data set. You can also specify a subset of variables if you do not
 want all the variables in the data set to be used.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ds_auto_freq_table.html">ds_auto_freq_table</a></span><span class="op">(</span><span class="va">mtcarz</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                              Variable: cyl                              </span></span>
 <span><span class="co">#&gt; -----------------------------------------------------------------------</span></span>
@@ -292,7 +301,7 @@ want all the variables in the data set to be used.</p>
 way tables by creating a cross table for each unique pair of categorical
 variables in a data set. You can also specify a subset of variables if
 you do not want all the variables in the data set to be used.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ds_auto_freq_table.html">ds_auto_cross_table</a></span><span class="op">(</span><span class="va">mtcarz</span>, <span class="va">cyl</span>, <span class="va">gear</span>, <span class="va">am</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     Cell Contents</span></span>
 <span><span class="co">#&gt;  |---------------|</span></span>
@@ -392,7 +401,7 @@ you do not want all the variables in the data set to be used.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0. <a href="https://www.rsquaredacademy.com/privacy-policy.html" class="external-link">Privacy</a> · <a href="#" data-rsa-analytics-optout>Turn off analytics</a></p>
 </div>
 
     </footer>

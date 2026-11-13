@@ -1,4 +1,4 @@
-#' Descriptive statistics and frquency tables
+#' Descriptive statistics and frequency tables
 #'
 #' Generate summary statistics & frequency table for all continuous variables in data.
 #'
@@ -15,6 +15,7 @@
 #' @export
 #'
 ds_auto_summary_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var <- rlang::quos(...)
@@ -47,7 +48,7 @@ ds_auto_summary_stats <- function(data, ...) {
     cat('\n\n')
     ds_rule(paste0('Summary Statistics'))
     cat('\n\n')
-    print(ds_summary_stats(data, i))
+    ds_summary_stats(data, i)
     cat('\n\n')
     ds_rule(paste0('Frequency Distribution'))
     cat('\n\n')
@@ -71,8 +72,10 @@ ds_auto_summary_stats <- function(data, ...) {
 #' @export
 #'
 ds_auto_group_summary <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
 
   is_num    <- sapply(data, is.numeric)

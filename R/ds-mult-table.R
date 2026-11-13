@@ -26,12 +26,14 @@
 #' # cross table for multiple columns
 #' ds_auto_cross_table(mtcarz, cyl, gear, am)
 #'
-#' @seealso \code{link{ds_freq_table}} \code{link{ds_cross_table}}
+#' @seealso \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #' @export
 #'
 ds_auto_freq_table <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
@@ -66,28 +68,25 @@ ds_auto_freq_table <- function(data, ...) {
 #' @export
 #'
 ds_auto_cross_table <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
+  data <- as_categorical(data)
   var <- rlang::quos(...)
   is_factor <- sapply(data, is.factor)
 
   if (length(var) < 1) {
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
     plot_data <- data[is_factor]
   } else {
     data %<>%
       dplyr::select(!!! var)
     is_factor <- sapply(data, is.factor)
-    if (!any(is_factor == TRUE)) {
-      stop("Data has no categorical variables.", call. = FALSE)
-    }
-    if (length(is_factor) < 2) {
-      stop("Two way table requires at least 2 categorical variables.", call. = FALSE)
-    } else {
-      plot_data <- data[is_factor]
-    }
+    plot_data <- data[is_factor]
+  }
+
+  n_cat <- ncol(plot_data)
+  if (n_cat < 2) {
+    stop(paste0("ds_auto_cross_table() needs at least 2 categorical variables; found ", n_cat, "."), call. = FALSE)
   }
 
   factor_var    <- names(plot_data)
@@ -101,8 +100,7 @@ ds_auto_cross_table <- function(data, ...) {
     "|", formatter("Percent"), "|\n",
     "|", formatter("Row Pct"), "|\n",
     "|", formatter("Col Pct"), "|\n",
-    "|---------------|\n\n",
-    "Total Observations: ", nrow(data), "\n\n"
+    "|---------------|\n\n"
   )
 
   for (i in seq_len(n)) {
@@ -117,6 +115,7 @@ ds_auto_cross_table <- function(data, ...) {
 #' @usage NULL
 #'
 ds_tway_tables <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_auto_cross_table()")
   ds_auto_cross_table(data)
 }
@@ -126,6 +125,7 @@ ds_tway_tables <- function(data) {
 #' @usage NULL
 #'
 ds_oway_tables <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_auto_freq_table()")
   ds_auto_freq_table(data)
 }

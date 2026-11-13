@@ -8,9 +8,14 @@
 ^NEWS$
 ^_pkgdown\.yml$
 ^docs$
+^docs-dev$
+^pkgdown$
 ^README-.*\.png$
 ^CONDUCT\.md$
 ^revdep$
 ^hex_descriptr\.png$
 ^\.github$
 TODO.md
+^roadmap$
+^AGENTS\.md$
+^tests/testthat/Rplots\.pdf$

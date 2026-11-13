@@ -14,6 +14,11 @@ ds_hmean(data, x = NULL)
 \description{
 Computes the harmonic mean
 }
+\details{
+Any \code{NA} values are stripped before computation. If any value
+is less than or equal to zero, a warning is issued and \code{NA} is
+returned.
+}
 \examples{
 # vector
 ds_hmean(mtcars$mpg)

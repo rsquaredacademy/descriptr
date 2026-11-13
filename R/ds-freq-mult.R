@@ -6,7 +6,7 @@ freq_table2.default <- function(data, name) {
 
   dat <-
     data %>%
-    dplyr::select(name) %>%
+    dplyr::select(dplyr::all_of(name)) %>%
     dplyr::pull(1) %>%
     na.omit()
 
@@ -17,11 +17,11 @@ freq_table2.default <- function(data, name) {
   cq          <- unique(sort(dat))
   result      <- as.vector(table(dat))
   level_names <- levels(dat)
-  data_len    <- length(dat)
+  n_obs       <- length(dplyr::pull(data, name))
   len         <- length(result)
   cum         <- cumsum(result)
-  per         <- percent(result, data_len)
-  cum_per     <- percent(cum, data_len)
+  per         <- percent(result, n_obs)
+  cum_per     <- percent(cum, n_obs)
 
   ftable <- data.frame(
     Levels          = level_names,
@@ -36,11 +36,6 @@ freq_table2.default <- function(data, name) {
     dplyr::pull(name) %>%
     is.na() %>%
     sum()
-
-  n_obs <-
-    data %>%
-    dplyr::pull(name) %>%
-    length()
 
   if (na_count > 0) {
     na_data <- dplyr::pull(data, var_name)
