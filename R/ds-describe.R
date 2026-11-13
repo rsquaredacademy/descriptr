@@ -540,7 +540,7 @@ ds_gmean <- function(data, x = NULL) {
   }
 
   if (min(z) <= 0) {
-    warning("Geometric mean requires strictly positive", call. = FALSE)
+    warning("Geometric mean requires strictly positive values", call. = FALSE)
     return(NA_real_)
   }
 
