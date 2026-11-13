@@ -37,3 +37,31 @@ test_that("ds_launch_shiny_app checks its suggested packages (L5)", {
       "shinycssloaders", "shinythemes", "stringr", "lubridate")
   )
 })
+
+test_that("ds_launch_shiny_app launches the xplorerr app (L5)", {
+  skip_if_not_installed("xplorerr")
+
+  launched <- 0L
+  local_mocked_bindings(check_suggests = function(pkg) invisible(NULL))
+  local_mocked_bindings(
+    app_descriptive = function(...) launched <<- launched + 1L,
+    .package = "xplorerr"
+  )
+
+  ds_launch_shiny_app()
+  expect_equal(launched, 1L)
+})
+
+test_that("ds_launch_shiny_app launches the xplorerr app (L5)", {
+  skip_if_not_installed("xplorerr")
+
+  launched <- 0L
+  local_mocked_bindings(check_suggests = function(pkg) invisible(NULL))
+  local_mocked_bindings(
+    app_descriptive = function(...) launched <<- launched + 1L,
+    .package = "xplorerr"
+  )
+
+  ds_launch_shiny_app()
+  expect_equal(launched, 1L)
+})

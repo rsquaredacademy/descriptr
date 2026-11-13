@@ -49,6 +49,7 @@ ds_freq_table <- function(data, col, bins = 5,
 #'
 ds_freq_table.default <- function(data, col, bins = 5,
                                   closed = c("left", "right", "both")) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
 	data <- as_categorical(data)
 	varyable <- rlang::enquo(col)
@@ -117,6 +118,7 @@ plot.ds_freq_table <- function(x, print_plot = TRUE, ...) {
 #' @usage NULL
 #'
 ds_freq_cont <- function(data, variable, bins = 5) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_freq_table()")
   ds_freq_table(data, {{ variable }}, bins)
 }

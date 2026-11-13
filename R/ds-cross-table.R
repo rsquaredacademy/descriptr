@@ -48,6 +48,7 @@ ds_cross_table <- function(data, var_1, var_2) UseMethod("ds_cross_table")
 
 #' @export
 ds_cross_table.default <- function(data, var_1, var_2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)
@@ -180,6 +181,7 @@ plot.ds_cross_table <- function(x, stacked = FALSE, proportional = FALSE,
 #' @export
 #'
 ds_twoway_table <- function(data, var_1, var_2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)

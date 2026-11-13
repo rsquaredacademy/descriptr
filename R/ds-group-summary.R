@@ -53,6 +53,7 @@ ds_group_summary <- function(data, group_by, cols) UseMethod("ds_group_summary")
 #' @export
 #'
 ds_group_summary.default <- function(data, group_by, cols) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)

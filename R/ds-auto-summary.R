@@ -15,6 +15,7 @@
 #' @export
 #'
 ds_auto_summary_stats <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   var <- rlang::quos(...)
@@ -71,6 +72,7 @@ ds_auto_summary_stats <- function(data, ...) {
 #' @export
 #'
 ds_auto_group_summary <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)

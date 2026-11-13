@@ -34,6 +34,7 @@
 #' @export
 #'
 ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -106,6 +107,7 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 #' @export
 #'
 ds_measures_variation <- function(data, ..., decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -201,6 +203,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #' @export
 #'
 ds_measures_symmetry <- function(data, ..., decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -292,6 +295,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #' @export
 #'
 ds_percentiles <- function(data, ..., decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -389,6 +393,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #' @export
 #'
 ds_extreme_obs <- function(data, col, decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.data.frame(data)) {
 
@@ -452,6 +457,7 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
 #' @seealso \code{\link[dplyr]{top_n}}
 #'
 ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (!is.numeric(data)) {
     stop("data must be numeric", call. = FALSE)
@@ -512,6 +518,7 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
 #'
 ds_gmean <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -559,6 +566,7 @@ ds_gmean <- function(data, x = NULL) {
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
 #'
 ds_hmean <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -615,6 +623,7 @@ ds_hmean <- function(data, x = NULL) {
 #' @export
 #'
 ds_mode <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -666,6 +675,7 @@ ds_mode <- function(data, x = NULL) {
 #' @export
 #'
 ds_range <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -713,6 +723,7 @@ ds_range <- function(data, x = NULL) {
 #' @export
 #'
 ds_kurtosis <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -762,6 +773,7 @@ ds_kurtosis <- function(data, x = NULL) {
 #' @export
 #'
 ds_skewness <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -806,6 +818,7 @@ ds_skewness <- function(data, x = NULL) {
 #' @export
 #'
 ds_mdev <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -841,6 +854,7 @@ ds_mdev <- function(data, x = NULL) {
 #' @export
 #'
 ds_cvar <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -879,6 +893,7 @@ ds_cvar <- function(data, x = NULL) {
 #' @export
 #'
 ds_css <- function(data, x = NULL) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   y <- deparse(substitute(x))
 
@@ -918,6 +933,7 @@ ds_css <- function(data, x = NULL) {
 #' @export
 #'
 ds_rindex <- function(data, values) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (!is.numeric(data)) {
     stop("Data must be numeric.", call. = FALSE)

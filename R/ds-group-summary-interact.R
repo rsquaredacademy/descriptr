@@ -27,6 +27,7 @@
 #' @export
 #'
 ds_group_summary_interact <- function(data, col, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
 

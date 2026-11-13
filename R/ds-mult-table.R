@@ -30,6 +30,7 @@
 #' @export
 #'
 ds_auto_freq_table <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)
@@ -67,6 +68,7 @@ ds_auto_freq_table <- function(data, ...) {
 #' @export
 #'
 ds_auto_cross_table <- function(data, ...) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
   data <- as_categorical(data)
@@ -113,6 +115,7 @@ ds_auto_cross_table <- function(data, ...) {
 #' @usage NULL
 #'
 ds_tway_tables <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_auto_cross_table()")
   ds_auto_cross_table(data)
 }
@@ -122,6 +125,7 @@ ds_tway_tables <- function(data) {
 #' @usage NULL
 #'
 ds_oway_tables <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   .Deprecated("ds_auto_freq_table()")
   ds_auto_freq_table(data)
 }

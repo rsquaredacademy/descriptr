@@ -445,6 +445,7 @@ ds_rule <- function(text = NULL) {
 }
 
 ds_num_cols <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
   is_num <- sapply(data, is.numeric)
   if (!any(is_num)) {
     stop("Data has no continuous variables.", call. = FALSE)
@@ -453,6 +454,7 @@ ds_num_cols <- function(data) {
 }
 
 ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   if (is.null(vars)) {
     varyable <- names(data)
@@ -471,4 +473,11 @@ ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
   result <- measure
   rownames(result) <- NULL
   return(result)
+}
+
+# grouped or rowwise tibbles keep their grouping columns in every select()
+# and summarise per group; descriptr summarises whole columns, so drop the
+# grouping before any computation
+is_grouped <- function(data) {
+  inherits(data, "grouped_df") || inherits(data, "rowwise_df")
 }

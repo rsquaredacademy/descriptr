@@ -44,6 +44,7 @@ ds_screener <- function(data) UseMethod("ds_screener")
 #' @export
 #'
 ds_screener.default <- function(data) {
+  if (is_grouped(data)) data <- dplyr::ungroup(data)
 
   check_df(data)
 
