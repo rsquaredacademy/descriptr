@@ -135,5 +135,5 @@ ds_auto_cross_table(customers)
 
 The spend band separates the channels: 85 of the 142 retail customers (59.86%)
 are in the high band, against 62 of the 298 hotel/restaurant/cafe customers
-(20.81%). Region, by contrast, is not associated with spending: the other
-region splits almost evenly across the bands (108 low, 99 medium, 109 high).
+(20.81%). The spend bands look much more even across regions: in the other
+region, for example, customers split almost evenly (108 low, 99 medium, 109 high).
