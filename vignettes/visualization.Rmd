@@ -28,11 +28,13 @@ types of plots.
 
 ## Data
 
-We have modified the `mtcars` data to create a new data set `mtcarz`. The only
-difference between the two data sets is related to the variable types. 
+The `wholesale_customers` data set contains annual spending by 440 wholesale
+customers on six product categories, together with the sales channel and region
+of each customer. We use the six spending columns for the continuous plots and
+`channel` and `region` for the categorical plots.
 
 ```{r egdata}
-str(mtcarz)
+str(wholesale_customers)
 ```
 
 ## Continuous Data
@@ -42,26 +44,32 @@ variables in the data set.
 
 #### Histograms
 
+Annual spending is concentrated at the low end for every product category, with
+a long right tail.
+
 ```{r hist}
-ds_plot_histogram(mtcarz)
+ds_plot_histogram(wholesale_customers)
 ```
 
 #### Density Plots
 
 ```{r density}
-ds_plot_density(mtcarz)
+ds_plot_density(wholesale_customers)
 ```
 
 #### Box Plots
 
 ```{r box_single}
-ds_plot_box_single(mtcarz)
+ds_plot_box_single(wholesale_customers)
 ```
 
 #### Scatter Plots
 
+The scatter plots show how spending on fresh products, milk and groceries moves
+together across customers.
+
 ```{r scatter}
-ds_plot_scatter(mtcarz, mpg, disp, hp)
+ds_plot_scatter(wholesale_customers, fresh, milk, grocery)
 ```
 
 ## Categorical Data
@@ -71,24 +79,30 @@ variables in the data set.
 
 #### Bar Plot
 
+Hotel/restaurant/cafe customers make up the larger share of the sample, and most
+customers are in the other region.
+
 ```{r bar}
-ds_plot_bar(mtcarz)
+ds_plot_bar(wholesale_customers)
 ```
 
 #### Stacked Bar Plot
 
 ```{r bar_stacked}
-ds_plot_bar_stacked(mtcarz, cyl, gear, am)
+ds_plot_bar_stacked(wholesale_customers, channel, region)
 ```
 
 #### Grouped Bar Plot
 
 ```{r bar_grouped}
-ds_plot_bar_grouped(mtcarz, cyl, gear, am)
+ds_plot_bar_grouped(wholesale_customers, channel, region)
 ```
 
 #### Grouped Box Plots
 
+Grouping by channel and region compares the distribution of fresh and milk
+spending across customer segments.
+
 ```{r box_group}
-ds_plot_box_group(mtcarz, cyl, gear, mpg, disp)
+ds_plot_box_group(wholesale_customers, channel, region, fresh, milk)
 ```

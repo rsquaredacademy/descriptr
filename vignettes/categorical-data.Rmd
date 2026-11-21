@@ -28,25 +28,29 @@ visualizing categorical data.
 
 ## Data
 
-We have modified the `mtcars` data to create a new data set `mtcarz`. The only
-difference between the two data sets is related to the variable types. 
+The `wholesale_customers` data set records annual spending by 440 wholesale
+customers on six product categories, along with the sales channel and region of
+each customer. Both `channel` and `region` are factors.
 
 ```{r egdata}
-str(mtcarz)
+str(wholesale_customers)
 ```
 
 ## Cross Tabulation
 
 The `ds_cross_table()` function creates two way tables of categorical variables. 
+The table below crosses the customer channel with the region. Of the 298
+hotel/restaurant/cafe customers, 211 (70.81%) are in the other region, as are
+105 of the 142 retail customers (73.94%).
 
 ```{r cross}
-ds_cross_table(mtcarz, cyl, gear)
+ds_cross_table(wholesale_customers, channel, region)
 ```
 
 If you want the above result as a tibble, use `ds_twoway_table()`.
 
 ```{r cross_tibble}
-ds_twoway_table(mtcarz, cyl, gear)
+ds_twoway_table(wholesale_customers, channel, region)
 ```
 
 A `plot()` method has been defined which will generate:
@@ -54,36 +58,38 @@ A `plot()` method has been defined which will generate:
 ### Grouped Bar Plots
 
 ```{r cross_group, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_cross_table(mtcarz, cyl, gear)
+k <- ds_cross_table(wholesale_customers, channel, region)
 plot(k)
 ```
 
 ### Stacked Bar Plots
 
 ```{r cross_stack, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_cross_table(mtcarz, cyl, gear)
+k <- ds_cross_table(wholesale_customers, channel, region)
 plot(k, stacked = TRUE)
 ```
 
 ### Proportional Bar Plots
 
 ```{r cross_prop, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_cross_table(mtcarz, cyl, gear)
+k <- ds_cross_table(wholesale_customers, channel, region)
 plot(k, proportional = TRUE)
 ```
 
 ## Frequency Table 
 
-The `ds_freq_table()` function creates frequency tables.
+The `ds_freq_table()` function creates frequency tables. Of the 440 customers,
+298 (67.73%) are in the hotel/restaurant/cafe channel and 142 (32.27%) are in
+retail.
 
 ```{r ftable}
-ds_freq_table(mtcarz, cyl)
+ds_freq_table(wholesale_customers, channel)
 ```
 
 A `plot()` method has been defined which will create a bar plot.
 
 ```{r ftable_bar, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_freq_table(mtcarz, cyl)
+k <- ds_freq_table(wholesale_customers, channel)
 plot(k)
 ```
 
@@ -92,10 +98,12 @@ plot(k)
 The `ds_auto_freq_table()` function creates multiple one way tables by creating a 
 frequency table for each categorical variable in a data set. You can also 
 specify a subset of variables if you do not want all the variables in the data 
-set to be used.
+set to be used. The data set has two categorical variables, so one table is
+created for each. Most customers (316, 71.82%) are in the other region; 77
+(17.50%) are in Lisbon and 47 (10.68%) are in Porto.
 
 ```{r oway}
-ds_auto_freq_table(mtcarz)
+ds_auto_freq_table(wholesale_customers)
 ```
 
 ## Multiple Two Way Tables
@@ -103,9 +111,29 @@ ds_auto_freq_table(mtcarz)
 The `ds_auto_cross_table()` function creates multiple two way tables by creating a 
 cross table for each unique pair of categorical variables in a data set. You 
 can also specify a subset of variables if you do not want all the variables in 
-the data set to be used.
+the data set to be used. Since `channel` and `region` are the only categorical
+variables, we first derive a third one: total annual spend across the six
+categories, split at its tertiles into `low`, `medium` and `high` spending
+bands. That gives 147, 146 and 147 customers in the three bands. Three tables
+are then created: channel by region, channel by spend band and region by spend
+band.
 
 ```{r tway}
-ds_auto_cross_table(mtcarz, cyl, gear, am)
+customers <- wholesale_customers %>%
+  mutate(
+    total_spend = fresh + milk + grocery + frozen + detergents_paper + delicassen,
+    spend_band  = cut(
+      total_spend,
+      breaks = quantile(total_spend, c(0, 1 / 3, 2 / 3, 1)),
+      include.lowest = TRUE,
+      labels = c("low", "medium", "high")
+    )
+  )
+
+ds_auto_cross_table(customers)
 ```
 
+The spend band separates the channels: 85 of the 142 retail customers (59.86%)
+are in the high band, against 62 of the 298 hotel/restaurant/cafe customers
+(20.81%). The spend bands look much more even across regions: in the other
+region, for example, customers split almost evenly (108 low, 99 medium, 109 high).

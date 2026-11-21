@@ -129,11 +129,12 @@ reference:
 
 - title: Data
   desc: >
-    descriptr comes with a built-in dataset `hsb` which is used to
-    illustrate the functions as well as for running tests.
+    descriptr comes with built-in datasets which are used to illustrate the
+    functions as well as for running tests.
   contents:
   - hsb
   - mtcarz
+  - wholesale_customers
 
 footer:
   structure:

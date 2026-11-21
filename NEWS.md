@@ -1,3 +1,8 @@
+# descriptr (development version)
+
+- Vignettes and README now use business data (new dataset
+  `wholesale_customers`, UCI, CC BY 4.0).
+
 # descriptr 0.6.1
 
 This is a patch release that fixes crashes and incorrect results in group
