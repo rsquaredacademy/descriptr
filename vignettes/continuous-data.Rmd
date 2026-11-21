@@ -29,11 +29,14 @@ describe categorical data and visualization options.
 
 ## Data
 
-We have modified the `mtcars` data to create a new data set `mtcarz`. The only
-difference between the two data sets is related to the variable types. 
+The `wholesale_customers` data set contains annual spending by 440 wholesale
+customers on six product categories. It has eight columns: the two factors
+`channel` and `region`, and six integer columns with the annual spend on fresh
+products, milk, groceries, frozen products, detergents and paper, and
+delicatessen products. The source does not specify a currency.
 
 ```{r egdata}
-str(mtcarz)
+str(wholesale_customers)
 ```
 
 ## Data Screening
@@ -45,23 +48,29 @@ The `ds_screener()` function will screen a data set and return the following:
 - Number of missing observations
 - % of missing observations
 
+The data set is complete: none of the eight variables has a missing value.
+
 ```{r screener}
-ds_screener(mtcarz)
+ds_screener(wholesale_customers)
 ```
 
 ## Summary Statistics
 
 The `ds_summary_stats` function returns a comprehensive set of statistics 
 including measures of location, variation, symmetry and extreme observations.
+Annual spending on fresh products averages 12000.30, with a median of 8504 and
+a standard deviation of 12647.33. The distribution is right-skewed (skewness
+2.56).
 
 ```{r summary}
-ds_summary_stats(mtcarz, mpg)
+ds_summary_stats(wholesale_customers, fresh)
 ```
 
-You can pass multiple variables as shown below:
+You can pass multiple variables as shown below. Milk spending averages 5796.27
+with a median of 3627, and is even more right-skewed (skewness 4.05).
 
 ```{r summary2}
-ds_summary_stats(mtcarz, mpg, disp)
+ds_summary_stats(wholesale_customers, fresh, milk)
 ```
 
 If you do not specify any variables, it will detect all the continuous 
@@ -70,10 +79,12 @@ variables in the data set and return summary statistics for each of them.
 ## Frequency Distribution
 
 The `ds_freq_table` function creates frequency tables for continuous variables. 
-The default number of intervals is 5.
+The default number of intervals is 5. With four intervals, 400 of the 440
+customers (90.91%) spend less than 28040 on fresh products, and only one
+customer (0.23%) falls in the top interval of 84114 to 112151.
 
 ```{r fcont}
-ds_freq_table(mtcarz, mpg, 4)
+ds_freq_table(wholesale_customers, fresh, 4)
 ```
 
 ### Histogram
@@ -81,7 +92,7 @@ ds_freq_table(mtcarz, mpg, 4)
 A `plot()` method has been defined which will generate a histogram.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_freq_table(mtcarz, mpg, 4)
+k <- ds_freq_table(wholesale_customers, fresh, 4)
 plot(k)
 ```
 
@@ -91,16 +102,18 @@ If you want to view summary statistics and frequency tables of all or subset of
 variables in a data set, use `ds_auto_summary_stats()`.
 
 ```{r auto-summary}
-ds_auto_summary_stats(mtcarz, disp, mpg)
+ds_auto_summary_stats(wholesale_customers, fresh, milk)
 ```
 
 ## Group Summary
 
 The `ds_group_summary()` function returns descriptive statistics of a continuous
-variable for the different levels of a categorical variable.
+variable for the different levels of a categorical variable. Hotel/restaurant/cafe
+customers spend 13475.56 on fresh products on average, compared with 8904.32 for
+retail customers; the medians are 9581.5 and 5993.5.
 
 ```{r gsummary}
-k <- ds_group_summary(mtcarz, cyl, mpg)
+k <- ds_group_summary(wholesale_customers, channel, fresh)
 k
 ```
 
@@ -115,36 +128,41 @@ k$tidy_stats
 A `plot()` method has been defined for comparing distributions.
 
 ```{r gsum_boxplot, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_group_summary(mtcarz, cyl, mpg)
+k <- ds_group_summary(wholesale_customers, channel, fresh)
 plot(k)
 ```
 
 ### Multiple Variables
 
 If you want grouped summary statistics for multiple variables in a data set, use
-`ds_auto_group_summary()`.
+`ds_auto_group_summary()`. Grouping fresh spending by region, customers in the
+other region spend 12533.47 on average, against 11101.73 in Lisbon and 9887.68
+in Porto.
 
 ```{r auto-group-summary}
-ds_auto_group_summary(mtcarz, cyl, gear, mpg)
+ds_auto_group_summary(wholesale_customers, channel, region, fresh)
 ```
 
 ### Combination of Categories
 
 To look at the descriptive statistics of a continuous variable for different 
 combinations of levels of two or more categorical variables, use 
-`ds_group_summary_interact()`.
+`ds_group_summary_interact()`. Retail customers in Lisbon have the lowest mean
+fresh spending (5200), while hotel/restaurant/cafe customers in the other region
+have the highest (13878).
 
 ```{r interact-summary}
-ds_group_summary_interact(mtcarz, mpg, cyl, gear)
+ds_group_summary_interact(wholesale_customers, fresh, channel, region)
 ```
 
 ## Multiple Variable Statistics 
 
 The `ds_tidy_stats()` function returns summary/descriptive statistics for 
-variables in a data frame/tibble.
+variables in a data frame/tibble. Fresh products have the highest mean annual
+spending (12000), followed by groceries (7951) and milk (5796).
 
 ```{r multistats}
-ds_tidy_stats(mtcarz, mpg, disp, hp)
+ds_tidy_stats(wholesale_customers, fresh, milk, grocery)
 ```
 
 ## Measures
@@ -158,33 +176,41 @@ continuous variables in the data set.
 #### Measures of Location
 
 ```{r mloc}
-ds_measures_location(mtcarz)
+ds_measures_location(wholesale_customers)
 ```
 
 #### Measures of Variation
 
+Delicatessen has the largest coefficient of variation (184.94) and fresh
+products the smallest (105.39).
+
 ```{r mvar}
-ds_measures_variation(mtcarz)
+ds_measures_variation(wholesale_customers)
 ```
 
 #### Measures of Symmetry
 
+All six product categories are right-skewed, with skewness ranging from 2.56 for
+fresh products to 11.15 for delicatessen.
+
 ```{r msym}
-ds_measures_symmetry(mtcarz)
+ds_measures_symmetry(wholesale_customers)
 ```
 
 #### Percentiles
 
+Half of the customers spend less than 8504 on fresh products, and the 99th
+percentile is 56082.61.
+
 ```{r mperc}
-ds_percentiles(mtcarz)
+ds_percentiles(wholesale_customers)
 ```
 
 #### Extreme Observations
 
+The largest fresh purchase is 112151 (observation 182); the smallest is 3
+(observations 96 and 339).
+
 ```{r mextreme}
-ds_extreme_obs(mtcarz, mpg)
+ds_extreme_obs(wholesale_customers, fresh)
 ```
-
-
-
-

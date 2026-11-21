@@ -45,55 +45,72 @@ install.packages("descriptr", repos = "https://rsquaredacademy.r-universe.dev")
 
 ## Usage
 
-We will use a modified version of the `mtcars` data set in the below examples. 
-The only difference between the data sets is related to the variable types.
+We will use the `wholesale_customers` data set in the below examples. It
+contains annual spending by 440 wholesale customers on six product categories,
+together with the sales channel and region of each customer. The data come from
+the UCI Machine Learning Repository (Cardoso 2013, CC BY 4.0).
 
 ```{r load, eval=TRUE, echo=FALSE}
 library(descriptr)
 ```
 
 ```{r egdata}
-str(mtcarz)
+str(wholesale_customers)
 ```
 
 ### Continuous Data
 
 #### Summary Statistics
 
+Annual spending on fresh products averages 12000.30, with a median of 8504 and
+a standard deviation of 12647.33. The distribution is right-skewed.
+
 ```{r descript1}
-ds_summary_stats(mtcarz, mpg)
+ds_summary_stats(wholesale_customers, fresh)
 ```
 
 #### Frequency Distribution
 
+With four intervals, 400 of the 440 customers (90.91%) spend less than 28040 on
+fresh products.
+
 ```{r descript4}
-ds_freq_table(mtcarz, mpg)
+ds_freq_table(wholesale_customers, fresh, 4)
 ```
 
 ### Categorical Data
 
 #### One Way Table
 
+Most customers are in the hotel/restaurant/cafe channel: 298 (67.73%) against
+142 (32.27%) in retail.
+
 ```{r descript3}
-ds_freq_table(mtcarz, cyl)
+ds_freq_table(wholesale_customers, channel)
 ```
 
 #### Two Way Table
 
+Customers in both channels are concentrated in the other region: 70.81% of
+hotel/restaurant/cafe customers and 73.94% of retail customers.
+
 ```{r descript2}
-ds_cross_table(mtcarz, cyl, gear)
+ds_cross_table(wholesale_customers, channel, region)
 ```
 
 ### Group Summary
 
+Grouping by channel shows that hotel/restaurant/cafe customers spend more on
+fresh products on average (13475.56) than retail customers (8904.32).
+
 ```{r descript5}
-ds_group_summary(mtcarz, cyl, mpg)
+ds_group_summary(wholesale_customers, channel, fresh)
 ```
 
 #### Multiple Variable Statistics
 
 ```{r descriptr6}
-ds_tidy_stats(mtcarz, mpg, disp, hp)
+ds_tidy_stats(wholesale_customers, fresh, milk, grocery)
 ```
 
 ## Features

@@ -37,119 +37,127 @@ install.packages("descriptr", repos = "https://rsquaredacademy.r-universe.dev")
 
 ## Usage
 
-We will use a modified version of the `mtcars` data set in the below
-examples. The only difference between the data sets is related to the
-variable types.
+We will use the `wholesale_customers` data set in the below examples. It
+contains annual spending by 440 wholesale customers on six product
+categories, together with the sales channel and region of each customer.
+The data come from the UCI Machine Learning Repository (Cardoso 2013, CC
+BY 4.0).
 
 ``` r
-str(mtcarz)
-#> 'data.frame':    32 obs. of  11 variables:
-#>  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
-#>  $ cyl : Factor w/ 3 levels "4","6","8": 2 2 1 2 3 2 3 1 1 2 ...
-#>  $ disp: num  160 160 108 258 360 ...
-#>  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
-#>  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
-#>  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
-#>  $ qsec: num  16.5 17 18.6 19.4 17 ...
-#>  $ vs  : Factor w/ 2 levels "0","1": 1 1 2 2 1 2 1 2 2 2 ...
-#>  $ am  : Factor w/ 2 levels "0","1": 2 2 2 1 1 1 1 1 1 1 ...
-#>  $ gear: Factor w/ 3 levels "3","4","5": 2 2 2 1 1 1 1 2 2 2 ...
-#>  $ carb: Factor w/ 6 levels "1","2","3","4",..: 4 4 1 1 2 1 4 2 2 4 ...
+str(wholesale_customers)
+#> 'data.frame':    440 obs. of  8 variables:
+#>  $ channel         : Factor w/ 2 levels "hotel_restaurant_cafe",..: 2 2 2 1 2 2 2 2 1 2 ...
+#>  $ region          : Factor w/ 3 levels "lisbon","porto",..: 3 3 3 3 3 3 3 3 3 3 ...
+#>  $ fresh           : int  12669 7057 6353 13265 22615 9413 12126 7579 5963 6006 ...
+#>  $ milk            : int  9656 9810 8808 1196 5410 8259 3199 4956 3648 11093 ...
+#>  $ grocery         : int  7561 9568 7684 4221 7198 5126 6975 9426 6192 18881 ...
+#>  $ frozen          : int  214 1762 2405 6404 3915 666 480 1669 425 1159 ...
+#>  $ detergents_paper: int  2674 3293 3516 507 1777 1795 3140 3321 1716 7425 ...
+#>  $ delicassen      : int  1338 1776 7844 1788 5185 1451 545 2566 750 2098 ...
 ```
 
 ### Continuous Data
 
 #### Summary Statistics
 
+Annual spending on fresh products averages 12000.30, with a median of
+8504 and a standard deviation of 12647.33. The distribution is
+right-skewed.
+
 ``` r
-ds_summary_stats(mtcarz, mpg)
-#> -------------------------------- Variable: mpg --------------------------------
+ds_summary_stats(wholesale_customers, fresh)
+#> ------------------------------- Variable: fresh -------------------------------
 #> 
-#>                         Univariate Analysis                          
+#>                                Univariate Analysis                                 
 #> 
-#>  N                       32.00      Variance                36.32 
-#>  Missing                  0.00      Std Deviation            6.03 
-#>  Mean                    20.09      Range                   23.50 
-#>  Median                  19.20      Interquartile Range      7.38 
-#>  Mode                    10.40      Uncorrected SS       14042.31 
-#>  Trimmed Mean            19.95      Corrected SS          1126.05 
-#>  Skewness                 0.67      Coeff Variation         30.00 
-#>  Kurtosis                -0.02      Std Error Mean           1.07 
+#>  N                             440.00      Variance                159954927.42 
+#>  Missing                         0.00      Std Deviation               12647.33 
+#>  Mean                        12000.30      Range                      112148.00 
+#>  Median                       8504.00      Interquartile Range         13806.00 
+#>  Mode                            3.00      Uncorrected SS       133583357177.00 
+#>  Trimmed Mean                10522.73      Corrected SS          70220213138.00 
+#>  Skewness                        2.56      Coeff Variation               105.39 
+#>  Kurtosis                       11.54      Std Error Mean                602.94 
 #> 
-#>                               Quantiles                               
+#>                                      Quantiles                                      
 #> 
-#>               Quantile                            Value                
+#>                  Quantile                                    Value                   
 #> 
-#>              Max                                  33.90                
-#>              99%                                  33.44                
-#>              95%                                  31.30                
-#>              90%                                  30.09                
-#>              Q3                                   22.80                
-#>              Median                               19.20                
-#>              Q1                                   15.43                
-#>              10%                                  14.34                
-#>              5%                                   12.00                
-#>              1%                                   10.40                
-#>              Min                                  10.40                
+#>                 Max                                        112151.00                 
+#>                 99%                                        56082.61                  
+#>                 95%                                        36818.50                  
+#>                 90%                                        27090.50                  
+#>                 Q3                                         16933.75                  
+#>                 Median                                      8504.00                  
+#>                 Q1                                          3127.75                  
+#>                 10%                                         915.60                   
+#>                 5%                                          401.90                   
+#>                 1%                                           28.46                   
+#>                 Min                                          3.00                    
 #> 
-#>                             Extreme Values                            
+#>                                    Extreme Values                                   
 #> 
-#>                 Low                                High                
+#>                     Low                                      High                    
 #> 
-#>   Obs                        Value       Obs                        Value 
-#>   15                         10.4        20                         33.9  
-#>   16                         10.4        18                         32.4  
-#>   24                         13.3        28                         30.4  
-#>    7                         14.3        19                         30.4  
-#>   17                         14.7        26                         27.3
+#>   Obs                              Value        Obs                              Value  
+#>    96                                3          182                              112151 
+#>   339                                3          126                              76237  
+#>    67                                9          285                              68951  
+#>   219                                18          40                              56159  
+#>    97                                23         259                              56083
 ```
 
 #### Frequency Distribution
 
+With four intervals, 400 of the 440 customers (90.91%) spend less than
+28040 on fresh products.
+
 ``` r
-ds_freq_table(mtcarz, mpg)
-#>                               Variable: mpg                               
-#> |-----------------------------------------------------------------------|
-#> |    Bins     | Frequency | Cum Frequency |   Percent    | Cum Percent  |
-#> |-----------------------------------------------------------------------|
-#> | 10.4 - 15.1 |     6     |       6       |    18.75     |    18.75     |
-#> |-----------------------------------------------------------------------|
-#> | 15.1 - 19.8 |    12     |      18       |     37.5     |    56.25     |
-#> |-----------------------------------------------------------------------|
-#> | 19.8 - 24.5 |     8     |      26       |      25      |    81.25     |
-#> |-----------------------------------------------------------------------|
-#> | 24.5 - 29.2 |     2     |      28       |     6.25     |     87.5     |
-#> |-----------------------------------------------------------------------|
-#> | 29.2 - 33.9 |     4     |      32       |     12.5     |     100      |
-#> |-----------------------------------------------------------------------|
-#> |    Total    |    32     |       -       |    100.00    |      -       |
-#> |-----------------------------------------------------------------------|
+ds_freq_table(wholesale_customers, fresh, 4)
+#>                                Variable: fresh                                
+#> |---------------------------------------------------------------------------|
+#> |      Bins       | Frequency | Cum Frequency |   Percent    | Cum Percent  |
+#> |---------------------------------------------------------------------------|
+#> |   3    - 28040  |    400    |      400      |    90.91     |    90.91     |
+#> |---------------------------------------------------------------------------|
+#> | 28040  - 56077  |    34     |      434      |     7.73     |    98.64     |
+#> |---------------------------------------------------------------------------|
+#> | 56077  - 84114  |     5     |      439      |     1.14     |    99.77     |
+#> |---------------------------------------------------------------------------|
+#> | 84114  - 112151 |     1     |      440      |     0.23     |     100      |
+#> |---------------------------------------------------------------------------|
+#> |      Total      |    440    |       -       |    100.00    |      -       |
+#> |---------------------------------------------------------------------------|
 ```
 
 ### Categorical Data
 
 #### One Way Table
 
+Most customers are in the hotel/restaurant/cafe channel: 298 (67.73%)
+against 142 (32.27%) in retail.
+
 ``` r
-ds_freq_table(mtcarz, cyl)
-#>                              Variable: cyl                              
-#> -----------------------------------------------------------------------
-#> Levels     Frequency    Cum Frequency       Percent        Cum Percent  
-#> -----------------------------------------------------------------------
-#>    4          11             11              34.38            34.38    
-#> -----------------------------------------------------------------------
-#>    6           7             18              21.88            56.25    
-#> -----------------------------------------------------------------------
-#>    8          14             32              43.75             100     
-#> -----------------------------------------------------------------------
-#>  Total        32              -             100.00              -      
-#> -----------------------------------------------------------------------
+ds_freq_table(wholesale_customers, channel)
+#>                                   Variable: channel                                   
+#> -------------------------------------------------------------------------------------
+#>        Levels            Frequency    Cum Frequency       Percent        Cum Percent  
+#> -------------------------------------------------------------------------------------
+#> hotel_restaurant_cafe       298            298             67.73            67.73    
+#> -------------------------------------------------------------------------------------
+#>        retail               142            440             32.27             100     
+#> -------------------------------------------------------------------------------------
+#>         Total               440             -             100.00              -      
+#> -------------------------------------------------------------------------------------
 ```
 
 #### Two Way Table
 
+Customers in both channels are concentrated in the other region: 70.81%
+of hotel/restaurant/cafe customers and 73.94% of retail customers.
+
 ``` r
-ds_cross_table(mtcarz, cyl, gear)
+ds_cross_table(wholesale_customers, channel, region)
 #>     Cell Contents
 #>  |---------------|
 #>  |     Frequency |
@@ -158,71 +166,70 @@ ds_cross_table(mtcarz, cyl, gear)
 #>  |       Col Pct |
 #>  |---------------|
 #> 
-#>  Total Observations:  32 
+#>  Total Observations:  440 
 #> 
 #> ----------------------------------------------------------------------------
-#> |              |                           gear                            |
+#> |              |                          region                           |
 #> ----------------------------------------------------------------------------
-#> |          cyl |            3 |            4 |            5 |    Row Total |
+#> |      channel |       lisbon |        porto |        other |    Row Total |
 #> ----------------------------------------------------------------------------
-#> |            4 |            1 |            8 |            2 |           11 |
-#> |              |         3.12 |        25.00 |         6.25 |              |
-#> |              |         9.09 |        72.73 |        18.18 |        34.38 |
-#> |              |         6.67 |        66.67 |        40.00 |              |
+#> |hotel_restaurant_cafe |           59 |           28 |          211 |          298 |
+#> |              |        13.41 |         6.36 |        47.95 |              |
+#> |              |        19.80 |         9.40 |        70.81 |        67.73 |
+#> |              |        76.62 |        59.57 |        66.77 |              |
 #> ----------------------------------------------------------------------------
-#> |            6 |            2 |            4 |            1 |            7 |
-#> |              |         6.25 |        12.50 |         3.12 |              |
-#> |              |        28.57 |        57.14 |        14.29 |        21.88 |
-#> |              |        13.33 |        33.33 |        20.00 |              |
+#> |       retail |           18 |           19 |          105 |          142 |
+#> |              |         4.09 |         4.32 |        23.86 |              |
+#> |              |        12.68 |        13.38 |        73.94 |        32.27 |
+#> |              |        23.38 |        40.43 |        33.23 |              |
 #> ----------------------------------------------------------------------------
-#> |            8 |           12 |            0 |            2 |           14 |
-#> |              |        37.50 |         0.00 |         6.25 |              |
-#> |              |        85.71 |         0.00 |        14.29 |        43.75 |
-#> |              |        80.00 |         0.00 |        40.00 |              |
-#> ----------------------------------------------------------------------------
-#> | Column Total |           15 |           12 |            5 |           32 |
-#> |              |        46.88 |        37.50 |        15.62 |              |
+#> | Column Total |           77 |           47 |          316 |          440 |
+#> |              |        17.50 |        10.68 |        71.82 |              |
 #> ----------------------------------------------------------------------------
 ```
 
 ### Group Summary
 
+Grouping by channel shows that hotel/restaurant/cafe customers spend
+more on fresh products on average (13475.56) than retail customers
+(8904.32).
+
 ``` r
-ds_group_summary(mtcarz, cyl, mpg)
-#>                                        mpg by cyl                                         
-#> -----------------------------------------------------------------------------------------
-#> |     Statistic/Levels|                    4|                    6|                    8|
-#> -----------------------------------------------------------------------------------------
-#> |                  Obs|                   11|                    7|                   14|
-#> |              Missing|                    0|                    0|                    0|
-#> |              Minimum|                 21.4|                 17.8|                 10.4|
-#> |              Maximum|                 33.9|                 21.4|                 19.2|
-#> |                 Mean|                26.66|                19.74|                 15.1|
-#> |               Median|                   26|                 19.7|                 15.2|
-#> |                 Mode|                 22.8|                   21|                 10.4|
-#> |       Std. Deviation|                 4.51|                 1.45|                 2.56|
-#> |             Variance|                20.34|                 2.11|                 6.55|
-#> |             Skewness|                 0.35|                -0.26|                -0.46|
-#> |             Kurtosis|                -1.43|                -1.83|                 0.33|
-#> |       Uncorrected SS|              8023.83|              2741.14|              3277.34|
-#> |         Corrected SS|               203.39|                12.68|                 85.2|
-#> |      Coeff Variation|                16.91|                 7.36|                16.95|
-#> |      Std. Error Mean|                 1.36|                 0.55|                 0.68|
-#> |                Range|                 12.5|                  3.6|                  8.8|
-#> |  Interquartile Range|                  7.6|                 2.35|                 1.85|
-#> -----------------------------------------------------------------------------------------
+ds_group_summary(wholesale_customers, channel, fresh)
+#>                          fresh by channel                           
+#> -------------------------------------------------------------------
+#> |     Statistic/Levels|hotel_restaurant_cafe|               retail|
+#> -------------------------------------------------------------------
+#> |                  Obs|                  298|                  142|
+#> |              Missing|                    0|                    0|
+#> |              Minimum|                    3|                   18|
+#> |              Maximum|               112151|                44466|
+#> |                 Mean|             13475.56|              8904.32|
+#> |               Median|               9581.5|               5993.5|
+#> |                 Mode|                    3|                   18|
+#> |       Std. Deviation|             13831.69|              8987.71|
+#> |             Variance|            191315579|             80779016|
+#> |             Skewness|                 2.51|                 1.59|
+#> |             Kurtosis|                10.59|                 2.81|
+#> |       Uncorrected SS|         110934764005|          22648593172|
+#> |         Corrected SS|          56820727011|          11389841317|
+#> |      Coeff Variation|               102.64|               100.94|
+#> |      Std. Error Mean|               801.25|               754.23|
+#> |                Range|               112148|                44448|
+#> |  Interquartile Range|              14204.5|                 9882|
+#> -------------------------------------------------------------------
 ```
 
 #### Multiple Variable Statistics
 
 ``` r
-ds_tidy_stats(mtcarz, mpg, disp, hp)
+ds_tidy_stats(wholesale_customers, fresh, milk, grocery)
 #> # A tibble: 3 × 16
-#>   vars    min   max  mean t_mean median  mode range variance  stdev  skew
-#>   <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl> <dbl>    <dbl>  <dbl> <dbl>
-#> 1 disp   71.1 472   231.   228    196.  276.  401.   15361.  124.   0.420
-#> 2 hp     52   335   147.   144.   123   110   283     4701.   68.6  0.799
-#> 3 mpg    10.4  33.9  20.1   20.0   19.2  10.4  23.5     36.3   6.03 0.672
+#>   vars      min    max   mean t_mean median  mode  range   variance  stdev  skew
+#>   <chr>   <int>  <int>  <dbl>  <dbl>  <dbl> <dbl>  <int>      <dbl>  <dbl> <dbl>
+#> 1 fresh       3 112151 12000. 10523.  8504      3 112148 159954927. 12647.  2.56
+#> 2 grocery     3  92780  7951.  6715.  4756.   683  92777  90310104.  9503.  3.59
+#> 3 milk       55  73498  5796.  4728.  3627    577  73443  54469967.  7380.  4.05
 #> # ℹ 5 more variables: kurtosis <dbl>, coeff_var <dbl>, q1 <dbl>, q3 <dbl>,
 #> #   iqrange <dbl>
 ```

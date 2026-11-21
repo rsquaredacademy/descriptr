@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.git$
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^cran-comments\.md$
@@ -13,6 +14,7 @@
 ^README-.*\.png$
 ^CONDUCT\.md$
 ^revdep$
+^data-raw$
 ^hex_descriptr\.png$
 ^\.github$
 TODO.md
