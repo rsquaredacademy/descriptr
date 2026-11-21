@@ -112,8 +112,28 @@ The `ds_auto_cross_table()` function creates multiple two way tables by creating
 cross table for each unique pair of categorical variables in a data set. You 
 can also specify a subset of variables if you do not want all the variables in 
 the data set to be used. Since `channel` and `region` are the only categorical
-variables, a single channel by region table is created.
+variables, we first derive a third one: total annual spend across the six
+categories, split at its tertiles into `low`, `medium` and `high` spending
+bands. That gives 147, 146 and 147 customers in the three bands. Three tables
+are then created: channel by region, channel by spend band and region by spend
+band.
 
 ```{r tway}
-ds_auto_cross_table(wholesale_customers)
+customers <- wholesale_customers %>%
+  mutate(
+    total_spend = fresh + milk + grocery + frozen + detergents_paper + delicassen,
+    spend_band  = cut(
+      total_spend,
+      breaks = quantile(total_spend, c(0, 1 / 3, 2 / 3, 1)),
+      include.lowest = TRUE,
+      labels = c("low", "medium", "high")
+    )
+  )
+
+ds_auto_cross_table(customers)
 ```
+
+The spend band separates the channels: 85 of the 142 retail customers (59.86%)
+are in the high band, against 62 of the 298 hotel/restaurant/cafe customers
+(20.81%). Region, by contrast, is not associated with spending: the other
+region splits almost evenly across the bands (108 low, 99 medium, 109 high).

@@ -71,11 +71,12 @@ ds_summary_stats(wholesale_customers, fresh)
 
 #### Frequency Distribution
 
-With four intervals, 400 of the 440 customers (90.91%) spend less than 28040 on
-fresh products.
+With ten intervals, the right skew is clear: 267 of the 440 customers (60.68%)
+spend less than 11217.8 on fresh products, while the top five intervals hold
+just 6 customers (1.36%).
 
 ```{r descript4}
-ds_freq_table(wholesale_customers, fresh, 4)
+ds_freq_table(wholesale_customers, fresh, 10)
 ```
 
 ### Categorical Data

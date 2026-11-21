@@ -79,12 +79,14 @@ variables in the data set and return summary statistics for each of them.
 ## Frequency Distribution
 
 The `ds_freq_table` function creates frequency tables for continuous variables. 
-The default number of intervals is 5. With four intervals, 400 of the 440
-customers (90.91%) spend less than 28040 on fresh products, and only one
-customer (0.23%) falls in the top interval of 84114 to 112151.
+The default number of intervals is 5. With ten intervals, the right skew is
+clear: 267 of the 440 customers (60.68%) spend less than 11217.8 on fresh
+products, another 109 (24.77%) spend between 11217.8 and 22432.6, and the top
+five intervals hold only 6 customers (1.36%), two of them empty. The largest
+purchase, 112151, sits alone in the last interval.
 
 ```{r fcont}
-ds_freq_table(wholesale_customers, fresh, 4)
+ds_freq_table(wholesale_customers, fresh, 10)
 ```
 
 ### Histogram
@@ -92,7 +94,7 @@ ds_freq_table(wholesale_customers, fresh, 4)
 A `plot()` method has been defined which will generate a histogram.
 
 ```{r fcont_hist, fig.width=7, fig.height=7, fig.align='centre'}
-k <- ds_freq_table(wholesale_customers, fresh, 4)
+k <- ds_freq_table(wholesale_customers, fresh, 10)
 plot(k)
 ```
 
