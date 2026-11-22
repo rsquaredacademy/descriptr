@@ -23,10 +23,18 @@
 #' # cross table for all categorical columns
 #' ds_auto_cross_table(wholesale_customers)
 #'
-#' # cross table for multiple columns: grocery spend split into three bands
-#' wc <- transform(wholesale_customers,
-#'   grocery_band = cut(grocery, 3, labels = c("low", "mid", "high")))
-#' ds_auto_cross_table(wc, channel, region, grocery_band)
+#' # Spend bands are tertiles of total spend across the six categories.
+#' wc <- dplyr::mutate(
+#'     wholesale_customers,
+#'     total_spend = fresh + milk + grocery + frozen + detergents_paper + delicassen,
+#'     spend_band  = cut(
+#'       total_spend,
+#'       breaks = quantile(total_spend, c(0, 1 / 3, 2 / 3, 1)),
+#'       include.lowest = TRUE,
+#'       labels = c("low", "medium", "high")
+#'     )
+#'   )
+#' ds_auto_cross_table(wc, channel, region, spend_band)
 #'
 #' @seealso \code{\link{ds_freq_table}} \code{\link{ds_cross_table}}
 #' @export
