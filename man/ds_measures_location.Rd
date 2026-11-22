@@ -25,22 +25,22 @@ Returns the measures of location such as mean, median & mode.
 }
 \examples{
 # single column
-ds_measures_location(mtcarz, mpg)
+ds_measures_location(wholesale_customers, fresh)
 
 # multiple columns
-ds_measures_location(mtcarz, mpg, disp)
+ds_measures_location(wholesale_customers, fresh, milk)
 
 # all columns
-ds_measures_location(mtcarz)
+ds_measures_location(wholesale_customers)
 
 # vector
-ds_measures_location(mtcarz$mpg)
+ds_measures_location(wholesale_customers$fresh)
 
 # vectors of different length
-disp <- mtcarz$disp[1:10]
-ds_measures_location(mtcarz$mpg, disp)
+milk_short <- wholesale_customers$milk[1:10]
+ds_measures_location(wholesale_customers$fresh, milk_short)
 
 # decimal places
-ds_measures_location(mtcarz, disp, hp, decimals = 3)
+ds_measures_location(wholesale_customers, fresh, milk, decimals = 3)
 
 }

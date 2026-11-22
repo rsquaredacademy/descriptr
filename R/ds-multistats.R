@@ -9,10 +9,10 @@
 #'
 #' @examples
 #' # all columns
-#' ds_tidy_stats(mtcarz)
+#' ds_tidy_stats(wholesale_customers)
 #'
 #' # multiple columns
-#' ds_tidy_stats(mtcarz, mpg, disp, hp)
+#' ds_tidy_stats(wholesale_customers, fresh, milk, grocery)
 #'
 #' @section Deprecated Functions:
 #' \code{ds_multi_stats()} have been deprecated. Instead use \code{ds_tidy_stats()}.

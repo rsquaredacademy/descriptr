@@ -8,11 +8,11 @@
 #'
 #' @examples
 #' # plot select variables
-#' ds_plot_scatter(mtcarz, mpg, disp)
+#' ds_plot_scatter(wholesale_customers, fresh, milk)
 #'
 #' # plot all continuous variables of a subset
-#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-#' ds_plot_scatter(mt)
+#' wc <- dplyr::select(wholesale_customers, fresh, milk)
+#' ds_plot_scatter(wc)
 #'
 #' @importFrom rlang sym
 #' @importFrom utils combn
@@ -77,14 +77,11 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
 #'
 #' @examples
 #' # plot single variable
-#' ds_plot_histogram(mtcarz, mpg)
-#'
-#' # plot multiple variables
-#' ds_plot_histogram(mtcarz, mpg, disp)
+#' ds_plot_histogram(wholesale_customers, fresh)
 #'
 #' # plot all continuous variables of a subset
-#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-#' ds_plot_histogram(mt)
+#' wc <- dplyr::select(wholesale_customers, fresh, milk)
+#' ds_plot_histogram(wc)
 #'
 #' @export
 #'
@@ -146,14 +143,11 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
 #'
 #' @examples
 #' # plot single variable
-#' ds_plot_density(mtcarz, mpg)
-#'
-#' # plot multiple variables
-#' ds_plot_density(mtcarz, mpg, disp)
+#' ds_plot_density(wholesale_customers, fresh)
 #'
 #' # plot all continuous variables of a subset
-#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-#' ds_plot_density(mt)
+#' wc <- dplyr::select(wholesale_customers, fresh, milk)
+#' ds_plot_density(wc)
 #'
 #' @export
 #'
@@ -212,14 +206,11 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 #'
 #' @examples
 #' # plot single variable
-#' ds_plot_bar(mtcarz, cyl)
-#'
-#' # plot multiple variables
-#' ds_plot_bar(mtcarz, cyl, gear)
+#' ds_plot_bar(wholesale_customers, channel)
 #'
 #' # plot all categorical variables of a subset
-#' mt <- dplyr::select(mtcarz, cyl, gear, am)
-#' ds_plot_bar(mt)
+#' wc <- dplyr::select(wholesale_customers, channel, region)
+#' ds_plot_bar(wc)
 #'
 #' @export
 #'
@@ -279,14 +270,11 @@ ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 #'
 #' @examples
 #' # plot single variable
-#' ds_plot_box_single(mtcarz, mpg)
-#'
-#' # plot multiple variables
-#' ds_plot_box_single(mtcarz, mpg, disp)
+#' ds_plot_box_single(wholesale_customers, fresh)
 #'
 #' # plot all continuous variables of a subset
-#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-#' ds_plot_box_single(mt)
+#' wc <- dplyr::select(wholesale_customers, fresh, milk)
+#' ds_plot_box_single(wc)
 #'
 #' @export
 #'
@@ -345,14 +333,8 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' # subset data
-#' mt <- dplyr::select(mtcarz, cyl, gear)
-#'
 #' # stacked bar plot
-#' ds_plot_bar_stacked(mtcarz, cyl, gear)
-#'
-#' # plot all variables of a subset
-#' ds_plot_bar_stacked(mt)
+#' ds_plot_bar_stacked(wholesale_customers, channel, region)
 #'
 #' @export
 #'
@@ -412,14 +394,8 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' # subset data
-#' mt <- dplyr::select(mtcarz, cyl, gear)
-#'
 #' # grouped bar plot
-#' ds_plot_bar_grouped(mtcarz, cyl, gear)
-#'
-#' # plot all variables of a subset
-#' ds_plot_bar_grouped(mt)
+#' ds_plot_bar_grouped(wholesale_customers, channel, region)
 #'
 #' @export
 #'
@@ -482,14 +458,12 @@ ds_plot_bar_grouped <- function(data, ..., print_plot = TRUE) {
 #' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #'
 #' @examples
-#' # subset data
-#' mt <- dplyr::select(mtcarz, cyl, disp, mpg)
-#'
 #' # plot select variables
-#' ds_plot_box_group(mtcarz, cyl, gear, mpg)
+#' ds_plot_box_group(wholesale_customers, channel, fresh)
 #'
-#' # plot all variables
-#' ds_plot_box_group(mt)
+#' # subset data
+#' wc <- dplyr::select(wholesale_customers, channel, region, fresh)
+#' ds_plot_box_group(wc)
 #'
 #' @export
 #'

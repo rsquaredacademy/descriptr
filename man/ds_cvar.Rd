@@ -16,9 +16,9 @@ Compute the coefficient of variation
 }
 \examples{
 # vector
-ds_cvar(mtcars$mpg)
+ds_cvar(wholesale_customers$fresh)
 
 # data.frame
-ds_cvar(mtcars, mpg)
+ds_cvar(wholesale_customers, fresh)
 
 }

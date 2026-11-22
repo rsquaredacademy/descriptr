@@ -30,11 +30,15 @@
 #'
 #' @examples
 #' # screen data
-#' ds_screener(mtcarz)
-#' ds_screener(airquality)
+#' ds_screener(wholesale_customers)
+#'
+#' # screen a copy with one missing value
+#' wc <- wholesale_customers
+#' wc$milk[1] <- NA
+#' ds_screener(wc)
 #'
 #' # plot
-#' x <- ds_screener(airquality)
+#' x <- ds_screener(wc)
 #' plot(x)
 #'
 #' @export

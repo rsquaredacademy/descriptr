@@ -18,6 +18,6 @@ Missing values are removed before computation and the number of
   observations returns \code{NA}.
 }
 \examples{
-ds_std_error(mtcars$mpg)
+ds_std_error(wholesale_customers$fresh)
 
 }

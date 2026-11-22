@@ -25,10 +25,10 @@ matches \code{e1071::skewness(x, type = 2)} and the SAS/SPSS definition.
 }
 \examples{
 # vector
-ds_skewness(mtcars$mpg)
+ds_skewness(wholesale_customers$fresh)
 
 # data.frame
-ds_skewness(mtcars, mpg)
+ds_skewness(wholesale_customers, fresh)
 
 }
 \references{

@@ -24,12 +24,12 @@ vector and \code{data.frame} input.
 }
 \examples{
 # data.frame
-ds_extreme_obs(mtcarz, mpg)
+ds_extreme_obs(wholesale_customers, fresh)
 
 # vector
-ds_extreme_obs(mtcarz$mpg)
+ds_extreme_obs(wholesale_customers$fresh)
 
 # decimal places
-ds_extreme_obs(mtcarz$mpg, decimals = 3)
+ds_extreme_obs(wholesale_customers$fresh, decimals = 3)
 
 }

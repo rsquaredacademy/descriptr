@@ -53,10 +53,10 @@ If the grouping column is named like one of the statistic columns, such as
 }
 \examples{
 # ds_group summary
-ds_group_summary(mtcarz, cyl, mpg)
+ds_group_summary(wholesale_customers, channel, fresh)
 
 # boxplot
-k <- ds_group_summary(mtcarz, cyl, mpg)
+k <- ds_group_summary(wholesale_customers, channel, fresh)
 plot(k)
 
 # tibble

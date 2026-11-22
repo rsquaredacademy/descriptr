@@ -24,22 +24,22 @@ Returns the measures of symmetry such as skewness and kurtosis.
 }
 \examples{
 # single column
-ds_measures_symmetry(mtcarz, mpg)
+ds_measures_symmetry(wholesale_customers, fresh)
 
 # multiple columns
-ds_measures_symmetry(mtcarz, mpg, disp)
+ds_measures_symmetry(wholesale_customers, fresh, milk)
 
 # all columns
-ds_measures_symmetry(mtcarz)
+ds_measures_symmetry(wholesale_customers)
 
 # vector
-ds_measures_symmetry(mtcarz$mpg)
+ds_measures_symmetry(wholesale_customers$fresh)
 
 # vectors of different length
-disp <- mtcarz$disp[1:10]
-ds_measures_symmetry(mtcarz$mpg, disp)
+milk_short <- wholesale_customers$milk[1:10]
+ds_measures_symmetry(wholesale_customers$fresh, milk_short)
 
 # decimal places
-ds_measures_symmetry(mtcarz, disp, hp, decimals = 3)
+ds_measures_symmetry(wholesale_customers, fresh, milk, decimals = 3)
 
 }

@@ -7,16 +7,16 @@
 #'
 #' @examples
 #' # numeric data
-#' ds_summary_stats(mtcarz$mpg)
+#' ds_summary_stats(wholesale_customers$fresh)
 #'
 #' # single variable
-#' ds_summary_stats(mtcarz, mpg)
+#' ds_summary_stats(wholesale_customers, fresh)
 #'
 #' # multiple variables
-#' ds_summary_stats(mtcarz, mpg, disp, hp)
+#' ds_summary_stats(wholesale_customers, fresh, milk)
 #'
 #' # all variables
-#' ds_summary_stats(mtcarz)
+#' ds_summary_stats(wholesale_customers)
 #'
 #' @importFrom rlang !!
 #' @importFrom stats na.omit

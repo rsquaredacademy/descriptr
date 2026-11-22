@@ -24,10 +24,10 @@ smallest of them is returned.
 }
 \examples{
 # vector
-ds_mode(mtcars$mpg)
+ds_mode(wholesale_customers$fresh)
 
 # data.frame
-ds_mode(mtcars, mpg)
+ds_mode(wholesale_customers, fresh)
 
 }
 \seealso{

@@ -13,23 +13,23 @@
 #'
 #' @examples
 #' # single column
-#' ds_measures_location(mtcarz, mpg)
+#' ds_measures_location(wholesale_customers, fresh)
 #'
 #' # multiple columns
-#' ds_measures_location(mtcarz, mpg, disp)
+#' ds_measures_location(wholesale_customers, fresh, milk)
 #'
 #' # all columns
-#' ds_measures_location(mtcarz)
+#' ds_measures_location(wholesale_customers)
 #'
 #' # vector
-#' ds_measures_location(mtcarz$mpg)
+#' ds_measures_location(wholesale_customers$fresh)
 #'
 #' # vectors of different length
-#' disp <- mtcarz$disp[1:10]
-#' ds_measures_location(mtcarz$mpg, disp)
+#' milk_short <- wholesale_customers$milk[1:10]
+#' ds_measures_location(wholesale_customers$fresh, milk_short)
 #'
 #' # decimal places
-#' ds_measures_location(mtcarz, disp, hp, decimals = 3)
+#' ds_measures_location(wholesale_customers, fresh, milk, decimals = 3)
 #'
 #' @export
 #'
@@ -86,23 +86,23 @@ ds_measures_location <- function(data, ..., trim = 0.05, decimals = 2) {
 #'
 #' @examples
 #' # single column
-#' ds_measures_variation(mtcarz, mpg)
+#' ds_measures_variation(wholesale_customers, fresh)
 #'
 #' # multiple columns
-#' ds_measures_variation(mtcarz, mpg, disp)
+#' ds_measures_variation(wholesale_customers, fresh, milk)
 #'
 #' # all columns
-#' ds_measures_variation(mtcarz)
+#' ds_measures_variation(wholesale_customers)
 #'
 #' # vector
-#' ds_measures_variation(mtcarz$mpg)
+#' ds_measures_variation(wholesale_customers$fresh)
 #'
 #' # vectors of different length
-#' disp <- mtcarz$disp[1:10]
-#' ds_measures_variation(mtcarz$mpg, disp)
+#' milk_short <- wholesale_customers$milk[1:10]
+#' ds_measures_variation(wholesale_customers$fresh, milk_short)
 #'
 #' # decimal places
-#' ds_measures_variation(mtcarz, disp, hp, decimals = 3)
+#' ds_measures_variation(wholesale_customers, fresh, milk, decimals = 3)
 #'
 #' @export
 #'
@@ -182,23 +182,23 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
 #'
 #' @examples
 #' # single column
-#' ds_measures_symmetry(mtcarz, mpg)
+#' ds_measures_symmetry(wholesale_customers, fresh)
 #'
 #' # multiple columns
-#' ds_measures_symmetry(mtcarz, mpg, disp)
+#' ds_measures_symmetry(wholesale_customers, fresh, milk)
 #'
 #' # all columns
-#' ds_measures_symmetry(mtcarz)
+#' ds_measures_symmetry(wholesale_customers)
 #'
 #' # vector
-#' ds_measures_symmetry(mtcarz$mpg)
+#' ds_measures_symmetry(wholesale_customers$fresh)
 #'
 #' # vectors of different length
-#' disp <- mtcarz$disp[1:10]
-#' ds_measures_symmetry(mtcarz$mpg, disp)
+#' milk_short <- wholesale_customers$milk[1:10]
+#' ds_measures_symmetry(wholesale_customers$fresh, milk_short)
 #'
 #' # decimal places
-#' ds_measures_symmetry(mtcarz, disp, hp, decimals = 3)
+#' ds_measures_symmetry(wholesale_customers, fresh, milk, decimals = 3)
 #'
 #' @export
 #'
@@ -274,23 +274,23 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
 #'
 #' @examples
 #' # single column
-#' ds_percentiles(mtcarz, mpg)
+#' ds_percentiles(wholesale_customers, fresh)
 #'
 #' # multiple columns
-#' ds_percentiles(mtcarz, mpg, disp)
+#' ds_percentiles(wholesale_customers, fresh, milk)
 #'
 #' # all columns
-#' ds_percentiles(mtcarz)
+#' ds_percentiles(wholesale_customers)
 #'
 #' # vector
-#' ds_percentiles(mtcarz$mpg)
+#' ds_percentiles(wholesale_customers$fresh)
 #'
 #' # vectors of different length
-#' disp <- mtcarz$disp[1:10]
-#' ds_percentiles(mtcarz$mpg, disp)
+#' milk_short <- wholesale_customers$milk[1:10]
+#' ds_percentiles(wholesale_customers$fresh, milk_short)
 #'
 #' # decimal places
-#' ds_percentiles(mtcarz, disp, hp, decimals = 3)
+#' ds_percentiles(wholesale_customers, fresh, milk, decimals = 3)
 #'
 #' @export
 #'
@@ -382,13 +382,13 @@ ds_percentiles <- function(data, ..., decimals = 2) {
 #'
 #' @examples
 #' # data.frame
-#' ds_extreme_obs(mtcarz, mpg)
+#' ds_extreme_obs(wholesale_customers, fresh)
 #'
 #' # vector
-#' ds_extreme_obs(mtcarz$mpg)
+#' ds_extreme_obs(wholesale_customers$fresh)
 #'
 #' # decimal places
-#' ds_extreme_obs(mtcarz$mpg, decimals = 3)
+#' ds_extreme_obs(wholesale_customers$fresh, decimals = 3)
 #'
 #' @export
 #'
@@ -445,13 +445,13 @@ ds_extreme_obs <- function(data, col, decimals = 2) {
 #' @return \code{n} highest/lowest observations from \code{data}
 #' @examples
 #' # 5 lowest observations
-#' ds_tailobs(mtcarz$mpg, 5)
+#' ds_tailobs(wholesale_customers$fresh, 5)
 #'
 #' # 5 highest observations
-#' ds_tailobs(mtcarz$mpg, 5, type = "high")
+#' ds_tailobs(wholesale_customers$fresh, 5, type = "high")
 #'
 #' # specify decimal places to display
-#' ds_tailobs(mtcarz$mpg, 5, decimals = 3)
+#' ds_tailobs(wholesale_customers$fresh, 5, decimals = 3)
 #'
 #' @export
 #' @seealso \code{\link[dplyr]{top_n}}
@@ -509,10 +509,10 @@ ds_tailobs <- function(data, n, type = c("low", "high"), decimals = 2) {
 #' \code{NA} is returned.
 #' @examples
 #' # vector
-#' ds_gmean(mtcars$mpg)
+#' ds_gmean(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_gmean(mtcars, mpg)
+#' ds_gmean(wholesale_customers, fresh)
 #'
 #' @export
 #' @seealso \code{\link{ds_hmean}} \code{\link[base]{mean}}
@@ -557,10 +557,10 @@ ds_gmean <- function(data, x = NULL) {
 #' returned.
 #' @examples
 #' # vector
-#' ds_hmean(mtcars$mpg)
+#' ds_hmean(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_hmean(mtcars, mpg)
+#' ds_hmean(wholesale_customers, fresh)
 #'
 #' @export
 #' @seealso \code{\link{ds_gmean}} \code{\link[base]{mean}}
@@ -614,10 +614,10 @@ ds_hmean <- function(data, x = NULL) {
 #' @return Mode of \code{x}
 #' @examples
 #' # vector
-#' ds_mode(mtcars$mpg)
+#' ds_mode(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_mode(mtcars, mpg)
+#' ds_mode(wholesale_customers, fresh)
 #'
 #' @seealso \code{\link[base]{mean}} \code{\link[stats]{median}}
 #' @export
@@ -666,10 +666,10 @@ ds_mode <- function(data, x = NULL) {
 #' @return Range of \code{x}
 #' @examples
 #' # vector
-#' ds_range(mtcars$mpg)
+#' ds_range(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_range(mtcars, mpg)
+#' ds_range(wholesale_customers, fresh)
 #'
 #' @seealso \code{\link[base]{range}}
 #' @export
@@ -713,10 +713,10 @@ ds_range <- function(data, x = NULL) {
 #' \code{e1071::kurtosis(x, type = 2)} and the SAS/SPSS definition.
 #' @examples
 #' # vector
-#' ds_kurtosis(mtcars$mpg)
+#' ds_kurtosis(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_kurtosis(mtcars, mpg)
+#' ds_kurtosis(wholesale_customers, fresh)
 #'
 #' @seealso \code{ds_skewness}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
@@ -763,10 +763,10 @@ ds_kurtosis <- function(data, x = NULL) {
 #' matches \code{e1071::skewness(x, type = 2)} and the SAS/SPSS definition.
 #' @examples
 #' # vector
-#' ds_skewness(mtcars$mpg)
+#' ds_skewness(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_skewness(mtcars, mpg)
+#' ds_skewness(wholesale_customers, fresh)
 #'
 #' @seealso \code{kurtosis}
 #' @references Sheskin, D.J. (2000) Handbook of Parametric and Nonparametric Statistical Procedures, Second Edition. Boca Raton, Florida: Chapman & Hall/CRC.
@@ -809,10 +809,10 @@ ds_skewness <- function(data, x = NULL) {
 #' takes place
 #' @examples
 #' # vector
-#' ds_mdev(mtcars$mpg)
+#' ds_mdev(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_mdev(mtcars, mpg)
+#' ds_mdev(wholesale_customers, fresh)
 #'
 #' @seealso \code{\link[stats]{mad}}
 #' @export
@@ -846,10 +846,10 @@ ds_mdev <- function(data, x = NULL) {
 #' @param x Column in \code{data}.
 #' @examples
 #' # vector
-#' ds_cvar(mtcars$mpg)
+#' ds_cvar(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_cvar(mtcars, mpg)
+#' ds_cvar(wholesale_customers, fresh)
 #'
 #' @export
 #'
@@ -885,10 +885,10 @@ ds_cvar <- function(data, x = NULL) {
 #' @param x Column in \code{data}.
 #' @examples
 #' # vector
-#' ds_css(mtcars$mpg)
+#' ds_css(wholesale_customers$fresh)
 #'
 #' # data.frame
-#' ds_css(mtcars, mpg)
+#' ds_css(wholesale_customers, fresh)
 #'
 #' @export
 #'
@@ -924,11 +924,11 @@ ds_css <- function(data, x = NULL) {
 #' @details Positions refer to the vector passed in; missing values are not
 #' removed before the indices are computed.
 #' @examples
-#' # returns index of 21
-#' ds_rindex(mtcars$mpg, 21)
+#' # returns the row with the largest fresh spend
+#' ds_rindex(wholesale_customers$fresh, 112151)
 #'
-#' # returns NULL
-#' ds_rindex(mtcars$mpg, 22)
+#' # returns NULL: no customer spent 0 on fresh
+#' ds_rindex(wholesale_customers$fresh, 0)
 #'
 #' @export
 #'

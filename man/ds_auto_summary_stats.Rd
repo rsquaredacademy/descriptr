@@ -16,9 +16,9 @@ Generate summary statistics & frequency table for all continuous variables in da
 }
 \examples{
 # all columns
-ds_auto_summary_stats(mtcarz)
+ds_auto_summary_stats(wholesale_customers)
 
 # multiple columns
-ds_auto_summary_stats(mtcarz, disp, hp)
+ds_auto_summary_stats(wholesale_customers, fresh, milk)
 
 }

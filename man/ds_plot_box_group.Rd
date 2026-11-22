@@ -17,13 +17,11 @@ ds_plot_box_group(data, ..., print_plot = TRUE)
 Creates box plots if the data has both categorical & continuous variables.
 }
 \examples{
-# subset data
-mt <- dplyr::select(mtcarz, cyl, disp, mpg)
-
 # plot select variables
-ds_plot_box_group(mtcarz, cyl, gear, mpg)
+ds_plot_box_group(wholesale_customers, channel, fresh)
 
-# plot all variables
-ds_plot_box_group(mt)
+# subset data
+wc <- dplyr::select(wholesale_customers, channel, region, fresh)
+ds_plot_box_group(wc)
 
 }

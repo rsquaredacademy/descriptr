@@ -23,10 +23,10 @@ takes place
 }
 \examples{
 # vector
-ds_mdev(mtcars$mpg)
+ds_mdev(wholesale_customers$fresh)
 
 # data.frame
-ds_mdev(mtcars, mpg)
+ds_mdev(wholesale_customers, fresh)
 
 }
 \seealso{

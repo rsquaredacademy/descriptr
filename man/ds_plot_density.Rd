@@ -20,13 +20,10 @@ Creates density plots if the data has continuous variables.
 }
 \examples{
 # plot single variable
-ds_plot_density(mtcarz, mpg)
-
-# plot multiple variables
-ds_plot_density(mtcarz, mpg, disp)
+ds_plot_density(wholesale_customers, fresh)
 
 # plot all continuous variables of a subset
-mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-ds_plot_density(mt)
+wc <- dplyr::select(wholesale_customers, fresh, milk)
+ds_plot_density(wc)
 
 }

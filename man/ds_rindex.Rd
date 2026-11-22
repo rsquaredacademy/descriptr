@@ -24,10 +24,10 @@ Positions refer to the vector passed in; missing values are not
 removed before the indices are computed.
 }
 \examples{
-# returns index of 21
-ds_rindex(mtcars$mpg, 21)
+# returns the row with the largest fresh spend
+ds_rindex(wholesale_customers$fresh, 112151)
 
-# returns NULL
-ds_rindex(mtcars$mpg, 22)
+# returns NULL: no customer spent 0 on fresh
+ds_rindex(wholesale_customers$fresh, 0)
 
 }

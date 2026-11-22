@@ -22,10 +22,10 @@ If any value is less than or equal to zero, a warning is issued and
 }
 \examples{
 # vector
-ds_gmean(mtcars$mpg)
+ds_gmean(wholesale_customers$fresh)
 
 # data.frame
-ds_gmean(mtcars, mpg)
+ds_gmean(wholesale_customers, fresh)
 
 }
 \seealso{

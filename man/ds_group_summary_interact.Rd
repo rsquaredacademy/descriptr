@@ -31,7 +31,7 @@ column is suffixed with \code{_group} so that every column name is unique
 and the statistic keeps its documented name.
 }
 \examples{
-ds_group_summary_interact(mtcarz, mpg, cyl, gear)
+ds_group_summary_interact(wholesale_customers, fresh, channel, region)
 
 }
 \seealso{

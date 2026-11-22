@@ -15,7 +15,7 @@ ds_auto_group_summary(data, ...)
 Generate summary statistics for all continuous variables in data.
 }
 \examples{
-# summary statistics of mpg & disp for each level of cyl & gear
-ds_auto_group_summary(mtcarz, cyl, gear, mpg, disp)
+# summary statistics of fresh spend for each level of channel & region
+ds_auto_group_summary(wholesale_customers, channel, region, fresh)
 
 }

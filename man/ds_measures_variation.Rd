@@ -25,22 +25,22 @@ Returns the measures of variation such as range, variance and standard
 }
 \examples{
 # single column
-ds_measures_variation(mtcarz, mpg)
+ds_measures_variation(wholesale_customers, fresh)
 
 # multiple columns
-ds_measures_variation(mtcarz, mpg, disp)
+ds_measures_variation(wholesale_customers, fresh, milk)
 
 # all columns
-ds_measures_variation(mtcarz)
+ds_measures_variation(wholesale_customers)
 
 # vector
-ds_measures_variation(mtcarz$mpg)
+ds_measures_variation(wholesale_customers$fresh)
 
 # vectors of different length
-disp <- mtcarz$disp[1:10]
-ds_measures_variation(mtcarz$mpg, disp)
+milk_short <- wholesale_customers$milk[1:10]
+ds_measures_variation(wholesale_customers$fresh, milk_short)
 
 # decimal places
-ds_measures_variation(mtcarz, disp, hp, decimals = 3)
+ds_measures_variation(wholesale_customers, fresh, milk, decimals = 3)
 
 }
