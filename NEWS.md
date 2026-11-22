@@ -2,6 +2,8 @@
 
 - Vignettes and README now use business data (new dataset
   `wholesale_customers`, UCI, CC BY 4.0).
+- Faster examples and tests for CRAN checks (heavy plot tests are skipped on
+  CRAN; they still run in CI).
 
 # descriptr 0.6.1
 

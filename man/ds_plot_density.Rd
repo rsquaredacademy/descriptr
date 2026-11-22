@@ -23,9 +23,10 @@ Creates density plots if the data has continuous variables.
 ds_plot_density(mtcarz, mpg)
 
 # plot multiple variables
-ds_plot_density(mtcarz, mpg, disp, hp)
+ds_plot_density(mtcarz, mpg, disp)
 
-# plot all variables
-ds_plot_density(mtcarz)
+# plot all continuous variables of a subset
+mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
+ds_plot_density(mt)
 
 }

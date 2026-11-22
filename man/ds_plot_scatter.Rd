@@ -20,7 +20,8 @@ Creates scatter plots if the data has continuous variables.
 # plot select variables
 ds_plot_scatter(mtcarz, mpg, disp)
 
-# plot all variables
-ds_plot_scatter(mtcarz)
+# plot all continuous variables of a subset
+mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
+ds_plot_scatter(mt)
 
 }
