@@ -158,7 +158,7 @@ md_helper <- function(x, y) {
 #'   observations returns \code{NA}.
 #'
 #' @examples
-#' ds_std_error(mtcars$mpg)
+#' ds_std_error(wholesale_customers$fresh)
 #'
 #' @export
 #'

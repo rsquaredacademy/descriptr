@@ -25,9 +25,9 @@ Descriptive statistics for multiple variables.
 
 \examples{
 # all columns
-ds_tidy_stats(mtcarz)
+ds_tidy_stats(wholesale_customers)
 
 # multiple columns
-ds_tidy_stats(mtcarz, mpg, disp, hp)
+ds_tidy_stats(wholesale_customers, fresh, milk, grocery)
 
 }

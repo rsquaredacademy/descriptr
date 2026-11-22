@@ -21,10 +21,10 @@ returned.
 }
 \examples{
 # vector
-ds_hmean(mtcars$mpg)
+ds_hmean(wholesale_customers$fresh)
 
 # data.frame
-ds_hmean(mtcars, mpg)
+ds_hmean(wholesale_customers, fresh)
 
 }
 \seealso{

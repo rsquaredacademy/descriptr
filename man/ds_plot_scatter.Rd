@@ -18,10 +18,10 @@ Creates scatter plots if the data has continuous variables.
 }
 \examples{
 # plot select variables
-ds_plot_scatter(mtcarz, mpg, disp)
+ds_plot_scatter(wholesale_customers, fresh, milk)
 
 # plot all continuous variables of a subset
-mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-ds_plot_scatter(mt)
+wc <- dplyr::select(wholesale_customers, fresh, milk)
+ds_plot_scatter(wc)
 
 }

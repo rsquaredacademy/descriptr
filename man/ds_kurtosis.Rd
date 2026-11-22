@@ -25,10 +25,10 @@ this is the excess kurtosis. It matches
 }
 \examples{
 # vector
-ds_kurtosis(mtcars$mpg)
+ds_kurtosis(wholesale_customers$fresh)
 
 # data.frame
-ds_kurtosis(mtcars, mpg)
+ds_kurtosis(wholesale_customers, fresh)
 
 }
 \references{

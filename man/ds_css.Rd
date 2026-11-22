@@ -16,9 +16,9 @@ Compute the corrected sum of squares
 }
 \examples{
 # vector
-ds_css(mtcars$mpg)
+ds_css(wholesale_customers$fresh)
 
 # data.frame
-ds_css(mtcars, mpg)
+ds_css(wholesale_customers, fresh)
 
 }

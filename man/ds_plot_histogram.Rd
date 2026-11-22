@@ -22,13 +22,10 @@ Creates histograms if the data has continuous variables.
 }
 \examples{
 # plot single variable
-ds_plot_histogram(mtcarz, mpg)
-
-# plot multiple variables
-ds_plot_histogram(mtcarz, mpg, disp)
+ds_plot_histogram(wholesale_customers, fresh)
 
 # plot all continuous variables of a subset
-mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
-ds_plot_histogram(mt)
+wc <- dplyr::select(wholesale_customers, fresh, milk)
+ds_plot_histogram(wc)
 
 }

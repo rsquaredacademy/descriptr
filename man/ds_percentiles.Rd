@@ -24,22 +24,22 @@ Returns the percentiles
 }
 \examples{
 # single column
-ds_percentiles(mtcarz, mpg)
+ds_percentiles(wholesale_customers, fresh)
 
 # multiple columns
-ds_percentiles(mtcarz, mpg, disp)
+ds_percentiles(wholesale_customers, fresh, milk)
 
 # all columns
-ds_percentiles(mtcarz)
+ds_percentiles(wholesale_customers)
 
 # vector
-ds_percentiles(mtcarz$mpg)
+ds_percentiles(wholesale_customers$fresh)
 
 # vectors of different length
-disp <- mtcarz$disp[1:10]
-ds_percentiles(mtcarz$mpg, disp)
+milk_short <- wholesale_customers$milk[1:10]
+ds_percentiles(wholesale_customers$fresh, milk_short)
 
 # decimal places
-ds_percentiles(mtcarz, disp, hp, decimals = 3)
+ds_percentiles(wholesale_customers, fresh, milk, decimals = 3)
 
 }

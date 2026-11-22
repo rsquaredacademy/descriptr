@@ -25,17 +25,17 @@
 #'
 #' @examples
 #' # categorical data
-#' ds_freq_table(mtcarz, cyl)
+#' ds_freq_table(wholesale_customers, channel)
 #'
 #' # barplot
-#' k <- ds_freq_table(mtcarz, cyl)
+#' k <- ds_freq_table(wholesale_customers, channel)
 #' plot(k)
 #'
 #' # continuous data
-#' ds_freq_table(mtcarz, mpg)
+#' ds_freq_table(wholesale_customers, fresh)
 #'
-#' # barplot
-#' k <- ds_freq_table(mtcarz, mpg)
+#' # histogram
+#' k <- ds_freq_table(wholesale_customers, fresh)
 #' plot(k)
 #'
 #' @seealso \code{\link{ds_cross_table}}

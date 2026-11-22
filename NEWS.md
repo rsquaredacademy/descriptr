@@ -1,5 +1,7 @@
 # descriptr (development version)
 
+- Function examples now use the business dataset `wholesale_customers` (UCI,
+  CC BY 4.0); `mtcarz` and `hsb` remain available.
 - Vignettes and README now use business data (new dataset
   `wholesale_customers`, UCI, CC BY 4.0).
 - Faster examples and tests for CRAN checks (heavy plot tests are skipped on

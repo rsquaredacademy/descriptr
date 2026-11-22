@@ -3,6 +3,8 @@
 #' A dataset containing demographic information and standardized test
 #' scores of high school students.
 #'
+#' Kept for backward compatibility; examples now use wholesale_customers.
+#'
 #' @format A data frame with 200 rows and 10 variables:
 #' \describe{
 #'   \item{id}{id of the student}

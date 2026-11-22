@@ -20,13 +20,10 @@ Creates bar plots if the data has categorical variables.
 }
 \examples{
 # plot single variable
-ds_plot_bar(mtcarz, cyl)
-
-# plot multiple variables
-ds_plot_bar(mtcarz, cyl, gear)
+ds_plot_bar(wholesale_customers, channel)
 
 # plot all categorical variables of a subset
-mt <- dplyr::select(mtcarz, cyl, gear, am)
-ds_plot_bar(mt)
+wc <- dplyr::select(wholesale_customers, channel, region)
+ds_plot_bar(wc)
 
 }

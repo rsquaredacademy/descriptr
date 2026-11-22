@@ -49,7 +49,7 @@ visualized as bar plots and mosaic plots.
 }
 \examples{
 # cross table
-k <- ds_cross_table(mtcarz, cyl, gear)
+k <- ds_cross_table(wholesale_customers, channel, region)
 k
 
 # bar plot
@@ -62,6 +62,6 @@ plot(k, stacked = TRUE)
 plot(k, proportional = TRUE)
 
 # returns tibble
-ds_twoway_table(mtcarz, cyl, gear)
+ds_twoway_table(wholesale_customers, channel, region)
 
 }

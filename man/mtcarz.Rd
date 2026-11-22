@@ -13,4 +13,7 @@ mtcarz
 \description{
 Copy of mtcars data set with modified variable types
 }
+\details{
+Kept for backward compatibility; examples now use wholesale_customers.
+}
 \keyword{datasets}

@@ -26,13 +26,13 @@ Any NA values are stripped from \code{data} before computation takes place.
 }
 \examples{
 # 5 lowest observations
-ds_tailobs(mtcarz$mpg, 5)
+ds_tailobs(wholesale_customers$fresh, 5)
 
 # 5 highest observations
-ds_tailobs(mtcarz$mpg, 5, type = "high")
+ds_tailobs(wholesale_customers$fresh, 5, type = "high")
 
 # specify decimal places to display
-ds_tailobs(mtcarz$mpg, 5, decimals = 3)
+ds_tailobs(wholesale_customers$fresh, 5, decimals = 3)
 
 }
 \seealso{

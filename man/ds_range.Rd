@@ -19,10 +19,10 @@ Compute the range of a numeric vector
 }
 \examples{
 # vector
-ds_range(mtcars$mpg)
+ds_range(wholesale_customers$fresh)
 
 # data.frame
-ds_range(mtcars, mpg)
+ds_range(wholesale_customers, fresh)
 
 }
 \seealso{

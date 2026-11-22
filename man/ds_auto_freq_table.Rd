@@ -36,17 +36,19 @@ Instead use \code{ds_auto_freq_table()} and \code{ds_auto_cross_table()}.
 }
 
 \examples{
-# frequency table for all columns
-ds_auto_freq_table(mtcarz)
+# frequency table for all categorical columns
+ds_auto_freq_table(wholesale_customers)
 
 # frequency table for multiple columns
-ds_auto_freq_table(mtcarz, cyl, gear)
+ds_auto_freq_table(wholesale_customers, channel, region)
 
-# cross table for all columns
-ds_auto_cross_table(mtcarz)
+# cross table for all categorical columns
+ds_auto_cross_table(wholesale_customers)
 
-# cross table for multiple columns
-ds_auto_cross_table(mtcarz, cyl, gear, am)
+# cross table for multiple columns: grocery spend split into three bands
+wc <- transform(wholesale_customers,
+  grocery_band = cut(grocery, 3, labels = c("low", "mid", "high")))
+ds_auto_cross_table(wc, channel, region, grocery_band)
 
 }
 \seealso{
