@@ -10,8 +10,9 @@
 #' # plot select variables
 #' ds_plot_scatter(mtcarz, mpg, disp)
 #'
-#' # plot all variables
-#' ds_plot_scatter(mtcarz)
+#' # plot all continuous variables of a subset
+#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
+#' ds_plot_scatter(mt)
 #'
 #' @importFrom rlang sym
 #' @importFrom utils combn
@@ -79,10 +80,11 @@ ds_plot_scatter <- function(data, ..., print_plot = TRUE) {
 #' ds_plot_histogram(mtcarz, mpg)
 #'
 #' # plot multiple variables
-#' ds_plot_histogram(mtcarz, mpg, disp, hp)
+#' ds_plot_histogram(mtcarz, mpg, disp)
 #'
-#' # plot all variables
-#' ds_plot_histogram(mtcarz)
+#' # plot all continuous variables of a subset
+#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
+#' ds_plot_histogram(mt)
 #'
 #' @export
 #'
@@ -147,10 +149,11 @@ ds_plot_histogram <- function(data, ..., bins = 5, fill = 'blue',
 #' ds_plot_density(mtcarz, mpg)
 #'
 #' # plot multiple variables
-#' ds_plot_density(mtcarz, mpg, disp, hp)
+#' ds_plot_density(mtcarz, mpg, disp)
 #'
-#' # plot all variables
-#' ds_plot_density(mtcarz)
+#' # plot all continuous variables of a subset
+#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
+#' ds_plot_density(mt)
 #'
 #' @export
 #'
@@ -214,8 +217,9 @@ ds_plot_density <- function(data, ..., color = 'blue', print_plot = TRUE) {
 #' # plot multiple variables
 #' ds_plot_bar(mtcarz, cyl, gear)
 #'
-#' # plot all variables
-#' ds_plot_bar(mtcarz)
+#' # plot all categorical variables of a subset
+#' mt <- dplyr::select(mtcarz, cyl, gear, am)
+#' ds_plot_bar(mt)
 #'
 #' @export
 #'
@@ -278,10 +282,11 @@ ds_plot_bar <- function(data, ..., fill = 'blue', print_plot = TRUE) {
 #' ds_plot_box_single(mtcarz, mpg)
 #'
 #' # plot multiple variables
-#' ds_plot_box_single(mtcarz, mpg, disp, hp)
+#' ds_plot_box_single(mtcarz, mpg, disp)
 #'
-#' # plot all variables
-#' ds_plot_box_single(mtcarz)
+#' # plot all continuous variables of a subset
+#' mt <- dplyr::select(mtcarz, mpg, disp, hp, wt)
+#' ds_plot_box_single(mt)
 #'
 #' @export
 #'
@@ -341,12 +346,12 @@ ds_plot_box_single <- function(data, ..., print_plot = TRUE) {
 #'
 #' @examples
 #' # subset data
-#' mt <- dplyr::select(mtcarz, cyl, gear, am)
+#' mt <- dplyr::select(mtcarz, cyl, gear)
 #'
 #' # stacked bar plot
 #' ds_plot_bar_stacked(mtcarz, cyl, gear)
 #'
-#' # plot all variables
+#' # plot all variables of a subset
 #' ds_plot_bar_stacked(mt)
 #'
 #' @export
@@ -408,12 +413,12 @@ ds_plot_bar_stacked <- function(data, ..., print_plot = TRUE) {
 #'
 #' @examples
 #' # subset data
-#' mt <- dplyr::select(mtcarz, cyl, gear, am)
+#' mt <- dplyr::select(mtcarz, cyl, gear)
 #'
 #' # grouped bar plot
 #' ds_plot_bar_grouped(mtcarz, cyl, gear)
 #'
-#' # plot all variables
+#' # plot all variables of a subset
 #' ds_plot_bar_grouped(mt)
 #'
 #' @export

@@ -25,7 +25,8 @@ ds_plot_bar(mtcarz, cyl)
 # plot multiple variables
 ds_plot_bar(mtcarz, cyl, gear)
 
-# plot all variables
-ds_plot_bar(mtcarz)
+# plot all categorical variables of a subset
+mt <- dplyr::select(mtcarz, cyl, gear, am)
+ds_plot_bar(mt)
 
 }

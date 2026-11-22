@@ -18,12 +18,12 @@ Creates grouped bar plots if the data has categorical variables.
 }
 \examples{
 # subset data
-mt <- dplyr::select(mtcarz, cyl, gear, am)
+mt <- dplyr::select(mtcarz, cyl, gear)
 
 # grouped bar plot
 ds_plot_bar_grouped(mtcarz, cyl, gear)
 
-# plot all variables
+# plot all variables of a subset
 ds_plot_bar_grouped(mt)
 
 }

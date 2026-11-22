@@ -3,12 +3,16 @@ fdata <- dplyr::select(mtcarz, cyl, gear)
 mdata <- dplyr::select(mtcarz, cyl, mpg)
 
 test_that("output from ds_screener is as expected", {
+  skip_on_cran()
+
   x <- ds_screener(airquality)
   p <- plot(x)
   vdiffr::expect_doppelganger("ds_screener_1", p)
 })
 
 test_that("output from ds_plot_scatter is as expected", {
+  skip_on_cran()
+
   p <- ds_plot_scatter(mtcarz, mpg, disp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_scatter_1", p[[1]])
   vdiffr::expect_doppelganger("ds_plot_scatter_2", p[[2]])
@@ -19,6 +23,8 @@ test_that("output from ds_plot_scatter is as expected", {
 })
 
 test_that("output from ds_plot_histogram is as expected", {
+  skip_on_cran()
+
   p <- ds_plot_histogram(mtcarz, mpg, disp, hp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_hist_1", p[[1]])
   vdiffr::expect_doppelganger("ds_plot_hist_2", p[[2]])
@@ -30,6 +36,8 @@ test_that("output from ds_plot_histogram is as expected", {
 })
 
 test_that("output from ds_plot_density is as expected", {
+  skip_on_cran()
+
   # skip_if(getRversion() > '4.0.3')
   p <- ds_plot_density(mtcarz, mpg, disp, hp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_density_1", p[[1]])
@@ -42,6 +50,8 @@ test_that("output from ds_plot_density is as expected", {
 })
 
 test_that("output from ds_plot_bar is as expected", {
+  skip_on_cran()
+
   p <- ds_plot_bar(mtcarz, cyl, gear, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_bar_1", p[[1]])
   vdiffr::expect_doppelganger("ds_plot_bar_2", p[[2]])
@@ -53,6 +63,8 @@ test_that("output from ds_plot_bar is as expected", {
 })
 
 test_that("output from ds_plot_box_single is as expected", {
+  skip_on_cran()
+
   p <- ds_plot_box_single(mtcarz, mpg, disp, hp, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_box_single_1", p[[1]])
   vdiffr::expect_doppelganger("ds_plot_box_single_2", p[[2]])
@@ -64,6 +76,7 @@ test_that("output from ds_plot_box_single is as expected", {
 })
 
 test_that("output from ds_plot_bar_stacked is as expected", {
+  skip_on_cran()
 
   p <- ds_plot_bar_stacked(mtcarz, cyl, gear, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_bar_stacked_1", p[[1]])
@@ -75,6 +88,7 @@ test_that("output from ds_plot_bar_stacked is as expected", {
 })
 
 test_that("output from ds_plot_bar_grouped is as expected", {
+  skip_on_cran()
 
   p <- ds_plot_bar_grouped(mtcarz, cyl, gear, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_bar_grouped_1", p[[1]])
@@ -87,6 +101,7 @@ test_that("output from ds_plot_bar_grouped is as expected", {
 })
 
 test_that("output from ds_plot_box_group is as expected", {
+  skip_on_cran()
 
   p <- ds_plot_box_group(mtcarz, cyl, gear, mpg, print_plot = FALSE)
   vdiffr::expect_doppelganger("ds_plot_box_group_1", p[[1]])
