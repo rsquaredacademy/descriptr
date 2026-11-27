@@ -1,5 +1,8 @@
 # descriptr (development version)
 
+- `ds_measures_variation()`, `ds_measures_symmetry()`, `ds_percentiles()` and
+  `ds_tidy_stats()` no longer drop or misgroup columns named `var`, `vars`, or
+  `values`.
 - Function examples now use the business dataset `wholesale_customers` (UCI,
   CC BY 4.0); `mtcarz` and `hsb` remain available.
 - Vignettes and README now use business data (new dataset

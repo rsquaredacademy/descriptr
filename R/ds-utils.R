@@ -481,3 +481,20 @@ ds_loc_prep <- function(data, vars = NULL, trim = 0.05, decimals = 2) {
 is_grouped <- function(data) {
   inherits(data, "grouped_df") || inherits(data, "rowwise_df")
 }
+
+# reshape selected columns to long format using collision-free temporary names
+# so user columns named var, vars, or values are never dropped or overwritten
+gather_columns <- function(data, key_name = "var") {
+  tmp_names <- make.unique(c(names(data), ".ds_var", ".ds_val"))
+  tmp_key   <- tmp_names[length(tmp_names) - 1L]
+  tmp_val   <- tmp_names[length(tmp_names)]
+
+  out <- tidyr::pivot_longer(
+    data,
+    cols      = dplyr::everything(),
+    names_to  = tmp_key,
+    values_to = tmp_val
+  )
+  names(out) <- c(key_name, "values")
+  out
+}
