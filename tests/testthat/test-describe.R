@@ -692,3 +692,31 @@ test_that("vector and data-frame NA handling is consistent (M4)", {
   expect_true(is.na(ds_std_error(c(NA_real_, NA_real_))))
   expect_true(is.na(ds_std_error(numeric(0))))
 })
+
+test_that("multi-column summary functions handle columns named var, vars, or values", {
+  df <- data.frame(
+    var = c(1, 2, 3, 4),
+    vars = c(5, 6, 8, 9),
+    values = c(10, 20, 30, 40)
+  )
+
+  v <- ds_measures_variation(df)
+  expect_equal(v$var, c("values", "var", "vars"))
+  expect_equal(v$n, c(4L, 4L, 4L))
+  expect_equal(v$sd, round(c(sd(df$values), sd(df$var), sd(df$vars)), 2))
+
+  s <- ds_measures_symmetry(df)
+  expect_equal(s$var, c("values", "var", "vars"))
+  expect_equal(s$n, c(4L, 4L, 4L))
+  expect_equal(s$kurtosis, round(c(ds_kurtosis(df$values), ds_kurtosis(df$var), ds_kurtosis(df$vars)), 2))
+
+  p <- ds_percentiles(df)
+  expect_equal(p$var, c("values", "var", "vars"))
+  expect_equal(p$n, c(4L, 4L, 4L))
+  expect_equal(p$median, c(median(df$values), median(df$var), median(df$vars)))
+
+  t <- ds_tidy_stats(df)
+  expect_equal(t$vars, c("values", "var", "vars"))
+  expect_equal(t$mean, c(mean(df$values), mean(df$var), mean(df$vars)))
+  expect_equal(t$stdev, c(sd(df$values), sd(df$var), sd(df$vars)))
+})

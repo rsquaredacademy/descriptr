@@ -38,7 +38,7 @@ ds_tidy_stats <- function(data, ...) {
   }
 
   data %>%
-    tidyr::gather(vars, values) %>%
+    gather_columns("vars") %>%
     dplyr::group_by(vars) %>%
     dplyr::summarise_all(
       list(

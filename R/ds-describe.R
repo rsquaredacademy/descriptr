@@ -126,7 +126,7 @@ ds_measures_variation <- function(data, ..., decimals = 2) {
     }
 
     data %>%
-      tidyr::gather(var, values) %>%
+      gather_columns("var") %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(list(n         = ~ sum(!is.na(.)),
                                 range     = ds_range,
@@ -222,7 +222,7 @@ ds_measures_symmetry <- function(data, ..., decimals = 2) {
     }
 
     data %>%
-      tidyr::gather(var, values) %>%
+      gather_columns("var") %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
         list(
@@ -314,7 +314,7 @@ ds_percentiles <- function(data, ..., decimals = 2) {
     }
 
     data %>%
-      tidyr::gather(var, values) %>%
+      gather_columns("var") %>%
       dplyr::group_by(var) %>%
       dplyr::summarise_all(
         list(n      = ~ sum(!is.na(.)),
